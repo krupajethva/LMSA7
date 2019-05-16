@@ -1,0 +1,27 @@
+<div class="loader_new"  *ngIf="globals.isLoading">
+    <div style="position: fixed; z-index: 9999999; top: 45%; left: 50%;">
+        <div class="loader lds-ripple"><div></div><div></div></div>
+        <div style="color: #fff; margin-top: 10px; text-align: center;"><strong>Processing...</strong></div>
+    </div>
+</div>
+
+<div class="height_100_box" *ngIf="globals.IsLoggedIn && globals.currentLink!='/link-list'">
+<app-header *ngIf="globals.authData!=undefined"></app-header> 
+<app-sidebar *ngIf="globals.authData!=undefined"></app-sidebar> 
+<div class="right_content_block">
+	<div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-2 height_100 menu_right">
+		<div class="bg_white_block"> 
+			<router-outlet ></router-outlet>
+			<app-footer></app-footer>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+</div>
+
+<div class="height_100_box" *ngIf="!globals.IsLoggedIn && globals.currentLink!='/link-list'">
+	<router-outlet></router-outlet>
+</div>
+
+<router-outlet *ngIf="globals.currentLink=='/link-list'"></router-outlet>
+

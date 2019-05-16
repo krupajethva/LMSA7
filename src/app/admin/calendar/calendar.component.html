@@ -1,0 +1,46 @@
+<div class="title_heading">				
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-calendar" aria-hidden="true"></i>Upcoming Events
+		</div>
+		</div>
+		<div class="col-md-8 col-sm-8">
+			<div class="welcome_message alert" role="alert">
+				<i class="fa fa-info"></i>Welcome back, <strong>12th Dec 2018 12:45</strong> 
+				 
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="breadcrumb_block">
+			<div class="col-md-6 col-sm-6">
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+					<li class="breadcrumb-item active" aria-current="page">Events</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div id="buttons" class="pull-right"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+<div class="color_description">
+	<ul>
+		<ng-container *ngFor="let typelist of AnnouncementTypeList">
+		<li *ngIf="(typelist.IsActive==1)">
+		<span [ngStyle]="{'background-color':typelist.ColorCode}"></span>{{typelist.TypeName}}
+		</li>
+		</ng-container>
+
+	</ul> 
+	<div class="clearfix"></div>
+</div>
+   <div class="col-md-12 col-sm-12">
+		<div id="calendar"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

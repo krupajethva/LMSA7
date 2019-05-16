@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.loader_new {
+	background: rgba(0, 0, 0,0.7);
+	opacity: 1;
+	width: 100%;
+	z-index: 9999;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	position: fixed;
+}
+
+.red_border {
+	border-color : red!important;
+ }

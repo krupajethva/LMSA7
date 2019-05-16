@@ -1,0 +1,53 @@
+DELIMITER $$
+CREATE PROCEDURE `addCertificate`(IN `CertificateName` VARCHAR(100), IN `CertificateTemplate` TEXT, IN `IsActive` BIT, IN `CreatedBy` INT(11), IN `CreatedOn` TIMESTAMP, IN `UpdatedBy` INT(11), IN `UpdatedOn` TIMESTAMP)
+    NO SQL
+BEGIN
+START TRANSACTION;
+INSERT INTO tblcertificatetemplate (CertificateName,CertificateTemplate,IsActive,CreatedBy,CreatedOn,UpdatedBy,UpdatedOn) VALUES (CertificateName,CertificateTemplate,IsActive,CreatedBy,CreatedOn,UpdatedBy,UpdatedOn);
+COMMIT;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getCertificate`()
+    NO SQL
+BEGIN
+START TRANSACTION;
+SELECT ct.CertificateId,ct.CertificateName,ct.CertificateTemplate,ct.IsActive 
+FROM tblcertificatetemplate as ct;
+COMMIT;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `updateCertificate`(IN `CertificateId` INT(11), IN `CertificateName` VARCHAR(100), IN `CertificateTemplate` TEXT, IN `IsActive` BIT(1), IN `UpdatedBy` INT(11), IN `UpdatedOn` TIMESTAMP)
+    NO SQL
+BEGIN
+START TRANSACTION;
+UPDATE tblcertificatetemplate as c SET c.CertificateId=CertificateId,c.CertificateName=CertificateName,
+c.CertificateTemplate=CertificateTemplate,c.IsActive=IsActive,c.UpdatedBy=UpdatedBy,c.UpdatedOn=UpdatedOn WHERE c.CertificateId=CertificateId;
+COMMIT;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `deleteCertificate`(IN `Certificate_Id` INT(11))
+    NO SQL
+BEGIN
+START TRANSACTION;
+
+DELETE from tblcertificatetemplate WHERE CertificateId=Certificate_Id;
+
+COMMIT;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `getCertificateById`(IN `CertificateId` INT(11))
+    NO SQL
+BEGIN
+START TRANSACTION;
+SELECT ct.CertificateId,ct.CertificateName,ct.CertificateTemplate,ct.IsActive from tblcertificatetemplate as ct where ct.CertificateId=CertificateId;
+COMMIT;
+END$$
+DELIMITER ;

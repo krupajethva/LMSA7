@@ -1,0 +1,20 @@
+Autologout link:-
+session Timeout
+You are being timed-out due to inactivity.
+https://hackedbychinese.github.io/ng2-idle/
+https://stackoverflow.com/questions/45911893/automatic-logout-in-angular-2-after-few-minutes/48116505#48116505
+https://github.com/strongloop/loopback-sdk-angular/issues
+https://itnext.io/inactivity-auto-logout-w-angular-and-ngrx-3bcb2fd7983f
+https://www.code-sample.com/2017/07/angular-2-auto-logout-using-ng2-idle.html
+
+@ng-idle:-
+
+npm install --save @ng-idle/core@2.0.0-beta.15 @ng-idle/keepalive@2.0.0-beta.15
+
+
+json link :-
+https://security.stackexchange.com/questions/115784/how-to-secure-json-data-that-is-shown-on-web-service-page
+https://www.json.org/JSONRequest.html
+https://betterexplained.com/articles/using-json-to-exchange-data/
+https://blog.securityevaluators.com/xml-vs-json-security-risks-22e5320cf529
+http://www.peachpit.com/blogs/blog.aspx?uk=Handling-JSON-Data-Securely1

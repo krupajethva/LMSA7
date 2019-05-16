@@ -1,0 +1,673 @@
+<div class="title_heading">
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-list" aria-hidden="true"></i>Course Detail
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-8">
+			<div class="welcome_message alert" role="alert">
+					<i class="fa fa-info"></i>Welcome back,
+					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+			</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Courses</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Course Detail</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-6 col-sm-6">
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block ">
+	<div class="col-md-9 col-sm-8">
+
+		<div *ngIf="CourseDetailList">
+			<h1 class="no_margin">{{CourseDetailList.CourseFullName}}</h1>
+			<div class="stars_block" *ngIf="ReviewAverage==null">
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>0 && ReviewAverage<1">
+				<i class="fa fa-star-half-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>1 && ReviewAverage<2">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-half-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>2 && ReviewAverage<3">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-half-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>3 && ReviewAverage<4">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-half-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>4 && ReviewAverage<5">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-half-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==1">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==2">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==3">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==4">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==5">
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+				<i class="fa fa-star"></i>
+			</div>
+			<div class="clearfix"></div>
+			<p class="padding_15">
+				<video width="350" height="200" controls class="pull-left video_margin"  *ngIf="CourseDetailList.FilePath">
+					<source src="assets/Instructor/{{CourseDetailList.Fid}}/Video/{{CourseDetailList.FilePath}}" type="video/mp4">Your browser does not support HTML5 video.</video>
+				{{CourseDetailList.Description}}</p>
+		</div>
+		<!-- <div class="coursedetail_wrapper">
+			<h2>{{CourseDetailList.CourseFullName}}</h2>
+			<div class="breadcrumb_block">
+			  <ul class="breadcrumb">
+				<li class="breadcrumb-item">
+				  <a href="#">Development</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Angular</li>
+			  </ul>
+			  <div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+			<p>User experience can be a game changer! A million dollar product could go to trash if it fails to grab eyeballs given
+			  the miniscule amount of time a user spends to make that decision. So, it is extremely important to take UX seriously.</p>
+			<div class="course_details_block">
+			  <ul>
+				<li>
+				  <i class="fa fa-code" aria-hidden="true"></i> {{CourseDetailList.CourseCode}}</li>
+				<li>
+				  <i class="fa fa-inr" aria-hidden="true"></i> {{CourseDetailList.Price}}</li>
+				<li>
+				  <i class="fa fa-globe" aria-hidden="true"></i> {{CourseDetailList.Location}}</li>
+				<li>
+				  <i class="fa fa-map-marker" aria-hidden="true"></i> India,Gujarat</li>
+			  </ul>
+			</div>
+		  </div> -->
+
+		<div class="clearfix"></div>
+		<div class="course_tabs">
+			<ul id="tabs" class="nav nav-tabs" role="tablist">
+				<li role="course" class="active" *ngIf="CourseDetailList.Featurescheck==1">
+					<a href="#Features" aria-controls="Features" role="tab" data-toggle="tab">Features</a>
+				</li>
+				<li role="course" *ngIf="CourseDetailList.whatgetcheck==1">
+					<a href="#whatget" aria-controls="whatget" role="tab" data-toggle="tab">What do you get?</a>
+				</li>
+				<li role="course" *ngIf="CourseDetailList.Targetcheck==1">
+					<a href="#Target" aria-controls="Target" role="tab" data-toggle="tab">Target Audience</a>
+				</li>
+				<li role="course" *ngIf="CourseDetailList.Requirementcheck==1">
+					<a href="#Requirement" aria-controls="Requirement" role="tab" data-toggle="tab">Requirement</a>
+				</li>
+				<li role="course" *ngIf="CourseDetailList.Morecheck==1">
+					<a href="#More" aria-controls="More" role="tab" data-toggle="tab">More</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="Features" *ngIf="CourseDetailList.Featurescheck==1">
+					<ul class="list_li width_li30">
+						<li>{{CourseDetailList.EmailBody}}</li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="whatget">
+					<p class="padding_15">{{CourseDetailList.EmailBody2}}</p>
+					<div class="clearfix"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="Target">
+					<ul class="list_li">
+						<li>{{CourseDetailList.EmailBody3}}</li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="Requirement">
+					<p class="padding_15">{{CourseDetailList.Requirement}} </p>
+					<div class="clearfix"></div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="More">
+					<p class="padding_15">{{CourseDetailList.EmailBody4}} </p>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<!-- Bootstrap Accordion -->
+			<!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"></div> -->
+			<!-- /Bootstrap Accordion -->
+
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+
+		<div class="coursecontent_leftblock">
+			<div class="coursecontent_heading">
+				<div class="pull-left">
+					<h3>Course Content</h3>
+				</div>
+				<div class="pull-right">
+					<span class="course_total_lecture">9 Lectures</span>
+					<!-- <span class="course_total_time">00:45:00</span> -->
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="coursecontent_accordian">
+
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+					<div class="panel panel-default" *ngFor="let Content of CourseContent ; let i = index; let first = first;">
+						<div class="panel-heading" role="tab" id="headingOne{{i}}">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{i}}" aria-expanded="true" [attr.aria-controls]="'collapseOne'+i">
+									<i class="more-less glyphicon glyphicon-plus"></i>
+									<div class="pull-left">
+										<h3>{{Content.TopicName}}</h3>
+									</div>
+									<div class="pull-right">
+										<span class="course_total_lecture">lectures</span>
+										<!-- <span class="course_total_time">{{Content.TopicTime}}</span> -->
+									</div>
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne{{i}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'headingOne'+i">
+							<div class="panel-body" *ngFor="let Contentchild of Content.child ; let j = index;">
+								<div class="pull-left">
+									<i class="fa fa-play-circle" aria-hidden="true"></i>
+									<h3>{{Contentchild.TopicName}}</h3>
+									<i class="fa fa-caret-down desc_details" (click)="TopicDes(i,j)" id="desc{{i}}{{j}}" aria-hidden="true"></i>
+									<p class="desc_area" id="desc_area{{i}}{{j}}">{{Contentchild.TopicDescription}}</p>
+								</div>
+								<div class="pull-right">
+									
+										<!-- [disabled]="Contentchild.enroll==0" -->
+										<span>
+									<button type="button"  class="video-btn next_btn"  (click)="Preview(i,j)" >
+										Preview
+									</button>
+									</span>
+								
+									<!-- Modal -->
+									<div class="modal fade" id="myModal{{i}}{{j}}"  role="dialog">
+										<div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+													<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															<h4 class="modal-title">{{Contentchild.TopicName}}</h4>
+														  </div>
+												<div class="modal-body">
+													
+													<!-- 16:9 aspect ratio -->
+													<div class="embed-responsive embed-responsive-16by9" *ngIf="Contentchild.FilePath">
+														
+													<!-- <iframe class="embed-responsive-item" src="assets/Instructor/{{Contentchild.Fid}}/Video/{{Contentchild.FilePath}}" id="video" allowscriptaccess="always"></iframe>  -->
+												 <video width="100%" height="350" controls class="video_margin"  *ngIf="Contentchild.FilePath">
+														<source src="assets/Instructor/{{Contentchild.fid}}/Video/{{Contentchild.FilePath}}" type="video/mp4">Your browser does not support HTML5 video.</video>	
+												</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- <a href="" class="course_preview">Preview</a> -->
+									<span class="course_total_time">{{Contentchild.TopicTime}}</span>
+								</div>
+							</div>
+							<!--<div class="panel-body">
+								<div class="pull-left">
+									<i class="fa fa-file-o" aria-hidden="true"></i>
+									<h3>Where to find the course source code</h3>
+									<i class="fa fa-caret-down desc_details" aria-hidden="true"></i>
+									<p class="desc_area">Let me introduce you to this course and give a rough outline over what you're going to learn!</p>
+								</div>
+								<div class="pull-right">
+									<button type="button" class="video-btn next_btn">
+										Preview
+									</button>
+							
+									<span class="course_total_time">00:5:00</span>
+								</div>
+							</div>
+						 <div class="panel-body">
+								<div class="pull-left">
+									<i class="fa fa-play-circle" aria-hidden="true"></i>
+									<h3>What is angular?</h3>
+									<i class="fa fa-caret-down desc_details" aria-hidden="true"></i>
+									<p class="desc_area">Let me introduce you to this course and give a rough outline over what you're going to learn!</p>
+								</div>
+								<div class="pull-right">
+									<button type="button" class="video-btn next_btn">
+										Preview
+									</button>
+						
+									<span class="course_total_time">00:5:00</span>
+								</div>
+							</div> -->
+						</div>
+					</div>
+
+
+
+				</div>
+				<!-- panel-group -->
+
+				<!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingOne">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" [attr.aria-controls]="'collapseOne'">
+									<div class="coursecontent_header">
+										<span class="pull-left">ABC</span>
+										<span class="pull-right">04:00:00</span>
+									</div>
+									<div class="clearfix"></div>
+								</a>
+							</h4>
+						</div>
+
+						<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'headingOne'+i">
+							<div class="panel-body">
+								<div class="coursecontent_detailtable">
+
+									<div class="col-md-3 no_padding" *ngFor="let Contentchild of Content.child ; let i = index;">
+										<div class="coursecontent_blocks" *ngIf="Contentchild.Type=='Video'">
+											<video width="350" height="200" controls class="pull-left video_margin">
+												<source src="assets/Course/Document/" type="video/mp4">Your browser does not support HTML5 video.</video>
+
+										</div>
+										<div class="coursecontent_blocks" *ngIf="Contentchild.Type=='Document'">
+											<a class="media_content" *ngIf="Contentchild.CourseDocument!=''" href="assets/Course/Document/" Download>
+												<span class="fa fa-download tooltip_inline"></span>
+												<embed src="assets/Course/Document/" type="application/pdf" width="100%" height="150px" />
+											</a>
+										</div>
+										
+									</div>
+									<div class="col-md-3 no_padding">
+										<div class="coursecontent_blocks">
+											<a class="media_content" href="assets/Course/pdf.pdf" Download>
+												<span class="fa fa-download tooltip_inline"></span>
+												<embed src="assets/Course/pdf.pdf" type="application/pdf" width="100%" height="150px" />
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="coursecontent_desc">
+									<p>dgfgdg</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+		<div class="course_forum_block">
+			<h3 class="pull-left">Discussion board</h3>
+			<div class="clearfix"></div>
+			<div class="clearfix"></div>
+			<div *ngFor="let discussion of CourseDiscussionList; let i = index" class="forum_box">
+				<div class="img_icon">
+						<span *ngIf="discussion.ProfileImage=='' || discussion.ProfileImage==NULL" class="instructor_letter">{{discussion.FirstName | slice:0:01}}{{discussion.LastName | slice:0:01}}</span>
+					<img *ngIf="discussion.ProfileImage!='' && discussion.ProfileImage!=NULL" src="assets/ProfilePhoto/{{discussion.UserId}}/{{discussion.ProfileImage}}" alt="" class="img-responsive" />
+				</div>
+				<div class="content_name" id="content{{i}}">
+					<div class="name">{{discussion.Name}}</div>
+					<div class="content">{{discussion.Comment}}</div>
+					<div class="reply_time">
+						<a>
+							<i class="fa fa-comments"></i> {{discussion.count}} Comments</a>
+						<span class="pull-right">
+							<i class="fa fa-clock-o"></i> {{discussion.PostTime | date:'MMM dd, yyyy | hh:mm a'}}</span>
+					</div>
+				</div>
+				<div *ngFor="let firstlevelreply of discussion.child; let j = index" class="forum_box inner_forum">
+					<div class="img_icon">
+							<span *ngIf="firstlevelreply.ProfileImage=='' || firstlevelreply.ProfileImage==NULL" class="instructor_letter">{{firstlevelreply.FirstName | slice:0:01}}{{firstlevelreply.LastName | slice:0:01}}</span>
+						<img *ngIf="firstlevelreply.ProfileImage!='' || firstlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{firstlevelreply.UserId}}/{{firstlevelreply.ProfileImage}}" alt="" class="img-responsive" />
+					</div>
+					<div class="content_name" id="content{{i}}{{j}}">
+						<div class="name">{{firstlevelreply.Name}}</div>
+						<div class="content">{{firstlevelreply.Reply}}</div>
+						<div class="reply_time">
+							<a>
+								<i class="fa fa-comments"></i> {{firstlevelreply.count}} Comments</a>
+							<span class="pull-right">
+								<i class="fa fa-clock-o"></i> {{firstlevelreply.PostTime | date:'MMM dd, yyyy | hh:mm a'}} </span>
+						</div>
+					</div>
+					<div *ngFor="let secondlevelreply of firstlevelreply.child; let k = index" class="forum_box inner_forum">
+						<div class="img_icon">
+								<span *ngIf="secondlevelreply.ProfileImage=='' || secondlevelreply.ProfileImage==NULL" class="instructor_letter">{{secondlevelreply.FirstName | slice:0:01}}{{secondlevelreply.LastName | slice:0:01}}</span>
+							<img *ngIf="secondlevelreply.ProfileImage!='' || secondlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{secondlevelreply.UserId}}/{{secondlevelreply.ProfileImage}}" alt="" class="img-responsive" />
+						</div>
+						<div class="content_name" id="content{{i}}{{j}}{{k}}">
+							<div class="name">{{secondlevelreply.Name}}</div>
+							<div class="content">{{secondlevelreply.Reply}}</div>
+							<div class="reply_time">
+								<span class="pull-right">
+									<i class="fa fa-clock-o"></i> {{secondlevelreply.PostTime | date:'MMM dd, yyyy | hh:mm a'}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="CourseDiscussionList.length>0" class="text-center">
+				<button class="back_btn" routerLink="/course-discussion/{{courseid}}">View All</button>
+			</div>
+			<div *ngIf="CourseDiscussionList.length<=0" class="forum_box">There is no discussion started yet.</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="course_forum_block">
+			<h3 class="pull-left" *ngIf="ReviewAverage>0">Reviews ({{ReviewAverage}} out of 5)</h3>
+			<h3 class="pull-left" *ngIf="ReviewAverage==null">Reviews</h3>
+			<div class="clearfix"></div>
+			
+			<div *ngFor="let review of CourseReviewList; let i = index" class="forum_box">
+				<div class="img_icon">
+						<span *ngIf="review.ProfileImage=='' || review.ProfileImage==NULL" class="instructor_letter">{{review.FirstName | slice:0:01}}{{review.LastName | slice:0:01}}</span>
+					<img *ngIf="review.ProfileImage!='' || review.ProfileImage!=NULL" src="assets/ProfilePhoto/{{review.UserId}}/{{review.ProfileImage}}" alt="" class="img-responsive" />
+				</div>
+				<div class="content_name" id='content{{i}}'>
+					<div class="name">{{review.Name}}</div>
+					<div class="content">{{review.ReviewComment}}</div>
+					<div class="reply_time">
+						<span class="star_review" *ngIf="review.Rating==1">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+						</span>
+						<span class="star_review" *ngIf="review.Rating==2">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+						</span>
+						<span class="star_review" *ngIf="review.Rating==3">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+							<i class="fa fa-star-o"></i>
+						</span>
+						<span class="star_review" *ngIf="review.Rating==4">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+						</span>
+						<span class="star_review" *ngIf="review.Rating==5">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</span>
+						<span class="pull-right">
+							<i class="fa fa-clock-o"></i> {{review.ReviewTime | date:'MMM dd, yyyy | hh:mm a'}}</span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<div *ngIf="CourseReviewList.length>0" class="text-center">
+				<button class="back_btn" routerLink="/course-rating/{{courseid}}">View All</button>
+			</div>
+			<div *ngIf="CourseReviewList.length<=0" class="forum_box">There is no review given yet.</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-4">
+		<div class="course_right">
+			<!-- <img src="assets/Course/{{CourseDetailList.CourseVideo}}" alt="" class="img-responsive" /> -->
+			<!-- <p class="padding_15">
+				<strong>
+					<i class="fa fa-clock-o"></i> Duration:</strong>
+				<br>
+				<strong>
+					<i class="fa fa-calendar"></i> Posted On:</strong>
+				<br>
+
+
+				<strong>
+					<i class="fa fa-check"></i> Attending:</strong>
+			</p> -->
+
+			<div class="course_detail_box">
+				<ul class="coursedetail_list">
+					<li>
+						<i class="fa fa-calendar" aria-hidden="true"></i>
+						<span class="coursedetail_title">Posted On</span>
+						<span>12th Dec 2016</span>
+					</li>
+					<li>
+						<i class="fa fa-clock-o" aria-hidden="true"></i>
+						<span class="coursedetail_title">Duration</span>
+						<span>23h 20m</span>
+					</li>
+					<li>
+						<i class="fa fa-user-circle" aria-hidden="true"></i>
+						<span class="coursedetail_title">Skill</span>
+						<span>{{CourseDetailList.Keyword}}</span>
+					</li>
+					<li>
+						<i class="fa fa-usd" aria-hidden="true"></i>
+						<span class="coursedetail_title">Price</span>
+						<span>{{CourseDetailList.Price}}</span>
+					</li>
+				</ul>
+			</div>
+
+
+
+			<!-- Large modal -->
+			<div class="text-center">
+				<button type="button" class="next_btn" data-toggle="modal" data-target=".bd-example-modal-lg">Available Session</button>
+			</div>
+			<div id="modalsession"class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Available Session</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="clearfix"></div>
+						<div class="modal-body">
+							<div class="session_blocks" >
+								<div class="col-lg-3 col-md-3 " *ngFor="let SessionList of CourseSesssionList; let i = index;">
+										<!-- (click)="SessionEnrollcClick(SessionList,i)" -->
+									<div class="news-blog imageremove" id="session{{i}}" >
+										<h4>{{SessionList.SessionName}}</h4>
+										<ul class="icon">
+											<li>
+												<i class="fa fa-calendar"></i>
+												<strong>Instructor : </strong> {{SessionList.FirstName}}</li>
+											<li>
+												<i class="fa fa-user"></i>
+												<strong>Start Date : </strong> {{SessionList.StartDate}}</li>
+											<li>
+												<i class="fa fa-calendar"></i>
+												<strong>End Date : </strong> {{SessionList.EndDate}}</li>
+											
+													<li>
+															<i class="fa fa-comments"></i>
+															<strong>Weekday : </strong> 
+															{{SessionList.monday}}<span *ngIf="SessionList.monday!='' && (SessionList.tuesday!='' || SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.tuesday}}<span *ngIf="SessionList.tuesday!='' && (SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.wednesday}}<span *ngIf="SessionList.wednesday!='' && (SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.thursday}}<span *ngIf="SessionList.thursday!='' && (SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.friday}}<span *ngIf="SessionList.friday!=''  && (SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.saturday}}<span *ngIf="SessionList.saturday!='' && SessionList.sunday!='' ">,</span>
+															{{SessionList.sunday}}</li>
+													<li>
+															<i class="fa fa-comments"></i>
+															<strong>Start Time : </strong> {{SessionList.StartTime}}</li>
+															<li>
+																<i class="fa fa-comments"></i>
+																<strong>End Time : </strong> {{SessionList.EndTime}}</li>
+																<li><i class="fa fa-comments"></i>
+												<strong>Duration : </strong> {{SessionList.StartDate}}</li>
+											<li>
+												<i class="fa fa-comments"></i>
+												<strong>Total Seats : </strong>
+												<span *ngIf="SessionList.TotalSeats==0">NA</span>
+												<span *ngIf="SessionList.TotalSeats>0">{{SessionList.TotalSeats}}</span>
+												</li>
+											<li>
+												<i class="fa fa-user"></i>
+												<strong>Pending Seats : </strong>		
+												<span *ngIf="SessionList.TotalSeats==0">NA</span>
+												<span *ngIf="SessionList.TotalSeats>0">{{SessionList.TotalSeats-SessionList.RemainingSeats}}</span> 
+												</li>
+												<li class="enroll_course_tag" *ngIf="SessionList.EnrollCheck==0" >
+													<!-- <strong> Enroll  </strong>[disabled]="
+													((SessionList.RemainingSeats == SessionList.TotalSeats && SessionList.Showstatus == 0)
+													     || (SessionList.Showstatus == 1 && (SessionList.CourseCloseDate < (datea | date : 'yyyy-MM-dd'))
+													      || !(SessionList.CourseSDate > (datea | date : 'yyyy-MM-dd'))) || (SessionList.EnrollCheck > 0))" -->
+													<button type="button" class="next_btn enrollnow_btn "
+													>Enroll Now</button>
+												</li>
+											<li class="enroll_course_tag" *ngIf="!((SessionList.prestartdate | date : 'yyyy-MM-dd') > (datea | date : 'yyyy-MM-dd'))">
+												<strong>This course is close for Enroll </strong>
+											</li>
+											<li class="enroll_course_tag" *ngIf="(SessionList.Showstatus == 1 && (SessionList.CourseCloseDate < (datea | date : 'yyyy-MM-dd'))) ">
+												<strong>this course close date </strong>
+											</li>
+										
+											<li class="enroll_course_tag" *ngIf="(SessionList.RemainingSeats == SessionList.TotalSeats && SessionList.Showstatus == 0)">
+												<strong>this course full </strong>
+											</li>
+											<li class="enroll_course_tag" *ngIf="SessionList.EnrollCheck>0">
+												<strong>You are enrolled in this course</strong>
+											</li>
+											
+
+										</ul>
+										<h5>{{i+1}}</h5>
+									</div>
+						
+								</div>
+
+
+
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="modal-footer">
+							<button type="button" class="back_btn" data-dismiss="modal">Close</button>
+							<!-- <button type="button" class="next_btn enrollnow_btn" (click)="Enroll()" [disabled]="!sessiontrue">Enroll Now</button> -->
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 	[disabled]="((SessionList.RemainingSeats==SessionList.TotalSeats && SessionList.Showstatus==1)
+			|| (SessionList.Showstatus==0 && ((SessionList.CourseCloseDate) < (datea | date : 'yyyy-MM-dd'))) 
+			|| !((SessionList.CourseSDate | date : 'yyyy-MM-dd') > (datea | date : 'yyyy-MM-dd')) || (SessionList.EnrollCheck>0))"
+<h2 *ngIf="paypalLoad">Paypal button is loading</h2>	 [disabled]="!sessiontrue" -->
+			<!-- <div class="text-center"> -->
+			<!-- [disabled]="((CourseDetailList.RemainingSeats==CourseDetailList.TotalSeats && CourseDetailList.Showstatus==1) || (CourseDetailList.Showstatus==0 && ((CourseDetailList.CourseCloseDate) < (datea | date : 'yyyy-MM-dd'))) || !((CourseDetailList.CourseSDate | date : 'yyyy-MM-dd') > (datea | date : 'yyyy-MM-dd')) || (CourseDetailList.EnrollCheck>0))" -->
+			<!-- <button (click)="Enroll(CourseDetailList.CourseId)" class="next_btn">Enroll Now</button> -->
+			<!-- <div id="paypal-checkout-btn"></div> -->
+			<!-- <a id="paypal-checkout-btn" class="next_btn">Register</a> ((course.EndDate) < (datea | date : 'yyyy-MM-dd')) -->
+			<!-- !((CourseDetailList.CourseSDate | date : 'yyyy-MM-dd') > (datea | date : 'yyyy-MM-dd')) -->
+			<!-- </div> -->
+
+		</div>
+
+		<div class="clearfix"></div>
+		
+		<div class="related_course">
+			<h3>Related Courses</h3>
+			<ul>
+				<li *ngFor="let Skill of Relatedcourse;">
+					<i class="fa fa-graduation-cap"></i>
+					<a href="#" class="title">{{Skill.CourseFullName}}</a>
+					<div class="stars_block">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star-o"></i>
+						<i class="fa fa-star-o"></i>
+					</div>
+				</li>
+				<li *ngIf="Relatedcourse.length<=0" class="forum_box">There is no related course.</li>
+			</ul>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+
+</div>
+<div class="clearfix"></div>

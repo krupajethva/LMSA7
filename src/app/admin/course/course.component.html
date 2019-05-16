@@ -1,0 +1,1343 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text" id="abc">
+      <i class="fa fa-book" aria-hidden="true"></i>course
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+
+        <li class="breadcrumb-item active" aria-current="page">Course</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+  <div class="col-md-12 col-sm-12">
+    <div class="course_details">
+      <div class="mydivs">
+        <section>
+          <div class="wizard">
+            <div class="wizard-inner">
+              <!-- <div class="connecting-line"></div> -->
+              <ul class="nav nav-tabs pull-left" role="tablist">
+                <li role="presentation" class="active" id="st1">
+                  <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab">
+                    <span class="round-tab">
+                      <i class="fa fa-file" aria-hidden="true"></i> Course Detail
+                      <!-- <i class="fa fa-file" aria-hidden="true"></i> -->
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation" class="disabled" id="st2">
+                  <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab">
+                    <span class="round-tab">
+                      <i class="fa fa-file-text" aria-hidden="true"></i> Course Topic
+                      <!-- <i class="fa fa-file-text" aria-hidden="true"></i> -->
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation" class="disabled" id="st3">
+                  <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab">
+                    <span class="round-tab">
+                      <i class="fa fa-file-video-o" aria-hidden="true"></i> Course Session
+                      <!-- <i class="fa fa-file-image-o" aria-hidden="true"></i> -->
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation" class="disabled" id="st4">
+                  <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab">
+                    <span class="round-tab">
+                      <i class="fa fa-certificate"></i> Badges
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <div class="form-group-active pull-right" [hidden]="!firstform">
+                <label>
+                  <span>*</span>Active?</label>
+                <div class="activeyes_box">
+                  <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="CourseEntity.IsActive">
+                  <label for="IsActive"></label>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <form role="form">
+              <div class="tab-content">
+                <div class="tab-pane active" role="tabpanel" id="step1">
+                  <!-- <h3>Step 1</h3> -->
+
+                  <div [hidden]="!firstform">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <form class="form-validate" #CourseForm1="ngForm" (ngSubmit)="next_btn(CourseForm1)">
+                          <!-- <h1 class="no_margin pull-left">Course Form Detail</h1> -->
+                          <div class="course_forum_block course_form_wrapper">
+                            <div class="row">
+                              <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                  <label>
+                                    <span>*</span>Category</label>
+                                  <select #CategoryId="ngModel" class="form-control" [(ngModel)]="CourseEntity.CategoryId" name="CategoryId" required>
+                                    <option value="" ngSelected='CourseEntity.CategoryId==""'>Select</option>
+                                    <ng-container *ngFor="let SubCategory of SubCategoryList">
+                                      <option value="{{SubCategory.CategoryId}}" ngSelected="CourseEntity.CategoryId==SubCategory.CategoryId">{{SubCategory.CategoryName}}</option>
+                                    </ng-container>
+                                  </select>
+                                  <span class="error_span" *ngIf="(CategoryId.dirty && CategoryId.invalid) || (CategoryId.pristine && submitted)">
+                                    <span *ngIf="CategoryId.errors || (CategoryId.pristine && required)">Please select category
+                                    </span>
+                                  </span>
+
+
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                  <label>
+                                    <span>*</span>Course Name </label>
+                                  <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #CourseFullName="ngModel" [(ngModel)]="CourseEntity.CourseFullName"
+                                    class="form-control" name="CourseFullName" [ngClass]="{red_border: (CourseFullName.dirty && CourseFullName.invalid) || (CourseFullName.pristine && submitted)}"
+                                    required />
+                                  <span class="error_span" *ngIf="(CourseFullName.dirty && CourseFullName.invalid) || (CourseFullName.pristine && submitted)">
+                                    <span *ngIf="CourseFullName.errors && CourseFullName.errors.required">
+                                      Please enter course name
+                                    </span>
+                                    <span *ngIf="CourseFullName.errors && CourseFullName.errors.pattern">
+                                      Please enter valid course name
+                                    </span>
+                                  </span>
+
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                              <div class="col-md-4 col-sm-4">
+                                <div class="form-group">
+                                  <label>
+                                    <span class="required">*</span>Course Price</label>
+                                  <input type="text" pattern="[0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #Price="ngModel" [(ngModel)]="CourseEntity.Price"
+                                    class="form-control" name="Price" [ngClass]="{red_border: (Price.dirty && Price.invalid) || (Price.pristine && submitted)}"
+                                    required />
+                                  <span class="error_span" *ngIf="(Price.dirty && Price.invalid) || (Price.pristine && submitted)">
+                                    <span *ngIf="Price.errors && Price.errors.required">
+                                      Please enter price
+                                    </span>
+                                    <span *ngIf="Price.errors && Price.errors.pattern">
+                                      Please enter valid price
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="col-md-4 col-sm-4">
+                                <div class="form-group">
+                                  <label>
+                                    <span>*</span>Course Skills</label>
+                                  <!-- id="tagsinput" data-role="tagsinput" -->
+                                  <input type="text" #Keyword="ngModel" [(ngModel)]="CourseEntity.Keyword" class="form-control" name="Keyword" [ngClass]="{'red_border': skillsValid}"
+                                  />
+                                  <span class="error_span" *ngIf="skillsValid">
+
+                                    Please enter course skills
+
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="col-md-4 col-sm-4">
+                                <div class="form-group">
+                                  <label>
+                                    <span class="required">*</span>Assessment Time</label>
+                                  <input type="text"   #AssessmentTime="ngModel" [(ngModel)]="CourseEntity.AssessmentTime"
+                                    class="form-control" name="AssessmentTime" [ngClass]="{red_border: (AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)}"
+                                    required />
+                                  <span class="error_span" *ngIf="(AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)">
+                                    <span *ngIf="AssessmentTime.errors && AssessmentTime.errors.required">
+                                      Please enter Assessment Time
+                                    </span>
+                                    <span *ngIf="AssessmentTime.errors && AssessmentTime.errors.pattern">
+                                      Please enter valid Assessment Time
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                              <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                  <label for="exampleFormControlTextarea1">Description</label>
+                                  <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" #Description="ngModel" [(ngModel)]="CourseEntity.Description"
+                                    class="form-control" name="Description" [ngClass]="{red_border: (Description.dirty && Description.invalid) || (Description.pristine && submitted)}"></textarea>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                  <label>
+                                    <span class="required">*</span>Total no of Questions</label>
+                                  <input type="text" pattern="[0-9.'/,-./;/:/(/&/)/./ ]{1,}" maxlength="100" #NoOfQuestion="ngModel" [(ngModel)]="CourseEntity.NoOfQuestion"
+                                    class="form-control mt_35" name="NoOfQuestion" [ngClass]="{red_border: (NoOfQuestion.dirty && NoOfQuestion.invalid) || (NoOfQuestion.pristine && submitted)}"
+                                    required />
+                                  <span class="error_span" *ngIf="(NoOfQuestion.dirty && NoOfQuestion.invalid) || (NoOfQuestion.pristine && submitted)">
+                                    <span *ngIf="NoOfQuestion.errors && NoOfQuestion.errors.required">
+                                      Please enter no of questions
+                                    </span>
+                                    <span *ngIf="NoOfQuestion.errors && NoOfQuestion.errors.pattern">
+                                      Please enter valid no of questions
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+
+                              <div class="col-md-6 col-sm-6 image_preview">
+
+
+                                <div class="form-group file_upload" id="CourseImageicon">
+                                  <label>
+                                    <span>*</span>Course Image</label>
+
+                                  <div class="choose_img">
+                                    <img *ngIf="imageshow" id="blah" align="middle" src="assets/Instructor/{{CourseEntity.rid}}/image/{{CourseEntity.CourseImage}}"
+                                      alt="your image" title="">
+                                    <input type="text" id="modalfiletext" class="CourseImagefocus" readonly data-toggle="modal" data-target="#myModal" [ngClass]="{'red_border': ImageValid}"
+                                    />
+                                  </div>
+
+
+                                  <!--<input type="file"  accept="image/*" name="CourseImage" id="CourseImage" #CourseImage="ngModel"
+                                    [(ngModel)]="CourseEntity.CourseImage" [ngClass]="{'red_border': ImageValid}" />-->
+                                  <span class="error_span" *ngIf="ImageValid">
+                                    Please upload course image
+                                  </span>
+                                  <a class="link display_none"></a>
+                                </div>
+
+
+                                
+                                <!-- Trigger the modal with a button -->
+                                <!-- <button type="button" class="select_button btn btn-info" data-toggle="modal" data-target="#myModal">Select Image</button> -->
+
+                                <!-- Modal -->
+
+                                <div id="myModal" class="modal fade" role="dialog">
+                                  <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Please select an image</h4>
+
+                                      </div>
+
+                                      <div class="clearfix"></div>
+                                      <div class="modal-body">
+                                        <div class="imageselectionmodal">
+                                          <div class="image_uploade_list">
+                                            <ul>
+                                              <li class="uploadfromcomp">
+                                                <div class="file_upload modal_fileupload">
+                                                  <div class="fileuploader">
+                                                    <i class="fa fa-upload"></i>Upload from your computer</div>
+                                                  <input type="file" class="form-control" id="CourseImage" name="CourseImage" #CourseImage="ngModel" [(ngModel)]="CourseEntity.CourseImage"
+                                                  />
+                                                </div>
+                                              </li>
+                                              <li id="test{{i}}" class="imageremove" (click)="imagecl(image,i)" *ngFor="let image of ImageList;let i = index">
+                                                <img src="assets/Instructor/{{image.fid}}/image/{{image.FilePath}}" class="img-responsive" alt="" />
+                                              </li>
+                                              <li *ngIf="ImageList==''">Not image</li>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="back_btn" data-dismiss="modal">Submit</button>
+                                        <button type="button" class="next_btn" data-dismiss="modal">Close</button>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6">
+                                <div class="form-group file_upload" id="Videoicon">
+                                  <label>
+                                    <span>*</span>Course Video</label>
+
+                                  <input type="text" id="modalfilevideo" class="Videofocus" readonly data-toggle="modal" data-target="#myModal1" [ngClass]="{'red_border': MediaValid}"
+                                  />
+                                  <!-- <input type="file" accept="video/*" size="15MB" name="Video" id="Video" #Video="ngModel" [(ngModel)]="CourseEntity.Video"
+                                    [ngClass]="{'red_border': MediaValid}" /> -->
+
+                                  <span class="error_span" *ngIf="MediaValid">
+                                    Please upload course video
+                                  </span>
+                                </div>
+                                <!-- Trigger the modal with a button -->
+
+
+                                <!-- Modal -->
+
+                                <div id="myModal1" class="modal fade" role="dialog">
+                                  <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Please select video</h4>
+                                      </div>
+                                      <div class="mediaselectionmodal">
+                                        <div class="modal-body">
+                                          <div class="media_uploade_list">
+                                            <ul>
+                                              <li class="uploadfromcomp">
+                                                <div class="file_upload modal_fileupload">
+                                                  <div class="fileuploader">
+                                                    <i class="fa fa-upload"></i>Upload from your computer</div>
+                                                  <input type="file" class="form-control" accept="video/*" size="15MB" name="Video" id="Video" #Video="ngModel" [(ngModel)]="CourseEntity.Video"
+                                                  />
+                                                </div>
+                                              </li>
+                                              <li id="Videoactive{{i}}" class="Videoremove" (click)="Videocl(Video,i)" *ngFor="let Video of VideoList;let i = index">
+                                                <ng-container *ngIf="Video.FilePath">
+                                                  <video src="assets/Instructor/{{Video.fid}}/Video/{{Video.FilePath}}" controls class="video_margin">
+                                                    <source type="video/mp4">Your browser does not support HTML5 video.</video>
+                                                </ng-container>
+                                              </li>
+
+                                              <!-- <li id="Videoactive{{i}}{{j}}{{k}}" class="Videoremove" (click)="SubTopicVideo(i,j,k,Video)" *ngFor="let Video of VideoList;let k = index">
+
+                                                <video src="assets/Instructor/{{Video.fid}}/Video/{{Video.FilePath}}" controls class="video_margin">{{Video.ResourcesId}}
+                                                  <source type="video/mp4">Your browser does not support HTML5 video.</video>
+                                              </li> -->
+
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="back_btn" data-dismiss="modal">Submit</button>
+                                        <button type="button" class="next_btn" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                              <div class="col-md-12 col-sm-12 coursetab_info">
+                                <div class="course_tabs">
+                                  <ul id="tabs" class="nav nav-tabs" role="tablist">
+                                    <li role="course" class="active">
+                                      <a href="#Features" aria-controls="Features" role="tab" data-toggle="tab">Features</a>
+                                    </li>
+                                    <li role="course">
+                                      <a href="#whatget" aria-controls="whatget" role="tab" data-toggle="tab">What do I get?
+                                      </a>
+                                    </li>
+                                    <li role="course">
+                                      <a href="#Target" aria-controls="Target" role="tab" data-toggle="tab">Target Audience
+                                      </a>
+                                    </li>
+                                    <li role="course">
+                                      <a href="#Requirement" aria-controls="Requirement" role="tab" data-toggle="tab">Requirement</a>
+                                    </li>
+                                    <li role="course">
+                                      <a href="#More" aria-controls="More" role="tab" data-toggle="tab">More</a>
+                                    </li>
+                                  </ul>
+                                  <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="Features">
+                                      <div class="form-group focused ckeditor_block editor">
+
+
+                                        <textarea class="form-control" name="EmailBody" id="EmailBodyF" rows="10" cols="60" contenteditable="true" #EmailBody="ngModel"
+                                          [(ngModel)]="CourseEntity.EmailBody" class="form-control"></textarea>
+                                      </div>
+
+                                      <div class="check_box">
+                                        <input type="checkbox" name="Featurescheck" [checked]="CourseEntity.Featurescheck" #Featurescheck="ngModel" id="Featurescheck"
+                                          [(ngModel)]="CourseEntity.Featurescheck" />
+                                        <label for="Featurescheck" class="checkboxbtn_label">Show Features</label>
+                                      </div>
+                                      <div class="clearfix"></div>
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="whatget">
+                                      <div class="form-group focused ckeditor_block editor">
+
+                                        <textarea class="form-control" name="EmailBody2" id="EmailBodyW" rows="10" cols="60" contenteditable="true" #EmailBody2="ngModel"
+                                          [(ngModel)]="CourseEntity.EmailBody2" class="form-control" [ngClass]="{red_border: (EmailBody2.dirty && EmailBody2.invalid) || (EmailBody2.pristine && submitted)}"></textarea>
+                                      </div>
+                                      <div class="check_box">
+                                        <input type="checkbox" name="whatgetcheck" [checked]="CourseEntity.whatgetcheck" #whatgetcheck="ngModel" id="whatgetcheck"
+                                          [(ngModel)]="CourseEntity.whatgetcheck" />
+                                        <label for="whatgetcheck" class="checkboxbtn_label">Show What do I get?</label>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Target">
+                                      <div class="form-group focused ckeditor_block editor">
+
+                                        <textarea class="form-control" name="EmailBody3" id="EmailBodyT" rows="10" cols="60" contenteditable="true" #EmailBody3="ngModel"
+                                          [(ngModel)]="CourseEntity.EmailBody3" class="form-control" [ngClass]="{red_border: (EmailBody3.dirty && EmailBody3.invalid) || (EmailBody3.pristine && submitted)}"></textarea>
+                                      </div>
+                                      <div class="check_box">
+                                        <input type="checkbox" name="Targetcheck" [checked]="CourseEntity.Targetcheck" #Targetcheck="ngModel" id="Targetcheck" [(ngModel)]="CourseEntity.Targetcheck"
+                                        />
+                                        <label for="Targetcheck" class="checkboxbtn_label">Show Target Audience
+                                        </label>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="Requirement">
+                                      <div class="form-group focused ckeditor_block editor">
+
+                                        <textarea class="form-control" name="Requirement" id="Requirement1" rows="10" cols="60" contenteditable="true" #Requirement="ngModel"
+                                          [(ngModel)]="CourseEntity.Requirement" class="form-control" [ngClass]="{red_border: (Requirement.dirty && Requirement.invalid) || (Requirement.pristine && submitted)}"></textarea>
+                                      </div>
+                                      <div class="check_box">
+                                        <input type="checkbox" name="Requirementcheck" [checked]="CourseEntity.Requirementcheck" #Requirementcheck="ngModel" id="Requirementcheck"
+                                          [(ngModel)]="CourseEntity.Requirementcheck" />
+                                        <label for="Requirementcheck" class="checkboxbtn_label">Show Requirement</label>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="More">
+                                      <div class="form-group focused ckeditor_block editor">
+
+                                        <textarea class="form-control" name="EmailBody4" id="EmailBodyM" rows="10" cols="60" contenteditable="true" #EmailBody4="ngModel"
+                                          [(ngModel)]="CourseEntity.EmailBody4" class="form-control" [ngClass]="{red_border: (EmailBody4.dirty && EmailBody4.invalid) || (EmailBody4.pristine && submitted)}"></textarea>
+                                      </div>
+                                      <div class="check_box">
+                                        <input type="checkbox" name="Morecheck" [checked]="CourseEntity.Morecheck" #Morecheck="ngModel" id="Morecheck" [(ngModel)]="CourseEntity.Morecheck"
+                                        />
+                                        <label for="Morecheck" class="checkboxbtn_label">Show More</label>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+
+
+                                  </div>
+
+                                  <!-- Bootstrap Accordion -->
+                                  <!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"></div> -->
+                                  <!-- /Bootstrap Accordion -->
+
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12  text-center">
+                              <button type="submit" class="next-step submit_btn back_btn" name="prev">Next</button>
+                            </div>
+                          </div>
+                          <!-- <div class="row" >
+                              <div class="col-md-12 col-sm-12  text-center" *ngIf="(CourseEntity.CourseId>0)">
+                                <button (click)="editCourseForm(CourseEntity)" type="button" name="ss">Next</button>
+                              </div>
+                            </div> -->
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- <ul class="list-inline pull-right">
+                    <li>
+                      <button type="button" class="next-step back_btn">Save and continue</button>
+                    </li>
+                  </ul> -->
+                </div>
+                <div class="tab-pane" role="tabpanel" id="step2">
+                  <!-- <h3>Step 2</h3> -->
+
+
+                  <div [hidden]="!secondform">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <form class="form-validate" #CourseForm="ngForm">
+                          <div class="col-md-12 col-sm-12">
+                            <div class="row">
+                              <div class="pull-left">
+                                <!-- <h1 class="no_margin">Course Topic Form Detail</h1> -->
+                              </div>
+                              <!-- <div class="pull-right">
+                                  <button type="button" (click)="back_btn()" class="next_btn">Back</button>
+                                </div> -->
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div class="course_forum_block course_form_wrapper">
+                            <div id="clonedInput" class="clonedInput">
+                              <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" *ngFor="let form of CourseFormList; let i=index;let first = first;">
+                                  <div class="panel-heading" role="tab" id="headingOne{{i}}">
+                                    <h4 class="panel-title">
+                                      <a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne{{i}}" aria-expanded="false" [attr.aria-controls]="'collapseOne'+i">
+                                        <i class="more-less glyphicon glyphicon-plus"></i> Course Topic {{i+1}} </a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseOne{{i}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'headingOne'+i">
+                                    <div class="panel-body">
+                                      <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                          <div class="form-group">
+                                            <label>
+                                              <span>*</span>Topic Name </label>
+                                            <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #TopicName="ngModel" [(ngModel)]="CourseFormList[i].TopicName"
+                                              class="form-control" name="TopicName{{i}}" [ngClass]="{red_border: (TopicName.dirty && TopicName.invalid) || (TopicName.pristine && submitted)}"
+                                              required />
+                                            <span class="error_span" *ngIf="(TopicName.dirty && TopicName.invalid) || (TopicName.pristine && submitted)">
+                                              <span *ngIf="TopicName.errors && TopicName.errors.required">
+                                                Please enter topic name
+                                              </span>
+                                              <span *ngIf="TopicName.errors && TopicName.errors.pattern">
+                                                Please enter valid topic name
+                                              </span>
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <!-- <div class="col-md-6 col-sm-6">
+                                          <div class="form-group">
+                                            <label>
+                                              <span>*</span>Course Time </label>
+                                            <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #TopicTime="ngModel" [(ngModel)]="CourseFormList[i].TopicTime"
+                                              class="form-control" name="TopicTime{{i}}" [ngClass]="{red_border: (TopicTime.dirty && TopicTime.invalid) || (TopicTime.pristine && submitted)}"
+                                              required />
+                                            <span class="error_span" *ngIf="(TopicTime.dirty && TopicTime.invalid) || (TopicTime.pristine && submitted)">
+                                              <span *ngIf="TopicTime.errors && TopicTime.errors.required">
+                                                Please enter Course Time
+                                              </span>
+                                              <span *ngIf="TopicTime.errors && TopicTime.errors.pattern">
+                                                Please enter valid Course Time
+                                              </span>
+                                            </span>
+                                          </div>
+                                        </div> -->
+                                        <div class="clearfix"></div>
+                                      </div>
+                                      <div class="clearfix"></div>
+
+
+                                      <div class="course_session_wrap" *ngFor="let SubtopicList of form.subtopic; let j=index;let first = first;">
+
+                                        <div class="row">
+                                          <div class="col-md-10">
+                                            <div class="form-group focused label_head">
+                                              <label class="focus_label">
+                                                <span>*</span>Sub Topic</label>
+                                              <div class="clearfix"></div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 no_padding">
+                                              <div class="form-group">
+                                                <label>
+                                                  <span>*</span>Name</label>
+                                                <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #SubTopicName="ngModel" [(ngModel)]="form.subtopic[j].SubTopicName"
+                                                  class="form-control" name="SubTopicName{{i}}{{j}}" [ngClass]="{red_border: (SubTopicName.dirty && SubTopicName.invalid) || (SubTopicName.pristine && submitted)}"
+                                                  required />
+                                                <span class="error_span" *ngIf="(SubTopicName.dirty && SubTopicName.invalid) || (SubTopicName.pristine && submitted)">
+                                                  <span *ngIf="SubTopicName.errors && SubTopicName.errors.required">
+                                                    Please enter sub topic name
+                                                  </span>
+                                                  <span *ngIf="SubTopicName.errors && SubTopicName.errors.pattern">
+                                                    Please enter valid sub topic name
+                                                  </span>
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                              <div class="form-group focused">
+                                                <label>
+                                                  <span>*</span>Duration </label>
+                                                <div class="time_number">
+                                                  <input type="number"  max="999" class="form-control" placeholder="hh" #hh="ngModel" [(ngModel)]="form.subtopic[j].hh"
+                                                    name="hh{{i}}{{j}}"  />:
+                                                  <input type="number"  max="59" class="form-control" placeholder="mm" #mm="ngModel" [(ngModel)]="form.subtopic[j].mm"
+                                                    name="mm{{i}}{{j}}"  />
+                                              
+                                                </div>
+                                                <span class="error_span" *ngIf="CourseFormList[i].subtopic[j].TimeValid">
+                                                  Please enter sub topic duration
+                                                </span>
+                                                <!-- <input type="text" class="form-control" id="duration2">
+                                                <input type="time" class="form-control" max="100:00:00" min="00:00:00" step="1" id="duration">
+                                <input type="text" class="form-control " id="SubTopicTime{{i}}{{j}}" #SubTopicTime="ngModel" [(ngModel)]="form.subtopic[j].SubTopicTime"
+                                                  name="SubTopicTime{{i}}{{j}}" /> -->
+
+
+
+                                              </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-6 col-sm-6 no_padding">
+                                              <div class="form-group focused">
+                                                <label>
+                                                  Description</label>
+                                                <textarea class="form-control" #SubTopicDescription="ngModel" rows="1" [(ngModel)]="form.subtopic[j].SubTopicDescription"
+                                                  class="form-control" name="SubTopicDescription{{i}}{{j}}" [ngClass]="{red_border: (SubTopicDescription.dirty && SubTopicDescription.invalid) || (SubTopicDescription.pristine && submitted)}"></textarea>
+
+                                              </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                              <div class="form-group file_upload" id="MulVideoiconn{{i}}{{j}}">
+                                                <label>
+                                                  <span>*</span>Upload Video</label>
+                                                <input type="text" class="SingleUploadfocus" id="modalfilesingle{{i}}{{j}}" readonly (click)="singleupload(i,j)" />
+                                                <!-- <input type="file" accept="video/*" size="15MB"  
+                                                  class="form-control" id="MulVideo{{i}}{{j}}" name="Videoicon{{i}}{{j}}" 
+                                                   #MulVideoicon="ngModel"
+                                                  [(ngModel)]="form.subtopic[j].MulVideoicon" /> -->
+                                                <!-- <input type="text" disabled /> -->
+                                                <!-- <input type="file" (change)="subtopicchange(i,j,$event)"  accept="video/*" size="15MB" name="Video{{i}}{{j}}" id="Video{{i}}{{j}}"
+                                                  #Video="ngModel" [(ngModel)]="form.subtopic[j].Video" /> -->
+
+                                                <span class="error_span" *ngIf="CourseFormList[i].subtopic[j].VideoValid">
+                                                  Please upload video
+                                                </span>
+                                              </div>
+
+                                              <!-- Modal -->
+
+                                              <div id="myModal2{{i}}{{j}}" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                  <!-- Modal content-->
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                      <h4 class="modal-title">Please select video</h4>
+                                                    </div>
+                                                    <div class="mediasubtopic" id="mediascrollbar{{i}}{{j}}">
+                                                      <div class="modal-body">
+                                                        <div class="media_uploade_list">
+                                                          <ul>
+                                                            <li class="uploadfromcomp">
+                                                              <div class="file_upload modal_fileupload">
+                                                                <div class="fileuploader">
+                                                                  <i class="fa fa-upload"></i>Upload from your computer</div>
+                                                                <input type="file" class="form-control" (change)="subtopicchange(Video,i,j)" accept="video/*" size="15MB" name="Video{{i}}{{j}}"
+                                                                  id="Video{{i}}{{j}}" #Video="ngModel" [(ngModel)]="form.subtopic[j].Video"
+                                                                />
+                                                              </div>
+                                                            </li>
+                                                            <li id="Videoactive{{i}}{{j}}{{k}}" class="Videoremove" (click)="SubTopicVideo(i,j,k,Video)" *ngFor="let Video of VideoList;let k = index">
+
+                                                              <video src="assets/Instructor/{{Video.fid}}/Video/{{Video.FilePath}}" controls class="video_margin">{{Video.ResourcesId}}
+                                                                <source type="video/mp4">Your browser does not support HTML5 video.</video>
+                                                            </li>
+
+                                                          </ul>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="back_btn">Submit</button>
+                                                      <button type="button" class="next_btn" (click)="close(i,j)">Close</button>
+                                                    </div>
+                                                  </div>
+
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                          </div>
+                                          <div class="col-md-2 course_session_button">
+                                            <button type="button" *ngIf="form.subtopic.length>1" (click)="DeleteSubTopic(SubtopicList,i,j)" class="btn btn-danger btn-rounded btn-sm"
+                                              title="Delete">
+                                              <span class="fa fa-times"></span>
+                                            </button>
+                                            <button type="button" [disabled]="
+                                            form.subtopic[j].SubTopicName.length<1 
+                                            || form.subtopic[j].hh.length<1 
+                                            || form.subtopic[j].mm.length<1
+                                          
+                                             || form.subtopic[j].SubTopicDescription.length<1 " (click)="AddSubTopic(i,j+1,TopicId)"
+                                              class="btn btn-default btn-rounded btn-sm" title="Add">
+                                              <span class="fa fa-plus"></span>
+                                            </button>
+                                          </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                      </div>
+                                      <!-- <div class="row">
+                                        <div class="col-md-12 col-sm-12 save_btn" *ngIf="singal">
+                                          <button type="button" (click)="edittopic(CourseForm,form,i)" class="next_btn pull-right">
+                                            <span>Save singal</span>
+                                          </button>
+                                        </div>
+                                      </div> -->
+                                    </div>
+                                  </div>
+                                  <div *ngIf="CourseFormList.length>1" (click)="DeleteTopic(form,i)" class="alert-close">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 text-center">
+                              <button class="actions" type="button" (click)="AddTopic()" class="clone back_btn">Add</button>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12 text-center course_buttons">
+                              <ul>
+                                <li class="pull-left">
+                                  <button type="button" class="prev-step next_btn" (click)="Previousfirst()">Previous</button>
+                                </li>
+                                <!-- <li class="actions">
+                                  <button type="button" (click)="AddCourseForm()" class="clone back_btn">Add</button>
+                                </li> -->
+                                <li class="pull-right" *ngIf="!singal">
+                                  <button type="button" (click)="addCourseTopic(CourseForm)" class="next-step back_btn">
+                                    <span>Next</span>
+                                  </button>
+                                </li>
+                                <li class="pull-right" *ngIf="editsave">
+                                  <button type="button" (click)="edittopic(CourseForm)" class="next-step back_btn">
+                                    <span>Next</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+                <div class="tab-pane" role="tabpanel" id="step3">
+                  <!-- <h3>Step 3</h3> -->
+
+
+
+                  <div class="content_block" [hidden]="!thirdform">
+                    <div class="col-md-12 col-sm-12">
+                      <h1>{{CourseList.CourseFullName}}</h1>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="content_block course_session_wrapper course_forum_block course_form_wrapper">
+                      <div class="col-md-12 col-sm-12">
+                        <form class="form-validate" #CourseFormSession="ngForm" (ngSubmit)="addCourseSession(CourseFormSession)">
+                          <div class="session_block">
+                            <!-- <h1>Introduction</h1> -->
+                            <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+
+                              <div class="panel panel-default" *ngFor="let form of schedularList; let i=index;let first = first;">
+                                <div class="panel-heading" role="tab" id="headingOne12{{i}}">
+                                  <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne1{{i}}" aria-expanded="false" [attr.aria-controls]="'collapseOne1'+i">
+                                      <i class="more-less glyphicon glyphicon-plus" *ngIf="!schedularList[i].SessionName"></i>
+                                      <span *ngIf="!schedularList[i].SessionName">Course Session {{i+1}}</span>
+                                      <i class="more-less glyphicon glyphicon-plus" *ngIf="schedularList[i].SessionName"></i>
+                                      <span *ngIf="schedularList[i].SessionName">{{schedularList[i].SessionName}}
+                                      </span>
+                                    </a>
+                                  </h4>
+                                </div>
+                                <div id="collapseOne1{{i}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'headingOne12'+i">
+                                  <div class="panel-body">
+                                    <div class="row">
+
+                                      <div class="col-md-12 col-sm-12">
+                                        <div class="Appointment_section">
+                                          <div class="form-group focused label_head">
+                                            <label class="focus_label">
+                                              <span>*</span>Appointment Time</label>
+                                            <div class="clearfix"></div>
+                                          </div>
+                                          <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                              <label>
+                                                <span>*</span>Session Name</label>
+                                              <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #SessionName="ngModel" [(ngModel)]="schedularList[i].SessionName"
+                                                class="form-control" name="SessionName{{i}}" [ngClass]="{red_border: (SessionName.dirty && SessionName.invalid) || (SessionName.pristine && submitted)}"
+                                                required />
+                                              <span class="error_span" *ngIf="(SessionName.dirty && SessionName.invalid) || (SessionName.pristine && submitted)">
+                                                <span *ngIf="SessionName.errors && SessionName.errors.required">
+                                                  Please enter session name
+                                                </span>
+
+                                                <span *ngIf="SessionName.errors && SessionName.errors.pattern">
+                                                  Please enter valid session name
+                                                </span>
+                                              </span>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                              <label>
+                                                <span>*</span>Start Time</label>
+
+                                              <input type="text" #StartTime="ngModel" id="StartTime{{i}}" [(ngModel)]="schedularList[i].StartTime" readonly class="form-control form_time_picker timefocus1"
+                                                name="StartTime{{i}}" />
+                                              <span class="error_span" *ngIf="schedularList[i].STimeValid">
+                                                Please enter start date
+                                              </span>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                              <label>
+                                                <span>*</span>End Time</label>
+                                              <input type="text" #EndTime="ngModel" id="EndTime{{i}}" [(ngModel)]="schedularList[i].EndTime" readonly class="form-control form_time_picker timefocus2"
+                                                name="EndTime{{i}}" />
+                                              <span class="error_span" *ngIf="schedularList[i].ETimeValid">
+                                                Please enter end time
+                                              </span>
+                                            </div>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+
+                                      <div class="col-md-12 col-sm-12">
+                                        <div class="recurrence_section">
+                                          <div class="form-group focused label_head">
+                                            <label class="focus_label">
+                                              <span>*</span>Recurring Course</label>
+                                            <div class="clearfix"></div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-4 col-sm-4">
+                                              <div class="form-group">
+                                                <label>
+                                                  <span class="required">*</span>Location</label>
+                                                <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #Location="ngModel" [(ngModel)]="schedularList[i].Location"
+                                                  class="form-control" name="Location{{i}}" [ngClass]="{red_border: (Location.dirty && Location.invalid) || (Location.pristine && submitted)}"
+                                                  required />
+                                                <span class="error_span" *ngIf="(Location.dirty && Location.invalid) || (Location.pristine && submitted)">
+                                                  <span *ngIf="Location.errors && Location.errors.required">
+                                                    Please enter location
+                                                  </span>
+                                                  <span *ngIf="Location.errors && Location.errors.pattern">
+                                                    Please enter valid location name
+                                                  </span>
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                              <div class="form-group">
+                                                <label>
+                                                  <span class="required">*</span>Country</label>
+
+
+                                                <select class='select-option' (change)="getStateList(CourseFormSession,i)" class="form-control" #CountryId="ngModel" [(ngModel)]="schedularList[i].CountryId"
+                                                  name="CountryId{{i}}" required>
+                                                  <option value="" ngSelected='schedularList[i].CountryId==""'>Select</option>
+                                                  <option *ngFor="let country of CountryList" value="{{country.CountryId}}" ngSelected="schedularList[i].CountryId==country.CountryId">{{country.CountryName}}</option>
+                                                </select>
+                                                <span class="error_span" *ngIf="(CountryId.dirty && CountryId.invalid) || (CountryId.pristine && submitted && !(schedularList[i].CountryId>0))">
+                                                  <span *ngIf="CountryId.errors || (CountryId.pristine && submitted)">Please select country </span>
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-4">
+                                              <div class="form-group">
+                                                <label>
+                                                  <span class="required">*</span>State</label>
+                                                <select class="form-control" #StateId="ngModel" [(ngModel)]="schedularList[i].StateId" name="StateId{{i}}" required>
+                                                  <option value="" ngSelected='schedularList[i].StateId==""'>Select</option>
+                                                  <option *ngFor="let state of stateList[i]" value="{{state.StateId}}" ngSelected="schedularList[i].StateId==state.StateId">{{state.StateName}}</option>
+                                                </select>
+                                                <span class="error_span" *ngIf="(StateId.dirty && StateId.invalid) || (StateId.pristine && submitted && !(schedularList[i].StateId>0))">
+                                                  <span *ngIf="StateId.errors || (StateId.pristine && submitted)">Please select state
+                                                  </span>
+                                                </span>
+                                                <!-- <select #StateId="ngModel" class="form-control"     [(ngModel)]="schedularList[i].StateId" name="StateId{{i}}" required>
+                                                  <option value="" ngSelected='schedularList[i].StateId==""'>Select</option>
+                                                  <ng-container  *ngFor="let state of stateList[i]">
+                                                    <option  value="{{state.StateId}}" ngSelected="schedularList[i].StateId==state.StateId">{{state.StateName}}</option>
+                                                  </ng-container>
+                                                </select>
+                                                <span class="error_span" *ngIf="(StateId.dirty && StateId.invalid) || (StateId.pristine && submitted && !(schedularList[i].StateId>0))">
+                                                  <span *ngIf="StateId.errors || (StateId.pristine && required)">Please select State</span>
+                                                </span> -->
+                                              </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-6 col-sm-6">
+                                              <div class="form-group">
+                                                <label>
+                                                  <span>*</span>Choose your Primary Instructor</label>
+                                                <select #Instructorone="ngModel" class="form-control" [(ngModel)]="schedularList[i].Instructorone" name="Instructorone{{i}}"
+                                                  required>
+                                                  <option value="" ngSelected='schedularList[i].Instructorone==""'>Select</option>
+                                                  <ng-container *ngFor="let Instructorl of InstructorListone;let l = index ">
+                                                    <option value="{{Instructorl.value}}" ngSelected="schedularList[i].Instructorone==Instructorl.value">{{Instructorl.label}}</option>
+                                                  </ng-container>
+                                                </select>
+                                                <span class="error_span" *ngIf="(Instructorone.dirty && Instructorone.invalid) || (Instructorone.pristine && submitted)">
+                                                  <span *ngIf="Instructorone.errors || (Instructorone.pristine && required)">Please select category</span>
+                                                </span>
+                                              </div>
+                                            </div>
+
+
+                                            <div class="col-md-6 col-sm-6">
+                                              <div class="form-group">
+                                                <label>
+                                                  <span class="required">*</span>Choose your Instructor</label>
+                                                <ng-select filterPlaceholder="Type to search..." [options]="InstructorList" name="Instructor{{i}}" [multiple]="true" [(ngModel)]="schedularList[i].Instructor"
+                                                  notFoundMsg="Not Instructor found" class="form-group instructorfocus">
+                                                </ng-select>
+                                                <span class="error_span" *ngIf="schedularList[i].InstructorValid">
+                                                  Please select course instructor
+                                                </span>
+                                              </div>
+                                            </div>
+
+                                            <!-- <div class="col-md-6 col-sm-6"  id="as"*ngIf="schedularList[i].InstSec==true">
+                                              <div class="form-group" >
+                                                <label>
+                                                  <span class="required">*</span>Choose your Instructor</label>
+                                                <ng-select filterPlaceholder="Type to search..." [options]="InstructorList" name="Instructor{{i}}" [multiple]="true" [(ngModel)]="schedularList[i].Instructor"
+                                                  notFoundMsg="Not Instructor found" class="form-group instructorfocus">
+                                                </ng-select>
+                                                <span class="error_span" *ngIf="schedularList[i].InstructorValid">
+                                                  Please select course instructor
+                                                </span>
+                                              </div>
+                                            </div> -->
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                      <div class="col-md-12 col-sm-12">
+                                        <div class="range_recurrence">
+                                          <div class="form-group focused label_head">
+                                            <label class="focus_label">
+                                              <span>*</span>Range of recurrence</label>
+                                            <div class="clearfix"></div>
+                                          </div>
+                                          <div class="col-md-4 col-sm-4">
+                                            <div class="form-group">
+                                              <span>Start Date:</span>
+                                              <div class="input_box">
+                                                <input type="text" readonly class="form-control form_date" id="StartDate{{i}}" name="StartDate{{i}}" [(ngModel)]="schedularList[i].StartDate"
+                                                />
+                                                <span class="error_span" *ngIf="schedularList[i].SDateValid">
+                                                  Please enter start date
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div class="form-group">
+                                              <span>End Date:</span>
+                                              <div class="input_box">
+                                                <input type="text" readonly class="form-control form_date" id="EndDate{{i}}" name="EndDate{{i}}" [(ngModel)]="schedularList[i].EndDate"
+                                                />
+                                                <span class="error_span" *ngIf="schedularList[i].EDateValid">
+                                                  Please enter end date
+                                                </span>
+                                                <span class="error_span" *ngIf="schedularList[i].startlessenddate">
+                                                  End date should be greater than start date
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-8 col-sm-8 recurrence_checkbox">
+
+                                            <div class="check_box">
+                                              <input type="checkbox" value="monday" name="monday{{i}}" [checked]="schedularList[i].monday" #monday="ngModel" id="monday{{i}}"
+                                                [(ngModel)]="schedularList[i].monday">
+                                              <label for="monday{{i}}" title="Mon" class="checkboxbtn_label">Mon</label>
+                                            </div>
+                                            <div class="check_box">
+                                              <input type="checkbox" value="tuesday" name="tuesday{{i}}" [checked]="schedularList[i].tuesday" #tuesday="ngModel" id="tuesday{{i}}"
+                                                [(ngModel)]="schedularList[i].tuesday">
+                                              <label for="tuesday{{i}}" title="Tue" class="checkboxbtn_label">Tue</label>
+                                            </div>
+                                            <div class="check_box">
+                                              <input type="checkbox" value="wednesday" name="wednesday{{i}}" [checked]="schedularList[i].wednesday" #wednesday="ngModel"
+                                                id="wednesday{{i}}" [(ngModel)]="schedularList[i].wednesday">
+                                              <label for="wednesday{{i}}" title="Wed" class="checkboxbtn_label">Wed</label>
+                                            </div>
+                                            <div class="check_box">
+                                              <input type="checkbox" value="thursday" name="thursday{{i}}" [checked]="schedularList[i].thursday" #thursday="ngModel" id="thursday{{i}}"
+                                                [(ngModel)]="schedularList[i].thursday">
+                                              <label for="thursday{{i}}" title="Thu" class="checkboxbtn_label">Thu</label>
+                                            </div>
+                                            <div class="check_box">
+                                              <input type="checkbox" value="friday" name="friday{{i}}" [checked]="schedularList[i].friday" #friday="ngModel" id="friday{{i}}"
+                                                [(ngModel)]="schedularList[i].friday">
+                                              <label for="friday{{i}}" title="Fri" class="checkboxbtn_label">Fri</label>
+                                            </div>
+                                            <div class="check_box">
+                                              <input type="checkbox" value="saturday" name="saturday{{i}}" [checked]="schedularList[i].saturday" #saturday="ngModel" id="saturday{{i}}"
+                                                [(ngModel)]="schedularList[i].saturday">
+                                              <label for="saturday{{i}}" title="Sat" class="checkboxbtn_label">Sat</label>
+                                            </div>
+                                            <div class="check_box">
+                                              <input type="checkbox" value="sunday" name="sunday{{i}}" [checked]="CourseEntity.sunday" #sunday="ngModel" id="sunday{{i}}"
+                                                [(ngModel)]="schedularList[i].sunday">
+
+                                              <label for="sunday{{i}}" title="Sun" class="checkboxbtn_label">Sun</label>
+                                            </div>
+                                          </div>
+                                          <span class="error_span" *ngIf="schedularList[i].checkboxbtnvalid">
+                                            Please select week day
+                                          </span>
+
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+
+                                      <div class="col-md-12 col-sm-12">
+                                        <div class="max_student">
+                                          <div class="form-group focused label_head">
+                                            <label class="focus_label">
+                                              <span>*</span>Max. Student</label>
+                                          </div>
+                                          <div class="form-group">
+                                            <div class="radiobtn_box">
+                                              <input type="radio" name="Showstatus{{i}}" id="endbye1{{i}}" (click)="maxStudent(CourseFormSession)" value="0" [(ngModel)]="schedularList[i].Showstatus">
+                                              <label for="endbye1{{i}}">Max Student </label>
+                                            </div>
+                                            <div class="radiobtn_box">
+                                              <input type="radio" name="Showstatus{{i}}" id="endbye2{{i}}" (click)="maxStudent(CourseFormSession)" value="1" [(ngModel)]="schedularList[i].Showstatus">
+                                              <label for="endbye2{{i}}">Course End Date</label>
+                                            </div>
+                                            <div *ngIf="schedularList[i].Showstatus==0">
+                                              <div class="input_box">
+                                                <input type="text" class="form-control" #TotalSeats="ngModel" name="TotalSeats{{i}}" [(ngModel)]="schedularList[i].TotalSeats"
+                                                  [ngClass]="{red_border: (TotalSeats.dirty && TotalSeats.invalid) || (TotalSeats.pristine && submitted)}"
+                                                  pattern="[0-9]{1,}" required />
+
+
+                                                <span class="error_span" *ngIf="(TotalSeats.dirty && TotalSeats.invalid) || (TotalSeats.pristine && submitted)">
+                                                  <span *ngIf="TotalSeats.errors && TotalSeats.errors.required">
+                                                    Please enter total seats
+                                                  </span>
+
+                                                  <span *ngIf="TotalSeats.errors && TotalSeats.errors.pattern">
+                                                    Please enter valid total seats
+                                                  </span>
+                                                </span>
+                                              </div>
+                                              <span>Max. Student</span>
+                                            </div>
+                                            <div *ngIf="schedularList[i].Showstatus==1">
+                                              <div class="input_box">
+
+                                                <input type="text" readonly class="form-control form_date" id="CourseCloseDate{{i}}" name="CourseCloseDate{{i}}" [(ngModel)]="schedularList[i].CourseCloseDate"
+                                                />
+                                                <span class="error_span" *ngIf="schedularList[i].CourseCloseDateValid">
+                                                  Please enter course close date
+                                                </span>
+                                              </div>
+                                              <span>Course Close Date</span>
+                                            </div>
+
+                                          </div>
+                                        </div>
+
+
+                                        <div class="max_student" *ngIf="schedularList[i].checkvalid && schedularList[i].enroll>0 && schedularList[i].PublishStatus!='0'">
+                                          <!-- <div class="form-group focused label_head">
+                                            <label class="focus_label">
+                                              <span>*</span>Max Student</label>
+                                          <div class="clearfix"></div>
+                                          </div> -->
+                                          <div class="form-group">
+                                            <div class="check_box checkBoxClass">
+                                              <input type="checkbox" class="checkbox_check" [(ngModel)]="schedularList[i].Check" name="Check{{i}}" id="Check{{i}}">
+                                              <label for="Check{{i}}" class="checkboxbtn_label">lerner can inform checked email</label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <button type="button" (click)="Publish(CourseFormSession,form,i)" *ngIf="schedularList[i].checkvalid && schedularList[i].PublishStatus!='0'"
+                                          class="next_btn pull-right">
+                                          <span>Publish</span>
+                                        </button>
+                                        <button type="button" *ngIf="schedularList[i].PublishStatus=='0'" (click)="addsinglesession(CourseFormSession,form,i)" class="back_btn pull-right">
+                                          <span>Save as draft</span>
+                                        </button>
+                                      </div>
+                                      <div class="clearfix"></div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="alert-close" *ngIf="schedularList.length>1" (click)="DeleteCoursesession(form,schedularList[i].CourseSessionId)">
+                                  <i class="fa fa-trash" aria-hidden="true"></i>
+                                </div>
+                                <div class="alert-close cloned" title="Clone" (click)="clone(form)">
+                                  <i class="fa fa-clone" aria-hidden="true"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- panel-group -->
+
+                          </div>
+
+                          <div class="col-md-12 col-sm-12 text-center">
+                            <button type="button" class="back_btn" (click)="AddCouseSession()">Add</button>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 col-sm-12 text-center course_buttons no_padding">
+                      <ul>
+                        <li class="pull-left">
+                          <button type="button" class="prev-step next_btn" (click)="Previoussecond()">Previous</button>
+                        </li>
+                        <!-- <li class="actions">
+                          <button type="button" class="back_btn" (click)="AddCouseSession()">Add</button>
+                        </li> -->
+
+                        <li class="pull-right">
+                          <button type="button" (click)="addCourseSession(CourseFormSession)" class="submit_btn back_btn">
+                            <span>Next</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="step4">
+                  <div class="content_block" [hidden]="!forthform">
+                    <form class="form-validate" #BadgesForm="ngForm" (ngSubmit)="addbadge(BadgesForm)">
+                      <div class="download_badges">
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                            <div class=" course_session_wrapper">
+                              <div class="Appointment_section" *ngIf="!badgehide">
+                                <div class="form-group focused label_head">
+                                  <label class="focus_label">
+                                    <span>*</span>Badge Label</label>
+                                  <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
+                                  <label>
+                                    <span>*</span>Enter your badge letters</label>
+                                  <input type="text" pattern="[A-Za-z.'-.]{2,7}" maxlength="100" #badgeletter="ngModel" [(ngModel)]="BadgesEntity.badgeletter"
+                                    class="form-control" name="badgeletter" [ngClass]="{red_border: (badgeletter.dirty && badgeletter.invalid) || (badgeletter.pristine && submitted)}"
+                                    required />
+                                  <span class="error_span" *ngIf="(badgeletter.dirty && badgeletter.invalid) || (badgeletter.pristine && submitted)">
+                                    <span *ngIf="badgeletter.errors && badgeletter.errors.required">
+                                      Please enter badge letters
+                                    </span>
+                                    <span *ngIf="badgeletter.errors && badgeletter.errors.pattern">
+                                      Please enter valid badge letters
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="badge_selection" *ngIf="!badgehide">
+                          <div class="row">
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                              <div class="col-md-3 col-sm-3 col-xs-6 your_badge_block" *ngIf="Bimageid">
+                                <label class="your_badge_preview">Your Badge</label>
+                                <img src="assets/Instructor/{{BadgesEntity.rid}}/image/{{BadgesEntity.badgeImage}}" class="img-responsive" alt="" />
+                              </div>
+                              <div class="col-md-3 col-sm-3 col-xs-12" *ngFor="let Badge of DefalutBadges;let i = index">
+                                <label class="image-radio" (click)="replaceBadges(Badge)">
+                                  <img src="../assets/Instructor/{{Badge.fid}}/image/{{Badge.FilePath}}" class="img-responsive" alt="" />
+                                  <input type="radio" name="image_radio" value="1" />
+                                  <i class="fa fa-check hidden"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-1 col-sm-1 col-xs-12">
+                              <div class="text-center section_or">
+                                <span *ngIf="!badgehide">OR</span>
+                              </div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                              <div class="text-center browse_badge_btn">
+                                <button type="button" (click)="Browseshow()" class="next_btn" *ngIf="!badgehide">Browse Your File</button>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="col-md-2 col-sm-2 col-xs-6">
+                            <label class="image-radio" name="certificatebadge3.png">
+                              <img src="assets/Instructor/badges/certificatebadge3.png" class="img-responsive" alt="" />
+                              <input type="radio" name="image_radio" value="3" />
+                              <i class="fa fa-check hidden"></i>
+                            </label>
+                          </div> -->
+                          <div class="clearfix"></div>
+                        </div>
+                        <span class="error_span" *ngIf="selebadge">
+                          Please select image
+                        </span>
+
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                            <!-- <div class="or_section">
+                              <span>OR</span>
+                            </div> -->
+                            <!-- <label>
+                              <span>*</span>Brouse your file</label>
+                            <input type="text" disabled class="form-control" />
+                            <input type="file" name="fileToUpload" id="fileToUpload" class="form-control" /> -->
+
+                            <!--<div class="row">
+                               <div class="col-md-12 col-sm-12 text-center">
+                                <button type="button" (click)="Browsehide()" class="next_btn" *ngIf="badgehide">Select Badge</button>
+                              </div> -->
+                            <!-- <div class="col-md-12 col-sm-12 text-center browse_badge_btn">
+                                <span *ngIf="!badgehide">OR</span>
+                                <button type="button" (click)="Browseshow()" class="next_btn" *ngIf="!badgehide">Browse Your File</button>
+                              </div> 
+                            </div>-->
+
+                            <div class="clearfix"></div>
+                            <div class="row">
+                              <div class="col-md-8 col-sm-8">
+                                <input type="hidden" value="" name="selectbages" id="selectbages" />
+
+                                <div class="form-group file_upload" id="badgeImageicon" *ngIf="badgehide">
+                                  <label>
+                                    <span>*</span>Brouse your file</label>
+
+                                  <input type="text" id="modalfilebadge" class="CourseImagefocus" readonly data-toggle="modal" data-target="#myModal3" [ngClass]="{'red_border': badgeValid}"
+                                  />
+                                  <span class="error_span" *ngIf="badgeValid">
+                                    Please upload image
+                                  </span>
+                                  <a class="link1 display_none"></a>
+                                </div>
+                              </div>
+                              <div class="col-md-2 col-sm-2 text-center section_or">
+                                <span *ngIf="badgehide">OR</span>
+                              </div>
+                              <div class="col-md-2 col-sm-2 text-center select_badge_btn">
+                                <button type="button" (click)="Browsehide()" class="next_btn" *ngIf="badgehide">Select Badge</button>
+                              </div>
+                            </div>
+
+                            <div id="myModal3" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Please select an image</h4>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <div class="modal-body">
+                                    <div class="imageselectionmodal">
+                                      <div class="image_uploade_list">
+                                        <ul>
+                                          <li class="uploadfromcomp">
+                                            <div class="file_upload modal_fileupload">
+                                              <div class="fileuploader">
+                                                <i class="fa fa-upload"></i>Upload from your computer</div>
+                                              <input type="file" class="form-control" id="badgeImage" name="badgeImage" #badgeImage="ngModel" [(ngModel)]="CourseEntity.badgeImage"
+                                              />
+                                            </div>
+                                          </li>
+                                          <li id="badgetest{{i}}" class="badgeremove" (click)="badgecl(image,i)" *ngFor="let image of ImageList;let i = index">
+                                            <img src="assets/Instructor/{{image.fid}}/image/{{image.FilePath}}" class="img-responsive" alt="" />
+
+                                          </li>
+                                          <li *ngIf="ImageList==''">Not image</li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="back_btn" data-dismiss="modal">Submit</button>
+                                    <button type="button" class="next_btn" data-dismiss="modal">Close</button>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12 text-center course_buttons">
+                            <ul>
+                              <li class="pull-left">
+                                <button type="button" class="prev-step next_btn" (click)="Previoushtird()">Previous</button>
+                              </li>
+                              <!-- <li class="actions">
+                                  <button type="button" class="back_btn" (click)="AddCouseSession()">Add</button>
+                                </li> -->
+                              <li>
+                                <button type="submit" class="submit_btn back_btn">
+                                  <span>Submit</span>
+                                </button>
+
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

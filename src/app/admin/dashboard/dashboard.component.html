@@ -1,0 +1,482 @@
+<div class="title_heading">
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-8">
+		<div class="welcome_message alert" role="alert">
+			<i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
+			
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+				<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-6 col-sm-6">
+			<div id="buttons" class="pull-right"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block admin_dashboard">
+	<div class="col-md-12">
+		<h3>Overview</h3>
+		<div class="row">
+			<div class="col-md-3 col-sm-3">
+				<div class="overview_block">
+					<i class="fa fa-user"></i>
+					<div class="icon_number">
+						<span *ngIf="totalLearner!=0">{{totalLearner}}</span>
+						<span *ngIf="totalLearner==0">0</span>
+					</div>
+					<div class="title">ACTIVE LEARNERS</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3">
+				<div class="overview_block">
+					<i class="fa fa-user"></i>
+					<div class="icon_number">
+						<span *ngIf="totalInstructor!=0">{{totalInstructor}}</span>
+						<span *ngIf="totalInstructor==0">0</span>
+					</div>
+					<div class="title">ACTIVE INSTRUCTORS</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3">
+				<div class="overview_block">
+					<i class="fa fa-book"></i>
+					<div class="icon_number">
+						<span *ngIf="totalCourses!=0">{{totalCourses}}</span>
+						<span *ngIf="totalCourses==0">0</span>
+					</div>
+					<div class="title">TOTAL COURSES</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3">
+				<div class="overview_block">
+					<i class="fa fa-book"></i>
+					<div class="icon_number">10</div>
+					<div class="title">CLAIMED BADGES</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="graph_block">
+					<h3 class="pull-left">Login and Course Completed</h3>
+					<div class="logincourse_tabs">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="logincourse" class="active"><a href="#Today" aria-controls="Today" role="tab" data-toggle="tab">Today</a></li>
+							<li role="logincourse"><a href="#Yesterday" aria-controls="Yesterday" role="tab" data-toggle="tab">Yesterday</a></li>
+							<li role="logincourse"><a href="#Week" aria-controls="Week" role="tab" data-toggle="tab">Week</a></li>
+							<li role="logincourse"><a href="#Month" aria-controls="Month" role="tab" data-toggle="tab">Month</a></li>
+						</ul>
+						<div class="clearfix"></div>
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="Today">
+								<div id="login_course_today" class="chart"></div>
+								<div class="clearfix"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="Yesterday">
+								<div id="login_course_yesterday" class="chart"></div>
+								<div class="clearfix"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="Week">
+								<div id="login_course_week" class="chart"></div>
+								<div class="clearfix"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="Month">
+								<div id="login_course_month" class="chart"></div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="invited_user_block">
+					<h3>Recent 5 Invitations</h3>
+					<div class="table-responsive">
+						<div class="scroll_invitetbl">
+					<table class="table table-hover" style="width:100%">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+								<th class="text-center instructor_width">Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr  *ngFor="let invitation of recentInvitation; let i = index">
+								<td>{{invitation.FirstName}}</td>
+								<td>{{invitation.EmailAddress}}</td>
+								<td class="text-center">
+									<div *ngIf="invitation.IsStatus =='0'"><span>Accepted</span></div>
+									<div *ngIf="invitation.IsStatus =='1'"><span>Pending</span></div>
+								</td>
+								
+							</tr>
+							<!-- <tr>
+								<td>Trushant Mehta</td>
+								<td>TMehta@TheOpenEyes.com</td>
+								<td class="text-center"><span class="invited">Invited</span></td>
+							</tr>
+							<tr>
+								<td>Brielle Williamson</td>
+								<td>brielle.williamson@infosys.com</td>
+								<td class="text-center"><span class="invited">Invited</span></td>
+							</tr>
+							<tr>
+								<td>Michael Tilahun</td>
+								<td>michael.til@tcs.com</td>
+								<td class="text-center"><span class="accepted">Accepted</span></td>
+							</tr>
+							<tr>
+								<td>Garrett Winters</td>
+								<td>garrett.winters@yahoo.com</td>
+								<td class="text-center"><span class="accepted">Accepted</span></td>
+							</tr> -->
+						</tbody>
+					</table>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="rated_course_block">
+					<h3>Top Rated Courses</h3>
+					<div class="table-responsive">
+						<div class="scroll_topcourse">
+					<table class="table table-hover" style="width:100%">
+						<thead>
+							<tr>
+								<th>Course Name</th>
+								<th class="instructor_width">Instructor(s)</th>
+								<th class="rating_width">Rating</th>
+								<th class="text-center action_width">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let topcourse of topratedcourse; let i = index">
+								<td>{{topcourse.CourseFullName}}</td>
+								<td>{{topcourse.FirstName}}  {{topcourse.LastName}}</td>
+								<td>
+									<span class="stars_block" *ngFor="let item of createRange(topcourse.Rating);let j = index">
+										<i class="fa fa-star"></i>
+									</span>
+								</td>
+								<td class="text-center">
+									<button class="edit" data-toggle="tooltip" data-placement="top" title="View" routerLink="/course-detail/{{topcourse.CourseId}}"><i class="fa fa-eye"></i></button>
+								</td>
+							</tr>
+							<!-- <tr>
+								<td>Complete ASP.NET MVC 5 Course</td>
+								<td>Shane Griffin</td>
+								<td>
+									<div class="stars_block"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star" aria-hidden="true"></i><i
+										 class="fa fa-star"></i><i class="fa fa-star"></i></div>
+								</td>
+								<td class="text-center">
+									<button class="edit" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></button>
+								</td>
+							</tr> -->
+							<!-- <tr>
+								<td>Master ASP.NET Core MVC 2.0</td>
+								<td>Adrian Demian,<br>Brielle Williamson</td>
+								<td>
+									<div class="stars_block"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star" aria-hidden="true"></i><i
+										 class="fa fa-star-o"></i><i class="fa fa-star-o"></i></div>
+								</td>
+								<td class="text-center">
+									<button class="edit" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></button>
+								</td>
+							</tr>
+							<tr>
+								<td>Node.js</td>
+								<td>Michael Tilahun,<br>Rick Brown</td>
+								<td>
+									<div class="stars_block"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star" aria-hidden="true"></i><i
+										 class="fa fa-star-o"></i><i class="fa fa-star-o"></i></div>
+								</td>
+								<td class="text-center">
+									<button class="edit" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></button>
+								</td>
+							</tr>
+							<tr>
+								<td>Angular 4</td>
+								<td>Adrian Demian</td>
+								<td>
+									<div class="stars_block"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"
+										 aria-hidden="true"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></div>
+								</td>
+								<td class="text-center">
+									<button class="edit" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></button>
+								</td>
+							</tr>
+							<tr>
+								<td>Bootstrap 4 From Scratch</td>
+								<td>Brielle Williamson</td>
+								<td>
+									<div class="stars_block"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"
+										 aria-hidden="true"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></div>
+								</td>
+								<td class="text-center">
+									<button class="edit" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></button>
+								</td>
+							</tr> -->
+						</tbody>
+					</table>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="users_block">
+					<h3>Top Learners<br><span>Courses</span></h3>
+					<div class="clearfix"></div>
+					<div class="courses_li">
+						<ul>
+							<li><span class="success"></span>Completed</li>
+							<li><span class="warning"></span>In Progress</li>
+							<li><span class="danger"></span>Pending</li>
+						</ul>
+					</div>
+					<div class="clearfix"></div>
+					<div class="users" *ngFor="let learner of topLearner; let i = index">
+						<div class="img_box"><img src="assets/images/guy-7.jpg" alt="" class="img-responsive" /></div>
+						<div class="name_box"><i>{{learner.FirstName}}</i>
+							<div class="progress">
+								<div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{learner.complete}}" style="width: 80%">
+								</div>
+								<div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{learner.inprocess}}" style="width: 0%">
+								</div>
+								<div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="{{learner.pending}}" style="width: 20%">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- {{learner.complete * 100 / learner.TOTALSESSION}} -->
+					<!-- <div class="users">
+						<div class="img_box">RW</div>
+						<div class="name_box"><i>Ralph Wiest</i>
+							<div class="progress">
+								<div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="5" style="width: 35%"></div>
+								<div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="3" style="width: 20%"></div>
+								<div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="3" style="width: 45%"></div>
+							</div>
+						</div>
+					</div>
+					<div class="users">
+						<div class="img_box">RD</div>
+						<div class="name_box"><i>Rhona Davidson</i>
+							<div class="progress">
+								<div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="3" style="width: 12%">
+								</div>
+								<div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="3" style="width: 5%">
+								</div>
+								<div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="3" style="width: 83%">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="users">
+						<div class="img_box"><img src="assets/images/guy-9.jpg" alt="" class="img-responsive" /></div>
+						<div class="name_box"><i>Sara Fecadu</i>
+							<div class="progress">
+								<div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="3" style="width: 10%">
+								</div>
+								<div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="3" style="width: 60%">
+								</div>
+								<div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="3" style="width: 30%">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="users">
+						<div class="img_box">TB</div>
+						<div class="name_box"><i>Troy Bryant</i>
+							<div class="progress">
+								<div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="3" style="width: 0%">
+								</div>
+								<div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="3" style="width: 70%">
+								</div>
+								<div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="3" style="width: 30%">
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="users_block instructor_block">
+					<h3>Top Instructors<br><span>Created Courses</span></h3>
+					<div class="users"  *ngFor="let instructor of topInstructors; let i = index">
+						<div class="img_box"  *ngIf="instructor.ProfileImage!='' && instructor.ProfileImage!=NULL">
+							<img src="assets/UserImages/{{instructor.ProfileImage}}" alt="{{instructor.ProfileImage}}" class="img-responsive" />
+						</div> 
+						<div class="img_box"  *ngIf="instructor.ProfileImage=='' || instructor.ProfileImage==NULL">
+								{{instructor.FirstName | slice:0:01 | uppercase}}{{instructor.LastName | slice:0:01 | uppercase}}
+						</div> 
+						
+						<div class="name_box"><i>{{instructor.FirstName}} {{instructor.LastName}}</i><span>{{instructor.TOTALSESSION}}</span>
+						</div>
+					</div>
+					<!-- <div class="users">
+						<img src="assets/images/guy-6.jpg" alt="" class="img-responsive" />
+						<div class="img_box">BW</div>
+						<div class="name_box"><i>Brielle Williamson</i><span>2</span>
+						</div>
+					</div>
+					<div class="users">
+						<div class="img_box">SG</div>
+						<div class="name_box"><i>Shane Griffin</i><span>2</span>
+						</div>
+					</div>
+					<div class="users">
+						<div class="img_box"><img src="assets/images/guy-8.jpg" alt="" class="img-responsive" /></div>
+						<div class="name_box"><i>Rick Brown</i><span>1</span>
+						</div>
+					</div>
+					<div class="users">
+						<div class="img_box">MT</div>
+						<div class="name_box"><i>Michael Tilahun</i><span>1</span>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="notification_block">
+					<h3>Recent Notifications</h3>
+					<div class="notification_red">
+						<div class="row">
+							<div class="col-md-4 col-sm-3 col-xs-5">
+								<div class="notification_time">
+									<span>07:21 PM<br>20-Sept-2018</span>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-9 col-xs-7">
+								<div class="notification_desc">
+									<p>Course Published</p>
+									<span>By Mark Thomas</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="notification_red">
+						<div class="row">
+							<div class="col-md-4 col-sm-3 col-xs-5">
+								<div class="notification_time">
+									<span>06:26 PM<br>20-Sept-2018</span>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-9 col-xs-7">
+								<div class="notification_desc">
+									<p>Invited A User</p>
+									<span>By Shane Griffin</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="notification_red">
+						<div class="row">
+							<div class="col-md-4 col-sm-3 col-xs-5">
+								<div class="notification_time">
+									<span>05:02 PM<br>20-Sept-2018</span>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-9 col-xs-7">
+								<div class="notification_desc">
+									<p>Feedback Started</p>
+									<span>By Adrian Demian</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="notification_red">
+						<div class="row">
+							<div class="col-md-4 col-sm-3 col-xs-5">
+								<div class="notification_time">
+									<span>04:48 PM<br>20-Sept-2018</span>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-9 col-xs-7">
+								<div class="notification_desc">
+									<p>New Course Started</p>
+									<span>By Rhona Davidson</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="notification_red">
+						<div class="row">
+							<div class="col-md-4 col-sm-3 col-xs-5">
+								<div class="notification_time">
+									<span>03:06 PM<br>20-Sept-2018</span>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-9 col-xs-7">
+								<div class="notification_desc">
+									<p>Feedback Submitted</p>
+									<span>By George Robinson</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="audit_block">
+					<h3>Recent Activities</h3>
+					<div class="audit_box"  *ngFor="let activity of recentActivity; let i = index">
+							<div class="title"><span class="dot"></span>{{activity.Activity}} ({{activity.Module}} )<span class="name">By {{activity.FirstName}}  {{activity.LastName}}</span></div>
+							<div class="time">{{activity.CreatedOn}}</div>
+					</div>
+					<!-- <div class="audit_box">
+						<div class="title"><span class="dot"></span>2 new users Invited<span class="name">By Shane Griffin</span></div>
+						<div class="time">Just Now</div>
+					</div>
+					<div class="audit_box">
+						<div class="title"><span class="dot"></span>Logged In<span class="name">By Shane Griffin</span></div>
+						<div class="time">3 minutes ago</div>
+					</div>
+					<div class="audit_box">
+						<div class="title"><span class="dot"></span>Added new Course<span class="name">By Adrian Demian</span></div>
+						<div class="time">1 hour ago</div>
+					</div>
+					<div class="audit_box">
+						<div class="title"><span class="dot"></span>Started new course<span class="name">By Rhona Davidson</span></div>
+						<div class="time">Yesterday</div>
+					</div>
+					<div class="audit_box">
+						<div class="title"><span class="dot"></span>Course Completed<span class="name">By Sara Fecadu</span></div>
+						<div class="time">On 08-Sept-2018</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<!-- 
+<tr>
+	<td>{{invitation.FirstName}}</td>
+</tr> -->

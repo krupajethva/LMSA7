@@ -1,0 +1,114 @@
+/*
+ * Container style
+ */
+.ps {
+  overflow: hidden !important;
+  overflow-anchor: none;
+  -ms-overflow-style: none;
+  touch-action: auto;
+  -ms-touch-action: auto;
+}
+
+/*
+ * Scrollbar rail styles
+ */
+.ps__rail-x {
+  display: none;
+  opacity: 0;
+  transition: background-color .2s linear, opacity .2s linear;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  height: 10px;
+  /* there must be 'bottom' or 'top' for ps__rail-x */
+  bottom: 0px;
+  /* please don't change 'position' */
+  position: absolute; z-index:999;
+}
+
+.ps__rail-y {
+  display: none;
+  opacity: 0;
+  transition: background-color .2s linear, opacity .2s linear;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  width: 10px;
+  /* there must be 'right' or 'left' for ps__rail-y */
+  right: 0;
+  /* please don't change 'position' */
+  position: absolute; z-index:999;
+}
+
+.ps--active-x > .ps__rail-x,
+.ps--active-y > .ps__rail-y {
+  display: block;
+  background-color: transparent;
+}
+
+.ps:hover > .ps__rail-x,
+.ps:hover > .ps__rail-y,
+.ps--focus > .ps__rail-x,
+.ps--focus > .ps__rail-y,
+.ps--scrolling-x > .ps__rail-x,
+.ps--scrolling-y > .ps__rail-y {
+  opacity: 1;
+}
+
+.ps .ps__rail-x:hover,
+.ps .ps__rail-y:hover,
+.ps .ps__rail-x:focus,
+.ps .ps__rail-y:focus,
+.ps .ps__rail-x.ps--clicking,
+.ps .ps__rail-y.ps--clicking {
+  opacity: 1;
+}
+
+/*
+ * Scrollbar thumb styles
+ */
+.ps__thumb-x {
+ background: rgba(255,195,92,1);
+background: -moz-linear-gradient(top, rgba(255,195,92,1) 0%, rgba(233,69,40,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,195,92,1)), color-stop(100%, rgba(233,69,40,1)));
+background: -webkit-linear-gradient(top, rgba(255,195,92,1) 0%, rgba(233,69,40,1) 100%);
+background: -o-linear-gradient(top, rgba(255,195,92,1) 0%, rgba(233,69,40,1) 100%);
+background: -ms-linear-gradient(top, rgba(255,195,92,1) 0%, rgba(233,69,40,1) 100%);
+background: linear-gradient(to bottom, rgba(255,195,92,1) 0%, rgba(233,69,40,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc35c', endColorstr='#e94528', GradientType=0 );
+  border-radius: 6px;
+  transition: background-color .2s linear, height .2s ease-in-out;
+  -webkit-transition: background-color .2s linear, height .2s ease-in-out;
+  height: 8px;
+  /* there must be 'bottom' for ps__thumb-x */
+  bottom: 2px;
+  /* please don't change 'position' */
+  position: absolute;
+}
+
+.ps__thumb-y {
+ background: rgba(0,0,0,0.4);
+  border-radius: 6px;
+  transition: background-color .2s linear, width .2s ease-in-out;
+  -webkit-transition: background-color .2s linear, width .2s ease-in-out;
+ 
+  width: 5px;
+  /* there must be 'right' for ps__thumb-y */
+  right: 1px;
+  /* please don't change 'position' */
+  position: absolute;
+}
+
+.ps__rail-x,
+    .ps__rail-y {
+      opacity: 1;
+    }
+
+/* MS supports */
+@supports (-ms-overflow-style: none) {
+  .ps {
+    overflow: auto !important;
+  }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ps {
+    overflow: auto !important;
+  }
+}

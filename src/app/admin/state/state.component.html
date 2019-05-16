@@ -1,0 +1,138 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-globe" aria-hidden="true"></i>{{header}} a State
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="#">State</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <a routerLink="/state-list" class="next_btn pull-right">List of States</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+  <div class="col-md-12 col-sm-12">
+    <div class="course_details">
+      <div class="mydivs">
+        <div *ngIf="!secondform">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <form class="form-validate" role="form" #stateForm="ngForm" (ngSubmit)="addState(stateForm)">
+                <!-- <h1 class="no_margin pull-left">Add State</h1> -->
+                <div class="form-group-active pull-right">
+                  <label>
+                    <span>*</span>Active?</label>
+
+                  <div class="activeyes_box">
+                    <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="stateEntity.IsActive">
+                    <label for="IsActive"></label>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="course_forum_block">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label>
+                          <span class="required">*</span>Country</label>
+                        <select class='select-option' required class="form-control" #CountryId="ngModel" [(ngModel)]="stateEntity.CountryId" name="CountryId"
+                          >
+                          <option value="" ngSelected='stateEntity.CountryId==""'></option>
+                          <option class='option' *ngFor='let country of CountryList' [value]="country.CountryId">{{country.CountryName}}</option>
+                        </select>
+                        <span class="error_span" *ngIf="(CountryId.dirty && CountryId.invalid) || (CountryId.pristine && submitted)">
+                          <span *ngIf="CountryId.errors.required || (CountryId.pristine && submitted)">Please select country </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label>
+                          <span class="required">*</span>State Name</label>
+                        <input type="text" class="form-control" #StateName="ngModel" [(ngModel)]="stateEntity.StateName" class="form-control" maxlength="100"
+                          name="StateName" pattern="[a-zA-Z ]{2,}" [ngClass]="{red_border: (StateName.dirty && StateName.invalid) || (StateName.pristine && submitted)}"
+                          required>
+                        <span class="error_span" *ngIf="(StateName.dirty && StateName.invalid) || (StateName.pristine && submitted)">
+                          <span *ngIf="StateName.errors.required || (StateName.pristine && submitted)">Please enter state</span>
+                        </span>
+                        <span class="error_span" *ngIf="StateName.errors && StateName.errors.pattern">
+                          Please enter valid state name
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label>
+                          <span class="required">*</span>State Abbreviation</label>
+                        <input type="text" class="form-control" style="text-transform: uppercase;" #StateAbbreviation="ngModel" [(ngModel)]="stateEntity.StateAbbreviation"
+                          class="form-control" maxlength="3" name="StateAbbreviation" pattern="[a-zA-Z]{2,}" [ngClass]="{red_border: (StateAbbreviation.dirty && StateAbbreviation.invalid) || (StateAbbreviation.pristine && submitted)}"
+                          required>
+                        <span class="error_span" *ngIf="(StateAbbreviation.dirty && StateAbbreviation.invalid) || (StateAbbreviation.pristine && submitted)">
+                          <span *ngIf="StateAbbreviation.errors.required || (StateAbbreviation.pristine && submitted)">Please enter state abbreviation</span>
+                        </span>
+                        <span class="error_span" *ngIf="StateAbbreviation.errors && StateAbbreviation.errors.pattern">
+                          Please enter valid state abbreviation
+                        </span>
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-6 col-sm-6">
+                      <div class="form-group-active">
+                        <label>
+                          <span>*</span>Active?</label>
+
+                        <div class="activeyes_box">
+                          <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="stateEntity.IsActive">
+                          <label for="IsActive"></label>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12  text-center">
+                      <button type="submit" class="next_btn">
+                        <span>{{buttonName}}</span>
+                      </button>
+                      <button *ngIf="stateEntity.StateId==0" class="back_btn" type="button" (click)="clearForm(stateForm)">
+                        <span>Clear</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

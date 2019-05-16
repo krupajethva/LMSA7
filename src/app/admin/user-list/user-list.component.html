@@ -1,0 +1,71 @@
+<div class="title_heading">				
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-users" aria-hidden="true"></i>Learners
+		</div>
+		</div>
+		<div class="col-md-8 col-sm-8">
+			<div class="welcome_message alert" role="alert">
+				<i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 	 
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="breadcrumb_block">
+			<div class="col-md-6 col-sm-6">
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+					<li class="breadcrumb-item"><a href="#">Learner</a></li>
+					<li class="breadcrumb-item active" aria-current="page">List</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<!-- <div class="col-md-6 col-sm-6">
+				<a routerLink="/invite-user" class="next_btn pull-right">Invite a User</a>
+			</div> -->
+			<div class="clearfix"></div>
+		</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+   <div class="col-md-12">
+	   <table id="list_tables" class="table table-hover" style="width:100%">
+           <thead>
+            <tr>
+				<th class="text-center sr_no_width">#</th>
+                <th class="width_15">Name</th>
+                <th class="email_width">Email Address</th>
+				<th class="status_width">Status</th>
+				<th class="width_15">Invited By</th>
+                <th class="text-center active_width">Active?</th>
+                <th class="text-center action_width"  *ngIf="globals.authData.RoleId==3 || globals.authData.RoleId==2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userList;let i = index">
+				<td class="text-center">{{i+1}}</td>
+                <td>{{user.UserName}}</td>
+                <td>{{user.EmailAddress}}</td>
+				<td *ngIf="user.IsActive==0 || user.IsActive==null">Pending</td>
+				<td *ngIf="user.IsActive==1">Success</td>
+				<td>{{user.InvitedUserName}}</td>
+                <td class="text-center">
+                    <div class="activeyes_box"  data-toggle="tooltip" data-placement="top" [attr.title]="user.IsActive==1 ? 'Active' : 'Deactive'">
+                            <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(user,i)" [checked]="user.IsActive==1" value="Yes" >
+                            <label for="active{{i}}"></label>
+                    </div>
+				</td>
+                <td class="text-center" *ngIf="globals.authData.RoleId==3 || globals.authData.RoleId==2">
+					
+					<button class="revoke_btn" type="delete" data-toggle="tooltip" data-placement="top"   title="Revoke" (click)="revokeUser(user)" ><i class="fa fa-user-times"></i></button>
+					<button class="reinvite_btn" type="delete" data-toggle="tooltip" data-placement="top"   title="Re-Invite" (click)="reinviteUser(user)" ><i class="fa fa-user-plus"></i></button>
+					<!-- <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/user/edit/{{user.UserId}}"><i class="fa fa-edit"></i></button> -->
+                    <button class="delete" data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deleteUser(user)"  > <i class="fa fa-trash"></i> </button>
+				</td>
+            </tr>
+              </tbody>
+            </table>
+          
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

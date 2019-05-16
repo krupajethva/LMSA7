@@ -1,0 +1,467 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-tachometer" aria-hidden="true"></i>Instructor Dashboard
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+      
+     
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Instructor Dashboard</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div id="buttons" class="pull-right"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block admin_dashboard learner_dashboard instructor_dashboard">
+  <div class="col-md-12">
+    <h3>Overview</h3>
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="learner_overview_block block_bg1">
+          <div class="pull-left">
+            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+          </div>
+          <div class="pull-right">
+            <div class="icon_number">{{totalCourses}}</div>
+            <div class="title">Courses</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="learner_overview_block block_bg2">
+          <div class="pull-left">
+            <i class="fa fa-leanpub" aria-hidden="true"></i>
+          </div>
+          <div class="pull-right">
+            <div class="icon_number">{{totalLesson}}</div>
+            <div class="title">Lessons</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="learner_overview_block block_bg3">
+          <div class="pull-left">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+          </div>
+          <div class="pull-right">
+            <div class="icon_number">{{totalStudent}}</div>
+            <div class="title">Students</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="learner_overview_block block_bg4">
+          <div class="pull-left">
+            <i class="fa fa-money" aria-hidden="true"></i>
+          </div>
+          <div class="pull-right">
+            <div class="icon_number">$22</div>
+            <div class="title">Earnings</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-8 col-sm-8">
+        <div class="graph_block">
+          <div class="col-md-10">
+            <h3 class="pull-left">Earn Vs Month Graphical Representation</h3>
+          </div>
+          <div class="col-md-2">
+            <form>
+              <select id='Select'>
+                <option value='0'>2015</option>
+                <option value='1'>2016</option>
+                <option value='2'>2017</option>
+                <option value='3'>2018</option>
+              </select>
+            </form>
+          </div>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="Tab1">
+              <div id="instructorgraph" class="chart"></div>
+            </div>
+            <div class="tab-pane" id="Tab2">
+              <div id="instructorgraph1" class="chart"></div>
+            </div>
+            <div class="tab-pane" id="Tab3">
+              <div id="instructorgraph2" class="chart"></div>
+            </div>
+            <div class="tab-pane" id="Tab4">
+              <div id="instructorgraph3" class="chart"></div>
+            </div>
+          </div>
+
+          <!-- <div id="instructorgraph" class="chart"></div> -->
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="users_block instructor_block">
+          <h3>Courses View</h3>
+          <div class="courses_li">
+            <ul>
+              <li>
+                <span class="success"></span>In Progress</li>
+              <li>
+                <span class="warning"></span>Pending</li>
+              <li>
+                <span class="danger"></span>Completed</li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="users"  *ngFor="let course of courseView; let i = index">
+            <div class="img_box">{{course.courseview}}</div>
+            <div class="name_box">
+              <i *ngIf="course.SessionStatus==0">Pending</i>
+              <i *ngIf="course.SessionStatus==1">In Progress</i>
+              <i *ngIf="course.SessionStatus==2">Completed</i>
+
+              <div class="progress" *ngIf="course.SessionStatus==0">
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+              </div>
+              <div class="progress" *ngIf="course.SessionStatus==1">
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+              </div>
+              <div class="progress" *ngIf="course.SessionStatus==2">
+                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="users">
+            <div class="img_box">5</div>
+            <div class="name_box">
+              <i>In Progress</i>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="5" style="width: 100%">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="users">
+            <div class="img_box">2</div>
+            <div class="name_box">
+              <i>Pending</i>
+              <div class="progress">
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="2" style="width: 40%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="users">
+            <div class="img_box">4</div>
+            <div class="name_box">
+              <i>Completed</i>
+              <div class="progress">
+                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="4" style="width: 80%">
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <!-- <div class="col-md-6 col-sm-6">
+          <div class="invited_user_block">
+            <h3>Recent 5 Invitations</h3>
+            <table class="table table-hover" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th class="text-center instructor_width">IsStatus</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tiger Nixon</td>
+                  <td>tiger.nixon@google.com</td>
+                  <td class="text-center"><span class="accepted">Accepted</span></td>
+                </tr>
+                <tr>
+                  <td>Trushant Mehta</td>
+                  <td>TMehta@TheOpenEyes.com</td>
+                  <td class="text-center"><span class="invited">Invited</span></td>
+                </tr>
+                <tr>
+                  <td>Brielle Williamson</td>
+                  <td>brielle.williamson@infosys.com</td>
+                  <td class="text-center"><span class="invited">Invited</span></td>
+                </tr>
+                <tr>
+                  <td>Michael Tilahun</td>
+                  <td>michael.til@tcs.com</td>
+                  <td class="text-center"><span class="accepted">Accepted</span></td>
+                </tr>
+                <tr>
+                  <td>Garrett Winters</td>
+                  <td>garrett.winters@yahoo.com</td>
+                  <td class="text-center"><span class="accepted">Accepted</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> -->
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <div class="rated_course_block">
+          <h3>Your Courses</h3>
+          <div class="scroll_score">
+            <div class="table-responsive">
+              <table class="table table-hover" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Course Name</th>
+                    <!-- <th class="instructor_width">Instructor(s)</th> -->
+                    <th class="rating_width">Rating</th>
+                    <th class="text-center action_width">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let course of instructorCourses; let i = index">
+                    <td> {{course.CourseFullName}}</td>
+                    <td>
+                      <div class="stars_block">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <button class="edit" data-toggle="tooltip" data-placement="top" title="View">
+                        <i class="fa fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr>
+                 <!-- <tr>
+                    <td>Build Websites from Scratch with HTML & CSS</td>
+                   
+                    <td>
+                      <div class="stars_block">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <button class="edit" data-toggle="tooltip" data-placement="top" title="View">
+                        <i class="fa fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr> -->
+                  <!-- <tr>
+                    <td>CSS - The Complete Guide (incl. Flexbox, Grid & Sass)</td>
+                     <td>
+                      <div class="stars_block">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <button class="edit" data-toggle="tooltip" data-placement="top" title="View">
+                        <i class="fa fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr> -->
+                  <!-- <tr>
+                    <td>Learn Web Designing & HTML5/CSS3 Essentials in 4-Hours</td>
+                    <td>
+                      <div class="stars_block">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <button class="edit" data-toggle="tooltip" data-placement="top" title="View">
+                        <i class="fa fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr> -->
+                  <!-- <tr>
+                    <td>HTML5, CSS3 & JavaScript Workshop: Build 7 Creative Projects</td>
+                    <td>
+                      <div class="stars_block">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <button class="edit" data-toggle="tooltip" data-placement="top" title="View">
+                        <i class="fa fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="content_block">
+          <div class="scroll_calender">
+            <div class="color_description">
+              <ul>
+                <li>
+                  <span style="background: #000;"></span>Course</li>
+                <li>
+                  <span style="background: yellow;"></span>Lecture</li>
+                <li>
+                  <span style="background: red;"></span>Seminar</li>
+                <li>
+                  <span style="background: blue;"></span>Exam</li>
+              </ul>
+            </div>
+            <div id="calendar"></div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <div class="notification_block">
+          <h3 class="pull-left">Recent Notifications</h3>
+          <a routerLink="/notification-list" class="next_btn pull-right">Notification List</a>
+          <div class="clearfix"></div>
+          <div class="notification_red">
+            <div class="row">
+              <div class="col-md-4 col-sm-3 col-xs-5">
+                <div class="notification_time">
+                  <span>07:21 PM
+                    <br>20-Sept-2018</span>
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-9 col-xs-7">
+                <div class="notification_desc">
+                  <p>Course Published</p>
+                  <span>By Mark Thomas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notification_red">
+            <div class="row">
+              <div class="col-md-4 col-sm-3 col-xs-5">
+                <div class="notification_time">
+                  <span>06:26 PM
+                    <br>20-Sept-2018</span>
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-9 col-xs-7">
+                <div class="notification_desc">
+                  <p>Invited A User</p>
+                  <span>By Shane Griffin</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notification_red">
+            <div class="row">
+              <div class="col-md-4 col-sm-3 col-xs-5">
+                <div class="notification_time">
+                  <span>05:02 PM
+                    <br>20-Sept-2018</span>
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-9 col-xs-7">
+                <div class="notification_desc">
+                  <p>Feedback Started</p>
+                  <span>By Adrian Demian</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notification_red">
+            <div class="row">
+              <div class="col-md-4 col-sm-3 col-xs-5">
+                <div class="notification_time">
+                  <span>04:48 PM
+                    <br>20-Sept-2018</span>
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-9 col-xs-7">
+                <div class="notification_desc">
+                  <p>New Course Started</p>
+                  <span>By Rhona Davidson</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notification_red">
+            <div class="row">
+              <div class="col-md-4 col-sm-3 col-xs-5">
+                <div class="notification_time">
+                  <span>03:06 PM
+                    <br>20-Sept-2018</span>
+                </div>
+              </div>
+              <div class="col-md-8 col-sm-9 col-xs-7">
+                <div class="notification_desc">
+                  <p>Feedback Submitted</p>
+                  <span>By George Robinson</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>          
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="audit_block">
+          <h3 class="pull-left">Recent Activities</h3>
+          <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
+          <div class="clearfix"></div>
+          <div class="audit_box" *ngFor="let activity of recentActivity">
+            <div class="title">
+              <span class="dot"></span>{{activity.Activity}} ( {{activity.Module}} )
+              <!-- <span class="name">By Shane Griffin</span> -->
+            </div>
+            <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

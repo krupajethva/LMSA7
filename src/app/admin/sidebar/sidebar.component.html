@@ -1,0 +1,91 @@
+<div class="sidebar_wrap">
+	<button class="pull-right toggle left_menu_toggle" href="#">
+		<i class="fa fa-dedent"></i>
+	</button>
+	
+	<ul class="sidebar_box" *ngFor="let menu of menuList; let i=index;">
+
+		<li class="sidebar_box_label">
+			<span>{{menu.DisplayName}}</span>
+		</li>
+
+		<span *ngFor="let child of menu.child; let j=index;">
+
+			<li [ngClass]="{'active':(globals.currentLink == child.Url)}" *ngIf="((!child.check) && child.Url!='')">
+				<a (click)="menuopen(child.Url,1,i,j)" title="{{child.DisplayName}}" data-toggle="tooltip" data-placement="right">
+					<i class="{{child.Icon}}"></i>
+					<span>{{child.DisplayName}}</span>
+				</a>
+			</li>
+
+			<li *ngIf="child.check" class="test {{child.SelectedClass}}">
+				<a title="{{child.DisplayName}}" id="test{{i}}{{j}}" class="dropdown_menu collapsed" (click)="closecollapse(i,j)" data-toggle="tooltip"
+				 data-placement="right" data-toggle="collapse" data-parent="#accordion">
+					<i class="{{child.Icon}}"></i>
+					<span>{{child.DisplayName}}</span>
+					<i class="fa fa-angle-down pull-right"></i>
+				</a>
+				<div class="collapse" id="collapseExample{{i}}{{j}}">
+					<ul class="sub_menu">
+
+						<li [ngClass]="{'active':(globals.currentLink == subchild.Url)}" *ngFor="let subchild of child.child; let k=index;">
+							<a (click)="menuopen(subchild.Url,0,i,j)" title="{{subchild.DisplayName}}" data-toggle="tooltip" data-placement="right">
+								<i class="{{subchild.Icon}}"></i>
+								<span>{{subchild.DisplayName}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+
+		</span>
+
+	</ul>
+
+
+
+
+	<!-- <ul class="sidebar_box">
+		<li class="sidebar_box_label"><span>General</span></li>
+				<li class="active"><a href="#" title="Dashboard" data-toggle="tooltip" data-placement="right"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+				<li><a href="#" title="Settings" data-toggle="tooltip" data-placement="right"><i class="fa fa-cogs"></i><span>Settings</span></a></li>
+				<li><a href="#" title="Email" data-toggle="tooltip" data-placement="right"><i class="fa fa-envelope"></i><span>Email</span></a></li>
+			</ul>
+			<ul class="sidebar_box">
+				<li class="sidebar_box_label"><span>Manage</span></li>
+				<li><a href="#" title="Users" data-toggle="tooltip" data-placement="right"><i class="fa fa-users"></i><span>Users</span></a></li>
+				<li class="dropdown_menu collapsed active" (click)="closecollapse()" data-toggle="collapse" href="#collapseExample1" data-parent="#accordion"><a href="#" title="Courses" data-toggle="tooltip" data-placement="right"><i class="fa fa-book"></i><span>Courses</span><i class="fa fa-angle-down pull-right"></i></a>
+				<div class="collapse" id="collapseExample1">
+				  <ul class="sub_menu">
+					<li><a href="#" title="Courses" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>View</span></a></li>
+					<li><a href="#" title="Courses" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>Add</span></a></li>
+				  </ul>
+				</div>
+				</li>
+				
+				<li class="active dropdown_menu collapsed" (click)="closecollapse()" data-toggle="collapse" href="#collapseExample2" data-parent="#accordion"><a href="#" title="Instructor" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>Instructor</span><i class="fa fa-angle-down pull-right"></i></a>
+				<div class="collapse" id="collapseExample2">
+				  <ul class="sub_menu">
+					<li class="active"><a href="#" title="Instructor" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>View</span></a></li>
+					<li><a href="#" title="Instructor" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>Add</span></a></li>
+				  </ul>
+				</div>
+				</li>
+				<li class="dropdown_menu collapsed" (click)="closecollapse()" data-toggle="collapse" href="#collapseExample3" data-parent="#accordion"><a href="#" title="Categories" data-toggle="tooltip" data-placement="right"><i class="fa fa-sitemap"></i><span>Categories</span><i class="fa fa-angle-down pull-right"></i></a>
+				<div class="collapse" id="collapseExample3">
+				  <ul class="sub_menu">
+					<li><a href="#" title="Categories" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>View</span></a></li>
+					<li><a href="#" title="Categories" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>Add</span></a></li>
+				  </ul>
+				</div>
+				</li>
+				<li><a href="#" title="Events" data-toggle="tooltip" data-placement="right"><i class="fa fa-calendar"></i><span>Events</span></a></li>
+				<li><a href="#" title="Roles &amp; Permissions" data-toggle="tooltip" data-placement="right"><i class="fa fa-user-circle"></i><span>Roles &amp; Permissions</span></a></li>
+			</ul>
+			<ul class="sidebar_box">
+				<li class="sidebar_box_label"><span>View</span></li>
+				<li><a href="#" title="Reports" data-toggle="tooltip" data-placement="right"><i class="fa fa-bar-chart"></i><span>Reports</span></a></li>
+				<li><a href="#" title="Certificates &amp; Badges" data-toggle="tooltip" data-placement="right"><i class="fa fa-certificate"></i><span>Certificates &amp; Badges</span></a></li>
+				<li><a href="#" title="Notifications" data-toggle="tooltip" data-placement="right"><i class="fa fa-bell"></i><span>Notifications</span></a></li>
+			</ul> -->
+</div>

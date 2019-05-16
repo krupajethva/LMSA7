@@ -1,0 +1,43 @@
+/* Query 1 - Add column `Biography` in `tbluser` table. Biography column store Instructor Biography. */
+
+ALTER TABLE `tbluser` 
+	ADD `Biography` TEXT NULL AFTER `Certificate`;
+
+/* Query 2 - Add table `tblcertificatetemplate` which store certificate templates. */
+
+CREATE TABLE `tblcertificatetemplate` (
+  `CertificateId` int(11) NOT NULL AUTO_INCREMENT,
+  `CertificateName` varchar(100) NOT NULL,
+  `CertificateTemplate` text NOT NULL,
+  `IsActive` bit(1) NOT NULL DEFAULT b'1',
+  `CreatedBy` int(11) NOT NULL,
+  `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedBy` int(11) NOT NULL,
+  `UpdatedOn` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`CertificateId`)
+) ENGINE=InnoDB;
+	
+/* Query 3 - Add table `tblinstructorfollowers` which store followers of Instructor. */
+	
+CREATE TABLE `tblinstructorfollowers` ( 
+	`InstructorFollowerId` INT(11) NOT NULL AUTO_INCREMENT , 
+	`InstructorUserId` INT(11) NOT NULL , 
+	`FollowerUserId` INT(11) NOT NULL , 
+	`IsActive` BIT(1) NOT NULL , 
+	`CreatedBy` INT(11) NOT NULL , 
+	`CreatedOn` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+	PRIMARY KEY (`InstructorFollowerId`)
+) ENGINE = InnoDB;
+
+/* Query 4 - Add table `tblinstructorfollowers` which store notification of all users. */
+
+CREATE TABLE `tblnotification` (
+	`NotificationId` int(11) NOT NULL AUTO_INCREMENT ,
+	`SenderId` int(11) NOT NULL,
+	`NotificationTitle` varchar(100) NOT NULL,
+	`NotificationText` varchar(200) NOT NULL,
+	`RecipientId` int(11) NOT NULL,
+	`IsRead` bit(1) NOT NULL,
+	`CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+	PRIMARY KEY (`NotificationId`)
+) ENGINE = InnoDB;

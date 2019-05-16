@@ -1,0 +1,73 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">    
+        <i class="fa fa-user-circle" aria-hidden="true"></i>My followers
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+      <div class="welcome_message alert" role="alert">
+          <i class="fa fa-info"></i>Welcome back,
+          <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item active" aria-current="page">My followers</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block">
+  <div class="col-md-12">
+    <table id="list_tables" class="table table-hover" style="width:100%">
+      <thead>
+        <tr>
+          <th class="text-center sr_no_width">#</th>
+          <th>Name</th>
+          <th>Job Title</th>
+          <th>Email Address</th>
+          <th>Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let follower of InstructorFollowersList; let i = index">
+          <td class="text-center">{{i+1}}</td>
+          <td>{{follower.Name | titlecase}}</td>
+          <td>{{follower.Title}}</td>
+          <td>{{follower.EmailAddress}}</td>
+          <td>{{follower.PhoneNumber}}</td>
+          <!-- <td class="text-center">
+            <button class="edit" data-toggle="tooltip" data-placement="bottom" title="View" (click)="viewFollower(follower.UserId)">
+              <i class="fa fa-eye"></i> </button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+
+
+<!-- <div class="modal fade bs-example-modal-md" id="ViewFollower_Modal" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Test</h4>
+      </div>
+      <div class="modal-body">
+        <p> {{ FollowerData.UserId }} </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->

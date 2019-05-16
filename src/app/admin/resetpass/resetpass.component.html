@@ -1,0 +1,61 @@
+
+<!-- Inner Section -->
+<div class="inner_content">
+  <div class="container ">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>AFP Corporate Training Skills Assessment</h2>
+            <h1>Reset Password</h1>
+          <h5>Please choose a new password to finish signing in.</h5>
+        <div class="col-md-5 col-sm-6 form_bg">
+        <div class="clearfix"></div><div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> </button>
+  {{globals.message}}
+</div>
+        <form #resetForm="ngForm" (ngSubmit)="addPassword(resetForm)">
+            <div class="form-group">
+                <label><span>*</span>Password </label>
+                 <input type="password" class="form-control" (keyup)="checkpassword()" data-toggle="tooltip" data-placement="top" title="Use 8 or more characters with a mix of letters, numbers & symbols(! @ # $ & * _ - )" pattern="^([a-zA-Z0-9@*#$#!]{8,15})$"#Password="ngModel" 
+				 [(ngModel)]="resetEntity.Password" name="Password" [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted)}" required/>
+                   <span class="error_span" *ngIf="(Password.dirty && Password.invalid) || (Password.pristine && submitted)">
+									<span *ngIf="Password.errors && Password.errors.required">
+                    Please enter your password
+											</span>
+										  
+										  <span *ngIf="Password.errors && Password.errors.pattern">
+												Password must be 8 characters or more
+										  </span>
+								</span>
+              </div>
+          
+          
+          
+         
+              <div class="form-group">
+                  <label><span>*</span>Confirm Password</label>
+            <input type="password" class="form-control" (keyup)="checkpassword()" pattern="[a-zA-Z0-9.-_@$*&!#]{8,50}"#cPassword="ngModel"
+            [(ngModel)]="resetEntity.cPassword" name="cPassword" [ngClass]="{red_border: ((cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted)) || (same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required))}" required/>
+                     <span class="error_span" *ngIf="(cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted) || same">
+              <span *ngIf="cPassword.errors && cPassword.errors.required && !same">
+                Please enter your password
+                  </span>
+                  
+                  <span *ngIf="cPassword.errors && cPassword.errors.pattern && !same">
+                    Password must be 8 characters or more
+                  </span>
+                  <span *ngIf="same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required)">
+                    Those passwords didn't match
+                  </span>
+            </span>
+                </div>
+	
+          <button class="next_btn pull-right" [disabled]="btn_disable && !same" type="submit"><span>Submit</span></button>
+        </form>
+        <div class="clearfix"></div>
+      </div>
+    </div> </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<!-- End Inner Section --> 

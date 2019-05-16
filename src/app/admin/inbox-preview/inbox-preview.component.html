@@ -1,0 +1,356 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-envelope" aria-hidden="true"></i>Inbox Preview
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item active">
+          <a href="#">Inbox Preview</a>
+        </li>
+        <!-- <li class="breadcrumb-item active" aria-current="page">Inbox</li> -->
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<div class="inbox-mail">
+  <div class="col-md-3 compose">
+    <form action="#" method="GET">
+      <!-- <div class="input-group input-group-in">
+        <input type="text" name="search" class="form-control2 input-search" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div> -->
+      <!-- Input Group -->
+    </form>
+    <div class="compose_label">
+      <a (click)="blankEntity()">Compose</a>
+    </div>
+    <nav class="nav-sidebar">
+      <ul class="nav tabs">
+        <li class="active">
+          <a routerLink="/inbox/1" data-toggle="tab">
+            <i class="fa fa-inbox"></i>Inbox<span *ngFor="let Inboxcount of inboxcountList;let i=index;">{{Inboxcount.Unreadcount}}</span>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="">
+          <a routerLink="/inbox/2" data-toggle="tab">
+            <i class="fa fa-paper-plane-o"></i>Sent</a>
+        </li>
+        <li class="">
+          <a routerLink="/inbox/3" data-toggle="tab">
+            <i class="fa fa-star-o"></i>Starred</a>
+        </li>
+        <!-- <li class="">
+          <a routerLink="/inbox" data-toggle="tab">
+            <i class="fa fa-tag"></i>Important</a>
+        </li> -->
+        <li class="">
+          <a routerLink="/inbox/4"  data-toggle="tab">
+            <i class="fa fa-pencil-square-o"></i>Draft<span *ngFor="let Draftcountres of draftcountList;let i=index;">{{Draftcountres.Draftcount}}</span>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="">
+          <a routerLink="/inbox/5" data-toggle="tab">
+            <i class="fa fa-trash-o"></i>Trash</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- tab content -->
+  <div class="col-md-9 tab-content tab-content-in">
+
+    <form #AddNewForm="ngForm" (ngSubmit)="addEmail(AddNewForm)">
+      <div class="compose_mail_box">
+        <div class="mailbox-header">
+          <div class="pull-left">
+            <h3>Message Box</h3>
+          </div>
+          <div class="pull-right">
+            <button type="button" (click)="Closedraft()" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="mail_box_body">
+
+          <div class="form-group">
+            <ng-select placeholder="Choose your To user" [options]="userList" [multiple]="true" [(ngModel)]="selectedCharacters" [ngModelOptions]="{standalone: true}"
+              required>
+            </ng-select>
+            <span class="error_span" *ngIf="errorMsg">
+              Please select to user
+            </span>
+          </div>
+
+          <div class="form-group">
+            <ng-select placeholder="Choose your Cc user" [options]="userList" [multiple]="true" [(ngModel)]="selectedCharactersCc" [ngModelOptions]="{standalone: true}">
+            </ng-select>
+          </div>
+
+          <div class="form-group">
+            <ng-select placeholder="Choose your Bcc user" [options]="userList" [multiple]="true" [(ngModel)]="selectedCharactersBcc"
+              [ngModelOptions]="{standalone: true}">
+            </ng-select>
+          </div>
+
+          <div class="form-group">
+            <input type="email" name="Subject" #Subject="ngModel" maxlength="255" [(ngModel)]="emailEntity.Subject" class="form-control"
+              placeholder="Subject" [ngClass]="{red_border: (Subject.dirty && Subject.invalid) || (Subject.pristine && submitted)}"
+              required>
+            <span class="error_span" *ngIf="(Subject.dirty && Subject.invalid) || (Subject.pristine && submitted)">
+              <span *ngIf="Subject.errors.required || (Subject.pristine && submitted)">Please enter subject</span>
+            </span>
+            <!-- <span class="error_span" *ngIf="Subject.errors && Subject.errors.pattern">
+              Please enter valid subject
+            </span> -->
+          </div>
+
+
+          <div class="clearfix"></div>
+          <div class="composebox">
+            <div class="col-md-12 col-sm-12">
+              <div class="multifileeditor">
+                <div class="form-group focused ckeditor_block editor">
+
+
+                  <textarea class="form-control" rows="10" cols="60" contenteditable="true" id="MessageBody" #MessageBody="ngModel" [(ngModel)]="emailEntity.MessageBody"
+                    name="MessageBody"></textarea>
+                  <span class="error_span" *ngIf="des_valid">Please enter email body</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="multifileuploader">
+                <div class="form-group">
+                  <!-- <input type="file" id="multiupload" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple> -->
+
+                  <input type="text" disabled />
+                  <input type="file" name="CertificateId" id="CertificateId" class="form-control" #CertificateId="ngModel" [(ngModel)]="emailEntity.CertificateId"
+                    accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple size="25MB" />
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="mailbox-footer">
+          <div class="pull-left">
+
+            <button class="submit_btn back_btn draft_btn" type="button" (click)="saveDraftInbox()">Save as Draft
+            </button>
+            <button class="submit_btn back_btn send_btn" type="submit">Send</button>
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="tab-pane active text-style" id="tab1">
+      <div class="inbox-right inbox_preview">
+        <div class="mailbox-content">
+          <div class="mail-toolbar clearfix">
+            <div class="float-left">
+              <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                <div class="btn-group">
+                  <!-- <a routerLink="/inbox"><button class="submit_btn next_btn">Back</button></a> -->
+                </div>
+              </div>
+            </div>
+            <div class="mail_labels pull-right">
+              <ul>
+                  <li>
+                      <div *ngIf="emailPreviewEntity.IsDelete==0">
+                        <a class="important" (click)="deleteInbox(emailPreviewEntity,1)" title="Mark as Spam">
+                          <i class="fa fa-trash icon_9"></i>
+                        </a>
+                      </div>
+                      <div *ngIf="emailPreviewEntity.IsDelete==1">
+                        <a (click)="deleteInbox(emailPreviewEntity,1)" title="Remove as Spam">
+                          <i class="fa fa-trash icon_9 main"></i>
+                        </a>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div *ngIf="emailPreviewEntity.IsRead==0">
+                        <a (click)="readInbox(emailPreviewEntity,1)" title="Mark as Read">
+                          <i class="fa fa-envelope icon_9"></i>
+                        </a>
+                      </div>
+                      <div *ngIf="emailPreviewEntity.IsRead==1">
+                        <a (click)="readInbox(emailPreviewEntity,1)" title="Remove as Read">
+                          <i class="fa fa-envelope-open main icon_9"></i>
+                        </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div *ngIf="emailPreviewEntity.IsStar==0">
+                        <a (click)="addstarInbox(emailPreviewEntity,1)" title="Mark as Starred">
+                          <i class="fa fa-star icon_9"></i>
+                        </a>
+                      </div>
+                      <div *ngIf="emailPreviewEntity.IsStar==1">
+                        <a (click)="addstarInbox(emailPreviewEntity,1)" title="Remove as Starred">
+                          <i class="fa fa-star icon_9 main"></i>
+                        </a>
+                      </div>
+                    </li>
+              </ul>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <hr>
+
+          <div class="inbox_preview_mailbox">
+            <!-- <div class="inbox_preview_header">
+              <div class="pull-left">
+                <h1>Transaction alert for your Bank Account</h1>
+              </div>
+              <div class="pull-right">
+                <ul>
+                  <li>
+                    <a href="" title="Print">
+                      <i class="fa fa-print" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div> -->
+
+            <div class="clearfix"></div>
+
+            <!-- <div *ngFor="let Inboxres of inboxList;let i=index;"> -->
+              <div class="inbox_preview_body">
+                <div class="mail_preview_row">
+                  <div class="pull-left">
+                    <img src="assets/images/guy-8.jpg" class="img-responsive" alt="" />
+                    <div class="mail_id">
+                      <p>{{emailPreviewEntity.EmailAddress}}
+                        <span>
+                          to {{emailPreviewEntity.ToEmailAddressGroup}}
+                          <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-caret-down"
+                                aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <table class="table">
+                                <tbody>
+                                  <tr>
+                                    <td>From : </td>
+                                    <td>{{emailPreviewEntity.EmailAddress}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>To : </td>
+                                    <td>{{emailPreviewEntity.ToEmailAddressGroup}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Cc : </td>
+                                    <td>{{emailPreviewEntity.CcEmailAddressGroup}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Bcc : </td>
+                                    <td>{{emailPreviewEntity.BccEmailAddressGroup}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Date : </td>
+                                    <!-- <td>Sep 21, 2018, 11:51 PM</td> -->
+                                    <td>{{emailPreviewEntity.CreatedOn | date:'medium' }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Subject : </td>
+                                    <td>{{emailPreviewEntity.Subject}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <ul>
+                      <li>
+                        {{ emailPreviewEntity.CreatedOn | date:'medium' }}
+                      </li>
+                      <li>
+                        <a  title="Reply" (click)="replay()">
+                          <i class="fa fa-reply" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a  title="Reply to all" (click)="replayAll()" >
+                          <i class="fa fa-reply-all" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a  title="Forward" (click)="forward()">
+                          <i class="fa fa-share" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="mailbody_editor">
+                    <div class="form-group focused ckeditor_block editor">
+                      <textarea class="form-control" name="EmailBody" rows="10" cols="60" contenteditable="true">{{emailPreviewEntity.MessageBody}}</textarea>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+              </div>
+              <div class="clearfix"></div>
+              <div class="inbox_preview_footer">
+                <div class="mailbox_preview_btn">
+                  <a class="back_btn" (click)="replay()" >
+                    <i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
+                  <a class="next_btn" (click)="forward()" >
+                    <i class="fa fa-share" aria-hidden="true"></i> Forward</a>
+                    <div class="clearfix"></div>
+                </div>
+              </div>
+
+            <!-- </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"> </div>
+</div>

@@ -1,0 +1,374 @@
+<div class="title_heading">
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-list" aria-hidden="true"></i>Course Review
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-8">
+		<div class="welcome_message alert" role="alert">
+			<i class="fa fa-info"></i>Welcome back, <strong>12th Dec 2018 12:45</strong> 
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home"></i></a></li>
+				<li class="breadcrumb-item"><a href="/course-list">Courses</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Course Review</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-2 col-sm-2 pull-right">
+				<a href="/course-detail/{{courseid}}" class="back_btn pull-right">Back to Course</a>	
+			</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+	<div class="col-md-12">
+		<div>
+			<h1 class="no_margin pull-left">{{CourseName}}</h1>
+			<button class="next_btn pull-right" id="review_btn" (click)="openDiv()" *ngIf="!allowUser">Write a Review</button>
+
+			<div class="clearfix"></div>
+			<div class="stars_block" *ngIf="ReviewAverage==null">
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+				<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>0 && ReviewAverage<1">
+					<i class="fa fa-star-half-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>1 && ReviewAverage<2">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-half-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>2 && ReviewAverage<3">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-half-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>3 && ReviewAverage<4">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-half-o"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage>4 && ReviewAverage<5">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-half-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==1">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==2">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==3">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-o"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==4">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star-o"></i>
+			</div>
+			<div class="stars_block" *ngIf="ReviewAverage==5">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+			</div>
+			<div class="clearfix"></div>
+			<div class="course_forum_block">
+					<div class="write_review" id="write_review">
+						<div class="row">
+							<form *ngIf="display" #reviewForm="ngForm" (ngSubmit)="addReview(reviewForm,0)">
+							<div class="col-md-12 col-sm-12">
+								<h4>Rate this course</h4>
+								<div class="rating">
+									<label>
+										<input type="radio" name="stars" value="1" #Ratings="ngModel"
+										[(ngModel)]="reviewEntity.Ratings" required/>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+									</label>
+									<label>
+										<input type="radio" name="stars" value="2" #Ratings="ngModel"
+										[(ngModel)]="reviewEntity.Ratings" required/>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+									</label>
+									<label>
+										<input type="radio" name="stars" value="3" #Ratings="ngModel"
+										[(ngModel)]="reviewEntity.Ratings" required/>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+									</label>
+									<label>
+										<input type="radio" name="stars" value="4" #Ratings="ngModel"
+										[(ngModel)]="reviewEntity.Ratings" required/>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+									</label>
+									<label>
+										<input type="radio" name="stars" value="5" #Ratings="ngModel"
+										[(ngModel)]="reviewEntity.Ratings" required/>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+										<span class="icon">
+											<i class="fa fa-star"></i>
+										</span>
+									</label>
+								</div>
+								<span class="clear_rating" (click)="clear_rating()">Clear</span>
+		
+								<div class="clearfix"></div>
+		
+								<span class="error_span" *ngIf="errorText">
+										Please give your ratings
+								</span>
+							</div>
+							<div class="form-group col-md-12 col-sm-12">
+								<label>
+								<span>*</span>Comment</label>
+								<input type="text" class="form-control" #ReviewComment="ngModel" [(ngModel)]="reviewEntity.ReviewComment" name="ReviewComment" maxlength="500" [ngClass]="{red_border: (ReviewComment.dirty && ReviewComment.invalid) || (ReviewComment.pristine && submitted)}" required/>
+									<span class="error_span" *ngIf="(ReviewComment.dirty && ReviewComment.invalid) || (ReviewComment.pristine && submitted)"> 
+										<span *ngIf="ReviewComment.errors.required || (ReviewComment.pristine && submitted)">Please enter your review</span>
+										<span *ngIf="ReviewComment.errors && ReviewComment.errors.pattern">Please enter a valid review</span>
+									</span> 
+							</div>
+							<div class="form-group col-md-12 col-sm-12">
+								<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+							</div>
+							<div class="clearfix"></div>
+							</form>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div *ngFor="let review of CourseReviewList; let i = index" class="forum_box">
+						<div class="img_icon">
+							<img src="assets/images/{{review.UserImage}}" alt="" class="img-responsive" />
+						</div>
+						<div class="content_name" id='content{{i}}'>
+							<div class="name">{{review.Name}}</div>
+							<div class="content">{{review.ReviewComment}}</div>
+							<div class="reply_time">
+								<span class="star_review" *ngIf="review.Rating==1">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+								</span>
+								<span class="star_review" *ngIf="review.Rating==2">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+								</span>
+								<span class="star_review" *ngIf="review.Rating==3">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+								</span>
+								<span class="star_review" *ngIf="review.Rating==4">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+								</span>
+								<span class="star_review" *ngIf="review.Rating==5">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+								</span>
+								<span class="pull-right">
+									<i class="fa fa-clock-o"></i> {{review.ReviewTime | date:'MMM dd, yyyy | hh:mm a'}}</span>
+							</div>
+							<div class="clearfix"></div>
+							<button (click) = "editDiv(review,i)" *ngIf="review.UserId==globals.authData.UserId" class="next_btn button_icons" id="edit_review" data-toggle="tooltip" data-placement="top" title="Edit">
+								<i class="fa fa-edit"></i>
+							</button>
+							<button (click) = "deleteReview(review)" *ngIf="review.UserId==globals.authData.UserId" class="back_btn button_icons" data-toggle="tooltip" data-placement="top" title="Delete">
+								<i class="fa fa-trash"></i>
+							</button>
+							<div *ngIf="review.UserId==globals.authData.UserId" class="write_review" id="write_review{{i}}">
+								<div class="row">
+									<form #reviewForm="ngForm" (ngSubmit)="addReview(reviewForm,review)">
+										<div class="col-md-12 col-sm-12">
+											<h4>Rate this course</h4>
+											<div class="rating">
+												<label>
+													<input type="radio" name="stars" value="1" #Ratings="ngModel"
+													[(ngModel)]="reviewEntity.Ratings" required/>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+												</label>
+												<label>
+													<input type="radio" name="stars" value="2" #Ratings="ngModel"
+													[(ngModel)]="reviewEntity.Ratings" required/>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+												</label>
+												<label>
+													<input type="radio" name="stars" value="3" #Ratings="ngModel"
+													[(ngModel)]="reviewEntity.Ratings" required/>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+												</label>
+												<label>
+													<input type="radio" name="stars" value="4" #Ratings="ngModel"
+													[(ngModel)]="reviewEntity.Ratings" required/>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+												</label>
+												<label>
+													<input type="radio" name="stars" value="5" #Ratings="ngModel"
+													[(ngModel)]="reviewEntity.Ratings" required/>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+													<span class="icon">
+														<i class="fa fa-star"></i>
+													</span>
+												</label>
+											</div>
+											<span class="clear_rating" (click)="clear_rating()">Clear</span>
+					
+											<div class="clearfix"></div>
+					
+											<span class="error_span" *ngIf="errorText">
+													Please give your ratings
+											</span>
+										</div>
+										<div class="form-group col-md-12 col-sm-12">
+											<label>
+											<span>*</span>Comment</label>
+											<input type="text" class="form-control" #ReviewComment="ngModel" [(ngModel)]="reviewEntity.ReviewComment" name="ReviewComment" maxlength="500" [ngClass]="{red_border: (ReviewComment.dirty && ReviewComment.invalid) || (ReviewComment.pristine && submitted)}" required/>
+												<span class="error_span" *ngIf="(ReviewComment.dirty && ReviewComment.invalid) || (ReviewComment.pristine && submitted)"> 
+													<span *ngIf="ReviewComment.errors.required || (ReviewComment.pristine && submitted)">Please enter your review</span>
+													<span *ngIf="ReviewComment.errors && ReviewComment.errors.pattern">Please enter a valid review</span>
+												</span> 
+										</div>
+										<div class="form-group col-md-12 col-sm-12">
+											<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+										</div>
+										<div class="clearfix"></div>
+										</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div *ngIf="CourseReviewList.length<=0" class="forum_box">There is no review given yet.</div>
+				</div>
+		</div>
+		
+		
+	</div>
+	
+	<div class="clearfix"></div>
+
+</div>
+<div class="clearfix"></div>

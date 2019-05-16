@@ -1,0 +1,111 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-industry" aria-hidden="true"></i>{{header}} an Industry
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="#">Industry</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <a routerLink="/industry/list" class="next_btn pull-right">List of Industries</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+  <div class="col-md-12 col-sm-12">
+    <div class="course_details">
+      <div class="mydivs">
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <form class="form-validate" #IndustryForm="ngForm" (ngSubmit)="addIndustry(IndustryForm)">
+              <!-- <h1 class="no_margin pull-left">Add Industry</h1> -->
+              <div class="form-group-active pull-right">
+                <label>
+                  <span>*</span>Active?</label>
+
+                <div class="activeyes_box">
+                  <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="IndustryEntity.IsActive">
+                  <label for="IsActive"></label>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="course_forum_block">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <label>
+                        <span>*</span>Industry</label>
+                      <input type="text" #IndustryName="ngModel" pattern="[a-zA-Z ]{2,}" maxlength="100" [(ngModel)]="IndustryEntity.IndustryName"
+                        class="form-control" name="IndustryName" [ngClass]="{red_border: (IndustryName.dirty && IndustryName.invalid) || (IndustryName.pristine && submitted)}"
+                        required/>
+                      <span class="error_span" *ngIf="(IndustryName.dirty && IndustryName.invalid) || (IndustryName.pristine && submitted)">
+                        <span *ngIf="IndustryName.errors && IndustryName.errors.required">Please enter industry</span>
+                        <span *ngIf="IndustryName.errors && IndustryName.errors.pattern">Please enter valid industry</span>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-6 col-sm-6">
+                    <div class="form-group-active">
+                      <label>
+                        <span>*</span>Active?</label>
+
+                      <div class="activeyes_box">
+                        <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="IndustryEntity.IsActive">
+                        <label for="IsActive"></label>
+                      </div>
+                    </div>
+                  </div> -->
+
+
+                </div>
+
+                <div class="clearfix"></div>
+
+
+                <div class="row">
+                  <div class="col-md-12 col-sm-12  text-center">
+                    <button type="submit" class="next_btn">
+                      <span>{{buttonName}}</span>
+                    </button>
+                    <button *ngIf="IndustryEntity.IndustryId==0" class="back_btn" type="button" (click)="clearForm(IndustryForm)">
+                      <span>Clear</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

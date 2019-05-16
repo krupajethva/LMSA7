@@ -1,0 +1,64 @@
+<div class="title_heading">
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-key" aria-hidden="true"></i>Login Logs
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-8">
+		<div class="welcome_message alert" role="alert">
+			<i class="fa fa-info"></i>Welcome back,
+			<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Login</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Logs</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<!-- <div class="col-md-6 col-sm-6">
+				<a routerLink="/country" class="next_btn pull-right">Add a Country</a>	
+			</div> -->
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+	<div class="col-md-12">
+		<table id="list_tables" class="table table-hover" style="width:100%">
+			<thead>
+				<tr>
+					<th class="text-center sr_no_width">#</th>
+					<th>User Name</th>
+					<th class="width_15">Role Name</th>
+					<th class="width_15">LoginType</th>
+					<th class="width_15">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let logsLogin of LoginlogList;let i = index">
+					<td class="text-center">{{i+1}}</td>
+					<td>{{logsLogin.UserName}}</td>
+					<td>{{logsLogin.RoleName}}</td>
+					<td *ngIf="logsLogin.LoginType==1">Login</td>
+					<td *ngIf="logsLogin.LoginType==0">Logout</td>
+					<td>{{logsLogin.CreatedOn | date:"MM/dd/yy - hh:mm a"}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

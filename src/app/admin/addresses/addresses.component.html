@@ -1,0 +1,156 @@
+
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-list" aria-hidden="true"></i>Add Address
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a href="#">Address</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <a routerLink="/address-list" class="next_btn pull-right">Back to Address List</a>	
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+  <div class="col-md-12 col-sm-12">
+    <div class="course_details">
+      <div class="mydivs">
+        <div *ngIf="!secondform">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <form class="form-validate"  #addressForm="ngForm" (ngSubmit)="addAddress(addressForm)">
+                <h1 class="no_margin pull-left">Add Address</h1>
+                <div class="form-group-active pull-right">
+                  <label><span>*</span>Active?</label>
+                     
+                          <div class="activeyes_box">
+                              <input type="checkbox" name="IsActive" id="IsActive"  value="yes"  #IsActive="ngModel" [(ngModel)]="addressesEntity.IsActive">
+                              <label for="IsActive"></label>
+                          </div>
+                </div>
+                <div class="clearfix"></div>
+                
+                <div class="course_forum_block">
+                  <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                          <div class="form-group">
+                            <label><span class="required">*</span>Address1</label>
+                            <input type="text"  #Address1="ngModel" pattern="[a-zA-Z',&.$\ ]{2,300}"  maxlength="300" [(ngModel)]="addressesEntity.Address1" class="form-control"
+                                  name="Address1"  [ngClass]="{red_border: (Address1.dirty && Address1.invalid) || (Address1.pristine && submitted)}" required/>		
+                                  <span class="error_span" *ngIf="(Address1.dirty && Address1.invalid) || (Address1.pristine && submitted)">
+                                      <span *ngIf="Address1.errors && Address1.errors.required">Please enter primary address</span>
+                                      <span *ngIf="Address1.errors && Address1.errors.pattern">Please enter valid primary address</span>
+                                  </span>
+                          </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label><span class="required">*</span>Address2</label>                 
+                          <input type="text"  #Address2="ngModel" pattern="[a-zA-Z',&.$\ ]{2,300}" maxlength="300"   [(ngModel)]="addressesEntity.Address2" class="form-control txtupper"
+                              name="Address2" [ngClass]="{red_border: Address2.dirty && Address2.invalid}"/>
+                              <span class="error_span" *ngIf="Address2.dirty && Address2.invalid">
+                                 <span *ngIf="Address2.errors && Address2.errors.pattern">Please enter valid secondary address</span>
+                              </span>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="clearfix"></div>
+
+                  <!-- <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label><span class="required">*</span>Country</label>
+                          <input type="text"  #CountryId="ngModel" pattern="[a-zA-Z ]{2,}" maxlength="100" [(ngModel)]="addressesEntity.CountryId" class="form-control"
+                                name="CountryId"  [ngClass]="{red_border: (CountryId.dirty && CountryId.invalid) || (CountryId.pristine && submitted)}" required/>		
+                                <span class="error_span" *ngIf="(CountryId.dirty && CountryId.invalid) || (CountryId.pristine && submitted)">
+                                    <span *ngIf="CountryId.errors && CountryId.errors.required">Please enter country</span>
+                                    <span *ngIf="CountryId.errors && CountryId.errors.pattern">Please enter valid country</span>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label><span class="required">*</span>State</label>                 
+                        <input type="text"  #StateId="ngModel" pattern="[a-zA-Z]{2,}" maxlength="3"   [(ngModel)]="addressesEntity.StateId" class="form-control txtupper"
+                            name="StateId" [ngClass]="{red_border: (StateId.dirty && StateId.invalid) || (StateId.pristine && submitted)}" required/>
+                            <span class="error_span" *ngIf="(StateId.dirty && StateId.invalid) || (StateId.pristine && submitted)">
+                               <span *ngIf="StateId.errors && StateId.errors.required"> Please enter state</span>
+                               <span *ngIf="StateId.errors && StateId.errors.pattern"> Please enter valid state</span>
+                            </span>
+                      </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div> -->
+
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <label><span class="required">*</span>City</label>
+                      <input type="text"  #City="ngModel" pattern="[a-zA-Z]{2,300}"  maxlength="300" [(ngModel)]="addressesEntity.City" class="form-control"
+                            name="City"  [ngClass]="{red_border: (City.dirty && City.invalid) || (City.pristine && submitted)}" required/>		
+                            <span class="error_span" *ngIf="(City.dirty && City.invalid) || (City.pristine && submitted)">
+                                <span *ngIf="City.errors && City.errors.required">Please enter city</span>
+                                <span *ngIf="City.errors && City.errors.pattern">Please enter valid city</span>
+                            </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <label><span class="required">*</span>ZipCode</label>                 
+                      <input type="text"  #ZipCode="ngModel" pattern="[0-9]{5,6}" maxlength="6"   [(ngModel)]="addressesEntity.ZipCode" class="form-control txtupper"
+                          name="ZipCode" [ngClass]="{red_border: (ZipCode.dirty && ZipCode.invalid) || (ZipCode.pristine && submitted)}" required/>
+                          <span class="error_span" *ngIf="(ZipCode.dirty && ZipCode.invalid) || (ZipCode.pristine && submitted)">
+                             <span *ngIf="ZipCode.errors && ZipCode.errors.required">Please enter zipcode</span>
+                             <span *ngIf="ZipCode.errors && ZipCode.errors.pattern">Please enter valid zipcode</span>
+                          </span>
+                    </div>
+                  </div>
+              </div>
+              <div class="clearfix"></div>
+
+                  <!-- <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group-active">
+                          <label><span>*</span>Active?</label>
+                             
+                                  <div class="activeyes_box">
+                                      <input type="checkbox" name="IsActive" id="IsActive"  value="yes"  #IsActive="ngModel" [(ngModel)]="addressesEntity.IsActive">
+                                      <label for="IsActive"></label>
+                                  </div>
+                        </div>
+                      </div>
+                  </div> -->
+                  <div class="clearfix"></div>
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12  text-center">
+                          <button type="submit" class="back_btn"><span>Submit</span></button>
+                       
+                      </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>   
+      </div>
+    </div>
+  </div>
+</div>

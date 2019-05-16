@@ -1,0 +1,179 @@
+<div class="title_heading">				
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-users" aria-hidden="true"></i>Roles Permission
+		</div>
+		</div>
+		<div class="col-md-8 col-sm-8">
+      <div class="welcome_message alert" role="alert">
+        <i class="fa fa-info"></i>Welcome back,
+        <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+      </div>
+    </div>
+		<div class="clearfix"></div>
+		<div class="breadcrumb_block">
+			<div class="col-md-6 col-sm-6">
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+					<li class="breadcrumb-item active" aria-current="page">Roles Permission</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+		
+			<div class="clearfix"></div>
+		</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+  
+   <div class="col-md-12">
+      <form method="get" role="form" action="rolepermission.html">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+            <label>
+              <span>*</span>Select Role</label>
+            
+              <select (change)="getRolePermission()" #RoleId="ngModel" [(ngModel)]="roleEntity.RoleId" name="RoleId">                    
+                <option value="" ngSelected="roleEntity.RoleId==''"></option>
+                <ng-container *ngFor="let role of roleList">
+                    <option *ngIf="((role.RoleId!=1 && globals.authData.RoleId==1)||(globals.authData.RoleId==5)||(role.RoleId!=1 && role.RoleId!=2 && globals.authData.RoleId==2)) && role.RoleId!=5" value="{{role.RoleId}}">{{role.RoleName}}</option>
+                </ng-container>    
+                <!-- <option *ngFor="let role of roleList"  value="{{role.RoleId}}">{{role.RoleName}}</option>                                                           -->
+            </select>
+            </div>
+            </div>
+          </div>              
+        </form>
+    <table id="list_tables" class="table table-hover table-bordered role_permission" style="width:100%">
+      <thead>
+        <tr>
+          <th class="sr_no_width">#</th>
+          <th>Screens</th>
+          <th class="text-center width_15">View</th>
+          <th class="text-center width_15">Add/Edit</th>
+          <th class="text-center width_15">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let permission of permissionList; let i = index" class="odd gradeX">
+              <td>{{i+1}}</td>
+              <td>{{permission.Name}}</td>
+              <td class="text-center">
+                <div class="check_box">
+                  <input type="checkbox" #View{{i}}="ngModel" [(ngModel)]="permissionList[i].View" name="View{{i}}" id="Check1{{i}}" >
+                  <label for="Check1{{i}}" class="checkboxbtn_label"></label>
+                </div>
+              </td>
+              <td class="text-center">
+                <div class="check_box">
+                  <input type="checkbox" #AddEdit{{i}}="ngModel" [(ngModel)]="permissionList[i].AddEdit" name="AddEdit{{i}}" id="Check2{{i}}" >
+                  <label for="Check2{{i}}" class="checkboxbtn_label"></label>
+                </div>
+              </td>
+              <td class="text-center">                         
+                <div class="check_box">
+                  <input type="checkbox" #dlt{{i}}="ngModel" [(ngModel)]="permissionList[i].dlt" name="dlt{{i}}" id="Check3{{i}}" >
+                  <label for="Check3{{i}}" class="checkboxbtn_label"></label>
+                </div>
+              </td>
+            </tr>    
+            <tr *ngIf="permissionList.length<=0">
+              <td colspan="5" class="text-center">There is no record found</td>
+            </tr>            
+      </tbody>
+    </table>
+    <div class="clearfix"></div>
+    <div class="text-center" *ngIf="permissionEntity.AddEdit==1">
+      <button type="submit" (click)="updatePermission()" class="next_btn" [disabled]="btn_disable"><span>Submit</span></button>
+  </div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+
+
+
+
+
+
+
+<!-- 
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>Roles Permission</h1>
+       
+        <div class="white_box">
+            <form method="get" role="form" action="rolepermission.html">
+              <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                <label>
+                  <span>*</span>Select Role</label>
+                
+                  <select (change)="getRolePermission()" #RoleId="ngModel" [(ngModel)]="roleEntity.RoleId" name="RoleId">                    
+                    <option value="" ngSelected='subcategoryEntity.InvitedByUserId==""'></option>
+                    <ng-container *ngFor="let role of roleList">
+                        <option *ngIf="(role.RoleId!=1 && globals.authData.RoleId==1)||(globals.authData.RoleId==5)" value="{{role.RoleId}}">{{role.RoleName}}</option>
+                    </ng-container>  
+                </select>
+                </div>
+                </div>
+              </div>              
+            </form>
+			<div class="table-responsive">
+            <table id="list_tables" class="table table-hover table-bordered role_permission" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="tbl1_width">No.</th>
+                  <th>Screens</th>
+                  <th class="text-center" style="width: 20%;">View</th>
+                  <th class="text-center" style="width: 20%;">Add/Edit</th>
+                  <th class="text-center" style="width: 20%;">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let permission of permissionList; let i = index" class="odd gradeX">
+                      <td>{{i+1}}</td>
+                      <td>{{permission.DisplayName}}</td>
+                      <td class="text-center">
+                        <div class="check_box">
+                          <input type="checkbox" #View{{i}}="ngModel" [(ngModel)]="permissionList[i].View" name="View{{i}}" id="Check1{{i}}" >
+                          <label for="Check1{{i}}" class="checkboxbtn_label"></label>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <div class="check_box">
+                          <input type="checkbox" #AddEdit{{i}}="ngModel" [(ngModel)]="permissionList[i].AddEdit" name="AddEdit{{i}}" id="Check2{{i}}" >
+                          <label for="Check2{{i}}" class="checkboxbtn_label"></label>
+                        </div>
+                      </td>
+                      <td class="text-center">                         
+                        <div class="check_box">
+                          <input type="checkbox" #dlt{{i}}="ngModel" [(ngModel)]="permissionList[i].dlt" name="dlt{{i}}" id="Check3{{i}}" >
+                          <label for="Check3{{i}}" class="checkboxbtn_label"></label>
+                        </div>
+                      </td>
+                    </tr>    
+                    <tr *ngIf="permissionList.length<=0">
+                      <td colspan="5" class="text-center">There is no record found</td>
+                    </tr>            
+              </tbody>
+            </table>
+          </div>
+          <div class="clearfix"></div>
+            <div class="text-center" *ngIf="permissionEntity.AddEdit==1">
+              <button type="submit" (click)="updatePermission()" class="next_btn" [disabled]="btn_disable"><span>Submit</span></button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+

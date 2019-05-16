@@ -1,0 +1,239 @@
+<div class="title_heading">
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-list" aria-hidden="true"></i>Course Discussion Board
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-8">
+		<div class="welcome_message alert" role="alert">
+			<i class="fa fa-info"></i>Welcome back, <strong>12th Dec 2018 12:45</strong> 
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-home"></i></a></li>
+				<li class="breadcrumb-item"><a href="/course-list">Courses</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Course Discussion Board</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-2 col-sm-2 pull-right">
+				<a href="/course-detail/{{courseid}}" class="back_btn pull-right">Back to Course</a>	
+			</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block discusion_block_content">
+	<div class="col-md-12">
+		<div>
+			<h1 class="no_margin pull-left">{{CourseName}}</h1>
+			
+			<div class="course_forum_block">
+					<button class="next_btn pull-right" id="start_discusion" (click)="start_discusion()">Start new Discussion</button>
+					<div class="clearfix"></div>
+		
+				<div class="write_discusion">
+					<div class="row">
+						<form #postForm="ngForm" (ngSubmit)="addPost(postForm,0)">
+							<div class="form-group col-md-10 col-sm-10">
+								<label>
+									<span>*</span>Write your Topic</label>
+								<input type="text" class="form-control" #Comment="ngModel" [(ngModel)]="postEntity.Comment" name="Comment"
+								 maxlength="500" [ngClass]="{red_border: (Comment.dirty && Comment.invalid) || (Comment.pristine && submitted)}" required/>
+								<span class="error_span" *ngIf="(Comment.dirty && Comment.invalid) || (Comment.pristine && submitted)">
+									<span *ngIf="Comment.errors.required || (Comment.pristine && submitted)">Please enter your comment</span>
+									<span *ngIf="Comment.errors && Comment.errors.pattern">Please enter a valid comment</span>
+								</span>
+							</div>
+							<div class="form-group col-md-2 col-sm-2">
+								<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+							</div>
+							<div class="clearfix"></div>
+						</form>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div *ngFor="let discussion of CourseDiscussionList; let i = index" class="forum_box">
+					<div class="img_icon">
+						<img src="assets/images/{{discussion.UserImage}}" alt="" class="img-responsive" />
+					</div>
+					<div class="content_name" id="content{{i}}">
+						<div class="name">{{discussion.Name}}</div>
+						<div class="content">{{discussion.Comment}}</div>
+						<div class="reply_time">
+							<a>
+								<i class="fa fa-comments"></i> {{discussion.count}} Comments</a> |
+							<a (click)="openCommentBox(i)" class="reply_btn first_level">
+								<i class="fa fa-reply"></i>Reply</a>
+							<span class="pull-right">
+								<i class="fa fa-clock-o"></i> {{discussion.PostTime | date:'MMM dd, yyyy | hh:mm a'}}</span>
+							<div class="write_reply" id="write_reply{{i}}">
+								<div class="row">
+									<form #replyForm="ngForm" (ngSubmit)="addCommentReply(replyForm,discussion,0,0,1)">
+										<div class="form-group col-md-10 col-sm-10">
+											<label>
+												<span>*</span>Write your reply</label>
+											<input type="text" class="form-control" #CommentReply="ngModel" [(ngModel)]="postEntity.CommentReply" name="CommentReply{{i}}"
+											maxlength="500" [ngClass]="{red_border: (CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)}"
+											 required/>
+											<span class="error_span" *ngIf="(CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)">
+												<span *ngIf="CommentReply.errors.required || (CommentReply.pristine && submitted)">Please enter your reply</span>
+												<span *ngIf="CommentReply.errors && CommentReply.errors.pattern">Please enter a valid reply</span>
+											</span>
+										</div>
+										<div class="form-group col-md-2 col-sm-2">
+											<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+										</div>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<button *ngIf="discussion.UserId==globals.authData.UserId" (click) = "editDiscussion(discussion,i)" class="next_btn button_icons edit_discusion" data-toggle="tooltip" data-placement="top" title="Edit">
+							<i class="fa fa-edit"></i>
+						</button>
+						<button *ngIf="discussion.UserId==globals.authData.UserId" (click) = "deleteDiscussion(discussion,0,0,1)" class="back_btn button_icons" data-toggle="tooltip" data-placement="top" title="Delete">
+							<i class="fa fa-trash"></i>
+						</button>
+						<div *ngIf="discussion.UserId==globals.authData.UserId" class="edit_reply" id='edit_reply{{i}}'>
+							<div class="row">
+								<form #postForm="ngForm" (ngSubmit)="addPost(postForm,discussion)">
+									<div class="form-group col-md-10 col-sm-10">
+										<label>
+											<span>*</span>Edit your Topic</label>
+										<input type="text" class="form-control" #Comment="ngModel" [(ngModel)]="postEntity.Comment" name="Comment"
+										 maxlength="500" [ngClass]="{red_border: (Comment.dirty && Comment.invalid) || (Comment.pristine && submitted)}" required/>
+										<span class="error_span" *ngIf="(Comment.dirty && Comment.invalid) || (Comment.pristine && submitted)">
+											<span *ngIf="Comment.errors.required || (Comment.pristine && submitted)">Please enter your comment</span>
+											<span *ngIf="Comment.errors && Comment.errors.pattern">Please enter a valid comment</span>
+										</span>
+									</div>
+									<div class="form-group col-md-2 col-sm-2">
+										<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+									</div>
+									<div class="clearfix"></div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div *ngFor="let firstlevelreply of discussion.child; let j = index" class="forum_box inner_forum">
+						<div class="img_icon">
+							<img src="assets/images/{{firstlevelreply.UserImage}}" alt="" class="img-responsive" />
+						</div>
+						<div class="content_name" id="content{{i}}{{j}}">
+							<div class="name">{{firstlevelreply.Name}}</div>
+							<div class="content">{{firstlevelreply.Reply}}</div>
+							<div class="reply_time">
+								<a>
+									<i class="fa fa-comments"></i> {{firstlevelreply.count}} Comments</a> |
+								<a class="reply_btn" (click)="openCommentReplyBox(i,j)">
+									<i class="fa fa-reply"></i>Reply</a>
+								<span class="pull-right">
+									<i class="fa fa-clock-o"></i> {{firstlevelreply.PostTime | date:'MMM dd, yyyy | hh:mm a'}} </span>
+								<div class="write_reply" id="write_reply{{i}}{{j}}">
+									<div class="row">
+										<form #replyForm="ngForm" (ngSubmit)="addCommentReply(replyForm,discussion,firstlevelreply,0,1)">
+											<div class="form-group col-md-10 col-sm-10">
+												<label>
+													<span>*</span>Write your reply</label>
+												<input type="text" class="form-control" #CommentReply="ngModel" [(ngModel)]="postEntity.CommentReply" name="CommentReply"
+												maxlength="500" [ngClass]="{red_border: (CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)}"
+												 required/>
+												<span class="error_span" *ngIf="(CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)">
+													<span *ngIf="CommentReply.errors.required || (CommentReply.pristine && submitted)">Please enter your reply</span>
+													<span *ngIf="CommentReply.errors && CommentReply.errors.pattern">Please enter a valid reply</span>
+												</span>
+											</div>
+											<div class="form-group col-md-2 col-sm-2">
+												<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<button *ngIf="firstlevelreply.UserId==globals.authData.UserId" (click) = "editReply(firstlevelreply,i,j)" class="next_btn button_icons edit_discusion" data-toggle="tooltip" data-placement="top" title="Edit">
+								<i class="fa fa-edit"></i>
+							</button>
+							<button *ngIf="firstlevelreply.UserId==globals.authData.UserId" (click) = "deleteDiscussion(firstlevelreply,discussion,0,2)" class="back_btn button_icons" data-toggle="tooltip" data-placement="top" title="Delete">
+								<i class="fa fa-trash"></i>
+							</button>
+							<div *ngIf="firstlevelreply.UserId==globals.authData.UserId" class="edit_reply" id="edit_reply{{i}}{{j}}">
+								<div class="row">
+									<form #replyForm="ngForm" (ngSubmit)="addCommentReply(replyForm,discussion,firstlevelreply,0,2)">
+										<div class="form-group col-md-10 col-sm-10">
+											<label>
+												<span>*</span>Write your reply</label>
+											<input type="text" class="form-control" #CommentReply="ngModel" [(ngModel)]="postEntity.CommentReply" name="CommentReply"
+											maxlength="500" [ngClass]="{red_border: (CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)}"
+											 required/>
+											<span class="error_span" *ngIf="(CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)">
+												<span *ngIf="CommentReply.errors.required || (CommentReply.pristine && submitted)">Please enter your reply</span>
+												<span *ngIf="CommentReply.errors && CommentReply.errors.pattern">Please enter a valid reply</span>
+											</span>
+										</div>
+										<div class="form-group col-md-2 col-sm-2">
+											<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+										</div>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div *ngFor="let secondlevelreply of firstlevelreply.child; let k = index" class="forum_box inner_forum">
+							<div class="img_icon">
+								<img src="assets/images/{{secondlevelreply.UserImage}}" alt="" class="img-responsive" />
+							</div>
+							<div class="content_name" id="content{{i}}{{j}}{{k}}">
+								<div class="name">{{secondlevelreply.Name}}</div>
+								<div class="content">{{secondlevelreply.Reply}}</div>
+								<div class="reply_time">
+									<span class="pull-right">
+										<i class="fa fa-clock-o"></i> {{secondlevelreply.PostTime | date:'MMM dd, yyyy | hh:mm a'}}</span>
+								</div>
+								<button *ngIf="secondlevelreply.UserId==globals.authData.UserId" (click) = "editReplyReply(secondlevelreply,i,j,k)" class="next_btn button_icons edit_discusion" data-toggle="tooltip" data-placement="top" title="Edit">
+									<i class="fa fa-edit"></i>
+								</button>
+								<button *ngIf="secondlevelreply.UserId==globals.authData.UserId" (click) = "deleteDiscussion(secondlevelreply,discussion,firstlevelreply,3)" class="back_btn button_icons" data-toggle="tooltip" data-placement="top" title="Delete">
+									<i class="fa fa-trash"></i>
+								</button>
+								<div *ngIf="secondlevelreply.UserId==globals.authData.UserId" class="edit_reply" id="edit_reply{{i}}{{j}}{{k}}">
+									<div class="row">
+										<form #replyForm="ngForm" (ngSubmit)="addCommentReply(replyForm,discussion,firstlevelreply,secondlevelreply,2)">
+											<div class="form-group col-md-10 col-sm-10">
+												<label>
+													<span>*</span>Write your reply</label>
+												<input type="text" class="form-control" #CommentReply="ngModel" [(ngModel)]="postEntity.CommentReply" name="CommentReply"
+												maxlength="500" [ngClass]="{red_border: (CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)}"
+												 required/>
+												<span class="error_span" *ngIf="(CommentReply.dirty && CommentReply.invalid) || (CommentReply.pristine && submitted)">
+													<span *ngIf="CommentReply.errors.required || (CommentReply.pristine && submitted)">Please enter your reply</span>
+													<span *ngIf="CommentReply.errors && CommentReply.errors.pattern">Please enter a valid reply</span>
+												</span>
+											</div>
+											<div class="form-group col-md-2 col-sm-2">
+												<button type="submit" class="back_btn pull-right" [disabled]="btn_disable">Post</button>
+											</div>
+											<div class="clearfix"></div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div *ngIf="CourseDiscussionList.length<=0" class="forum_box">There is no discussion started yet.</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<div class="clearfix"></div>
+
+</div>
+<div class="clearfix"></div>

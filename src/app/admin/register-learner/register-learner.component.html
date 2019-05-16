@@ -1,0 +1,339 @@
+<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3">
+	<div class="all_outer_page">
+		<app-header-register></app-header-register>
+		<div class="clearfix"></div>
+		<ul class="nav nav-tabs register_tab" role="tablist">
+			<li role="register" class="active" id="personalli">
+				<a aria-controls="personaldetail" role="tab"  title="Personal Detail">
+					<i class="fa fa-user-plus" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li role="register" id="educationli">
+				<a aria-controls="educationdetail" role="tab"  title="Educational Detail">
+					<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li role="register" id="loginli">
+				<a aria-controls="logindetail" role="tab" title="Preview">
+					<i class="fa fa-eye" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+		<div class="white_form_block">
+			<div class="padding_box">
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active fade in" id="personaldetail">
+						<form #RegisterForm1="ngForm">
+							<div class="row">
+								<div class="col-md-10 col-sm-10 col-xs-10">
+									<h1>Personal Detail</h1>
+									<p class="padding_15">Enter your detail to Register:</p>
+								</div>
+								<div class="col-md-2 col-sm-2 col-xs-2">
+									<!-- <div class="logo tab_logo">
+										<a class="logo_text">
+											<img src="assets/images/landing_logo.png" class="img-responsive" alt="" />
+										</a>
+									</div> -->
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+
+									<div class="form-group">
+										<label>
+											<span>*</span>First Name </label>
+										<input type="text" class="form-control" minlength="2" maxlength="100" #FirstName="ngModel" [(ngModel)]="RegisterEntity.FirstName"
+										 name="FirstName" pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted1)}"
+										 required />
+										<span class="error_span" *ngIf="(FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted1)">
+											<span *ngIf="FirstName.errors.required || (FirstName.pristine && submitted1)">Please enter first name</span>
+											<span *ngIf="FirstName.errors && FirstName.errors.pattern">Please enter valid first name</span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Last Name </label>
+										<input type="text" class="form-control" minlength="2" maxlength="100" #LastName="ngModel" [(ngModel)]="RegisterEntity.LastName"
+										 name="LastName" pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (LastName.dirty && LastName.invalid) || (LastName.pristine && submitted1)}"
+										 required />
+										<span class="error_span" *ngIf="(LastName.dirty && LastName.invalid) || (LastName.pristine && submitted1)">
+											<span *ngIf="LastName.errors.required || (LastName.pristine && submitted1)">Please enter last name</span>
+											<span *ngIf="LastName.errors && LastName.errors.pattern">Please enter valid last name</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Email Address </label>
+										<input type="text" class="form-control" maxlength="100" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #EmailAddress="ngModel"
+										 [(ngModel)]="RegisterEntity.EmailAddress" name="EmailAddress" [ngClass]="{red_border: (EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted1)}"
+										 required>
+										<span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted1)">
+											<span *ngIf="EmailAddress.errors.required || (EmailAddress.pristine && submitted1)">Please enter email address
+											</span>
+											<span *ngIf="EmailAddress.errors && EmailAddress.errors.pattern">Please enter valid email address</span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Phone Number </label>
+										<input type="text" class="form-control" #PhoneNumber="ngModel" name="PhoneNumber" pattern="[0-9\-.()+\s]{10,13}" maxlength="13"
+										 [(ngModel)]="RegisterEntity.PhoneNumber" [ngClass]="{red_border: (PhoneNumber.dirty && PhoneNumber.invalid) || (PhoneNumber.pristine && submitted1)}"
+										 required />
+										<span class="error_span" *ngIf="(PhoneNumber.dirty && PhoneNumber.invalid) || (PhoneNumber.pristine && submitted1)">
+											<span *ngIf="PhoneNumber.errors.required || (PhoneNumber.pristine && submitted1)">Please enter phone number</span>
+											<span *ngIf="PhoneNumber.errors && PhoneNumber.errors.pattern">Please enter valid phone number</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Password </label>
+										<input type="password" class="form-control" (keyup)="checkpassword()" data-toggle="tooltip" data-placement="top" title="Minimum 8 and maximum 50 characters in length. Should allow AlphaNumeric characters. Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#)."
+										 pattern="[a-zA-Z0-9_\-@$*&!#]{8,50}" #Password="ngModel" [(ngModel)]="RegisterEntity.Password" name="Password"
+										 [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted1)}" required />
+										<span class="error_span" *ngIf="(Password.dirty && Password.invalid) || (Password.pristine && submitted1)">
+											<span *ngIf="Password.errors && Password.errors.required">
+												Please enter password
+											</span>
+											<span *ngIf="Password.errors && Password.errors.pattern">
+												Please enter valid password
+											</span>
+										</span>
+
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Confirm Password </label>
+										<input type="password" class="form-control" data-toggle="tooltip" data-placement="top" title="Minimum 8 and maximum 50 characters in length. Should allow AlphaNumeric characters. Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#)."
+										 (keyup)="checkpassword()" pattern="[a-zA-Z0-9_\-@$*&!#]{8,50}" #cPassword="ngModel" [(ngModel)]="RegisterEntity.cPassword"
+										 name="cPassword" [ngClass]="{red_border: ((cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted1)) || (same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required))}"
+										 required />
+										<span class="error_span" *ngIf="(cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted1) || same">
+											<span *ngIf="cPassword.errors && cPassword.errors.required && !same">
+												Please enter confirm password
+											</span>
+
+											<span *ngIf="cPassword.errors && cPassword.errors.pattern && !same">
+												Password must be 8 to 15 characters
+											</span>
+											<span *ngIf="same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required)">
+												Those passwords didn't match
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+
+							<a (click)="next1(RegisterForm1)" aria-controls="educationdetail" id="educationbtn" role="tab" data-toggle="tab" class="next_btn pull-right">Next</a>
+						</form>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="educationdetail">
+						<div class="row">
+							<div class="col-md-10 col-sm-10 col-xs-10">
+								<h1>Educational Detail</h1>
+								<p class="padding_15">Enter your details to Register:</p>
+							</div>
+							<div class="col-md-2 col-sm-2 col-xs-2">
+								<!-- <div class="logo tab_logo">
+									<a class="logo_text">
+										<img src="assets/images/landing_logo.png" class="img-responsive" alt="" />
+									</a>
+								</div> -->
+							</div>
+						</div>
+						<form #RegisterForm2="ngForm">
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Education Level</label>
+										<select #EducationLevelId="ngModel" [(ngModel)]="RegisterEntity.EducationLevelId" name="EducationLevelId" [ngClass]="{red_border: (EducationLevelId.dirty && EducationLevelId.invalid) || (EducationLevelId.pristine && submitted2)}"
+										 required>
+											<option value="" ngSelected='RegisterEntity.EducationLevelId==""'></option>
+											<option *ngFor="let education of EducationLeveList" value="{{education.EducationLevelId}}" ngSelected="RegisterEntity.EducationLevelId==education.EducationLevelId">{{education.Education}}</option>
+										</select>
+										<span class="error_span" *ngIf="(EducationLevelId.dirty && EducationLevelId.invalid) || (EducationLevelId.pristine && submitted2)">
+											<span *ngIf="EducationLevelId.errors.required || (EducationLevelId.pristine && submitted2)">Please select education level</span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Expertise field </label>
+										<input type="text" class="form-control" maxlength="250" #Field="ngModel" [(ngModel)]="RegisterEntity.Field" name="Field"
+										 pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (Field.dirty && Field.invalid) || (Field.pristine && submitted2)}"
+										 required />
+										<span class="error_span" *ngIf="(Field.dirty && Field.invalid) || (Field.pristine && submitted2)">
+											<span *ngIf="Field.errors.required || (Field.pristine && submitted2)">Please enter field</span>
+											<span *ngIf="Field.errors && Field.errors.pattern">Please enter valid field</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<div class="form-group">
+										<label>
+											<span>*</span>Skills </label>
+										<!-- <input  type="text" id="tagsinput" data-role="tagsinput" class="form-control" #Skills="ngModel" [(ngModel)]="RegisterEntity.Skills" name="Skills" pattern="[a-zA-Z'.$\ ]{2,100}" 
+												[ngClass]="{'red_border': sameskill || Skills.pristine}"/>  
+											<span class="error_span" *ngIf="(Skills.pristine && submitted2) || sameskill" >
+												Please enter skills
+											</span> -->
+
+										<input type="text" id="tagsinput" data-role="tagsinput" #Keyword="ngModel" [(ngModel)]="RegisterEntity.Keyword" class="form-control"
+										 name="Keyword" [ngClass]="{'red_border': sameskill || Keyword.pristine}" />
+										<span class="error_span" *ngIf="sameskill">
+											Please enter skills
+										</span>
+
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>Address</label>
+										<input type="text" class="form-control" #Address1="ngModel" [(ngModel)]="RegisterEntity.Address1" name="Address1" maxlength="100"
+										 pattern="[a-zA-Z0-9\-&\, ]{2,300}" [ngClass]="{red_border: (Address1.dirty && Address1.invalid) || (Address1.pristine && submitted2)}"
+										 required />
+										<span class="error_span" *ngIf="(Address1.dirty && Address1.invalid) || (Address1.pristine && submitted2)">
+											<span *ngIf="Address1.errors.required || (Address1.pristine && submitted2)">Please enter address1</span>
+											<span *ngIf="Address1.errors && Address1.errors.pattern">Please enter valid address1</span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>
+											<span>*</span>City</label>
+										<input type="text" class="form-control" #City="ngModel" [(ngModel)]="RegisterEntity.City" name="City" maxlength="100" pattern="[a-zA-Z\-&\, ]{2,100}"
+										 [ngClass]="{red_border: (City.dirty && City.invalid) || (City.pristine && submitted2)}" required />
+										<span class="error_span" *ngIf="(City.dirty && City.invalid) || (City.pristine && submitted2)">
+											<span *ngIf="City.errors.required || (City.pristine && submitted2)">Please enter city</span>
+											<span *ngIf="City.errors && City.errors.pattern">Please enter valid city</span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+							<a (click)="previous1()" aria-controls="personaldetail" id="personalbtn" role="tab" data-toggle="tab" class="back_btn pull-left">Previous</a>
+							<a (click)="next2(RegisterForm2)" aria-controls="logindetail" id="loginbtn" role="tab" data-toggle="tab" class="next_btn pull-right">Next</a>
+						</form>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="logindetail">
+						<div class="row">
+							<div class="col-md-10 col-sm-10 col-xs-10">
+								<div class="preview_tab">
+									<div class="row">
+										<h1>Personal Details</h1>
+										<div class="col-md-6">
+											<p class="padding_15">First Name:
+												<span>{{RegisterEntity.FirstName}}</span>
+											</p>
+										</div>
+										<div class="col-md-6">
+											<p class="padding_15">Last Name:
+												<span>{{RegisterEntity.LastName}}</span>
+											</p>
+										</div>
+										<div class="col-md-6">
+											<p class="padding_15">Email Address:
+												<span>{{RegisterEntity.EmailAddress}}</span>
+											</p>
+										</div>
+										<div class="col-md-6">
+											<p class="padding_15">Phone Number:
+												<span>{{RegisterEntity.PhoneNumber}}</span>
+											</p>
+										</div>
+									</div>
+									<div class="row">
+										<h1>Educational Details</h1>
+										<div class="col-md-4">
+
+											<p class="padding_15">Education Level:
+												<span *ngFor="let education of EducationLeveList">
+													<span *ngIf="education.EducationLevelId==RegisterEntity.EducationLevelId">{{education.Education}}</span>
+												</span>
+											</p>
+
+										</div>
+										<div class="col-md-4">
+											<p class="padding_15">Expertise Field:
+												<span>{{RegisterEntity.Field}}</span>
+											</p>
+										</div>
+										<div class="col-md-4">
+											<p class="padding_15">Skills:
+												<span>{{RegisterEntity.Keyword}}</span>
+											</p>
+										</div>
+									</div>
+									<div class="row">
+										<h1>Address Details</h1>
+										<div class="col-md-6">
+											<p class="padding_15">Address:
+												<span>{{RegisterEntity.Address1}}</span>
+											</p>
+										</div>
+										<div class="col-md-6">
+											<p class="padding_15">City:
+												<span>{{RegisterEntity.City}}</span>
+											</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-2 col-xs-2">
+								<!-- <div class="logo tab_logo">
+									<a class="logo_text">
+										<img src="assets/images/landing_logo.png" class="img-responsive" alt="" />
+									</a>
+								</div> -->
+							</div>
+						</div>
+						<form #InstructerRegisterForm="ngForm" (ngSubmit)="learner_Register(InstructerRegisterForm)">
+							<a (click)="previous2()" aria-controls="educationdetail" id="educationbtn1" role="tab" data-toggle="tab" class="back_btn pull-left">Previous</a>
+							<button [disabled]="btn_disable" class="next_btn pull-right" type="submit">
+								<span>Register</span>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="account_block">
+				<p class="pull-left">ALREADY HAVE AN ACCOUNT?</p>
+				<a routerLink="/login" class="pull-right back_btn">Sign In</a>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<app-footer-register></app-footer-register>
+	</div>
+</div>
+<div class="clearfix"></div>

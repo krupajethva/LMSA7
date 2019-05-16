@@ -1,0 +1,110 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-user" aria-hidden="true"></i>Invite User
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a>
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a>Invite User</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Invite</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block">
+  <div class="col-md-12 col-sm-12">
+              <form class="form-validate" role="form" #inviteForm="ngForm" (ngSubmit)="inviteUser(inviteForm)">
+                <div class="form-group-active pull-right">
+                  <label>
+                    <span>*</span>Active?</label>
+
+                  <div class="activeyes_box">
+                    <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="inviteUserEntity.IsActive">
+                    <label for="IsActive"></label>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>
+                          <span>*</span>Email Address</label>
+                        <input type="email" class="form-control" #EmailAddress="ngModel" name="EmailAddress" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                          [(ngModel)]="inviteUserEntity.EmailAddress" [ngClass]="{red_border: (EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted)}"
+                          required/>
+                        <span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted)">
+                          <span *ngIf="EmailAddress.errors.required || (EmailAddress.pristine && submitted)">Please enter email address </span>
+                        </span>
+                        <span class="error_span" *ngIf="EmailAddress.errors && EmailAddress.errors.pattern">
+                          Please enter valid email address
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>First Name </label>
+                        <input type="text" class="form-control" #FirstName="ngModel" [(ngModel)]="inviteUserEntity.FirstName"
+                          name="FirstName" maxlength="100" pattern="[a-zA-Z'.$\ ]{2,100}"
+                          [ngClass]="{red_border: (FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted1)}"
+                           />
+                        <span class="error_span"
+                          *ngIf="(FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted1)">
+                          <span *ngIf="FirstName.errors && FirstName.errors.pattern">Please enter valid first name</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Last Name </label>
+                        <input type="text" class="form-control" #LastName="ngModel" [(ngModel)]="inviteUserEntity.LastName"
+                          name="LastName" maxlength="100" pattern="[a-zA-Z'.$\ ]{2,100}"
+                          [ngClass]="{red_border: (LastName.dirty && LastName.invalid) || (LastName.pristine && submitted1)}"
+                           />
+                        <span class="error_span"
+                          *ngIf="(LastName.dirty && LastName.invalid) || (LastName.pristine && submitted1)">
+                          <span *ngIf="LastName.errors && LastName.errors.pattern">Please enter valid last name</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12  text-center">
+                      <button type="submit" class="next_btn">
+                        <span>Invite</span>
+                      </button>
+                      <button class="back_btn" type="button" (click)="clearForm(inviteForm)">
+                        <span>Clear</span>
+                      </button>
+                    </div>
+                  </div>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+
+        

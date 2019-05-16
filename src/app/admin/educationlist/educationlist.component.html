@@ -1,0 +1,65 @@
+<div class="title_heading">				
+    <div class="col-md-4 col-sm-4">
+      <div class="title_text">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i>Educations
+      </div>
+      </div>
+      <div class="col-md-8 col-sm-8">
+        <div class="welcome_message alert" role="alert">
+          <i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
+           
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="breadcrumb_block">
+        <div class="col-md-6 col-sm-6">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="#">Education</a></li>
+            <li class="breadcrumb-item active" aria-current="page">List</li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <a routerLink="/education" class="next_btn pull-right">Add an Education</a>	
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="content_block">
+     <div class="col-md-12">
+       <table id="list_tables" class="table table-hover" style="width:100%">
+             <thead>
+              <tr>
+          <th class="text-center sr_no_width">#</th>
+                  <th>Education Name</th>
+                  <th class="text-center active_width">Active?</th>
+                  <th class="text-center action_width">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let Education of EducationList;let i = index">
+          <td class="text-center">{{i+1}}</td>
+                  <td>{{Education.Education}}</td>
+             
+           <td class="text-center">
+                  <div class="activeyes_box"  data-toggle="tooltip" data-placement="top" [attr.title]="Education.IsActive==1 ? 'Active' : 'Deactive'">
+                          <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(Education,i)" [checked]="Education.IsActive==1" value="Yes" >
+                          <label for="active{{i}}"></label>
+                  </div>
+          </td>
+                  <td class="text-center">
+               
+                  <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/education/edit/{{Education.EducationLevelId}}"><i class="fa fa-edit"></i></button>
+                  <button class="delete" data-toggle="tooltip" data-placement="top" *ngIf="Education.isdisabled>0"  [disabled]="Education.isdisabled>0" title="Education can't be deleted as it is already assigned to an active User's profile"> <i class="fa fa-trash"></i></button>
+                  <button class="delete" *ngIf="Education.isdisabled==0"  data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deleteEducation(Education)"  > <i class="fa fa-trash"></i> </button>
+          </td>
+              </tr>
+                </tbody>
+              </table>
+            
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>

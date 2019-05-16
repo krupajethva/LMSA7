@@ -1,0 +1,317 @@
+<div class="title_heading">
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-book" aria-hidden="true"></i>My Courses
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-8">
+			<div class="welcome_message alert" role="alert">
+					<i class="fa fa-info"></i>Welcome back,
+					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+			</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">My Courses</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-6 col-sm-6">
+
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<form class="form-validate" #LearnerCourseForm="ngForm" (ngSubmit)="addLearnerCourse(LearnerCourseForm)">
+				<div class="fliter_section">
+					<!-- <h3>Search By:</h3> -->
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Category</label>
+							<select #CategoryId="ngModel" class="form-control" [(ngModel)]="LearnerCourseEntity.CategoryId" name="CategoryId">
+								<option value="" ngSelected='LearnerCourseEntity.CategoryId==""'>Select</option>
+								<ng-container *ngFor="let SubCategory of SubCategoryList">
+									<option value="{{SubCategory.CategoryId}}" ngSelected="LearnerCourseEntity.CategoryId==SubCategory.CategoryId">{{SubCategory.CategoryName}}</option>
+								</ng-container>
+							</select>
+						</div>
+					</div>
+					<!-- <div class="col-md-3">
+					<div class="form-group">
+						<label><span>*</span>IsStatus</label>
+						<select #IsStatus="ngModel" class="form-control" [(ngModel)]="LearnerCourseEntity.IsStatus" name="IsStatus" 
+						[ngClass]="{red_border: (IsStatus.dirty && IsStatus.invalid) || (IsStatus.pristine && submitted)}"
+					   required>
+							<option></option>
+							<option  value="2">Completed</option>
+							<option  value="1">In Progress</option>
+							<option  value="0">Pending</option>
+						</select>
+					</div>
+				</div> -->
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Course Name </label>
+							<!-- <input type="text" class="form-control" name="CourseName" required /> -->
+							<input type="text" #CourseName="ngModel" maxlength="100" [(ngModel)]="LearnerCourseEntity.CourseName" class="form-control"
+							 name="CourseName" />
+						</div>
+					</div>
+					<div class="col-md-3">
+						<button class="back_btn" type="submit">Filter</button>
+						<button class="next_btn" type="submit" (click)="clearForm(LearnerCourseForm)">Clear</button>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-12 col-sm-12">
+		<div class="course_learner_block">
+			<div class="row">
+				<div class="col-md-3 col-sm-4" *ngFor="let course of CourseList ; let i = index">
+					<div class="course_box">
+						<!-- <div class="progress_block" *ngIf="((course.StartDate) > (datea | date : 'yyyy-MM-dd'))">
+
+							<span class="label label-danger pull-right">Pending</span>
+							<div class="clearfix"></div>
+						</div>
+						<div class="progress_block" *ngIf="((course.EndDate) < (datea | date : 'yyyy-MM-dd'))">
+							<span class="label label-success pull-right">Completed</span>
+							<div class="clearfix"></div>
+						</div>
+						<div class="progress_block">
+							<span class="label label-success pull-right">In process</span>
+							<div class="clearfix"></div>
+						</div> -->
+
+						<div class="course_img">
+							<img src="assets/Instructor/{{course.Fid}}/image/{{course.FilePath}}" alt="" class="img-responsive" />
+						</div>
+						<div class="course_title">{{course.CourseFullName}}</div>
+						<div class="course_btn text-center">
+							<!-- <a routerLink="/course-detail" class="next_btn">Continue</a> -->
+							<a class="back_btn" (click)="SessionClick(course.CourseId,i)">Your Session</a>
+						</div>
+						<!-- <button type="button" class="next_btn" data-toggle="modal" data-target=".bd-example-modal-lg">Available Session</button> -->
+
+						<div id="modalsession{{i}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+						 aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<div class="col-lg-12 col-md-12">
+											<div class="pull-left">
+												<h5 class="modal-title" id="exampleModalLabel">Your Session</h5>
+											</div>
+											<div class="pull-right">
+
+												<ul class="statusicons">
+													<li class="completestatus">
+														<span></span> Complete</li>
+													<li class="inprogressstatus">
+														<span></span> In Progress</li>
+													<li class="pendingstatus">
+														<span></span> Pending</li>
+												</ul>
+											</div>
+										</div>
+										<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button> -->
+									</div>
+									<div class="clearfix"></div>
+									<div class="modal-body">
+										<div class="session_blocks">
+											<div class="col-lg-3 col-md-3" *ngFor="let SessionList of CourseSesssionList; let k = index;">
+												<div class="news-blog" 
+														[ngClass]="{completesession:SessionList.SessionStatus==2,
+														inprogresssession:SessionList.SessionStatus==1,
+														pendingsession:SessionList.SessionStatus==0}">
+														<!-- [ngClass]="{completesession:((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd' )),
+														inprogresssession:((SessionList.StartDate) < (datea | date : 'yyyy-MM-dd' )) && ((SessionList.EndDate)> (datea | date : 'yyyy-MM-dd')) ,
+														pendingsession:((SessionList.StartDate)> (datea | date : 'yyyy-MM-dd'))}" -->
+														<h4>{{SessionList.SessionName}}</h4>
+														<ul class="icon">
+															<li>
+																<i class="fa fa-calendar"></i>
+																<strong>Instructor : </strong> {{SessionList.FirstName}}</li>
+															<li>
+																<i class="fa fa-user"></i>
+																<strong>Start Date : </strong> {{SessionList.StartDate}}</li>
+															<li>
+																<i class="fa fa-calendar"></i>
+																<strong>End Date : </strong> {{SessionList.EndDate}}</li>
+															<li>
+																<i class="fa fa-comments"></i>
+																<strong>Duration : </strong> {{SessionList.StartDate}}</li>
+															<li>
+																<i class="fa fa-comments"></i>
+																<strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
+															<li>
+																<i class="fa fa-user"></i>
+																<strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}</li>
+																<li *ngIf="SessionList.Result!=NULL">
+																	<i class="fa fa-user"></i>
+																		<strong>Your Result : </strong> {{SessionList.Result}}% </li>
+															<!-- <li class="enroll_course_tag" *ngIf="((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd'))">
+																<strong>Completed</strong>
+															</li>
+															<li class="enroll_course_tag" *ngIf="((SessionList.StartDate) > (datea | date : 'yyyy-MM-dd'))">
+																<a (click)="startsession(CourseSesssionList,i)">
+																	<strong>Start your session</strong>
+																</a>
+															</li>
+															<li class="enroll_course_tag" *ngIf="((SessionList.StartDate) < (datea | date : 'yyyy-MM-dd')) && ((SessionList.EndDate) > (datea | date : 'yyyy-MM-dd'))">
+																<a  (click)="startsession(CourseSesssionList,i)" >
+																	<strong>Continue your session</strong>
+																</a>
+															</li> -->
+															
+															<a *ngIf="SessionList.taketest==0 && SessionList.SessionStatus==2" (click)="taketest(SessionList.CourseSessionId)" class="next_btn pull-right">take test</a>	
+															<a  *ngIf="SessionList.taketest>0 && SessionList.Result==NULL && SessionList.SessionStatus==2" (click)="Continue(SessionList.CourseSessionId)" class="next_btn pull-right">Continue test</a>
+													
+															<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==2">
+																<strong>Completed</strong>
+															</li>
+															<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==0">
+																<a (click)="startsession(CourseSesssionList,i)">
+																	<strong>Start your session</strong>
+																</a>
+															</li>
+															<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==1">
+																<a  (click)="startsession(CourseSesssionList,i)" >
+																	<strong>Continue your session</strong>
+																</a>
+															</li>
+														</ul>
+														<h5>{{k+1}}</h5>
+												</div>
+											</div>
+											<!-- <div class="col-lg-3 col-md-3">
+												<div class="news-blog inprogresssession">
+													<h4>Session name Two</h4>
+													<ul class="icon">
+														<li>
+															<i class="fa fa-calendar"></i>
+															<strong>Instructor : </strong> ABC</li>
+														<li>
+															<i class="fa fa-user"></i>
+															<strong>Start Date : </strong> 12th June 2018</li>
+														<li>
+															<i class="fa fa-calendar"></i>
+															<strong>End Date : </strong> 24th Dec 2018</li>
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>Duration : </strong> 45h 25m</li>
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>Total Seats : </strong>56</li>
+														<li>
+															<i class="fa fa-user"></i>
+															<strong>Pending Seats : </strong> 12</li>
+														<li class="enroll_course_tag">
+															<a href="">
+																<strong>Continue your session</strong>
+															</a>
+														</li>
+													</ul>
+													<h5>2</h5>
+												</div>
+											</div> 
+											<div class="col-lg-3 col-md-3">
+												<div class="news-blog pendingsession">
+													<h4>Session name Three</h4>
+													<ul class="icon">
+														<li>
+															<i class="fa fa-calendar"></i>
+															<strong>Instructor : </strong> ABC</li>
+														<li>
+															<i class="fa fa-user"></i>
+															<strong>Start Date : </strong> 12th June 2018</li>
+														<li>
+															<i class="fa fa-calendar"></i>
+															<strong>End Date : </strong> 24th Dec 2018</li>
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>Duration : </strong> 45h 25m</li>
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>Total Seats : </strong>56</li>
+														<li>
+															<i class="fa fa-user"></i>
+															<strong>Pending Seats : </strong> 12</li>
+														<li class="enroll_course_tag">
+															<a href="">
+																<strong>Start your session</strong>
+															</a>
+														</li>
+													</ul>
+													<h5>3</h5>
+												</div>
+											</div>-->
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="modal-footer">
+										<button type="button" class="next_btn" (click)="close(i)">Close</button>
+										<!-- <button type="button" class="next_btn enrollnow_btn" (click)="Enroll()" [disabled]="!sessiontrue">Enroll Now</button> -->
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="course_btn" *ngIf="((course.EndDate) < (datea | date : 'yyyy-MM-dd'))">
+							<a routerLink="" class="back_btn">Take Test</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2" *ngIf="CourseList==''">
+					<div class="course_box">no course found</div>
+				</div>
+
+			</div>
+			<!-- <div class="row">
+					<div class="col-md-3 col-sm-3" *ngFor="let course of CourseList ; let i = index">
+					   <div class="course_box">
+							   <div class="progress_block"  *ngIf="((course.StartDate) > (datea | date : 'yyyy-MM-dd'))" >
+			   
+									   <span class="label label-danger pull-right">Pending</span>
+								   <div class="clearfix"></div>
+							   </div>
+						   <div class="progress_block" *ngIf="((course.EndDate) < (datea | date : 'yyyy-MM-dd'))">
+								   <span class="label label-success pull-right">Completed</span>
+								   <div class="clearfix"></div>
+							   </div> 
+									<div class="progress_block"  *ngIf="((course.StartDate) < (datea | date : 'yyyy-MM-dd')) && ((course.EndDate) > (datea | date : 'yyyy-MM-dd'))">
+								   <span class="label label-success pull-right">In process</span>
+								   <div class="clearfix"></div>
+							   </div> 
+						   
+						   <div class="course_img"><img src="assets/Course/{{course.CourseImage}}" alt="" class="img-responsive" /></div>
+						   <div class="course_title">{{course.CourseFullName}}</div>
+						   <div class="course_btn" *ngIf="((course.EndDate) > (datea | date : 'yyyy-MM-dd'))"><a routerLink="/course-detail" class="next_btn">Continue</a></div>
+						   <div class="course_btn" *ngIf="((course.EndDate) < (datea | date : 'yyyy-MM-dd'))"><a routerLink="" class="back_btn">Take Test</a></div>
+					   </div>
+				   </div>
+				   <div class="col-md-3 col-sm-3" *ngIf="CourseList==''"> <div class="course_box">no course found</div></div>
+				   
+			   </div> -->
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

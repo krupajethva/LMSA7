@@ -1,0 +1,119 @@
+
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-list" aria-hidden="true"></i>Import Data-Form
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back, <strong>12th Dec 2018 12:45</strong>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a ><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a >Import Data</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Import Data-Form</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+         
+                  <!-- <a routerLink="/invited-learner-list" class="next_btn pull-right">Back to Invited-Learner List</a>	 -->
+             
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+  <div class="col-md-12 col-sm-12">
+    <div class="course_details">
+      <div class="mydivs">
+        <div *ngIf="!secondform">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <form class="form-validate" role="form" #importFile="ngForm" (ngSubmit)="addFile(importFile)">
+                <h1 class="no_margin">Import Data Form</h1>
+                
+                <div class="course_forum_block">
+
+                    <!-- <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+      
+                        <div class="form-group">
+                          <label><span>*</span>First Name </label>
+                          <input type="text" class="form-control" #FirstName="ngModel" [(ngModel)]="RegisterEntity.FirstName" name="FirstName"
+                           pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)}"
+                           required />
+                          <span class="error_span" *ngIf="(FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)">
+                            <span *ngIf="FirstName.errors.required || (FirstName.pristine && submitted)">Please enter first name</span>
+                            <span *ngIf="FirstName.errors && FirstName.errors.pattern">Please enter valid first name</span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label><span>*</span>Last Name </label>
+                          <input type="text" class="form-control" #LastName="ngModel" [(ngModel)]="RegisterEntity.LastName" name="LastName"
+                           pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (LastName.dirty && LastName.invalid) || (LastName.pristine && submitted)}"
+                           required />
+                          <span class="error_span" *ngIf="(LastName.dirty && LastName.invalid) || (LastName.pristine && submitted)">
+                            <span *ngIf="LastName.errors.required || (LastName.pristine && submitted)">Please enter last name</span>
+                            <span *ngIf="LastName.errors && LastName.errors.pattern">Please enter valid last name</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div> -->
+
+                  <div class="clearfix"></div>
+                  <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                          <div class="form-group">
+                            <div class="form-group file_upload">
+                              <label><span>*</span>Upload Certificate </label>
+                              <input type="text" disabled /><input type="file" accept=".xlsx"  name="CertificateId" id="CertificateId"
+                               class="form-control" #CertificateId="ngModel" [(ngModel)]="RegisterEntity.CertificateId" />
+                              <span class="error_span" *ngIf="certificate_error">
+                                Please upload certificate
+                              </span>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                           
+                        </div>
+                      </div>
+                  </div>
+                  <div class="clearfix"></div>
+                 
+                 
+               
+                  <div class="clearfix"></div>
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12  text-center">
+                          <button type="submit" class="back_btn"><span>Submit</span></button>
+                       
+                      </div>
+                    </div>
+                 
+               
+                 
+                </div>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+
+         
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

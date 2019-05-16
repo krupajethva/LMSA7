@@ -1,0 +1,99 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-certificate" aria-hidden="true"></i>Certificates
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
+      
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a href="#">Certificate</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <a routerLink="/certificatetemplate" class="next_btn pull-right">Add a Certificate</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block">
+  <div class="col-md-12">
+    <table id="list_tables" class="table table-hover" style="width:100%">
+      <thead>
+        <tr>
+          <th class="text-center sr_no_width">#</th>
+          <th>Certificate Name</th>
+          <th>Template</th>
+          <th class="text-center active_width">Active?</th>
+          <th class="text-center action_width">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let certificate of certificateList; let i = index">
+          <td class="text-center">{{i+1}}</td>
+          <td>{{certificate.CertificateName}}</td>
+          <td>{{certificate.CertificateTemplate}}</td>
+
+          <td class="text-center">
+            <!-- <div class="activeyes_box">
+                      <input type="checkbox" name="active1" id="active1" checked value="Yes">
+                      <label for="active1"></label>
+                    </div> -->
+            <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="certificate.IsActive==1 ? 'Active' : 'Deactive'">
+              <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(certificate,i)" [checked]="certificate.IsActive==1"
+                value="Yes">
+              <label for="active{{i}}"></label>
+            </div>
+          </td>
+          <td class="text-center">
+            <!-- <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button> -->
+            <button class="edit" data-toggle="tooltip" data-placement="bottom" title="View" (click)="viewCertificate(certificate.CertificateId)">
+              <i class="fa fa-eye"></i> </button>
+            <button class="edit" data-toggle="tooltip" data-placement="bottom" title="Edit" routerLink="/certificatetemplate/edit/{{certificate.CertificateId}}">
+              <i class="fa fa-edit"></i> </button>
+            <!-- <button class="delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button> -->
+
+            <!-- <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="You can’t delete Certificate as it is assigned to one of the sub category ">
+              <button *ngIf="certificate.isdisabled>0" class="delete" [disabled]="certificate.isdisabled>0" (click)="deleteCertificate(certificate)">
+                <span class="fa fa-trash"></span> </button>
+            </div> -->
+
+            <button class="delete" data-toggle="tooltip" data-placement="bottom" title="Delete" (click)="deleteCertificate(certificate)">
+              <i class="fa fa-trash"></i> </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+
+
+<div class="modal fade bs-example-modal-md" id="ViewCertificate_Modal" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{certificateData.CertificateName}}</h4>
+      </div>
+      <div class="modal-body">
+        <p> <span [innerHTML]="certificateData.CertificateTemplate"></span> </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

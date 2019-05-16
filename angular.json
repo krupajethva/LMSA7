@@ -1,0 +1,191 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "LMSA7": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/LMSA7",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [
+              "src/assets/js/jquery-1.11.3.min.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/bootstrap.min.js", 
+              "src/assets/js/swiper.min.js",       
+              "src/assets/js/jquery.flexslider-min.js",
+              "src/assets/js/html2pdf.bundle.js",
+              "src/assets/js/html2canvas.js",
+              "src/assets/js/sandyCountdown.js",
+              "src/assets/js/plugin.js",
+              "src/assets/js/jquery-duration-picker.js",
+              "src/assets/js/typeahead.bundle.js",
+              "src/assets/js/bootstrap-tagsinput.min.js",
+              "src/assets/js/bootstrap-datetimepicker.js",
+              "src/assets/js/moment.min.js",
+              "src/assets/js/fullcalendar.min.js",
+              "src/assets/js/jquery.dataTables.min.js",
+              "src/assets/js/perfect-scrollbar.js",
+              "src/assets/js/dataTables.buttons.min.js",
+              "src/assets/js/dataTables.responsive.min.js",
+              "src/assets/js/buttons.print.min.js",
+              "src/assets/js/jszip.min.js",
+              "src/assets/js/buttons.html5.min.js",
+              "src/assets/js/amcharts.js",
+              "src/assets/js/serial.js",
+              "src/assets/js/prettify.min.js",
+              "src/assets/js/bootstrap-multiselect.js",
+              "src/assets/js/imageuploadify.min.js",
+              "src/assets/js/customInput.js",
+              "src/assets/js/sweetalert2.min.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/bootstrap-colorpicker.js",
+              "src/assets/js/accordion.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "LMSA7:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "LMSA7:build:production"
+            },
+            "dev": {
+              "browserTarget": "LMSA7:build:dev"
+            },
+            "local": {
+              "browserTarget": "LMSA7:build:local"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "LMSA7:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "LMSA7-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "LMSA7:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "LMSA7:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "LMSA7"
+}

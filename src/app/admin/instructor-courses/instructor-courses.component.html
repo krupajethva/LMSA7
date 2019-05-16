@@ -1,0 +1,361 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-book" aria-hidden="true"></i>MY COURSES
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+      <div class="welcome_message alert" role="alert">
+          <i class="fa fa-info"></i>Welcome back,
+          <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+      </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">My Course</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <form class="form-validate" #InstructorCourseForm="ngForm" (ngSubmit)="addInstructorCourse(InstructorCourseForm)">
+        <div class="fliter_section">
+          <!-- <h3>Search By:</h3> -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>
+                <span>*</span>Category</label>
+              <select #CategoryId="ngModel" class="form-control" [(ngModel)]="InstructorCourseEntity.CategoryId" name="CategoryId">
+                <option value="" ngSelected='InstructorCourseEntity.CategoryId==""'>Select</option>
+                <ng-container *ngFor="let SubCategory of SubCategoryList">
+                  <option value="{{SubCategory.CategoryId}}" ngSelected="InstructorCourseEntity.CategoryId==SubCategory.CategoryId">{{SubCategory.CategoryName}}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <!-- <div class="col-md-3">
+              <div class="form-group">
+                <label><span></span>IsStatus</label>
+                <select #IsStatus="ngModel" class="form-control" [(ngModel)]="InstructorCourseEntity.IsStatus" name="IsStatus">
+                  <option></option>
+                  <option  value="2">Completed</option>
+                  <option  value="1">In Progress</option>
+                  <option  value="0">Pending</option>
+                </select>
+              </div>
+            </div> -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Course Name </label>
+              <!-- <input type="text" class="form-control" name="CourseName" required /> -->
+              <input type="text" #CourseName="ngModel" maxlength="100" [(ngModel)]="InstructorCourseEntity.CourseName" class="form-control"
+                name="CourseName" />
+            </div>
+          </div>
+          <div class="col-md-5">
+            <button class="back_btn" type="submit">Filter</button>
+            <button class="next_btn" type="submit" (click)="clearForm(InstructorCourseForm)">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-12 col-sm-12">
+    <div class="course_learner_block">
+      <div class="row">
+        <div class="col-md-3 col-sm-4" *ngFor="let course of CourseList ; let i = index">
+          <div class="course_box" >
+            <!-- <div class="progress_block" *ngIf="course.PublishStatus==0"><span class="label label-primary pull-right">Draft</span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="progress_block" *ngIf="course.PublishIsStatus==1"><span class="label label-success pull-right">Published</span>
+              <div class="clearfix"></div>
+            </div> -->
+            <div class="course_img">
+              <img src="assets/Instructor/{{course.Fid}}/image/{{course.FilePath}}" alt="" class="img-responsive" />
+            </div>
+            <div class="course_title">{{course.CourseFullName}}</div>
+            <div class="course_btn instructor_btn">
+              <div class="pull-left">
+                <a class="back_btn" (click)="SessionClick(course.CourseId,i)">Available Session</a>
+              </div>
+              <div class="pull-right">
+                <a routerLink="/course/edit/{{course.CourseId}}" data-placement="top" data-toggle="tooltip" title="Edit">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                <a routerLink="/preview/{{course.CourseId}}" data-placement="top" data-toggle="tooltip" title="Detail">
+                  <i class="fa fa-info" aria-hidden="true"></i>
+                </a>
+                <a data-toggle="modal" (click)="clone(course.CourseId)" data-target="#courseclonemodal">
+                  <i class="fa fa-clone" aria-hidden="true"></i>
+                </a>
+                <a routerLink="/course-questionlist/{{course.CourseId}}" data-placement="top" data-toggle="tooltip" title="Course Question">
+                  <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="clearfix"></div>
+              <!-- <a routerLink="/course-detail/{{course.CourseId}}" *ngIf="course.PublishStatus!=0" class="back_btn">Detail</a>
+              <a routerLink="/course/edit/{{course.CourseId}}" class="back_btn">Edit</a>
+              <button class="next_btn">Publish</button> -->
+            </div>
+            <div id="modalsession{{i}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <div class="col-lg-12 col-md-12">
+                      <div class="pull-left">
+                        <h5 class="modal-title" id="exampleModalLabel">My Sessions</h5>
+                      </div>
+                      <div class="pull-right">
+                        <ul class="statusicons">
+                          <li class="Draft">
+                            <span></span> Draft</li>
+                          <li class="Publish">
+                            <span></span> Publish</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button> -->
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="modal-body">
+                    <div class="session_blocks">
+                      <div class="col-lg-3 col-md-3" *ngFor="let SessionList of CourseSesssionList; let k = index;">
+                        <div class="news-blog" [ngClass]="{Draft:SessionList.PublishStatus==0,Publish:SessionList.PublishStatus>0}">
+                          <h4>{{SessionList.SessionName}}</h4>
+                          <ul class="icon">
+                            <li>
+                              <i class="fa fa-calendar"></i>
+                              <strong>Instructors : </strong> {{SessionList.FirstName}}</li>
+                            <li>
+                              <i class="fa fa-user"></i>
+                              <strong>Start Date : </strong> {{SessionList.StartDate}} {{sdsd | date :'HH:mm:ss'}}</li>
+                            <li>
+                              <i class="fa fa-calendar"></i>
+                              <strong>End Date : </strong> {{SessionList.EndDate}}</li>
+                            <li>
+                              <li>
+                                <i class="fa fa-clock-o"></i>
+                                <strong>Start Time : </strong> {{SessionList.StartTimeChange}}</li>
+                              <li>
+                                <i class="fa fa-clock-o"></i>
+                                <strong>End Time : </strong> {{SessionList.EndTimeChange}}</li>
+                              <!-- <li>
+                                <i class="fa fa-comments"></i>
+                                <strong>Duration : </strong> {{SessionList.StartDate}}</li> -->
+                              <li>
+                                <i class="fa fa-comments"></i>
+                                <strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
+
+                              <li>
+                                <i class="fa fa-user"></i>
+                                <strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}</li>
+                              <li class="start_session_btn" *ngIf="SessionList.SessionStatus==0 && SessionList.PublishStatus>0 && 
+                                !(SessionList.StartDate > (datea | date : 'yyyy-MM-dd')) 
+                                && (SessionList.StartTime < (SCtime | date :'HH:mm:ss'))">
+                                <a class="back_btn" (click)="StartSession(SessionList.CourseSessionId,k)">Start</a>
+                              </li>
+                              <li class="end_session_btn" *ngIf="SessionList.SessionStatus==1 && SessionList.PublishStatus>0 
+                                && ((SessionList.EndDate > (datea | date : 'yyyy-MM-dd')) ||
+                                 (SessionList.EndDate == (datea | date : 'yyyy-MM-dd'))
+                                  && (SessionList.EndTime > (ECtime | date :'HH:mm:ss')))">
+                                <a class="next_btn" (click)="EndSession(SessionList.CourseSessionId,k)">End</a>
+                              </li>
+                              <li class="complete_session_lbl" *ngIf="SessionList.SessionStatus==2 && SessionList.PublishStatus>0">
+                                <p class="text-success">
+                                  <strong>Complete Session</strong>
+                                </p>
+                              </li>
+
+                              <!-- <li class="start_session_btn">
+                                <a class="back_btn" (click)="StartSession(SessionList.CourseSessionId,k)">Start</a>
+                              </li>
+                              <li class="end_session_btn">
+                                <a class="next_btn" (click)="EndSession(SessionList.CourseSessionId,k)">End</a>
+                              </li>
+                              <li class="complete_session_lbl">
+                                <p class="text-success">
+                                  <strong>Complete Session</strong>
+                                </p>
+                              </li> -->
+
+
+                              <li class="enroll_course_tag attendancesession" *ngIf="SessionList.PublishStatus>0">
+                                <div class="col-md-6 attendancesession_label">
+                                  <strong>Already Publish</strong>
+                                </div>
+                                <div class="col-md-6 attendancesession">
+                                  <a  (click)="attendance(SessionList.CourseSessionId,i)" >Attendance</a>
+                                </div>
+                              </li>
+                              <li class="enroll_course_tag draftpublishtag" *ngIf="SessionList.PublishStatus==0">
+                                <div class="col-md-6 draftsession">
+                                  <a (click)="draft(course.CourseId,i)">Edit</a>
+                                </div>
+                                <div class="col-md-6 publishsession">
+                                  <a (click)="Publish(SessionList.CourseSessionId,k)">Publish</a>
+                                </div>
+                              </li>
+                          </ul>
+                          <h5>{{k+1}}</h5>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="modal-footer">
+                    <button type="button" class="next_btn" (click)="close(i)">Close</button>
+                    <!-- <button type="button" class="next_btn enrollnow_btn" (click)="Enroll()" [disabled]="!sessiontrue">Enroll Now</button> -->
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- <div class="col-md-3 col-sm-3">
+          <div class="course_box">
+            <div class="progress_block"><span class="label label-primary pull-right">Draft</span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="course_img"><img src="assets/images/l5.jpg" alt="" class="img-responsive" /></div>
+            <div class="course_title">HTML5, CSS3 & JavaScript Workshop: Build 7 Creative
+								Projects</div>
+            <div class="course_btn instructor_btn"><a routerLink="" class="back_btn">Detail</a><a routerLink="" class="next_btn">Publish</a></div>
+          </div>
+        </div> -->
+        <!-- <div class="col-md-3 col-sm-3">
+          <div class="course_box">
+            <div class="progress_block"><span class="label label-success pull-right">Published</span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="course_img"><img src="assets/images/l6.jpg" alt="" class="img-responsive" /></div>
+            <div class="course_title">Step-by-step HTML and CSS for Absolute Beginners</div>
+            <div class="course_btn instructor_btn"><a routerLink="" class="back_btn">Detail</a></div>
+          </div>
+        </div> -->
+        <div class="col-md-2 col-sm-2" *ngIf="CourseList==''">
+          <div class="course_box">no course found</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="courseclonemodal" tabindex="-1" role="dialog" aria-labelledby="courseclonemodalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form class="form-validate" #CloneForm="ngForm" (ngSubmit)="clonesubmit(CloneForm)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Course Clone</h5>
+        </div>
+        <div class="modal-body course_clone_block">
+          <div class="course_clone">
+            <div class="clone_header">
+              <div class="form-group">
+                <div class="check_box">
+                  <input type="checkbox" name="CheckCourse" id="CheckC" (click)="courseall()" [checked]="CheckCoursevalid">
+                  <label for="CheckC" class="checkboxbtn_label"></label>
+                </div>
+              </div>
+              <span>Course</span>
+            </div>
+          </div>
+
+          <div class="course_details_clone">
+            <div class="clone_header">
+              <div class="form-group">
+                <div class="check_box disabled">
+                  <input type="checkbox" name="Checkdetail" id="CheckD" value="Checkdetail" checked disabled>
+                  <label for="CheckD" class="checkboxbtn_label"></label>
+                </div>
+              </div>
+              <span>Course Details</span>
+            </div>
+          </div>
+
+
+          <div class="course_topic_clone">
+            <div class="clone_header">
+              <div class="form-group">
+                <div class="check_box">
+                  <input type="checkbox" name="Checktopic" id="Checkt" (click)="topicall()" [checked]="Checktopicvalid">
+                  <label for="Checkt" class="checkboxbtn_label"></label>
+                </div>
+              </div>
+              <span>Topic</span>
+            </div>
+            <div class="course_topic_clone_wrap">
+              <div class="form-group" *ngFor="let tops of CoursetopicList;let i = index">
+                <div class="check_box">
+                  <input type="checkbox" name="Checksubtopic{{i}}" id="Check{{i}}" (click)="topicSuball(tops.Checksubtopic,i)" [checked]="tops.Checksubtopic">
+                  <label for="Check{{i}}" class="checkboxbtn_label">{{tops.TopicName}} </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="course_session_clone">
+            <div class="clone_header">
+              <div class="form-group">
+                <div class="check_box">
+                  <input type="checkbox" name="CheckSession" id="CheckS" (click)="sessionall()" [checked]="Checksessionvalid">
+                  <label for="CheckS" class="checkboxbtn_label"></label>
+                </div>
+              </div>
+              <span>Session</span>
+            </div>
+            <div class="course_session_clone_wrap">
+              <div class="form-group" *ngFor="let Session of CoursescctionList;let j = index">
+                <div class="check_box">
+                  <input type="checkbox" name="Checksubsession{{i}}" id="CheckSe{{j}}" (click)="sessionSuball(Session.Checksession,j)" [checked]="Session.Checksession">
+                  <label for="CheckSe{{j}}" class="checkboxbtn_label">{{Session.SessionName}}</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="course_details_clone">
+            <div class="clone_header">
+              <div class="form-group">
+                <div class="check_box disabled">
+                  <input type="checkbox" name="Checkbages" id="Checkb" value="Checkdetail" checked disabled>
+                  <label for="Checkb" class="checkboxbtn_label"></label>
+                </div>
+              </div>
+              <span>Course Bages</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="back_btn" data-dismiss="modal">Close</button>
+          <button type="submit" class="next_btn">Clone</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

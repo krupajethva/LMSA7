@@ -1,0 +1,207 @@
+<div class="title_heading">
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-list" aria-hidden="true"></i>Course Catalog
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-8">
+			<div class="welcome_message alert" role="alert">
+					<i class="fa fa-info"></i>Welcome back,
+					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+		  </div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Course Catalog</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-md-6 col-sm-6">
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+	<div class="col-md-9 col-sm-9">
+		<div class="course_list_block">
+			<div class="list_grid">
+				<button class="grid_btn active">
+					<i class="fa fa-th"></i>
+				</button>
+				<button class="list_btn">
+					<i class="fa fa-list"></i>
+				</button>
+				<button class="next_btn" type="submit" (click)="clearForm(aa)">Clear Filter</button>
+			</div>
+			<div class="row">
+				<ng-container *ngFor="let course of CourseList | paginate: { itemsPerPage:6, currentPage: p}; let i = index">
+					<div class="col-md-4 col-sm-6">
+						<div class="course_box">
+							<div class="course_img">
+								<a routerLink="/course-detail/{{course.CourseId}}">
+								
+									<img src="assets/Instructor/{{course.Fid}}/image/{{course.FilePath}}" alt="" class="img-responsive" />
+								</a>
+							</div>
+							<div class="content">
+								<div class="course_title">
+									<a routerLink="/course-detail/{{course.CourseId}}">{{course.CourseFullName}}</a>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg==null">
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg>0 && course.reviewavg<1">
+									<i class="fa fa-star-half-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg>1 && course.reviewavg<2">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg>2 && course.reviewavg<3">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg>3 && course.reviewavg<4">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg>4 && course.reviewavg<5">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg==1">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg==2">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg==3">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg==4">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="stars_block" *ngIf="course.reviewavg==5">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</div>
+								<div class="desc_block">
+									<p>{{course.Description | slice:0:280}}
+										<a *ngIf="course.Description && course.Description.length > 280" routerLink="/course-detail/{{course.CourseId}}"> ... more</a>
+									</p>
+								</div>
+								<div></div>
+								<!-- <h3 class="instructor">
+							<div class="multiinstructor_detail">
+								<ul>
+									<li   *ngFor="let instructor of course.child; let i = index" data-toggle="tooltip" data-placement="top" title="{{instructor.UserName}}"><a href=""><img src="assets/Course/{{instructor.ProfileImage}}" alt="" class="img-responsive" /></a></li>
+									<li data-toggle="tooltip" data-placement="top" title="View More"><a href=""><img src="assets/Course/add-user-symbol-of-interface.png" alt="" class="img-responsive" /></a></li>
+									
+								</ul>
+							</div>
+							  </h3> -->
+
+
+							</div>
+
+						</div>
+					</div>
+				</ng-container>
+				<div *ngIf="CourseList==''">Courses are not available</div>
+			</div>
+			<div class="pagination_block" *ngIf="CourseList!=''">
+				<ul class="pagination">
+					<pagination-controls (pageChange)="p=$event"></pagination-controls>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-3">
+		<div class="course_list_right">
+			<div class="category_block">
+				<h3>Category</h3>
+				<ul>
+					<ng-container *ngFor="let SubCategory of SubCategoryList; let i = index;">
+						<li id="test{{i}}" class="test" *ngIf="SubCategory.totalcourse>0 ">
+							<a (click)="CategoryWise(SubCategory.CategoryId, i)">{{SubCategory.CategoryName}}
+								<span>{{SubCategory.totalcourse}}</span>
+							</a>
+						</li>
+					</ng-container>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+			<div class="instrutor_course">
+				<h3>Top Instructors</h3>
+				<ng-container *ngFor="let InList of InstList ; let i = index;">
+					<div (click)="InstWise(InList.UserId,i)" id="users{{i}}" class="users" *ngIf="InList.totalCourse>0 ">
+
+						<div class="img_box">
+								<span *ngIf="InList.ProfileImage=='' || InList.ProfileImage==NULL" class="instructor_letter">{{InList.FirstName | slice:0:01}}{{InList.LastName | slice:0:01}}</span>
+							<img src="assets/UserImages/{{InList.ProfileImage}}" alt="" class="img-responsive" />
+						</div>
+						<div class="name_box">
+							<span class="pull-left">{{InList.FirstName}}</span>
+							<span class="pull-right">{{InList.totalCourse}}</span>
+						</div>
+						<div class="viewall_instructor_btn">
+							<a  routerLink="/instructor-detail/{{InList.UserId}}">
+								<i class="fa fa-eye" title="" data-original-title="View Details"></i>
+							</a>
+						</div>
+
+					</div>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

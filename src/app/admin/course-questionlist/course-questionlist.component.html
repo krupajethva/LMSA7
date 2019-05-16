@@ -1,0 +1,82 @@
+<div class="title_heading">				
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-question-circle" aria-hidden="true"></i>Course Question List
+		</div>
+		</div>
+		<div class="col-md-8 col-sm-8">
+				<div class="welcome_message alert" role="alert">
+						<i class="fa fa-info"></i>Welcome back,
+						<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+				</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="breadcrumb_block">
+			<div class="col-md-6 col-sm-6">
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+					<li class="breadcrumb-item"><a  routerLink="/courselist-question" >Course Question</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Course Question List</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+			
+				<a routerLink="/course-question/{{CID}}" class="next_btn pull-right">Add a Question</a>	
+			</div>
+		
+			<div class="clearfix"></div>
+		</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+   <div class="col-md-12">		
+	   <div class="pull-left">
+		<h3>{{Coursename.CourseFullName}}</h3>
+	  </div>
+	   <table id="list_tables" class="table table-hover" style="width:100%">
+           <thead>
+            <tr>
+				<th class="text-center sr_no_width">#</th>
+                <th>Question Name</th>
+
+                <th class="active_width">IsActive?</th>
+        
+                <th class="text-center action_width">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let question of questionlist; let i = index">
+				<td class="text-center">{{i+1}}</td>
+                <td [innerHTML]="question.QuestionName"></td>
+      
+           
+                <td class="text-center">
+				
+                  <div class="activeyes_box"  data-toggle="tooltip" data-placement="top" [attr.title]="question.IsActive==1 ? 'Active' : 'Deactive'">
+                          <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(question,i)" [checked]="question.IsActive==1" value="Yes" >
+                          <label for="active{{i}}"></label>
+                  </div>
+     			 </td>
+                <td class="text-center">
+          <!-- <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button> -->
+          <button  class="edit" data-toggle="tooltip" data-placement="top"   title="Edit Question"  routerLink="/course-question/{{question.CourseId}}/{{question.QuestionId}}" > <i class="fa fa-edit"></i> </button>
+          <!-- <button  class="edit" data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deleteQuestion(question)" > <i class="fa fa-trash"></i> </button> -->
+		  <span  data-toggle="tooltip" data-placement="bottom"  title="You can’t delete question as it is assigned to one of the test "> 
+			<button *ngIf="question.isdisabled>0" class="delete" [disabled]="question.isdisabled>0"   (click)="deleteQuestion(question)"  > <span class="fa fa-trash"></span> </button>
+			</span>
+	
+				<!-- <button *ngIf="(permissionEntity.Delete==1) && (domain.isdisabled==0)"   (click)="deleteDomain(domain)"  class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"> <span class="fa fa-times"></span> </button> -->
+				<button *ngIf="question.isdisabled==0"class="delete" data-toggle="tooltip" data-placement="bottom" title="Delete"  (click)="deleteQuestion(question)"   > <i class="fa fa-trash"></i> </button>
+			
+        </td>
+            </tr>
+           
+           
+              </tbody>
+            </table>
+
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

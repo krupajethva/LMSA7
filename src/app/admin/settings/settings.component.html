@@ -1,0 +1,553 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-cog" aria-hidden="true"></i>Settings
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item active">Settings</li>
+        <!-- <li class="breadcrumb-item active" aria-current="page"></li> -->
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <!-- <a routerLink="/state-list" class="next_btn pull-right">Back to Setting List</a>	 -->
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+  <div class="col-md-12 col-sm-12">
+    <div class="course_details">
+      <div class="mydivs">
+        <div>
+          <div class="row">
+            <div class="white_shadow_box" *ngIf="globals.authData.RoleId==5 || globals.authData.RoleId==1 || globals.authData.RoleId==2">
+              <div class="col-md-12 col-sm-12">
+                <form class="form-validate" #fromForm="ngForm" (ngSubmit)="addEmailFrom(fromForm)">
+                  <h1 class="no_margin">SMTP Form Detail</h1>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Email Address</label>
+                          <input type="text" class="form-control" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #emailfrom="ngModel"
+                            [(ngModel)]="configEntity.emailfrom" name="emailfrom" [ngClass]="{red_border: (emailfrom.dirty && emailfrom.invalid) || (emailfrom.pristine && submitted4)}"
+                            required/>
+                          <span class="error_span" *ngIf="(emailfrom.dirty && emailfrom.invalid) || (emailfrom.pristine && submitted4)">
+                            <span *ngIf="emailfrom.errors.required || (emailfrom.pristine && submitted4)">Please enter email address</span>
+                            <span *ngIf="emailfrom.errors && emailfrom.errors.pattern">
+                              Please enter valid email address
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Email Password</label>
+                          <input type="password" class="form-control" #emailpassword="ngModel" [(ngModel)]="configEntity.emailpassword" name="emailpassword"
+                            [ngClass]="{red_border: (emailpassword.dirty && emailpassword.invalid) || (emailpassword.pristine && submitted4)}"
+                            required/>
+                          <span class="error_span" *ngIf="(emailpassword.dirty && emailpassword.invalid) || (emailpassword.pristine && submitted4)">
+                            <span *ngIf="emailpassword.errors.required || (emailpassword.pristine && submitted4)">Please enter email password</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 text-center">
+                        <button type="submit" class="back_btn">
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="white_shadow_box" *ngIf="globals.authData.RoleId==5 || globals.authData.RoleId==1 || globals.authData.RoleId==2">
+                <form class="form-validate" #InvitationForm="ngForm">
+              <div class="col-md-6 col-sm-6">
+                <!-- <form class="form-validate" #contForm="ngForm" (ngSubmit)="addcontact(contForm)"> -->
+                  <h1 class="no_margin">Contact Form Detail</h1>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Contact Us Email</label>
+                          <input type="text" class="form-control" #ContactFrom="ngModel" [(ngModel)]="ContactEntity.ContactFrom" name="ContactFrom"
+                            pattern="[a-zA-Z0-9.,-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}(,|$)" [ngClass]="{red_border: (ContactFrom.dirty && ContactFrom.invalid) || (ContactFrom.pristine && submitted5)}"
+                            required/>
+                          <span class="error_span" *ngIf="(ContactFrom.dirty && ContactFrom.invalid) || (ContactFrom.pristine && submitted5)">
+                            <span *ngIf="ContactFrom.errors.required || (ContactFrom.pristine && submitted5)">Please enter Email from</span>
+                            <span *ngIf="!(ContactFrom.errors.required || (ContactFrom.pristine && submitted5)) && ContactFrom.errors.pattern">
+                              Please enter valid email address
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <button type="submit" class="back_btn">
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="clearfix"></div>
+                <!-- </form> -->
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <!-- <form class="form-validate" #courseKeywordForm="ngForm" (ngSubmit)="addCourseKeyword(courseKeywordForm)"> -->
+                  <h1 class="no_margin">Course Keyword Detail</h1>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Course Keyword</label>
+                          <input type="text" class="form-control" #CourseKeyword="ngModel" [(ngModel)]="courseKeyEntity.CourseKeyword" name="CourseKeyword"
+                            [ngClass]="{red_border: (CourseKeyword.dirty && CourseKeyword.invalid) || (CourseKeyword.pristine && submitted2)}"
+                            required/>
+                          <span class="error_span" *ngIf="(CourseKeyword.dirty && CourseKeyword.invalid) || (CourseKeyword.pristine && submitted2)">
+                            <span *ngIf="CourseKeyword.errors.required || (CourseKeyword.pristine && submitted2)">Please enter course keyword</span>
+                            <span *ngIf="!(CourseKeyword.errors.required || (CourseKeyword.pristine && submitted2)) && CourseKeyword.errors.pattern">
+                              Please enter valid course keyword
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <button type="submit" class="back_btn">
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div> -->
+                  </div>
+                <!-- </form> -->
+              </div>
+              <div class="clearfix"></div>
+              <div class="col-md-12 col-sm-12">
+                <!-- <form class="form-validate" #InvitationForm="ngForm" (ngSubmit)="addInvitation(InvitationForm)"> -->
+                  <h1 class="no_margin">Invitation Message</h1>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Success</label>
+                          <input type="text" class="form-control" pattern="[a-zA-Z ]{2,}" #Success="ngModel" [(ngModel)]="InviEntity.Success" name="Success"
+                            [ngClass]="{red_border: ((Success.dirty && Success.invalid) || (Success.pristine && submitted6))}"
+                            required/>
+                          <span class="error_span" *ngIf="(Success.dirty && Success.invalid) || (Success.pristine && submitted6)">
+                            <span *ngIf="Success.errors.required || (Success.pristine && submitted6)">Please enter success message</span>
+                            <span *ngIf="!(Success.errors.required || (Success.pristine && submitted6)) && Success.errors.pattern">Please enter valid success</span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Revoke</label>
+                          <input type="text" class="form-control" pattern="[a-zA-Z ]{2,}" #Revoke="ngModel" [(ngModel)]="InviEntity.Revoke" name="Revoke"
+                            [ngClass]="{red_border: (Revoke.dirty && Revoke.invalid) || (Revoke.pristine && submitted6)}" required/>
+                          <span class="error_span" *ngIf="(Revoke.dirty && Revoke.invalid) || (Revoke.pristine && submitted6)">
+                            <span *ngIf="Revoke.errors.required || (Revoke.pristine && submitted6)">Please enter revoke message</span>
+                            <span *ngIf="!(Revoke.errors.required || (Revoke.pristine && submitted6)) && Revoke.errors.pattern">
+                              Please enter valid revoke message
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Pending</label>
+                          <input type="text" class="form-control" pattern="[a-zA-Z ]{2,}" #Pending="ngModel" [(ngModel)]="InviEntity.Pending" name="Pending"
+                            [ngClass]="{red_border: (Pending.dirty && Pending.invalid) || (Pending.pristine && submitted6)}"
+                            required/>
+                          <span class="error_span" *ngIf="(Pending.dirty && Pending.invalid) || (Pending.pristine && submitted6)">
+                            <span *ngIf="Pending.errors.required || (Pending.pristine && submitted6)">Please enter pending message</span>
+                            <span *ngIf="!(Pending.errors.required || (Pending.pristine && submitted6)) && Pending.errors.pattern">
+                              Please enter valid pending message
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 text-center">
+                        <button type="submit" (click)="secondSubmit(InvitationForm)" class="back_btn">
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                <!-- </form> -->
+              </div>
+            </form>
+              <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- <div class="white_shadow_box">
+              <div class="col-md-12 col-sm-12">
+                <form class="form-validate" #InvitationForm="ngForm" (ngSubmit)="addInvitation(InvitationForm)">
+                  <h1 class="no_margin">Invitation Message</h1>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Success</label>
+                          <input type="text" class="form-control" pattern="[a-zA-Z ]{2,}" #Success="ngModel" [(ngModel)]="InviEntity.Success" name="Success"
+                            [ngClass]="{red_border: ((Success.dirty && Success.invalid) || (Success.pristine && submitted6))}"
+                            required/>
+                          <span class="error_span" *ngIf="(Success.dirty && Success.invalid) || (Success.pristine && submitted6)">
+                            <span *ngIf="Success.errors.required || (Success.pristine && submitted6)">Please enter success</span>
+                            <span *ngIf="!(Success.errors.required || (Success.pristine && submitted6)) && Success.errors.pattern">Please enter valid success</span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Revoke</label>
+                          <input type="text" class="form-control" pattern="[a-zA-Z ]{2,}" #Revoke="ngModel" [(ngModel)]="InviEntity.Revoke" name="Revoke"
+                            [ngClass]="{red_border: (Revoke.dirty && Revoke.invalid) || (Revoke.pristine && submitted6)}" required/>
+                          <span class="error_span" *ngIf="(Revoke.dirty && Revoke.invalid) || (Revoke.pristine && submitted6)">
+                            <span *ngIf="Revoke.errors.required || (Revoke.pristine && submitted6)">Please enter revoke message</span>
+                            <span *ngIf="!(Revoke.errors.required || (Revoke.pristine && submitted6)) && Revoke.errors.pattern">
+                              Please enter valid revoke message
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Pending</label>
+                          <input type="text" class="form-control" pattern="[a-zA-Z ]{2,}" #Pending="ngModel" [(ngModel)]="InviEntity.Pending" name="Pending"
+                            [ngClass]="{red_border: (Pending.dirty && Pending.invalid) || (Pending.pristine && submitted6)}"
+                            required/>
+                          <span class="error_span" *ngIf="(Pending.dirty && Pending.invalid) || (Pending.pristine && submitted6)">
+                            <span *ngIf="Pending.errors.required || (Pending.pristine && submitted6)">Please enter pending message</span>
+                            <span *ngIf="!(Pending.errors.required || (Pending.pristine && submitted6)) && Pending.errors.pattern">
+                              Please enter valid pending message
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <button type="submit" class="back_btn">
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div> -->
+            <div class="white_shadow_box" *ngIf="globals.authData.RoleId==5 || globals.authData.RoleId==1 || globals.authData.RoleId==2">
+                <form class="form-validate" #onoffForm="ngForm" (ngSubmit)="addONOFF(onoffForm)">
+              <h1 class="no_margin settings_label">Open Registration On/Off for </h1>
+              <div class="col-md-6 col-sm-3">
+                <!-- <form class="form-validate" #onoffForm="ngForm" (ngSubmit)="addONOFF(onoffForm)"> -->
+                  <h2 class="no_margin">Learner</h2>
+                  <div class="course_forum_block">
+                    <!-- <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label><span class="required">*</span>Settings On/Off Learner</label>
+                                <input  type="text" class="form-control" #Settings="ngModel" [(ngModel)]="onoffEntity.Settings" name="Settings" pattern="[a-zA-Z ]{2,50}" [ngClass]="{red_border: (Settings.dirty && Settings.invalid) || (Settings.pristine && submitted3)}"  required/>    
+                                <span class="error_span" *ngIf="(Settings.dirty && Settings.invalid) || (Settings.pristine && submitted3)"> 
+                                  <span *ngIf="Settings.errors.required || (Settings.pristine && submitted3)">Please enter settings</span>
+                                  <span *ngIf="!(Settings.errors.required || (Settings.pristine && submitted3)) && Settings.errors.pattern">
+                                    Please enter valid settings
+                                </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                              
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group-active">
+                          <label>
+                            <span>*</span>Active?</label>
+                          <div class="activeyes_box">
+                            <input type="checkbox" name="IsActive" id="IsActive" #IsActive="ngModel" [(ngModel)]="onoffEntity.IsActive">
+                            <label for="IsActive"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <button type="submit" class="back_btn">
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="clearfix"></div>
+                <!-- </form> -->
+              </div>
+              <div class="col-md-6 col-sm-3">
+                <!-- <form class="form-validate" #insonoffForm="ngForm" (ngSubmit)="insaddONOFF(insonoffForm)"> -->
+                  <h2 class="no_margin">Instructor</h2>
+                  <div class="course_forum_block">
+                    <!-- <div class="row">
+                         
+                          <div class="col-md-6 col-sm-6">
+                              <div class="form-group">
+                                  <label><span class="required">*</span>Settings On/Off Instructor</label>
+                                  <input  type="text" class="form-control" #SettingsInstructor="ngModel" [(ngModel)]="instructoronoffEntity.SettingsInstructor" name="SettingsInstructor" pattern="[a-zA-Z ]{2,50}" [ngClass]="{red_border: (SettingsInstructor.dirty && SettingsInstructor.invalid) || (SettingsInstructor.pristine && submitted7)}"  required/>    
+                                  <span class="error_span" *ngIf="(SettingsInstructor.dirty && SettingsInstructor.invalid) || (SettingsInstructor.pristine && submitted7)"> 
+                                    <span *ngIf="SettingsInstructor.errors.required || (SettingsInstructor.pristine && submitted7)">Please enter settings instructor</span>
+                                    <span *ngIf="!(SettingsInstructor.errors.required || (SettingsInstructor.pristine && submitted7)) && SettingsInstructor.errors.pattern">
+                                      Please enter valid settings instructor
+                                  </span>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                          <div class="form-group">
+                             
+                          </div>
+                      </div> -->
+
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group-active">
+                          <label>
+                            <span>*</span>Active?</label>
+                          <div class="activeyes_box">
+                            <input type="checkbox" name="IsActive1" id="IsActive1" value="yes" #IsActive1="ngModel" [(ngModel)]="instructoronoffEntity.IsActive">
+                            <label for="IsActive1"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                <!-- </form> -->
+              </div>
+              <!-- <div class="col-md-3 col-sm-3">
+                <form class="form-validate" #onoffForm="ngForm" (ngSubmit)="addONOFF(onoffForm)">
+                  <h2 class="no_margin">Alerts</h2>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group-active">
+                          <label>
+                            <span>*</span>Active?</label>
+                          <div class="activeyes_box">
+                            <input type="checkbox" name="IsActive" id="IsActive3" value="yes" #IsActive="ngModel" [(ngModel)]="onoffEntity.IsActive">
+                            <label for="IsActive3"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </form>
+              </div> -->
+              <!-- <div class="col-md-3 col-sm-3">
+                <form class="form-validate" #insonoffForm="ngForm" (ngSubmit)="insaddONOFF(insonoffForm)">
+                  <h2 class="no_margin">Notifications</h2>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group-active">
+                          <label>
+                            <span>*</span>Active?</label>
+                          <div class="activeyes_box">
+                            <input type="checkbox" name="IsActive" id="IsActive4" value="yes" #IsActive="ngModel" [(ngModel)]="instructoronoffEntity.IsActive">
+                            <label for="IsActive4"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </form>
+              </div> -->
+              <div class="clearfix"></div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                  <button type="submit" class="back_btn">
+                    <span>Submit</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+            </div>
+            <div class="clearfix"></div>
+            <!-- <div class="white_shadow_box">
+              <div class="col-md-12 col-sm-12">
+                <form class="form-validate" #courseKeywordForm="ngForm" (ngSubmit)="addCourseKeyword(courseKeywordForm)">
+                  <h1 class="no_margin">Course Keyword Detail</h1>
+                  <div class="course_forum_block">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label>
+                            <span class="required">*</span>Course Keyword</label>
+                          <input type="text" class="form-control" #CourseKeyword="ngModel" [(ngModel)]="courseKeyEntity.CourseKeyword" name="CourseKeyword"
+                            [ngClass]="{red_border: (CourseKeyword.dirty && CourseKeyword.invalid) || (CourseKeyword.pristine && submitted2)}"
+                            required/>
+                          <span class="error_span" *ngIf="(CourseKeyword.dirty && CourseKeyword.invalid) || (CourseKeyword.pristine && submitted2)">
+                            <span *ngIf="CourseKeyword.errors.required || (CourseKeyword.pristine && submitted2)">Please enter course keyword</span>
+                            <span *ngIf="!(CourseKeyword.errors.required || (CourseKeyword.pristine && submitted2)) && CourseKeyword.errors.pattern">
+                              Please enter valid course keyword
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <button type="submit" class="back_btn">
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div> -->
+            <div class="white_shadow_box">
+                <div class="col-md-12 col-sm-12">
+                  <form class="form-validate" #reminderForm="ngForm" (ngSubmit)="UpdateReminder(reminderForm)">
+                    <h1 class="no_margin">Email Notifications Reminder</h1>
+                    <div class="course_forum_block">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                          <div class="form-group">
+                            <label>
+                              <span class="required">*</span>Course Strat Hours</label>
+                            <input type="text" class="form-control" pattern="[0-9]{1,2}" #CourseStartHours="ngModel"
+                              [(ngModel)]="reminderEntity.CourseStartHours" name="CourseStartHours" [ngClass]="{red_border: (CourseStartHours.dirty && CourseStartHours.invalid) || (CourseStartHours.pristine && submitted8)}"
+                              required/>
+                            <span class="error_span" *ngIf="(CourseStartHours.dirty && CourseStartHours.invalid) || (CourseStartHours.pristine && submitted8)">
+                              <span *ngIf="CourseStartHours.errors.required || (CourseStartHours.pristine && submitted8)">Please enter course strat hours</span>
+                              <span *ngIf="CourseStartHours.errors && CourseStartHours.errors.pattern">
+                                Please enter valid course strat hours
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                          <div class="form-group">
+                            <label>
+                              <span class="required">*</span>Course End Hours</label>
+                            <input type="text" class="form-control" pattern="[0-9]{1,2}" #CourseEndHours="ngModel" [(ngModel)]="reminderEntity.CourseEndHours" name="CourseEndHours"
+                              [ngClass]="{red_border: (CourseEndHours.dirty && CourseEndHours.invalid) || (CourseEndHours.pristine && submitted8)}"
+                              required/>
+                              <span class="error_span" *ngIf="(CourseEndHours.dirty && CourseEndHours.invalid) || (CourseEndHours.pristine && submitted8)">
+                                  <span *ngIf="CourseEndHours.errors.required || (CourseEndHours.pristine && submitted8)">Please enter course end hours</span>
+                                  <span *ngIf="CourseEndHours.errors && CourseEndHours.errors.pattern">
+                                    Please enter valid course end hours
+                                  </span>
+                                </span>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                              <label>
+                                <span class="required">*</span>Course Strat Days</label>
+                              <input type="text" class="form-control" pattern="[0-9]{1,2}"  #CourseStartDateReminder="ngModel"
+                                [(ngModel)]="reminderEntity.CourseStartDateReminder" name="CourseStartDateReminder" [ngClass]="{red_border: (CourseStartDateReminder.dirty && CourseStartDateReminder.invalid) || (CourseStartDateReminder.pristine && submitted8)}"
+                                required/>
+                              <span class="error_span" *ngIf="(CourseStartDateReminder.dirty && CourseStartDateReminder.invalid) || (CourseStartDateReminder.pristine && submitted8)">
+                                <span *ngIf="CourseStartDateReminder.errors.required || (CourseStartDateReminder.pristine && submitted8)">Please enter course strat days</span>
+                                <span *ngIf="CourseStartDateReminder.errors && CourseStartDateReminder.errors.pattern">
+                                  Please enter valid course strat days
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-sm-6">
+                              <div class="form-group">
+                                <label>
+                                  <span class="required">*</span>Instructor Before Days</label>
+                                <input type="text" class="form-control" pattern="[0-9]{1,2}" #InstructorBeforeDays="ngModel"
+                                  [(ngModel)]="reminderEntity.InstructorBeforeDays" name="InstructorBeforeDays" [ngClass]="{red_border: (InstructorBeforeDays.dirty && InstructorBeforeDays.invalid) || (InstructorBeforeDays.pristine && submitted8)}"
+                                  required/>
+                                <span class="error_span" *ngIf="(InstructorBeforeDays.dirty && InstructorBeforeDays.invalid) || (InstructorBeforeDays.pristine && submitted8)">
+                                  <span *ngIf="InstructorBeforeDays.errors.required || (InstructorBeforeDays.pristine && submitted8)">Please enter instructor before days</span>
+                                  <span *ngIf="InstructorBeforeDays.errors && InstructorBeforeDays.errors.pattern">
+                                    Please enter valid instructor before days
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 text-center">
+                          <button type="submit" class="back_btn">
+                            <span>Submit</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

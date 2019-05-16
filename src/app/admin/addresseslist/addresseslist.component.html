@@ -1,0 +1,72 @@
+<div class="title_heading">				
+	<div class="col-md-4 col-sm-4">
+		<div class="title_text">
+			<i class="fa fa-address-card" aria-hidden="true"></i>Addresses
+		</div>
+		</div>
+		<div class="col-md-8 col-sm-8">
+			<div class="welcome_message alert" role="alert">
+				<i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
+				 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="breadcrumb_block">
+			<div class="col-md-6 col-sm-6">
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+					<li class="breadcrumb-item"><a href="#">Address</a></li>
+					<li class="breadcrumb-item active" aria-current="page">List</li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<a routerLink="/Address" class="next_btn pull-right">Add a Address</a>	
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	<div class="clearfix"></div>
+</div>
+<div class="content_block">
+   <div class="col-md-12">
+	   <table id="list_tables" class="table table-hover" style="width:100%">
+           <thead>
+            <tr>
+				<th class="text-center sr_no_width">#</th>
+                <th class="address_width">Address1</th>
+                <th class="address_width">Address2</th>
+                <th class="city_width">City</th>
+                <th class="zipcode_width">ZipCode</th>
+                <th class="text-center active_width">Active?</th>
+                <th class="text-center action_width">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Addresses of AddressesList;let i = index">
+                <td class="text-center">{{i+1}}</td>
+                        <td>{{Addresses.Address1}}</td>
+                        <td>{{Addresses.Address2}}</td>
+                        <td>{{Addresses.City}}</td>
+                        <td>{{Addresses.ZipCode}}</td>
+                        <td class="text-center">
+                  <!-- <div class="activeyes_box">
+                              <input type="checkbox" name="active1" id="active1" checked value="Yes">
+                              <label for="active1"></label>
+                            </div> -->
+                            <!-- <div class="activeyes_box"  data-toggle="tooltip" data-placement="top" [attr.title]="Company.IsActive==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(Company,i)" [checked]="Company.IsActive==1" value="Yes" >
+                                    <label for="active{{i}}"></label>
+                            </div> -->
+                </td>
+                <td class="text-center">
+                    <!-- <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/company/edit/{{Company.CompanyId}}"><i class="fa fa-edit"></i></button>
+                    <button class="delete" data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deleteCompany(Company)"> <i class="fa fa-trash"></i> </button> -->
+                </td>
+            </tr>
+              </tbody>
+            </table>
+          
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

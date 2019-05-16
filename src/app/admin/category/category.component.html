@@ -1,0 +1,156 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-sitemap" aria-hidden="true"></i>{{header}} a Sub Category
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
+
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item" aria-current="page">Sub Category</li>
+        <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <a routerLink="/categorylist" class="next_btn pull-right">List of Sub Categories</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block">
+  <div class="col-md-12 col-sm-12">
+    <form class="form-validate" #CategoryForm="ngForm" (ngSubmit)="addCategory(CategoryForm)">
+      <div class="form-group-active pull-right">
+        <label>
+          <span class="required">*</span>Active ?</label>
+        <div class="activeyes_box">
+          <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="CategoryEntity.IsActive">
+          <label for="IsActive"></label>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <div class="form-group">
+            <label>
+              <span class="required">*</span>Parent Category</label>
+            <!-- <select   class="form-control" #ParentId="ngModel" 
+    [(ngModel)]="CategoryEntity.ParentId" name="ParentId" [ngClass]="{red_border: (ParentId.dirty && ParentId.invalid) || (ParentId.pristine && submitted)}">
+  <option value="">Select</option>
+<option class='option' *ngFor='let parent of ParentList' [value]="parent.CategoryId">{{parent.CategoryName}}</option> -->
+
+            <select #ParentId="ngModel" class="form-control" [(ngModel)]="CategoryEntity.ParentId" name="ParentId" required>
+              <option value="" ngSelected='CategoryEntity.ParentId==""'>Select</option>
+              <ng-container *ngFor="let parent of ParentList">
+                <option *ngIf="(CategoryEntity.CategoryId > 0 && parent.CategoryId!=CategoryEntity.CategoryId) || CategoryEntity.CategoryId == 0"
+                  value="{{parent.CategoryId}}" ngSelected="CategoryEntity.ParentId==parent.CategoryId">{{parent.CategoryName}}</option>
+              </ng-container>
+            </select>
+            <span class="error_span" *ngIf="(ParentId.dirty && ParentId.invalid) || (ParentId.pristine && submitted)">
+              <span *ngIf="ParentId.errors || (ParentId.pristine && required)">Please select parent category</span>
+            </span>
+
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="form-group">
+            <label>
+              <span class="required">*</span>Sub Category Name </label>
+            <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #CategoryName="ngModel" [(ngModel)]="CategoryEntity.CategoryName"
+              class="form-control" name="CategoryName" [ngClass]="{red_border: (CategoryName.dirty && CategoryName.invalid) || (CategoryName.pristine && submitted)}"
+              required/>
+            <span class="error_span" *ngIf="(CategoryName.dirty && CategoryName.invalid) || (CategoryName.pristine && submitted)">
+              <span *ngIf="CategoryName.errors.required || (CategoryName.pristine && submitted)">
+                Please enter sub category name
+              </span>
+              <span *ngIf="CategoryName.errors && CategoryName.errors.pattern">
+                Please enter valid sub category name
+              </span>
+            </span>
+
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="form-group">
+            <label>
+              <span class="required">*</span>Sub Category Code</label>
+            <input type="text" pattern="[a-zA-Z0-9.'/,-./;/:/(/&/)/./ ]{2,}" maxlength="100" #CategoryCode="ngModel" [(ngModel)]="CategoryEntity.CategoryCode"
+              class="form-control" name="CategoryCode" [ngClass]="{red_border: (CategoryCode.dirty && CategoryCode.invalid) || (CategoryCode.pristine && submitted)}"
+              required/>
+            <span class="error_span" *ngIf="(CategoryCode.dirty && CategoryCode.invalid) || (CategoryCode.pristine && submitted)">
+              <span *ngIf="CategoryCode.errors && CategoryCode.errors.required">
+                Please enter sub category code
+              </span>
+
+              <span *ngIf="CategoryCode.errors && CategoryCode.errors.pattern">
+                Please enter valid sub category code
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group">
+            <label>
+              <span class="required">*</span>Description</label>
+            <textarea maxlength="100" #Description="ngModel" [(ngModel)]="CategoryEntity.Description" class="form-control" name="Description"
+              [ngClass]="{red_border: (Description.dirty && Description.invalid) || (Description.pristine && submitted)}" required></textarea>
+            <span class="error_span" *ngIf="(Description.dirty && Description.invalid) || (Description.pristine && submitted)">
+              <span *ngIf="Description.errors && Description.errors.required">
+                Please enter sub category description
+              </span>
+
+              <span *ngIf="Description.errors && Description.errors.pattern">
+                Please enter valid sub category description
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <!-- <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="form-group-active">
+            <label>
+              <span class="required">*</span>Active ?</label>
+
+
+            <div class="activeyes_box">
+              <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="CategoryEntity.IsActive">
+              <label for="IsActive"></label>
+            </div>
+          </div>
+
+
+        </div> -->
+
+
+      </div>
+      <div class="text-center">
+        <button class="next_btn" type="submit">
+          <span>{{submitbutton}}</span>
+        </button>
+        <button *ngIf="CategoryEntity.CategoryId==0" class="back_btn" type="button" (click)="clearForm(CategoryForm)">
+          <span>Clear</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>

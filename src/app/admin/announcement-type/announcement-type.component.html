@@ -1,0 +1,86 @@
+<div class="title_heading">
+  <div class="col-md-4 col-sm-4">
+    <div class="title_text">
+      <i class="fa fa-list" aria-hidden="true"></i>announcementtype
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8">
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back, <strong>12th Dec 2018 12:45</strong> 
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="breadcrumb_block">
+    <div class="col-md-6 col-sm-6">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a href="#">Courses</a></li>
+        <li class="breadcrumb-item active" aria-current="page">AnnouncementType Form</li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <a routerLink="/announcementtypelist" class="next_btn pull-right">Back</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="content_block course_detail_block">
+  <div class="col-md-12 col-sm-12">
+    <div class="course_details">
+      <div class="mydivs">
+        <div *ngIf="!secondform">
+            <form #announcementtypeForm="ngForm" (ngSubmit)="addAnnouncementType(announcementtypeForm)">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              
+                <h1 class="no_margin">Announcement Type Detail</h1>
+                
+                <div class="course_forum_block">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                          <label><span>*</span>AnnouncementType Name</label>
+                        <input type="text" class="form-control" #TypeName="ngModel" [(ngModel)]="announcementtypeEntity.TypeName" name="TypeName" pattern="[a-zA-Z-'&\s]{2,}" maxlength="150" [ngClass]="{red_border: (TypeName.dirty && TypeName.invalid) || (TypeName.pristine && submitted)}" required/>  
+                                  <span class="error_span" *ngIf="(TypeName.dirty && TypeName.invalid) || (TypeName.pristine && submitted)"> 
+                                    <span *ngIf="TypeName.errors.required || (TypeName.pristine && submitted)">Please enter AnnouncementType Name</span>
+                                    <span *ngIf="TypeName.errors && TypeName.errors.pattern">Please enter valid AnnouncementType Name</span>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-group">
+                        <label><span>*</span>Color Code</label>
+                        <input type="text" id="demo" value="" class="form-control" #ColorCode="ngModel" [(ngModel)]="announcementtypeEntity.ColorCode" name="ColorCode" readonly [ngClass]="{red_border: (ColorCode.dirty && ColorCode.invalid) || (ColorCode.pristine && submitted)}" />  
+                                  <span class="error_span" *ngIf="color_IsStatus"> 
+                                    Please select Color Code
+                                </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <div class="form-group-active">
+                          <label><span>*</span>Active?</label>
+                          <div class="activeyes_box">
+                              <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="announcementtypeEntity.IsActive">
+                              <label for="IsActive"></label>
+                            </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12  text-center">
+              <button type="submit" [disabled]="btn_disable" class="next_btn">Submit</button>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
