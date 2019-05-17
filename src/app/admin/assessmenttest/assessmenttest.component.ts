@@ -15,7 +15,7 @@ export class AssessmenttestComponent implements OnInit {
   assessmentEntity;
   questionlist;
   ansEntity;
-  all;
+  Answered;
   UnAnswred;
   Reviewed;
   TotalQuestion;
@@ -48,31 +48,34 @@ export class AssessmenttestComponent implements OnInit {
 }; 
     this.Atim='';
 
-    setTimeout(function () {
-      // The slider being synced must be initialized first
-      $('.carousel').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        itemWidth: 50,
-        itemMargin:1,
-        asNavFor: '.slider'
-      });
+    // setTimeout(function () {
+    //   // The slider being synced must be initialized first
+    //   $('.carousel').flexslider({
+    //     animation: "slide",
+    //     controlNav: false,
+    //     animationLoop: false,
+    //     slideshow: false,
+    //     itemWidth: 50,
+    //     itemMargin:1,
+    //     asNavFor: '.slider'
+    //   });
 
-      $('.slider').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        sync: ".carousel"
-      });
-      $(".carousel .flex-direction-nav:last-child").css("display", "block");
-      $(".slider .flex-direction-nav:last-child").css("display", "block");
-      /*----- end assessment slider script -----*/
-    }, 500);
+    //   $('.slider').flexslider({
+    //     animation: "slide",
+    //     controlNav: false,
+    //     animationLoop: false,
+    //     slideshow: false,
+    //     sync: ".carousel"
+    //   });
+    //   $(".carousel .flex-direction-nav:last-child").css("display", "block");
+    //   $(".slider .flex-direction-nav:last-child").css("display", "block");
+    //   /*----- end assessment slider script -----*/
+    // }, 500);
 
-
+ 
+    this.UnAnswred = false;
+    this.Answered=false;
+    this.Reviewed = false;
     this.globals.isLoading = false;
     this.assessmentEntity = {};
     this.ansEntity = {};
@@ -150,6 +153,7 @@ export class AssessmenttestComponent implements OnInit {
             $(progress).css("width", addpro + "%");
             this.globals.isLoading = false;
       
+           
             setTimeout(function () {
               $('.modal').on('shown.bs.modal', function () {
                 $('.right_content_block').addClass('style_position');
@@ -157,12 +161,42 @@ export class AssessmenttestComponent implements OnInit {
               $('.modal').on('hidden.bs.modal', function () {
                 $('.right_content_block').removeClass('style_position');
               });
-              // $('#test0').addClass('completed');
-
-
-
-
-            }, 500);
+                    // $('#test0').addClass('completed');
+                    /*----- start assessment slider script -----*/
+              
+                    // The slider being synced must be initialized first
+                    $('.flexslider').removeData("flexslider");
+                    $('#slider').flexslider({
+                      destroy:true
+                    });
+                    $('#carousel').flexslider({
+                        destroy:true
+                    });
+                    $(".carousel .flex-direction-nav").css("display", "none");
+                    $(".slider .flex-direction-nav").css("display", "none");
+                   
+            
+                    $('.carousel').flexslider({
+                      animation: "slide",
+                      controlNav: false,
+                      animationLoop: false,
+                      slideshow: false,
+                      itemWidth: 50,
+                      itemMargin:1,
+                      asNavFor: '.slider'
+                    });
+              
+                    $('.slider').flexslider({
+                      animation: "slide",
+                      controlNav: false,
+                      animationLoop: false,
+                      slideshow: false,
+                      sync: ".carousel"
+                    });
+                    $(".carousel .flex-direction-nav:last-child").css("display", "block");
+                    $(".slider .flex-direction-nav:last-child").css("display", "block");
+                    /*----- end assessment slider script -----*/
+                  }, 500);
           }
         },
           (error) => {
@@ -185,6 +219,81 @@ export class AssessmenttestComponent implements OnInit {
   {
     alert('a');
   }
+  All() {
+    if($('input[name="Check1"]').is(':checked'))
+      {
+        this.assessmentEntity.Answered=true;
+        this.Answered = true;
+      }else
+      {
+        this.assessmentEntity.Answered=false;
+        this.Answered = false;
+      }
+      if($('input[name="Check2"]').is(':checked'))
+      {
+        this.assessmentEntity.UnAnswred=true;
+        this.UnAnswred = true;
+      }else
+      {
+        this.assessmentEntity.UnAnswred=false;
+        this.UnAnswred = false;
+      }
+      if($('input[name="Check3"]').is(':checked'))
+      {
+        this.assessmentEntity.Reviewed=true;
+        this.Reviewed = true;
+      }else
+      {
+        this.assessmentEntity.Reviewed=false;
+        this.Reviewed = false;
+      }
+
+   
+    setTimeout(function () {
+      $('.modal').on('shown.bs.modal', function () {
+        $('.right_content_block').addClass('style_position');
+      })
+      $('.modal').on('hidden.bs.modal', function () {
+        $('.right_content_block').removeClass('style_position');
+      });
+            // $('#test0').addClass('completed');
+            /*----- start assessment slider script -----*/
+      
+            // The slider being synced must be initialized first
+            $('.flexslider').removeData("flexslider");
+            $('#slider').flexslider({
+              destroy:true
+            });
+            $('#carousel').flexslider({
+                destroy:true
+            });
+            $(".carousel .flex-direction-nav").css("display", "none");
+            $(".slider .flex-direction-nav").css("display", "none");
+           
+    
+            $('.carousel').flexslider({
+              animation: "slide",
+              controlNav: false,
+              animationLoop: false,
+              slideshow: false,
+              itemWidth: 50,
+              itemMargin:1,
+              asNavFor: '.slider'
+            });
+      
+            $('.slider').flexslider({
+              animation: "slide",
+              controlNav: false,
+              animationLoop: false,
+              slideshow: false,
+              sync: ".carousel"
+            });
+            $(".carousel .flex-direction-nav:last-child").css("display", "block");
+            $(".slider .flex-direction-nav:last-child").css("display", "block");
+            /*----- end assessment slider script -----*/
+          }, 500);
+  }
+ 
   QuestionChange(OptionId, QuestionId, ResultId, j) {
 
   
@@ -261,115 +370,115 @@ export class AssessmenttestComponent implements OnInit {
           this.router.navigate(['/pagenotfound']);
         });
   }
-  All() {debugger
+  // All() {debugger
  
-    if($('input[name="Check1"]').is(':checked'))
-    {
-      this.assessmentEntity.all=true;
-    }else
-    {
-      this.assessmentEntity.all=false;
-    }
-    if($('input[name="Check2"]').is(':checked'))
-    {
-      this.assessmentEntity.UnAnswred=true;
-    }else
-    {
-      this.assessmentEntity.UnAnswred=false;
-    }
-    if($('input[name="Check3"]').is(':checked'))
-    {
-      this.assessmentEntity.Reviewed=true;
-    }else
-    {
-      this.assessmentEntity.Reviewed=false;
-    }
-    this.AssessmenttestService.getbyassessmentcheck(this.assessmentEntity)
-    .then((data) => {
-      debugger
-      // if(){
+  //   if($('input[name="Check1"]').is(':checked'))
+  //   {
+  //     this.assessmentEntity.all=true;
+  //   }else
+  //   {
+  //     this.assessmentEntity.all=false;
+  //   }
+  //   if($('input[name="Check2"]').is(':checked'))
+  //   {
+  //     this.assessmentEntity.UnAnswred=true;
+  //   }else
+  //   {
+  //     this.assessmentEntity.UnAnswred=false;
+  //   }
+  //   if($('input[name="Check3"]').is(':checked'))
+  //   {
+  //     this.assessmentEntity.Reviewed=true;
+  //   }else
+  //   {
+  //     this.assessmentEntity.Reviewed=false;
+  //   }
+  //   this.AssessmenttestService.getbyassessmentcheck(this.assessmentEntity)
+  //   .then((data) => {
+  //     debugger
+  //     // if(){
 
-      // } else {
+  //     // } else {
 
-      // }
-      this.questionlist = data;
-      if(this.questionlist==null)
-      {
-        $(".carousel .flex-direction-nav").css("display", "none");
-        $(".slider .flex-direction-nav").css("display", "none");
-      }
-      else
-      {
-      setTimeout(function () {
+  //     // }
+  //     this.questionlist = data;
+  //     if(this.questionlist==null)
+  //     {
+  //       $(".carousel .flex-direction-nav").css("display", "none");
+  //       $(".slider .flex-direction-nav").css("display", "none");
+  //     }
+  //     else
+  //     {
+  //     setTimeout(function () {
 
-        // $('#test0').addClass('completed');
-        /*----- start assessment slider script -----*/
+  //       // $('#test0').addClass('completed');
+  //       /*----- start assessment slider script -----*/
   
-        // The slider being synced must be initialized first
-        $('.flexslider').removeData("flexslider");
-        $('#slider').flexslider({
-          destroy:true
-        });
-        $('#carousel').flexslider({
-            destroy:true
-        });
-        $(".carousel .flex-direction-nav").css("display", "none");
-        $(".slider .flex-direction-nav").css("display", "none");
+  //       // The slider being synced must be initialized first
+  //       $('.flexslider').removeData("flexslider");
+  //       $('#slider').flexslider({
+  //         destroy:true
+  //       });
+  //       $('#carousel').flexslider({
+  //           destroy:true
+  //       });
+  //       $(".carousel .flex-direction-nav").css("display", "none");
+  //       $(".slider .flex-direction-nav").css("display", "none");
        
 
-        $('.carousel').flexslider({
-          animation: "slide",
-          controlNav: false,
-          animationLoop: false,
-          slideshow: false,
-          itemWidth: 50,
-          itemMargin:1,
-          asNavFor: '.slider'
-        });
+  //       $('.carousel').flexslider({
+  //         animation: "slide",
+  //         controlNav: false,
+  //         animationLoop: false,
+  //         slideshow: false,
+  //         itemWidth: 50,
+  //         itemMargin:1,
+  //         asNavFor: '.slider'
+  //       });
   
-        $('.slider').flexslider({
-          animation: "slide",
-          controlNav: false,
-          animationLoop: false,
-          slideshow: false,
-          sync: ".carousel"
-        });
-        $(".carousel .flex-direction-nav:last-child").css("display", "block");
-        $(".slider .flex-direction-nav:last-child").css("display", "block");
-        /*----- end assessment slider script -----*/
-      }, 500);
-    }
-    //   var k = 0;
-    //   this.TotalQuestion = this.questionlist[0].TotalAttendQuestion;
-    //  this.ResultId = this.questionlist[0].ResultId;
-    //   for (var i = 0; i < this.questionlist.length; i++) {
-    //     if (this.questionlist[i].OptionId > 0) {
+  //       $('.slider').flexslider({
+  //         animation: "slide",
+  //         controlNav: false,
+  //         animationLoop: false,
+  //         slideshow: false,
+  //         sync: ".carousel"
+  //       });
+  //       $(".carousel .flex-direction-nav:last-child").css("display", "block");
+  //       $(".slider .flex-direction-nav:last-child").css("display", "block");
+  //       /*----- end assessment slider script -----*/
+  //     }, 500);
+  //   }
+  //   //   var k = 0;
+  //   //   this.TotalQuestion = this.questionlist[0].TotalAttendQuestion;
+  //   //  this.ResultId = this.questionlist[0].ResultId;
+  //   //   for (var i = 0; i < this.questionlist.length; i++) {
+  //   //     if (this.questionlist[i].OptionId > 0) {
 
-    //       k++;
-    //     }
-    //   this.anstotalcount = k;
-    //     let addpro = (100 * k) / this.TotalQuestion;
-    //     this.percent = Math.round(addpro);
-    //     var progress = document.getElementById("progress");
-    //     $(progress).css("width", addpro + "%");
-    //     this.globals.isLoading = false;
-    //   }
-    },
-      (error) => {
-        //alert('error');
-        this.btn_disable = false;
-        this.submitted = false;
-        //this.router.navigate(['/pagenotfound']);
-      });
+  //   //       k++;
+  //   //     }
+  //   //   this.anstotalcount = k;
+  //   //     let addpro = (100 * k) / this.TotalQuestion;
+  //   //     this.percent = Math.round(addpro);
+  //   //     var progress = document.getElementById("progress");
+  //   //     $(progress).css("width", addpro + "%");
+  //   //     this.globals.isLoading = false;
+  //   //   }
+  //   },
+  //     (error) => {
+  //       //alert('error');
+  //       this.btn_disable = false;
+  //       this.submitted = false;
+  //       //this.router.navigate(['/pagenotfound']);
+  //     });
     
-  }
+  // }
   finalsubmit() {
     debugger
     $("#demo").html(localStorage.getItem("Userdata"));
     this.pushtime=localStorage.getItem("Userdata");
     this.AsTotaltime;
-    alert(this.pushtime);
-    alert(this.AsTotaltime);
+    // alert(this.pushtime);
+    // alert(this.AsTotaltime);
     this.AssessmenttestService.finalsubmit(this.ResultId, this.globals.authData.UserId,this.AsTotaltime,this.pushtime)
       .then((data) => {
         $('#assessment_preview_modal').modal('hide');
