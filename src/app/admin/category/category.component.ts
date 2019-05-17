@@ -112,10 +112,10 @@ export class CategoryComponent implements OnInit {
       myInput();
     }
     setTimeout(function(){
-      $(".categories").addClass("active");
-      $(".categories > div").addClass("in");
-      $(".categories > a").removeClass("collapsed");
-      $(".categories > a").attr("aria-expanded","true");
+		$(".subcategories").addClass("active");
+        $(".subcategories > div").addClass("in");
+        $(".subcategories > a").removeClass("collapsed");
+      	$(".subcategories > a").attr("aria-expanded","true");
     },300);
 
     }

@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
           $('.modal').on('hidden.bs.modal', function () {
             $(".modal.fade.show").removeClass("in");
             $(".modal-backdrop.fade.show").removeClass("in");
-          })
+          });
         }, 100);
 
         var current_progress = 0;

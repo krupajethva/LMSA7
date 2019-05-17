@@ -1163,7 +1163,7 @@
                                     <span>*</span>Enter your badge letters</label>
                                   <input type="text" pattern="[A-Za-z.'-.]{2,7}" maxlength="100" #badgeletter="ngModel" [(ngModel)]="BadgesEntity.badgeletter"
                                     class="form-control" name="badgeletter" [ngClass]="{red_border: (badgeletter.dirty && badgeletter.invalid) || (badgeletter.pristine && submitted)}"
-                                    required />
+                                     />
                                   <span class="error_span" *ngIf="(badgeletter.dirty && badgeletter.invalid) || (badgeletter.pristine && submitted)">
                                     <span *ngIf="badgeletter.errors && badgeletter.errors.required">
                                       Please enter badge letters

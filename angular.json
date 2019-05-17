@@ -27,7 +27,6 @@
             ],
             "scripts": [
               "src/assets/js/jquery-1.11.3.min.js",
-              "src/assets/js/bootstrap.bundle.min.js",
               "src/assets/js/bootstrap.min.js", 
               "src/assets/js/swiper.min.js",       
               "src/assets/js/jquery.flexslider-min.js",

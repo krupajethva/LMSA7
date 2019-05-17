@@ -36,15 +36,15 @@ export class EmailtemplateComponent implements OnInit {
 		this.emailEntity = {};
 		//CKEDITOR.replace('EmailBody');
 		CKEDITOR.replace('EmailBody', {
-			height: '300',
+			height: '200',
 			resize_enabled: 'false',
-			resize_maxHeight: '300',
+			resize_maxHeight: '200',
 			resize_maxWidth: '948',
-			resize_minHeight: '300',
+			resize_minHeight: '200',
 			resize_minWidth: '948',
 			extraAllowedContent: 'span;ul;li;table;td;style;*[id];img[*];*(*);*{*}',
-			disallowedContent: 'img{width,height};',
-			enterMode: Number(2)
+			disallowedContent: 'img{width,height};'
+			//extraAllowedContent: 'style;*[id,rel](*){*}
 		});
 		let id = this.route.snapshot.paramMap.get('id');
 		this.EmailtemplateService.getDefaultList()
