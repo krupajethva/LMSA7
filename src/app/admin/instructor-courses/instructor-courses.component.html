@@ -211,7 +211,8 @@
                                   <a (click)="draft(course.CourseId,i)">Edit</a>
                                 </div>
                                 <div class="col-md-6 publishsession">
-                                  <a (click)="Publish(SessionList.CourseSessionId,k)">Publish</a>
+                                  <button class="publishbtn" [disabled]="SessionList.IsActive==0" (click)="Publish(SessionList.CourseSessionId,k)">
+                                    Publish</button>
                                 </div>
                               </li>
                           </ul>

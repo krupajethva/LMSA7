@@ -63,6 +63,7 @@ export class CourseComponent implements OnInit {
 	Bimageid;
 	imageshow;
 	DefalutBadges;
+	urlid;
 	constructor( public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
 		private CourseService: CourseService, private CourseSchedulerService: CourseSchedulerService) { }
 	//selectedCharacters: Array<string> = ['376'];
@@ -349,7 +350,7 @@ export class CourseComponent implements OnInit {
 				
 		let id = this.route.snapshot.paramMap.get('id');
 		let name = this.route.snapshot.paramMap.get('name');
-
+        this.urlid=id;
 		if (id) {
 			if (name) {
 				this.firstform = false;
@@ -756,6 +757,7 @@ export class CourseComponent implements OnInit {
 								for (var i = 0; i < this.array_data.length; i++) {
 									this.stateList[i] = this.stateList_temp;
 									this.schedularList[i].checkvalid = true;
+									if (this.schedularList[i].IsActive == 0) { this.schedularList[i].IsActive = 0; } else { this.schedularList[i].IsActive = '1'; }
 									if (this.schedularList[i].monday =="0") { this.schedularList[i].monday = 0; } else { this.schedularList[i].monday = '1'; }
 									if( this.schedularList[i].tuesday== "0") { this.schedularList[i].tuesday = 0; } else { this.schedularList[i].tuesday = '1'; }
 									if (this.schedularList[i].wednesday == "0") { this.schedularList[i].wednesday = 0; } else { this.schedularList[i].wednesday = '1'; }
@@ -818,7 +820,7 @@ export class CourseComponent implements OnInit {
 								}, 100);
 							} else {
 								var item = {
-									'SessionName': '', 'StartTime': '', 'EndTime': '',
+									'IsActive':1,'SessionName': '', 'StartTime': '', 'EndTime': '',
 									'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '', 'CountryId': '', 'StateId': '',
 									'CourseCloseDate': '', 'Showstatus': '0', 'TotalSeats': '', 'Check': false, 'CourseSessionId': '0'
 								};
@@ -837,7 +839,9 @@ export class CourseComponent implements OnInit {
 								this.schedularList[0].EDateValid = false;
 								this.schedularList[0].CourseCloseDateValid = false;
 								this.schedularList[0].checkvalid = false;
-
+								this.schedularList[0].SessionStatus=0;
+								this.schedularList[0].PublishStatus=0;
+								this.schedularList[index].CourseSessionId=0;
 
 								this.globals.isLoading = false;
 
@@ -1794,7 +1798,7 @@ export class CourseComponent implements OnInit {
 		// 'MonthDay':'','EveryMonth':'','WeekDay':'','WhichWeekDay':'','EveryMonth2':'','EveryYears':'','YearlyIsStatus':'','Month':'',
 		// 'YearlyWeekDay':'','YearlyWhichWeekDay':'','YearlyMonth':'','StartDate':'','EndIsStatus':'','NoOfOccurences':'','EndDate':'','Documenticon': [], 'MulVideoicon': [] };
 		var item = {
-			'SessionName': '', 'StartTime': '', 'EndTime': '',
+			'IsActive':1,'SessionName': '', 'StartTime': '', 'EndTime': '',
 			'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '', 'CountryId': '', 'StateId': '',
 			'CourseCloseDate': '', 'Showstatus': '0', 'TotalSeats': '', 'Check': false, 'CourseSessionId': '0'
 		};
@@ -1802,6 +1806,9 @@ export class CourseComponent implements OnInit {
 		var index = this.schedularList.length - 1;
 		this.schedularList[index].checkvalid = false;
 		this.schedularList[index].CourseSessionId = 0;
+		this.schedularList[index].SessionStatus=0;
+		this.schedularList[index].PublishStatus=0;
+		this.schedularList[index].CourseSessionId=0;
 		setTimeout(function () {
 
 			$('#daily_recurrence' + index).removeClass('hide');
@@ -1895,6 +1902,7 @@ export class CourseComponent implements OnInit {
 		debugger
 		for (var j = 0; j < this.schedularList.length; j++) {
 			var Wday=0;
+			if (this.schedularList[j].IsActive==true) { this.schedularList[j].IsActive = 1; } else { this.schedularList[j].IsActive = 0; }
 		if (this.schedularList[j].sunday == true) { this.schedularList[j].sunday = 1; } else { this.schedularList[j].sunday = 0; }
 		if (this.schedularList[j].monday == true) { this.schedularList[j].monday = 1; } else { this.schedularList[j].monday = 0; }
 		if (this.schedularList[j].tuesday == true) { this.schedularList[j].tuesday = 1; } else { this.schedularList[j].tuesday = 0; }
@@ -2088,8 +2096,9 @@ export class CourseComponent implements OnInit {
 		Entity.StartDate = $("#StartDate" + i).val();
 		Entity.EndDate = $("#EndDate" + i).val();
 		Entity.CourseCloseDate = $("#CourseCloseDate" + i).val();
-		if (Entity.Sunday == true) { Entity.Sunday = 1; } else { Entity.Sunday = 0; }
-		if (Entity.Monday == true) { Entity.Monday = 1; } else { Entity.Monday = 0; }
+	
+		if (Entity.sunday == true) { Entity.sunday = 1; } else { Entity.sunday = 0; }
+		if (Entity.monday == true) { Entity.monday = 1; } else { Entity.monday = 0; }
 		if (Entity.tuesday == true) { Entity.tuesday = 1; } else { Entity.tuesday = 0; }
 		if (Entity.wednesday == true) { Entity.wednesday = 1; } else { Entity.wednesday = 0; }
 		if (Entity.thursday == true) { Entity.thursday = 1; } else { Entity.thursday = 0; }

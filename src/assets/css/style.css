@@ -381,8 +381,10 @@ table .text-right{text-align: right;}
 .list_li li{padding:0px 0 7px 15px; background: url(../images/dot.png) left 5px no-repeat; background-size: 10px; color: #2e2d31; font-size: 13px;}
 .width_li30 li{width: 33%; float: left;}
 .course_forum_block .form-group-active{margin: 10px 0px 15px 0px;}
+.course_forum_block .course-active{margin:0px;padding-right: 15px;}
 .activeyes_box {display: inline-block;margin: -5px 0px 0 5px;vertical-align: middle;}
 .activeyes_box label{ background:#dfe2ea; transform: none!important; font-weight:normal; height: 20px; width: 45px; display:inline-block; vertical-align:top; margin:0; cursor:pointer; color:#444; position: relative; top: 0px; border-radius: 20px;}
+.activeyes_box.dis_btn label{cursor: not-allowed;}
 .activeyes_box label:after{    text-align: center;
   font-size: 11px;color: #fff;content: "N"; width:15px; height: 15px; border-radius: 100%; left: 3px; top: 2px; background: #6b6a6a; position: absolute; transition:left 0.3s linear 0s; }
 .activeyes_box input[type="checkbox"]:checked + label:after{content: "Y";left :60%; background: var(--theme-color); transition:left 0.3s linear 0s;    text-align: center;
@@ -586,7 +588,8 @@ footer.register_footer a:hover{color:var(--theme-color); }
 .news-blog li.enroll_course_tag.draftpublishtag .draftsession,.news-blog li.enroll_course_tag.draftpublishtag .attendancesession{padding: 5px 0px;}
 .news-blog li.enroll_course_tag.draftpublishtag .publishsession{background: #60b8d1!important;
   padding: 5px 0px;}
-
+  .news-blog li.enroll_course_tag.draftpublishtag .publishbtn{border: 0;
+  color: #fff;background: transparent!important;}
 .news-blog li.enroll_course_tag .attendancesession_label{padding: 5px 0px;}
 .news-blog li.enroll_course_tag .attendancesession_label strong{    padding-left: 15px;}
 .news-blog li.enroll_course_tag  .attendancesession {background: var(--theme-color);

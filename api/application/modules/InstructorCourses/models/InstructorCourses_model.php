@@ -86,7 +86,7 @@ class InstructorCourses_model extends CI_Model
 		// $this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.CourseImage,cp.StartDate,cp.EndDate,cp.IsActive,cp.PublishIsStatus');
 		// $this->db->where('cp.InstructorId',$User_Id);
 		// $result = $this->db->get('tblcourse cp');
-		$result = $this->db->query('select cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
+		$result = $this->db->query('select cs.IsActive,cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
         FROM tblcourseinstructor AS csi 
 		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
         LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
@@ -204,6 +204,62 @@ class InstructorCourses_model extends CI_Model
 		return false;
 		}	
 	}
+	function updateinstdata($CourseSessionId = NULL)
+	{
+	try{
+		if($CourseSessionId)
+		{
+		$Course_data = array(
+			'PublishStatus' =>1
+		);
+		
+		$this->db->where('CourseSessionId',$CourseSessionId);
+		$result = $this->db->update('tblcoursesession',$Course_data);
+		// $this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.CourseImage,cp.StartDate,cp.EndDate,cp.IsActive,cp.PublishStatus');
+		// $this->db->where('cp.CourseId',$CourseId);
+		// $result = $this->db->get('tblcourse cp');
+	
+		$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) { 
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+	//	$res=array();
+		if($result)
+		{	$data =$this->db->query('SELECT UserId FROM tblcoursesession AS cs 
+			LEFT JOIN tblcourseinstructor AS cin ON
+			 cin.CourseSessionId=cs.CourseSessionId WHERE cs.CourseSessionId='.$CourseSessionId);
+			 	$ress=array();
+			 	 foreach($data->result() as $row)
+				  {
+					//print_r($ress);
+				$id=$row->UserId;
+				array_push($ress,$id);
+					// foreach($data1->result() as $row1){
+					// 	if($row1->FollowerUserId!='')
+					// 	{
+					// 	$FollowerUserId = explode(",",$row1->FollowerUserId);
+					// 	foreach($FollowerUserId as $id){
+					// 		array_push($ress,$id);
+					// 	}
+					//   }
+						
+					// }
+					
+				  }
+				 return array_unique($ress);
+		
+		}else
+		{
+			return false;
+		}
+		}
+		
+		}catch(Exception $e){
+		trigger_error($e->getMessage(), E_USER_ERROR);
+		return false;
+		}	
+	}
 	// function updatePublish($data)
 	// {
 	// try{
@@ -234,7 +290,7 @@ class InstructorCourses_model extends CI_Model
 	function getSearchCourseList($data = NULL)
 	{
 	try{
-		$this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath');
+		$this->db->select('cs.IsActive,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath');
 		$this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
 		$this->db->join('tblcourse cp', 'cp.CourseId = cs.CourseId', 'left');
 		$this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
@@ -289,7 +345,7 @@ class InstructorCourses_model extends CI_Model
 		// $this->db->where('csi.UserId',$data['UserId']); 
 		// $result = $this->db->get('tblcourseuserregister csi');
 
-		$result = $this->db->query('select csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
+		$result = $this->db->query('select csi.IsActive,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
 			GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId='.$User_Id.' AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
 			 (SELECT GROUP_CONCAT(u.FirstName)
 						  FROM tbluser u 

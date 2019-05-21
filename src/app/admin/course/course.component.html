@@ -782,7 +782,15 @@
                                 <div id="collapseOne1{{i}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'headingOne12'+i">
                                   <div class="panel-body">
                                     <div class="row">
-
+                                        <div class="course-active pull-right">
+                                            <label>
+                                              <span>*</span>Active?</label>
+                                            <div class="activeyes_box" [ngClass]="{dis_btn: schedularList[i].SessionStatus>0}" 
+                                             dis_btn>
+                                          <input type="checkbox" name="IsActive{{i}}"  [disabled]="schedularList[i].SessionStatus>0" id="IsActive{{i}}" value="yes"  #IsActive="ngModel" [(ngModel)]="schedularList[i].IsActive">
+                                              <label for="IsActive{{i}}"></label>
+                                            </div>
+                                          </div>
                                       <div class="col-md-12 col-sm-12">
                                         <div class="Appointment_section">
                                           <div class="form-group focused label_head">
@@ -1094,12 +1102,12 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <button type="button" (click)="Publish(CourseFormSession,form,i)" *ngIf="schedularList[i].checkvalid && schedularList[i].PublishStatus!='0'"
+                                        <button type="button" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid"
                                           class="next_btn pull-right">
                                           <span>Publish</span>
                                         </button>
-                                        <button type="button" *ngIf="schedularList[i].PublishStatus=='0'" (click)="addsinglesession(CourseFormSession,form,i)" class="back_btn pull-right">
-                                          <span>Save as draft</span>
+                                        <button type="button" *ngIf="schedularList[i].CourseSessionId==0" (click)="addsinglesession(CourseFormSession,form,i)" class="back_btn pull-right">
+                                          <span>Save as draft{{schedularList[i].CourseSessionId}}</span>
                                         </button>
                                       </div>
                                       <div class="clearfix"></div>

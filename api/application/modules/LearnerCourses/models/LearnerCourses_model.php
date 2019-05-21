@@ -38,7 +38,7 @@ class LearnerCourses_model extends CI_Model
 		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
         LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
         LEFT JOIN  tblresources AS rs ON rs.ResourcesId = cp.CourseImageId
-        WHERE csi.UserId='.$User_Id.' GROUP BY cp.CourseId');
+        WHERE csi.UserId='.$User_Id.' AND cs.PublishStatus=1 AND cs.IsActive=1  GROUP BY cp.CourseId');
 
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
@@ -124,7 +124,7 @@ class LearnerCourses_model extends CI_Model
 					FROM tblcoursesession AS csi 
 					LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
 					LEFT JOIN  tblcourseuserregister AS dd ON dd.CourseSessionId = csi.CourseSessionId
-					WHERE csi.CourseId='.$Course_id.' AND dd.UserId='.$User_Id.' AND csi.PublishStatus=1 GROUP BY csi.CourseSessionId');
+					WHERE csi.CourseId='.$Course_id.' AND dd.UserId='.$User_Id.' AND csi.PublishStatus=1 AND cs.IsActive=1  GROUP BY csi.CourseSessionId');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -148,9 +148,9 @@ class LearnerCourses_model extends CI_Model
 		$this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
 		$this->db->join('tblcourse cp', 'cp.CourseId = cs.CourseId', 'left');
 		$this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
-		//$this->db->where('cp.CategoryId',$data['Cat']); 
+		$this->db->where('cs.IsActive',1); 
+		$this->db->where('cs.PublishStatus',1);
 	
-		//$this->db->like('cp.CourseFullName', $data['Name']); 
 		$this->db->where('csi.UserId',$data['user']);
 		if($data['Cat']!=0)
 		{
@@ -161,8 +161,8 @@ class LearnerCourses_model extends CI_Model
 		{
 			$this->db->like('cp.CourseFullName', $data['Name']);
 		}
-		
-	$this->db->group_by('cp.CourseId');
+	
+		$this->db->group_by('cp.CourseId');
 		$result = $this->db->get('tblcourseuserregister csi');
 	
 

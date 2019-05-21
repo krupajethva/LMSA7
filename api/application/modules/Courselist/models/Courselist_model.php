@@ -13,7 +13,7 @@ class Courselist_model extends CI_Model
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
-				}
+				}	
 		foreach($result->result() as $row) {
 			$res['Name'] = $row->Name;
 			$res['ProfileImage'] = $row->ProfileImage;
@@ -93,7 +93,7 @@ class Courselist_model extends CI_Model
 		from tblmstcategory as cat
    LEFT JOIN tblcourse as cp on cp.CategoryId=cat.CategoryId
    LEFT JOIN tblcoursesession as cs  on cs.CourseId=cp.CourseId
-   where cat.ParentId!=0 AND cs.PublishStatus!=0 GROUP BY cat.CategoryId');
+   where cat.ParentId!=0 AND cs.PublishStatus!=0 AND cs.IsActive=1 GROUP BY cat.CategoryId');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -156,7 +156,7 @@ class Courselist_model extends CI_Model
 		$result = $this->db->query('select c.UserId,user.FirstName,user.LastName,user.ProfileImage,COUNT(DISTINCT cp.CourseId) as totalCourse FROM
         tblcourseinstructor as c LEFT JOIN tblcoursesession as cs  on cs.CourseSessionId=c.CourseSessionId
         LEFT JOIN tbluser as user on c.UserId=user.UserId
-        LEFT JOIN tblcourse as cp on cp.CourseId=cs.CourseId WHERE cs.PublishStatus!=0
+        LEFT JOIN tblcourse as cp on cp.CourseId=cs.CourseId WHERE cs.PublishStatus!=0 AND cs.IsActive=1
         GROUP BY c.UserId ORDER BY COUNT(DISTINCT cp.CourseId) DESC LIMIT 5');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
@@ -183,7 +183,7 @@ class Courselist_model extends CI_Model
 				LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
         LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
         LEFT JOIN  tblresources AS rs ON rs.ResourcesId = cp.CourseImageId
-        WHERE csi.UserId='.$User_Id.' AND  cs.PublishStatus!=0 GROUP BY cp.CourseId');
+        WHERE csi.UserId='.$User_Id.' AND  cs.PublishStatus!=0 AND cs.IsActive=1 GROUP BY cp.CourseId');
 	
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
@@ -287,7 +287,7 @@ class Courselist_model extends CI_Model
 						  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
 					FROM tblcoursesession AS csi 
 					LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
-					WHERE csi.CourseId='.$CourseId.' AND csi.PublishStatus=1 GROUP BY csi.CourseSessionId');
+					WHERE csi.CourseId='.$CourseId.' AND csi.PublishStatus=1 AND csi.IsActive=1 GROUP BY csi.CourseSessionId');
 		
 		// }
 	
@@ -634,7 +634,7 @@ class Courselist_model extends CI_Model
 			$aKeyword = explode(",", $Course[0]->keyword);
 			
 
-     	    $query ="SELECT c.CourseFullName,c.CourseId,c.Keyword,(SELECT COUNT(CourseSessionId) FROM tblcoursesession where CourseId=c.CourseId && PublishStatus=1) as totalSession,(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId =c.CourseId) as ReviewAverage, (IF"; 
+     	    $query ="SELECT c.CourseFullName,c.CourseId,c.Keyword,(SELECT COUNT(CourseSessionId) FROM tblcoursesession where CourseId=c.CourseId && PublishStatus=1 && IsActive=1) as totalSession,(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId =c.CourseId) as ReviewAverage, (IF"; 
 			 for($i = 0; $i < count($aKeyword); $i++) 
 			 {
 				$query .= "(c.Keyword like '%" . $aKeyword[$i] . "%')";
@@ -650,7 +650,7 @@ class Courselist_model extends CI_Model
 			  }
 
 
-			  $query ="SELECT c.CourseFullName,c.CourseId,c.Keyword,(SELECT COUNT(CourseSessionId) FROM tblcoursesession where CourseId=c.CourseId && PublishStatus=1) as totalSession,(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId =c.CourseId) as ReviewAverage, CONCAT("; 
+			  $query ="SELECT c.CourseFullName,c.CourseId,c.Keyword,(SELECT COUNT(CourseSessionId) FROM tblcoursesession where CourseId=c.CourseId && PublishStatus=1 && IsActive=1) as totalSession,(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId =c.CourseId) as ReviewAverage, CONCAT("; 
 			  $total_count = count($aKeyword);
 			  for($i = 0; $i < count($aKeyword); $i++) 
 			  {
@@ -667,7 +667,7 @@ class Courselist_model extends CI_Model
 			   }
 
 
-				  $query .= ") AND (SELECT COUNT(CourseSessionId) FROM tblcoursesession where CourseId=c.CourseId && PublishStatus=1)>0 ORDER BY LENGTH(match_keyword) DESC limit 5";
+				  $query .= ") AND (SELECT COUNT(CourseSessionId) FROM tblcoursesession where CourseId=c.CourseId && PublishStatus=1 && IsActive=1)>0 ORDER BY LENGTH(match_keyword) DESC limit 5";
 			
 			// echo $query;
 			// 	echo "</br>";
