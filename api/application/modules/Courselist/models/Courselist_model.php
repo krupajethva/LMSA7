@@ -501,7 +501,7 @@ class Courselist_model extends CI_Model
 			
 				);
 				$insert = $this->db->insert('tblcourseuserregister',$Cart_data);
-
+				$last_id = $this->db->insert_id();
 				$this->db->select('cat.RemainingSeats');
 				$this->db->where('CourseSessionId',$post_addEnroll['CourseSessionId']);
 				$result = $this->db->get('tblcoursesession as cat');
@@ -525,7 +525,7 @@ class Courselist_model extends CI_Model
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}	
-				if($insert)
+				if($ress)
 				{	
 					$log_data = array(
 						'UserId' => trim($post_addEnroll['UserId']),
@@ -534,7 +534,7 @@ class Courselist_model extends CI_Model
 		
 					);
 					$log = $this->db->insert('tblactivitylog',$log_data);
-					return true;
+					return $last_id;
 				}
 				else
 				{
