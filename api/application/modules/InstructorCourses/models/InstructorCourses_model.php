@@ -573,16 +573,34 @@ class InstructorCourses_model extends CI_Model
 	}
 	public function getlist_value($timestamp = NULL,$date = NULL)
 	{	
-		$Course_data = array(
-		'SessionStatus' =>2
-	);
 	
+	    $this->db->select('ca.CourseSessionId,ca.SessionStatus');
 		$this->db->where('TIME(EndTime) <',$timestamp);
 		$this->db->where('DATE(EndDate)',$date);
-		$result = $this->db->update('tblcoursesession',$Course_data);
-		if($result)
+		$result = $this->db->get('tblcoursesession ca');
+		$myArray = json_decode(json_encode($result->result()), true);
+		$res=array();
+
+		foreach($myArray as $row)
+		{ 
+			   if($row['SessionStatus']==1)
+			   {
+				$Course_data = array(
+					'SessionStatus' =>2
+				);
+				// $this->db->where('TIME(EndTime) =',$timestamp);
+				 $this->db->where('CourseSessionId',$row['CourseSessionId']);
+				$result1 = $this->db->update('tblcoursesession',$Course_data);
+			
+					array_push($res,$row['CourseSessionId']);
+			   }
+		}
+		
+		
+	
+		if($result1)
 		{
-			return true;
+			return $res;
 		}else
 		{
 			return false;
@@ -590,11 +608,11 @@ class InstructorCourses_model extends CI_Model
 	}
 	public function getlist_emailvalue($lastemail = NULL,$date = NULL)
 	{	
-		$this->db->select('user.UserId,user.FirstName,user.EmailAddress,ca.CourseSessionId,ca.StartTime,ca.EndTime');
+		$this->db->select('ca.CourseSessionId');
 		$this->db->where('TIME(EndTime) =',$lastemail);
 		$this->db->where('DATE(EndDate)',$date);
-		$this->db->join('tblcourseinstructor ins', 'ins.CourseSessionId = ca.CourseSessionId', 'left');
-		$this->db->join('tbluser user', 'user.UserId = ins.UserId', 'left');
+		//$this->db->join('tblcourseinstructor ins', 'ins.CourseSessionId = ca.CourseSessionId', 'left');
+		//$this->db->join('tbluser user', 'user.UserId = ins.UserId', 'left');
 		$result = $this->db->get('tblcoursesession ca');
 		$res=array();
 		if($result->result())
