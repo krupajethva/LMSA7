@@ -73,9 +73,14 @@ class CourseScheduler extends CI_Controller
 					{
 
 						$resultTo=$this->db->query('SELECT us.UserId,us.FirstName,us.LastName,us.EmailAddress,Creg.UserId,cs.CourseFullName,
-						csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,csi.StartTime,csi.EndTime 
+						csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,csi.StartTime,csi.EndTime, 
+						GROUP_CONCAT(coin.UserId) as instUserId,
+							 (SELECT GROUP_CONCAT(u.FirstName)
+										  FROM tbluser u 
+										  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(coin.UserId))) as instName 
 						FROM tblcourseuserregister as Creg INNER JOIN tbluser us ON find_in_set(us.UserId, Creg.UserId)>0
 						LEFT Join tblcoursesession as csi ON csi.CourseSessionId=Creg.CourseSessionId
+						LEFT JOIN  tblcourseinstructor AS coin ON coin.CourseSessionId = csi.CourseSessionId
 						LEFT Join tblcourse as cs ON cs.CourseId=csi.CourseId
 						 WHERE
 						 find_in_set(us.UserId, Creg.UserId) and Creg.CourseSessionId='.$post_Session["CourseSessionId"].' GROUP BY us.EmailAddress');
@@ -90,7 +95,7 @@ class CourseScheduler extends CI_Controller
 						$CourseFullName=$toEmail->CourseFullName;
 						$StartDate=$toEmail->StartDate;
 						$StartTime=$toEmail->StartTimeChange;
-						$InstructorName=$toEmail->FirstName;
+						$InstructorName=$toEmail->instName;
 					 // print_r($EmailAddress=$users['EmailAddress']);
 					 $EmailToken = 'Course Republished Enrolees';
 						$this->db->select('Value');
@@ -198,9 +203,14 @@ class CourseScheduler extends CI_Controller
 					}
 				}
 				$resultinst=$this->db->query('SELECT us.UserId,us.FirstName,us.LastName,us.EmailAddress,Creg.UserId,cs.CourseFullName,
-				csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,csi.StartTime,csi.EndTime 
+				csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,csi.StartTime,csi.EndTime, 
+				GROUP_CONCAT(coin.UserId) as instUserId,
+							 (SELECT GROUP_CONCAT(u.FirstName)
+										  FROM tbluser u 
+										  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(coin.UserId))) as instName 
 				FROM tblcourseuserregister as Creg INNER JOIN tbluser us ON find_in_set(us.UserId, Creg.UserId)>0
 				LEFT Join tblcoursesession as csi ON csi.CourseSessionId=Creg.CourseSessionId
+				LEFT JOIN  tblcourseinstructor AS coin ON coin.CourseSessionId = csi.CourseSessionId
 				LEFT Join tblcourse as cs ON cs.CourseId=csi.CourseId
 				 WHERE
 				 find_in_set(us.UserId, Creg.UserId) and Creg.CourseSessionId='.$post_Session["CourseSessionId"].' GROUP BY us.EmailAddress');
@@ -215,7 +225,7 @@ class CourseScheduler extends CI_Controller
 				 $CourseFullName=$toEmail->CourseFullName;
 				 $StartDate=$toEmail->StartDate;
 				 $StartTime=$toEmail->StartTimeChange;
-				 $InstructorName=$toEmail->FirstName;
+				 $InstructorName=$toEmail->instName;
 			 $EmailToken = 'Course Republished Instructor';
 				$this->db->select('Value');
 				$this->db->where('Key','EmailFrom');
