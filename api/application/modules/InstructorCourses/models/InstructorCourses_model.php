@@ -621,4 +621,39 @@ class InstructorCourses_model extends CI_Model
 		}
 		return $res;
 	}
+	public function isActiveChange($post_data) {
+		try{
+		if($post_data) {
+			if(trim($post_data['IsActive'])==1){
+				$IsActive = true;
+			} else {
+				$IsActive = false;
+			}
+			$data = array(
+				'IsActive' => $IsActive,
+				'UpdatedBy' => trim($post_data['UpdatedBy']),
+				'UpdatedOn' => date('y-m-d H:i:s'),
+			);			
+			$this->db->where('CourseSessionId',trim($post_data['CourseSessionId']));
+			$res = $this->db->update('tblcoursesession',$data);
+			$db_error = $this->db->error();
+			if (!empty($db_error) && !empty($db_error['code'])) { 
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+				return false; // unreachable return statement !!!
+			}
+			if($res) {
+				
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}	}
+		catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+		
+	}
 }

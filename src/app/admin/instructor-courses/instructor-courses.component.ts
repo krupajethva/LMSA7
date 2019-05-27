@@ -264,7 +264,7 @@ export class InstructorCoursesComponent implements OnInit {
   }
 
   SessionClick(CourseId, i) 
-  {
+  {debugger
     $('#modalsession' + i).modal('show');
     var id = { 'CourseId': CourseId, 'UserId': this.globals.authData.UserId };
     this.InstructorCoursesService.getAllsessionDetail(id)
@@ -272,7 +272,11 @@ export class InstructorCoursesComponent implements OnInit {
       .then((data) => {
         if (data) {
           this.CourseSesssionList = data;
-        //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
+          for (var i = 0; i < this.CourseSesssionList.length; i++) {
+            if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
+            //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
+          }
+         
           // var d = new Date(this.CourseSesssionList.StartDate);
           // alert(this.CourseSesssionList.StartDate);
             // this.StartDate = d;
@@ -509,6 +513,37 @@ export class InstructorCoursesComponent implements OnInit {
         });
 
   }
+  isActiveChange(SessionEntity, i)
+  { debugger
+    if(this.CourseSesssionList[i].IsActive==false){
+      this.CourseSesssionList[i].IsActive = 0;
+      SessionEntity.IsActive = 0;
+    } else {
+      this.CourseSesssionList[i].IsActive = 1;
+      SessionEntity.IsActive = 1;
+    }
+   // this.globals.isLoading = true;
+   SessionEntity.UpdatedBy = 1;
+    
+		this.InstructorCoursesService.isActiveChange(SessionEntity)
+		.then((data) => 
+		{	      
+     // this.globals.isLoading = false;	
+     swal({
+      type: 'success',
+      title: 'Updated!',
+      text: 'Category has been updated successfully',
+      showConfirmButton: false,
+      timer: 1500
+    })
+			
+		}, 
+		(error) => 
+		{
+     // this.globals.isLoading = false;
+      this.router.navigate(['/pagenotfound']);
+		});		
+	}
 }
 
 
