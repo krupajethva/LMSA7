@@ -508,9 +508,9 @@ class InstructorCourses extends CI_Controller
 			   $houra=$Hours['Value'];
 			  //$time= strtotime('-'.$houra. 'hour');
 			  date_default_timezone_set("Asia/Kolkata");
-			    $timestamp = date('H:i:s', time() - (3600*$houra));
+			  echo   $timestamp = date('H:i:s', time() - (3600*$houra));
 			
-				echo $lastemail = date('H:i:00',time() + 900);
+				 $lastemail = date('H:i:00',time() + 900);
 			 $date=date('Y-m-d');
 
 			  //$time = date('H:i', $timestamp);

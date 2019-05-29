@@ -368,6 +368,7 @@ class CourseScheduler extends CI_Controller
 							}
 							
 						  }
+						 // echo json_encode($ress);
 					if($data)
 					{	
 						$Coursedata =$this->db->query('select co.CourseFullName,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.EndDate,
@@ -379,15 +380,15 @@ class CourseScheduler extends CI_Controller
 						LEFT JOIN  tblcourse AS co ON co.CourseId = csi.CourseId
 						LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
 						WHERE csi.CourseSessionId='.$result.' GROUP BY csi.CourseSessionId');	
-				foreach($Coursedata->result() as $Cdata)
-				{
+						$Cdata=$Coursedata->result();
+			
 				foreach ($ress as $users)
 				{
 					
-					$CourseFullName=$Cdata->CourseFullName;
-					$StartDate=$Cdata->StartDate;
-					$StartTime=$Cdata->StartTimeChange;
-					$InstructorName=$Cdata->FirstName;
+					$CourseFullName=$Cdata[0]->CourseFullName;
+					$StartDate=$Cdata[0]->StartDate;
+					$StartTime=$Cdata[0]->StartTimeChange;
+					$InstructorName=$Cdata[0]->FirstName;
 				 // print_r($EmailAddress=$users['EmailAddress']);
 				 $EmailToken = 'Course Published Followers';
 					$this->db->select('Value');
@@ -451,10 +452,11 @@ class CourseScheduler extends CI_Controller
 							'MessageBody' => trim($body),
 						);
 						$res = $this->db->insert('tblemaillog',$email_log);	
-					
+						//echo json_encode($users);
+						
 					}else
 					{
-						echo json_encode("Fail");
+						echo json_encode('fail');
 					}
 				}  else {
 					$userId_ar = explode(',', $row->totalTo);			 
@@ -493,12 +495,12 @@ class CourseScheduler extends CI_Controller
 				}
 			}	
 				}
-			}
-			// echo json_encode($result);
+			
+		//	echo json_encode($ress);
 			//}
 		}	else
 		{
-			//echo json_encode('error');
+			echo json_encode('error');
 		}
 		$data =$this->db->query('SELECT UserId FROM tblcoursesession AS cs 
 			LEFT JOIN tblcourseinstructor AS cin ON
@@ -509,18 +511,18 @@ class CourseScheduler extends CI_Controller
 					//print_r($ress);
 				$id=$row->UserId;
 				array_push($res,$id);
-					// foreach($data1->result() as $row1){
-					// 	if($row1->FollowerUserId!='')
-					// 	{
-					// 	$FollowerUserId = explode(",",$row1->FollowerUserId);
-					// 	foreach($FollowerUserId as $id){
-					// 		array_push($ress,$id);
-					// 	}
-					//   }
+					foreach($data1->result() as $row1){
+						if($row1->FollowerUserId!='')
+						{
+						$FollowerUserId = explode(",",$row1->FollowerUserId);
+						foreach($FollowerUserId as $id){
+							array_push($ress,$id);
+						}
+					  }
 						
-					// }
+					}
 					
-				  }
+				 }
 			if($data)
 				{	$Coursedata =$this->db->query('select co.CourseFullName,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.EndDate,
 					GROUP_CONCAT(cs.UserId) as UserId,
@@ -654,11 +656,11 @@ class CourseScheduler extends CI_Controller
 			}
 			//	print_r($data);		
 		//echo json_encode($data);	
-				echo json_encode($result);	
+			//	echo json_encode($result);	
 				}
 				
 			}
-			
+			echo json_encode('suceess');
 	}
 
 	public function getAllDefaultData()
