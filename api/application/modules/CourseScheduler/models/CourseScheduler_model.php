@@ -10,7 +10,7 @@ class CourseScheduler_model extends CI_Model
 	 {
 		 if($post_Courseschedular)
 		 {	
-		
+			
 			$CourseId=$post_Course['CourseId'];
 			foreach($post_Courseschedular as $Courseschedular) {
 				if($Courseschedular['CourseSessionId']>0)
@@ -126,16 +126,16 @@ class CourseScheduler_model extends CI_Model
 					 $out_param_query1 = $this->db->query('select @id as out_param;');
 					$CourseSessionId=$out_param_query1->result()[0]->out_param;
 					
-					$singleinst_data = array(
-						'CourseSessionId' => $CourseSessionId,
-						'UserId' =>  $Courseschedular['Instructorone'],
-						'IsPrimary'=>1,
-						'CreatedBy' => $post_Course['CreatedBy']
+					// $singleinst_data = array(
+					// 	'CourseSessionId' => $CourseSessionId,
+					// 	'UserId' =>  $Courseschedular['Instructorone'],
+					// 	'IsPrimary'=>1,
+					// 	'CreatedBy' => $post_Course['CreatedBy']
 
 								
-					);
-					$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
-
+					// );
+					// $ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
+					array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
 					foreach($Courseschedular['Instructor'] as $row){
 						$Courseinstructo_data = array(
 							'CourseSessionId' => $CourseSessionId,
@@ -168,7 +168,7 @@ class CourseScheduler_model extends CI_Model
 		
 					);
 					$log = $this->db->insert('tblactivitylog',$log_data);
-					return true;
+					return $post_Courseschedular;
 				}
 				else
 				{
@@ -188,7 +188,7 @@ class CourseScheduler_model extends CI_Model
 		$post_Course=$post_Sessionn['course'];
 		$post_Session=$post_Sessionn['schedularList'];
 			if($post_Sessionn)
-			{
+			{$weekday="";
 				$CourseId=$post_Course['CourseId'];
 				if($post_Session['Showstatus']==1)
 				{
