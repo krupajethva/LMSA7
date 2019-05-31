@@ -13,7 +13,59 @@ class CourseScheduler extends CI_Controller
 		$this->load->model('CourseScheduler_model');
 	}
 
+public function abc()
+{   $new_data=  array("484", "504","508");
+	$this->db->select('UserId');
+	$this->db->where('CourseSessionId',3);
+	$old= $this->db->get('tblcourseinstructor');
+	$Old_Result=$old->result();
+	$old_data = array();
+	foreach($Old_Result as $row)
+	{
+		array_push($old_data, $row->UserId);
+	}
+	$old_data1 = $old_data;
+   $array_delete=array();
+   $array_new=array();
+	// $this->db->where('CourseSessionId',$post_Session['CourseSessionId']);
+	// 	$ress = $this->db->delete('tblcourseinstructor');
+		foreach($new_data as $row)
+		{
+			if (in_array($row, $old_data))
+			{ 
+				//$key = array_search($row,$old_data);
+				//$array_delete = array_diff($old_data, [$key]);
+				array_splice($old_data, array_search($row, $old_data ), 1);
+		
+			}
+		  else
+			{
+				$Courseinstructo_data = array(
+					'CourseSessionId' =>3,
+					'UserId' =>  $row,
+					'IsPrimary'=>0,
+					'CreatedBy' =>484
 
+				);
+				$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
+			array_push($array_new,$row);
+			}
+		}
+		if(count($old_data)>0){
+			$this->db->where_in('UserId',$old_data);
+			$this->db->where('CourseSessionId',3);
+			$res_delete = $this->db->delete('tblcourseinstructor');
+		}else
+		{
+			echo "error";
+		}
+
+		print_r($new_data);
+		print_r($old_data1);
+		print_r($old_data);
+		print_r($array_new);
+
+}
 	
 	public function addScheduler()
 	{
@@ -581,7 +633,7 @@ class CourseScheduler extends CI_Controller
 						echo json_encode('success');
 					}else
 					{
-						echo json_encode($result);
+						//echo json_encode($result);
 					}
 
 				}else
@@ -907,7 +959,7 @@ class CourseScheduler extends CI_Controller
 				}
 				
 			}
-			echo json_encode('suceess');
+		//	echo json_encode('suceess');
 	}
 
 	public function getAllDefaultData()

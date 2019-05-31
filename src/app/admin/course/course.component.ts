@@ -74,6 +74,7 @@ export class CourseComponent implements OnInit {
 		this.BadgesEntity = {};
 		this.badgehide = false;
 		this.imageshow = false;
+
 		// $('.file_upload input[type="file"]').change(function (e) {
 		// 	var fileName = e.target.files[0].name;
 		// 	$('.file_upload input[type="text"]').val(fileName);
@@ -820,8 +821,8 @@ export class CourseComponent implements OnInit {
 								}, 100);
 							} else {
 								var item = {
-									'IsActive':1,'SessionName': '', 'StartTime': '', 'EndTime': '',
-									'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '', 'CountryId': '', 'StateId': '',
+									'IsActive':1,'SessionName': 'abc', 'StartTime': '', 'EndTime': '',
+									'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '','Instructorone': '', 'CountryId': '', 'StateId': '',
 									'CourseCloseDate': '', 'Showstatus': '0', 'TotalSeats': '', 'Check': false, 'CourseSessionId': '0'
 								};
 								this.stateList = [];
@@ -829,9 +830,26 @@ export class CourseComponent implements OnInit {
 								// this.InstructorList = [];
 								// this.InstructorList[0] = [];
 								this.schedularList = [];
+							
+								
 								this.schedularList.push(item);
+				
 								this.schedularList.CourseSessionId = 0;
 								var index = this.schedularList.length - 1;
+								for (var i = 0; i < this.InstructorListone.length; i++) 
+								{
+									if(this.globals.authData.RoleId==3)
+									{
+										if(this.InstructorListone[i].value==this.globals.authData.UserId)
+										{
+											this.schedularList[0].Instructorone=this.InstructorListone[i].value;
+										}else
+										{
+											
+										}
+									}
+									
+								}
 								this.schedularList[0].STimeValid = false;
 								this.schedularList[0].ETimeValid = false;
 								this.schedularList[0].InstructorValid = false;
@@ -1799,11 +1817,25 @@ export class CourseComponent implements OnInit {
 		// 'YearlyWeekDay':'','YearlyWhichWeekDay':'','YearlyMonth':'','StartDate':'','EndIsStatus':'','NoOfOccurences':'','EndDate':'','Documenticon': [], 'MulVideoicon': [] };
 		var item = {
 			'IsActive':1,'SessionName': '', 'StartTime': '', 'EndTime': '',
-			'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '', 'CountryId': '', 'StateId': '',
+			'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '','Instructorone':'', 'CountryId': '', 'StateId': '',
 			'CourseCloseDate': '', 'Showstatus': '0', 'TotalSeats': '', 'Check': false, 'CourseSessionId': '0'
 		};
 		this.schedularList.splice(this.schedularList.length, 0, item);
 		var index = this.schedularList.length - 1;
+		for (var i = 0; i < this.InstructorListone.length; i++) 
+								{
+									if(this.globals.authData.RoleId==3)
+									{
+										if(this.InstructorListone[i].value==this.globals.authData.UserId)
+										{
+											this.schedularList[index].Instructorone=this.InstructorListone[i].value;
+										}else
+										{
+											
+										}
+									}
+									
+								}
 		this.schedularList[index].checkvalid = false;
 		this.schedularList[index].CourseSessionId = 0;
 		this.schedularList[index].SessionStatus=0;
@@ -1843,14 +1875,14 @@ export class CourseComponent implements OnInit {
 				
 			});
 			myInput();
-		}, 100);
+		}, 500);
 		setTimeout(function () {
 
 			$('.form_time_picker').click(function () {
 				$('.table-condensed thead tr').empty();
 				$('.table-condensed thead tr').append('<th class="switch no_time_click">Pick Time</th>');
 			}); myInput();
-		}, 100);
+		}, 500);
 	}
 	DeleteCoursesession(item, i) {
 		debugger

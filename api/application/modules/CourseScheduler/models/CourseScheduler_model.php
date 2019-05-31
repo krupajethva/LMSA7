@@ -126,16 +126,16 @@ class CourseScheduler_model extends CI_Model
 					 $out_param_query1 = $this->db->query('select @id as out_param;');
 					$CourseSessionId=$out_param_query1->result()[0]->out_param;
 					
-					// $singleinst_data = array(
-					// 	'CourseSessionId' => $CourseSessionId,
-					// 	'UserId' =>  $Courseschedular['Instructorone'],
-					// 	'IsPrimary'=>1,
-					// 	'CreatedBy' => $post_Course['CreatedBy']
+					$singleinst_data = array(
+						'CourseSessionId' => $CourseSessionId,
+						'UserId' =>  $Courseschedular['Instructorone'],
+						'IsPrimary'=>1,
+						'CreatedBy' => $post_Course['CreatedBy']
 
 								
-					// );
-					// $ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
-					array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
+					);
+					$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
+					// array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
 					foreach($Courseschedular['Instructor'] as $row){
 						$Courseinstructo_data = array(
 							'CourseSessionId' => $CourseSessionId,
@@ -457,30 +457,59 @@ class CourseScheduler_model extends CI_Model
 				);
 				$this->db->where('CourseSessionId',$post_Session['CourseSessionId']);
 				$res = $this->db->update('tblcoursesession',$Coursesession_data);
+				array_push($post_Session['Instructor'],$post_Session['Instructorone']);
+				$new_data=$post_Session['Instructor'];
 
+				$this->db->select('UserId');
 				$this->db->where('CourseSessionId',$post_Session['CourseSessionId']);
-					$ress = $this->db->delete('tblcourseinstructor');
-					$singleinst_data = array(
-						'CourseSessionId' => $post_Session['CourseSessionId'],
-						'UserId' =>  $post_Session['Instructorone'],
-						'IsPrimary'=>1,
-						'CreatedBy' => $post_Course['CreatedBy']
+				$old= $this->db->get('tblcourseinstructor');
+				$Old_Result=$old->result();
+					$old_data = array();
+					foreach($Old_Result as $row)
+					{
+						array_push($old_data, $row->UserId);
+					}
+					$old_data1 = $old_data;
+				$array_delete=array();
+				$array_new=array();
 
-								
-					);
-					$resadd=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
+				foreach($new_data as $row)
+				{
+					if (in_array($row, $old_data))
+					{
+						array_splice($old_data, array_search($row, $old_data ), 1);
 
-					foreach($post_Session['Instructor'] as $row){
+					}
+				else
+					{
+						
+					
 						$Courseinstructo_data = array(
 							'CourseSessionId' =>$post_Session['CourseSessionId'],
 							'UserId' =>  $row,
 							'IsPrimary'=>0,
 							'CreatedBy' => $post_Course['CreatedBy']
-	
-									
+		
 						);
-						$ress1=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
-					}	
+						$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
+					
+					array_push($array_new,$row);
+					}
+				 }
+				 if(count($old_data)>0){
+					$this->db->where_in('UserId',$old_data);
+					$this->db->where('CourseSessionId',$post_Session['CourseSessionId']);
+					$res_delete = $this->db->delete('tblcourseinstructor');
+				}
+			
+
+	    	// print_r($new_data);
+	    	// print_r($old_data);
+	       // print_r($array_delete);
+		  // print_r($array_new);
+			 
+			
+					
 			}
 			
 
@@ -491,7 +520,7 @@ class CourseScheduler_model extends CI_Model
 				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 				return false; // unreachable return statement !!!
 			}
-			if($ress1)
+			if($res)
 				{	
 					$log_data = array(
 						'UserId' => trim($post_Course['CreatedBy']),

@@ -913,10 +913,10 @@
                                           </div>
                                           <div class="row">
                                             <div class="col-md-6 col-sm-6">
-                                              <div class="form-group">
+                                              <div class="form-group" >
                                                 <label>
                                                   <span>*</span>Choose your Primary Instructor</label>
-                                                <select #Instructorone="ngModel" class="form-control" [(ngModel)]="schedularList[i].Instructorone" name="Instructorone{{i}}"
+                                                <select [disabled]="globals.authData.RoleId==3" #Instructorone="ngModel" class="form-control" [(ngModel)]="schedularList[i].Instructorone" name="Instructorone{{i}}"
                                                   required>
                                                   <option value="" ngSelected='schedularList[i].Instructorone==""'>Select</option>
                                                   <ng-container *ngFor="let Instructorl of InstructorListone;let l = index ">
@@ -933,7 +933,7 @@
                                             <div class="col-md-6 col-sm-6">
                                               <div class="form-group">
                                                 <label>
-                                                  <span class="required">*</span>Choose your Instructor</label>
+                                                  <span class="required">*</span>Choose Additional  Instructor</label>
                                                 <ng-select filterPlaceholder="Type to search..." [options]="InstructorList" name="Instructor{{i}}" [multiple]="true" [(ngModel)]="schedularList[i].Instructor"
                                                   notFoundMsg="Not Instructor found" class="form-group instructorfocus">
                                                 </ng-select>
@@ -1102,7 +1102,7 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <button type="button" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid"
+                                        <button type="button"  [disabled]=" schedularList[i].IsActive==0" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid"
                                           class="next_btn pull-right">
                                           <span>Publish</span>
                                         </button>
