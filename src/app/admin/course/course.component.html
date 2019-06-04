@@ -1107,7 +1107,7 @@
                                           <span>Publish</span>
                                         </button>
                                         <button type="button" *ngIf="schedularList[i].CourseSessionId==0" (click)="addsinglesession(CourseFormSession,form,i)" class="back_btn pull-right">
-                                          <span>Save as draft{{schedularList[i].CourseSessionId}}</span>
+                                          <span>Save as draft</span>
                                         </button>
                                       </div>
                                       <div class="clearfix"></div>
@@ -1127,8 +1127,8 @@
 
                           </div>
 
-                          <div class="col-md-12 col-sm-12 text-center">
-                            <button type="button" class="back_btn" (click)="AddCouseSession()">Add</button>
+                          <div class="col-md-12 col-sm-12 text-center" >
+                            <button type="button" class="back_btn"  [disabled]="validadd" (click)="AddNewSession(CourseFormSession)">Add</button>
                           </div>
                         </form>
                       </div>

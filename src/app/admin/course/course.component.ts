@@ -64,6 +64,7 @@ export class CourseComponent implements OnInit {
 	imageshow;
 	DefalutBadges;
 	urlid;
+	validadd;
 	constructor( public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
 		private CourseService: CourseService, private CourseSchedulerService: CourseSchedulerService) { }
 	//selectedCharacters: Array<string> = ['376'];
@@ -1806,9 +1807,115 @@ export class CourseComponent implements OnInit {
 		this.globals.isLoading = false;
 	}
 	// Course session
-	AddCouseSession() {
+	AddNewSession(CourseFormSession) {
+		var count = 0;
 		debugger
+		for (var j = 0; j < this.schedularList.length; j++) {
+			var Wday=0;
+			if (this.schedularList[j].IsActive==true) { this.schedularList[j].IsActive = 1; } else { this.schedularList[j].IsActive = 0; }
+		if (this.schedularList[j].sunday == true) { this.schedularList[j].sunday = 1; } else { this.schedularList[j].sunday = 0; }
+		if (this.schedularList[j].monday == true) { this.schedularList[j].monday = 1; } else { this.schedularList[j].monday = 0; }
+		if (this.schedularList[j].tuesday == true) { this.schedularList[j].tuesday = 1; } else { this.schedularList[j].tuesday = 0; }
+		if (this.schedularList[j].wednesday == true) { this.schedularList[j].wednesday = 1; } else { this.schedularList[j].wednesday = 0; }
+		if (this.schedularList[j].thursday == true) { this.schedularList[j].thursday = 1; } else { this.schedularList[j].thursday = 0; }
+		if (this.schedularList[j].friday == true) { this.schedularList[j].friday = 1; } else { this.schedularList[j].friday = 0; }
+		if (this.schedularList[j].saturday == true) { this.schedularList[j].saturday = 1; } else { this.schedularList[j].saturday = 0; }
 
+			this.schedularList[j].StartTime = $("#StartTime" + j).val();
+			this.schedularList[j].EndTime = $("#EndTime" + j).val();
+			this.schedularList[j].StartDate = $("#StartDate" + j).val();
+			this.schedularList[j].EndDate = $("#EndDate" + j).val();
+			this.schedularList[j].CourseCloseDate = $("#CourseCloseDate" + j).val();
+
+			if(this.schedularList[j].StartDate > this.schedularList[j].EndDate)
+			{
+				count = 1;
+				this.schedularList[j].startlessenddate = true;
+			}else
+			{
+				this.schedularList[j].startlessenddate = false;
+			}
+			if (this.schedularList[j].Showstatus == 0) {
+
+				this.schedularList[j].CourseCloseDate = null;
+
+			} else {
+				this.schedularList[j].TotalSeats = 0;
+				if (this.schedularList[j].CourseCloseDate == "" || this.schedularList[j].CourseCloseDate == null || this.schedularList[j].CourseCloseDate == undefined) {
+					this.schedularList[j].CourseCloseDateValid = true;
+					count = 1;
+				} else {
+					this.schedularList[j].CourseCloseDateValid = false;
+				}
+
+
+			}
+			if (this.schedularList[j].StartTime == "" || this.schedularList[j].StartTime == null || this.schedularList[j].StartTime == undefined) {
+				this.schedularList[j].STimeValid = true;
+				count = 1;
+			} else {
+				this.schedularList[j].STimeValid = false;
+			}
+			if (this.schedularList[j].EndTime == "" || this.schedularList[j].EndTime == null || this.schedularList[j].EndTime == undefined) {
+				this.schedularList[j].ETimeValid = true;
+				count = 1;
+			} else {
+				this.schedularList[j].ETimeValid = false;
+			}
+			if (this.schedularList[j].StartDate == "" || this.schedularList[j].StartDate == null || this.schedularList[j].StartDate == undefined) {
+				this.schedularList[j].SDateValid = true;
+				count = 1;
+			} else {
+				this.schedularList[j].SDateValid = false;
+			}
+			if (this.schedularList[j].EndDate == "" || this.schedularList[j].EndDate == null || this.schedularList[j].EndDate == undefined) {
+				this.schedularList[j].EDateValid = true;
+				count = 1;
+			} else {
+				this.schedularList[j].EDateValid = false;
+			}
+
+			if (this.schedularList[j].Instructor == "" || this.schedularList[j].Instructor == null || this.schedularList[j].Instructor == undefined) {
+				this.schedularList[j].InstructorValid = true;
+				count = 1;
+			} else {
+				this.schedularList[j].InstructorValid = false;
+			}
+			if(this.schedularList[j].sunday == 1)
+			{
+					Wday=1;
+			}if(this.schedularList[j].monday == 1)
+			{
+					Wday=1;
+			}if(this.schedularList[j].tuesday == 1)
+			{
+					Wday=1;
+			}if(this.schedularList[j].wednesday == 1)
+			{
+					Wday=1;
+			}if(this.schedularList[j].thursday == 1)
+			{
+					Wday=1;
+			}if(this.schedularList[j].friday == 1)
+			{
+					Wday=1;
+			}if(this.schedularList[j].saturday == 1)
+			{
+					Wday=1;
+			}
+			if(Wday==0)
+			{
+				this.schedularList[j].checkboxbtnvalid=true;
+			}else
+			{
+				this.schedularList[j].checkboxbtnvalid=false;
+			}
+			
+			this.schedularList.CourseSessionId = 0;
+		}
+		if (CourseFormSession.valid && count == 0  && Wday>0) 
+		{
+		this.validadd=false;
 		this.submitted = false;
 		// this.btn_disable = false;
 		// var item = { 'ScheduleName': '', 'StartTime': '', 'EndTime': '','Everyday':'','EveryWeekDay': '','EveryWeek':'', 
@@ -1841,6 +1948,7 @@ export class CourseComponent implements OnInit {
 		this.schedularList[index].SessionStatus=0;
 		this.schedularList[index].PublishStatus=0;
 		this.schedularList[index].CourseSessionId=0;
+	
 		setTimeout(function () {
 
 			$('#daily_recurrence' + index).removeClass('hide');
@@ -1883,6 +1991,13 @@ export class CourseComponent implements OnInit {
 				$('.table-condensed thead tr').append('<th class="switch no_time_click">Pick Time</th>');
 			}); myInput();
 		}, 500);
+	}else {
+		this.globals.isLoading = false;
+		this.submitted = true;
+		this.btn_disable = false;
+		this.validadd=true;
+
+	} 
 	}
 	DeleteCoursesession(item, i) {
 		debugger
