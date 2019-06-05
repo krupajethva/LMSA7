@@ -12,9 +12,11 @@ class CourseScheduler_model extends CI_Model
 		 {	
 			
 			$CourseId=$post_Course['CourseId'];
+			$count=0;
 			foreach($post_Courseschedular as $Courseschedular) {
 				if($Courseschedular['CourseSessionId']>0)
 				{  	$weekday='';
+
 					if($Courseschedular['Showstatus']==1)
 					{
 						$Showstatus = true;
@@ -60,6 +62,7 @@ class CourseScheduler_model extends CI_Model
 					$res=$this->db->query('call updateCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$Courseschedular_data);
 					$this->db->where('CourseSessionId',$Courseschedular['CourseSessionId']);
 					$ress = $this->db->delete('tblcourseinstructor');
+					$post_Courseschedular[$count]['NewSendEmail']=0;
 					$singleinst_data = array(
 						'CourseSessionId' => $Courseschedular['CourseSessionId'],
 						'UserId' =>  $Courseschedular['Instructorone'],
@@ -82,7 +85,8 @@ class CourseScheduler_model extends CI_Model
 						$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
 					}
 				}else
-				 {$weekday="";
+				 {
+					 $weekday="";
 					if($Courseschedular['Showstatus']==1)
 					{
 						$Showstatus = true;
@@ -125,7 +129,9 @@ class CourseScheduler_model extends CI_Model
 					$res=$this->db->query('call addCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$Courseschedular_data);
 					 $out_param_query1 = $this->db->query('select @id as out_param;');
 					$CourseSessionId=$out_param_query1->result()[0]->out_param;
-					
+					$post_Courseschedular[$count]['CourseSessionId']=$CourseSessionId;
+					$post_Courseschedular[$count]['NewSendEmail']=1;
+					$count++;
 					$singleinst_data = array(
 						'CourseSessionId' => $CourseSessionId,
 						'UserId' =>  $Courseschedular['Instructorone'],

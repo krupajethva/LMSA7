@@ -181,6 +181,8 @@ import { AssessmenttestService } from './services/assessmenttest.service';
 import { CourseCertificateService } from './services/course-certificate.service';
 import { CertificateBadgeService } from './services/certificate-badge.service';
 import { AttendanceService } from './services/attendance.service';
+import { InvitationacceptdeclineComponent } from './invitationacceptdecline/invitationacceptdecline.component';
+import { InvitationacceptdeclineService } from './services/invitationacceptdecline.service';
 const routes: Routes = [	
   {
     path: '',
@@ -258,8 +260,8 @@ const routes: Routes = [
 				  { path : 'course-certificate', component : CourseCertificateComponent,canActivate : [AuthGuard] },
 				 { path : 'course/edit/:id', component : CourseComponent,canActivate : [AuthGuard] },
 				  { path : 'course/edit/:id/:name', component : CourseComponent,canActivate : [AuthGuard] },
-				  { path : 'Instructorinvitation', component : InstructorinvitationComponent,canActivate : [AuthGuard] },
-				  { path : 'Instructorinvitationlist', component : InstructorinvitationlistComponent,canActivate : [AuthGuard] },
+				//   { path : 'Instructorinvitation', component : InstructorinvitationComponent,canActivate : [AuthGuard] },
+				//   { path : 'Instructorinvitationlist', component : InstructorinvitationlistComponent,canActivate : [AuthGuard] },
 		
 
 				  { path : 'course-detail', component : CourseDetailComponent,canActivate : [AuthGuard] },
@@ -311,6 +313,7 @@ const routes: Routes = [
 				  { path : 'attendance/:id', component : AttendanceComponent,canActivate : [AuthGuard] },
 				  { path : 'instructorlist', component : InstructorlistComponent,canActivate : [AuthGuard] },
 				 
+				  { path : 'instructor-invitation/:id', component : InvitationacceptdeclineComponent,canActivate : [AuthGuard] },
 
 				  //{ path: 'certificatetemplate', component: CertificatetemplateComponent, canActivate: [AuthGuard] },
 				  //{ path: 'certificatetemplate/edit/:id', component: CertificatetemplateComponent, canActivate: [AuthGuard] },
@@ -330,7 +333,7 @@ exports: [RouterModule],
 providers: [AdminService,ImportfiledataService,InboxService,Globals,AuthGuard,RegisterAdminInvitedService,IndustryService,RegisterService,AddressesService,CompanyService,RegisterInstructorInvitedService,RegisterLearnerInvitedService,InviteInstructorService,InviteLearnerService,ActivityService,UserActivationService,EditProfileService,EducationService,EmailtemplateService,SettingsService,CountryService,StateService,RolepermissionService,AuthService,UserService,UserinstructorService,ForgotpasswordService,
 	ResetpasswordService,ResetpassService,CategoryService,CourseService,CoursetopicService,ParentcategoryService,
 	InstructorinvitationService,CourseListService,RolepermissionService,CommonService,AnnouncementService,
-	CalendarService,CertificatetemplateService,CertificateBadgeService,AttendanceService,CourseSchedulerService,CourseCertificateService,CourseQuestionService,DashboardService,AssessmenttestService,LearnerCoursesService,InstructorCoursesService,ActivedeleteService,InstructorfollowersService],
+	CalendarService,CertificatetemplateService,CertificateBadgeService,InvitationacceptdeclineService,AttendanceService,CourseSchedulerService,CourseCertificateService,CourseQuestionService,DashboardService,AssessmenttestService,LearnerCoursesService,InstructorCoursesService,ActivedeleteService,InstructorfollowersService],
 
   bootstrap: [AdminComponent],
 })

@@ -159,4 +159,31 @@ class Instructorinvi_model extends CI_Model
 			}	
 			
 		}
+
+		public function EditInstRequest($type,$CourseSessionId,$UserId) {
+	
+			if($type) {
+				   
+					$Instructor_data = array(
+						'Approval' => $type,
+						'UpdatedBy' => $UserId,
+						'UpdatedOn' => date('y-m-d H:i:s')
+					);
+					
+					$this->db->where('CourseSessionId',$CourseSessionId);
+					$this->db->where('UserId',$UserId);
+					$res = $this->db->update('tblcourseinstructor',$Instructor_data);
+					
+					if($res) {		
+						return true;
+					} else {
+						return false;
+					}
+				}
+				else {
+					
+					return false;
+				}	
+				
+			}
 }

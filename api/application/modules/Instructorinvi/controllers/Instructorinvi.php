@@ -12,8 +12,23 @@ class Instructorinvi extends CI_Controller
 		$this->load->model('Instructorinvi_model');
 	}
 
-	
-	
+	public function InstRequest($type = NULL,$CourseSessionId=NULL,$UserId=NULL) {
+		
+		if(!empty($type)) {					
+			
+			$result = [];
+			$result = $this->Instructorinvi_model->EditInstRequest($type,$CourseSessionId,$UserId);	
+			if($result)
+			{
+				if($type==1)
+				{
+					
+				}
+
+			}		
+			echo json_encode($result);				
+		}			
+	}
 	public function getAllCourse() {
 		
 		$data=$this->Instructorinvi_model->getlist_course();
