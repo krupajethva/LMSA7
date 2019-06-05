@@ -256,5 +256,24 @@ secondSubmit(allEntity){ debugger
     return promise;
   }
 
+  BeforeReminder(reminderEntity){
+    console.log('reminderEntity', reminderEntity);
+    let promise = new Promise((resolve, reject) => {
+      this.http.post(this.globals.baseAPIUrl + 'Coursebeforereminders/update_data', reminderEntity)
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+        reject(msg);
+        this.globals.isLoading = false;
+        this.router.navigate(['/pagenotfound']);
+          }
+        );
+    });		
+    return promise;
+  }
+
 }
 
