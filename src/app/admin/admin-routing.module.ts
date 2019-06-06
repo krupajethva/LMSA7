@@ -31,6 +31,9 @@ import { UserService } from './services/user.service';
 import { InstructorfollowersComponent } from './instructorfollowers/instructorfollowers.component';
 import { InstructorfollowersService } from './services/instructorfollowers.service';
 
+import { CoursebeforereminderComponent } from './coursebeforereminder/coursebeforereminder.component';
+import { CoursebeforereminderService } from './services/coursebeforereminder.service';
+
 import { LoginlogComponent } from './loginlog/loginlog.component';
 import { EmaillogComponent } from './emaillog/emaillog.component';
 
@@ -312,6 +315,7 @@ const routes: Routes = [
 				  { path : 'attendance', component : AttendanceComponent,canActivate : [AuthGuard] },
 				  { path : 'attendance/:id', component : AttendanceComponent,canActivate : [AuthGuard] },
 				  { path : 'instructorlist', component : InstructorlistComponent,canActivate : [AuthGuard] },
+				  { path : 'coursebeforereminder', component : CoursebeforereminderComponent,canActivate : [AuthGuard] },
 				 
 				  { path : 'instructor-invitation/:id', component : InvitationacceptdeclineComponent,canActivate : [AuthGuard] },
 
@@ -333,7 +337,8 @@ exports: [RouterModule],
 providers: [AdminService,ImportfiledataService,InboxService,Globals,AuthGuard,RegisterAdminInvitedService,IndustryService,RegisterService,AddressesService,CompanyService,RegisterInstructorInvitedService,RegisterLearnerInvitedService,InviteInstructorService,InviteLearnerService,ActivityService,UserActivationService,EditProfileService,EducationService,EmailtemplateService,SettingsService,CountryService,StateService,RolepermissionService,AuthService,UserService,UserinstructorService,ForgotpasswordService,
 	ResetpasswordService,ResetpassService,CategoryService,CourseService,CoursetopicService,ParentcategoryService,
 	InstructorinvitationService,CourseListService,RolepermissionService,CommonService,AnnouncementService,
-	CalendarService,CertificatetemplateService,CertificateBadgeService,InvitationacceptdeclineService,AttendanceService,CourseSchedulerService,CourseCertificateService,CourseQuestionService,DashboardService,AssessmenttestService,LearnerCoursesService,InstructorCoursesService,ActivedeleteService,InstructorfollowersService],
+	CalendarService,CertificatetemplateService,CertificateBadgeService,AttendanceService,CourseSchedulerService,CourseCertificateService,CourseQuestionService,DashboardService,AssessmenttestService,LearnerCoursesService,InstructorCoursesService,ActivedeleteService,InstructorfollowersService,CoursebeforereminderService,InvitationacceptdeclineService],
+
 
   bootstrap: [AdminComponent],
 })
