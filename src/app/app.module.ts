@@ -5,14 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { EscapeHtmlPipe } from './admin/pipes/keep-html.pipe';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { InvitationacceptdeclineComponent } from './invitationacceptdecline/invitationacceptdecline.component';
+
+
 
 @NgModule({
 
   declarations: [
 		AppComponent,
-		EscapeHtmlPipe,
-		InvitationacceptdeclineComponent
+		EscapeHtmlPipe
 		
 	],	
   imports: [

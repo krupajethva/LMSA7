@@ -55,7 +55,6 @@
                             </div>
                         </td>
                         <td class="text-center">
-
                             <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/company/edit/{{Company.CompanyId}}"><i class="fa fa-edit"></i></button>
                             <button *ngIf="Company.isdisabled>0" data-toggle="tooltip" [disabled]="Company.isdisabled>0" data-type="Record" class="delete" title="Company can't be deleted as it is already assigned to an active User's profile"><i class="fa fa-trash"></i></button>
                             <button class="delete"  *ngIf="Company.isdisabled==0" data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deleteCompany(Company)"> <i class="fa fa-trash"></i> </button>
@@ -63,7 +62,6 @@
             </tr>
               </tbody>
             </table>
-          
 	</div>
 	<div class="clearfix"></div>
 </div>
