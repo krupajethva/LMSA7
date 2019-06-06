@@ -149,6 +149,7 @@ import { InstructorlistComponent } from './instructorlist/instructorlist.compone
 import { CertificateBadgeComponent } from './certificate-badge/certificate-badge.component';
 import { CertificateBadgeslistComponent } from './certificate-badgeslist/certificate-badgeslist.component';
 import { CoursebeforereminderComponent } from './coursebeforereminder/coursebeforereminder.component';
+import { InvitationacceptdeclineComponent } from './invitationacceptdecline/invitationacceptdecline.component';
 @NgModule({
 	
 	declarations: [
@@ -234,6 +235,8 @@ import { CoursebeforereminderComponent } from './coursebeforereminder/coursebefo
 		AddresseslistComponent, IndustryComponent, IndustrylistComponent,
 		RegisterAdminInvitedComponent, OpeninstructorComponent,	
 		CoursebeforereminderComponent,
+		RegisterAdminInvitedComponent, OpeninstructorComponent,
+		InvitationacceptdeclineComponent,
 		InstructorlistComponent,
 	],
 	imports: [

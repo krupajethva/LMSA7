@@ -4,13 +4,14 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Authorization,Origin, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Content-Type: application/json; charset=utf-8");
-
+use \Firebase\JWT\JWT;
 class CourseScheduler extends CI_Controller 
 {	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('CourseScheduler_model');
+		include APPPATH . 'vendor/firebase/php-jwt/src/JWT.php';
 	}
 
 public function abc()
@@ -83,18 +84,19 @@ public function abc()
 						$this->db->where('CourseId',$CourseId);
 						$result_course = $this->db->get('tblcourse');
 						$course=json_decode(json_encode($result_course->result()), True);
-		
+					
 						foreach($result as $Courseschedular)
 						{
-							if($Courseschedular['CourseSessionId']==0)
-							{
+						//	if($Courseschedular['CourseSessionId']==0)
+							//{
 							array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
 							
 					foreach($Courseschedular['Instructor'] as $UserId){
 					$SessionName=$Courseschedular['SessionName'];
 					$StartDate=$Courseschedular['StartDate'];
 					$StartTime=$Courseschedular['StartTime'];
-				 	$CourseName=$course[0]['CourseFullName'];
+					 $CourseName=$course[0]['CourseFullName'];
+			
 				 // print_r($EmailAddress=$users['EmailAddress']);
 				 $EmailToken = 'Instructor Invitation';
 					$this->db->select('Value');
@@ -139,7 +141,15 @@ public function abc()
 					$body = str_replace("{ StartDate }",$StartDate,$body);
 					$body = str_replace("{ StartTime }",$StartTime,$body);
 					$body = str_replace("{ SessionName }",$SessionName,$body);
+					$data1['CourseSessionId']=$Courseschedular['CourseSessionId'];
+					$data2['CourseSessionId']=$Courseschedular['CourseSessionId'];
+					$data1['UserId']=$UserId;
+					$data2['UserId']=$UserId;
+					$data1['type']=1;
+					$data2['type']=2;
 				//	$body = str_replace("{login_url}",$StartTime,$body);
+					$body = str_replace("{ link1 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey","HS256").'',$body);
+					$body = str_replace("{ link2 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'',$body);
 					$body = str_replace("{login_url}",''.BASE_URL.'/login/',$body);
 					$this->email->from($smtpEmail, 'LMS Admin');
 					$this->email->to($rowTo[0]->EmailAddress);		
@@ -202,9 +212,10 @@ public function abc()
 			}
 						}
 						//print_r('success');
-						}
+						//}
 					}
-							echo json_encode($course);
+				
+							echo json_encode($result);
 			}
 					
 			
@@ -289,6 +300,16 @@ public function abc()
 					$body = str_replace("{ SessionName }",$SessionName,$body);
 				//	$body = str_replace("{login_url}",$StartTime,$body);
 					$body = str_replace("{login_url}",''.BASE_URL.'/login/',$body);
+					$data1['CourseSessionId']=$result;
+					$data2['CourseSessionId']=$result;
+					$data1['UserId']=$UserId;
+					$data2['UserId']=$UserId;
+					$data1['type']=1;
+					$data2['type']=0;
+				//	$body = str_replace("{login_url}",$StartTime,$body);
+					$body = str_replace("{ link1 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey","HS256").'',$body);
+					$body = str_replace("{ link2 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'',$body);
+					
 					$this->email->from($smtpEmail, 'LMS Admin');
 					$this->email->to($rowTo[0]->EmailAddress);		
 					$this->email->subject($row->Subject);

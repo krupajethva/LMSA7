@@ -65,6 +65,7 @@ export class CourseComponent implements OnInit {
 	DefalutBadges;
 	urlid;
 	validadd;
+	menushow
 	constructor( public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
 		private CourseService: CourseService, private CourseSchedulerService: CourseSchedulerService) { }
 	//selectedCharacters: Array<string> = ['376'];
@@ -352,6 +353,7 @@ export class CourseComponent implements OnInit {
 				
 		let id = this.route.snapshot.paramMap.get('id');
 		let name = this.route.snapshot.paramMap.get('name');
+	
         this.urlid=id;
 		if (id) {
 			if (name) {
@@ -379,7 +381,7 @@ export class CourseComponent implements OnInit {
 				this.thirdform = false;
 				this.forthform = false;
 			}
-
+            this.menushow=true;
 			this.singal = true;
 			this.editsave = true;
 			this.header = 'Edit';
@@ -503,6 +505,7 @@ export class CourseComponent implements OnInit {
 
 		}
 		else {
+			this.menushow=false;
 			this.header = 'Add';
 			this.CourseEntity = {};
 			this.CourseEntity.CourseId = 0;
@@ -1431,6 +1434,7 @@ export class CourseComponent implements OnInit {
 								$('#st2').addClass('active');
 								$('#step2').addClass('active');
 								$('#step1').removeClass('active');
+							
 								$('#st1').addClass('disabled');
 								$('#st1').addClass('success');
 								$('#st2').removeClass('success');
