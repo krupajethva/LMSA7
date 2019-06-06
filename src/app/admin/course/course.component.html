@@ -38,76 +38,67 @@
           <div class="wizard">
             <div class="wizard-inner">
               <!-- <div class="connecting-line"></div> -->
-  
-              <ul class="nav nav-tabs pull-left" role="tablist"  >
-                <li role="presentation" class="active" id="st1">
-                  <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab">
-                    <span class="round-tab">
-                      <i class="fa fa-file" aria-hidden="true"></i> Course Detail 1 {{menushow}}
-                      <!-- <i class="fa fa-file" aria-hidden="true"></i> -->
-                    </span>
-                  </a>
-                </li>
-                <li role="presentation" class="disabled" id="st2">
-                  <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab">
-                    <span class="round-tab">
-                      <i class="fa fa-file-text" aria-hidden="true"></i> Course Topic
-                      <!-- <i class="fa fa-file-text" aria-hidden="true"></i> -->
-                    </span>
-                  </a>
-                </li>
-                <li role="presentation" class="disabled" id="st3">
-                  <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab">
-                    <span class="round-tab">
-                      <i class="fa fa-file-video-o" aria-hidden="true"></i> Course Session
-                      <!-- <i class="fa fa-file-image-o" aria-hidden="true"></i> -->
-                    </span>
-                  </a>
-                </li>
-                <li role="presentation" class="disabled" id="st4">
-                  <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab">
-                    <span class="round-tab">
-                      <i class="fa fa-certificate"></i> Badges
-                    </span>
-                  </a>
-                </li>
-              </ul>
-       
-   
+
               <ul class="nav nav-tabs pull-left" role="tablist" >
-                <li role="presentation" class="active" id="st1">
+                <li role="presentation" class="active"  (click)="Previousfirst()"  id="st1">
                   <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab">
                     <span class="round-tab">
-                      <i class="fa fa-file" aria-hidden="true"></i> Course Detail 2 {{menushow}}
+                      <i class="fa fa-file" aria-hidden="true"></i> Course Detail 2 {{tab1}}
                       <!-- <i class="fa fa-file" aria-hidden="true"></i> -->
                     </span>
                   </a>
                 </li>
-                <li role="presentation" class="disabled" id="st2">
+
+        
+                <li role="presentation"  *ngIf="tab2"  (click)="Previoussecond()" class="success" id="st2">
                   <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab">
                     <span class="round-tab">
-                      <i class="fa fa-file-text" aria-hidden="true"></i> Course Topic
+                      <i class="fa fa-file-text" aria-hidden="true"></i> Course Topic {{tab2}}
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation"  *ngIf="!tab2" class="disabled"  id="st2">
+                  <a>
+                    <span class="round-tab">
+                      <i class="fa fa-file-text" aria-hidden="true"></i> Course Topic {{tab2}}
                       <!-- <i class="fa fa-file-text" aria-hidden="true"></i> -->
                     </span>
                   </a>
                 </li>
-                <li role="presentation" class="disabled" id="st3">
+     
+                <li role="presentation"  *ngIf="tab3"  (click)="Previoushtird()"  id="st3">
                   <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab">
                     <span class="round-tab">
-                      <i class="fa fa-file-video-o" aria-hidden="true"></i> Course Session
+                      <i class="fa fa-file-video-o" aria-hidden="true"></i> Course Session{{tab3}}
                       <!-- <i class="fa fa-file-image-o" aria-hidden="true"></i> -->
                     </span>
                   </a>
                 </li>
-                <li role="presentation"class="disabled" id="st4">
-                  <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab">
+                <li role="presentation" *ngIf="!tab3"  class="disabled" id="st3">
+                  <a>
+                    <span class="round-tab">
+                      <i class="fa fa-file-video-o" aria-hidden="true"></i> Course Session{{tab3}}
+                      <!-- <i class="fa fa-file-image-o" aria-hidden="true"></i> -->
+                    </span>
+                  </a>
+                </li>
+
+                <li role="presentation"   *ngIf="tab4" id="st4">
+                  <a href="#step4" data-toggle="tab" aria-controls="step4" (click)="Previousfour()" role="tab">
+                    <span class="round-tab">
+                      <i class="fa fa-certificate"></i> Badges
+                    </span>
+                  </a>
+                </li>
+                <li role="presentation"  *ngIf="!tab4"  class="disabled" id="st4">
+                  <a>
                     <span class="round-tab">
                       <i class="fa fa-certificate"></i> Badges
                     </span>
                   </a>
                 </li>
               </ul>
-           
+      
               <div class="form-group-active pull-right" [hidden]="!firstform">
                 <label>
                   <span>*</span>Active?</label>

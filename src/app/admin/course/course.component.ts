@@ -65,7 +65,12 @@ export class CourseComponent implements OnInit {
 	DefalutBadges;
 	urlid;
 	validadd;
-	menushow
+	menushow;
+	tab1;
+	tab2;
+	tab3;
+	tab4;
+	tab5;
 	constructor( public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
 		private CourseService: CourseService, private CourseSchedulerService: CourseSchedulerService) { }
 	//selectedCharacters: Array<string> = ['376'];
@@ -76,7 +81,7 @@ export class CourseComponent implements OnInit {
 		this.BadgesEntity = {};
 		this.badgehide = false;
 		this.imageshow = false;
-
+		
 		// $('.file_upload input[type="file"]').change(function (e) {
 		// 	var fileName = e.target.files[0].name;
 		// 	$('.file_upload input[type="text"]').val(fileName);
@@ -367,7 +372,7 @@ export class CourseComponent implements OnInit {
 				$('#step3').addClass('active');
 				$('#step2').removeClass('active');
 				$('#step1').removeClass('active');
-				$('#st2').addClass('disabled');
+			//	$('#st2').addClass('disabled');
 				$('#st2').removeClass('active');
 				$('#st2').addClass('success');
 				$('#st1').addClass('disabled');
@@ -381,6 +386,13 @@ export class CourseComponent implements OnInit {
 				this.thirdform = false;
 				this.forthform = false;
 			}
+			this.tab1=true;
+		this.tab2=true;
+		this.tab3=true;
+		this.tab4=true;
+		this.tab5=true;
+	
+
             this.menushow=true;
 			this.singal = true;
 			this.editsave = true;
@@ -388,6 +400,9 @@ export class CourseComponent implements OnInit {
 			this.CourseService.getById(id)
 				.then((data) => {
 					debugger
+					$('#st2').addClass('success');
+					$('#st3').addClass('success');
+					$('#st4').addClass('success');
 					this.CourseEntity = data;
 					if (data['IsActive'] == 0) { this.CourseEntity.IsActive = 0; } else { this.CourseEntity.IsActive = '1'; }
 					if (data['Featurescheck'] == 0) { this.CourseEntity.Featurescheck = 0; } else { this.CourseEntity.Featurescheck = '1'; }
@@ -505,6 +520,11 @@ export class CourseComponent implements OnInit {
 
 		}
 		else {
+			this.tab1=true;
+		this.tab2=false;
+		this.tab3=false;
+		this.tab4=false;
+		this.tab5=false;
 			this.menushow=false;
 			this.header = 'Add';
 			this.CourseEntity = {};
@@ -725,6 +745,7 @@ export class CourseComponent implements OnInit {
 		$('#myModal2' + i + j).modal('hide');
 	}
 	addbadges() {
+		
 		this.firstform = false;
 		this.secondform = false;
 		this.thirdform = false;
@@ -755,9 +776,10 @@ export class CourseComponent implements OnInit {
 					this.CourseSchedulerService.getById(course_id, this.globals.authData.UserId)
 						.then((data) => {
 							debugger
-
+							$('#st3').addClass('active');
 							this.array_data = data['coursesession'];
 							if (this.array_data.length > 0) {
+						
 								this.schedularList = data['coursesession'];
 								for (var i = 0; i < this.array_data.length; i++) {
 									this.stateList[i] = this.stateList_temp;
@@ -772,9 +794,8 @@ export class CourseComponent implements OnInit {
 									if (this.schedularList[i].sunday == "0") { this.schedularList[i].sunday = 0; } else { this.schedularList[i].sunday = '1'; }
 								}
 						
-									
-								
-								
+							
+								$('#st3').addClass('active');
 								this.CourseList = data['coursename'];
 								// this.schedularList = data['coursesession'];
 
@@ -824,8 +845,9 @@ export class CourseComponent implements OnInit {
 									});
 								}, 100);
 							} else {
+								$('#st3').addClass('active');
 								var item = {
-									'IsActive':1,'SessionName': 'abc', 'StartTime': '', 'EndTime': '',
+									'IsActive':1,'SessionName': 'session', 'StartTime': '', 'EndTime': '',
 									'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '','Instructorone': '', 'CountryId': '', 'StateId': '',
 									'CourseCloseDate': '', 'Showstatus': '0', 'TotalSeats': '', 'Check': false, 'CourseSessionId': '0'
 								};
@@ -1148,35 +1170,67 @@ export class CourseComponent implements OnInit {
 
 
 
-		$('#st1').removeClass('disabled');
+		//$('#st1').removeClass('disabled');
 		$('#st1').addClass('active');
 		$('#st1').removeClass('success');
 		$('#step1').addClass('active');
+		if(this.tab2==true)
+		{
 		$('#step2').removeClass('active');
-		$('#st2').addClass('disabled');
 		$('#st2').addClass('success');
-		$('#st2').removeClass('success');
 		$('#st2').removeClass('active');
+		}
+		if(this.tab3==true)
+		{
+		$('#step3').removeClass('active');
+		$('#st3').addClass('success');
+		$('#st3').removeClass('active');
+		}
+		if(this.tab4==true)
+		{
+		$('#step4').removeClass('active');
+		$('#st4').addClass('success');
+		$('#st4').removeClass('active');
+		}
 	}
 	Previoussecond() {
 		debugger
-		this.singal = true;
-		this.firstform = false;
-		this.secondform = true;
-		this.thirdform = false;
-		this.forthform = false;
-		this.CourseService.getByTopicId(this.CourseEntity.CourseId)
+
+		if(this.urlid)
+		{
+			this.CourseService.getByTopicId(this.CourseEntity.CourseId)
 			.then((data) => {
 				debugger
 
 				this.CourseFormList = data;
-				$('#st2').removeClass('disabled');
+			//	$('#st2').removeClass('disabled');
+			this.singal = true;
+			this.firstform = false;
+			this.secondform = true;
+			this.thirdform = false;
+			this.forthform = false;
 				$('#st2').addClass('active');
 				$('#step2').addClass('active');
-				$('#step3').removeClass('active');
-				$('#st3').addClass('disabled');
-				$('#st3').removeClass('active');
 				$('#st2').removeClass('success');
+				if(this.tab1==true)
+				{
+				$('#step1').removeClass('active');
+				$('#st1').addClass('success');
+				$('#st1').removeClass('active');
+				}
+				if(this.tab3==true)
+				{
+				$('#step3').removeClass('active');
+				$('#st3').addClass('success');
+				$('#st3').removeClass('active');
+				}
+				if(this.tab4==true)
+				{
+				$('#step4').removeClass('active');
+				$('#st4').addClass('success');
+				$('#st4').removeClass('active');
+				}
+			
 				for (var i = 0; i < this.CourseFormList.length; i++) {
 					for (var j = 0; j < this.CourseFormList[i].subtopic.length; j++) {
 						$('#MulVideoiconn' + i + j + ' input[type="text"]').val(this.CourseFormList[i].subtopic[j].Video);
@@ -1197,58 +1251,218 @@ export class CourseComponent implements OnInit {
 					this.submitted = false;
 					//this.router.navigate(['/pagenotfound']);
 				});
+		}
+		else
+		{
+			this.singal = true;
+			this.firstform = false;
+			this.secondform = true;
+			this.thirdform = false;
+			this.forthform = false;
+			    $('#st2').addClass('active');
+				$('#step2').addClass('active');
+				$('#st2').removeClass('success');
+
+
+				if(this.tab2==true)
+				{
+				$('#step1').removeClass('active');
+				$('#st1').addClass('success');
+				$('#st1').removeClass('active');
+				}
+				if(this.tab3==true)
+				{
+				$('#step3').removeClass('active');
+				$('#st3').addClass('success');
+				$('#st3').removeClass('active');
+				}
+			
+				if(this.tab4==true)
+				{
+				$('#step4').removeClass('active');
+				$('#st4').addClass('success');
+				$('#st4').removeClass('active');
+			   }
+	
+	
+		}
+	
 
 		//$('#st2').addClass('success');
 	}
 	Previoushtird() {
 		debugger
 		
-		this.singal = false;
+		
+		if(this.urlid)
+		{
+			this.CourseSchedulerService.getById(this.CourseEntity.CourseId, this.globals.authData.UserId)
+			.then((data) => {
+				debugger
+				this.singal = false;
 		this.firstform = false;
 		this.secondform = false;
 		this.thirdform = true;
 		this.forthform = false;
-		$('#st3').removeClass('disabled');
-				$('#st3').addClass('active');
-				$('#step3').addClass('active');
-				$('#step4').removeClass('active');
-				$('#st4').addClass('disabled');
-				$('#st4').removeClass('active');
-				$('#st3').removeClass('success');
-		// this.CourseService.getByTopicId(this.CourseEntity.CourseId)
-		// 	.then((data) => {
-		// 		debugger
+		//$('#st3').removeClass('disabled');
+		$('#st3').addClass('active');
+		$('#step3').addClass('active');
+		$('#st3').removeClass('success');
+		if(this.tab1==true)
+		{
+		$('#step1').removeClass('active');
+		$('#st1').addClass('success');
+		$('#st1').removeClass('active');
+		}
+		if(this.tab2==true)
+		{
+		$('#step2').removeClass('active');
+		$('#st2').addClass('success');
+		$('#st2').removeClass('active');
+		}
+		if(this.tab4==true)
+		{
+		$('#step4').removeClass('active');
+		$('#st4').addClass('success');
+		$('#st4').removeClass('active');
+		}
+				this.schedularList = data['coursesession'];
+				for (var i = 0; i < this.array_data.length; i++) {
+					this.stateList[i] = this.stateList_temp;
+					this.schedularList[i].checkvalid = true;
+					if (this.schedularList[i].IsActive == 0) { this.schedularList[i].IsActive = 0; } else { this.schedularList[i].IsActive = '1'; }
+					if (this.schedularList[i].monday =="0") { this.schedularList[i].monday = 0; } else { this.schedularList[i].monday = '1'; }
+					if( this.schedularList[i].tuesday== "0") { this.schedularList[i].tuesday = 0; } else { this.schedularList[i].tuesday = '1'; }
+					if (this.schedularList[i].wednesday == "0") { this.schedularList[i].wednesday = 0; } else { this.schedularList[i].wednesday = '1'; }
+					if (this.schedularList[i].thursday == "0") { this.schedularList[i].thursday = 0; } else { this.schedularList[i].thursday = '1'; }
+					if (this.schedularList[i].friday =="0") { this.schedularList[i].friday = 0; } else { this.schedularList[i].friday = '1'; }
+					if (this.schedularList[i].saturday == "0") { this.schedularList[i].saturday = 0; } else { this.schedularList[i].saturday = '1'; }
+					if (this.schedularList[i].sunday == "0") { this.schedularList[i].sunday = 0; } else { this.schedularList[i].sunday = '1'; }
+				}
+			
+				this.globals.isLoading = false;
 
-		// 		this.CourseFormList = data;
-		// 		$('#st2').removeClass('disabled');
-		// 		$('#st2').addClass('active');
-		// 		$('#step2').addClass('active');
-		// 		$('#step3').removeClass('active');
-		// 		$('#st3').addClass('disabled');
-		// 		$('#st3').removeClass('active');
-		// 		$('#st2').removeClass('success');
-		// 		for (var i = 0; i < this.CourseFormList.length; i++) {
-		// 			for (var j = 0; j < this.CourseFormList[i].subtopic.length; j++) {
-		// 				$('#MulVideoiconn' + i + j + ' input[type="text"]').val(this.CourseFormList[i].subtopic[j].Video);
-		// 				setTimeout(function () {
+				setTimeout(function () {
+					$(".instructorfocus").addClass('filled');
+					$(".instructorfocus").parents('.form-group').addClass('focused');
+					$('.form_time_picker').datetimepicker({
+						weekStart: 1,
+						todayBtn: 0,
+						autoclose: true,
+						todayHighlight: 0,
+						startView: 1,
+						//minView: 1,
+						//maxView: 1,
+						forceParse: 0,
+						
+						format: 'HH:ii P',
+						showMeridian: true,
+						pickDate: false,
+						pickTime: true,
+						pickerPosition: 'top-left'
+					});
 
-		// 					myInput();
-		// 				}, 100);
+					// $('.form_time_picker').click(function () {
+					// 	$('.switch').addClass('no_time_click');
+					// });
+					$('.form_time_picker').click(function () {
+						$('.table-condensed thead tr').empty();
+						$('.table-condensed thead tr').append('<th class="switch no_time_click">Pick Time</th>');
+					});
+					myInput();
+				}, 100);
+				setTimeout(function () {
+					$('.form_date').datetimepicker({
+						weekStart: 1,
+						todayBtn: 1,
+						autoclose: 1,
+						todayHighlight: 1,
+						startDate: '-0d',
+						startView: 2,
+						minView: 2,
+						forceParse: 0,
+						pickTime: false,
+						format: 'yyyy/mm/dd',
+					});
+				}, 100);
 
-		// 			}
-		// 		}
+
+
+			},
+				(error) => {
+					//alert('error');
+					this.btn_disable = false;
+					this.submitted = false;
+					//this.router.navigate(['/pagenotfound']);
+				});
+		}
+		else
+		{
+			//  $('#st3').addClass('active');
+			this.singal = false;
+		this.firstform = false;
+		this.secondform = false;
+		this.thirdform = true;
+		this.forthform = false;
+		//$('#st3').removeClass('disabled');
+		$('#st3').addClass('active');
+		$('#step3').addClass('active');
+		$('#st3').removeClass('success');
+		if(this.tab1==true)
+		{
+		$('#step1').removeClass('active');
+		$('#st1').addClass('success');
+		$('#st1').removeClass('active');
+		}
+		if(this.tab2==true)
+		{
+		$('#step2').removeClass('active');
+		$('#st2').addClass('success');
+		$('#st2').removeClass('active');
+		}
+		if(this.tab4==true)
+		{
+		$('#step4').removeClass('active');
+		$('#st4').addClass('success');
+		$('#st4').removeClass('active');
+		}
+		}
+	
+		
+	}
+	Previousfour() {
+		debugger
+		this.CourseEntity.CourseId;
+		this.firstform = false;
+		this.secondform = false;
+		this.thirdform = false;
+		this.forthform = true;
+		//success
 
 
 
-		// 	},
-		// 		(error) => {
-		// 			//alert('error');
-		// 			this.btn_disable = false;
-		// 			this.submitted = false;
-		// 			//this.router.navigate(['/pagenotfound']);
-		// 		});
-
-		//$('#st2').addClass('success');
+		//$('#st1').removeClass('disabled');
+		$('#st4').addClass('active');
+		$('#st4').removeClass('success');
+		$('#step4').addClass('active');
+		if(this.tab2==true)
+		{
+		$('#step2').removeClass('active');
+		$('#st2').addClass('success');
+		$('#st2').removeClass('active');
+		}
+		if(this.tab1==true)
+		{
+		$('#step1').removeClass('active');
+		$('#st1').addClass('success');
+		$('#st1').removeClass('active');
+		}
+		if(this.tab3==true)
+		{
+		$('#step3').removeClass('active');
+		$('#st3').addClass('success');
+		$('#st3').removeClass('active');
+		}
 	}
 	DeleteTopic(item) {
 		debugger
@@ -1430,12 +1644,11 @@ export class CourseComponent implements OnInit {
 										$('#MulVideoiconn' + i + j + ' input[type="text"]').val(this.CourseFormList[i].subtopic[j].Video);
 									}
 								}
-								$('#st2').removeClass('disabled');
+					
 								$('#st2').addClass('active');
 								$('#step2').addClass('active');
 								$('#step1').removeClass('active');
-							
-								$('#st1').addClass('disabled');
+							   this.tab2=true;
 								$('#st1').addClass('success');
 								$('#st2').removeClass('success');
 								$('#st1').removeClass('active');
@@ -1459,17 +1672,18 @@ export class CourseComponent implements OnInit {
 						this.btn_disable = true;
 						this.submitted = false;
 						this.globals.isLoading = false;
-						$('#st2').removeClass('disabled');
+						this.tab2=true;
+
+					} setTimeout(function () {
+						//$('#st2').removeClass('disabled');
 						$('#st2').addClass('active');
 						$('#step2').addClass('active');
 						$('#step1').removeClass('active');
-						$('#st1').addClass('disabled');
+					//	$('#st1').addClass('disabled');
 						$('#st1').addClass('success');
 						$('#st2').removeClass('success');
 						$('#st1').removeClass('active');
-
-
-					} setTimeout(function () {
+						this.tab1=true;
 						$('.modal').on('shown.bs.modal', function () {
 							$('.right_content_block').addClass('style_position');
 						})
@@ -1647,14 +1861,15 @@ export class CourseComponent implements OnInit {
 					this.CourseFormList = data['Courselist'];
 
 					this.editsave = true;
-					$('#st3').removeClass('disabled');
-					$('#st3').addClass('active');
+					//$('#st3').removeClass('disabled');
+					this.tab3=true;
+					
 					$('#step3').addClass('active');
 					$('#step2').removeClass('active');
 					$('#st2').addClass('success');
-					$('#st2').addClass('disabled');
+				//	$('#st2').addClass('disabled');
 					$('#st2').removeClass('active');
-
+					$('#st3').addClass('active');
 				},
 					(error) => {
 						this.btn_disable = false;
@@ -1786,15 +2001,16 @@ export class CourseComponent implements OnInit {
 			this.CourseService.edittopic(addt)
 				.then((data) => {
 					var course_id = data;
-
-					$('#st3').removeClass('disabled');
-					$('#st3').addClass('active');
+					this.addSession(course_id);
+					this.tab3=true;
+					$('#st3').removeClass('success');
 					$('#step3').addClass('active');
 					$('#step2').removeClass('active');
-					$('#st2').addClass('disabled');
-					$('#st2').removeClass('active');
 					$('#st2').addClass('success');
-					this.addSession(course_id);
+				//	$('#st2').addClass('disabled');
+					$('#st2').removeClass('active');
+					$('#st3').addClass('active');
+				
 					this.globals.isLoading = false;
 					this.btn_disable = false;
 					this.submitted = false;
@@ -1927,7 +2143,7 @@ export class CourseComponent implements OnInit {
 		// 'MonthDay':'','EveryMonth':'','WeekDay':'','WhichWeekDay':'','EveryMonth2':'','EveryYears':'','YearlyIsStatus':'','Month':'',
 		// 'YearlyWeekDay':'','YearlyWhichWeekDay':'','YearlyMonth':'','StartDate':'','EndIsStatus':'','NoOfOccurences':'','EndDate':'','Documenticon': [], 'MulVideoicon': [] };
 		var item = {
-			'IsActive':1,'SessionName': '', 'StartTime': '', 'EndTime': '',
+			'IsActive':1,'SessionName': 'Session', 'StartTime': '', 'EndTime': '',
 			'Location': '', 'StartDate': '', 'EndDate': '', 'Instructor': '','Instructorone':'', 'CountryId': '', 'StateId': '',
 			'CourseCloseDate': '', 'Showstatus': '0', 'TotalSeats': '', 'Check': false, 'CourseSessionId': '0'
 		};
@@ -2213,11 +2429,12 @@ export class CourseComponent implements OnInit {
 					this.addbadges();
 					//	this.router.navigate(['/instructor-courses']);
 					this.globals.isLoading = false;
-					$('#st4').removeClass('disabled');
-					$('#st4').addClass('active');
+				//	$('#st4').removeClass('disabled');
+				 this.tab4=true;
+				 $('#st4').removeClass('success');
+					 $('#st4').addClass('active');
 					$('#step4').addClass('active');
 					$('#step3').removeClass('active');
-					$('#st3').addClass('disabled');
 					$('#st3').removeClass('active');
 					$('#st3').addClass('success');
 
