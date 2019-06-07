@@ -401,11 +401,13 @@ export class CourseComponent implements OnInit {
 				$('#st2').addClass('success');
 				$('#st1').addClass('success');
 				$('#st4').addClass('success');
+				$('#st5').addClass('success');
 					}
 					else{
 					$('#st2').addClass('success');
 					$('#st3').addClass('success');
 					$('#st4').addClass('success');
+					$('#st5').addClass('success');
 				}
 					this.CourseEntity = data;
 					if (data['IsActive'] == 0) { this.CourseEntity.IsActive = 0; } else { this.CourseEntity.IsActive = '1'; }
