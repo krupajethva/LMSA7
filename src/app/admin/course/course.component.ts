@@ -350,6 +350,9 @@ export class CourseComponent implements OnInit {
 				this.VideoList = data['video'];
 				this.DefalutBadges = data['defalutbadge'];
 
+				this.BadgesEntity.BadgeImageId=this.DefalutBadges[0].ResourcesId;
+				this.BadgesEntity.ResourcesId=this.DefalutBadges[0].ResourcesId;
+
 			},
 				(error) => {
 					//	alert('error');
@@ -697,7 +700,7 @@ export class CourseComponent implements OnInit {
 	replaceBadges(Badge){
 		this.BadgesEntity.BadgeImageId = Badge.ResourcesId;
 		this.BadgesEntity.ResourcesId=Badge.ResourcesId;
-		alert(this.BadgesEntity.BadgeImageId);
+	//	alert(this.BadgesEntity.BadgeImageId);
 	}
 	imagemodalshow()
 	{
@@ -2472,43 +2475,57 @@ export class CourseComponent implements OnInit {
 			this.CourseSchedulerEntity.CourseId;
 		}
 		this.CourseSchedulerEntity.CreatedBy = this.globals.authData.UserId;
-
-
-		// this.CourseSchedulerEntity.CourseSessionId=0;
-		// this.CourseSchedulerEntity.CourseId=2;
-
 		if (CourseFormSession.valid && count == 0  && Wday>0) {
 			this.globals.isLoading = true;
 			this.btn_disable = true;
 			var addt = { 'schedularList': this.schedularList, 'course': this.CourseSchedulerEntity };
-			this.CourseSchedulerService.addScheduler(addt)
-				.then((data) => {
-					this.btn_disable = false;
-					this.submitted = false;
-					this.globals.isLoading = false;
-					//	this.CourseSchedulerEntity = {};
-					CourseFormSession.form.markAsPristine();
-					// if (id) {
-					// 	swal({
+			// this.CourseSchedulerService.addScheduler(addt)
+			// 	.then((data) => {
+			// 		this.btn_disable = false;
+			// 		this.submitted = false;
+			// 		this.globals.isLoading = false;
+			// 		//	this.CourseSchedulerEntity = {};
+			// 		CourseFormSession.form.markAsPristine();
+			// 		// if (id) {
+			// 		// 	swal({
 
-					// 		type: 'success',
-					// 		title: 'Updated!',
-					// 		text: 'Course Session has been Updated Successfully!',
-					// 		showConfirmButton: false,
-					// 		timer: 1500
-					// 	})
-					// 	this.globals.isLoading = false;
-					// } else {
-					// 	swal({
+			// 		// 		type: 'success',
+			// 		// 		title: 'Updated!',
+			// 		// 		text: 'Course Session has been Updated Successfully!',
+			// 		// 		showConfirmButton: false,
+			// 		// 		timer: 1500
+			// 		// 	})
+			// 		// 	this.globals.isLoading = false;
+			// 		// } else {
+			// 		// 	swal({
 
-					// 		type: 'success',
-					// 		title: 'Added!',
-					// 		text: 'Course Session has been Added Successfully!',
-					// 		showConfirmButton: false,
-					// 		timer: 1500
-					// 	})
-						//this.globals.isLoading = false;
-					//}
+			// 		// 		type: 'success',
+			// 		// 		title: 'Added!',
+			// 		// 		text: 'Course Session has been Added Successfully!',
+			// 		// 		showConfirmButton: false,
+			// 		// 		timer: 1500
+			// 		// 	})
+			// 			//this.globals.isLoading = false;
+			// 		//}
+			// 		this.addbadges();
+			// 		//	this.router.navigate(['/instructor-courses']);
+			// 		this.globals.isLoading = false;
+			// 	//	$('#st4').removeClass('disabled');
+			// 	 this.tab4=true;
+			// 	 $('#st4').removeClass('success');
+			// 		 $('#st4').addClass('active');
+			// 		$('#step4').addClass('active');
+			// 		$('#step3').removeClass('active');
+			// 		$('#st3').removeClass('active');
+			// 		$('#st3').addClass('success');
+
+
+			// 	},
+			// 		(error) => {
+			// 			this.btn_disable = false;
+			// 			this.submitted = false;
+			// 			this.globals.isLoading = false;
+			// 		});
 					this.addbadges();
 					//	this.router.navigate(['/instructor-courses']);
 					this.globals.isLoading = false;
@@ -2520,14 +2537,6 @@ export class CourseComponent implements OnInit {
 					$('#step3').removeClass('active');
 					$('#st3').removeClass('active');
 					$('#st3').addClass('success');
-
-
-				},
-					(error) => {
-						this.btn_disable = false;
-						this.submitted = false;
-						this.globals.isLoading = false;
-					});
 
 		} else {
 			this.globals.isLoading = false;
@@ -2911,7 +2920,7 @@ export class CourseComponent implements OnInit {
 		$('#myModal3').modal('hide');
 
 		$('#badgeImage').change(function (e) {
-			alert('a');
+			// alert('a');
 			
 			var file = e.target.files[0];
 			var reader = new FileReader();
@@ -2922,7 +2931,7 @@ export class CourseComponent implements OnInit {
 			  $(".link").text(reader.result);
 			}
 			this.BadgesEntity.Dataurl=reader.readAsDataURL(file);
-			alert(this.BadgesEntity.Dataurl);
+			//alert(this.BadgesEntity.Dataurl);
 		  });
 	}
 	Browseshow() {

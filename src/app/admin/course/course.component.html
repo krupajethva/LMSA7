@@ -1124,27 +1124,23 @@
                                           </div>
                                         </div>
 
-
+                                        <!-- lerner can inform checked email -->
                                         <div class="max_student" *ngIf="schedularList[i].checkvalid && schedularList[i].enroll>0 && schedularList[i].PublishStatus!='0'">
-                                          <!-- <div class="form-group focused label_head">
-                                            <label class="focus_label">
-                                              <span>*</span>Max Student</label>
-                                          <div class="clearfix"></div>
-                                          </div> -->
                                           <div class="form-group">
                                             <div class="check_box checkBoxClass">
                                               <input type="checkbox" class="checkbox_check" [(ngModel)]="schedularList[i].Check" name="Check{{i}}" id="Check{{i}}">
                                               <label for="Check{{i}}" class="checkboxbtn_label">lerner can inform checked email</label>
                                             </div>
                                           </div>
-                                        </div>
-                                        <button type="button"  [disabled]=" schedularList[i].IsActive==0" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid"
+                                        </div> 
+                                             <!-- hide buuton session wise -->
+                                        <!-- <button type="button"  [disabled]=" schedularList[i].IsActive==0" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid"
                                           class="next_btn pull-right">
                                           <span>Publish</span>
                                         </button>
                                         <button type="button" *ngIf="schedularList[i].CourseSessionId==0" (click)="addsinglesession(CourseFormSession,form,i)" class="back_btn pull-right">
                                           <span>Save as draft</span>
-                                        </button>
+                                        </button> -->
                                       </div>
                                       <div class="clearfix"></div>
 
@@ -1356,6 +1352,7 @@
                               <li class="pull-left">
                                 <button type="button" class="prev-step next_btn" (click)="Previoushtird()">Previous</button>
                               </li>
+                              
                               <!-- <li class="actions">
                                   <button type="button" class="back_btn" (click)="AddCouseSession()">Add</button>
                                 </li> -->
