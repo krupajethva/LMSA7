@@ -53,3 +53,36 @@ ERROR - 2019-06-07 10:29:50 --> Severity: Warning --> mysqli::real_connect(): (H
 ERROR - 2019-06-07 10:29:50 --> Unable to connect to the database
 ERROR - 2019-06-07 10:29:50 --> Unable to connect to the database
 ERROR - 2019-06-07 10:29:50 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:03 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:03 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:03 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:03 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:03 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:03 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:03 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:03 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:03 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:03 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:03 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:03 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:22 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:22 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:22 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:22 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:22 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:22 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:22 --> Severity: Warning --> mysqli::real_connect(): (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ C:\wamp64\www\LMSA7\api\system\database\drivers\mysqli\mysqli_driver.php 201
+ERROR - 2019-06-07 11:16:22 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:22 --> Unable to connect to the database
+ERROR - 2019-06-07 11:16:22 --> Unable to connect to the database

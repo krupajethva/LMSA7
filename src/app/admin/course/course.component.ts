@@ -20,6 +20,7 @@ export class CourseComponent implements OnInit {
 	singal;
 	secondform;
 	thirdform;
+	fifthform;
 	CourseEntity;
 	ImageEntity;
 	SubCategoryList;
@@ -1195,6 +1196,12 @@ export class CourseComponent implements OnInit {
 		$('#st4').addClass('success');
 		$('#st4').removeClass('active');
 		}
+		if(this.tab5==true)
+		{
+		$('#step5').removeClass('active');
+		$('#st5').addClass('success');
+		$('#st5').removeClass('active');
+		}
 	}
 	Previoussecond() {
 		debugger
@@ -1232,6 +1239,12 @@ export class CourseComponent implements OnInit {
 				$('#step4').removeClass('active');
 				$('#st4').addClass('success');
 				$('#st4').removeClass('active');
+				}
+				if(this.tab5==true)
+				{
+				$('#step5').removeClass('active');
+				$('#st5').addClass('success');
+				$('#st5').removeClass('active');
 				}
 			
 				for (var i = 0; i < this.CourseFormList.length; i++) {
@@ -1286,6 +1299,12 @@ export class CourseComponent implements OnInit {
 				$('#st4').addClass('success');
 				$('#st4').removeClass('active');
 			   }
+			   if(this.tab5==true)
+			   {
+			   $('#step5').removeClass('active');
+			   $('#st5').addClass('success');
+			   $('#st5').removeClass('active');
+			   }
 	
 	
 		}
@@ -1328,6 +1347,12 @@ export class CourseComponent implements OnInit {
 		$('#step4').removeClass('active');
 		$('#st4').addClass('success');
 		$('#st4').removeClass('active');
+		}
+		if(this.tab5==true)
+		{
+		$('#step5').removeClass('active');
+		$('#st5').addClass('success');
+		$('#st5').removeClass('active');
 		}
 				this.schedularList = data['coursesession'];
 				for (var i = 0; i < this.array_data.length; i++) {
@@ -1429,6 +1454,12 @@ export class CourseComponent implements OnInit {
 		$('#st4').addClass('success');
 		$('#st4').removeClass('active');
 		}
+		if(this.tab5==true)
+		{
+		$('#step5').removeClass('active');
+		$('#st5').addClass('success');
+		$('#st5').removeClass('active');
+		}
 		}
 	
 		
@@ -1465,6 +1496,53 @@ export class CourseComponent implements OnInit {
 		$('#step3').removeClass('active');
 		$('#st3').addClass('success');
 		$('#st3').removeClass('active');
+		}
+		if(this.tab5==true)
+		{
+		$('#step5').removeClass('active');
+		$('#st5').addClass('success');
+		$('#st5').removeClass('active');
+		}
+	}
+	Previousfive() {
+		debugger
+		this.CourseEntity.CourseId;
+		this.firstform = false;
+		this.secondform = false;
+		this.thirdform = false;
+		this.forthform = false;
+		this.fifthform = true;
+		//success
+
+
+
+		//$('#st1').removeClass('disabled');
+		$('#st5').addClass('active');
+		$('#st5').removeClass('success');
+		$('#step5').addClass('active');
+		if(this.tab2==true)
+		{
+		$('#step2').removeClass('active');
+		$('#st2').addClass('success');
+		$('#st2').removeClass('active');
+		}
+		if(this.tab1==true)
+		{
+		$('#step1').removeClass('active');
+		$('#st1').addClass('success');
+		$('#st1').removeClass('active');
+		}
+		if(this.tab3==true)
+		{
+		$('#step3').removeClass('active');
+		$('#st3').addClass('success');
+		$('#st3').removeClass('active');
+		}
+		if(this.tab4==true)
+		{
+		$('#step4').removeClass('active');
+		$('#st4').addClass('success');
+		$('#st4').removeClass('active');
 		}
 	}
 	DeleteTopic(item) {
