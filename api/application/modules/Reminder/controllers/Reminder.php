@@ -35,7 +35,6 @@ class Reminder extends CI_Controller
 						$FollowerUserId = explode(",",$users->UserId);
 							foreach($FollowerUserId as $id){
 								array_push($ress,$id);
-								
 							}
 							foreach($ress as $id)
 							{

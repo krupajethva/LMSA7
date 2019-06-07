@@ -37,4 +37,6 @@ class Coursebeforereminders extends CI_Controller
         $res = $data->result();
         echo json_encode($res);
     }
+
+  
 }
