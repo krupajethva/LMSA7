@@ -39,8 +39,8 @@
             <div class="wizard-inner">
               <!-- <div class="connecting-line"></div> -->
 
-              <ul class="nav nav-tabs pull-left" role="tablist" >
-                <li role="presentation" class="active"  (click)="Previousfirst()"  id="st1">
+              <ul class="nav nav-tabs pull-left" role="tablist">
+                <li role="presentation" class="active" (click)="Previousfirst()" id="st1">
                   <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab">
                     <span class="round-tab">
                       <i class="fa fa-file" aria-hidden="true"></i> Course Detail 2
@@ -49,15 +49,15 @@
                   </a>
                 </li>
 
-        
-                <li role="presentation"  *ngIf="tab2"  (click)="Previoussecond()" class="success" id="st2">
+
+                <li role="presentation" *ngIf="tab2" (click)="Previoussecond()" class="success" id="st2">
                   <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab">
                     <span class="round-tab">
                       <i class="fa fa-file-text" aria-hidden="true"></i> Course Topic
                     </span>
                   </a>
                 </li>
-                <li role="presentation"  *ngIf="!tab2" class="disabled"  id="st2">
+                <li role="presentation" *ngIf="!tab2" class="disabled" id="st2">
                   <a>
                     <span class="round-tab">
                       <i class="fa fa-file-text" aria-hidden="true"></i> Course Topic
@@ -65,8 +65,8 @@
                     </span>
                   </a>
                 </li>
-     
-                <li role="presentation"  *ngIf="tab3"  (click)="Previoushtird()"  id="st3">
+
+                <li role="presentation" *ngIf="tab3" (click)="Previoushtird()" id="st3">
                   <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab">
                     <span class="round-tab">
                       <i class="fa fa-file-video-o" aria-hidden="true"></i> Course Session
@@ -74,7 +74,7 @@
                     </span>
                   </a>
                 </li>
-                <li role="presentation" *ngIf="!tab3"  class="disabled" id="st3">
+                <li role="presentation" *ngIf="!tab3" class="disabled" id="st3">
                   <a>
                     <span class="round-tab">
                       <i class="fa fa-file-video-o" aria-hidden="true"></i> Course Session
@@ -83,28 +83,28 @@
                   </a>
                 </li>
 
-                <li role="presentation"   *ngIf="tab4" id="st4">
+                <li role="presentation" *ngIf="tab4" id="st4">
                   <a href="#step4" data-toggle="tab" aria-controls="step4" (click)="Previousfour()" role="tab">
                     <span class="round-tab">
                       <i class="fa fa-certificate"></i> Badges
                     </span>
                   </a>
                 </li>
-                <li role="presentation"  *ngIf="!tab4"  class="disabled" id="st4">
+                <li role="presentation" *ngIf="!tab4" class="disabled" id="st4">
                   <a>
                     <span class="round-tab">
                       <i class="fa fa-certificate"></i> Badges
                     </span>
                   </a>
                 </li>
-                <li role="presentation"   *ngIf="tab5" id="st5">
+                <li role="presentation" *ngIf="tab5" id="st5">
                   <a href="#step5" data-toggle="tab" aria-controls="step5" (click)="Previousfive()" role="tab">
                     <span class="round-tab">
                       <i class="fa fa-certificate"></i> Confirmation
                     </span>
                   </a>
                 </li>
-                <li role="presentation"  *ngIf="!tab5"  class="disabled" id="st5">
+                <li role="presentation" *ngIf="!tab5" class="disabled" id="st5">
                   <a>
                     <span class="round-tab">
                       <i class="fa fa-certificate"></i> Confirmation
@@ -112,7 +112,7 @@
                   </a>
                 </li>
               </ul>
-      
+
               <div class="form-group-active pull-right" [hidden]="!firstform">
                 <label>
                   <span>*</span>Active?</label>
@@ -210,8 +210,8 @@
                                 <div class="form-group">
                                   <label>
                                     <span class="required">*</span>Assessment Time</label>
-                                  <input type="text"   #AssessmentTime="ngModel" [(ngModel)]="CourseEntity.AssessmentTime"
-                                    class="form-control" name="AssessmentTime" [ngClass]="{red_border: (AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)}"
+                                  <input type="text" #AssessmentTime="ngModel" [(ngModel)]="CourseEntity.AssessmentTime" class="form-control" name="AssessmentTime"
+                                    [ngClass]="{red_border: (AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)}"
                                     required />
                                   <span class="error_span" *ngIf="(AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)">
                                     <span *ngIf="AssessmentTime.errors && AssessmentTime.errors.required">
@@ -280,7 +280,7 @@
                                 </div>
 
 
-                                
+
                                 <!-- Trigger the modal with a button -->
                                 <!-- <button type="button" class="select_button btn btn-info" data-toggle="modal" data-target="#myModal">Select Image</button> -->
 
@@ -631,11 +631,11 @@
                                                 <label>
                                                   <span>*</span>Duration </label>
                                                 <div class="time_number">
-                                                  <input type="number"  max="999" class="form-control" placeholder="hh" #hh="ngModel" [(ngModel)]="form.subtopic[j].hh"
-                                                    name="hh{{i}}{{j}}"  />:
-                                                  <input type="number"  max="59" class="form-control" placeholder="mm" #mm="ngModel" [(ngModel)]="form.subtopic[j].mm"
-                                                    name="mm{{i}}{{j}}"  />
-                                              
+                                                  <input type="number" max="999" class="form-control" placeholder="hh" #hh="ngModel" [(ngModel)]="form.subtopic[j].hh" name="hh{{i}}{{j}}"
+                                                  />:
+                                                  <input type="number" max="59" class="form-control" placeholder="mm" #mm="ngModel" [(ngModel)]="form.subtopic[j].mm" name="mm{{i}}{{j}}"
+                                                  />
+
                                                 </div>
                                                 <span class="error_span" *ngIf="CourseFormList[i].subtopic[j].TimeValid">
                                                   Please enter sub topic duration
@@ -818,15 +818,15 @@
                                 <div id="collapseOne1{{i}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'headingOne12'+i">
                                   <div class="panel-body">
                                     <div class="row">
-                                        <div class="course-active pull-right">
-                                            <label>
-                                              <span>*</span>Active?</label>
-                                            <div class="activeyes_box" [ngClass]="{dis_btn: schedularList[i].SessionStatus>0}" 
-                                             dis_btn>
-                                          <input type="checkbox" name="IsActive{{i}}"  [disabled]="schedularList[i].SessionStatus>0" id="IsActive{{i}}" value="yes"  #IsActive="ngModel" [(ngModel)]="schedularList[i].IsActive">
-                                              <label for="IsActive{{i}}"></label>
-                                            </div>
-                                          </div>
+                                      <div class="course-active pull-right">
+                                        <label>
+                                          <span>*</span>Active?</label>
+                                        <div class="activeyes_box" [ngClass]="{dis_btn: schedularList[i].SessionStatus>0}" dis_btn>
+                                          <input type="checkbox" name="IsActive{{i}}" [disabled]="schedularList[i].SessionStatus>0" id="IsActive{{i}}" value="yes"
+                                            #IsActive="ngModel" [(ngModel)]="schedularList[i].IsActive">
+                                          <label for="IsActive{{i}}"></label>
+                                        </div>
+                                      </div>
                                       <div class="col-md-12 col-sm-12">
                                         <div class="Appointment_section">
                                           <div class="form-group focused label_head">
@@ -949,11 +949,11 @@
                                           </div>
                                           <div class="row">
                                             <div class="col-md-6 col-sm-6">
-                                              <div class="form-group" >
+                                              <div class="form-group">
                                                 <label>
                                                   <span>*</span>Choose your Primary Instructor</label>
-                                                <select [disabled]="globals.authData.RoleId==3" #Instructorone="ngModel" class="form-control" [(ngModel)]="schedularList[i].Instructorone" name="Instructorone{{i}}"
-                                                  required>
+                                                <select [disabled]="globals.authData.RoleId==3" #Instructorone="ngModel" class="form-control" [(ngModel)]="schedularList[i].Instructorone"
+                                                  name="Instructorone{{i}}" required>
                                                   <option value="" ngSelected='schedularList[i].Instructorone==""'>Select</option>
                                                   <ng-container *ngFor="let Instructorl of InstructorListone;let l = index ">
                                                     <option value="{{Instructorl.value}}" ngSelected="schedularList[i].Instructorone==Instructorl.value">{{Instructorl.label}}</option>
@@ -969,7 +969,7 @@
                                             <div class="col-md-6 col-sm-6">
                                               <div class="form-group">
                                                 <label>
-                                                  <span class="required">*</span>Choose Additional  Instructor</label>
+                                                  <span class="required">*</span>Choose Additional Instructor</label>
                                                 <ng-select filterPlaceholder="Type to search..." [options]="InstructorList" name="Instructor{{i}}" [multiple]="true" [(ngModel)]="schedularList[i].Instructor"
                                                   notFoundMsg="Not Instructor found" class="form-group instructorfocus">
                                                 </ng-select>
@@ -1159,8 +1159,8 @@
 
                           </div>
 
-                          <div class="col-md-12 col-sm-12 text-center" >
-                            <button type="button" class="back_btn"  [disabled]="validadd" (click)="AddNewSession(CourseFormSession)">Add</button>
+                          <div class="col-md-12 col-sm-12 text-center">
+                            <button type="button" class="back_btn" [disabled]="validadd" (click)="AddNewSession(CourseFormSession)">Add</button>
                           </div>
                         </form>
                       </div>
@@ -1203,7 +1203,7 @@
                                     <span>*</span>Enter your badge letters</label>
                                   <input type="text" pattern="[A-Za-z.'-.]{2,7}" maxlength="100" #badgeletter="ngModel" [(ngModel)]="BadgesEntity.badgeletter"
                                     class="form-control" name="badgeletter" [ngClass]="{red_border: (badgeletter.dirty && badgeletter.invalid) || (badgeletter.pristine && submitted)}"
-                                     />
+                                  />
                                   <span class="error_span" *ngIf="(badgeletter.dirty && badgeletter.invalid) || (badgeletter.pristine && submitted)">
                                     <span *ngIf="badgeletter.errors && badgeletter.errors.required">
                                       Please enter badge letters
@@ -1367,6 +1367,188 @@
                         </div>
                       </div>
                     </form>
+                  </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="step5">
+                  <div class="content_block confimation_block">
+                    <div class="firstform_confirmation">
+                      <div class="form-group focused label_head">
+                        <label class="focus_label">
+                          <span>*</span>Course Detail</label>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-2">
+                          <h6>Category</h6>
+                          <p>PHP</p>
+                        </div>
+                        <div class="col-md-6">
+                          <h6>Course Name</h6>
+                          <p>Angular Material 2 Design For Programmers and CSS Newbies</p>
+                        </div>
+                        <div class="col-md-2">
+                          <h6>Course Price</h6>
+                          <p>$25</p>
+                        </div>
+                        <div class="col-md-2">
+                          <h6>Assessment Time</h6>
+                          <p>12:10:55</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="secondform_confirmation">
+                      <div class="form-group focused label_head">
+                        <label class="focus_label">
+                          <span>*</span>Course Topic</label>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <h6>Topic Name</h6>
+                          <p>Course topic name</p>
+                        </div>
+                        <div class="col-md-4">
+                          <h6>Topic Name</h6>
+                          <p>Course topic name</p>
+                        </div>
+                        <div class="col-md-4">
+                          <h6>Topic Name</h6>
+                          <p>Course topic name</p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-md-4">
+                          <h6>Topic Name</h6>
+                          <p>Course topic name</p>
+                        </div>
+                        <div class="col-md-4">
+                          <h6>Topic Name</h6>
+                          <p>Course topic name</p>
+                        </div>
+                        <div class="col-md-4">
+                          <h6>Topic Name</h6>
+                          <p>Course topic name</p>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="thirdform_confirmation">
+                      <div class="form-group focused label_head">
+                        <label class="focus_label">
+                          <span>*</span>Course Session</label>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <h3>Appointment Time</h3>
+                          <ul>
+                            <li>
+                              <h6>Session Name</h6>
+                              <p>Session One</p>
+                            </li>
+                            <li>
+                              <h6>Start Time</h6>
+                              <p>09:45 AM</p>
+                            </li>
+                            <li>
+                              <h6>End Time</h6>
+                              <p>09:45 PM</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-2">
+                          <h3>Recurring Course</h3>
+                          <ul>
+                            <li>
+                              <h6>Location</h6>
+                              <p>Vadodara</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-3">
+                          <h3>Range of recurrence</h3>
+                          <ul>
+                            <li>
+                              <h6>Start Date</h6>
+                              <p>2019-06-03</p>
+                            </li>
+                            <li>
+                              <h6>End Date</h6>
+                              <p>2019-06-03</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-3 confrm_btn_group">
+                          <button class="next_btn pull-right" type="button">
+                            <span>Save</span>
+                          </button>
+                          <button class="back_btn pull-right" type="button">
+                            <span>Publish</span>
+                          </button>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <h3>Appointment Time</h3>
+                          <ul>
+                            <li>
+                              <h6>Session Name</h6>
+                              <p>Session One</p>
+                            </li>
+                            <li>
+                              <h6>Start Time</h6>
+                              <p>09:45 AM</p>
+                            </li>
+                            <li>
+                              <h6>End Time</h6>
+                              <p>09:45 PM</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-2">
+                          <h3>Recurring Course</h3>
+                          <ul>
+                            <li>
+                              <h6>Location</h6>
+                              <p>Vadodara</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-3">
+                          <h3>Range of recurrence</h3>
+                          <ul>
+                            <li>
+                              <h6>Start Date</h6>
+                              <p>2019-06-03</p>
+                            </li>
+                            <li>
+                              <h6>End Date</h6>
+                              <p>2019-06-03</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-3 confrm_btn_group">
+                          <button class="next_btn pull-right" type="button">
+                            <span>Save</span>
+                          </button>
+                          <button class="back_btn pull-right" type="button">
+                            <span>Publish</span>
+                          </button>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 text-center">
+                      <button class="next_btn" type="button">
+                        <span>Submit</span>
+                      </button>
+                    </div>
+                    <div class="clearfix"></div>
                   </div>
                 </div>
               </div>
