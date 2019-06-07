@@ -2807,6 +2807,19 @@ margin-bottom: 15px;}
 .white_shadow_box .course_forum_block{margin-bottom: 0px;}
 /* ------- end settings page css ------- */
 
+
+/* Start Course Confirmation Css */
+.confimation_block .firstform_confirmation,.confimation_block .secondform_confirmation,.confimation_block .thirdform_confirmation{background: #fbfbfb;padding: 10px;border: 1px solid #cccccc;margin: 20px 0px;float: left;width: 100%;}
+.confimation_block .thirdform_confirmation h3{color: #78c2d7;font-size: 16px;}
+.confimation_block .firstform_confirmation h6,.confimation_block .secondform_confirmation h6,.confimation_block .thirdform_confirmation h6{font-size: 14px;font-weight: 600;color: #102749;}
+.confimation_block .firstform_confirmation p,.confimation_block .secondform_confirmation p,.confimation_block .thirdform_confirmation p{color: #8893a0;}
+.confimation_block hr{margin: 15px 15px;}
+.confimation_block .thirdform_confirmation .confrm_btn_group{position: absolute;bottom: 0;right:10px;}
+.confimation_block .thirdform_confirmation .confrm_btn_group button{margin: 0px 5px;}
+.confimation_block .thirdform_confirmation .row{position: relative;}
+.confimation_block .thirdform_confirmation ul li{display: inline-block;margin-right: 25px;}
+.confimation_block .thirdform_confirmation ul li:last-child{margin: 0px;}
+/* End Course Confirmation Css */
   
 /* ====================================================================================================================
  * RESPONSIVE
