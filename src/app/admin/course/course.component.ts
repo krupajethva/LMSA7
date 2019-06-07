@@ -361,23 +361,18 @@ export class CourseComponent implements OnInit {
 	
         this.urlid=id;
 		if (id) {
+			this.tab1=true;
+			this.tab2=true;
+			this.tab3=true;
+			this.tab4=true;
+			this.tab5=true;
 			if (name) {
 				this.firstform = false;
 				this.secondform = false;
 				this.thirdform = true;
 				this.forthform = false;
 				this.imageshow = true;
-				$('#st3').removeClass('disabled');
-				$('#st3').addClass('active');
-				$('#step3').addClass('active');
-				$('#step2').removeClass('active');
-				$('#step1').removeClass('active');
-			//	$('#st2').addClass('disabled');
-				$('#st2').removeClass('active');
-				$('#st2').addClass('success');
-				$('#st1').addClass('disabled');
-				$('#st1').removeClass('active');
-				$('#st1').addClass('success');
+				
 				this.addSession(id);
 			} else {
 				this.firstform = true;
@@ -385,12 +380,9 @@ export class CourseComponent implements OnInit {
 				this.secondform = false;
 				this.thirdform = false;
 				this.forthform = false;
+	
 			}
-			this.tab1=true;
-		this.tab2=true;
-		this.tab3=true;
-		this.tab4=true;
-		this.tab5=true;
+	
 	
 
             this.menushow=true;
@@ -400,9 +392,20 @@ export class CourseComponent implements OnInit {
 			this.CourseService.getById(id)
 				.then((data) => {
 					debugger
+					if (name) 
+					{
+						$('#st3').removeClass('success');
+				$('#st3').addClass('active');
+				$('#step3').addClass('active');
+				$('#st2').addClass('success');
+				$('#st1').addClass('success');
+				$('#st4').addClass('success');
+					}
+					else{
 					$('#st2').addClass('success');
 					$('#st3').addClass('success');
 					$('#st4').addClass('success');
+				}
 					this.CourseEntity = data;
 					if (data['IsActive'] == 0) { this.CourseEntity.IsActive = 0; } else { this.CourseEntity.IsActive = '1'; }
 					if (data['Featurescheck'] == 0) { this.CourseEntity.Featurescheck = 0; } else { this.CourseEntity.Featurescheck = '1'; }
