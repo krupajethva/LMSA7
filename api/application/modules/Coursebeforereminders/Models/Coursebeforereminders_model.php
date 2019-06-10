@@ -38,7 +38,7 @@ class Coursebeforereminders_model extends CI_Model
             $post_data = $data;
             $insertdata = array(
                 "CourseId" => trim($post_data['CourseId']),
-            
+
                 "RemainderDay1" =>  trim($post_data['day1'] ? $post_data['day1'] : '0'),
                 "RemainderDay2" =>  trim($post_data['day2'] ? $post_data['day2'] : '0'),
                 "RemainderDay3" =>  trim($post_data['day3'] ? $post_data['day3'] : '0'),
@@ -85,5 +85,14 @@ class Coursebeforereminders_model extends CI_Model
         return $query;
     }
 
-  
+    public function getlist()
+    {
+        $this->db->select('CourseId,RemainderDay1,RemainderDay2,RemainderDay3,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
+        $this->db->from('tblcoursebeforereminder');
+        $query = $this->db->get();
+        if ($query) {
+            return $query;
+        }
+        return $query;
+    }
 }
