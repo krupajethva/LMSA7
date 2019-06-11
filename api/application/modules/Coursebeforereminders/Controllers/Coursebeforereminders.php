@@ -38,123 +38,204 @@ class Coursebeforereminders extends CI_Controller
         echo json_encode($res);
     }
 
+    public function sendEmail($userArr, $CourseFullName, $StartDate, $StartTime)
+    {
+        foreach ($userArr as $users) {
+            $FirstName = $users->FirstName;
+            $UserEmail = $users->EmailAddress;
+
+            // print_r($EmailAddress=$users['EmailAddress']);
+            $EmailToken = 'Course Start Reminder For Learner';
+            $this->db->select('Value');
+            $this->db->where('Key', 'EmailFrom');
+            $smtp1 = $this->db->get('tblmstconfiguration');
+            foreach ($smtp1->result() as $row) {
+                $smtpEmail = $row->Value;
+            }
+            $this->db->select('Value');
+            $this->db->where('Key', 'EmailPassword');
+            $smtp2 = $this->db->get('tblmstconfiguration');
+            foreach ($smtp2->result() as $row) {
+                $smtpPassword = $row->Value;
+            }
+
+            $config['protocol'] = PROTOCOL;
+            $config['smtp_host'] = SMTP_HOST;
+            $config['smtp_port'] = SMTP_PORT;
+            $config['smtp_user'] = $smtpEmail;
+            $config['smtp_pass'] = $smtpPassword;
+
+            $config['charset'] = 'utf-8';
+            $config['newline'] = "\r\n";
+            $config['mailtype'] = 'html';
+            $this->email->initialize($config);
+
+            $query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
+
+            foreach ($query->result() as $row) {
+                $body = $row->EmailBody;
+                if ($row->BccEmail != '') {
+                    $bcc = $row->BccEmail . ',' . $row->totalbcc;
+                } else {
+                    $bcc = $row->totalbcc;
+                }
+                $body = str_replace("{ CourseFullName }", $CourseFullName, $body);
+                $body = str_replace("{ StartDate }", $StartDate, $body);
+                $body = str_replace("{ StartTime }", $StartTime, $body);
+                $body = str_replace("{ InstructorName }", $FirstName, $body);
+                //	$body = str_replace("{login_url}",$StartTime,$body);
+                $body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
+                $this->email->from($smtpEmail, 'LMS Admin');
+                $this->email->to($UserEmail);
+                $this->email->subject($row->Subject);
+                $this->email->cc($row->totalcc);
+                $this->email->bcc($bcc);
+                $this->email->message($body);
+                if ($this->email->send()) {
+                    $email_log = array(
+                        'From' => trim($smtpEmail),
+                        'Cc' => '',
+                        'Bcc' => '',
+                        'To' => trim($users->EmailAddress),
+                        'Subject' => trim($row->Subject),
+                        'MessageBody' => trim($body),
+                    );
+                    $res = $this->db->insert('tblemaillog', $email_log);
+                } else {
+                    //echo json_encode("Fail");
+                }
+            }
+        }
+    }
+
     public function getlist()
     {
         $data = $this->Coursebeforereminders_model->getlist();
-        $res = $data->result();
+        $CoursebeforeremindersResult = $data->result();
         // echo json_encode($res);
-        print_r($res);
+        print_r($CoursebeforeremindersResult);
 
         //For reminderday1 
-        foreach ($res as $List) {
-            $this->db->select('CourseSessionId,SessionName');
+        foreach ($CoursebeforeremindersResult as $Coursebeforereminders) {
+            $this->db->select('CourseSessionId,SessionName, StartDate, StartTime');
             $this->db->from('tblcoursesession');
-            $this->db->where('CourseId', $List->CourseId);
+            $this->db->where('CourseId', $Coursebeforereminders->CourseId);
             $this->db->where('IsActive', 1);
-            $this->db->where('StartDate', date('Y-m-d', strtotime('+' . $List->RemainderDay1 . 'days')));
-            echo '<br/>';
-            echo '<pre/>';
-            echo $List->RemainderDay1;
+            $this->db->where_in('StartDate', [
+                date('Y-m-d', strtotime('+' . $Coursebeforereminders->RemainderDay1 . 'days')),
+                date('Y-m-d', strtotime('+' . $Coursebeforereminders->RemainderDay2 . 'days')),
+                date('Y-m-d', strtotime('+' . $Coursebeforereminders->RemainderDay3 . 'days'))]);
             $this->db->order_by("CourseSessionId", "asc");
             $getID = $this->db->get();
-            echo '<br />';
-            echo '<pre />';
-            print_r($this->db->last_query());
-            $res1 = $getID->result();
-            // print_r($res1);
-
-            if (!empty($List->CourseSessionId)) {
-                $Reminder1SendTo = explode(",", $List->Reminder1SendTo);
-                $Reminder2SendTo = explode(",", $List->Reminder2SendTo);
-                $Reminder3SendTo = explode(",", $List->Reminder3SendTo);
+            $CourseSessionResult = $getID->result();
+            if (count($CourseSessionResult) > 0) {
+                foreach ($CourseSessionResult as $CourseSession)
+                    // print_r($res1);
+                    $Reminder1SendTo = explode(",", $Coursebeforereminders->Reminder1SendTo);
+                    $Reminder2SendTo = explode(",", $Coursebeforereminders->Reminder2SendTo);
+                    $Reminder3SendTo = explode(",", $Coursebeforereminders->Reminder3SendTo);
                 //Candidate For Reminder1
                 if ($Reminder1SendTo[0] == true) {
-                    $this->db->select('UserId');
-                    $this->db->from('tblcourseuserregister');
-                    $this->db->where('CourseSessionId', $List->CourseSessionId);
+                    $this->db->select('user.UserId, user.FirstName, user.EmailAddress');
+                    $this->db->from('tblcourseuserregister tcur');
+                    $this->db->join('tbluser user', 'tcur.UserId = user.UserId', 'left');
+                    $this->db->where('CourseSessionId', $CourseSession->CourseSessionId);
                     $candidate = $this->db->get();
-                    $candidate->result();
+                    $candidateResult = $candidate->result();
+                    $this->sendEmail($candidateResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime);
                 }
                 //Insructor For Reminder1
                 if ($Reminder1SendTo[1] == true) {
-                    $this->db->select('UserId');
-                    $this->db->from('tblcourseinstructor');
-                    $this->db->where('CourseSessionId', $List->CourseSessionId);
+                    $this->db->select('user.UserId, user.FirstName, user.EmailAddress');
+                    $this->db->from('tblcourseinstructor tci');
+                    $this->db->join('tbluser user', 'tci.UserId = user.UserId', 'left');
+                    $this->db->where('CourseSessionId', $CourseSession->CourseSessionId);
                     $insructor = $this->db->get();
-                    $insructor->result();
+                    $instructorResult = $insructor->result();
+                    $this->sendEmail($instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime);
                 }
                 //Candidate For Reminder2
                 if ($Reminder2SendTo[0] == true) {
-                    $this->db->select('UserId');
-                    $this->db->from('tblcourseuserregister');
-                    $this->db->where('CourseSessionId', $List->CourseSessionId);
+                    $this->db->select('user.UserId, user.FirstName, user.EmailAddress');
+                    $this->db->from('tblcourseuserregister tcur');
+                    $this->db->join('tbluser user', 'tcur.UserId = user.UserId', 'left');
+                    $this->db->where('CourseSessionId', $CourseSession->CourseSessionId);
                     $candidate = $this->db->get();
-                    $candidate->result();
+                    $candidateResult = $candidate->result();
+                    $this->sendEmail($candidateResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime);
                 }
                 //Insructor For Reminder2
                 if ($Reminder2SendTo[1] == true) {
-                    $this->db->select('UserId');
-                    $this->db->from('tblcourseinstructor');
-                    $this->db->where('CourseSessionId', $List->CourseSessionId);
+                    $this->db->select('user.UserId, user.FirstName, user.EmailAddress');
+                    $this->db->from('tblcourseinstructor tci');
+                    $this->db->join('tbluser user', 'tci.UserId = user.UserId', 'left');
+                    $this->db->where('CourseSessionId', $CourseSession->CourseSessionId);
                     $insructor = $this->db->get();
                     $insructor->result();
+                    $instructorResult = $insructor->result();
+                    $this->sendEmail($instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime);
                 }
 
                 //Candidate For Reminder3
                 if ($Reminder3SendTo[0] == true) {
-                    $this->db->select('UserId');
-                    $this->db->from('tblcourseuserregister');
-                    $this->db->where('CourseSessionId', $List->CourseSessionId);
+                    $this->db->select('user.UserId, user.FirstName, user.EmailAddress');
+                    $this->db->from('tblcourseuserregister tcur');
+                    $this->db->join('tbluser user', 'tcur.UserId = user.UserId', 'left');
+                    $this->db->where('CourseSessionId', $CourseSession->CourseSessionId);
                     $candidate = $this->db->get();
-                    $candidate->result();
+                    $candidateResult = $candidate->result();
+                    $this->sendEmail($candidateResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime);
                 }
                 //Insructor For Reminder3
                 if ($Reminder3SendTo[1] == true) {
-                    $this->db->select('UserId');
-                    $this->db->from('tblcourseinstructor');
-                    $this->db->where('CourseSessionId', $List->CourseSessionId);
+                    $this->db->select('user.UserId, user.FirstName, user.EmailAddress');
+                    $this->db->from('tblcourseinstructor tci');
+                    $this->db->join('tbluser user', 'tci.UserId = user.UserId', 'left');
+                    $this->db->where('CourseSessionId', $CourseSession->CourseSessionId);
                     $insructor = $this->db->get();
                     $insructor->result();
+                    $instructorResult = $insructor->result();
+                    $this->sendEmail($instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime);
                 }
             }
         }
 
-        //For reminderday2
-        foreach ($res as $List) {
-            $this->db->select('CourseSessionId,SessionName');
-            $this->db->from('tblcoursesession');
-            $this->db->where('CourseId', $List->CourseId);
-            $this->db->where('IsActive', 1);
-            $this->db->where('StartDate', date('Y-m-d', strtotime('+' . $List->RemainderDay2 . 'days')));
-            echo '<br/>';
-            echo '<pre/>';
-            echo $List->RemainderDay1;
-            $this->db->order_by("CourseSessionId", "asc");
-            $getID = $this->db->get();
-            echo '<br />';
-            echo '<pre />';
-            print_r($this->db->last_query());
-            $res1 = $getID->result();
-            // print_r($res1);
-        }
+        // //For reminderday2
+        // foreach ($res as $List) {
+        //     $this->db->select('CourseSessionId,SessionName');
+        //     $this->db->from('tblcoursesession');
+        //     $this->db->where('CourseId', $List->CourseId);
+        //     $this->db->where('IsActive', 1);
+        //     $this->db->where('StartDate', date('Y-m-d', strtotime('+' . $List->RemainderDay2 . 'days')));
+        //     echo '<br/>';
+        //     echo '<pre/>';
+        //     echo $List->RemainderDay1;
+        //     $this->db->order_by("CourseSessionId", "asc");
+        //     $getID = $this->db->get();
+        //     echo '<br />';
+        //     echo '<pre />';
+        //     print_r($this->db->last_query());
+        //     $res1 = $getID->result();
+        //     // print_r($res1);
+        // }
 
-        //For reminderday3
-        foreach ($res as $List) {
-            $this->db->select('CourseSessionId,SessionName');
-            $this->db->from('tblcoursesession');
-            $this->db->where('CourseId', $List->CourseId);
-            $this->db->where('IsActive', 1);
-            $this->db->where('StartDate', date('Y-m-d', strtotime('+' . $List->RemainderDay3 . 'days')));
-            echo '<br/>';
-            echo '<pre/>';
-            echo $List->RemainderDay1;
-            $this->db->order_by("CourseSessionId", "asc");
-            $getID = $this->db->get();
-            echo '<br />';
-            echo '<pre />';
-            print_r($this->db->last_query());
-            $res1 = $getID->result();
-            // print_r($res1);
-        }
+        // //For reminderday3
+        // foreach ($res as $List) {
+        //     $this->db->select('CourseSessionId,SessionName');
+        //     $this->db->from('tblcoursesession');
+        //     $this->db->where('CourseId', $List->CourseId);
+        //     $this->db->where('IsActive', 1);
+        //     $this->db->where('StartDate', date('Y-m-d', strtotime('+' . $List->RemainderDay3 . 'days')));
+        //     echo '<br/>';
+        //     echo '<pre/>';
+        //     echo $List->RemainderDay1;
+        //     $this->db->order_by("CourseSessionId", "asc");
+        //     $getID = $this->db->get();
+        //     echo '<br />';
+        //     echo '<pre />';
+        //     print_r($this->db->last_query());
+        //     $res1 = $getID->result();
+        //     // print_r($res1);
+        // }
     }
 }
