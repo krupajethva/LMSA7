@@ -18,7 +18,6 @@ class Reminder extends CI_Controller
 		$data=$this->Reminder_model->getlist_InstructorBeforeDays();
 		if($data)
 		{
-		
 	 	$Day=$data->Value;
 		$datetime1=date('Y-m-d',strtotime('+'.$Day.'days'));
 	    $lastdata=$this->Reminder_model->getlist_Instructor($datetime1);
