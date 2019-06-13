@@ -61,4 +61,11 @@ export class CoursebeforereminderComponent implements OnInit {
 		}
 	}
 
+	getdetails(data) {
+		console.log(data);
+		this.beforeReminderEntity = data;
+		
+	}
 }
+
+
