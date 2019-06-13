@@ -184,7 +184,17 @@
                                   <strong>Complete Session</strong>
                                 </p>
                               </li>
+            
+                                <div class="form-group-active">
+                                  <label>
+                                    <span>*</span>Active?{{SessionList.IsActive}}</label>
 
+                                  <div class="activeyes_box">
+                                    <input type="checkbox" name="IsActive{{k}}"  (change)="isActiveChange(SessionList,k)"id="IsActive{{k}}" value="yes" #IsActive="ngModel" [(ngModel)]="SessionList.IsActive">
+                                    <label for="IsActive{{k}}"></label>
+                                  </div>
+                                </div>
+                                       
                               <!-- <li class="start_session_btn">
                                 <a class="back_btn" (click)="StartSession(SessionList.CourseSessionId,k)">Start</a>
                               </li>
@@ -211,7 +221,8 @@
                                   <a (click)="draft(course.CourseId,i)">Edit</a>
                                 </div>
                                 <div class="col-md-6 publishsession">
-                                  <a (click)="Publish(SessionList.CourseSessionId,k)">Publish</a>
+                                  <button class="publishbtn" [disabled]="SessionList.IsActive==0" (click)="Publish(SessionList.CourseSessionId,k)">
+                                    Publish</button>
                                 </div>
                               </li>
                           </ul>

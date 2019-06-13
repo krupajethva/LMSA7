@@ -28,14 +28,7 @@ export class ParentcategoryComponent implements OnInit {
     this.ParentCategoryEntity = {};
     this.ParentCategoryEntity.CategoryId = 0;
     this.ParentCategoryEntity.IsActive = 1;
-    setTimeout(function () {
-      if ($(".bg_white_block").hasClass("ps--active-y")) {
-        $('footer').removeClass('footer_fixed');
-      }
-      else {
-        $('footer').addClass('footer_fixed');
-      }
-    }, 100);
+
     var skills = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -89,7 +82,18 @@ export class ParentcategoryComponent implements OnInit {
       this.ParentCategoryEntity.IsActive = '1';
       myInput();
     }
-
+ setTimeout(function () {
+      if ($(".bg_white_block").hasClass("ps--active-y")) {
+        $('footer').removeClass('footer_fixed');
+      }
+      else {
+        $('footer').addClass('footer_fixed');
+      }
+      $(".categories").addClass("active");
+      $(".categories > div").addClass("in");
+      $(".categories > a").removeClass("collapsed");
+      $(".categories > a").attr("aria-expanded","true");
+    }, 100);
 
   }
 

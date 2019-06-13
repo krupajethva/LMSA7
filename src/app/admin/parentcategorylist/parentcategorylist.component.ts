@@ -109,6 +109,10 @@ export class ParentcategorylistComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
+	    $(".categories").addClass("active");
+      $(".categories > div").addClass("in");
+      $(".categories > a").removeClass("collapsed");
+      $(".categories > a").attr("aria-expanded","true");
     }, 1000);
   }
   deleteCategory(category) {

@@ -34,7 +34,7 @@
     <div class="row">
       <div class="col-md-8 col-sm-8">
         <div class="course_quiz_header">
-          <h1>{{assessmentEntity.CourseFullName}} 
+          <h1>{{assessmentEntity.CourseFullName}}
           </h1>
           <p>Instructors :
             <span>{{assessmentEntity.user}}</span>
@@ -53,7 +53,8 @@
               <div id="sandyCountdown">
                 <canvas id="sandyCanvas" class="sandyWatch" width="300" height="300"></canvas>
                 <div id="sandyCounter" class="sandyCounter">
-                      <div  id="countdown"></div>  <p id="demo"></p>
+                  <div id="countdown"></div>
+                  <p id="demo"></p>
                 </div>
               </div>
             </div>
@@ -63,7 +64,8 @@
       <div class="clearfix"></div>
       <div class="col-md-12 col-sm-12">
         <div class="progress">
-          <div id="progress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+          <div id="progress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+            aria-valuemin="0" aria-valuemax="100">
             {{percent}}% ({{anstotalcount}}/{{TotalQuestion}})
           </div>
         </div>
@@ -81,19 +83,19 @@
       <div class="wrapper">
         <div class="assessment_wrap_bottom">
           <h3 class="pull-left">Questions</h3>
-            <div class="dropdown_checkbox pull-right">
-              <div class="check_box">
-                <input type="checkbox" name="Check1" id="Check1" value="Check1" (click)="All()">
-                <label for="Check1" title="All" class="checkboxbtn_label"> All</label>
-              </div>
-              <div class="check_box">
-                <input type="checkbox" name="Check2" id="Check2" value="Check1" (click)="All()">
-                <label for="Check2" title="UnAnswered Questions" class="checkboxbtn_label">UnAnswered Questions</label>
-              </div>
-              <div class="check_box">
-                <input type="checkbox" name="Check3" id="Check3" value="Check1" (click)="All()">
-                <label for="Check3" title="Mark as Reviewed" class="checkboxbtn_label">Mark as Reviewed</label>
-              </div>
+          <div class="dropdown_checkbox pull-right">
+            <div class="check_box">
+              <input type="checkbox" name="Check1" id="Check1" value="Check1" (click)="All()">
+              <label for="Check1" title="All" class="checkboxbtn_label">Answered Questions</label>
+            </div>
+            <div class="check_box">
+              <input type="checkbox" name="Check2" id="Check2" value="Check1" (click)="All()">
+              <label for="Check2" title="UnAnswered Questions" class="checkboxbtn_label">UnAnswered Questions</label>
+            </div>
+            <div class="check_box">
+              <input type="checkbox" name="Check3" id="Check3" value="Check1" (click)="All()">
+              <label for="Check3" title="Mark as Reviewed" class="checkboxbtn_label">Mark as Reviewed</label>
+            </div>
             <!-- <div class="dropdown_checkbox">
                 <div class="radiobtn">
                   <input type="radio" id="All" name="drone" value="All" checked (click)="All()" />
@@ -128,69 +130,411 @@
             <div class="assessment_que_preview">
               <div class="flexslider carousel">
                 <ul class="slides">
-  
-                  <li *ngFor="let question of questionlist; let i = index;">
-                    <div class="questionblock">
-                      <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
-                        <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                  <ng-container *ngFor="let question of questionlist; let i = index;">
+
+                    <li *ngIf="Answered && !UnAnswred && !Reviewed && question.OptionId>0">
+                      <div class="questionblock">
+                        <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
+                          <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                        <div class="mark_review" *ngIf="question.MarkasReview==1">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="number">{{question.SerialNo}}</div>
                       </div>
-                      <div class="mark_review" *ngIf="question.MarkasReview==1">
-                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                    </li>
+                    <li *ngIf=" !all && !Answered && UnAnswred && !Reviewed && question.OptionId==0">
+                      <div class="questionblock">
+                        <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
+                          <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                        <div class="mark_review" *ngIf="question.MarkasReview==1">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="number">{{question.SerialNo}}</div>
                       </div>
-                      <div class="number">{{question.SerialNo}}</div>
-                    </div>
-                
-                  </li>
-                  
+
+                    </li>
+                    <li *ngIf="!all && !Answered && !UnAnswred && Reviewed && question.MarkasReview>0">
+                      <div class="questionblock">
+                        <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
+                          <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                        <div class="mark_review" *ngIf="question.MarkasReview==1">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="number">{{question.SerialNo}}</div>
+                      </div>
+
+                    </li>
+                    <li *ngIf=" !all && Answered && !UnAnswred && Reviewed && (question.OptionId>0 || question.MarkasReview>0) ">
+                      <div class="questionblock">
+                        <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
+                          <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                        <div class="mark_review" *ngIf="question.MarkasReview==1">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="number">{{question.SerialNo}}</div>
+                      </div>
+
+                    </li>
+                    <li *ngIf=" !all && Answered && UnAnswred && !Reviewed && (question.OptionId>0 || question.OptionId==0) ">
+                      <div class="questionblock">
+                        <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
+                          <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                        <div class="mark_review" *ngIf="question.MarkasReview==1">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="number">{{question.SerialNo}}</div>
+                      </div>
+
+                    </li>
+                    <li *ngIf=" !all && !Answered && UnAnswred && Reviewed && (question.OptionId==0 || question.MarkasReview>0) ">
+                      <div class="questionblock">
+                        <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
+                          <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                        <div class="mark_review" *ngIf="question.MarkasReview==1">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="number">{{question.SerialNo}}</div>
+                      </div>
+
+                    </li>
+
+                    <li *ngIf="((!Answered && !UnAnswred && !Reviewed) || (Answered && UnAnswred && Reviewed && ((question.OptionId>0 ||question.OptionId==0 || question.MarkasReview>0))))">
+                      <div class="questionblock">
+                        <div [ngClass]="{'complete':question.OptionId>0}" id="test{{i}}">
+                          <i *ngIf="question.OptionId>0" class="fa fa-check" aria-hidden="true"></i>
+                        </div>
+                        <div class="mark_review" *ngIf="question.MarkasReview==1">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="number">{{question.SerialNo}}</div>
+                      </div>
+
+                    </li>
+
+                  </ng-container>
+
+
                 </ul>
-                
-              
+
+
 
               </div>
               <div *ngIf="questionlist==null" class="no_que"> No question found</div>
               <div class="flexslider slider">
                 <ul class="slides">
-    
-                  <li *ngFor="let question of questionlist; let i = index;">
-                    <div class="assessment_que_info">
-                      <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                          <div class="assessment_que_ans_block">
-                            <div class="que_block">
-                              <h4>Question {{i+1}} :</h4>
-                              <h3 [innerHTML]="question.QuestionName"></h3>
-                              <!-- <p>What were your major achievements in the past year?</p> -->
-                            </div>
-                            <div class="ans_block">
-                              <!-- <div class="quiz_ans_right">
+                  <ng-container *ngFor="let question of questionlist; let i = index; let f=first;">
+                    <ng-container *ngIf="Answered && !UnAnswred && !Reviewed">
+                      <li *ngIf=" question.OptionId>0">
+                        <div class="assessment_que_info">
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="assessment_que_ans_block">
+                                <div class="que_block">
+                                  <h4>Question {{i+1}} :</h4>
+
+                                  <h3 [innerHTML]="question.QuestionName"></h3>
+                                  <!-- <p>What were your major achievements in the past year?</p> -->
+                                </div>
+                                <div class="ans_block">
+                                  <!-- <div class="quiz_ans_right">
                                 <input type="radio" name="rb" id="rb1" />
                                 <label for="rb1">Check this</label>
                               </div> -->
-                              <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
-                                  <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId" id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)"
-                                  />
-                                  <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
+                                    <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId"
+                                      id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)" />
+                                    <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  </div>
+
                                 </div>
-                             
-                            </div>
-                            <div class="mark_review_btn">
-                              <span>Mark as Review</span>
-                              <!-- <div class="activeyes_box">
+                                <div class="mark_review_btn">
+                                  <span>Mark as Review</span>
+                                  <!-- <div class="activeyes_box">
                                 <input type="checkbox" name="active11" id="active11" checked value="Yes">
                                 <label for="active11"></label>
                               </div> -->
-                              <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
-                                  <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)" [checked]="question.MarkasReview==1"
-                                    value="Yes">
-                                  <label for="MarkasReview{{i}}"></label>
+                                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)"
+                                      [checked]="question.MarkasReview==1" value="Yes">
+                                    <label for="MarkasReview{{i}}"></label>
+                                  </div>
                                 </div>
+                              </div>
                             </div>
+                            <div class="clearfix"></div>
                           </div>
                         </div>
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
-                  </li>
+                      </li>
+                      <!-- <div *ngIf="f && question.OptionId>0">No questions avaliable for perticular filter</div> -->
+                    </ng-container>
+                    <ng-container *ngIf="!Answered && UnAnswred && !Reviewed">
+                      <li *ngIf="question.OptionId==0">
+                        <div class="assessment_que_info">
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="assessment_que_ans_block">
+                                <div class="que_block">
+                                  <h4>Question {{i+1}} :</h4>
+
+                                  <h3 [innerHTML]="question.QuestionName"></h3>
+                                  <!-- <p>What were your major achievements in the past year?</p> -->
+                                </div>
+                                <div class="ans_block">
+                                  <!-- <div class="quiz_ans_right">
+                                <input type="radio" name="rb" id="rb1" />
+                                <label for="rb1">Check this</label>
+                              </div> -->
+                                  <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
+                                    <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId"
+                                      id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)" />
+                                    <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  </div>
+
+                                </div>
+                                <div class="mark_review_btn">
+                                  <span>Mark as Review</span>
+                                  <!-- <div class="activeyes_box">
+                                <input type="checkbox" name="active11" id="active11" checked value="Yes">
+                                <label for="active11"></label>
+                              </div> -->
+                                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)"
+                                      [checked]="question.MarkasReview==1" value="Yes">
+                                    <label for="MarkasReview{{i}}"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </li>
+              
+                    </ng-container>
+                    <ng-container *ngIf="!Answered && !UnAnswred && Reviewed">
+                      <li *ngIf="question.MarkasReview>0">
+                        <div class="assessment_que_info">
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="assessment_que_ans_block">
+                                <div class="que_block">
+                                  <h4>Question {{i+1}} :</h4>
+                                  <h3 [innerHTML]="question.QuestionName"></h3>
+                                  <!-- <p>What were your major achievements in the past year?</p> -->
+                                </div>
+                                <div class="ans_block">
+                                  <!-- <div class="quiz_ans_right">
+                                <input type="radio" name="rb" id="rb1" />
+                                <label for="rb1">Check this</label>
+                              </div> -->
+                                  <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
+                                    <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId"
+                                      id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)" />
+                                    <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  </div>
+
+                                </div>
+                                <div class="mark_review_btn">
+                                  <span>Mark as Review</span>
+                                  <!-- <div class="activeyes_box">
+                                <input type="checkbox" name="active11" id="active11" checked value="Yes">
+                                <label for="active11"></label>
+                              </div> -->
+                                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)"
+                                      [checked]="question.MarkasReview==1" value="Yes">
+                                    <label for="MarkasReview{{i}}"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </li>
+                  
+                    </ng-container>
+                    <ng-container *ngIf=" Answered && !UnAnswred && Reviewed">
+                      <li *ngIf="(question.OptionId>0 || question.MarkasReview>0) ">
+                        <div class="assessment_que_info">
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="assessment_que_ans_block">
+                                <div class="que_block">
+                                  <h4>Question {{i+1}} :</h4>
+                                  <h3 [innerHTML]="question.QuestionName"></h3>
+                                  <!-- <p>What were your major achievements in the past year?</p> -->
+                                </div>
+                                <div class="ans_block">
+                                  <!-- <div class="quiz_ans_right">
+                                <input type="radio" name="rb" id="rb1" />
+                                <label for="rb1">Check this</label>
+                              </div> -->
+                                  <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
+                                    <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId"
+                                      id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)" />
+                                    <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  </div>
+
+                                </div>
+                                <div class="mark_review_btn">
+                                  <span>Mark as Review</span>
+                                  <!-- <div class="activeyes_box">
+                                <input type="checkbox" name="active11" id="active11" checked value="Yes">
+                                <label for="active11"></label>
+                              </div> -->
+                                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)"
+                                      [checked]="question.MarkasReview==1" value="Yes">
+                                    <label for="MarkasReview{{i}}"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </li>
+                  
+                    </ng-container>
+                    <ng-container *ngIf="Answered && UnAnswred && !Reviewed">
+                      <li *ngIf="(question.OptionId>0 || question.OptionId==0) ">
+                        <div class="assessment_que_info">
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="assessment_que_ans_block">
+                                <div class="que_block">
+                                  <h4>Question {{i+1}} :</h4>
+                                  <h3 [innerHTML]="question.QuestionName"></h3>
+                                  <!-- <p>What were your major achievements in the past year?</p> -->
+                                </div>
+                                <div class="ans_block">
+                                  <!-- <div class="quiz_ans_right">
+                                <input type="radio" name="rb" id="rb1" />
+                                <label for="rb1">Check this</label>
+                              </div> -->
+                                  <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
+                                    <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId"
+                                      id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)" />
+                                    <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  </div>
+
+                                </div>
+                                <div class="mark_review_btn">
+                                  <span>Mark as Review</span>
+                                  <!-- <div class="activeyes_box">
+                                <input type="checkbox" name="active11" id="active11" checked value="Yes">
+                                <label for="active11"></label>
+                              </div> -->
+                                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)"
+                                      [checked]="question.MarkasReview==1" value="Yes">
+                                    <label for="MarkasReview{{i}}"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </li>
+               
+                    </ng-container>
+                    <ng-container *ngIf="!Answered && UnAnswred && Reviewed">
+                      <li *ngIf="(question.OptionId==0 || question.MarkasReview>0) ">
+                        <div class="assessment_que_info">
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="assessment_que_ans_block">
+                                <div class="que_block">
+                                  <h4>Question {{i+1}} :</h4>
+                                  <h3 [innerHTML]="question.QuestionName"></h3>
+                                  <!-- <p>What were your major achievements in the past year?</p> -->
+                                </div>
+                                <div class="ans_block">
+                                  <!-- <div class="quiz_ans_right">
+                                <input type="radio" name="rb" id="rb1" />
+                                <label for="rb1">Check this</label>
+                              </div> -->
+                                  <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
+                                    <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId"
+                                      id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)" />
+                                    <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  </div>
+
+                                </div>
+                                <div class="mark_review_btn">
+                                  <span>Mark as Review</span>
+                                  <!-- <div class="activeyes_box">
+                                <input type="checkbox" name="active11" id="active11" checked value="Yes">
+                                <label for="active11"></label>
+                              </div> -->
+                                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)"
+                                      [checked]="question.MarkasReview==1" value="Yes">
+                                    <label for="MarkasReview{{i}}"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </li>
+    
+                    </ng-container>
+                    <ng-container *ngIf="((!Answered && !UnAnswred && !Reviewed) || (Answered && UnAnswred && Reviewed))">
+                      <li *ngIf="(question.OptionId>0 ||question.OptionId==0 || question.MarkasReview>0)">
+                        <div class="assessment_que_info">
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="assessment_que_ans_block">
+                                <div class="que_block">
+                                  <h4>Question {{i+1}} :</h4>
+                                  <h3 [innerHTML]="question.QuestionName"></h3>
+                                  <!-- <p>What were your major achievements in the past year?</p> -->
+                                </div>
+                                <div class="ans_block">
+                                  <!-- <div class="quiz_ans_right">
+                                <input type="radio" name="rb" id="rb1" />
+                                <label for="rb1">Check this</label>
+                              </div> -->
+                                  <div class="quiz_ans_right" *ngFor="let questionchild of question.child; let j = index;">
+                                    <input type="radio" name="OptionId{{i}}" [checked]="questionchild.OptionId==question.OptionId"
+                                      id="OptionId{{i}}{{j}}" (change)="QuestionChange(questionchild.OptionId,question.QuestionId,question.ResultId,i)" />
+                                    <label for="OptionId{{i}}{{j}}">{{questionchild.OptionValue}}</label>
+                                  </div>
+
+                                </div>
+                                <div class="mark_review_btn">
+                                  <span>Mark as Review</span>
+                                  <!-- <div class="activeyes_box">
+                                <input type="checkbox" name="active11" id="active11" checked value="Yes">
+                                <label for="active11"></label>
+                              </div> -->
+                                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.MarkasReview==1 ? 'Active' : 'Deactive'">
+                                    <input type="checkbox" name="MarkasReview" id="MarkasReview{{i}}" (change)="questionactive(question,i)"
+                                      [checked]="question.MarkasReview==1" value="Yes">
+                                    <label for="MarkasReview{{i}}"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </li>
+
+                    </ng-container>
+                  </ng-container>
+                  <li>No questions avaliable for perticular filter</li>
                 </ul>
               </div>
             </div>
@@ -200,11 +544,12 @@
                 <!-- <button class="btn next_btn float-right disabled" type="button">
                   Submit
                 </button> -->
-         
 
-                <button [disabled]="anstotalcount!=TotalQuestion"  class="btn next_btn float-right" data-toggle="modal" (click)="submitans()" type="button">
-                    <span>Submit</span>
-                  </button>
+
+                <button [disabled]="anstotalcount!=TotalQuestion" class="btn next_btn float-right" data-toggle="modal"
+                  (click)="submitans()" type="button">
+                  <span>Submit</span>
+                </button>
                 <!-- <button class="back_btn float-right" type="button">
                   Save as Draft addass
                 </button> -->

@@ -381,8 +381,10 @@ table .text-right{text-align: right;}
 .list_li li{padding:0px 0 7px 15px; background: url(../images/dot.png) left 5px no-repeat; background-size: 10px; color: #2e2d31; font-size: 13px;}
 .width_li30 li{width: 33%; float: left;}
 .course_forum_block .form-group-active{margin: 10px 0px 15px 0px;}
+.course_forum_block .course-active{margin:0px;padding-right: 15px;}
 .activeyes_box {display: inline-block;margin: -5px 0px 0 5px;vertical-align: middle;}
 .activeyes_box label{ background:#dfe2ea; transform: none!important; font-weight:normal; height: 20px; width: 45px; display:inline-block; vertical-align:top; margin:0; cursor:pointer; color:#444; position: relative; top: 0px; border-radius: 20px;}
+.activeyes_box.dis_btn label{cursor: not-allowed;}
 .activeyes_box label:after{    text-align: center;
   font-size: 11px;color: #fff;content: "N"; width:15px; height: 15px; border-radius: 100%; left: 3px; top: 2px; background: #6b6a6a; position: absolute; transition:left 0.3s linear 0s; }
 .activeyes_box input[type="checkbox"]:checked + label:after{content: "Y";left :60%; background: var(--theme-color); transition:left 0.3s linear 0s;    text-align: center;
@@ -586,7 +588,8 @@ footer.register_footer a:hover{color:var(--theme-color); }
 .news-blog li.enroll_course_tag.draftpublishtag .draftsession,.news-blog li.enroll_course_tag.draftpublishtag .attendancesession{padding: 5px 0px;}
 .news-blog li.enroll_course_tag.draftpublishtag .publishsession{background: #60b8d1!important;
   padding: 5px 0px;}
-
+  .news-blog li.enroll_course_tag.draftpublishtag .publishbtn{border: 0;
+  color: #fff;background: transparent!important;}
 .news-blog li.enroll_course_tag .attendancesession_label{padding: 5px 0px;}
 .news-blog li.enroll_course_tag .attendancesession_label strong{    padding-left: 15px;}
 .news-blog li.enroll_course_tag  .attendancesession {background: var(--theme-color);
@@ -948,7 +951,7 @@ textarea{resize: none;}
 .course_detail_block .coursetab_info .course_tabs{margin-top: 10px;}
 .fileupload_block .content{padding:0px; }
 .file_upload input[type="text"]{background:url(../images/upload.png) 98% center no-repeat; background-size:20px;}
-.file_upload input[type="file"]{opacity: 0; position: absolute; left: 0; top: 22px; z-index: 99; width: 100%; cursor: pointer;}
+.file_upload input[type="file"]{opacity: 0; position: absolute; left: 0; top: 0; z-index: 99; width: 100%; cursor: pointer;}
 .alert-close{background: rgb(53, 72, 101);border-radius: 50%;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 -1px 2px rgba(255,255,255,0.25);color: #ffffff;cursor: pointer;font-size: 20px;font-weight: normal;height: 22px;line-height: 24px;position: relative;right: -10px;text-align: center;top: -10px;transition: color 0.2s ease-in-out;width: 22px;}
 .clonedInput{display: block; position: relative;}
 /*----------------------------End Course Details------------------------------*/
@@ -2804,6 +2807,19 @@ margin-bottom: 15px;}
 .white_shadow_box .course_forum_block{margin-bottom: 0px;}
 /* ------- end settings page css ------- */
 
+
+/* Start Course Confirmation Css */
+.confimation_block .firstform_confirmation,.confimation_block .secondform_confirmation,.confimation_block .thirdform_confirmation{background: #fbfbfb;padding: 10px;border: 1px solid #cccccc;margin: 20px 0px;float: left;width: 100%;}
+.confimation_block .thirdform_confirmation h3{color: #78c2d7;font-size: 16px;}
+.confimation_block .firstform_confirmation h6,.confimation_block .secondform_confirmation h6,.confimation_block .thirdform_confirmation h6{font-size: 14px;font-weight: 600;color: #102749;}
+.confimation_block .firstform_confirmation p,.confimation_block .secondform_confirmation p,.confimation_block .thirdform_confirmation p{color: #8893a0;}
+.confimation_block hr{margin: 15px 15px;}
+.confimation_block .thirdform_confirmation .confrm_btn_group{position: absolute;bottom: 0;right:10px;}
+.confimation_block .thirdform_confirmation .confrm_btn_group button{margin: 0px 5px;}
+.confimation_block .thirdform_confirmation .row{position: relative;}
+.confimation_block .thirdform_confirmation ul li{display: inline-block;margin-right: 25px;}
+.confimation_block .thirdform_confirmation ul li:last-child{margin: 0px;}
+/* End Course Confirmation Css */
   
 /* ====================================================================================================================
  * RESPONSIVE

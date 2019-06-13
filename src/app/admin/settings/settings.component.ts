@@ -45,6 +45,11 @@ export class SettingsComponent implements OnInit {
 	submitted8;
 	btn_disable8;
 	courseList;
+	beforeReminderEntity;
+	beforeReminderEntity1;
+	beforeReminderEntity2;
+	beforeReminderEntity3;
+	ReminderData;
 	constructor(private el: ElementRef,  private router: Router,
 		private route: ActivatedRoute, private SettingsService: SettingsService, public globals: Globals) {
 
@@ -61,6 +66,10 @@ export class SettingsComponent implements OnInit {
 		this.courseKeyEntity = {};
 		this.instructoronoffEntity = {};
 		this.reminderEntity = {};
+		this.beforeReminderEntity = [];
+		this.beforeReminderEntity1 = {'day1': 0, 'instructor': false, 'candidate':false};
+		this.beforeReminderEntity2 = {'day2': 0, 'instructor': false, 'candidate':false};
+		this.beforeReminderEntity3 = {'day3': 0, 'instructor': false, 'candidate':false};
 		myInput();
 
 
@@ -480,6 +489,24 @@ export class SettingsComponent implements OnInit {
 						this.globals.isLoading = false;
 						this.router.navigate(['/pagenotfound']);
 					});
+		}
+	}
+
+	BeforeReminder(reminderForm){
+		this.beforeReminderEntity = Array(this.beforeReminderEntity1,this.beforeReminderEntity2,this.beforeReminderEntity3);
+		console.log("outside")
+		if (reminderForm.valid) {
+			console.log("called")
+		  this.SettingsService.BeforeReminder(this.beforeReminderEntity)
+		  .then((data) => {
+			this.ReminderData = data;
+			console.log(this.ReminderData);
+			//this.router.navigate(['/project/list']);
+		  },
+			(error) => {
+			  //alert('error');
+			});
+		} else {
 		}
 	}
 

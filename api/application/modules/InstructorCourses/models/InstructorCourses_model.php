@@ -86,7 +86,7 @@ class InstructorCourses_model extends CI_Model
 		// $this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.CourseImage,cp.StartDate,cp.EndDate,cp.IsActive,cp.PublishIsStatus');
 		// $this->db->where('cp.InstructorId',$User_Id);
 		// $result = $this->db->get('tblcourse cp');
-		$result = $this->db->query('select cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
+		$result = $this->db->query('select cs.IsActive,cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
         FROM tblcourseinstructor AS csi 
 		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
         LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
@@ -204,6 +204,62 @@ class InstructorCourses_model extends CI_Model
 		return false;
 		}	
 	}
+	function updateinstdata($CourseSessionId = NULL)
+	{
+	try{
+		if($CourseSessionId)
+		{
+		$Course_data = array(
+			'PublishStatus' =>1
+		);
+		
+		$this->db->where('CourseSessionId',$CourseSessionId);
+		$result = $this->db->update('tblcoursesession',$Course_data);
+		// $this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.CourseImage,cp.StartDate,cp.EndDate,cp.IsActive,cp.PublishStatus');
+		// $this->db->where('cp.CourseId',$CourseId);
+		// $result = $this->db->get('tblcourse cp');
+	
+		$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) { 
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+	//	$res=array();
+		if($result)
+		{	$data =$this->db->query('SELECT UserId FROM tblcoursesession AS cs 
+			LEFT JOIN tblcourseinstructor AS cin ON
+			 cin.CourseSessionId=cs.CourseSessionId WHERE cs.CourseSessionId='.$CourseSessionId);
+			 	$ress=array();
+			 	 foreach($data->result() as $row)
+				  {
+					//print_r($ress);
+				$id=$row->UserId;
+				array_push($ress,$id);
+					// foreach($data1->result() as $row1){
+					// 	if($row1->FollowerUserId!='')
+					// 	{
+					// 	$FollowerUserId = explode(",",$row1->FollowerUserId);
+					// 	foreach($FollowerUserId as $id){
+					// 		array_push($ress,$id);
+					// 	}
+					//   }
+						
+					// }
+					
+				  }
+				 return array_unique($ress);
+		
+		}else
+		{
+			return false;
+		}
+		}
+		
+		}catch(Exception $e){
+		trigger_error($e->getMessage(), E_USER_ERROR);
+		return false;
+		}	
+	}
 	// function updatePublish($data)
 	// {
 	// try{
@@ -234,7 +290,7 @@ class InstructorCourses_model extends CI_Model
 	function getSearchCourseList($data = NULL)
 	{
 	try{
-		$this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath');
+		$this->db->select('cs.IsActive,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath');
 		$this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
 		$this->db->join('tblcourse cp', 'cp.CourseId = cs.CourseId', 'left');
 		$this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
@@ -289,7 +345,7 @@ class InstructorCourses_model extends CI_Model
 		// $this->db->where('csi.UserId',$data['UserId']); 
 		// $result = $this->db->get('tblcourseuserregister csi');
 
-		$result = $this->db->query('select csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
+		$result = $this->db->query('select csi.IsActive,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
 			GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId='.$User_Id.' AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
 			 (SELECT GROUP_CONCAT(u.FirstName)
 						  FROM tbluser u 
@@ -517,16 +573,34 @@ class InstructorCourses_model extends CI_Model
 	}
 	public function getlist_value($timestamp = NULL,$date = NULL)
 	{	
-		$Course_data = array(
-		'SessionStatus' =>2
-	);
 	
+	    $this->db->select('ca.CourseSessionId,ca.SessionStatus');
 		$this->db->where('TIME(EndTime) <',$timestamp);
 		$this->db->where('DATE(EndDate)',$date);
-		$result = $this->db->update('tblcoursesession',$Course_data);
-		if($result)
+		$result = $this->db->get('tblcoursesession ca');
+		$myArray = json_decode(json_encode($result->result()), true);
+		$res=array();
+
+		foreach($myArray as $row)
+		{ 
+			   if($row['SessionStatus']==1)
+			   {
+				$Course_data = array(
+					'SessionStatus' =>2
+				);
+				// $this->db->where('TIME(EndTime) =',$timestamp);
+				 $this->db->where('CourseSessionId',$row['CourseSessionId']);
+				$result1 = $this->db->update('tblcoursesession',$Course_data);
+			
+					array_push($res,$row['CourseSessionId']);
+			   }
+		}
+		
+		
+	
+		if($result1)
 		{
-			return true;
+			return $res;
 		}else
 		{
 			return false;
@@ -534,11 +608,11 @@ class InstructorCourses_model extends CI_Model
 	}
 	public function getlist_emailvalue($lastemail = NULL,$date = NULL)
 	{	
-		$this->db->select('user.UserId,user.FirstName,user.EmailAddress,ca.CourseSessionId,ca.StartTime,ca.EndTime');
+		$this->db->select('ca.CourseSessionId');
 		$this->db->where('TIME(EndTime) =',$lastemail);
 		$this->db->where('DATE(EndDate)',$date);
-		$this->db->join('tblcourseinstructor ins', 'ins.CourseSessionId = ca.CourseSessionId', 'left');
-		$this->db->join('tbluser user', 'user.UserId = ins.UserId', 'left');
+		//$this->db->join('tblcourseinstructor ins', 'ins.CourseSessionId = ca.CourseSessionId', 'left');
+		//$this->db->join('tbluser user', 'user.UserId = ins.UserId', 'left');
 		$result = $this->db->get('tblcoursesession ca');
 		$res=array();
 		if($result->result())
@@ -546,5 +620,40 @@ class InstructorCourses_model extends CI_Model
 			$res=$result->result();
 		}
 		return $res;
+	}
+	public function isActiveChange($post_data) {
+		try{
+		if($post_data) {
+			if(trim($post_data['IsActive'])==1){
+				$IsActive = true;
+			} else {
+				$IsActive = false;
+			}
+			$data = array(
+				'IsActive' => $IsActive,
+				'UpdatedBy' => trim($post_data['UpdatedBy']),
+				'UpdatedOn' => date('y-m-d H:i:s'),
+			);			
+			$this->db->where('CourseSessionId',trim($post_data['CourseSessionId']));
+			$res = $this->db->update('tblcoursesession',$data);
+			$db_error = $this->db->error();
+			if (!empty($db_error) && !empty($db_error['code'])) { 
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+				return false; // unreachable return statement !!!
+			}
+			if($res) {
+				
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}	}
+		catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+		
 	}
 }

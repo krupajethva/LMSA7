@@ -22,7 +22,7 @@
     "@auth0/angular-jwt": "^2.1.0",
     "core-js": "^2.5.4",
     "jw-angular-social-buttons": "^1.0.0",
-    "ng-select": "^1.0.1",
+    "ng-select": "^1.0.2",
     "ngx-chips": "^2.0.0-beta.0",
     "ngx-pagination": "^3.2.1",
     "rxjs": "~6.3.3",

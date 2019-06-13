@@ -177,4 +177,21 @@ getAllParent()
       });
       return promise;
     }
+    isActiveChange(SessionEntity){ debugger
+      let promise = new Promise((resolve, reject) => {
+        this.http.post(this.globals.baseAPIUrl + 'InstructorCourses/isActiveChange', SessionEntity)
+          .toPromise()
+          .then(
+            res => { // Success
+              resolve(res);
+            },
+            msg => { // Error
+              reject(msg);
+           //   this.globals.isLoading = false;
+              //this.router.navigate(['/pagenotfound']);      
+            }
+          );
+      });		
+      return promise;
+      }
 }

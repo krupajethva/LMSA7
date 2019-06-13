@@ -192,7 +192,7 @@
 				</li>
 			</ul>
 			<div class="tab-content">
-				<div  class="tab-pane active" id="Features" *ngIf="CourseDetailList.Featurescheck==1">
+				<div   role="tabpanel" class="tab-pane active" id="Features" *ngIf="CourseDetailList.Featurescheck==1">
 					<ul class="list_li width_li30">
 						<li [innerHTML]="CourseDetailList.EmailBody"></li>
 					</ul>
@@ -201,7 +201,7 @@
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<div  class="tab-pane" id="whatget">
+				<div   role="tabpanel" class="tab-pane" id="whatget">
 					<ul class="list_li width_li30">
 						<li [innerHTML]="CourseDetailList.EmailBody2"></li>
 					</ul>
@@ -210,7 +210,7 @@
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<div class="tab-pane" id="Target">
+				<div  role="tabpanel" class="tab-pane" id="Target">
 					<ul class="list_li width_li30">
 						<li [innerHTML]="CourseDetailList.EmailBody3"></li>
 					</ul>
