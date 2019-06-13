@@ -10,7 +10,6 @@ class CourseScheduler_model extends CI_Model
 	 {
 		 if($post_Courseschedular)
 		 {	
-			
 			$CourseId=$post_Course['CourseId'];
 			$count=0;
 			foreach($post_Courseschedular as $Courseschedular) {
@@ -20,13 +19,15 @@ class CourseScheduler_model extends CI_Model
 					if($Courseschedular['Showstatus']==1)
 					{
 						$Showstatus = true;
-					} else {
+					} else 
+					{
 						$Showstatus = false;
 					}
 					if($Courseschedular['IsActive']==true)
 					{
 						$IsActive = 1;
-					} else {
+					} else 
+					{
 						$IsActive = 0;
 					}
 					
@@ -37,7 +38,6 @@ class CourseScheduler_model extends CI_Model
 					if($Courseschedular['friday']==1){$weekday .=	',1';}else{$weekday .=',0';}
 					if($Courseschedular['saturday']==1){$weekday .=	',1';}else{$weekday .=',0';}
 					if($Courseschedular['sunday']==1){$weekday .=',1';}else{$weekday .=',0';}
-
 					$Courseschedular_data = array(
 						'CourseId'=>$CourseId,
 						'IsActive'=>$IsActive,
@@ -56,8 +56,6 @@ class CourseScheduler_model extends CI_Model
 						'UpdatedBy' => $post_Course['CreatedBy'],
 						'UpdatedOn' => date('y-m-d H:i:s'),
 						'CourseSessionId' => $Courseschedular['CourseSessionId']
-						
-						
 					);
 					$res=$this->db->query('call updateCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$Courseschedular_data);
 					$this->db->where('CourseSessionId',$Courseschedular['CourseSessionId']);
@@ -67,20 +65,17 @@ class CourseScheduler_model extends CI_Model
 						'CourseSessionId' => $Courseschedular['CourseSessionId'],
 						'UserId' =>  $Courseschedular['Instructorone'],
 						'IsPrimary'=>1,
-						'CreatedBy' => $post_Course['CreatedBy'],
-
-								
+						'CreatedBy' => $post_Course['CreatedBy']		
 					);
 					$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
-
-					foreach($Courseschedular['Instructor'] as $row){
+					//array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
+					foreach($Courseschedular['Instructor'] as $row)
+					{
 						$Courseinstructo_data = array(
 							'CourseSessionId' => $Courseschedular['CourseSessionId'],
 							'UserId' =>  $row,
 							'IsPrimary'=>0,
-							'CreatedBy' => $post_Course['CreatedBy'],
-	
-									
+							'CreatedBy' => $post_Course['CreatedBy']		
 						);
 						$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
 					}
@@ -90,13 +85,15 @@ class CourseScheduler_model extends CI_Model
 					if($Courseschedular['Showstatus']==1)
 					{
 						$Showstatus = true;
-					} else {
+					} else 
+					{
 						$Showstatus = false;
 					}
 					if($Courseschedular['IsActive']==true)
 					{
 						$IsActive = 1;
-					} else {
+					} else 
+					{
 						$IsActive = 0;
 					}
 					if($Courseschedular['monday']==1){$weekday .= '1';}else{$weekday .= '0';}
@@ -124,7 +121,6 @@ class CourseScheduler_model extends CI_Model
 						'weekday' => $weekday,
 						'CreatedBy' => $post_Course['CreatedBy'],
 						'CreatedOn' => date('y-m-d H:i:s')
-						
 					);
 					$res=$this->db->query('call addCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$Courseschedular_data);
 					 $out_param_query1 = $this->db->query('select @id as out_param;');
@@ -136,23 +132,19 @@ class CourseScheduler_model extends CI_Model
 						'CourseSessionId' => $CourseSessionId,
 						'UserId' =>  $Courseschedular['Instructorone'],
 						'IsPrimary'=>1,
-						'CreatedBy' => $post_Course['CreatedBy']
-
-								
+						'CreatedBy' => $post_Course['CreatedBy']	
 					);
 					$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
 					// array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
-					foreach($Courseschedular['Instructor'] as $row){
+					foreach($Courseschedular['Instructor'] as $row)
+					{
 						$Courseinstructo_data = array(
 							'CourseSessionId' => $CourseSessionId,
 							'UserId' =>  $row,
 							'IsPrimary'=>0,
-							'CreatedBy' => $post_Course['CreatedBy']
-	
-									
+							'CreatedBy' => $post_Course['CreatedBy']		
 						);
 						$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
-						//$out_param_query = $this->db->query('select @id as out_param;');
 					}	
 				}
 		}
@@ -163,8 +155,6 @@ class CourseScheduler_model extends CI_Model
 			throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 			return false; // unreachable return statement !!!
 		}
-	
-		
 		if($res)
 				{	
 					$log_data = array(
@@ -488,8 +478,6 @@ class CourseScheduler_model extends CI_Model
 					}
 				else
 					{
-						
-					
 						$Courseinstructo_data = array(
 							'CourseSessionId' =>$post_Session['CourseSessionId'],
 							'UserId' =>  $row,
@@ -507,19 +495,11 @@ class CourseScheduler_model extends CI_Model
 					$this->db->where('CourseSessionId',$post_Session['CourseSessionId']);
 					$res_delete = $this->db->delete('tblcourseinstructor');
 				}
-			
-
 	    	// print_r($new_data);
 	    	// print_r($old_data);
 	       // print_r($array_delete);
-		  // print_r($array_new);
-			 
-			
-					
+		  // print_r($array_new);	
 			}
-			
-
-
 			$db_error = $this->db->error();
 			if (!empty($db_error) && !empty($db_error['code']))
 			{ 
@@ -559,30 +539,29 @@ class CourseScheduler_model extends CI_Model
 	}
 	public function get_Coursesession($Course_id=Null,$userid=Null)
 	{
-		try {
-
-
-	  if($Course_id)
-	  {
-		$result = $this->db->query('SELECT cp.IsActive,cp.SessionStatus,cp.CourseId,cp.CourseSessionId,cp.PublishStatus,cins.UserId as Instructorone,cp.weekday,cp.SessionName,cp.Showstatus,cp.CourseCloseDate,cp.TotalSeats,cp.RemainingSeats,
-		TIME_FORMAT(cp.StartTime, "%h %i %p") as StartTime,TIME_FORMAT(cp.EndTime, "%h %i %p") as EndTime,
-		cp.StartDate,cp.EndDate,cp.CountryId,cp.StateId,cp.Location,cp.IsActive,(SELECT COUNT(mc.CourseSessionId) 
-		FROM tblcourseuserregister as mc
-		WHERE mc.CourseSessionId=cp.CourseSessionId AND mc.UserId='.$userid.') AS enroll
-		 from tblcoursesession as cp
-	   LEFT JOIN tblcourseinstructor as cins ON cins.CourseSessionId=cp.CourseSessionId
-	   where cp.CourseId='.$Course_id.' AND cins.IsPrimary=1');
-		//$result=$this->db->query('call getByCourseSession(?)',$Course_id);
+		try 
+		{
+	     if($Course_id)
+	     {		
+			$result = $this->db->query('SELECT cp.IsActive,cp.SessionStatus,cp.CourseId,cp.CourseSessionId,cp.PublishStatus,cins.UserId as Instructorone,cp.weekday,cp.SessionName,cp.Showstatus,cp.CourseCloseDate,cp.TotalSeats,cp.RemainingSeats,
+			TIME_FORMAT(cp.StartTime, "%h %i %p") as StartTime,TIME_FORMAT(cp.EndTime, "%h %i %p") as EndTime,
+			cp.StartDate,cp.EndDate,cp.CountryId,cp.StateId,cp.Location,cp.IsActive,(SELECT COUNT(mc.CourseSessionId) 
+			FROM tblcourseuserregister as mc
+			WHERE mc.CourseSessionId=cp.CourseSessionId AND mc.UserId='.$userid.') AS enroll
+			from tblcoursesession as cp
+		    LEFT JOIN tblcourseinstructor as cins ON cins.CourseSessionId=cp.CourseSessionId
+		    where cp.CourseId='.$Course_id.' AND cins.IsPrimary=1');
+	    	//$result=$this->db->query('call getByCourseSession(?)',$Course_id);
 		
-		 $db_error = $this->db->error();
+	    	$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
-		$Course_data= array();
-		$result = json_decode(json_encode($result->result()), TRUE);
-		 foreach($result as $row)
-		 { 
+		   $Course_data= array();
+		   $result = json_decode(json_encode($result->result()), TRUE);
+		   foreach($result as $row)
+		   { 
 		   mysqli_next_result($this->db->conn_id);
 			$res=$this->db->query('call getBySessioninstructor(?)',$row['CourseSessionId']);
 			$result1 = json_decode(json_encode($res->result()), True);
