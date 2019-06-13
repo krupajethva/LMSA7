@@ -2814,7 +2814,7 @@ margin-bottom: 15px;}
 .confimation_block .firstform_confirmation h6,.confimation_block .secondform_confirmation h6,.confimation_block .thirdform_confirmation h6{font-size: 14px;font-weight: 600;color: #102749;}
 .confimation_block .firstform_confirmation p,.confimation_block .secondform_confirmation p,.confimation_block .thirdform_confirmation p{color: #8893a0;}
 .confimation_block hr{margin: 15px 15px;}
-.confimation_block .thirdform_confirmation .confrm_btn_group{position: absolute;bottom: 0;right:10px;}
+.confimation_block .thirdform_confirmation .confrm_btn_group{position: absolute;bottom: 30px;right:10px;}
 .confimation_block .thirdform_confirmation .confrm_btn_group button{margin: 0px 5px;}
 .confimation_block .thirdform_confirmation .row{position: relative;}
 .confimation_block .thirdform_confirmation ul li{display: inline-block;margin-right: 25px;}

@@ -1018,6 +1018,7 @@ public function get_Allvideo($User_id=Null)
   {
 		 $this->db->select('cp.ResourcesId,cp.InstructorId as fid,cp.FilePath,cp.Keyword');
 		$this->db->where('cp.Keyword!=','CourseImage');
+		$this->db->where('cp.Keyword!=','Signature');
 		 $this->db->where('cp.InstructorId',$User_id);
 		 $result=$this->db->get('tblresources cp');
 	
