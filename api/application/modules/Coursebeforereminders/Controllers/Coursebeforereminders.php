@@ -165,8 +165,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $nameArr = $insructor->result();
                     print_r($nameArr);
-
-                    $this->sendEmail($candidateResult,$nameArr->FirstName,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
+                    $this->sendEmail($candidateResult,$nameArr,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
                 }
                 //Insructor For Reminder1
                 if ($Reminder1SendTo[1] == true && $CourseSession->StartDate == $newReminderDate1) {
@@ -177,7 +176,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $instructorResult = $insructor->result();
                     print_r($instructorResult);
-                    $this->sendEmail($instructorResult,$instructorResult->FirstName, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
+                    $this->sendEmail($instructorResult,$instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
                 }
                 //Candidate For Reminder2
                 if ($Reminder2SendTo[0] == true && $CourseSession->StartDate == $newReminderDate2) {
@@ -196,8 +195,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $nameArr = $insructor->result();
                     print_r($nameArr);
-
-                    $this->sendEmail($candidateResult,$nameArr->FirstName,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
+                    $this->sendEmail($candidateResult,$nameArr,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
                 }
                 //Insructor For Reminder2
                 if ($Reminder2SendTo[1] == true && $CourseSession->StartDate == $newReminderDate2) {
@@ -209,7 +207,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor->result();
                     $instructorResult = $insructor->result();
                     print_r($instructorResult);
-                    $this->sendEmail($instructorResult, $instructorResult->FirstName, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
+                    $this->sendEmail($instructorResult, $instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
                 }
 
                 //Candidate For Reminder3
@@ -229,8 +227,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $nameArr = $insructor->result();
                     print_r($nameArr);
-
-                    $this->sendEmail($candidateResult,$nameArr->FirstName,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
+                    $this->sendEmail($candidateResult,$nameArr,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
                 }
                 //Insructor For Reminder3
                 if ($Reminder3SendTo[1] == true && $CourseSession->StartDate == $newReminderDate3) {
@@ -242,7 +239,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor->result();
                     $instructorResult = $insructor->result();
                     print_r($instructorResult);
-                    $this->sendEmail($instructorResult,$instructorResult->FirstName, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
+                    $this->sendEmail($instructorResult,$instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
                 }
             }
         }

@@ -6,11 +6,12 @@ import { CoursebeforereminderService } from '../services/coursebeforereminder.se
 import { CommonService } from '../services/common.service';
 import { Globals } from '.././globals';
 import { debuglog } from 'util';
+import { empty } from 'rxjs';
 
 @Component({
-  selector: 'app-coursebeforereminder',
-  templateUrl: './coursebeforereminder.component.html',
-  styleUrls: ['./coursebeforereminder.component.css']
+	selector: 'app-coursebeforereminder',
+	templateUrl: './coursebeforereminder.component.html',
+	styleUrls: ['./coursebeforereminder.component.css']
 })
 export class CoursebeforereminderComponent implements OnInit {
 	beforeReminderEntity;
@@ -18,45 +19,46 @@ export class CoursebeforereminderComponent implements OnInit {
 	courseList;
 	detatisList;
 
-  constructor(private router: Router,	private route: ActivatedRoute, private CoursebeforereminderService: CoursebeforereminderService, public globals: Globals) { }
+	constructor(private router: Router, private route: ActivatedRoute, private CoursebeforereminderService: CoursebeforereminderService, public globals: Globals) { }
 
-  ngOnInit() {
-		this.beforeReminderEntity ={};
-		
+	ngOnInit() {
+		this.beforeReminderEntity = {};
+
 		this.CoursebeforereminderService.getcourselist()
-    .then((data) => {
-			this.courseList = data;
-		//	console.log(this.courseList);
-    },
-      (error) => {
-        //alert('error');
-			});
-			
-			this.CoursebeforereminderService.getAllDetails()
 			.then((data) => {
-				this.detatisList = data;
-			//	console.log(this.courseList);
+				this.courseList = data;
+				//	console.log(this.courseList);
 			},
 				(error) => {
 					//alert('error');
 				});
-  }
 
-  BeforeReminder(reminderForm){
-	
+		this.CoursebeforereminderService.getAllDetails()
+			.then((data) => {
+				this.detatisList = data;
+				//	console.log(this.courseList);
+			},
+				(error) => {
+					//alert('error');
+				});
+	}
+
+	BeforeReminder(reminderForm) {
+
 		console.log("outside")
 		if (reminderForm.valid) {
-      console.log("called")
-		  this.CoursebeforereminderService.BeforeReminder(this.beforeReminderEntity)
-		  .then((data) => {
-			this.ReminderData = data;
-			console.log(this.ReminderData);
-			//this.router.navigate(['/project/list']);
-		  },
-			(error) => {
-			  //alert('error');
-			});
+			console.log("called")
+			this.CoursebeforereminderService.BeforeReminder(this.beforeReminderEntity)
+				.then((data) => {
+					this.ReminderData = data;
+					console.log(this.ReminderData);
+					//this.router.navigate(['/project/list']);
+				},
+					(error) => {
+						//alert('error');
+					});
 		} else {
 		}
 	}
+
 }
