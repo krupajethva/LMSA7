@@ -41,6 +41,7 @@ export class CoursebeforereminderComponent implements OnInit {
 				(error) => {
 					//alert('error');
 				});
+				console.log("beforeReminderEntity",this.beforeReminderEntity);
 	}
 
 	BeforeReminder(reminderForm) {
@@ -61,4 +62,19 @@ export class CoursebeforereminderComponent implements OnInit {
 		}
 	}
 
+	getdetails(data) {
+		let ReminderData1Arr = data.Reminder1SendTo.split(',');
+		let ReminderData2Arr = data.Reminder2SendTo.split(',');
+		let ReminderData3Arr = data.Reminder3SendTo.split(',');
+		data.candidate1 = ReminderData1Arr[0];
+		data.instructor1 = ReminderData1Arr[1];
+		data.candidate2 = ReminderData2Arr[0];
+		data.instructor2 = ReminderData2Arr[1];
+		data.candidate3 = ReminderData3Arr[0];
+		data.instructor3 = ReminderData3Arr[1];
+		console.log(data);
+		this.beforeReminderEntity = data;
+	}
 }
+
+
