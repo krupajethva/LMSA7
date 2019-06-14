@@ -32,7 +32,7 @@ export class InstructorCoursesComponent implements OnInit {
   coursestarthours;
   courseendhours;
 
-  constructor( public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
+  constructor(public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
     private InstructorCoursesService: InstructorCoursesService, private LearnerCoursesService: LearnerCoursesService) { }
   ngOnInit() {
 
@@ -47,10 +47,10 @@ export class InstructorCoursesComponent implements OnInit {
     var curr_date = d.getDate();
     var curr_month = d.getMonth() + 1; //Months are zero based
     var curr_year = d.getFullYear();
-   // var curr_Hours=  d.getHours(); // => 9
-   // var curr_Minutes=d.getMinutes(); // =>  30
-   
-   // this.Ctime=curr_Hours+':'+curr_Minutes;
+    // var curr_Hours=  d.getHours(); // => 9
+    // var curr_Minutes=d.getMinutes(); // =>  30
+
+    // this.Ctime=curr_Hours+':'+curr_Minutes;
     //alert(this.Ctime);
 
     if (curr_month < 10) {
@@ -65,10 +65,17 @@ export class InstructorCoursesComponent implements OnInit {
       var date = '' + curr_date;
     }
     this.datea = curr_year + '-' + month + '-' + date;
-   
-    
-      
+
+
+
     setTimeout(function () {
+
+      $('.skip_btn').click(function () {
+        $('.skiped_block').addClass("active");
+      });
+      $('.skiped_block .close_skip').click(function () {
+        $('.skiped_block').removeClass("active");
+      });
 
       new PerfectScrollbar('.course_clone_block');
 
@@ -100,22 +107,24 @@ export class InstructorCoursesComponent implements OnInit {
     },
       500);
 
+
+
     this.InstructorCoursesService.getAllParent()
       //.map(res => res.json())
       .then((data) => {
         this.SubCategoryList = data['sub'];
         this.coursestarthours = data['coursestarthours'];
         this.courseendhours = data['courseendhours'];
-        var hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours()+Number(this.coursestarthours.Value);
+        var hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours() + Number(this.coursestarthours.Value);
         var minutes = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
         var seconds = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
         this.Ctime = hours + ":" + minutes + ":" + seconds;
-        this.SCtime= curr_year + '-' + month + '-' + date +" "+ hours + ":" + minutes + ":" + seconds;
-       var Ehours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours()-Number(this.coursestarthours.Value);
-       var Eminutes = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
-       var Eseconds = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
-       this.ECtime = curr_year + '-' + month + '-' + date +" "+ Ehours + ":" + Eminutes + ":" + Eseconds;
-    
+        this.SCtime = curr_year + '-' + month + '-' + date + " " + hours + ":" + minutes + ":" + seconds;
+        var Ehours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours() - Number(this.coursestarthours.Value);
+        var Eminutes = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+        var Eseconds = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+        this.ECtime = curr_year + '-' + month + '-' + date + " " + Ehours + ":" + Eminutes + ":" + Eseconds;
+
       },
         (error) => {
           //alert('error');
@@ -132,10 +141,10 @@ export class InstructorCoursesComponent implements OnInit {
           //this.router.navigate(['/pagenotfound']);
         });
     myInput();
+
   }
-  addInstructorCourse(InstructorCourseForm) 
-  {
-    
+  addInstructorCourse(InstructorCourseForm) {
+
 
     if (InstructorCourseForm.valid) {
       this.globals.isLoading = true;
@@ -188,51 +197,60 @@ export class InstructorCoursesComponent implements OnInit {
 
   }
   Publish(CourseSessionId, k) {
-    
+
     // var Enrolla={'CourseId': CourseId,'UserId': this.globals.authData.UserId};
     swal({
-			title: 'Publish a session',
-			text: "Are you sure you want to publish this session?",
-			type: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes'
+      title: 'Publish a session',
+      text: "Are you sure you want to publish this session?",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
     })
-    .then((result) => {
-      if (result.value) {
-    this.globals.isLoading = true;
-    this.InstructorCoursesService.updatePublish(CourseSessionId)
-      .then((data) => {
-        this.globals.isLoading = false;
-        //this.router.navigate(['/payment']);  
-        this.ss = data;
-        this.CourseSesssionList[k].PublishStatus = 1;
-        swal({
-          type: 'success',
-          title: 'Success!',
-          text: 'Session Published successfully.',
-          showConfirmButton: false,
-          timer: 3000
-        })
-        //   this.CourseList[index].PublishStatus = 1;
-        //this.router.navigate(['/payment']);  
-      },
-        (error) => {
-          alert('error');
+      .then((result) => {
+        if (result.value) {
+          this.globals.isLoading = true;
+          this.InstructorCoursesService.updatePublish(CourseSessionId)
+            .then((data) => {
+              this.globals.isLoading = false;
+              //this.router.navigate(['/payment']);  
+              this.ss = data;
+              this.CourseSesssionList[k].PublishStatus = 1;
+              swal({
+                type: 'success',
+                title: 'Success!',
+                text: 'Session Published successfully.',
+                showConfirmButton: false,
+                timer: 3000
+              })
+              //   this.CourseList[index].PublishStatus = 1;
+              //this.router.navigate(['/payment']);  
+            },
+              (error) => {
+                alert('error');
 
-        });
-      }
-    })
+              });
+        }
+      })
 
   }
+
+  view_inst_btn() {
+    $('.view_inst_block').addClass("active");
+  }
+
+  cancel_inst_btn() {
+    $('.view_inst_block').removeClass("active");
+  }
+
   draft(CourseId, i) {
     $('#modalsession' + i).modal('hide');
     this.router.navigate(['/course/edit/' + CourseId + '/' + true]);
   }
   attendance(CourseSessionId, i) {
     $('#modalsession' + i).modal('hide');
-    this.router.navigate(['/attendance/' + CourseSessionId ]);
+    this.router.navigate(['/attendance/' + CourseSessionId]);
   }
 
   clearForm(InstructorCourseForm) {
@@ -263,8 +281,8 @@ export class InstructorCoursesComponent implements OnInit {
     InstructorCourseForm.form.markAsPristine();
   }
 
-  SessionClick(CourseId, i) 
-  {debugger
+  SessionClick(CourseId, i) {
+    debugger
     $('#modalsession' + i).modal('show');
     var id = { 'CourseId': CourseId, 'UserId': this.globals.authData.UserId };
     this.InstructorCoursesService.getAllsessionDetail(id)
@@ -276,12 +294,12 @@ export class InstructorCoursesComponent implements OnInit {
             if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
             //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
           }
-         
+
           // var d = new Date(this.CourseSesssionList.StartDate);
           // alert(this.CourseSesssionList.StartDate);
-            // this.StartDate = d;
-            // this.StartDate = curr_year + '-' + month + '-' + date;
-            //  Sessionid.CourseSDate = this.StartDate;
+          // this.StartDate = d;
+          // this.StartDate = curr_year + '-' + month + '-' + date;
+          //  Sessionid.CourseSDate = this.StartDate;
         }
       },
         (error) => {
@@ -290,80 +308,79 @@ export class InstructorCoursesComponent implements OnInit {
           //this.router.navigate(['/pagenotfound']);
         });
   }
-  close(i) 
-  {
-    
+  close(i) {
+
     $('#modalsession' + i).modal('hide');
   }
   StartSession(CourseSessionId, k) {
-  
-    swal({
-			title: 'Start a Session',
-			text: "Are you sure you want to start this session?",
-			type: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes'
-    })
-    .then((result) => {
-      if (result.value) {
-    this.InstructorCoursesService.StartSession(CourseSessionId)
-      //.map(res => res.json())
-      .then((data) => {
-        if (data) {
-          this.CourseSesssionList[k].SessionStatus = 1;
-          swal({
-            type: 'success',
-            title: 'Start!',
-            text: 'Session has been started.',
-            showConfirmButton: false,
-            timer: 3000
-          })
-        }
-      },
-        (error) => {
-          //alert('error');
 
-          //this.router.navigate(['/pagenotfound']);
-        });
-      }
+    swal({
+      title: 'Start a Session',
+      text: "Are you sure you want to start this session?",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
     })
+      .then((result) => {
+        if (result.value) {
+          this.InstructorCoursesService.StartSession(CourseSessionId)
+            //.map(res => res.json())
+            .then((data) => {
+              if (data) {
+                this.CourseSesssionList[k].SessionStatus = 1;
+                swal({
+                  type: 'success',
+                  title: 'Start!',
+                  text: 'Session has been started.',
+                  showConfirmButton: false,
+                  timer: 3000
+                })
+              }
+            },
+              (error) => {
+                //alert('error');
+
+                //this.router.navigate(['/pagenotfound']);
+              });
+        }
+      })
   }
   EndSession(CourseSessionId, k) {
     swal({
-			title: 'End a Session',
-			text: "Are you sure you want to end this session?",
-			type: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes'
+      title: 'End a Session',
+      text: "Are you sure you want to end this session?",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
     })
-    .then((result) => {
-      if (result.value) {
-    this.InstructorCoursesService.EndSession(CourseSessionId)
-      //.map(res => res.json())
-      .then((data) => {
-        if (data) {
-          this.CourseSesssionList[k].SessionStatus = 2;
-          swal({
-            type: 'success',
-            title: 'Seesion End!',
-            text: 'Session has been ended.',
-            showConfirmButton: false,
-            timer: 3000
-          })
+      .then((result) => {
+        if (result.value) {
+          this.InstructorCoursesService.EndSession(CourseSessionId)
+            //.map(res => res.json())
+            .then((data) => {
+              if (data) {
+                this.CourseSesssionList[k].SessionStatus = 2;
+                swal({
+                  type: 'success',
+                  title: 'Seesion End!',
+                  text: 'Session has been ended.',
+                  showConfirmButton: false,
+                  timer: 3000
+                })
 
+              }
+            },
+              (error) => {
+                //alert('error');
+
+                //this.router.navigate(['/pagenotfound']);
+              });
         }
-      },
-        (error) => {
-          //alert('error');
-
-          //this.router.navigate(['/pagenotfound']);
-        });
-      }
-    })
+      })
   }
   clone(CourseId) {
     this.InstructorCoursesService.getbycourseclone(CourseId)
@@ -385,14 +402,14 @@ export class InstructorCoursesComponent implements OnInit {
   }
   courseall() {
     this.CheckCoursevalid = !this.CheckCoursevalid;
-    if(this.CheckCoursevalid == true){
+    if (this.CheckCoursevalid == true) {
       this.Checktopicvalid = true;
       this.Checksessionvalid = true;
     } else {
       this.Checktopicvalid = false;
       this.Checksessionvalid = false;
     }
-   
+
     for (var i = 0; i < this.CoursetopicList.length; i++) {
       if (this.Checktopicvalid == true) {
         this.CoursetopicList[i].Checksubtopic = true;
@@ -400,7 +417,7 @@ export class InstructorCoursesComponent implements OnInit {
         this.CoursetopicList[i].Checksubtopic = false;
       }
     }
-    
+
     for (var i = 0; i < this.CoursescctionList.length; i++) {
       if (this.Checksessionvalid == true) {
         this.CoursescctionList[i].Checksession = true;
@@ -484,25 +501,24 @@ export class InstructorCoursesComponent implements OnInit {
     }
 
   }
-  clonesubmit(CloneForm)
-  {
+  clonesubmit(CloneForm) {
 
-   // this.CoursecloneEntity = {};
-   this.CoursecloneEntity.CourseId=this.CoursecloneEntity.CourseId;
-    this.CoursecloneEntity.Checksession=this.Checksessionvalid;
-    this.CoursecloneEntity.CheckcourseDetail=true;
-    this.CoursecloneEntity.Checkbages=true;
-    this.CoursecloneEntity.CheckCours=this.CheckCoursevalid;
-    this.CoursecloneEntity.Checktopic=this.Checktopicvalid;
-    var clone = { 'Course': this.CoursecloneEntity, 'CoursesesstionList':  this.CoursescctionList,'CourseTopicList': this.CoursetopicList };
+    // this.CoursecloneEntity = {};
+    this.CoursecloneEntity.CourseId = this.CoursecloneEntity.CourseId;
+    this.CoursecloneEntity.Checksession = this.Checksessionvalid;
+    this.CoursecloneEntity.CheckcourseDetail = true;
+    this.CoursecloneEntity.Checkbages = true;
+    this.CoursecloneEntity.CheckCours = this.CheckCoursevalid;
+    this.CoursecloneEntity.Checktopic = this.Checktopicvalid;
+    var clone = { 'Course': this.CoursecloneEntity, 'CoursesesstionList': this.CoursescctionList, 'CourseTopicList': this.CoursetopicList };
     this.InstructorCoursesService.addclone(clone)
       //.map(res => res.json())
       .then((data) => {
         if (data) {
 
-   // alert(data);
-   window.location.href='/course/edit/'+data;
-        //  this.router.navigate(['/course/edit/'+data])
+          // alert(data);
+          window.location.href = '/course/edit/' + data;
+          //  this.router.navigate(['/course/edit/'+data])
 
         }
       },
@@ -513,37 +529,35 @@ export class InstructorCoursesComponent implements OnInit {
         });
 
   }
-  isActiveChange(SessionEntity, i)
-  { debugger
-    if(this.CourseSesssionList[i].IsActive==false){
+  isActiveChange(SessionEntity, i) {
+    debugger
+    if (this.CourseSesssionList[i].IsActive == false) {
       this.CourseSesssionList[i].IsActive = 0;
       SessionEntity.IsActive = 0;
     } else {
       this.CourseSesssionList[i].IsActive = 1;
       SessionEntity.IsActive = 1;
     }
-   // this.globals.isLoading = true;
-   SessionEntity.UpdatedBy = 1;
-    
-		this.InstructorCoursesService.isActiveChange(SessionEntity)
-		.then((data) => 
-		{	      
-     // this.globals.isLoading = false;	
-     swal({
-      type: 'success',
-      title: 'Updated!',
-      text: 'Category has been updated successfully',
-      showConfirmButton: false,
-      timer: 1500
-    })
-			
-		}, 
-		(error) => 
-		{
-     // this.globals.isLoading = false;
-      this.router.navigate(['/pagenotfound']);
-		});		
-	}
+    // this.globals.isLoading = true;
+    SessionEntity.UpdatedBy = 1;
+
+    this.InstructorCoursesService.isActiveChange(SessionEntity)
+      .then((data) => {
+        // this.globals.isLoading = false;	
+        swal({
+          type: 'success',
+          title: 'Updated!',
+          text: 'Category has been updated successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+      },
+        (error) => {
+          // this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
+  }
 }
 
 
