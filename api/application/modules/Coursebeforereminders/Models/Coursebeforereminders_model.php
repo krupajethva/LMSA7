@@ -9,9 +9,9 @@ class Coursebeforereminders_model extends CI_Model
 
             $updatetdata = array(
                 "CourseId" => trim($post_data['CourseId']),
-                "RemainderDay1" =>  trim($post_data['day1'] ? $post_data['day1'] : '0'),
-                "RemainderDay2" =>  trim($post_data['day2'] ? $post_data['day2'] : '0'),
-                "RemainderDay3" =>  trim($post_data['day3'] ? $post_data['day3'] : '0'),
+                "RemainderDay1" =>  trim($post_data['RemainderDay1'] ? $post_data['RemainderDay1'] : '0'),
+                "RemainderDay2" =>  trim($post_data['RemainderDay2'] ? $post_data['RemainderDay2'] : '0'),
+                "RemainderDay3" =>  trim($post_data['RemainderDay3'] ? $post_data['RemainderDay3'] : '0'),
                 "Reminder1SendTo" => trim(($post_data['candidate1'] ? $post_data['candidate1'] : '0')
                     . ',' . ($post_data['instructor1'] ? $post_data['instructor1'] : '0')),
                 "Reminder2SendTo" => trim(($post_data['candidate2'] ? $post_data['candidate2'] : '0')
@@ -19,7 +19,6 @@ class Coursebeforereminders_model extends CI_Model
                 "Reminder3SendTo" => trim(($post_data['candidate3'] ? $post_data['candidate3'] : '0')
                     . ',' . ($post_data['instructor3'] ? $post_data['instructor3'] : '0')),
             );
-
             $this->db->where('CourseBeforeReminderId', $post_data['CourseBeforeReminderId']);
             $res = $this->db->update('tblcoursebeforereminder', $updatetdata);
             if ($res) {
@@ -39,9 +38,9 @@ class Coursebeforereminders_model extends CI_Model
             $insertdata = array(
                 "CourseId" => trim($post_data['CourseId']),
 
-                "RemainderDay1" =>  trim($post_data['day1'] ? $post_data['day1'] : '0'),
-                "RemainderDay2" =>  trim($post_data['day2'] ? $post_data['day2'] : '0'),
-                "RemainderDay3" =>  trim($post_data['day3'] ? $post_data['day3'] : '0'),
+                "RemainderDay1" =>  trim($post_data['RemainderDay1'] ? $post_data['RemainderDay1'] : '0'),
+                "RemainderDay2" =>  trim($post_data['RemainderDay2'] ? $post_data['RemainderDay2'] : '0'),
+                "RemainderDay3" =>  trim($post_data['RemainderDay3'] ? $post_data['RemainderDay3'] : '0'),
                 "Reminder1SendTo" => trim(($post_data['candidate1'] ? $post_data['candidate1'] : '0')
                     . ',' . ($post_data['instructor1'] ? $post_data['instructor1'] : '0')),
                 "Reminder2SendTo" => trim(($post_data['candidate2'] ? $post_data['candidate2'] : '0')
@@ -74,7 +73,7 @@ class Coursebeforereminders_model extends CI_Model
 
     public function getAllDetails()
     {
-        $this->db->select('tr.CourseId,tr.RemainderDay1,tr.RemainderDay2,tr.RemainderDay3,tc.CourseFullName,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
+        $this->db->select('tr.CourseBeforeReminderId, tr.CourseId,tr.RemainderDay1,tr.RemainderDay2,tr.RemainderDay3,tc.CourseFullName,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
         $this->db->join('tblcourse as tc', 'tr.CourseId=tc.CourseId');
         $this->db->from('tblcoursebeforereminder as tr');
 
