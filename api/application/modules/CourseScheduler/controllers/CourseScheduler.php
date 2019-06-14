@@ -267,7 +267,7 @@ public function abc()
 					$data1['UserId']=$UserId;
 					$data2['UserId']=$UserId;
 					$data1['type']=1;
-					$data2['type']=0;
+					$data2['type']=2;
 				//	$body = str_replace("{login_url}",$StartTime,$body);
 					$body = str_replace("{ link1 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey","HS256").'',$body);
 					$body = str_replace("{ link2 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'',$body);

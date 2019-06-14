@@ -1272,8 +1272,8 @@
                                 <label class="image-radio" (click)="replaceBadges(Badge)">
                                   <img src="../assets/Instructor/{{Badge.fid}}/image/{{Badge.FilePath}}" class="img-responsive"
                                     alt="" />
-                                  <input type="radio" name="image_radio" value="1" *ngIf="i==0" checked />
-                                  <input type="radio" name="image_radio" value="1" *ngIf="i>0" />
+                                  <input type="radio" name="image_radio" value="1" *ngIf="urlid==0" checked />
+                                  <input type="radio" name="image_radio" value="1" *ngIf="urlid>0"/>
                                   <i class="fa fa-check hidden"></i>
                                 </label>
                               </div>
@@ -1537,7 +1537,7 @@
                           <button type="button"  (click)="addsinglesession(CourseFormSession,form,i)" class="next_btn pull-right">
                             <span>Save as draft</span>
                           </button>
-                          <button type="button"  [disabled]=" schedularList[i].IsActive==0" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid"
+                          <button type="button"  [disabled]=" schedularList[i].IsActive==0" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid>0"
                           class="back_btn pull-right">
                           <span>Publish</span>
                         </button>

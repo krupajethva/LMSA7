@@ -82,7 +82,7 @@ export class CourseComponent implements OnInit {
 		this.BadgesEntity = {};
 		this.badgehide = false;
 		this.imageshow = false;
-		
+	
 		// $('.file_upload input[type="file"]').change(function (e) {
 		// 	var fileName = e.target.files[0].name;
 		// 	$('.file_upload input[type="text"]').val(fileName);
@@ -370,8 +370,9 @@ export class CourseComponent implements OnInit {
 									let id = this.route.snapshot.paramMap.get('id');
 									let name = this.route.snapshot.paramMap.get('name');
 								
-									this.urlid=id;
+								
 									if (id) {
+										this.urlid=id;
 										this.CourseEntity.CourseId = id;
 							
 										this.tab1=true;
@@ -614,7 +615,7 @@ export class CourseComponent implements OnInit {
 									}
 									else {
 								
-							
+										this.urlid=0;
 													debugger
 															var itemq = {
 																'IsActive':1,'SessionName': 'session', 'StartTime': '', 'EndTime': '',
@@ -3118,7 +3119,7 @@ export class CourseComponent implements OnInit {
 	}
 	Finelsubmit()
 	{
-	
+	debugger
 	this.CourseService.addbadge(this.BadgesEntity)
 				.then((data) => {
 				
@@ -3129,7 +3130,8 @@ export class CourseComponent implements OnInit {
 						this.submitted = false;
 
 					});
-								
+					// this.CourseSchedulerEntity.CourseId=this.CourseEntity.CourseId;
+					// this.CourseSchedulerEntity.CreatedBy = this.globals.authData.UserId;		
 			var addt = { 'schedularList': this.schedularList, 'course': this.CourseSchedulerEntity };
 			this.CourseSchedulerService.addScheduler(addt)
 				.then((data) => {
