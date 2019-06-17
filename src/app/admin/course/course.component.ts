@@ -522,6 +522,10 @@ export class CourseComponent implements OnInit {
 							for (var i = 0; i < this.array_data.length; i++) {
 								this.stateList[i] = this.stateList_temp;
 								this.schedularList[i].checkvalid = true;
+								if(this.schedularList[i].PublishStatus==1)
+								{
+									this.schedularList[i].PublishStatus=1;}else
+								{this.schedularList[i].PublishStatus=0;}
 								if (this.schedularList[i].IsActive == 0) { this.schedularList[i].IsActive = 0; } else { this.schedularList[i].IsActive = '1'; }
 								if (this.schedularList[i].monday == "0") { this.schedularList[i].monday = 0; } else { this.schedularList[i].monday = '1'; }
 								if (this.schedularList[i].tuesday == "0") { this.schedularList[i].tuesday = 0; } else { this.schedularList[i].tuesday = '1'; }
@@ -2912,7 +2916,15 @@ export class CourseComponent implements OnInit {
 		}
 	}
 	Finelsubmit() {
+
 		debugger
+		if(this.urlid>0)
+		{
+			this.BadgesEntity.UpdatedBy = this.globals.authData.UserId;
+		}else
+		{
+
+		}
 		this.CourseService.addbadge(this.BadgesEntity)
 			.then((data) => {
 
@@ -2927,6 +2939,23 @@ export class CourseComponent implements OnInit {
 		this.CourseSchedulerEntity.CreatedBy = this.globals.authData.UserId;
 		this.CourseSchedulerEntity.UpdatedBy = this.globals.authData.UserId;
 		this.CourseSchedulerEntity.UserId = this.globals.authData.UserId;
+		for (var j = 0; j < this.schedularList.length; j++) 
+		{
+			if(this.schedularList[j].Publish==true)
+			{
+				this.schedularList[j].Publish=1;
+			}else
+			{
+				this.schedularList[j].Publish=0;
+			}
+			if(this.schedularList[j].Check==true)
+			{
+				this.schedularList[j].Check=1;
+			}else
+			{
+				this.schedularList[j].Check=0;
+			}
+		}
 		var addt = { 'schedularList': this.schedularList, 'course': this.CourseSchedulerEntity };
 		this.CourseSchedulerService.addScheduler(addt)
 			.then((data) => {

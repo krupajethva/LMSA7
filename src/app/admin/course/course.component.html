@@ -1148,7 +1148,7 @@
                                                   </span>
                                                 </span>
                                               </div>
-                                              <span>Max. Student</span>
+                                              <span>{{schedularList[i].checkvalid}}Max.{{schedularList[i].PublishStatus}} Student{{schedularList[i].enroll}}</span>
                                             </div>
                                             <div *ngIf="schedularList[i].Showstatus==1">
                                               <div class="input_box">
@@ -1532,12 +1532,24 @@
                             </li>
                           </ul>
                         </div>
-                        <div class="col-md-3 confrm_btn_group">
+                        <div class="col-md-3">
+                            <h3>Publish</h3>
+                            <ul>
+                              <li *ngIf="schedularList[i].PublishStatus==0">
+    
+                                    <div class="check_box ">
+                                      <input type="checkbox" class="checkbox_check" [(ngModel)]="schedularList[i].Publish"
+                                        name="Publish{{i}}" id="Publish{{i}}">
+                                      <label for="Publish{{i}}" class="checkboxbtn_label">Instructor can
+                                        checked Publish the session</label>
+                                    </div>
+                           
+                              </li>
+                              <li  *ngIf="schedularList[i].PublishStatus==1">
+                                  <h6>Already publish</h6>
+                              </li>
+                            </ul>
                      
-                          <button type="button"  [disabled]=" schedularList[i].IsActive==0" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid>0"
-                          class="back_btn pull-right">
-                          <span>Publish</span>
-                        </button>
                         </div>
                         <div class="clearfix"></div>
                         <hr>
