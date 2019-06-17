@@ -38,6 +38,14 @@ class CourseScheduler_model extends CI_Model
 					if($Courseschedular['friday']==1){$weekday .=	',1';}else{$weekday .=',0';}
 					if($Courseschedular['saturday']==1){$weekday .=	',1';}else{$weekday .=',0';}
 					if($Courseschedular['sunday']==1){$weekday .=',1';}else{$weekday .=',0';}
+
+					if($Courseschedular['PublishStatus']==1)
+					{
+						$PublishStatus=1;
+					}else
+					{
+						if($Courseschedular['Publish']==1){$PublishStatus=1;}else{$PublishStatus=0;}
+					}
 					$Courseschedular_data = array(
 						'CourseId'=>$CourseId,
 						'IsActive'=>$IsActive,
@@ -53,11 +61,12 @@ class CourseScheduler_model extends CI_Model
 						'StateId' => $Courseschedular['StateId'],
 						'Location' => $Courseschedular['Location'],
 						'weekday' => $weekday,
+						'PublishStatus'=>$PublishStatus,
 						'UpdatedBy' => $post_Course['CreatedBy'],
 						'UpdatedOn' => date('y-m-d H:i:s'),
 						'CourseSessionId' => $Courseschedular['CourseSessionId']
 					);
-					$res=$this->db->query('call updateCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$Courseschedular_data);
+					$res=$this->db->query('call updateCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$Courseschedular_data);
 					$this->db->where('CourseSessionId',$Courseschedular['CourseSessionId']);
 					$ress = $this->db->delete('tblcourseinstructor');
 					$post_Courseschedular[$count]['NewSendEmail']=0;
@@ -65,9 +74,10 @@ class CourseScheduler_model extends CI_Model
 						'CourseSessionId' => $Courseschedular['CourseSessionId'],
 						'UserId' =>  $Courseschedular['Instructorone'],
 						'IsPrimary'=>1,
+						'Approval'=>1,
 						'CreatedBy' => $post_Course['CreatedBy']		
 					);
-					$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
+					$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$singleinst_data);
 					//array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
 					foreach($Courseschedular['Instructor'] as $row)
 					{
@@ -75,9 +85,10 @@ class CourseScheduler_model extends CI_Model
 							'CourseSessionId' => $Courseschedular['CourseSessionId'],
 							'UserId' =>  $row,
 							'IsPrimary'=>0,
+							'Approval'=>0,
 							'CreatedBy' => $post_Course['CreatedBy']		
 						);
-						$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
+						$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$Courseinstructo_data);
 					}
 				}else
 				 {
@@ -103,7 +114,14 @@ class CourseScheduler_model extends CI_Model
 					if($Courseschedular['friday']==1){$weekday .=	',1';}else{$weekday .=',0';}
 					if($Courseschedular['saturday']==1){$weekday .=	',1';}else{$weekday .=',0';}
 					if($Courseschedular['sunday']==1){$weekday .=',1';}else{$weekday .=',0';}
-
+					if($Courseschedular['PublishStatus']==1)
+					{
+						$PublishStatus=1;
+					}else
+					{
+						if($Courseschedular['Publish']==1){$PublishStatus=1;}else{$PublishStatus=0;}
+					}
+			
 					$Courseschedular_data = array(
 						'CourseId'=>$CourseId,
 						'IsActive'=>$IsActive,
@@ -118,11 +136,12 @@ class CourseScheduler_model extends CI_Model
 						'CountryId' => $Courseschedular['CountryId'],
 						'StateId' => $Courseschedular['StateId'],
 						'Location' => $Courseschedular['Location'],
+						'PublishStatus'=>$PublishStatus,
 						'weekday' => $weekday,
 						'CreatedBy' => $post_Course['CreatedBy'],
 						'CreatedOn' => date('y-m-d H:i:s')
 					);
-					$res=$this->db->query('call addCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$Courseschedular_data);
+					$res=$this->db->query('call addCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$Courseschedular_data);
 					 $out_param_query1 = $this->db->query('select @id as out_param;');
 					$CourseSessionId=$out_param_query1->result()[0]->out_param;
 					$post_Courseschedular[$count]['CourseSessionId']=$CourseSessionId;
@@ -132,9 +151,10 @@ class CourseScheduler_model extends CI_Model
 						'CourseSessionId' => $CourseSessionId,
 						'UserId' =>  $Courseschedular['Instructorone'],
 						'IsPrimary'=>1,
+						'Approval'=>1,
 						'CreatedBy' => $post_Course['CreatedBy']	
 					);
-					$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$singleinst_data);
+					$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$singleinst_data);
 					// array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
 					foreach($Courseschedular['Instructor'] as $row)
 					{
@@ -142,11 +162,135 @@ class CourseScheduler_model extends CI_Model
 							'CourseSessionId' => $CourseSessionId,
 							'UserId' =>  $row,
 							'IsPrimary'=>0,
+							'Approval'=>0,
 							'CreatedBy' => $post_Course['CreatedBy']		
 						);
-						$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
+						$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$Courseinstructo_data);
 					}	
+					
+			
+		//	echo json_encode($ress);
+			//}
+	
 				}
+
+
+
+				if($Courseschedular['Publish']==1)
+					{
+						if($Courseschedular['CourseSessionId']>0)
+						{
+							$SID=$Courseschedular['CourseSessionId'];
+						}else{
+							$SID=$CourseSessionId;
+						}
+					$arr=array();
+							//print_r($ress);
+							 $data1 = $this->db->query('
+							 SELECT FollowerUserId FROM tblinstructorfollowers AS cs WHERE cs.InstructorUserId='.$Courseschedular['Instructorone']);
+							foreach($data1->result() as $row1){
+								if($row1->FollowerUserId!='')
+								{
+								$FollowerUserId = explode(",",$row1->FollowerUserId);
+								foreach($FollowerUserId as $id){
+									array_push($arr,$id);
+								}
+							  }
+								
+							}
+							$Coursedata =$this->db->query('select co.CourseFullName,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.EndDate,
+				GROUP_CONCAT(cs.UserId) as UserId,
+				 (SELECT GROUP_CONCAT(u.FirstName)
+							  FROM tbluser u 
+							  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
+						FROM tblcoursesession AS csi 
+						LEFT JOIN  tblcourse AS co ON co.CourseId = csi.CourseId
+						LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
+						WHERE csi.CourseSessionId='.$SID.' AND cs.IsPrimary=1 GROUP BY csi.CourseSessionId');	
+						$Cdata=$Coursedata->result();
+							 $EmailToken = 'Course Published Followers';
+					$this->db->select('Value');
+					$this->db->where('Key','EmailFrom');
+					$smtp1 = $this->db->get('tblmstconfiguration');	
+					foreach($smtp1->result() as $row) {
+						$smtpEmail = $row->Value;
+					}
+					$this->db->select('Value');
+					$this->db->where('Key','EmailPassword');
+					$smtp2 = $this->db->get('tblmstconfiguration');	
+					foreach($smtp2->result() as $row) {
+						$smtpPassword = $row->Value;
+					}
+				foreach ($arr as $users)
+				{
+					
+					$CourseFullName=$Cdata[0]->CourseFullName;
+					$StartDate=$Cdata[0]->StartDate;
+					$StartTime=$Cdata[0]->StartTimeChange;
+					$InstructorName=$Cdata[0]->FirstName;
+				 // print_r($EmailAddress=$users['EmailAddress']);
+			
+					
+				$config['protocol']=PROTOCOL;
+				$config['smtp_host']=SMTP_HOST;
+				$config['smtp_port']=SMTP_PORT;
+				$config['smtp_user']=$smtpEmail;
+				$config['smtp_pass']=$smtpPassword;
+	
+				$config['charset']='utf-8';
+				$config['newline']="\r\n";
+				$config['mailtype'] = 'html';							
+				$this->email->initialize($config);
+		
+				$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '".$EmailToken."' && et.IsActive = 1");
+		
+				foreach($query->result() as $row){ 
+					if($row->To==4 || $row->To==3){
+					$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = '.$users); 
+					$rowTo = $queryTo->result();
+					$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
+					$body = $row->EmailBody;
+				
+					if($row->BccEmail!=''){
+						$bcc = $row->BccEmail.','.$row->totalbcc;
+					} else {
+						$bcc = $row->totalbcc;
+					}
+					$body = str_replace("{ CourseFullName }",$CourseFullName,$body);
+					$body = str_replace("{ StartDate }",$StartDate,$body);
+					$body = str_replace("{ StartTime }",$StartTime,$body);
+					$body = str_replace("{ InstructorName }",$InstructorName,$body);
+				//	$body = str_replace("{login_url}",$StartTime,$body);
+					$body = str_replace("{login_url}",''.BASE_URL.'/login/',$body);
+					$this->email->from($smtpEmail, 'LMS Admin');
+					$this->email->to($rowTo[0]->EmailAddress);		
+					$this->email->subject($row->Subject);
+					$this->email->cc($row->totalcc);
+					$this->email->bcc($bcc);
+					$this->email->message($body);
+					if($this->email->send())
+					{
+						$email_log = array(
+							'From' => trim($smtpEmail),
+							'Cc' => '',
+							'Bcc' => '',
+							'To' => trim($rowTo[0]->EmailAddress),
+							'Subject' => trim($row->Subject),
+							'MessageBody' => trim($body),
+						);
+						$res = $this->db->insert('tblemaillog',$email_log);	
+						//echo json_encode($users);
+						
+					}else
+					{
+						echo json_encode('fail');
+					}
+				}  else {
+				
+				}
+			}	
+				}
+			}else{}
 		}
 		
 		$db_error = $this->db->error();
@@ -547,7 +691,7 @@ class CourseScheduler_model extends CI_Model
 			TIME_FORMAT(cp.StartTime, "%h %i %p") as StartTime,TIME_FORMAT(cp.EndTime, "%h %i %p") as EndTime,
 			cp.StartDate,cp.EndDate,cp.CountryId,cp.StateId,cp.Location,cp.IsActive,(SELECT COUNT(mc.CourseSessionId) 
 			FROM tblcourseuserregister as mc
-			WHERE mc.CourseSessionId=cp.CourseSessionId AND mc.UserId='.$userid.') AS enroll
+			WHERE mc.CourseSessionId=cp.CourseSessionId ) AS enroll
 			from tblcoursesession as cp
 		    LEFT JOIN tblcourseinstructor as cins ON cins.CourseSessionId=cp.CourseSessionId
 		    where cp.CourseId='.$Course_id.' AND cins.IsPrimary=1');
