@@ -56,6 +56,8 @@
                               <option [value]="cl.CourseId">{{cl.CourseFullName}}</option>
                             </ng-container>
                           </select>
+                          <input type="hidden" [(ngModel)]="beforeReminderEntity.CourseBeforeReminderId"
+                            name="CourseBeforeReminderId">
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6">
@@ -63,6 +65,7 @@
                           <label>
                             <span class="required">*</span>Start Date before</label>
                           <select [(ngModel)]="beforeReminderEntity.RemainderDay1" name="RemainderDay1">
+                            <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -81,6 +84,7 @@
                             <option value="16">16</option>
                           </select>
                           <select [(ngModel)]="beforeReminderEntity.RemainderDay2" name="RemainderDay2">
+                            <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -99,6 +103,7 @@
                             <option value="16">16</option>
                           </select>
                           <select [(ngModel)]="beforeReminderEntity.RemainderDay3" name="RemainderDay3">
+                            <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -119,10 +124,10 @@
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group1">
                           <label>
                             <span class="required">*</span>To Whom</label>
-                            <input type="hidden" [(ngModel)]="beforeReminderEntity.CourseBeforeReminderId" name="CourseBeforeReminderId">
+                            <div class="clearfix"></div>
                           <div class="check_box">
                             <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate1" name="Check1"
                               id="Candidate1" value="1" [checked]="beforeReminderEntity.candidate1===1222">
@@ -187,7 +192,11 @@
                               <td>{{dl.RemainderDay2}}</td>
                               <td>{{dl.RemainderDay3}}</td>
                               <td class="text-center">
-                                <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" (click)="getdetails(dl)"><i class="fa fa-edit"></i></button>
+                                <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit"
+                                  (click)="getdetails(dl)"><i class="fa fa-edit"></i></button>
+                                  <button class="delete" data-toggle="tooltip" data-placement="top" title="Delete" 
+                                  (click)="deletereminder(dl)"><i class="fa fa-trash"></i>
+                                  </button>
                               </td>
                             </tr>
                           </tbody>

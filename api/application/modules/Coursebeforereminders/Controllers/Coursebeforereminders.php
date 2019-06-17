@@ -38,6 +38,13 @@ class Coursebeforereminders extends CI_Controller
         echo json_encode($res);
     }
 
+    public function deletereminder()
+    {
+        $data = $this->Coursebeforereminders_model->deletereminder();
+        $res = $data->result();
+        echo json_encode($res);
+    }
+
     public function sendEmail($emailArr,$name,$CourseFullName,$StartDate, $StartTime,$type)
     {
         $allNames = '';

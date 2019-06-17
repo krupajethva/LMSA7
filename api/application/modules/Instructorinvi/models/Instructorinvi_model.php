@@ -149,4 +149,25 @@ class Instructorinvi_model extends CI_Model
 			return false;
 		}
 	}
+
+	public function Instructor_List($type, $CourseSessionId)
+	{
+		if ($type) {
+			$this->db->select('UserId');
+			$this->db->where('CourseSessionId', $CourseSessionId);
+			$res = $this->db->get('tblcourseuserregister');
+			if ($res) {
+				return true;
+			} else {
+				return false;
+			}
+
+			$this->db->select('UserId');
+			$this->db->where('CourseSessionId', $CourseSessionId);
+			$res1 = $this->db->get('tblcourseuserregister');
+
+		} else {
+			return false;
+		}
+	}
 }

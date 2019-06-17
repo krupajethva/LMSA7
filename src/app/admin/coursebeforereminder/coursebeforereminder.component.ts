@@ -51,8 +51,10 @@ export class CoursebeforereminderComponent implements OnInit {
 			console.log("called")
 			this.CoursebeforereminderService.BeforeReminder(this.beforeReminderEntity)
 				.then((data) => {
-					this.ReminderData = data;
-					console.log(this.ReminderData);
+					//this.ReminderData = data;
+					console.log(this.courseList);
+					this.courseList.push(this.beforeReminderEntity);
+					console.log(this.courseList);
 					//this.router.navigate(['/project/list']);
 				},
 					(error) => {
@@ -75,6 +77,8 @@ export class CoursebeforereminderComponent implements OnInit {
 		console.log(data);
 		this.beforeReminderEntity = data;
 	}
+
+
 }
 
 
