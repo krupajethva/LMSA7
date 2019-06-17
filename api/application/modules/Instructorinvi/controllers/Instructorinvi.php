@@ -24,7 +24,6 @@ class Instructorinvi extends CI_Controller
 				{
 					
 				}
-
 			}		
 			echo json_encode($result);				
 		}			

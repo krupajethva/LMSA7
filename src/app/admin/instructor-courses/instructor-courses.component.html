@@ -5,10 +5,10 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-      <div class="welcome_message alert" role="alert">
-          <i class="fa fa-info"></i>Welcome back,
-          <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
-      </div>
+    <div class="welcome_message alert" role="alert">
+      <i class="fa fa-info"></i>Welcome back,
+      <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+    </div>
   </div>
   <div class="clearfix"></div>
   <div class="breadcrumb_block">
@@ -79,7 +79,7 @@
     <div class="course_learner_block">
       <div class="row">
         <div class="col-md-3 col-sm-4" *ngFor="let course of CourseList ; let i = index">
-          <div class="course_box" >
+          <div class="course_box">
             <!-- <div class="progress_block" *ngIf="course.PublishStatus==0"><span class="label label-primary pull-right">Draft</span>
               <div class="clearfix"></div>
             </div>
@@ -142,9 +142,167 @@
                         <div class="news-blog" [ngClass]="{Draft:SessionList.PublishStatus==0,Publish:SessionList.PublishStatus>0}">
                           <h4>{{SessionList.SessionName}}</h4>
                           <ul class="icon">
+                            <!-- <li>
+                              <i class="fa fa-calendar"></i>
+                              <strong>Instructors : </strong> {{SessionList.FirstName}}</li> -->
+
                             <li>
                               <i class="fa fa-calendar"></i>
-                              <strong>Instructors : </strong> {{SessionList.FirstName}}</li>
+                              <strong>Instructors : </strong>
+                              <button (click)="view_inst_btn()" class="view_inst_btn">
+                                <i title="View Instructors" data-toggle="tooltip" data-placement="top" class="fa fa-eye" aria-hidden="true"></i>
+                                <span>2</span>
+                              </button>
+                            </li>
+
+                            <div class="view_inst_block">
+                              <span (click)="cancel_inst_btn()" class="close_skip close_btn fa fa-times" title="Close" data-toggle="tooltip" data-placement="top"></span>
+                              <div class="view_inst_wrap">
+                                <h3>Instructors</h3>
+                                <ul>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Anand</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Vidhi</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Uttam</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Nirav</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Krupali</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Anand</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Vidhi</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Uttam</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Nirav</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                  <li>
+                                    <div class="pull-left instr_name">
+                                      <span>Krupali</span>
+                                    </div>
+                                    <div class="pull-right instr_icn">
+                                      <a href="">
+                                        <i class="fa fa-user-times"></i>
+                                      </a>
+                                      <a href="">
+                                        <i class="fa fa-user-plus"></i>
+                                      </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
                             <li>
                               <i class="fa fa-user"></i>
                               <strong>Start Date : </strong> {{SessionList.StartDate}} {{sdsd | date :'HH:mm:ss'}}</li>
@@ -184,17 +342,18 @@
                                   <strong>Complete Session</strong>
                                 </p>
                               </li>
-            
-                                <div class="form-group-active">
-                                  <label>
-                                    <span>*</span>Active?{{SessionList.IsActive}}</label>
 
-                                  <div class="activeyes_box">
-                                    <input type="checkbox" name="IsActive{{k}}"  (change)="isActiveChange(SessionList,k)"id="IsActive{{k}}" value="yes" #IsActive="ngModel" [(ngModel)]="SessionList.IsActive">
-                                    <label for="IsActive{{k}}"></label>
-                                  </div>
+                              <div class="form-group-active">
+                                <label>
+                                  <span>*</span>Active?{{SessionList.IsActive}}</label>
+
+                                <div class="activeyes_box">
+                                  <input type="checkbox" name="IsActive{{k}}" (change)="isActiveChange(SessionList,k)" id="IsActive{{k}}" value="yes" #IsActive="ngModel"
+                                    [(ngModel)]="SessionList.IsActive">
+                                  <label for="IsActive{{k}}"></label>
                                 </div>
-                                       
+                              </div>
+
                               <!-- <li class="start_session_btn">
                                 <a class="back_btn" (click)="StartSession(SessionList.CourseSessionId,k)">Start</a>
                               </li>
@@ -213,7 +372,7 @@
                                   <strong>Already Publish</strong>
                                 </div>
                                 <div class="col-md-6 attendancesession">
-                                  <a  (click)="attendance(SessionList.CourseSessionId,i)" >Attendance</a>
+                                  <a (click)="attendance(SessionList.CourseSessionId,i)">Attendance</a>
                                 </div>
                               </li>
                               <li class="enroll_course_tag draftpublishtag" *ngIf="SessionList.PublishStatus==0">

@@ -316,7 +316,7 @@ hr {
 .right_content_block .bg_white_block .title_heading .breadcrumb_block .breadcrumb li{color: #666; font-family: 'OpenSans-Regular'; font-size: 14px;}
 .right_content_block .bg_white_block .title_heading .breadcrumb_block .breadcrumb a{color: #9EA7B3;}
 
-.next_btn{background: var(--theme-color); border-radius:4px; color: #fff; font-size: 13px; border: 0; padding: 10px; line-height: 13px; min-width: 100px; opacity: 0.85; transition: all .3s ease-in-out; text-align: center; display: inline-block;}
+.next_btn{margin:0 5px;background: var(--theme-color); border-radius:4px; color: #fff; font-size: 13px; border: 0; padding: 10px; line-height: 13px; min-width: 100px; opacity: 0.85; transition: all .3s ease-in-out; text-align: center; display: inline-block;}
 .next_btn:hover,.next_btn:focus{opacity: 1; transition: all .3s ease-in-out; box-shadow: 0 5px 10px 2px rgba(88,103,221,.15); color: #fff;}
 .back_btn{background: var(--option-color); border-radius:4px; color: #fff; font-size: 13px; border: 0; padding: 10px; line-height: 13px; min-width: 100px; opacity: 0.85; transition: all .3s ease-in-out; text-align: center;  display: inline-block;}
 .back_btn.followbtn,.next_btn.unfollowbtn{min-width:25px!important;padding:5px!important;font-size:10px!important;}
@@ -964,6 +964,113 @@ textarea{resize: none;}
 .course_learner_block .course_box .course_btn.instructor_btn .back_btn,.course_learner_block .course_box .course_btn.instructor_btn .next_btn{font-size: 12px;}
 .course_learner_block .course_box .course_btn.instructor_btn .next_btn{min-width: 25px!important;}
 .course_learner_block .course_box .progress_block span.label-primary {margin: 0;font-size: 12px;}
+
+
+.view_inst_block .close_skip {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9;
+  cursor: pointer;
+}
+.close_btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9;
+  cursor: pointer;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 18px;
+  transition: all 0.5s ease;
+}
+.view_inst_block {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 9;
+  background: rgba(255,255,255,0.95);
+  width: 100%;
+  border: 1px solid #ccc;
+  text-align: left;
+  box-shadow: 0 0 5px #f3f3f3;
+  border-radius: 5px;
+  padding: 20px 20px 0px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s linear 0s;
+  height: 0px;
+}
+.view_inst_block ul{
+  padding-top: 10px;
+}
+.view_inst_block ul li{
+display: block;
+padding-bottom: 0px;
+position: relative;
+padding-left: 20px;
+}
+.view_inst_block h3{
+  margin-bottom: 5px;
+}
+.view_inst_block ul li .instr_name{
+  font-size: 18px;
+}
+.view_inst_block ul li:before{
+  content: "";
+  position: absolute;
+  background: #bbbbbb;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: 8px;
+  left: 0;
+}
+.view_inst_block ul li .instr_icn .fa-user-times{
+  color: #0061AF;
+  margin: 0px 10px;
+  font-size: 16px;
+}
+.view_inst_block ul li .instr_icn .fa-user-plus{
+  color: #018a3a;
+  font-size: 16px;
+}
+button.view_inst_btn {
+  font-size: 21px;
+  color: #0061AF;
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  margin: 0px 5px;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+button.view_inst_btn span {
+  position: absolute;
+  top: 0px;
+  right: -10px;
+  background: #60b8d1;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 20px;
+}
+.view_inst_block.active {
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.5s linear 0s;
+  height: 100%;
+}
+
+
 /*----------------------------End instructor Course Details------------------------------*/
 
 /*start css for instructor list*/
