@@ -285,7 +285,7 @@ class Course extends CI_Controller
 			if(isset($_FILES['CourseImage']) && !empty($_FILES['CourseImage']))
 			{	
 				//$dirname=str_replace(' ','_',$id);
-				$directoryname="../assets/Instructor/".$id."/";
+				$directoryname="../src/assets/Instructor/".$id."/";
 				$directoryname1= $directoryname."image/";
 				if(!is_dir($directoryname1)){
 					mkdir($directoryname1, 0755, true);
@@ -304,7 +304,7 @@ class Course extends CI_Controller
 		if(isset($_FILES['Video']) && !empty($_FILES['Video']))
 		{	
 			//$dirname=str_replace(' ','_',$id);
-			$directoryname="../assets/Instructor/".$id."/";
+			$directoryname="../src/assets/Instructor/".$id."/";
 			$directoryname1= $directoryname."Video/";
 			if(!is_dir($directoryname1)){
 				mkdir($directoryname1, 0755, true);

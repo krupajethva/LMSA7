@@ -82,13 +82,13 @@ if (defined('ACTIVE_GROUP'))
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
-	 'hostname' => 'localhost',
-	 'username' => 'root',
-	 'password' => '',
-	// 'hostname' => '192.168.1.170',
-	// 'username' => 'vidhi',
-	// 'password' => 'vidhi@123',
+	 'dsn'	=> '',
+	 // 'hostname' => 'localhost',
+	 // 'username' => 'root',
+	 // 'password' => '',
+  'hostname' => '192.168.1.170',
+	 'username' => 'vidhi',
+	'password' => 'vidhi@123',
 	'database' => 'lms',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
