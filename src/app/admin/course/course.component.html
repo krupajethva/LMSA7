@@ -1534,9 +1534,6 @@
                         </div>
                         <div class="col-md-3 confrm_btn_group">
                      
-                          <button type="button"  (click)="addsinglesession(CourseFormSession,form,i)" class="next_btn pull-right">
-                            <span>Save as draft</span>
-                          </button>
                           <button type="button"  [disabled]=" schedularList[i].IsActive==0" (click)="Publish(CourseFormSession,form,i)" *ngIf="urlid>0"
                           class="back_btn pull-right">
                           <span>Publish</span>

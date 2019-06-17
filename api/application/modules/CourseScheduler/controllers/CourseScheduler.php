@@ -100,6 +100,7 @@ public function abc()
 					$this->db->select('Value');
 					$this->db->where('Key','EmailFrom');
 					$smtp1 = $this->db->get('tblmstconfiguration');	
+
 					foreach($smtp1->result() as $row) 
 					{
 						$smtpEmail = $row->Value;
