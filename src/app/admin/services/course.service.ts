@@ -304,6 +304,7 @@ export class CourseService {
     return promise;
   }
   badgeuploadFile(file, id) {
+    debugger
     let promise = new Promise((resolve, reject) => {
       this.http.post(this.globals.baseAPIUrl + 'Course/badgeuploadFile/' + id, file)
         .toPromise()

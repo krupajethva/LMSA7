@@ -62,7 +62,7 @@
                         <div class="form-group">
                           <label>
                             <span class="required">*</span>Start Date before</label>
-                          <select [(ngModel)]="beforeReminderEntity.day1" name="value">
+                          <select [(ngModel)]="beforeReminderEntity.RemainderDay1" name="RemainderDay1">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -80,7 +80,7 @@
                             <option value="15">15</option>
                             <option value="16">16</option>
                           </select>
-                          <select [(ngModel)]="beforeReminderEntity.day2" name="value">
+                          <select [(ngModel)]="beforeReminderEntity.RemainderDay2" name="RemainderDay2">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -98,7 +98,7 @@
                             <option value="15">15</option>
                             <option value="16">16</option>
                           </select>
-                          <select [(ngModel)]="beforeReminderEntity.day3" name="value">
+                          <select [(ngModel)]="beforeReminderEntity.RemainderDay3" name="RemainderDay3">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -122,34 +122,35 @@
                         <div class="form-group">
                           <label>
                             <span class="required">*</span>To Whom</label>
+                            <input type="hidden" [(ngModel)]="beforeReminderEntity.CourseBeforeReminderId" name="CourseBeforeReminderId">
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate1" name="Check"
-                              id="Candidate1" value="1">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate1" name="Check1"
+                              id="Candidate1" value="1" [checked]="beforeReminderEntity.candidate1===1222">
                             <label for="Candidate1" class="checkboxbtn_label">Candidate</label>
                           </div>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor1" name="Check"
-                              id="Instructor1" value="1">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor1" name="Check2"
+                              id="Instructor1" value="1" [checked]="beforeReminderEntity.instructor1===12222">
                             <label for="Instructor1" class="checkboxbtn_label">Instructor</label>
                           </div>
                           <br>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate2" name="Check"
-                              id="Candidate2" value="Candidate2">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate2" name="Check3"
+                              id="Candidate2" value="0" [checked]="beforeReminderEntity.candidate2==222">
                             <label for="Candidate2" class="checkboxbtn_label">Candidate</label>
                           </div>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor2" name="Check"
-                              id="Instructor2" value="Instructor2">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor2" name="Check4"
+                              id="Instructor2" value="0" [checked]="beforeReminderEntity.instructor2==1">
                             <label for="Instructor2" class="checkboxbtn_label">Instructor</label>
                           </div><br>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate3" name="Check"
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate3" name="Check5"
                               id="Candidate3" value="Candidate3">
                             <label for="Candidate3" class="checkboxbtn_label">Candidate</label>
                           </div>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor3" name="Check"
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor3" name="Check6"
                               id="Instructor3" value="Instructor3">
                             <label for="Instructor3" class="checkboxbtn_label">Instructor</label>
                           </div>
@@ -186,7 +187,7 @@
                               <td>{{dl.RemainderDay2}}</td>
                               <td>{{dl.RemainderDay3}}</td>
                               <td class="text-center">
-                                <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/coursebeforereminder/{{dl.CourseBeforeReminderId}}"><i class="fa fa-edit"></i></button>
+                                <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" (click)="getdetails(dl)"><i class="fa fa-edit"></i></button>
                               </td>
                             </tr>
                           </tbody>

@@ -44,6 +44,10 @@ class Category extends CI_Controller
 				}
 					
 			}
+
+			
+
+
 	}
 	
 	public function getById($Category_id=null)

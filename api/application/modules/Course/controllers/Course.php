@@ -337,7 +337,7 @@ class Course extends CI_Controller
 					
 					if(isset($_FILES['Video'.$i]) && !empty($_FILES['Video'.$i]))
 					{
-						$directoryname="../assets/Instructor/".$id."/";
+						$directoryname="../src/assets/Instructor/".$id."/";
 						$directoryname1= $directoryname."Video/";
 						if(!is_dir($directoryname1)){
 							mkdir($directoryname1, 0755, true);
@@ -365,9 +365,9 @@ class Course extends CI_Controller
 			if(isset($_FILES['badgeImage']) && !empty($_FILES['badgeImage']))
 			{	
 				//$dirname=str_replace(' ','_',$id);
-				$directoryname="../assets/Instructor/".$id."/";
+				$directoryname="../src/assets/Instructor/".$id."/";
 
-				$directoryname="../assets/Instructor/".$id."/";
+				$directoryname="../src/assets/Instructor/".$id."/";
 				$directoryname1= $directoryname."image/";
 				if(!is_dir($directoryname1)){
 					mkdir($directoryname1, 0755, true);
@@ -378,11 +378,17 @@ class Course extends CI_Controller
 				$target_file = $target_dir . $newfilename;
 				move_uploaded_file($_FILES["badgeImage"]["tmp_name"], $target_file);
 				//move_uploaded_file($_FILES["CourseImage"]["tmp_name"], "../assets/Course/".$_FILES["CourseImage"]["name"]);
-				
+				echo json_encode($_FILES['badgeImage']);
+			}else
+			{
+				echo json_encode('error1');
 			} 
-	
+			
+			}else
+			{
+				echo json_encode('error2');
 			}
-		echo json_encode('success');
+		
 	
 	}
 	public function addClone() {
