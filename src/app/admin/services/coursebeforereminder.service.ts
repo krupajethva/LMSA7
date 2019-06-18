@@ -69,7 +69,7 @@ export class CoursebeforereminderService {
     deletereminder(data){
       debugger
       let promise = new Promise((resolve, reject) => {
-        this.http.get(this.globals.baseAPIUrl + 'Coursebeforereminders/deletereminder')
+        this.http.post(this.globals.baseAPIUrl + 'Coursebeforereminders/deletereminder',data)
           .toPromise()
           .then(
             res => { // Success 

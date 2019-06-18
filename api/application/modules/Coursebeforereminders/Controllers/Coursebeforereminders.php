@@ -40,12 +40,20 @@ class Coursebeforereminders extends CI_Controller
 
     public function deletereminder()
     {
-        $data = $this->Coursebeforereminders_model->deletereminder();
-        $res = $data->result();
-        echo json_encode($res);
+        $courseReminderObj = json_decode(trim(file_get_contents('php://input')), true);
+        try {
+            if (!empty($courseReminderObj['CourseBeforeReminderId'])) {
+                $this->Coursebeforereminders_model->deletereminder($courseReminderObj['CourseBeforeReminderId']);
+                echo true;
+            } else {
+                echo false;
+            }
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
-    public function sendEmail($emailArr,$name,$CourseFullName,$StartDate, $StartTime,$type)
+    public function sendEmail($emailArr, $name, $CourseFullName, $StartDate, $StartTime, $type)
     {
         $allNames = '';
         foreach ($name as $users) {
@@ -133,8 +141,8 @@ class Coursebeforereminders extends CI_Controller
             $newReminderDate1 = date('Y-m-d', strtotime('+' . $Coursebeforereminders->RemainderDay1 . 'days'));
             $newReminderDate2 = date('Y-m-d', strtotime('+' . $Coursebeforereminders->RemainderDay2 . 'days'));
             $newReminderDate3 = date('Y-m-d', strtotime('+' . $Coursebeforereminders->RemainderDay3 . 'days'));
-            
-      
+
+
             $this->db->select('CourseSessionId,SessionName, StartDate, StartTime');
             $this->db->from('tblcoursesession');
             $this->db->where('CourseId', $Coursebeforereminders->CourseId);
@@ -151,7 +159,7 @@ class Coursebeforereminders extends CI_Controller
             if (count($CourseSessionResult) > 0) {
                 foreach ($CourseSessionResult as $CourseSession)
 
-                $Reminder1SendTo = explode(",", $Coursebeforereminders->Reminder1SendTo);
+                    $Reminder1SendTo = explode(",", $Coursebeforereminders->Reminder1SendTo);
                 $Reminder2SendTo = explode(",", $Coursebeforereminders->Reminder2SendTo);
                 $Reminder3SendTo = explode(",", $Coursebeforereminders->Reminder3SendTo);
 
@@ -172,7 +180,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $nameArr = $insructor->result();
                     print_r($nameArr);
-                    $this->sendEmail($candidateResult,$nameArr,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
+                    $this->sendEmail($candidateResult, $nameArr, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
                 }
                 //Insructor For Reminder1
                 if ($Reminder1SendTo[1] == true && $CourseSession->StartDate == $newReminderDate1) {
@@ -183,7 +191,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $instructorResult = $insructor->result();
                     print_r($instructorResult);
-                    $this->sendEmail($instructorResult,$instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
+                    $this->sendEmail($instructorResult, $instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
                 }
                 //Candidate For Reminder2
                 if ($Reminder2SendTo[0] == true && $CourseSession->StartDate == $newReminderDate2) {
@@ -202,7 +210,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $nameArr = $insructor->result();
                     print_r($nameArr);
-                   $this->sendEmail($candidateResult,$nameArr,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
+                    $this->sendEmail($candidateResult, $nameArr, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
                 }
                 //Insructor For Reminder2
                 if ($Reminder2SendTo[1] == true && $CourseSession->StartDate == $newReminderDate2) {
@@ -214,7 +222,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor->result();
                     $instructorResult = $insructor->result();
                     print_r($instructorResult);
-               $this->sendEmail($instructorResult, $instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
+                    $this->sendEmail($instructorResult, $instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
                 }
 
                 //Candidate For Reminder3
@@ -234,7 +242,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor = $this->db->get();
                     $nameArr = $insructor->result();
                     print_r($nameArr);
-                    $this->sendEmail($candidateResult,$nameArr,$CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
+                    $this->sendEmail($candidateResult, $nameArr, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'candidate');
                 }
                 //Insructor For Reminder3
                 if ($Reminder3SendTo[1] == true && $CourseSession->StartDate == $newReminderDate3) {
@@ -246,7 +254,7 @@ class Coursebeforereminders extends CI_Controller
                     $insructor->result();
                     $instructorResult = $insructor->result();
                     print_r($instructorResult);
-                 $this->sendEmail($instructorResult,$instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
+                    $this->sendEmail($instructorResult, $instructorResult, $CourseSession->SessionName, $CourseSession->StartDate, $CourseSession->StartTime, 'Instructor');
                 }
             }
         }

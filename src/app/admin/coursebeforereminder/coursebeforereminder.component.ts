@@ -7,6 +7,7 @@ import { CommonService } from '../services/common.service';
 import { Globals } from '.././globals';
 import { debuglog } from 'util';
 import { empty } from 'rxjs';
+import { cloneDeep } from 'lodash';
 
 @Component({
 	selector: 'app-coursebeforereminder',
@@ -17,7 +18,7 @@ export class CoursebeforereminderComponent implements OnInit {
 	beforeReminderEntity;
 	ReminderData;
 	courseList;
-	detatisList;
+	detailList;
 
 	constructor(private router: Router, private route: ActivatedRoute, private CoursebeforereminderService: CoursebeforereminderService, public globals: Globals) { }
 
@@ -35,16 +36,16 @@ export class CoursebeforereminderComponent implements OnInit {
 
 		this.CoursebeforereminderService.getAllDetails()
 			.then((data) => {
-				this.detatisList = data;
+				this.detailList = data;
 				//	console.log(this.courseList);
 			},
 				(error) => {
 					//alert('error');
 				});
-				console.log("beforeReminderEntity",this.beforeReminderEntity);
+		console.log("beforeReminderEntity", this.beforeReminderEntity);
 	}
 
-	BeforeReminder(reminderForm) {
+	InsertOrUpdateBeforeReminder(reminderForm) {
 
 		console.log("outside")
 		if (reminderForm.valid) {
@@ -52,9 +53,17 @@ export class CoursebeforereminderComponent implements OnInit {
 			this.CoursebeforereminderService.BeforeReminder(this.beforeReminderEntity)
 				.then((data) => {
 					//this.ReminderData = data;
-					console.log(this.courseList);
-					this.courseList.push(this.beforeReminderEntity);
-					console.log(this.courseList);
+					let beforeReminderEntity = cloneDeep(this.beforeReminderEntity)
+					this.courseList.forEach(course => {
+						if (beforeReminderEntity['CourseId'] == course.CourseId) {
+							beforeReminderEntity.CourseFullName = course.CourseFullName;
+						}
+
+					});
+					this.detailList.push(beforeReminderEntity);
+					
+
+					console.log('this.detailList', this.detailList);
 					//this.router.navigate(['/project/list']);
 				},
 					(error) => {
@@ -78,7 +87,22 @@ export class CoursebeforereminderComponent implements OnInit {
 		this.beforeReminderEntity = data;
 	}
 
+	deletereminder(data) {
+		debugger
+		this.CoursebeforereminderService.deletereminder(data)
+			.then((responseData) => {
+				if (responseData == true) {
+					console.log('delete');
+					let index = this.detailList.indexOf(data);
+					if (index != -1) {
+						this.detailList.splice(index, 1);
+					}
+				} else {
+					console.log('error');
+				}
+			})
+
+
+	}
 
 }
-
-

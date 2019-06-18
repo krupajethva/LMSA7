@@ -42,7 +42,7 @@
             <div class="white_shadow_box">
               <div class="col-md-12 col-sm-12">
                 <form class="form-validate" #beforereminderForm="ngForm"
-                  (ngSubmit)="BeforeReminder(beforereminderForm)">
+                  (ngSubmit)="InsertOrUpdateBeforeReminder(beforereminderForm)">
                   <h1 class="no_margin">Course Before Reminder</h1>
                   <div class="course_forum_block">
                     <div class="row">
@@ -185,7 +185,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let dl of detatisList;let i = index">
+                            <tr *ngFor="let dl of detailList;let i = index">
                               <td class="text-center">{{i+1}}</td>
                               <td>{{dl.CourseFullName}}</td>
                               <td>{{dl.RemainderDay1}}</td>

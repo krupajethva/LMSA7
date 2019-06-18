@@ -84,16 +84,10 @@ class Coursebeforereminders_model extends CI_Model
         return $query;
     }
 
-    public function deletereminder($data)
+    public function deletereminder($CourseBeforeReminderId)
     {
-        $this->db->where('CourseBeforeReminderId', $data['CourseBeforeReminderId']);
+        $this->db->where('CourseBeforeReminderId', $CourseBeforeReminderId);
         $this->db->delete('tblcoursebeforereminder');
-
-        $query = $this->db->get();
-        if ($query) {
-            return $query;
-        }
-        return $query;
     }
 
     public function getlist()
