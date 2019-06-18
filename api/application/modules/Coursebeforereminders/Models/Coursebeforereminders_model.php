@@ -6,7 +6,6 @@ class Coursebeforereminders_model extends CI_Model
     {
         if ($data) {
             $post_data = $data;
-
             $updatetdata = array(
                 "CourseId" => trim($post_data['CourseId']),
                 "RemainderDay1" =>  trim($post_data['RemainderDay1'] ? $post_data['RemainderDay1'] : '0'),

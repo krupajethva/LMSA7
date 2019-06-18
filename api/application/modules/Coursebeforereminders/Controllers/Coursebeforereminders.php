@@ -15,7 +15,18 @@ class Coursebeforereminders extends CI_Controller
     public function insert_data()
     {
         $data = json_decode(trim(file_get_contents('php://input')), true);
-        if (!empty($data['CourseBeforeReminderId'])) {
+
+        $this->db->select('CourseId');
+        $this->db->from('tblcoursebeforereminder');
+        $this->db->where('CourseId', $data['CourseId']);
+        $row = $this->db->get();
+        $courseResult = $row->result();
+
+        // if (count($courseResult) > 0) {
+        //     $data['CourseBeforeReminderId'] = $courseResult['0']['CourseBeforeReminderId'];
+        // }
+        
+        if (!empty($data['CourseBeforeReminderId']) && count($courseResult) > 0) {
             $result = $this->Coursebeforereminders_model->update($data);
         } else {
             $result = $this->Coursebeforereminders_model->insert($data);
