@@ -17,8 +17,8 @@ if (!function_exists('SendEmail')) {
                     'From' => trim($smtpEmail),
                     'Cc' => trim($cc),
                     'Bcc' => trim($bcc),
-                    'To' => trim($EmailAddress),
-                    'Subject' => trim($row->Subject),
+                    'To' => trim($to),
+                    'Subject' => trim($subject),
                     'MessageBody' => trim($body),
                 );	
                 $res = $CI->db->insert('tblemaillog',$email_log);	
