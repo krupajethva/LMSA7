@@ -172,14 +172,19 @@ class Education_model extends CI_Model
 					return false; // unreachable return statement !!!
 				}
 			if($res) {
-				$log_data = array(
-					'UserId' =>  trim($post_Education['UpdatedBy']),
-					'Module' => 'Education',
-					'Activity' =>'Update'
+				// $log_data = array(
+				// 	'UserId' =>  trim($post_Education['UpdatedBy']),
+				// 	'Module' => 'Education',
+				// 	'Activity' =>'Update'
 	
-				);
-				$log = $this->db->insert('tblactivitylog',$log_data);
-				return true;
+				// );
+				// $log = $this->db->insert('tblactivitylog',$log_data);
+				$log = InsertActivityLog($post_Education['UpdatedBy'],'Education','Update');
+				if($log){
+					return true;
+				} else {
+					return false;
+				}				
 			} else {
 				return false;
 			}

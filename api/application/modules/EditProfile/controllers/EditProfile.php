@@ -290,27 +290,28 @@ class EditProfile extends CI_Controller
 					$body = str_replace("{ first_name }",$FirstName,$body);
 					$body = str_replace("{ last_name }",$LastName,$body);
 					$body = str_replace("{ link }",''.BASE_URL.'/login/',$body);
-					$this->email->from($smtpEmail, 'LMS Admin');
-					$this->email->to($rowTo[0]->EmailAddress);		
-					$this->email->subject($row->Subject);
-					$this->email->cc($row->totalcc);
-					$this->email->bcc($bcc);
-					$this->email->message($body);
-					if($this->email->send())
-					{
-						$email_log = array(
-							'From' => trim($smtpEmail),
-							'Cc' => '',
-							'Bcc' => '',
-							'To' => trim($EmailAddress),
-							'Subject' => trim($row->Subject),
-							'MessageBody' => trim($body),
-						);	
-						$res = $this->db->insert('tblemaillog',$email_log);	
-					}else
-					{
-						//echo json_encode("Fail");
-					}
+					// $this->email->from($smtpEmail, 'LMS Admin');
+					// $this->email->to($rowTo[0]->EmailAddress);		
+					// $this->email->subject($row->Subject);
+					// $this->email->cc($row->totalcc);
+					// $this->email->bcc($bcc);
+					// $this->email->message($body);
+					// if($this->email->send())
+					// {
+					// 	$email_log = array(
+					// 		'From' => trim($smtpEmail),
+					// 		'Cc' => '',
+					// 		'Bcc' => '',
+					// 		'To' => trim($EmailAddress),
+					// 		'Subject' => trim($row->Subject),
+					// 		'MessageBody' => trim($body),
+					// 	);	
+					// 	$res = $this->db->insert('tblemaillog',$email_log);	
+					// }else
+					// {
+					// 	//echo json_encode("Fail");
+					// }
+					$send = SendEmail($smtpEmail, $rowTo[0]->EmailAddress, $row->totalcc, $bcc, $row->Subject, $body);
 				} 
 				 else {
 					$userId_ar = explode(',', $row->totalTo);			 
