@@ -128,7 +128,6 @@ isActiveChange(changeEntity, i)
         showConfirmButton: false,
         timer: 3000
       })
-    
   }, 
   (error) => 
   {

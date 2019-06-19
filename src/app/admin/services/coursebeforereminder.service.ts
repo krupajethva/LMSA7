@@ -65,5 +65,23 @@ export class CoursebeforereminderService {
       });
       return promise;
     }
+
+    deletereminder(data){
+      debugger
+      let promise = new Promise((resolve, reject) => {
+        this.http.post(this.globals.baseAPIUrl + 'Coursebeforereminders/deletereminder',data)
+          .toPromise()
+          .then(
+            res => { // Success 
+              resolve(res);
+            },
+            msg => { // Error
+              reject(msg);
+              this.router.navigate(['/pagenotfound']);
+            }
+          );
+      });
+      return promise;
+    }
    
 }

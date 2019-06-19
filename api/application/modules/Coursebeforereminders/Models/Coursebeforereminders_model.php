@@ -6,7 +6,6 @@ class Coursebeforereminders_model extends CI_Model
     {
         if ($data) {
             $post_data = $data;
-
             $updatetdata = array(
                 "CourseId" => trim($post_data['CourseId']),
                 "RemainderDay1" =>  trim($post_data['RemainderDay1'] ? $post_data['RemainderDay1'] : '0'),
@@ -82,6 +81,12 @@ class Coursebeforereminders_model extends CI_Model
             return $query;
         }
         return $query;
+    }
+
+    public function deletereminder($CourseBeforeReminderId)
+    {
+        $this->db->where('CourseBeforeReminderId', $CourseBeforeReminderId);
+        $this->db->delete('tblcoursebeforereminder');
     }
 
     public function getlist()

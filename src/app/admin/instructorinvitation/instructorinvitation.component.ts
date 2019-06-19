@@ -11,8 +11,6 @@
     selector: 'app-instructorinvitation',
     templateUrl: './instructorinvitation.component.html',
     styleUrls: ['./instructorinvitation.component.css']
-  
-  
   })
   export class InstructorinvitationComponent implements OnInit {
     CourseList;

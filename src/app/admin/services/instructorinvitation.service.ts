@@ -75,7 +75,7 @@ export class InstructorinvitationService {
   ReInvite(InvitationId)
   {
   let promise = new Promise((resolve, reject) => {		
-    this.http.post(this.globals.baseAPIUrl + 'Instructorinvi/ReInvite/' ,InvitationId)
+    this.http.post(this.globals.baseAPIUrl + 'Instructorinvi/ReInvite/',InvitationId)
       .toPromise()
       .then(
         res => { // Success
