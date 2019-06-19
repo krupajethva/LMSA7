@@ -37,7 +37,7 @@ badgesEntity;
           $('footer').addClass('footer_fixed');    
         } 
         $('#BadgeImage').change(function (e) {
-          alert('a');
+        
           
           var file = e.target.files[0];
           var reader = new FileReader();
