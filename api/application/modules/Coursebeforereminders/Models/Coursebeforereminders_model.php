@@ -21,7 +21,7 @@ class Coursebeforereminders_model extends CI_Model
             $this->db->where('CourseBeforeReminderId', $post_data['CourseBeforeReminderId']);
             $res = $this->db->update('tblcoursebeforereminder', $updatetdata);
             if ($res) {
-                return true;
+                return $post_data['CourseBeforeReminderId'];
             } else {
                 return false;
             }
@@ -48,8 +48,10 @@ class Coursebeforereminders_model extends CI_Model
                     . ',' . ($post_data['instructor3'] ? $post_data['instructor3'] : '0')),
             );
             $res = $this->db->insert('tblcoursebeforereminder', $insertdata);
+            $insertdata['CourseBeforeReminderId'] = $this->db->insert_id();
+            
             if ($res) {
-                return true;
+                return $insertdata;
             } else {
                 return false;
             }
@@ -83,12 +85,7 @@ class Coursebeforereminders_model extends CI_Model
         return $query;
     }
 
-    public function deletereminder($CourseBeforeReminderId)
-    {
-        $this->db->where('CourseBeforeReminderId', $CourseBeforeReminderId);
-        $this->db->delete('tblcoursebeforereminder');
-    }
-
+   
     public function getlist()
     {
         $this->db->select('CourseId,RemainderDay1,RemainderDay2,RemainderDay3,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
@@ -99,4 +96,31 @@ class Coursebeforereminders_model extends CI_Model
         }
         return $query;
     }
+
+    public function fetch_data($id = NULL)
+	{
+		if ($id) {
+            $this->db->select('tr.CourseBeforeReminderId, tr.CourseId,tr.RemainderDay1,tr.RemainderDay2,tr.RemainderDay3,tc.CourseFullName,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
+            $this->db->join('tblcourse as tc', 'tr.CourseId=tc.CourseId');
+            $this->db->from('tblcoursebeforereminder as tr');
+
+            $query = $this->db->get();
+            if ($query) {
+                return $query;
+            }
+            return $query;
+
+		// 	$result = $this->db->get('tblprojects');
+		// 	$project = array();
+		// 	if ($result->result()) {
+		// 		foreach ($result->result() as $row) {
+		// 			$project = $row;
+		// 		}
+		// 	}
+		// 	return $project;
+		// } else {
+		// 	return false;
+      
+        }
+	}
 }
