@@ -15,9 +15,9 @@ class CourseScheduler extends CI_Controller
 	}
 	// demo function
 public function abc()
-{   $new_data=  array("484", "504","508");
+{   $new_data=  array("484", "512","508");
 	$this->db->select('UserId');
-	$this->db->where('CourseSessionId',3);
+	$this->db->where('CourseSessionId',12);
 	$old= $this->db->get('tblcourseinstructor');
 	$Old_Result=$old->result();
 	$old_data = array();
@@ -42,19 +42,20 @@ public function abc()
 		  else
 			{
 				$Courseinstructo_data = array(
-					'CourseSessionId' =>3,
+					'CourseSessionId' =>12,
 					'UserId' =>  $row,
 					'IsPrimary'=>0,
+					'Approval'=>0,
 					'CreatedBy' =>484
 
 				);
-				$ress=$this->db->query('call addcourseinstructor(?,?,?,?)',$Courseinstructo_data);
+				$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$Courseinstructo_data);
 			array_push($array_new,$row);
 			}
 		}
 		if(count($old_data)>0){
 			$this->db->where_in('UserId',$old_data);
-			$this->db->where('CourseSessionId',3);
+			$this->db->where('CourseSessionId',12);
 			$res_delete = $this->db->delete('tblcourseinstructor');
 		}else
 		{
@@ -79,7 +80,8 @@ public function abc()
 			{ 
 					$result = $this->CourseScheduler_model->add_CourseScheduler($post_Course);
 					if($result)
-					{
+					{ 
+					
 						$this->db->select('CourseFullName');
 						$this->db->where('CourseId',$CourseId);
 						$result_course = $this->db->get('tblcourse');

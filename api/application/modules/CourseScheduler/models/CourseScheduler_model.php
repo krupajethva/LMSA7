@@ -67,29 +67,62 @@ class CourseScheduler_model extends CI_Model
 						'CourseSessionId' => $Courseschedular['CourseSessionId']
 					);
 					$res=$this->db->query('call updateCoursesession(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',$Courseschedular_data);
-					$this->db->where('CourseSessionId',$Courseschedular['CourseSessionId']);
-					$ress = $this->db->delete('tblcourseinstructor');
 					$post_Courseschedular[$count]['NewSendEmail']=0;
-					$singleinst_data = array(
-						'CourseSessionId' => $Courseschedular['CourseSessionId'],
-						'UserId' =>  $Courseschedular['Instructorone'],
-						'IsPrimary'=>1,
-						'Approval'=>1,
-						'CreatedBy' => $post_Course['CreatedBy']		
-					);
-					$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$singleinst_data);
+					array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
+							$this->db->select('UserId');
+							$this->db->where('CourseSessionId',$Courseschedular['CourseSessionId']);
+							$old= $this->db->get('tblcourseinstructor');
+							$Old_Result=$old->result();
+							$old_data = array();
+							foreach($Old_Result as $row)
+							{
+								array_push($old_data, $row->UserId);
+							}
+							$old_data1 = $old_data;
+						$array_delete=array();
+						$array_new=array();
+
+						foreach($Courseschedular['Instructor'] as $row)
+						{
+							if (in_array($row, $old_data))
+							{ 
+								array_splice($old_data, array_search($row, $old_data ), 1);
+						
+							}
+						else
+							{
+								$Courseinstructo_data = array(
+									'CourseSessionId' =>$Courseschedular['CourseSessionId'],
+									'UserId' =>  $row,
+									'IsPrimary'=>0,
+									'Approval'=>0,
+									'CreatedBy' =>$post_Course['CreatedBy']
+
+								);
+								$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$Courseinstructo_data);
+							array_push($array_new,$row);
+							}
+						}
+						if(count($old_data)>0){
+							$this->db->where_in('UserId',$old_data);
+							$this->db->where('CourseSessionId',$Courseschedular['CourseSessionId']);
+							$res_delete = $this->db->delete('tblcourseinstructor');
+						}else
+						{
+							
+						}
 					//array_push($Courseschedular['Instructor'],$Courseschedular['Instructorone']);
-					foreach($Courseschedular['Instructor'] as $row)
-					{
-						$Courseinstructo_data = array(
-							'CourseSessionId' => $Courseschedular['CourseSessionId'],
-							'UserId' =>  $row,
-							'IsPrimary'=>0,
-							'Approval'=>0,
-							'CreatedBy' => $post_Course['CreatedBy']		
-						);
-						$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$Courseinstructo_data);
-					}
+					// foreach($Courseschedular['Instructor'] as $row)
+					// {
+					// 	$Courseinstructo_data = array(
+					// 		'CourseSessionId' => $Courseschedular['CourseSessionId'],
+					// 		'UserId' =>  $row,
+					// 		'IsPrimary'=>0,
+					// 		'Approval'=>0,
+					// 		'CreatedBy' => $post_Course['CreatedBy']		
+					// 	);
+					// 	$ress=$this->db->query('call addcourseinstructor(?,?,?,?,?)',$Courseinstructo_data);
+					// }
 				}else
 				 {
 					 $weekday="";

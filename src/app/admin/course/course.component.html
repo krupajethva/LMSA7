@@ -1238,12 +1238,12 @@
                               <div class="Appointment_section" *ngIf="!badgehide">
                                 <div class="form-group focused label_head">
                                   <label class="focus_label">
-                                    <span>*</span>Badge Label</label>
+                                    Badge Label</label>
                                   <div class="clearfix"></div>
                                 </div>
                                 <div class="form-group">
                                   <label>
-                                    <span>*</span>Enter your badge letters</label>
+                                  Enter your badge letters</label>
                                   <input type="text" pattern="[A-Za-z.'-.]{2,7}" maxlength="100" #badgeletter="ngModel"
                                     [(ngModel)]="BadgesEntity.badgeletter" class="form-control" name="badgeletter"
                                     [ngClass]="{red_border: (badgeletter.dirty && badgeletter.invalid) || (badgeletter.pristine && submitted)}" />
@@ -1268,12 +1268,12 @@
                                 <img src="assets/Instructor/{{BadgesEntity.rid}}/image/{{BadgesEntity.badgeImage}}"
                                   class="img-responsive" alt="" />
                               </div>
-                              <div class="col-md-3 col-sm-3 col-xs-12" *ngFor="let Badge of DefalutBadges;let i = index">
-                                <label class="image-radio" (click)="replaceBadges(Badge)">
+                              <div class="col-md-3 col-sm-3 col-xs-12" *ngFor="let Badge of DefalutBadges;let i = index; let first=first;">
+                                <label class="image-radio" (click)="replaceBadges(Badge)" id="badg{{i}}" >
                                   <img src="../assets/Instructor/{{Badge.fid}}/image/{{Badge.FilePath}}" class="img-responsive"
                                     alt="" />
-                                  <input type="radio" name="image_radio" value="1" *ngIf="urlid==0" checked />
-                                  <input type="radio" name="image_radio" value="1" *ngIf="urlid>0"/>
+                                  <input type="radio" name="image_radio" value="1" />
+                                 
                                   <i class="fa fa-check hidden"></i>
                                 </label>
                               </div>

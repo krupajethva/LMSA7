@@ -343,13 +343,15 @@ export class CourseComponent implements OnInit {
 
 		this.CourseService.getAllimage(this.globals.authData.UserId)
 			//.map(res => res.json())
-			.then((data) => {
+			.then((data) => {debugger
 				this.ImageList = data['image'];
 				this.VideoList = data['video'];
 				this.DefalutBadges = data['defalutbadge'];
 
+	
 				this.BadgesEntity.BadgeImageId = this.DefalutBadges[0].ResourcesId;
 				this.BadgesEntity.ResourcesId = this.DefalutBadges[0].ResourcesId;
+			
 
 			},
 				(error) => {
@@ -542,6 +544,7 @@ export class CourseComponent implements OnInit {
 							this.globals.isLoading = false;
 
 							setTimeout(function () {
+								
 								$(".instructorfocus").addClass('filled');
 								$(".instructorfocus").parents('.form-group').addClass('focused');
 								$('.form_time_picker').datetimepicker({
@@ -657,6 +660,7 @@ export class CourseComponent implements OnInit {
 
 
 					setTimeout(function () {
+						$('#badg0').addClass('image-radio-checked');
 						function toggleIcon(e) {
 							$(e.target)
 								.prev('.panel-heading')
@@ -1169,6 +1173,7 @@ export class CourseComponent implements OnInit {
 		this.secondform = false;
 		this.thirdform = false;
 		this.forthform = false;
+		this.fifthform = false;
 		//success
 
 
@@ -1213,6 +1218,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = true;
 			this.thirdform = false;
 			this.forthform = false;
+			this.fifthform = false;
 			$('#st2').addClass('active');
 			$('#step2').addClass('active');
 			$('#st2').removeClass('success');
@@ -1264,6 +1270,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = true;
 			this.thirdform = false;
 			this.forthform = false;
+			this.fifthform = false;
 			$('#st2').addClass('active');
 			$('#step2').addClass('active');
 			$('#st2').removeClass('success');
@@ -1310,6 +1317,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = false;
 			this.thirdform = true;
 			this.forthform = false;
+			this.fifthform = false;
 			//$('#st3').removeClass('disabled');
 			$('#st3').addClass('active');
 			$('#step3').addClass('active');
@@ -1411,6 +1419,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = false;
 			this.thirdform = true;
 			this.forthform = false;
+			this.fifthform = false;
 			//$('#st3').removeClass('disabled');
 			$('#st3').addClass('active');
 			$('#step3').addClass('active');
@@ -1446,9 +1455,8 @@ export class CourseComponent implements OnInit {
 		this.secondform = false;
 		this.thirdform = false;
 		this.forthform = true;
+		this.fifthform = false;
 		//success
-
-
 
 		//$('#st1').removeClass('disabled');
 		$('#st4').addClass('active');
@@ -1493,7 +1501,7 @@ export class CourseComponent implements OnInit {
 
 
 
-		//$('#st1').removeClass('disabled');
+		$('#st5').removeClass('disabled');
 		$('#st5').addClass('active');
 		$('#st5').removeClass('success');
 		$('#step5').addClass('active');
@@ -2750,6 +2758,7 @@ export class CourseComponent implements OnInit {
 		debugger
 		this.badgehide = false;
 		this.BadgesEntity.ResourcesId = null;
+		this.BadgesEntity.BadgeImageId = null;
 		//this.BadgesEntity.badgeImage = null;
 		$("input[name='selectbages']").val(null);
 		$('#badgeImageicon input[type="text"]').val(null);
@@ -2911,6 +2920,7 @@ export class CourseComponent implements OnInit {
 			} else {
 				//	this.router.navigate(['/instructor-courses']);
 			}
+			this.tab5 = true;
 			this.Previousfive();
 
 		}
@@ -2918,6 +2928,7 @@ export class CourseComponent implements OnInit {
 	Finelsubmit() {
 
 		debugger
+			this.globals.isLoading = true;
 		if(this.urlid>0)
 		{
 			this.BadgesEntity.UpdatedBy = this.globals.authData.UserId;
@@ -2963,7 +2974,7 @@ export class CourseComponent implements OnInit {
 				this.submitted = false;
 				this.globals.isLoading = false;
 				//	this.CourseSchedulerEntity = {};
-
+				this.router.navigate(['/instructor-courses']);
 
 
 			},
