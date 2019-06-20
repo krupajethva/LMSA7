@@ -66,10 +66,11 @@ export class CoursebeforereminderService {
       return promise;
     }
 
-    deletereminder(data){
+    fetchReminder(id){
+
       debugger
       let promise = new Promise((resolve, reject) => {
-        this.http.post(this.globals.baseAPIUrl + 'Coursebeforereminders/deletereminder',data)
+        this.http.get(this.globals.baseAPIUrl + 'Coursebeforereminders/update?id=' + id)
           .toPromise()
           .then(
             res => { // Success 
@@ -77,11 +78,14 @@ export class CoursebeforereminderService {
             },
             msg => { // Error
               reject(msg);
+  
               this.router.navigate(['/pagenotfound']);
             }
           );
       });
       return promise;
-    }
+  }
+
+   
    
 }

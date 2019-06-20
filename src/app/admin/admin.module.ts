@@ -150,6 +150,8 @@ import { CertificateBadgeComponent } from './certificate-badge/certificate-badge
 import { CertificateBadgeslistComponent } from './certificate-badgeslist/certificate-badgeslist.component';
 import { CoursebeforereminderComponent } from './coursebeforereminder/coursebeforereminder.component';
 import { InvitationacceptdeclineComponent } from './invitationacceptdecline/invitationacceptdecline.component';
+import { CoursebeforereminderlistComponent } from './coursebeforereminderlist/coursebeforereminderlist.component';
+
 @NgModule({
 	
 	declarations: [
@@ -163,6 +165,7 @@ import { InvitationacceptdeclineComponent } from './invitationacceptdecline/invi
 		FooterComponent,
 		SidebarComponent,
 		CategoryComponent,
+		CoursebeforereminderlistComponent,
 		CourseCertificateComponent,
 		CategorylistComponent,
 		ParentcategoryComponent,

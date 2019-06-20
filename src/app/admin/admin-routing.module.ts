@@ -186,6 +186,8 @@ import { CertificateBadgeService } from './services/certificate-badge.service';
 import { AttendanceService } from './services/attendance.service';
 import { InvitationacceptdeclineComponent } from './invitationacceptdecline/invitationacceptdecline.component';
 import { InvitationacceptdeclineService } from './services/invitationacceptdecline.service';
+import { CoursebeforereminderlistComponent } from './coursebeforereminderlist/coursebeforereminderlist.component';
+import { CoursebeforereminderlistService } from './services/coursebeforereminderlist.service';
 const routes: Routes = [	
   {
     path: '',
@@ -316,6 +318,9 @@ const routes: Routes = [
 				  { path : 'attendance/:id', component : AttendanceComponent,canActivate : [AuthGuard] },
 				  { path : 'instructorlist', component : InstructorlistComponent,canActivate : [AuthGuard] },
 				  { path : 'coursebeforereminder', component : CoursebeforereminderComponent,canActivate : [AuthGuard] },
+				  { path : 'coursebeforereminder/:id', component : CoursebeforereminderComponent,canActivate : [AuthGuard] },
+
+				  { path : 'coursebeforereminderlist', component : CoursebeforereminderlistComponent,canActivate : [AuthGuard] },
 				 
 				  { path : 'instructor-invitation/:id', component : InvitationacceptdeclineComponent,canActivate : [AuthGuard] },
 
@@ -336,7 +341,7 @@ exports: [RouterModule],
  
 providers: [AdminService,ImportfiledataService,InboxService,Globals,AuthGuard,RegisterAdminInvitedService,IndustryService,RegisterService,AddressesService,CompanyService,RegisterInstructorInvitedService,RegisterLearnerInvitedService,InviteInstructorService,InviteLearnerService,ActivityService,UserActivationService,EditProfileService,EducationService,EmailtemplateService,SettingsService,CountryService,StateService,RolepermissionService,AuthService,UserService,UserinstructorService,ForgotpasswordService,
 	ResetpasswordService,ResetpassService,CategoryService,CourseService,CoursetopicService,ParentcategoryService,
-	InstructorinvitationService,CourseListService,RolepermissionService,CommonService,AnnouncementService,
+	InstructorinvitationService,CourseListService,RolepermissionService,CommonService,AnnouncementService,CoursebeforereminderlistService,
 	CalendarService,CertificatetemplateService,CertificateBadgeService,AttendanceService,CourseSchedulerService,CourseCertificateService,CourseQuestionService,DashboardService,AssessmenttestService,LearnerCoursesService,InstructorCoursesService,ActivedeleteService,InstructorfollowersService,CoursebeforereminderService,InvitationacceptdeclineService],
 
 

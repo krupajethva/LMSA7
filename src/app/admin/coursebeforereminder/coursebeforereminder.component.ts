@@ -8,9 +8,9 @@ import { Globals } from '.././globals';
 import { debuglog } from 'util';
 import { empty } from 'rxjs';
 import { cloneDeep } from 'lodash';
-declare var $,swal: any;
-declare function myInput() : any;
-declare var $,Bloodhound: any;
+declare var $, swal: any;
+declare function myInput(): any;
+declare var $, Bloodhound: any;
 
 @Component({
 	selector: 'app-coursebeforereminder',
@@ -22,8 +22,7 @@ export class CoursebeforereminderComponent implements OnInit {
 	ReminderData;
 	courseList;
 	detailList;
-	test1;
-	test2;
+
 
 	constructor(private router: Router, private route: ActivatedRoute, private CoursebeforereminderService: CoursebeforereminderService, public globals: Globals) { }
 
@@ -39,15 +38,19 @@ export class CoursebeforereminderComponent implements OnInit {
 					//alert('error');
 				});
 
-		this.CoursebeforereminderService.getAllDetails()
-			.then((data) => {
-				this.detailList = data;
-				//	console.log(this.courseList);
-			},
-				(error) => {
-					//alert('error');
-				});
-		console.log("beforeReminderEntity", this.beforeReminderEntity);
+		let id = this.route.snapshot.paramMap.get('id');
+		if (id) {
+			this.CoursebeforereminderService.fetchReminder(id)
+				.then((data) => {
+					this.beforeReminderEntity = data['0'];
+					console.log(this.beforeReminderEntity);
+				},
+					(error) => {
+						//alert('error');
+
+
+					});
+		}
 	}
 
 	InsertOrUpdateBeforeReminder(reminderForm) {
@@ -57,16 +60,9 @@ export class CoursebeforereminderComponent implements OnInit {
 			console.log("called")
 			this.CoursebeforereminderService.BeforeReminder(this.beforeReminderEntity)
 				.then((data) => {
-					//this.ReminderData = data;
-					let beforeReminderEntity = cloneDeep(this.beforeReminderEntity)
-					this.courseList.forEach(course => {
-						if (beforeReminderEntity['CourseId'] == course.CourseId) {
-							beforeReminderEntity.CourseFullName = course.CourseFullName;
-						}
-					});
-					this.detailList.push(beforeReminderEntity);
-					console.log('this.detailList', this.detailList);
-					//this.router.navigate(['/project/list']);
+					this.ReminderData = data;
+					console.log(this.ReminderData);
+					this.router.navigate(['/coursebeforereminderlist']);
 				},
 					(error) => {
 						//alert('error');
@@ -75,48 +71,8 @@ export class CoursebeforereminderComponent implements OnInit {
 		}
 	}
 
-	getdetails(data) {
-		let ReminderData1Arr = data.Reminder1SendTo.split(',');
-		let ReminderData2Arr = data.Reminder2SendTo.split(',');
-		let ReminderData3Arr = data.Reminder3SendTo.split(',');
-		data.candidate1 = ReminderData1Arr[0];
-		data.instructor1 = ReminderData1Arr[1];
-		data.candidate2 = ReminderData2Arr[0];
-		data.instructor2 = ReminderData2Arr[1];
-		data.candidate3 = ReminderData3Arr[0];
-		data.instructor3 = ReminderData3Arr[1];
-		console.log(data);
-		this.beforeReminderEntity = data;
-	}
-
-	getdata(){
-		this.beforeReminderEntity.test1 = "1";
-		this.beforeReminderEntity.test2 = "0";
-	}
-
-	deletereminder(data) {
-		debugger
-		this.CoursebeforereminderService.deletereminder(data)
-			.then((responseData) => {
-				if (responseData == true) {
-					console.log('delete');
-					let index = this.detailList.indexOf(data);
-					if (index != -1) {
-						this.detailList.splice(index, 1);
-					}
-					swal({
-						type: 'success',
-						title: 'Deleted!',
-						text: 'Reminder has been deleted successfully',
-						showConfirmButton: false,
-						timer: 3000
-					  })
-				} else {
-					console.log('error');
-				}
-			})
 
 
-	}
+
 
 }
