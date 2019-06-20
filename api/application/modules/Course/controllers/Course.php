@@ -365,7 +365,7 @@ class Course extends CI_Controller
 			if(isset($_FILES['badgeImage']) && !empty($_FILES['badgeImage']))
 			{	
 				//$dirname=str_replace(' ','_',$id);
-				$directoryname="../src/assets/Instructor/".$id."/";
+				//$directoryname="../src/assets/Instructor/".$id."/";
 
 				$directoryname="../src/assets/Instructor/".$id."/";
 				$directoryname1= $directoryname."image/";
