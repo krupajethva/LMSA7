@@ -42,8 +42,20 @@ export class CoursebeforereminderComponent implements OnInit {
 		if (id) {
 			this.CoursebeforereminderService.fetchReminder(id)
 				.then((data) => {
-					this.beforeReminderEntity = data['0'];
-					console.log(this.beforeReminderEntity);
+					console.log('data', data);
+					if (data && data.length > 0) {
+						let ReminderData1Arr = data['0'].Reminder1SendTo.split(',');
+						let ReminderData2Arr = data['0'].Reminder2SendTo.split(',');
+						let ReminderData3Arr = data['0'].Reminder3SendTo.split(',');
+						data['0'].candidate1 = ReminderData1Arr[0] == '1' ? true : false;
+						data['0'].instructor1 = ReminderData1Arr[1] == '1' ? true : false;
+						data['0'].candidate2 = ReminderData2Arr[0] == '1' ? true : false;
+						data['0'].instructor2 = ReminderData2Arr[1] == '1' ? true : false;
+						data['0'].candidate3 = ReminderData3Arr[0] == '1' ? true : false;
+						data['0'].instructor3 = ReminderData3Arr[1] == '1' ? true : false;
+						this.beforeReminderEntity = data['0'];
+						console.log(this.beforeReminderEntity);
+					}
 				},
 					(error) => {
 						//alert('error');
@@ -60,9 +72,9 @@ export class CoursebeforereminderComponent implements OnInit {
 			console.log("called")
 			this.CoursebeforereminderService.BeforeReminder(this.beforeReminderEntity)
 				.then((data) => {
-					this.ReminderData = data;
-					console.log(this.ReminderData);
-					this.router.navigate(['/coursebeforereminderlist']);
+					// this.ReminderData = data;
+					console.log(data);
+					setTimeout(() => this.router.navigate(['/coursebeforereminderlist']), 3000);
 				},
 					(error) => {
 						//alert('error');

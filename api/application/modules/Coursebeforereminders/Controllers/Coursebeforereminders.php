@@ -16,24 +16,22 @@ class Coursebeforereminders extends CI_Controller
     {
         $data = json_decode(trim(file_get_contents('php://input')), true);
 
-        $this->db->select('CourseBeforeReminderId');
-        $this->db->from('tblcoursebeforereminder');
-        $this->db->where('CourseId', $data['CourseId']);
-        $row = $this->db->get();
-        $courseResult = $row->result();
+        // $this->db->select('CourseBeforeReminderId');
+        // $this->db->from('tblcoursebeforereminder');
+        // $this->db->where('CourseId', $data['CourseId']);
+        // $row = $this->db->get();
+        // $courseResult = $row->result();
 
-        if (count($courseResult) > 0) {
-            $data['CourseBeforeReminderId'] = $courseResult['0']->CourseBeforeReminderId;
-        }
-        
-        if (!empty($data['CourseBeforeReminderId']) && count($courseResult) > 0) {
+        // if (count($courseResult) > 0) {
+        //     $data['CourseBeforeReminderId'] = $courseResult['0']->CourseBeforeReminderId;
+        // }
+
+        if (!empty($data['CourseBeforeReminderId'])) {
             $result = $this->Coursebeforereminders_model->update($data);
         } else {
             $result = $this->Coursebeforereminders_model->insert($data);
         }
-        if ($result) {
-            echo json_encode($result);
-        }
+        echo json_encode($result);
     }
     public function course_list()
     {
@@ -65,12 +63,12 @@ class Coursebeforereminders extends CI_Controller
     }
 
     public function update()
-	{
-		$CourseBeforeReminderId = $this->input->get('id');
+    {
+        $CourseBeforeReminderId = $this->input->get('id');
         $data = $this->Coursebeforereminders_model->fetch_data($CourseBeforeReminderId);
         $res = $data->result();
-		echo json_encode($res);
-	}
+        echo json_encode($res);
+    }
 
     public function sendEmail($emailArr, $name, $CourseFullName, $StartDate, $StartTime, $type)
     {
