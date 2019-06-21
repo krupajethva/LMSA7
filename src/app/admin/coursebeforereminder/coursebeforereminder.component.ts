@@ -22,17 +22,18 @@ export class CoursebeforereminderComponent implements OnInit {
 	ReminderData;
 	courseList;
 	detailList;
+	ableordisable;
 
 
 	constructor(private router: Router, private route: ActivatedRoute, private CoursebeforereminderService: CoursebeforereminderService, public globals: Globals) { }
 
 	ngOnInit() {
 		this.beforeReminderEntity = {};
-
+		this.ableordisable = false;
 		this.CoursebeforereminderService.getcourselist()
 			.then((data) => {
 				this.courseList = data;
-				//	console.log(this.courseList);
+			//	console.log(this.courseList);
 			},
 				(error) => {
 					//alert('error');
@@ -42,8 +43,8 @@ export class CoursebeforereminderComponent implements OnInit {
 		if (id) {
 			this.CoursebeforereminderService.fetchReminder(id)
 				.then((data) => {
-					console.log('data', data);
-					if (data && data.length > 0) {
+					//console.log('data', data);
+					if (data) {
 						let ReminderData1Arr = data['0'].Reminder1SendTo.split(',');
 						let ReminderData2Arr = data['0'].Reminder2SendTo.split(',');
 						let ReminderData3Arr = data['0'].Reminder3SendTo.split(',');
@@ -55,14 +56,16 @@ export class CoursebeforereminderComponent implements OnInit {
 						data['0'].instructor3 = ReminderData3Arr[1] == '1' ? true : false;
 						this.beforeReminderEntity = data['0'];
 						console.log(this.beforeReminderEntity);
+						this.ableordisable = true;
+						this.courseList.push({'CourseId':data['0'].CourseId, 'CourseFullName':data['0'].CourseFullName})
+						console.log(this.courseList);
+
 					}
 				},
 					(error) => {
 						//alert('error');
-
-
 					});
-		}
+		} 
 	}
 
 	InsertOrUpdateBeforeReminder(reminderForm) {
@@ -80,6 +83,7 @@ export class CoursebeforereminderComponent implements OnInit {
 						//alert('error');
 					});
 		} else {
+			alert('Fill proper data');
 		}
 	}
 

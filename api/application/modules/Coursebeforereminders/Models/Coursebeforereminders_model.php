@@ -68,13 +68,11 @@ class Coursebeforereminders_model extends CI_Model
 
     public function course_list()
     {
-        
         $result=$this->db->query("SELECT co.CourseId,co.CourseFullName FROM tblcourse co WHERE co.CourseId NOT IN (SELECT br.CourseId FROM tblcoursebeforereminder br) AND  co.IsActive='1'");
         if ($result) {
             return $result;
         }
         return $result;
-
       
     }
 
@@ -91,7 +89,6 @@ class Coursebeforereminders_model extends CI_Model
         return $query;
     }
 
-   
     public function getlist()
     {
         $this->db->select('CourseId,RemainderDay1,RemainderDay2,RemainderDay3,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
@@ -102,7 +99,6 @@ class Coursebeforereminders_model extends CI_Model
         }
         return $query;
     }
-
     public function fetch_data($id = NULL)
 	{
 		if ($id) {
@@ -116,18 +112,6 @@ class Coursebeforereminders_model extends CI_Model
                 return $query;
             }
             return $query;
-
-		// 	$result = $this->db->get('tblprojects');
-		// 	$project = array();
-		// 	if ($result->result()) {
-		// 		foreach ($result->result() as $row) {
-		// 			$project = $row;
-		// 		}
-		// 	}
-		// 	return $project;
-		// } else {
-		// 	return false;
-      
         }
 	}
 }
