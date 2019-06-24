@@ -15,42 +15,74 @@ class Instructorinvi extends CI_Controller
 	public function InstRequest($type = NULL, $CourseSessionId = NULL, $UserId = NULL)
 	{
 
-		if (!empty($type)) {
+		//if (!empty($type)) {
 
-			$result = [];
-			$result = $this->Instructorinvi_model->EditInstRequest($type, $CourseSessionId, $UserId);
-			if ($result) {
-				if ($type == 1) {
-					// Send Mail 
-					//Followers
-					$this->db->select('FollowerUserId');
-					$this->db->where('InstructorUserId',$UserId);
-					$this->db->from('tblinstructorfollowers');
-					$follower = $this->db->get();
-					if ($follower) {
-						return true;
-					} else {
-						return false;
-					}
+		//	$result = [];
+		//$result = $this->Instructorinvi_model->EditInstRequest($type, $CourseSessionId, $UserId);
+		//	if ($result) {
+			$this->db->select('FirstName,LastName');
+			$this->db->where('UserId',504);
+			$this->db->from('tbluser');
+			$res = $this->db->get();
+			$Instructor_name = $res -> result();
+			print_r($Instructor_name);
 
-					//learners
-					$this->db->select('CourseUserregisterId');
-					$this->db->where('UserId',$UserId);
-					$this->db->from('tblinstructorfollowers');
-					$learner = $this->db->get();
-					if ($learner) {
-						return true;
-					} else {
-						return false;
-					}
+		if (1 == 1) {
+			// Send Mail 
+			//Followers
 
-					//Primary Instructor
-					
+			$this->db->select('FollowerUserId');
+			$this->db->where('InstructorUserId', 504);
+			$this->db->from('tblinstructorfollowers');
+			$res = $this->db->get();
 
+			foreach ($res->result() as $follower) {
+				$user = $follower->FollowerUserId;
+				$data = explode(",", $user);
+				foreach ($data as $dataObj) {
+				//	print($dataObj); // Ahi send mail function with parameter (dataObj)
 				}
 			}
-			echo json_encode($result);
+			//print_r($follower);
+			// if ($follower) {
+			// 	return true;
+			// } else {
+			// 	return false;
+			// }
+
+			//learners
+			$this->db->select('tl.CourseUserregisterId,tl.UserId,tc.EmailAddress');
+			$this->db->where('CourseSessionId', 2);
+			$this->db->join('tbluser as tc', 'tl.UserId=tc.UserId');
+			$this->db->from('tblcourseuserregister as tl');
+			$res = $this->db->get();
+			$learner = $res->result();
+			// if ($learner) {
+			// 	return true;
+			// } else {
+			// 	return false;
+			// }
+			//print_r($learner);
+
+			//Primary Instructor
+			$this->db->select('ti.CourseInstructorId,ti.UserId,tc.CourseId,tc.SessionName,tc.StartDate,tc.StartTime,tbc.CourseFullName');
+			$this->db->where('ti.CourseSessionId', 2);
+			$this->db->where('ti.Approval', 1);
+			$this->db->join('tblcoursesession as tc', 'ti.CourseSessionId=tc.CourseSessionId');
+			$this->db->join('tblcourse as tbc', 'tc.CourseId=tbc.CourseId');
+			$this->db->from('tblcourseinstructor as ti');
+			$res = $this->db->get();
+			$Primary_inst = $res->result();
+			// if ($Primary_inst) {
+			// 	return true;
+			// } else {
+			// 	return false;
+			// }
+				print_r($Primary_inst);
 		}
+		//}
+		echo json_encode($result);
+		//}
 	}
 	public function getAllCourse()
 	{
