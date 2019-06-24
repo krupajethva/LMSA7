@@ -68,15 +68,31 @@ export class CoursebeforereminderComponent implements OnInit {
 		} 
 	}
 
-	InsertOrUpdateBeforeReminder(reminderForm) {
+	InsertOrUpdateBeforeReminder(beforereminderForm) {
 
 		console.log("outside")
-		if (reminderForm.valid) {
+		if (beforereminderForm.valid) {
 			console.log("called")
 			this.CoursebeforereminderService.BeforeReminder(this.beforeReminderEntity)
 				.then((data) => {
 					// this.ReminderData = data;
-					console.log(data);
+					if(this.beforeReminderEntity.CourseBeforeReminderId){
+						swal({
+							type: 'success',
+							title: 'Updated!',
+							text: 'Reminder has been updated successfully',
+							showConfirmButton: false,
+							timer: 3000
+						})
+					} else {
+						swal({
+							type: 'success',
+							title: 'Inserted!',
+							text: 'Reminder has been added successfully',
+							showConfirmButton: false,
+							timer: 3000
+						})
+					}
 					setTimeout(() => this.router.navigate(['/coursebeforereminderlist']), 3000);
 				},
 					(error) => {
