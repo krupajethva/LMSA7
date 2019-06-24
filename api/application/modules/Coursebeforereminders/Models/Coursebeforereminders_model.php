@@ -21,7 +21,10 @@ class Coursebeforereminders_model extends CI_Model
             $this->db->where('CourseBeforeReminderId', $post_data['CourseBeforeReminderId']);
             $res = $this->db->update('tblcoursebeforereminder', $updatetdata);
             if ($res) {
-                return $post_data['CourseBeforeReminderId'];
+                $response = new stdClass(); 
+                $response->success = true;
+                $response->message = "updated successfully";
+                return $response;
             } else {
                 return false;
             }
@@ -51,7 +54,10 @@ class Coursebeforereminders_model extends CI_Model
             $insertdata['CourseBeforeReminderId'] = $this->db->insert_id();
             
             if ($res) {
-                return $insertdata;
+                $response = new stdClass();
+                $response->success = true;
+                $response->message = "Added successfully";
+                return $response;
             } else {
                 return false;
             }
@@ -62,14 +68,12 @@ class Coursebeforereminders_model extends CI_Model
 
     public function course_list()
     {
-        $this->db->select('CourseId,CourseFullName');
-        $this->db->from('tblcourse');
-        $this->db->where('IsActive', 1);
-        $query = $this->db->get();
-        if ($query) {
-            return $query;
+        $result=$this->db->query("SELECT co.CourseId,co.CourseFullName FROM tblcourse co WHERE co.CourseId NOT IN (SELECT br.CourseId FROM tblcoursebeforereminder br) AND  co.IsActive='1'");
+        if ($result) {
+            return $result;
         }
-        return $query;
+        return $result;
+      
     }
 
     public function getAllDetails()
@@ -85,7 +89,6 @@ class Coursebeforereminders_model extends CI_Model
         return $query;
     }
 
-   
     public function getlist()
     {
         $this->db->select('CourseId,RemainderDay1,RemainderDay2,RemainderDay3,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
@@ -96,12 +99,12 @@ class Coursebeforereminders_model extends CI_Model
         }
         return $query;
     }
-
     public function fetch_data($id = NULL)
 	{
 		if ($id) {
             $this->db->select('tr.CourseBeforeReminderId, tr.CourseId,tr.RemainderDay1,tr.RemainderDay2,tr.RemainderDay3,tc.CourseFullName,Reminder1SendTo,Reminder2SendTo,Reminder3SendTo');
             $this->db->join('tblcourse as tc', 'tr.CourseId=tc.CourseId');
+            $this->db->where('CourseBeforeReminderId',$id);
             $this->db->from('tblcoursebeforereminder as tr');
 
             $query = $this->db->get();
@@ -109,18 +112,6 @@ class Coursebeforereminders_model extends CI_Model
                 return $query;
             }
             return $query;
-
-		// 	$result = $this->db->get('tblprojects');
-		// 	$project = array();
-		// 	if ($result->result()) {
-		// 		foreach ($result->result() as $row) {
-		// 			$project = $row;
-		// 		}
-		// 	}
-		// 	return $project;
-		// } else {
-		// 	return false;
-      
         }
 	}
 }

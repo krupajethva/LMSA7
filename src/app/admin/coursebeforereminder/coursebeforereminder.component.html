@@ -51,8 +51,9 @@
                           <label>
                             <span class="required">*</span>Course</label>
                             <div class="clearfix"></div>
+                         
                           <select #CourseId="ngModel" [(ngModel)]="beforeReminderEntity.CourseId" name="CourseId"
-                            class="form-control" required>
+                            class="form-control" [disabled]="ableordisable" required>
                             <ng-container *ngFor='let cl of courseList'>
                               <option [value]="cl.CourseId">{{cl.CourseFullName}}</option>
                             </ng-container>

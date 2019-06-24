@@ -22,6 +22,31 @@ class Instructorinvi extends CI_Controller
 			if ($result) {
 				if ($type == 1) {
 					// Send Mail 
+					//Followers
+					$this->db->select('FollowerUserId');
+					$this->db->where('InstructorUserId',$UserId);
+					$this->db->from('tblinstructorfollowers');
+					$follower = $this->db->get();
+					if ($follower) {
+						return true;
+					} else {
+						return false;
+					}
+
+					//learners
+					$this->db->select('CourseUserregisterId');
+					$this->db->where('UserId',$UserId);
+					$this->db->from('tblinstructorfollowers');
+					$learner = $this->db->get();
+					if ($learner) {
+						return true;
+					} else {
+						return false;
+					}
+
+					//Primary Instructor
+					
+
 				}
 			}
 			echo json_encode($result);
