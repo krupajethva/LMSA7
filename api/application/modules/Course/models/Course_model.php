@@ -326,7 +326,7 @@ class Course_model extends CI_Model
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
-	 $Course_data= "";
+	 
 	
 		//  $result = json_decode(json_encode($result->result()), True);
 		//  mysqli_next_result($this->db->conn_id);
@@ -345,7 +345,7 @@ class Course_model extends CI_Model
 		
 	// 	 $InstructorId = implode(",",$Course_data);
 	// 	 $Instructor = explode(",",$InstructorId);
-	$aa=$result->result();
+
 		foreach($result->result() as $row)
 		 {
 			$Course_data=$row;
