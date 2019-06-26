@@ -78,6 +78,7 @@ export class InstructorCoursesComponent implements OnInit {
       });
 
       new PerfectScrollbar('.course_clone_block');
+      //new PerfectScrollbar('.instructor_scroll');
 
       $('.modal').on('shown.bs.modal', function () {
         $('.right_content_block').addClass('style_position');
@@ -294,7 +295,10 @@ export class InstructorCoursesComponent implements OnInit {
             if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
             //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
           }
-
+          setTimeout(function () {
+            new PerfectScrollbar('.instructor_scroll');
+          },
+          500);
           // var d = new Date(this.CourseSesssionList.StartDate);
           // alert(this.CourseSesssionList.StartDate);
           // this.StartDate = d;
@@ -307,6 +311,7 @@ export class InstructorCoursesComponent implements OnInit {
 
           //this.router.navigate(['/pagenotfound']);
         });
+        
   }
   close(i) {
 
