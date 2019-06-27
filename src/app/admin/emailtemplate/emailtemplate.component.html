@@ -5,15 +5,13 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+     Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
 
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+    <div class="clearfix"></div>
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="#">
@@ -25,16 +23,16 @@
         </li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
-      <div class="clearfix"></div>
     </div>
-    <div class="col-md-6 col-sm-6">
-      <a routerLink="/emailtemplate-list" class="next_btn pull-right">List of Email Templates</a>
-    </div>
-    <div class="clearfix"></div>
   </div>
+
   <div class="clearfix"></div>
 </div>
 <div class="content_block course_detail_block">
+  <div class="col-md-6 col-sm-6 pull-right">
+    <a routerLink="/emailtemplate-list" class="next_btn pull-right">List of Email Templates</a>
+  </div>
+  <div class="clearfix"></div>
   <div class="col-md-12 col-sm-12">
     <div class="course_details">
       <div class="mydivs">
@@ -80,8 +78,7 @@
                         <span *ngIf="Token.errors.required || (Token.pristine && submitted)">Please select email token</span>
                       </span> -->
 
-                      <select #TokenId="ngModel" [(ngModel)]="emailEntity.TokenId" name="TokenId"
-                        required>
+                      <select #TokenId="ngModel" [(ngModel)]="emailEntity.TokenId" name="TokenId" required>
                         <option value="" ngSelected='emailEntity.TokenId==""'></option>
                         <option *ngFor="let tocken of tockenList" value="{{tocken.TokenId}}" ngSelected="emailEntity.TokenId==tocken.TokenId">{{tocken.TokenName}}</option>
                       </select>
@@ -136,8 +133,7 @@
                     <div class="form-group col-md-4">
                       <label>
                         <span class="required">*</span>To</label>
-                      <select class="form-control" #To="ngModel" [(ngModel)]="emailEntity.To" name="To"
-                        required>
+                      <select class="form-control" #To="ngModel" [(ngModel)]="emailEntity.To" name="To" required>
                         <option value="" ngSelected='emailEntity.To==""'></option>
                         <ng-container *ngFor="let role of roleList">
                           <option *ngIf="(emailEntity.Cc!=role.RoleId)&&(emailEntity.Bcc!=role.RoleId)" value="{{role.RoleId}}" ngSelected="emailEntity.To==role.RoleId">{{role.RoleName}}</option>

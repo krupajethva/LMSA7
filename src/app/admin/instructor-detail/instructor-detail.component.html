@@ -5,14 +5,11 @@
 		</div>
 	</div>
 	<div class="col-md-8 col-sm-8">
-			<div class="welcome_message alert" role="alert">
-					<i class="fa fa-info"></i>Welcome back,
+		<!-- <div class="welcome_message alert" role="alert">
+					Welcome back,
 					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
-			</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="breadcrumb_block">
-		<div class="col-md-6 col-sm-6">
+			</div> -->
+		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item">
 					<a href="#">
@@ -21,17 +18,18 @@
 				</li>
 				<li class="breadcrumb-item active" aria-current="page">Instructor Detail</li>
 			</ul>
-			<div class="clearfix"></div>
 		</div>
 		<div class="clearfix"></div>
 	</div>
 	<div class="clearfix"></div>
+
 </div>
 <div class="content_block">
 	<div class="col-md-12">
 		<div class="course_list_block instructor_block">
 			<h1 class="pull-left">{{FirstName}} {{LastName}}</h1>
-			<div class="follow_block pull-right">{{totalFollowers}} Followers <span *ngIf="InstructorId!=globals.authData.UserId">|</span>
+			<div class="follow_block pull-right">{{totalFollowers}} Followers
+				<span *ngIf="InstructorId!=globals.authData.UserId">|</span>
 				<button *ngIf="flag==0 && InstructorId!=globals.authData.UserId" class="back_btn" id="follow" data-toggle="tooltip" data-placement="top"
 				 title="Follow" (click)="followInstructor()">
 					<i class="fa fa-user-plus"></i>Follow Me</button>
@@ -52,7 +50,7 @@
 					<strong>{{Education}}</strong>
 				</span>
 				<br>{{Biography}}</p>
-				<div class="clearfix"></div>
+			<div class="clearfix"></div>
 			<h3>Active Courses</h3>
 			<div class="row">
 				<ng-container *ngFor="let course of ActiveCourses | paginate: { itemsPerPage:6, currentPage: p}; let i = index">

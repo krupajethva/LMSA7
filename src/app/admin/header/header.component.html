@@ -40,14 +40,14 @@
 				</div> -->
 				<div class="header_right pull-right">
 					<!-- <ul class="notification"> -->
-						<!-- <li class="user_indicator">
+					<!-- <li class="user_indicator">
 							<span *ngIf="globals.authData.RoleId==1">SuperAdmin</span>
 							<span *ngIf="globals.authData.RoleId==2">Admin</span>
 							<span *ngIf="globals.authData.RoleId==3">Instructor</span>
 							<span *ngIf="globals.authData.RoleId==4">Learner</span>
 							<span *ngIf="globals.authData.RoleId==5">It Department</span>
 						</li> -->
-						<!-- <li>
+					<!-- <li>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<i class="fa fa-comments-o" aria-hidden="true"></i>
 								<span class="badge1">3</span>
@@ -231,14 +231,12 @@
 							<li>
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									<span class="user_img">
-										<div
-											*ngIf="RegisterEntity.ProfileImage!='' && RegisterEntity.ProfileImage!=NULL">
+										<div *ngIf="RegisterEntity.ProfileImage!='' && RegisterEntity.ProfileImage!=NULL">
 
-											<img src="assets/ProfilePhoto/{{globals.authData.UserId}}/{{RegisterEntity.ProfileImage}}" alt=""
-												class="img-responsive" />
+											<img src="assets/ProfilePhoto/{{globals.authData.UserId}}/{{RegisterEntity.ProfileImage}}" alt="" class="img-responsive"
+											/>
 										</div>
-										<div
-											*ngIf="RegisterEntity.ProfileImage=='' || RegisterEntity.ProfileImage==NULL">
+										<div *ngIf="RegisterEntity.ProfileImage=='' || RegisterEntity.ProfileImage==NULL">
 											{{globals.authData.FirstName | slice:0:01}}{{globals.authData.LastName | slice:0:01}}
 										</div>
 									</span>
@@ -252,9 +250,8 @@
 											<div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 										</div> -->
 										<div class="progress">
-											<div class="progress-bar" id="dynamic2" role="progressbar" aria-valuemin="0"
-												aria-valuemax="100" [attr.aria-valuenow]="progress"
-												style="min-width: 2em;" [style.width]="(progress/100)*100 + '%'">
+											<div class="progress-bar" id="dynamic2" role="progressbar" aria-valuemin="0" aria-valuemax="100" [attr.aria-valuenow]="progress"
+											 style="min-width: 2em;" [style.width]="(progress/100)*100 + '%'">
 												{{globals.current_progress}}%</div>
 										</div>
 									</li>
@@ -277,6 +274,12 @@
 						</ul>
 					</div>
 				</div>
+
+				<div class="welcome_message alert pull-right" role="alert">
+					Welcome back,
+					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
+				</div>
+
 			</div>
 			<!-- End Profile -->
 			<div class="clearfix"></div>

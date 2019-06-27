@@ -5,15 +5,33 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
       
      
+    </div> -->
+
+    <div class="breadcrumb_block pull-right">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Instructor Dashboard</li>
+      </ul>
+      <div class="clearfix"></div>
+      <!-- <div class="col-md-6 col-sm-6">
+        <div id="buttons" class="pull-right"></div>
+      </div>
+      <div class="clearfix"></div> -->
     </div>
+
+
   </div>
   <div class="clearfix"></div>
-  <div class="breadcrumb_block">
+  <!-- <div class="breadcrumb_block">
     <div class="col-md-6 col-sm-6">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
@@ -30,7 +48,7 @@
     </div>
     <div class="clearfix"></div>
   </div>
-  <div class="clearfix"></div>
+  <div class="clearfix"></div> -->
 </div>
 <div class="content_block admin_dashboard learner_dashboard instructor_dashboard">
   <div class="col-md-12">
@@ -133,7 +151,7 @@
           </div>
           <div class="clearfix"></div>
 
-          <div class="users"  *ngFor="let course of courseView; let i = index">
+          <div class="users" *ngFor="let course of courseView; let i = index">
             <div class="img_box">{{course.courseview}}</div>
             <div class="name_box">
               <i *ngIf="course.SessionStatus==0">Pending</i>
@@ -241,7 +259,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr  *ngFor="let course of instructorCourses; let i = index">
+                  <tr *ngFor="let course of instructorCourses; let i = index">
                     <td> {{course.CourseFullName}}</td>
                     <td>
                       <div class="stars_block">
@@ -258,7 +276,7 @@
                       </button>
                     </td>
                   </tr>
-                 <!-- <tr>
+                  <!-- <tr>
                     <td>Build Websites from Scratch with HTML & CSS</td>
                    
                     <td>
@@ -441,7 +459,7 @@
               </div>
             </div>
           </div>
-          <div class="clearfix"></div>          
+          <div class="clearfix"></div>
         </div>
       </div>
       <div class="col-md-6 col-sm-6">

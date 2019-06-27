@@ -5,14 +5,30 @@
 		</div>
 	</div>
 	<div class="col-md-8 col-sm-8">
-		<div class="welcome_message alert" role="alert">
-			<i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}}
+		<!-- <div class="welcome_message alert" role="alert">
+			Welcome back, <strong>{{globals.authData.FirstName}}
 				{{globals.authData.LastName}}!</strong>
 
+		</div> -->
+
+		<div class="breadcrumb_block pull-right">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Admin</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">List</li>
+			</ul>
+			<div class="clearfix"></div>
 		</div>
+
 	</div>
 	<div class="clearfix"></div>
-	<div class="breadcrumb_block">
+	<!-- <div class="breadcrumb_block">
 		<div class="col-md-6 col-sm-6">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
@@ -21,14 +37,8 @@
 			</ul>
 			<div class="clearfix"></div>
 		</div>
-		<div class="col-md-4 col-sm-4">
-			<!-- <div class="btn-group pull-right add-right export-data" id="buttons"></div> -->
-		</div>
-		<!-- <div class="col-md-2 col-sm-2">
-				<a routerLink="-add" class="next_btn pull-right">Add a Admin</a>	
-			</div> -->
 		<div class="clearfix"></div>
-	</div>
+	</div> -->
 	<div class="clearfix"></div>
 </div>
 <div class="content_block">
@@ -49,17 +59,15 @@
 			<tbody>
 				<tr *ngFor="let user of userList;let i = index">
 					<td class="text-center">{{i+1}}</td>
-					
+
 					<td>{{user.UserName}}</td>
 					<td>{{user.EmailAddress}}</td>
 					<td *ngIf="user.IsActive==0">Pending</td>
 					<td *ngIf="user.IsActive==1">Success</td>
 					<td>{{user.InvitedUserName}}</td>
 					<td class="text-center" *ngIf="globals.authData.RoleId==1 || globals.authData.RoleId==5">
-						<div class="activeyes_box" data-toggle="tooltip" data-placement="top"
-							[attr.title]="user.IsActive==1 ? 'Active' : 'Deactive'">
-							<input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(user,i)"
-								[checked]="user.IsActive==1" value="Yes">
+						<div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="user.IsActive==1 ? 'Active' : 'Deactive'">
+							<input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(user,i)" [checked]="user.IsActive==1" value="Yes">
 							<label for="active{{i}}"></label>
 						</div>
 					</td>
@@ -82,13 +90,16 @@
 						</div>
 					</td> -->
 					<td class="text-center" *ngIf="globals.authData.RoleId==1 || globals.authData.RoleId==5">
-						<button class="revoke_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Revoke"
-							(click)="revokeUser(user)"><i class="fa fa-user-times"></i></button>
-						<button class="reinvite_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Re-Invite"
-							(click)="reinviteUser(user)"><i class="fa fa-user-plus"></i></button>
+						<button class="revoke_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Revoke" (click)="revokeUser(user)">
+							<i class="fa fa-user-times"></i>
+						</button>
+						<button class="reinvite_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Re-Invite" (click)="reinviteUser(user)">
+							<i class="fa fa-user-plus"></i>
+						</button>
 						<!-- <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/edit/{{user.UserId}}"><i class="fa fa-edit"></i></button> -->
-						<button class="delete" data-toggle="tooltip" data-placement="top" title="Delete"
-							(click)="deleteUser(user)"> <i class="fa fa-trash"></i> </button>
+						<button class="delete" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteUser(user)">
+							<i class="fa fa-trash"></i>
+						</button>
 					</td>
 				</tr>
 			</tbody>

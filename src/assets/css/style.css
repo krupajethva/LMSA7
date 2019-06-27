@@ -70,6 +70,7 @@ h5{color:#354865; display:block; font:normal 16px/18px 'OpenSans-SemiBold'; marg
 /*-------------Header and navigation--------------------*/
 .container{ width:100%; max-width:100%; padding:0 30px;}
 header{ position: fixed; z-index: 999; width: 100%; padding:0 0 10px 0; top: 10px;}
+header .welcome_message.alert{padding: 10px;margin-bottom: 0px;border: 0;border-radius: 0px;color: #fff;}
 header.register_header{ top: 0px;}
 header .logo {padding: 2px 0;}
 header .logo .logo_text{font-family: 'OpenSans-Light'; width:75%; font-size: 30px; letter-spacing: -1px; text-decoration: none; text-transform: uppercase; color: #fff; line-height: 30px;}
@@ -95,7 +96,7 @@ header .notification li a span.badge2{background:#4AC4BC;}
 .account_menu{display: inline-block;}
 .header_right li{position:relative; display:block; float: left; margin-left:10px;}
 .header_right li a .caret{margin-left:5px; border-top: 4px solid #fff;}
-.header_right li a span.user_img{text-transform:uppercase;width: 40px; height: 40px; border:2px solid #fff; border-radius:100%; text-align: center; color: #fff; font-size: 14px; display: inline-block; margin-right: 10px; line-height: 35px; padding: 0; overflow: hidden; vertical-align: middle;}
+.header_right li a span.user_img{text-transform:uppercase;width: 40px; height: 40px; border:2px solid #fff; border-radius:100%; text-align: center; color: #fff; font-size: 14px; display: inline-block; margin-right: 0px; line-height: 35px; padding: 0; overflow: hidden; vertical-align: middle;}
 .header_right li a {font-size:13px; padding: 0; text-align: left; color: #ffffff; box-shadow: none; position: relative; transition:all 0.8s ease 0s; display:block;}
 .header_right li:hover a,.header_right li:focus a{background-position: right bottom; color: #ffffff; }
 .header_right li .dropdown-backdrop{display: none!important;}
@@ -200,7 +201,8 @@ label{font-weight: normal;}
 .form-group.focused .check_box label{ transform: translateY(0%);}
 
 .form-group input,.form-group textarea{line-height:20px; color: #2e2d31!important; font-size: 13px; font-weight:normal; box-shadow: none!important; font-family:'OpenSans-Regular'; outline: 0; background: transparent; padding: 7px 0; border: 0; border-bottom: 1px solid #888!important; width: 100%; border-radius: 0; z-index: 99; position: relative; margin-bottom: 2px;}
-
+ul.tooltip_style li{text-align: left;padding: 3px 10px;list-style: circle !important;position: relative;}
+ul.tooltip_style li:before{position: absolute;content: "";background: #fff;width: 5px;height: 5px;border-radius: 50%;left: 0;top: 8px;}
 html input[disabled] { cursor: not-allowed; background:transparent!important;}
 button[disabled]{ cursor: not-allowed;}
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{background:transparent!important;}
@@ -244,7 +246,7 @@ button[disabled]{ cursor: not-allowed;}
 /*--------------End Register Login--------------------*/
 
 /* ------- Sidebar Area Start ------- */
-.sidebar_wrap{ position: fixed; top: 60px; left: 0; padding: 0 8px 0 30px; height: 84%; width: 17.6667%; z-index: 999; transition:all 0.4s ease 0s; overflow-y: auto;}
+.sidebar_wrap{ position: fixed; top: 60px; left: 0; padding: 0 8px 0 30px; height: 89%; width: 17.6667%; z-index: 999; transition:all 0.4s ease 0s; overflow-y: auto;}
 .sidebar_wrap .sidebar_box{background: rgba(0, 0, 0, 0.1);border-radius: 3px;padding:15px 0;margin-bottom:10px;box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);}
 .sidebar_wrap .sidebar_box .sidebar_box_label span{ background: rgba(0, 0, 0, 0.2);border-radius: 15px;padding: 5px 10px;color:#fff; display: inline-block;font-size: 12px;margin-bottom: 5px; margin: 0 15px 10px 15px;}
 .sidebar_wrap .sidebar_box li i {font-size: 18px; width:25px;}
@@ -311,7 +313,7 @@ hr {
 .right_content_block .bg_white_block .title_heading .alert i{color: #fff; font-size: 11px; margin-right: 10px; background: #4AC4BC; width: 18px; height: 18px; border-radius: 100%; text-align: center; line-height: 20px;}
 .right_content_block .bg_white_block .title_text{ height: 50px;}
 .right_content_block .bg_white_block .add_back {border-left: 1px dashed #CCCCCC; height: 50px; padding: 10px 15px; text-align: right;}
-.right_content_block .bg_white_block .title_heading .breadcrumb_block{border-top: 1px dashed #CCCCCC; display: block; padding: 10px 0;}
+.right_content_block .bg_white_block .title_heading .breadcrumb_block{display: block; padding: 10px 0;}
 .right_content_block .bg_white_block .title_heading .breadcrumb_block .breadcrumb{ margin: 5px 0 0 0; padding: 0;}
 .right_content_block .bg_white_block .title_heading .breadcrumb_block .breadcrumb li{color: #666; font-family: 'OpenSans-Regular'; font-size: 14px;}
 .right_content_block .bg_white_block .title_heading .breadcrumb_block .breadcrumb a{color: #9EA7B3;}

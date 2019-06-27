@@ -5,15 +5,12 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
 
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="#">
@@ -24,12 +21,10 @@
       </ul>
       <div class="clearfix"></div>
     </div>
-    <div class="col-md-6 col-sm-6">
-
-    </div>
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
+
 </div>
 <div class="content_block" id="datatable_id">
   <div class="col-md-12 col-sm-12">
@@ -49,53 +44,50 @@
     </div>
     <div class="fliter_section">
       <div class="row">
-          <form class="form-validate" #AttendanceForm="ngForm" (ngSubmit)="addattendance(AttendanceForm)">
-        <div class="col-md-5 col-sm-5">
-          
-          <div class="form-group">
-            <label>
-              <span></span>Course</label>
-            <select class='select-option' (change)="getSessionList(AttendanceForm)" class="form-control"
-              #CourseId="ngModel" [(ngModel)]="SearchAttendanceEntity.CourseId" name="CourseId"
-              [ngClass]="{red_border: (CourseId.dirty && CourseId.invalid)}" required>
-              <!-- <option value=""></option> -->
-              <option *ngFor="let Course of CourseList" value="{{Course.CourseId}}"
-                ngSelected="SearchAttendanceEntity.CourseId==Course.CourseId">{{Course.CourseFullName}}</option>
-            </select>
-            <span class="error_span" *ngIf="(CourseId.dirty && CourseId.invalid) || (CourseId.pristine && submitted)">
+        <form class="form-validate" #AttendanceForm="ngForm" (ngSubmit)="addattendance(AttendanceForm)">
+          <div class="col-md-5 col-sm-5">
+
+            <div class="form-group">
+              <label>
+                <span></span>Course</label>
+              <select class='select-option' (change)="getSessionList(AttendanceForm)" class="form-control" #CourseId="ngModel" [(ngModel)]="SearchAttendanceEntity.CourseId"
+                name="CourseId" [ngClass]="{red_border: (CourseId.dirty && CourseId.invalid)}" required>
+                <!-- <option value=""></option> -->
+                <option *ngFor="let Course of CourseList" value="{{Course.CourseId}}" ngSelected="SearchAttendanceEntity.CourseId==Course.CourseId">{{Course.CourseFullName}}</option>
+              </select>
+              <span class="error_span" *ngIf="(CourseId.dirty && CourseId.invalid) || (CourseId.pristine && submitted)">
                 <span *ngIf="CourseId.errors || (CourseId.pristine && required)">Please select course</span>
               </span>
+            </div>
           </div>
-        </div>
-        <div class="col-md-5 col-sm-5">
-          <div class="form-group">
-            <label>
-              <span class="required"></span>Session</label>
-            <select class="form-control" #CourseSessionId="ngModel" [(ngModel)]="SearchAttendanceEntity.CourseSessionId" name="CourseSessionId"
-              [ngClass]="{red_border: (CourseSessionId.dirty && CourseSessionId.invalid)}" required>
-              <!-- <option value="" ngSelected='SearchAttendanceEntity.CourseSessionId==""'></option> -->
-              <option *ngFor="let Session of SessionList" value="{{Session.CourseSessionId}}"
-                ngSelected="SearchAttendanceEntity.CourseSessionId==Session.CourseSessionId">{{Session.SessionName}}</option>
-            </select>
-            <span class="error_span" *ngIf="(CourseSessionId.dirty && CourseSessionId.invalid) || (CourseSessionId.pristine && submitted)">
+          <div class="col-md-5 col-sm-5">
+            <div class="form-group">
+              <label>
+                <span class="required"></span>Session</label>
+              <select class="form-control" #CourseSessionId="ngModel" [(ngModel)]="SearchAttendanceEntity.CourseSessionId" name="CourseSessionId"
+                [ngClass]="{red_border: (CourseSessionId.dirty && CourseSessionId.invalid)}" required>
+                <!-- <option value="" ngSelected='SearchAttendanceEntity.CourseSessionId==""'></option> -->
+                <option *ngFor="let Session of SessionList" value="{{Session.CourseSessionId}}" ngSelected="SearchAttendanceEntity.CourseSessionId==Session.CourseSessionId">{{Session.SessionName}}</option>
+              </select>
+              <span class="error_span" *ngIf="(CourseSessionId.dirty && CourseSessionId.invalid) || (CourseSessionId.pristine && submitted)">
                 <span *ngIf="CourseSessionId.errors || (CourseSessionId.pristine && required)">Please select session</span>
               </span>
+            </div>
           </div>
-        </div>
-        <!-- <div class="col-md-2 col-sm-2">
+          <!-- <div class="col-md-2 col-sm-2">
           <div class="form-group">
             <label>
               <span>*</span>Time </label>
             <input type="text" readonly class="form-control form_time" />
           </div>
         </div> -->
-        <div class="clearfix"></div>
-        <div class="col-md-12 col-sm-12 text-center">
+          <div class="clearfix"></div>
+          <div class="col-md-12 col-sm-12 text-center">
             <button class="back_btn" type="submit">Filter</button>
             <button class="next_btn" type="button" (click)="clearForm(AttendanceForm)">Clear</button>
-        </div>
-        <div class="clearfix"></div>
-        <!-- <div class="col-md-4 col-sm-4">
+          </div>
+          <div class="clearfix"></div>
+          <!-- <div class="col-md-4 col-sm-4">
           <div class="form-group">
             <label>
               <span>*</span>Date </label>
@@ -112,31 +104,31 @@
         <div class="col-md-4 col-sm-4 add_session">
           <i class="fa fa-plus" aria-hidden="true"></i>
         </div> -->
-      </form>
+        </form>
         <div class="clearfix"></div>
       </div>
     </div>
-    <table  *ngIf="listhide" id="list_tables" class="table table-responsive table-hover" style="width:100%">
+    <table *ngIf="listhide" id="list_tables" class="table table-responsive table-hover" style="width:100%">
       <thead>
-        <tr >
+        <tr>
           <th rowspan="2" class="text-center sr_no_width">#</th>
           <th rowspan="2" class="date_width">Enrollment Date</th>
           <th rowspan="2">Learner Name</th>
           <th rowspan="2" class="email_width">Email Address</th>
-          <th id="aa"  class="text-center">Date</th>
+          <th id="aa" class="text-center">Date</th>
           <th rowspan="2">Total</th>
           <!-- <th class="width_10 text-center">Attendance</th>
           <th class="date_width">End Date</th>
           <th class="text-center active_width">Status</th> -->
         </tr>
-     
+
       </thead>
       <tbody>
-          <tr>
-              <th  colspan="4" ></th>
-              <th class="text-center"  *ngFor="let Date of DateList; let j = index">{{Date}}</th>
-              <th  ></th>
-            </tr>
+        <tr>
+          <th colspan="4"></th>
+          <th class="text-center" *ngFor="let Date of DateList; let j = index">{{Date}}</th>
+          <th></th>
+        </tr>
         <tr *ngFor="let Attendance of AttendanceList; let i = index">
           <td class="text-center">{{i+1}}</td>
           <td>{{Attendance.CreatedOn | date : 'yyyy-MM-dd'}} </td>
@@ -144,13 +136,15 @@
           <td>{{Attendance.EmailAddress}}</td>
           <td class="text-center" *ngFor="let Check of Attendance.Child; let j = index">
             <div class="check_box">
+
               <input type="checkbox" [checked]='Check=="1"' value={{Check}}
                (click)="AttendanceCheck(Attendance.CourseUserregisterId,$event,i,j,Attendance.Totalattendance)" name="Check{{i}}{{j}}" id="Check{{i}}{{j}}" value="yes">
+
               <label for="Check{{i}}{{j}}" title="Absent" class="checkboxbtn_label"></label>
             </div>
           </td>
           <td class="text-center">{{Attendance.Totalattendance}}</td>
-          
+
           <!-- <td>09/10/2018</td>
           <td class="text-center">
             <div class="activeyes_box" data-toggle="tooltip" data-placement="top" title="Absent">
@@ -159,9 +153,9 @@
             </div>
           </td> -->
         </tr>
-      
-       
-       
+
+
+
       </tbody>
     </table>
   </div>

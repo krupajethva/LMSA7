@@ -5,16 +5,13 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
       
       
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="#">
@@ -23,14 +20,11 @@
         </li>
         <li class="breadcrumb-item active" aria-current="page">Learner Dashboard</li>
       </ul>
-      <div class="clearfix"></div>
-    </div>
-    <div class="col-md-6 col-sm-6">
-      <div id="buttons" class="pull-right"></div>
     </div>
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
+
 </div>
 <div class="content_block admin_dashboard learner_dashboard">
   <div class="col-md-12">
@@ -140,7 +134,7 @@
           </div>
           <div class="clearfix"></div>
 
-          <div class="users"  *ngFor="let course of courseview; let i = index">
+          <div class="users" *ngFor="let course of courseview; let i = index">
             <div class="img_box">{{course.courseview}}</div>
             <div class="name_box">
               <i *ngIf="course.SessionStatus==0">Pending</i>
@@ -366,10 +360,10 @@
 
     <!-- NEW START-->
     <div class="row">
-        <div class="col-md-6 col-sm-6">
-          <div class="rated_course_block">
-            <h3>Your Courses</h3>
-        <div class="scroll_score">
+      <div class="col-md-6 col-sm-6">
+        <div class="rated_course_block">
+          <h3>Your Courses</h3>
+          <div class="scroll_score">
             <div class="table-responsive">
               <div class="scroll_yourscore">
                 <table class="table table-hover" style="width:100%">
@@ -396,27 +390,27 @@
                 </table>
               </div>
             </div>
-        </div>
           </div>
         </div>
-    <!-- NEW END -->
+      </div>
+      <!-- NEW END -->
 
       <div class="col-md-6 col-sm-6">
         <div class="content_block">
-		<div class="scroll_calender">
-          <div class="color_description">
-            <ul>
-              <ng-container *ngFor="let typelist of AnnouncementTypeList">
-                <li *ngIf="(typelist.IsActive==1)">
-                <span [ngStyle]="{'background-color':typelist.ColorCode}"></span>{{typelist.TypeName}}
-                </li>
+          <div class="scroll_calender">
+            <div class="color_description">
+              <ul>
+                <ng-container *ngFor="let typelist of AnnouncementTypeList">
+                  <li *ngIf="(typelist.IsActive==1)">
+                    <span [ngStyle]="{'background-color':typelist.ColorCode}"></span>{{typelist.TypeName}}
+                  </li>
                 </ng-container>
-            </ul>
+              </ul>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div id="calendar"></div>
+            </div>
           </div>
-          <div class="col-md-12 col-sm-12">
-            <div id="calendar"></div>
-          </div>		  
-		  </div>
         </div>
         <div class="clearfix"></div>
       </div>

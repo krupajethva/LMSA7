@@ -7,27 +7,20 @@
   </div>
   <!-- <div class="col-md-8 col-sm-8">
     <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
     </div>
   </div> -->
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
-      <!-- <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">
-            <i class="fa fa-home"></i>
-          </a>
-        </li> -->
-      <!-- <li class="breadcrumb-item active">Settings</li> -->
-      <!-- <li class="breadcrumb-item active" aria-current="page"></li> -->
-      <!-- </ul> -->
-      <div class="clearfix"></div>
-    </div>
-    <div class="col-md-6 col-sm-6">
-      <!-- <a routerLink="/state-list" class="next_btn pull-right">Back to Setting List</a>	 -->
-    </div>
+  <div class="breadcrumb_block pull-right">
+    <!-- <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">
+              <i class="fa fa-home"></i>
+            </a>
+          </li> -->
+    <!-- <li class="breadcrumb-item active">Settings</li> -->
+    <!-- <li class="breadcrumb-item active" aria-current="page"></li> -->
+    <!-- </ul> -->
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
@@ -41,8 +34,7 @@
             <!-- Course Before Reminder Start -->
             <div class="white_shadow_box">
               <div class="col-md-12 col-sm-12">
-                <form class="form-validate" #beforereminderForm="ngForm"
-                  (ngSubmit)="InsertOrUpdateBeforeReminder(beforereminderForm)">
+                <form class="form-validate" #beforereminderForm="ngForm" (ngSubmit)="InsertOrUpdateBeforeReminder(beforereminderForm)">
                   <h1 class="no_margin">Course Before Reminder List</h1>
                   <div class="course_forum_block">
                     <!-- list Table -->
@@ -67,10 +59,11 @@
                               <td>{{dl.RemainderDay2}}</td>
                               <td>{{dl.RemainderDay3}}</td>
                               <td class="text-center">
-                                <button type="button" class="edit" data-toggle="tooltip" data-placement="top" title="Edit"
-                                routerLink="/coursebeforereminder/{{dl.CourseBeforeReminderId}}"><i class="fa fa-edit"></i></button>
-                                <button type="button" class="delete" data-toggle="tooltip" data-placement="top" title="Delete"
-                                  (click)="deletereminder(dl)"><i class="fa fa-trash"></i>
+                                <button type="button" class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/coursebeforereminder/{{dl.CourseBeforeReminderId}}">
+                                  <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" class="delete" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deletereminder(dl)">
+                                  <i class="fa fa-trash"></i>
                                 </button>
                               </td>
                             </tr>

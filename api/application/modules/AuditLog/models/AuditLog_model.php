@@ -77,33 +77,6 @@ class AuditLog_model extends CI_Model
 			return false;
 		}	
 	}
-
-
-	public function getNotificationByUser($id = null) {
-		try {
-			if($id)
-			{
-				$this->db->select('CONCAT(tu.FirstName, " " , tu.LastName) as SenderName ,tn.NotificationTitle, tn.NotificationText, tn.CreatedOn');
-				$this->db->order_by('tn.NotificationId',"desc");
-				$this->db->join('tbluser as tu', 'tn.SenderId = tu.UserId', 'inner');
-				$this->db->where('tn.RecipientId', $id);
-				$result = $this->db->get('tblnotification as tn');		
-				$res = array();
-				if($result->result()) {
-					$res = $result->result();
-				}
-				return $res;
-			}else
-			{
-				return false;
-			}
-		}
-		catch(Exception $e){
-			trigger_error($e->getMessage(), E_USER_ERROR);
-			return false;
-		}
-	}
-
 	public function getActivityByUser($id = null) {
 		try {
 			if($id)

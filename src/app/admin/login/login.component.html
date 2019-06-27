@@ -24,7 +24,7 @@
 						<input type="password" class="form-control" #Password="ngModel" [(ngModel)]="loginEntity.Password" name="Password" [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted)}"
 						 data-toggle="tooltip" data-placement="top"
 						 data-html="true"
-title="<ul><li>Minimum 8 and maximum 50 characters in length.</li><li>Should allow AlphaNumeric characters.</li><li>Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#).</li></ul>"
+title="<ul class='tooltip_style'><li>Minimum 8 and maximum 50 characters in length.</li><li>Should allow AlphaNumeric characters.</li><li>Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#).</li></ul>"
 						 required />
 						<span class="error_span" *ngIf="(Password.dirty && Password.invalid) || (Password.pristine && submitted)">
 							<span *ngIf="Password.errors.required || (Password.pristine && submitted)">Please enter password</span>

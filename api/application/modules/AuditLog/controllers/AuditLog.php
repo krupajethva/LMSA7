@@ -32,18 +32,6 @@ class AuditLog extends CI_Controller {
 		echo json_encode($data);
 				
 	}
-
-	public function getNotificationByUser($id=null) 
-	{
-		if(!empty($id))
-		{
-			$data=[];
-			$data=$this->AuditLog_model->getNotificationByUser($id);
-			echo json_encode($data);
-		}
-	}
-
-	
 	public function getActivityByUser($id=null) 
 	{
 		if(!empty($id))

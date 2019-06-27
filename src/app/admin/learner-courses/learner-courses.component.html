@@ -5,14 +5,12 @@
 		</div>
 	</div>
 	<div class="col-md-8 col-sm-8">
-			<div class="welcome_message alert" role="alert">
-					<i class="fa fa-info"></i>Welcome back,
+		<!-- <div class="welcome_message alert" role="alert">
+					Welcome back,
 					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
-			</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="breadcrumb_block">
-		<div class="col-md-6 col-sm-6">
+			</div> -->
+		<div class="clearfix"></div>
+		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item">
 					<a href="#">
@@ -23,11 +21,8 @@
 			</ul>
 			<div class="clearfix"></div>
 		</div>
-		<div class="col-md-6 col-sm-6">
-
-		</div>
-		<div class="clearfix"></div>
 	</div>
+
 	<div class="clearfix"></div>
 </div>
 <div class="content_block">
@@ -135,35 +130,34 @@
 									<div class="modal-body">
 										<div class="session_blocks">
 											<div class="col-lg-3 col-md-3" *ngFor="let SessionList of CourseSesssionList; let k = index;">
-												<div class="news-blog" 
-														[ngClass]="{completesession:SessionList.SessionStatus==2,
+												<div class="news-blog" [ngClass]="{completesession:SessionList.SessionStatus==2,
 														inprogresssession:SessionList.SessionStatus==1,
 														pendingsession:SessionList.SessionStatus==0}">
-														<!-- [ngClass]="{completesession:((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd' )),
+													<!-- [ngClass]="{completesession:((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd' )),
 														inprogresssession:((SessionList.StartDate) < (datea | date : 'yyyy-MM-dd' )) && ((SessionList.EndDate)> (datea | date : 'yyyy-MM-dd')) ,
 														pendingsession:((SessionList.StartDate)> (datea | date : 'yyyy-MM-dd'))}" -->
-														<h4>{{SessionList.SessionName}}</h4>
-														<ul class="icon">
-															<li>
-																<i class="fa fa-calendar"></i>
-																<strong>Instructor : </strong> {{SessionList.FirstName}}</li>
-															<li>
-																<i class="fa fa-user"></i>
-																<strong>Start Date : </strong> {{SessionList.StartDate}}</li>
-															<li>
-																<i class="fa fa-calendar"></i>
-																<strong>End Date : </strong> {{SessionList.EndDate}}</li>
-															
-															<li>
-																<i class="fa fa-comments"></i>
-																<strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
-															<li>
-																<i class="fa fa-user"></i>
-																<strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}</li>
-																<li *ngIf="SessionList.Result!=NULL">
-																	<i class="fa fa-user"></i>
-																		<strong>Your Result : </strong> {{SessionList.Result}}% </li>
-															<!-- <li class="enroll_course_tag" *ngIf="((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd'))">
+													<h4>{{SessionList.SessionName}}</h4>
+													<ul class="icon">
+														<li>
+															<i class="fa fa-calendar"></i>
+															<strong>Instructor : </strong> {{SessionList.FirstName}}</li>
+														<li>
+															<i class="fa fa-user"></i>
+															<strong>Start Date : </strong> {{SessionList.StartDate}}</li>
+														<li>
+															<i class="fa fa-calendar"></i>
+															<strong>End Date : </strong> {{SessionList.EndDate}}</li>
+
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
+														<li>
+															<i class="fa fa-user"></i>
+															<strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}</li>
+														<li *ngIf="SessionList.Result!=NULL">
+															<i class="fa fa-user"></i>
+															<strong>Your Result : </strong> {{SessionList.Result}}% </li>
+														<!-- <li class="enroll_course_tag" *ngIf="((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd'))">
 																<strong>Completed</strong>
 															</li>
 															<li class="enroll_course_tag" *ngIf="((SessionList.StartDate) > (datea | date : 'yyyy-MM-dd'))">
@@ -176,25 +170,26 @@
 																	<strong>Continue your session</strong>
 																</a>
 															</li> -->
-															
-															<a *ngIf="SessionList.taketest==0 && SessionList.SessionStatus==2" (click)="taketest(SessionList.CourseSessionId)" class="next_btn pull-right">take test</a>	
-															<a  *ngIf="SessionList.taketest>0 && SessionList.Result==NULL && SessionList.SessionStatus==2" (click)="Continue(SessionList.CourseSessionId)" class="next_btn pull-right">Continue test</a>
-													
-															<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==2">
-																<strong>Completed</strong>
-															</li>
-															<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==0">
-																<a (click)="startsession(CourseSesssionList,i)">
-																	<strong>Start your session</strong>
-																</a>
-															</li>
-															<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==1">
-																<a  (click)="startsession(CourseSesssionList,i)" >
-																	<strong>Continue your session</strong>
-																</a>
-															</li>
-														</ul>
-														<h5>{{k+1}}</h5>
+
+														<a *ngIf="SessionList.taketest==0 && SessionList.SessionStatus==2" (click)="taketest(SessionList.CourseSessionId)" class="next_btn pull-right">take test</a>
+														<a *ngIf="SessionList.taketest>0 && SessionList.Result==NULL && SessionList.SessionStatus==2" (click)="Continue(SessionList.CourseSessionId)"
+														 class="next_btn pull-right">Continue test</a>
+
+														<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==2">
+															<strong>Completed</strong>
+														</li>
+														<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==0">
+															<a (click)="startsession(CourseSesssionList,i)">
+																<strong>Start your session</strong>
+															</a>
+														</li>
+														<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==1">
+															<a (click)="startsession(CourseSesssionList,i)">
+																<strong>Continue your session</strong>
+															</a>
+														</li>
+													</ul>
+													<h5>{{k+1}}</h5>
 												</div>
 											</div>
 											<!-- <div class="col-lg-3 col-md-3">
