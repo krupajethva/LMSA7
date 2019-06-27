@@ -986,55 +986,58 @@ textarea{resize: none;}
   line-height: 18px;
   transition: all 0.5s ease;
 }
+.view_inst_wrap{
+  position: relative;
+}
+.view_inst_wrap .instructor_scroll{height: 300px;position: relative;}
 .view_inst_block {
   position: absolute;
   top: 0px;
   left: 0px;
   z-index: 9;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.98);
   width: 100%;
   border: 1px solid #ccc;
   text-align: left;
   box-shadow: 0 0 5px #f3f3f3;
   border-radius: 5px;
-  padding: 20px 20px 0px;
+  padding: 10px 0px 0px;
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s linear 0s;
   height: 0px;
 }
 .view_inst_block ul{
-  padding-top: 10px;
+  padding-top: 5px;
 }
 .view_inst_block ul li{
 display: block;
-padding-bottom: 0px;
+padding-bottom: 5px;
 position: relative;
-padding-left: 20px;
+border-bottom: 1px solid #dcdcdc;
+padding-top: 5px;
 }
 .view_inst_block h3{
   margin-bottom: 5px;
+  padding-left: 10px;
 }
 .view_inst_block ul li .instr_name{
-  font-size: 18px;
+  font-size: 14px;
+    text-transform: none;
+    padding-left: 10px;
 }
-.view_inst_block ul li:before{
-  content: "";
-  position: absolute;
-  background: #bbbbbb;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  top: 8px;
-  left: 0;
+.view_inst_block ul li .instr_email{
+  font-size: 12px;
+    text-transform: none;
+    padding-left: 10px;
 }
 .view_inst_block ul li .instr_icn .fa-user-times{
-  color: #0061AF;
+  color: var(--theme-color);
   margin: 0px 10px;
   font-size: 16px;
 }
 .view_inst_block ul li .instr_icn .fa-user-plus{
-  color: #018a3a;
+  color: var(--option-color);
   font-size: 16px;
 }
 button.view_inst_btn {

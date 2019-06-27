@@ -22,7 +22,9 @@
 						<label>
 							<span>*</span>Password </label>
 						<input type="password" class="form-control" #Password="ngModel" [(ngModel)]="loginEntity.Password" name="Password" [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted)}"
-						 data-toggle="tooltip" data-placement="top" title="Minimum 8 and maximum 50 characters in length. Should allow AlphaNumeric characters. Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#)."
+						 data-toggle="tooltip" data-placement="top"
+						 data-html="true"
+title="<ul><li>Minimum 8 and maximum 50 characters in length.</li><li>Should allow AlphaNumeric characters.</li><li>Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#).</li></ul>"
 						 required />
 						<span class="error_span" *ngIf="(Password.dirty && Password.invalid) || (Password.pristine && submitted)">
 							<span *ngIf="Password.errors.required || (Password.pristine && submitted)">Please enter password</span>
@@ -44,8 +46,9 @@
 						</div>
 						<div class="clearfix"></div>
 						<div class="col-md-12 col-sm-12 text-center">
-							<button *ngIf="openRegisteration==1" routerLink="/register-learner" class="back_btn">Learner Registration</button>
-							<button *ngIf="openRegisterationInstructor==1" routerLink="/open-register-instructor" class="back_btn">Instructor Registration</button>
+							<button *ngIf="openRegisteration==1" routerLink="/register-learner" class="back_btn">Registration</button>
+							<!-- <button *ngIf="openRegisteration==1" routerLink="/register-learner" class="back_btn">Learner Registration</button>
+							<button *ngIf="openRegisterationInstructor==1" routerLink="/open-register-instructor" class="back_btn">Instructor Registration</button> -->
 						</div>
 					</div>
 				</div>
