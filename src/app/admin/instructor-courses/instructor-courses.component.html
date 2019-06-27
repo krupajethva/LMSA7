@@ -34,12 +34,10 @@
             <div class="form-group">
               <label>
                 <span>*</span>Category</label>
-              <select #CategoryId="ngModel" class="form-control" [(ngModel)]="InstructorCourseEntity.CategoryId"
-                name="CategoryId">
+              <select #CategoryId="ngModel" class="form-control" [(ngModel)]="InstructorCourseEntity.CategoryId" name="CategoryId">
                 <option value="" ngSelected='InstructorCourseEntity.CategoryId==""'>Select</option>
                 <ng-container *ngFor="let SubCategory of SubCategoryList">
-                  <option value="{{SubCategory.CategoryId}}"
-                    ngSelected="InstructorCourseEntity.CategoryId==SubCategory.CategoryId">{{SubCategory.CategoryName}}
+                  <option value="{{SubCategory.CategoryId}}" ngSelected="InstructorCourseEntity.CategoryId==SubCategory.CategoryId">{{SubCategory.CategoryName}}
                   </option>
                 </ng-container>
               </select>
@@ -60,8 +58,8 @@
             <div class="form-group">
               <label>Course Name </label>
               <!-- <input type="text" class="form-control" name="CourseName" required /> -->
-              <input type="text" #CourseName="ngModel" maxlength="100" [(ngModel)]="InstructorCourseEntity.CourseName"
-                class="form-control" name="CourseName" />
+              <input type="text" #CourseName="ngModel" maxlength="100" [(ngModel)]="InstructorCourseEntity.CourseName" class="form-control"
+                name="CourseName" />
             </div>
           </div>
           <div class="col-md-5">
@@ -92,8 +90,7 @@
                 <a class="back_btn" (click)="SessionClick(course.CourseId,i)">Available Session</a>
               </div>
               <div class="pull-right">
-                <a routerLink="/course/edit/{{course.CourseId}}" data-placement="top" data-toggle="tooltip"
-                  title="Edit">
+                <a routerLink="/course/edit/{{course.CourseId}}" data-placement="top" data-toggle="tooltip" title="Edit">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
                 <a routerLink="/preview/{{course.CourseId}}" data-placement="top" data-toggle="tooltip" title="Detail">
@@ -102,8 +99,7 @@
                 <a data-toggle="modal" (click)="clone(course.CourseId)" data-target="#courseclonemodal">
                   <i class="fa fa-clone" aria-hidden="true"></i>
                 </a>
-                <a routerLink="/course-questionlist/{{course.CourseId}}" data-placement="top" data-toggle="tooltip"
-                  title="Course Question">
+                <a routerLink="/course-questionlist/{{course.CourseId}}" data-placement="top" data-toggle="tooltip" title="Course Question">
                   <i class="fa fa-question-circle-o" aria-hidden="true"></i>
                 </a>
               </div>
@@ -112,8 +108,8 @@
               <a routerLink="/course/edit/{{course.CourseId}}" class="back_btn">Edit</a>
               <button class="next_btn">Publish</button> -->
             </div>
-            <div id="modalsession{{i}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-              aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div id="modalsession{{i}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+              aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -138,8 +134,7 @@
                   <div class="modal-body">
                     <div class="session_blocks">
                       <div class="col-lg-3 col-md-3" *ngFor="let SessionList of CourseSesssionList; let k = index;">
-                        <div class="news-blog"
-                          [ngClass]="{Draft:SessionList.PublishStatus==0,Publish:SessionList.PublishStatus>0}">
+                        <div class="news-blog" [ngClass]="{Draft:SessionList.PublishStatus==0,Publish:SessionList.PublishStatus>0}">
                           <h4>{{SessionList.SessionName}}</h4>
                           <ul class="icon">
                             <!-- <li>
@@ -150,15 +145,13 @@
                               <i class="fa fa-calendar"></i>
                               <strong>Instructors : </strong>
                               <button (click)="view_inst_btn()" class="view_inst_btn">
-                                <i title="View Instructors" data-toggle="tooltip" data-placement="top" class="fa fa-eye"
-                                  aria-hidden="true"></i>
+                                <i title="View Instructors" data-toggle="tooltip" data-placement="top" class="fa fa-eye" aria-hidden="true"></i>
                                 <span>2</span>
                               </button>
                             </li>
 
                             <div class="view_inst_block">
-                              <span (click)="cancel_inst_btn()" class="close_skip close_btn fa fa-times" title="Close"
-                                data-toggle="tooltip" data-placement="top"></span>
+                              <span (click)="cancel_inst_btn()" class="close_skip close_btn fa fa-times" title="Close" data-toggle="tooltip" data-placement="top"></span>
                               <div class="view_inst_wrap">
                                 <h3>Instructors</h3>
                                 <div class="instructor_scroll">
@@ -169,12 +162,7 @@
                                       </div>
                                       <div class="pull-right instr_icn">
                                         <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
-                                        </a>
-                                        <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
+                                          <i class="fa fa-check" aria-hidden="true" data-placement="top" data-toggle="tooltip" title="Accepted"></i>
                                         </a>
                                       </div>
                                       <div class="clearfix"></div>
@@ -189,12 +177,10 @@
                                       </div>
                                       <div class="pull-right instr_icn">
                                         <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
+                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip" title="Revoke"></i>
                                         </a>
                                         <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
+                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip" title="Re-invite"></i>
                                         </a>
                                       </div>
                                       <div class="clearfix"></div>
@@ -209,12 +195,10 @@
                                       </div>
                                       <div class="pull-right instr_icn">
                                         <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
+                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip" title="Revoke"></i>
                                         </a>
                                         <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
+                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip" title="Re-invite"></i>
                                         </a>
                                       </div>
                                       <div class="clearfix"></div>
@@ -229,12 +213,10 @@
                                       </div>
                                       <div class="pull-right instr_icn">
                                         <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
+                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip" title="Revoke"></i>
                                         </a>
                                         <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
+                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip" title="Re-invite"></i>
                                         </a>
                                       </div>
                                       <div class="clearfix"></div>
@@ -249,12 +231,10 @@
                                       </div>
                                       <div class="pull-right instr_icn">
                                         <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
+                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip" title="Revoke"></i>
                                         </a>
                                         <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
+                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip" title="Re-invite"></i>
                                         </a>
                                       </div>
                                       <div class="clearfix"></div>
@@ -269,12 +249,10 @@
                                       </div>
                                       <div class="pull-right instr_icn">
                                         <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
+                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip" title="Revoke"></i>
                                         </a>
                                         <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
+                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip" title="Re-invite"></i>
                                         </a>
                                       </div>
                                       <div class="clearfix"></div>
@@ -294,53 +272,52 @@
                               <i class="fa fa-calendar"></i>
                               <strong>End Date : </strong> {{SessionList.EndDate}}</li>
                             <li>
-                            <li>
-                              <i class="fa fa-clock-o"></i>
-                              <strong>Start Time : </strong> {{SessionList.StartTimeChange}}</li>
-                            <li>
-                              <i class="fa fa-clock-o"></i>
-                              <strong>End Time : </strong> {{SessionList.EndTimeChange}}</li>
-                            <!-- <li>
+                              <li>
+                                <i class="fa fa-clock-o"></i>
+                                <strong>Start Time : </strong> {{SessionList.StartTimeChange}}</li>
+                              <li>
+                                <i class="fa fa-clock-o"></i>
+                                <strong>End Time : </strong> {{SessionList.EndTimeChange}}</li>
+                              <!-- <li>
                                 <i class="fa fa-comments"></i>
                                 <strong>Duration : </strong> {{SessionList.StartDate}}</li> -->
-                            <li>
-                              <i class="fa fa-comments"></i>
-                              <strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
+                              <li>
+                                <i class="fa fa-comments"></i>
+                                <strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
 
-                            <li>
-                              <i class="fa fa-user"></i>
-                              <strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}
-                            </li>
-                            <li class="start_session_btn" *ngIf="SessionList.SessionStatus==0 && SessionList.PublishStatus>0 && 
+                              <li>
+                                <i class="fa fa-user"></i>
+                                <strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}
+                              </li>
+                              <li class="start_session_btn" *ngIf="SessionList.SessionStatus==0 && SessionList.PublishStatus>0 && 
                                 !(SessionList.StartDate > (datea | date : 'yyyy-MM-dd')) 
                                 && (SessionList.StartTime < (SCtime | date :'HH:mm:ss'))">
-                              <a class="back_btn" (click)="StartSession(SessionList.CourseSessionId,k)">Start</a>
-                            </li>
-                            <li class="end_session_btn" *ngIf="SessionList.SessionStatus==1 && SessionList.PublishStatus>0 
+                                <a class="back_btn" (click)="StartSession(SessionList.CourseSessionId,k)">Start</a>
+                              </li>
+                              <li class="end_session_btn" *ngIf="SessionList.SessionStatus==1 && SessionList.PublishStatus>0 
                                 && ((SessionList.EndDate > (datea | date : 'yyyy-MM-dd')) ||
                                  (SessionList.EndDate == (datea | date : 'yyyy-MM-dd'))
                                   && (SessionList.EndTime > (ECtime | date :'HH:mm:ss')))">
-                              <a class="next_btn" (click)="EndSession(SessionList.CourseSessionId,k)">End</a>
-                            </li>
-                            <li class="complete_session_lbl"
-                              *ngIf="SessionList.SessionStatus==2 && SessionList.PublishStatus>0">
-                              <p class="text-success">
-                                <strong>Complete Session</strong>
-                              </p>
-                            </li>
+                                <a class="next_btn" (click)="EndSession(SessionList.CourseSessionId,k)">End</a>
+                              </li>
+                              <li class="complete_session_lbl" *ngIf="SessionList.SessionStatus==2 && SessionList.PublishStatus>0">
+                                <p class="text-success">
+                                  <strong>Complete Session</strong>
+                                </p>
+                              </li>
 
-                            <div class="form-group-active">
-                              <label>
-                                <span>*</span>Active?{{SessionList.IsActive}}</label>
+                              <div class="form-group-active">
+                                <label>
+                                  <span>*</span>Active?{{SessionList.IsActive}}</label>
 
-                              <div class="activeyes_box">
-                                <input type="checkbox" name="IsActive{{k}}" (change)="isActiveChange(SessionList,k)"
-                                  id="IsActive{{k}}" value="yes" #IsActive="ngModel" [(ngModel)]="SessionList.IsActive">
-                                <label for="IsActive{{k}}"></label>
+                                <div class="activeyes_box">
+                                  <input type="checkbox" name="IsActive{{k}}" (change)="isActiveChange(SessionList,k)" id="IsActive{{k}}" value="yes" #IsActive="ngModel"
+                                    [(ngModel)]="SessionList.IsActive">
+                                  <label for="IsActive{{k}}"></label>
+                                </div>
                               </div>
-                            </div>
 
-                            <!-- <li class="start_session_btn">
+                              <!-- <li class="start_session_btn">
                                 <a class="back_btn" (click)="StartSession(SessionList.CourseSessionId,k)">Start</a>
                               </li>
                               <li class="end_session_btn">
@@ -353,24 +330,23 @@
                               </li> -->
 
 
-                            <li class="enroll_course_tag attendancesession" *ngIf="SessionList.PublishStatus>0">
-                              <div class="col-md-6 attendancesession_label">
-                                <strong>Already Publish</strong>
-                              </div>
-                              <div class="col-md-6 attendancesession">
-                                <a (click)="attendance(SessionList.CourseSessionId,i)">Attendance</a>
-                              </div>
-                            </li>
-                            <li class="enroll_course_tag draftpublishtag" *ngIf="SessionList.PublishStatus==0">
-                              <div class="col-md-6 draftsession">
-                                <a (click)="draft(course.CourseId,i)">Edit</a>
-                              </div>
-                              <div class="col-md-6 publishsession">
-                                <button class="publishbtn" [disabled]="SessionList.IsActive==0"
-                                  (click)="Publish(SessionList.CourseSessionId,k)">
-                                  Publish</button>
-                              </div>
-                            </li>
+                              <li class="enroll_course_tag attendancesession" *ngIf="SessionList.PublishStatus>0">
+                                <div class="col-md-6 attendancesession_label">
+                                  <strong>Already Publish</strong>
+                                </div>
+                                <div class="col-md-6 attendancesession">
+                                  <a (click)="attendance(SessionList.CourseSessionId,i)">Attendance</a>
+                                </div>
+                              </li>
+                              <li class="enroll_course_tag draftpublishtag" *ngIf="SessionList.PublishStatus==0">
+                                <div class="col-md-6 draftsession">
+                                  <a (click)="draft(course.CourseId,i)">Edit</a>
+                                </div>
+                                <div class="col-md-6 publishsession">
+                                  <button class="publishbtn" [disabled]="SessionList.IsActive==0" (click)="Publish(SessionList.CourseSessionId,k)">
+                                    Publish</button>
+                                </div>
+                              </li>
                           </ul>
                           <h5>{{k+1}}</h5>
                         </div>
@@ -424,8 +400,7 @@
 <div class="clearfix"></div>
 
 <!-- Modal -->
-<div class="modal fade" id="courseclonemodal" tabindex="-1" role="dialog" aria-labelledby="courseclonemodalTitle"
-  aria-hidden="true">
+<div class="modal fade" id="courseclonemodal" tabindex="-1" role="dialog" aria-labelledby="courseclonemodalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <form class="form-validate" #CloneForm="ngForm" (ngSubmit)="clonesubmit(CloneForm)">
       <div class="modal-content">
@@ -437,8 +412,7 @@
             <div class="clone_header">
               <div class="form-group">
                 <div class="check_box">
-                  <input type="checkbox" name="CheckCourse" id="CheckC" (click)="courseall()"
-                    [checked]="CheckCoursevalid">
+                  <input type="checkbox" name="CheckCourse" id="CheckC" (click)="courseall()" [checked]="CheckCoursevalid">
                   <label for="CheckC" class="checkboxbtn_label"></label>
                 </div>
               </div>
@@ -472,8 +446,7 @@
             <div class="course_topic_clone_wrap">
               <div class="form-group" *ngFor="let tops of CoursetopicList;let i = index">
                 <div class="check_box">
-                  <input type="checkbox" name="Checksubtopic{{i}}" id="Check{{i}}"
-                    (click)="topicSuball(tops.Checksubtopic,i)" [checked]="tops.Checksubtopic">
+                  <input type="checkbox" name="Checksubtopic{{i}}" id="Check{{i}}" (click)="topicSuball(tops.Checksubtopic,i)" [checked]="tops.Checksubtopic">
                   <label for="Check{{i}}" class="checkboxbtn_label">{{tops.TopicName}} </label>
                 </div>
               </div>
@@ -483,8 +456,7 @@
             <div class="clone_header">
               <div class="form-group">
                 <div class="check_box">
-                  <input type="checkbox" name="CheckSession" id="CheckS" (click)="sessionall()"
-                    [checked]="Checksessionvalid">
+                  <input type="checkbox" name="CheckSession" id="CheckS" (click)="sessionall()" [checked]="Checksessionvalid">
                   <label for="CheckS" class="checkboxbtn_label"></label>
                 </div>
               </div>
@@ -493,8 +465,7 @@
             <div class="course_session_clone_wrap">
               <div class="form-group" *ngFor="let Session of CoursescctionList;let j = index">
                 <div class="check_box">
-                  <input type="checkbox" name="Checksubsession{{i}}" id="CheckSe{{j}}"
-                    (click)="sessionSuball(Session.Checksession,j)" [checked]="Session.Checksession">
+                  <input type="checkbox" name="Checksubsession{{i}}" id="CheckSe{{j}}" (click)="sessionSuball(Session.Checksession,j)" [checked]="Session.Checksession">
                   <label for="CheckSe{{j}}" class="checkboxbtn_label">{{Session.SessionName}}</label>
                 </div>
               </div>

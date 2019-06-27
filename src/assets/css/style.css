@@ -1049,6 +1049,16 @@ padding-top: 5px;
   color: var(--option-color);
   font-size: 16px;
 }
+.view_inst_block ul li .instr_icn .fa-check{
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  background: #40526d;
+  border-radius: 50%;
+  line-height: 18px;
+  color: #fff;
+  font-size: 12px;
+}
 button.view_inst_btn {
   font-size: 21px;
   color: #0061AF;
