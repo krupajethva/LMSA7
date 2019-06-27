@@ -283,7 +283,7 @@ class InstructorCourses_model extends CI_Model
 				$this->db->like('cp.CourseFullName', $data['Name']);
 			}
 
-			$this->db->group_by('cp.CourseId');
+			$this->db->group_by('cp.CourseId, cs.IsActive');
 			$result = $this->db->get('tblcourseinstructor csi');
 			//$this->db->like('cp.CourseFullName', $data['Name']); 
 			//$this->db->like('cp.CourseFullName', $data['Name']); 

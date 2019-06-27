@@ -242,12 +242,12 @@ export class InstructorCoursesComponent implements OnInit {
 
   }
 
-  view_inst_btn() {
-    $('.view_inst_block').addClass("active");
+  view_inst_btn(CourseSessionId) {
+    $('.view_inst_block' + CourseSessionId).addClass("active");
   }
 
-  cancel_inst_btn() {
-    $('.view_inst_block').removeClass("active");
+  cancel_inst_btn(CourseSessionId) {
+    $('.view_inst_block' + CourseSessionId).removeClass("active");
   }
 
   draft(CourseId, i) {
@@ -296,27 +296,6 @@ export class InstructorCoursesComponent implements OnInit {
       .then((data) => {
         if (data) {
           this.CourseSesssionList = data;
-          console.log(this.CourseSesssionList);
-          this.totalinstructor = this.CourseSesssionList['0']['userdetails'];
-          //console.log(this.totalinstructor);
-          // this.totalinstructor = totalinstructor;
-          this.totalinstructor.forEach(insructor => {
-            // console.log(insructor.Approval);
-            if (insructor.Approval == 0) {
-              this.Revokeable = false;
-            }
-            if (insructor.Approval != 1) {
-              this.ReInviteable = false;
-            }
-            if (insructor.Approval == 1) {
-              this.ReInviteable = true;
-              this.Revokeable = true;
-            }
-          });
-
-
-
-
 
           // console.log(this.totalinstructor.length);
           for (var i = 0; i < this.CourseSesssionList.length; i++) {
