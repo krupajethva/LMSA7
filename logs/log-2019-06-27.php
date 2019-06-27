@@ -1,6 +1,0 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-ERROR - 2019-06-27 10:51:43 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
-ERROR - 2019-06-27 10:51:54 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
-ERROR - 2019-06-27 10:52:38 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
-ERROR - 2019-06-27 10:55:16 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php

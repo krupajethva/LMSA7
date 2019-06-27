@@ -241,8 +241,15 @@ button[disabled]{ cursor: not-allowed;}
 
 .error_span { color: #ff0000; font-size: 12px; position: absolute;padding-top: 3px;display: contents;}
 .white_form_block .padding_box .preview_tab h1{padding: 0px 15px;}
-.white_form_block .padding_box .preview_tab p span{display:block;color: var(--theme-color);font-size: 12px;font-weight: bold;}
+.white_form_block .padding_box .preview_tab p{font-weight: bold;}
+.white_form_block .padding_box .preview_tab p span{display:block;color: var(--theme-color);font-size: 12px;font-weight: normal;}
 .white_form_block .tab_logo img{width: 60px;height: 60px;margin: 0 auto;}
+
+.white_form_block .padding_box .radiobtn_box{margin-top: 0;}
+.white_form_block .padding_box .radiobtn_box label{top: 0;padding: 0px 5px 0px 22px;}
+.white_form_block .padding_box h3{font-size: 14px;color: #60b8d1;}
+.white_form_block .padding_box h3.pr_15{padding-right: 15px;}
+.white_form_block .padding_box .preview_tab .br_btm{border-bottom: 1px dashed #c1c1c1;margin-bottom: 15px;}
 /*--------------End Register Login--------------------*/
 
 /* ------- Sidebar Area Start ------- */
@@ -1043,6 +1050,16 @@ padding-top: 5px;
   color: var(--option-color);
   font-size: 16px;
 }
+.view_inst_block ul li .instr_icn .fa-check{
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  background: #40526d;
+  border-radius: 50%;
+  line-height: 18px;
+  color: #fff;
+  font-size: 12px;
+}
 button.view_inst_btn {
   font-size: 21px;
   color: #0061AF;
@@ -1783,8 +1800,8 @@ select-dropdown > div{z-index: 999!important;}
 /*Multi File Upload*/
 
 /*Single File Upload*/
-.file_upload input[type="text"]{padding-right: 45px;z-index:0;background:url(../images/upload.png) 98% center no-repeat #fff!important;background-size:20px!important;}
-.file_upload input[type="file"]{opacity:0!important;position:absolute!important;left:0!important;top:22px!important;z-index:99!important;width:100%!important;cursor:pointer!important;}
+.file_upload input[type="text"]{padding-right: 45px;z-index:0;background:url(../images/upload.png) 98% center no-repeat transparent!important;background-size:20px!important;}
+.file_upload input[type="file"]{opacity:0!important;position:absolute!important;left:0!important;top:0px!important;z-index:99!important;width:100%!important;cursor:pointer!important;}
 /*Single File Upload*/
 
 /*start course session css*/
