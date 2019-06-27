@@ -128,7 +128,7 @@ class Attendance_model extends CI_Model
         FROM tblcourseinstructor AS csi 
 		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
         LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
-        WHERE csi.UserId='.$User_Id.' AND  cs.PublishStatus!=0 GROUP BY cp.CourseId ORDER BY cp.CourseFullName asc');
+        WHERE csi.UserId='.$User_Id.' AND  cs.PublishStatus!=0 AND cs.SessionStatus != 0 GROUP BY cp.CourseId ORDER BY cp.CourseFullName asc');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
