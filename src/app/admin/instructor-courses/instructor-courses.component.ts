@@ -291,6 +291,7 @@ export class InstructorCoursesComponent implements OnInit {
       .then((data) => {
         if (data) {
           this.CourseSesssionList = data;
+          console.log(this.CourseSesssionList);
           for (var i = 0; i < this.CourseSesssionList.length; i++) {
             if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
             //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;

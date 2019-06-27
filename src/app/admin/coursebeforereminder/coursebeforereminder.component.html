@@ -6,29 +6,21 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+    <div class="breadcrumb_block pull-right">
       <!-- <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">
-            <i class="fa fa-home"></i>
-          </a>
-        </li> -->
+            <li class="breadcrumb-item">
+              <a href="#">
+                <i class="fa fa-home"></i>
+              </a>
+            </li> -->
       <!-- <li class="breadcrumb-item active">Settings</li> -->
       <!-- <li class="breadcrumb-item active" aria-current="page"></li> -->
       <!-- </ul> -->
-      <div class="clearfix"></div>
     </div>
-    <div class="col-md-6 col-sm-6">
-      <!-- <a routerLink="/state-list" class="next_btn pull-right">Back to Setting List</a>	 -->
-    </div>
-    <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
 </div>
@@ -41,8 +33,7 @@
             <!-- Course Before Reminder Start -->
             <div class="white_shadow_box">
               <div class="col-md-12 col-sm-12">
-                <form class="form-validate" #beforereminderForm="ngForm"
-                  (ngSubmit)="InsertOrUpdateBeforeReminder(beforereminderForm)">
+                <form class="form-validate" #beforereminderForm="ngForm" (ngSubmit)="InsertOrUpdateBeforeReminder(beforereminderForm)">
                   <h1 class="no_margin">Course Before Reminder</h1>
                   <div class="course_forum_block">
                     <div class="row">
@@ -50,16 +41,15 @@
                         <div class="form-group1">
                           <label>
                             <span class="required">*</span>Course</label>
-                            <div class="clearfix"></div>
-                         
-                          <select #CourseId="ngModel" [(ngModel)]="beforeReminderEntity.CourseId" name="CourseId"
-                            class="form-control" [disabled]="ableordisable" required>
+                          <div class="clearfix"></div>
+
+                          <select #CourseId="ngModel" [(ngModel)]="beforeReminderEntity.CourseId" name="CourseId" class="form-control" [disabled]="ableordisable"
+                            required>
                             <ng-container *ngFor='let cl of courseList'>
                               <option [value]="cl.CourseId">{{cl.CourseFullName}}</option>
                             </ng-container>
                           </select>
-                          <input type="hidden" [(ngModel)]="beforeReminderEntity.CourseBeforeReminderId"
-                            name="CourseBeforeReminderId">
+                          <input type="hidden" [(ngModel)]="beforeReminderEntity.CourseBeforeReminderId" name="CourseBeforeReminderId">
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6">
@@ -132,34 +122,29 @@
                             <span class="required">*</span>To Whom</label>
                           <div class="clearfix"></div>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate1" name="candidate1"
-                              id="Candidate1" value="1" [checked]="beforeReminderEntity.candidate1=='1'">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate1" name="candidate1" id="Candidate1" value="1" [checked]="beforeReminderEntity.candidate1=='1'">
                             <label for="Candidate1" class="checkboxbtn_label">Candidate</label>
                           </div>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor1" name="instructor1"
-                              id="Instructor1" value="1" [checked]="beforeReminderEntity.instructor1=='1'">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor1" name="instructor1" id="Instructor1" value="1" [checked]="beforeReminderEntity.instructor1=='1'">
                             <label for="Instructor1" class="checkboxbtn_label">Instructor</label>
                           </div>
                           <br>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate2" name="candidate2"
-                              id="Candidate2" value="1" [checked]="beforeReminderEntity.candidate2=='1'">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate2" name="candidate2" id="Candidate2" value="1" [checked]="beforeReminderEntity.candidate2=='1'">
                             <label for="Candidate2" class="checkboxbtn_label">Candidate</label>
                           </div>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor2" name="instructor2"
-                              id="Instructor2" value="1" [checked]="beforeReminderEntity.instructor2=='1'">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor2" name="instructor2" id="Instructor2" value="1" [checked]="beforeReminderEntity.instructor2=='1'">
                             <label for="Instructor2" class="checkboxbtn_label">Instructor</label>
-                          </div><br>
+                          </div>
+                          <br>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate3" name="candidate3"
-                              id="Candidate3" value="1" [checked]="beforeReminderEntity.candidate3=='1'">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.candidate3" name="candidate3" id="Candidate3" value="1" [checked]="beforeReminderEntity.candidate3=='1'">
                             <label for="Candidate3" class="checkboxbtn_label">Candidate</label>
                           </div>
                           <div class="check_box">
-                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor3" name="instructor3"
-                              id="Instructor3" value="1" [checked]="beforeReminderEntity.instructor3=='1'">
+                            <input type="checkbox" [(ngModel)]="beforeReminderEntity.instructor3" name="instructor3" id="Instructor3" value="1" [checked]="beforeReminderEntity.instructor3=='1'">
                             <label for="Instructor3" class="checkboxbtn_label">Instructor</label>
                           </div>
                         </div>

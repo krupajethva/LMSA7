@@ -5,14 +5,11 @@
 		</div>
 	</div>
 	<div class="col-md-8 col-sm-8">
-			<div class="welcome_message alert" role="alert">
-					<i class="fa fa-info"></i>Welcome back,
+		<!-- <div class="welcome_message alert" role="alert">
+					Welcome back,
 					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
-			</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="breadcrumb_block">
-		<div class="col-md-6 col-sm-6">
+			</div> -->
+		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item">
 					<a href="#">
@@ -26,11 +23,10 @@
 			</ul>
 			<div class="clearfix"></div>
 		</div>
-		<div class="col-md-6 col-sm-6">
-		</div>
 		<div class="clearfix"></div>
 	</div>
 	<div class="clearfix"></div>
+
 </div>
 <div class="content_block course_detail_block ">
 	<div class="col-md-9 col-sm-8">
@@ -116,7 +112,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<p class="padding_15">
-				<video width="350" height="200" controls class="pull-left video_margin"  *ngIf="CourseDetailList.FilePath">
+				<video width="350" height="200" controls class="pull-left video_margin" *ngIf="CourseDetailList.FilePath">
 					<source src="assets/Instructor/{{CourseDetailList.Fid}}/Video/{{CourseDetailList.FilePath}}" type="video/mp4">Your browser does not support HTML5 video.</video>
 				{{CourseDetailList.Description}}</p>
 		</div>
@@ -241,33 +237,33 @@
 									<p class="desc_area" id="desc_area{{i}}{{j}}">{{Contentchild.TopicDescription}}</p>
 								</div>
 								<div class="pull-right">
-									
-										<!-- [disabled]="Contentchild.enroll==0" -->
-										<span>
-									<button type="button"  class="video-btn next_btn"  (click)="Preview(i,j)" >
-										Preview
-									</button>
+
+									<!-- [disabled]="Contentchild.enroll==0" -->
+									<span>
+										<button type="button" class="video-btn next_btn" (click)="Preview(i,j)">
+											Preview
+										</button>
 									</span>
-								
+
 									<!-- Modal -->
-									<div class="modal fade" id="myModal{{i}}{{j}}"  role="dialog">
+									<div class="modal fade" id="myModal{{i}}{{j}}" role="dialog">
 										<div class="modal-dialog modal-lg" role="document">
 											<div class="modal-content">
-													<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															<h4 class="modal-title">{{Contentchild.TopicName}}</h4>
-														  </div>
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+													<h4 class="modal-title">{{Contentchild.TopicName}}</h4>
+												</div>
 												<div class="modal-body">
-													
+
 													<!-- 16:9 aspect ratio -->
 													<div class="embed-responsive embed-responsive-16by9" *ngIf="Contentchild.FilePath">
-														
-													<!-- <iframe class="embed-responsive-item" src="assets/Instructor/{{Contentchild.Fid}}/Video/{{Contentchild.FilePath}}" id="video" allowscriptaccess="always"></iframe>  -->
-												 <video width="100%" height="350" controls class="video_margin"  *ngIf="Contentchild.FilePath">
-														<source src="assets/Instructor/{{Contentchild.fid}}/Video/{{Contentchild.FilePath}}" type="video/mp4">Your browser does not support HTML5 video.</video>	
-												</div>
+
+														<!-- <iframe class="embed-responsive-item" src="assets/Instructor/{{Contentchild.Fid}}/Video/{{Contentchild.FilePath}}" id="video" allowscriptaccess="always"></iframe>  -->
+														<video width="100%" height="350" controls class="video_margin" *ngIf="Contentchild.FilePath">
+															<source src="assets/Instructor/{{Contentchild.fid}}/Video/{{Contentchild.FilePath}}" type="video/mp4">Your browser does not support HTML5 video.</video>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -373,8 +369,9 @@
 			<div class="clearfix"></div>
 			<div *ngFor="let discussion of CourseDiscussionList; let i = index" class="forum_box">
 				<div class="img_icon">
-						<span *ngIf="discussion.ProfileImage=='' || discussion.ProfileImage==NULL" class="instructor_letter">{{discussion.FirstName | slice:0:01}}{{discussion.LastName | slice:0:01}}</span>
-					<img *ngIf="discussion.ProfileImage!='' && discussion.ProfileImage!=NULL" src="assets/ProfilePhoto/{{discussion.UserId}}/{{discussion.ProfileImage}}" alt="" class="img-responsive" />
+					<span *ngIf="discussion.ProfileImage=='' || discussion.ProfileImage==NULL" class="instructor_letter">{{discussion.FirstName | slice:0:01}}{{discussion.LastName | slice:0:01}}</span>
+					<img *ngIf="discussion.ProfileImage!='' && discussion.ProfileImage!=NULL" src="assets/ProfilePhoto/{{discussion.UserId}}/{{discussion.ProfileImage}}"
+					 alt="" class="img-responsive" />
 				</div>
 				<div class="content_name" id="content{{i}}">
 					<div class="name">{{discussion.Name}}</div>
@@ -388,8 +385,9 @@
 				</div>
 				<div *ngFor="let firstlevelreply of discussion.child; let j = index" class="forum_box inner_forum">
 					<div class="img_icon">
-							<span *ngIf="firstlevelreply.ProfileImage=='' || firstlevelreply.ProfileImage==NULL" class="instructor_letter">{{firstlevelreply.FirstName | slice:0:01}}{{firstlevelreply.LastName | slice:0:01}}</span>
-						<img *ngIf="firstlevelreply.ProfileImage!='' || firstlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{firstlevelreply.UserId}}/{{firstlevelreply.ProfileImage}}" alt="" class="img-responsive" />
+						<span *ngIf="firstlevelreply.ProfileImage=='' || firstlevelreply.ProfileImage==NULL" class="instructor_letter">{{firstlevelreply.FirstName | slice:0:01}}{{firstlevelreply.LastName | slice:0:01}}</span>
+						<img *ngIf="firstlevelreply.ProfileImage!='' || firstlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{firstlevelreply.UserId}}/{{firstlevelreply.ProfileImage}}"
+						 alt="" class="img-responsive" />
 					</div>
 					<div class="content_name" id="content{{i}}{{j}}">
 						<div class="name">{{firstlevelreply.Name}}</div>
@@ -403,8 +401,9 @@
 					</div>
 					<div *ngFor="let secondlevelreply of firstlevelreply.child; let k = index" class="forum_box inner_forum">
 						<div class="img_icon">
-								<span *ngIf="secondlevelreply.ProfileImage=='' || secondlevelreply.ProfileImage==NULL" class="instructor_letter">{{secondlevelreply.FirstName | slice:0:01}}{{secondlevelreply.LastName | slice:0:01}}</span>
-							<img *ngIf="secondlevelreply.ProfileImage!='' || secondlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{secondlevelreply.UserId}}/{{secondlevelreply.ProfileImage}}" alt="" class="img-responsive" />
+							<span *ngIf="secondlevelreply.ProfileImage=='' || secondlevelreply.ProfileImage==NULL" class="instructor_letter">{{secondlevelreply.FirstName | slice:0:01}}{{secondlevelreply.LastName | slice:0:01}}</span>
+							<img *ngIf="secondlevelreply.ProfileImage!='' || secondlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{secondlevelreply.UserId}}/{{secondlevelreply.ProfileImage}}"
+							 alt="" class="img-responsive" />
 						</div>
 						<div class="content_name" id="content{{i}}{{j}}{{k}}">
 							<div class="name">{{secondlevelreply.Name}}</div>
@@ -428,11 +427,12 @@
 			<h3 class="pull-left" *ngIf="ReviewAverage>0">Reviews ({{ReviewAverage}} out of 5)</h3>
 			<h3 class="pull-left" *ngIf="ReviewAverage==null">Reviews</h3>
 			<div class="clearfix"></div>
-			
+
 			<div *ngFor="let review of CourseReviewList; let i = index" class="forum_box">
 				<div class="img_icon">
-						<span *ngIf="review.ProfileImage=='' || review.ProfileImage==NULL" class="instructor_letter">{{review.FirstName | slice:0:01}}{{review.LastName | slice:0:01}}</span>
-					<img *ngIf="review.ProfileImage!='' || review.ProfileImage!=NULL" src="assets/ProfilePhoto/{{review.UserId}}/{{review.ProfileImage}}" alt="" class="img-responsive" />
+					<span *ngIf="review.ProfileImage=='' || review.ProfileImage==NULL" class="instructor_letter">{{review.FirstName | slice:0:01}}{{review.LastName | slice:0:01}}</span>
+					<img *ngIf="review.ProfileImage!='' || review.ProfileImage!=NULL" src="assets/ProfilePhoto/{{review.UserId}}/{{review.ProfileImage}}"
+					 alt="" class="img-responsive" />
 				</div>
 				<div class="content_name" id='content{{i}}'>
 					<div class="name">{{review.Name}}</div>
@@ -533,7 +533,8 @@
 			<div class="text-center">
 				<button type="button" class="next_btn" data-toggle="modal" data-target=".bd-example-modal-lg">Available Session</button>
 			</div>
-			<div id="modalsession"class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div id="modalsession" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			 aria-hidden="true">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -544,10 +545,10 @@
 						</div>
 						<div class="clearfix"></div>
 						<div class="modal-body">
-							<div class="session_blocks" >
+							<div class="session_blocks">
 								<div class="col-lg-3 col-md-3 " *ngFor="let SessionList of CourseSesssionList; let i = index;">
-										<!-- (click)="SessionEnrollcClick(SessionList,i)" -->
-									<div class="news-blog imageremove" id="session{{i}}" >
+									<!-- (click)="SessionEnrollcClick(SessionList,i)" -->
+									<div class="news-blog imageremove" id="session{{i}}">
 										<h4>{{SessionList.SessionName}}</h4>
 										<ul class="icon">
 											<li>
@@ -559,63 +560,68 @@
 											<li>
 												<i class="fa fa-calendar"></i>
 												<strong>End Date : </strong> {{SessionList.EndDate}}</li>
-											
-													<li>
-															<i class="fa fa-comments"></i>
-															<strong>Weekday : </strong> 
-															{{SessionList.monday}}<span *ngIf="SessionList.monday!='' && (SessionList.tuesday!='' || SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
-															{{SessionList.tuesday}}<span *ngIf="SessionList.tuesday!='' && (SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
-															{{SessionList.wednesday}}<span *ngIf="SessionList.wednesday!='' && (SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
-															{{SessionList.thursday}}<span *ngIf="SessionList.thursday!='' && (SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
-															{{SessionList.friday}}<span *ngIf="SessionList.friday!=''  && (SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
-															{{SessionList.saturday}}<span *ngIf="SessionList.saturday!='' && SessionList.sunday!='' ">,</span>
-															{{SessionList.sunday}}</li>
-													<li>
-															<i class="fa fa-comments"></i>
-															<strong>Start Time : </strong> {{SessionList.StartTime}}</li>
-															<li>
-																<i class="fa fa-comments"></i>
-																<strong>End Time : </strong> {{SessionList.EndTime}}</li>
-																
+
+											<li>
+												<i class="fa fa-comments"></i>
+												<strong>Weekday : </strong>
+												{{SessionList.monday}}
+												<span *ngIf="SessionList.monday!='' && (SessionList.tuesday!='' || SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+												{{SessionList.tuesday}}
+												<span *ngIf="SessionList.tuesday!='' && (SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+												{{SessionList.wednesday}}
+												<span *ngIf="SessionList.wednesday!='' && (SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+												{{SessionList.thursday}}
+												<span *ngIf="SessionList.thursday!='' && (SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+												{{SessionList.friday}}
+												<span *ngIf="SessionList.friday!=''  && (SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+												{{SessionList.saturday}}
+												<span *ngIf="SessionList.saturday!='' && SessionList.sunday!='' ">,</span>
+												{{SessionList.sunday}}</li>
+											<li>
+												<i class="fa fa-comments"></i>
+												<strong>Start Time : </strong> {{SessionList.StartTime}}</li>
+											<li>
+												<i class="fa fa-comments"></i>
+												<strong>End Time : </strong> {{SessionList.EndTime}}</li>
+
 											<li>
 												<i class="fa fa-comments"></i>
 												<strong>Total Seats : </strong>
 												<span *ngIf="SessionList.TotalSeats==0">NA</span>
 												<span *ngIf="SessionList.TotalSeats>0">{{SessionList.TotalSeats}}</span>
-												</li>
+											</li>
 											<li>
 												<i class="fa fa-user"></i>
-												<strong>Pending Seats : </strong>		
+												<strong>Pending Seats : </strong>
 												<span *ngIf="SessionList.TotalSeats==0">NA</span>
-												<span *ngIf="SessionList.TotalSeats>0">{{SessionList.TotalSeats-SessionList.RemainingSeats}}</span> 
-												</li>
-												<li class="enroll_course_tag" *ngIf="SessionList.EnrollCheck==0" >
-													<!-- <strong> Enroll  </strong>[disabled]="
+												<span *ngIf="SessionList.TotalSeats>0">{{SessionList.TotalSeats-SessionList.RemainingSeats}}</span>
+											</li>
+											<li class="enroll_course_tag" *ngIf="SessionList.EnrollCheck==0">
+												<!-- <strong> Enroll  </strong>[disabled]="
 													((SessionList.RemainingSeats == SessionList.TotalSeats && SessionList.Showstatus == 0)
 													     || (SessionList.Showstatus == 1 && (SessionList.CourseCloseDate < (datea | date : 'yyyy-MM-dd'))
 													      || !(SessionList.CourseSDate > (datea | date : 'yyyy-MM-dd'))) || (SessionList.EnrollCheck > 0))" -->
-													<button type="button" class="next_btn enrollnow_btn "
-													>Enroll Now</button>
-												</li>
+												<button type="button" class="next_btn enrollnow_btn ">Enroll Now</button>
+											</li>
 											<li class="enroll_course_tag" *ngIf="!((SessionList.prestartdate | date : 'yyyy-MM-dd') > (datea | date : 'yyyy-MM-dd'))">
 												<strong>This course is close for Enroll </strong>
 											</li>
 											<li class="enroll_course_tag" *ngIf="(SessionList.Showstatus == 1 && (SessionList.CourseCloseDate < (datea | date : 'yyyy-MM-dd'))) ">
 												<strong>this course close date </strong>
 											</li>
-										
+
 											<li class="enroll_course_tag" *ngIf="(SessionList.RemainingSeats == SessionList.TotalSeats && SessionList.Showstatus == 0)">
 												<strong>this course full </strong>
 											</li>
 											<li class="enroll_course_tag" *ngIf="SessionList.EnrollCheck>0">
 												<strong>You are enrolled in this course</strong>
 											</li>
-											
+
 
 										</ul>
 										<h5>{{i+1}}</h5>
 									</div>
-						
+
 								</div>
 
 
@@ -647,7 +653,7 @@
 		</div>
 
 		<div class="clearfix"></div>
-		
+
 		<div class="related_course">
 			<h3>Related Courses</h3>
 			<ul>
