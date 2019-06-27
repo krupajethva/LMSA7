@@ -11,85 +11,6 @@ export class RegisterInstructorInvitedService {
   constructor( private http: HttpClient, private globals: Globals, private router: Router) { }
 
 
-  add(userEntity) {
-    let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'User/addUser', userEntity)
-        .toPromise()
-        .then(
-          res => { // Success 
-            let result = res;
-            if (result && result['token']) {
-              localStorage.setItem('token', result['token']);
-              this.globals.authData = new JwtHelperService().decodeToken(result['token']);
-            }
-            resolve(res);
-          },
-          msg => { // Error
-            reject(msg);
-
-            // this.router.navigate(['/pagenotfound']);
-          }
-        );
-    });
-    return promise;
-  }
-
-  // add(userEntity){ 
-  //   debugger
-  //   let promise = new Promise((resolve, reject) => { 
-  //     this.http.post(this.globals.baseAPIUrl + 'User/addUser', userEntity)
-
-  //       .toPromise()
-  //       .then(
-  //         res => { // Success
-  //           resolve(res); 
-  //         },
-  //         msg => { // Error
-  //       reject(msg);
-  //         }
-  //       );
-  //   });		
-  //   return promise;
-  //   }
-
-  // ** file upload
-  importFileUserData(file) {
-    debugger
-    let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'User/importFileUserData', file)
-        .toPromise()
-        .then(
-          res => { // Success
-            resolve(res);
-          },
-          msg => { // Error
-            reject(msg);
-            //this.globals.isLoading = false;
-          }
-        );
-    });
-    return promise;
-  }
-
-
-  // ** import file
-  importFileData(RegisterEntity) {
-    debugger
-    let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'User/importFile', RegisterEntity)
-        .toPromise()
-        .then(
-          res => { // Success 
-            resolve(res);
-          },
-          msg => { // Error
-            reject(msg);
-          }
-        );
-    });
-    return promise;
-  }
-
 
   // ** instructor register invited //
   openInstructorRegister(RegisterEntity) {
@@ -204,7 +125,7 @@ export class RegisterInstructorInvitedService {
   }
 
 
-  // invited user get id  //
+  // invited user get id  // 
   getById(UserId) {
     let promise = new Promise((resolve, reject) => {
       this.http.get(this.globals.baseAPIUrl + 'User/getById/' + UserId)

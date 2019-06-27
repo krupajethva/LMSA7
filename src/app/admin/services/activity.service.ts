@@ -64,25 +64,6 @@ getEmailLog()
 	});		
 	return promise;
   }
-
-  getNotificationByUser(id)
-  {
-	let promise = new Promise((resolve, reject) => {
-    this.http.get(this.globals.baseAPIUrl + 'AuditLog/getNotificationByUser/' + id)
-      .toPromise()
-      .then(
-        res => { // Success
-          resolve(res);
-        },
-        msg => { // Error
-      reject(msg);
-     this.globals.isLoading = false;
-        }
-      );
-	});		
-	return promise;
-  }
-
   
   getActivityByUser(id)
   {
