@@ -31,6 +31,9 @@ export class InstructorCoursesComponent implements OnInit {
   ECtime;
   coursestarthours;
   courseendhours;
+  totalinstructor;
+  Revokeable;
+  ReInviteable;
 
   constructor(public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
     private InstructorCoursesService: InstructorCoursesService, private LearnerCoursesService: LearnerCoursesService) { }
@@ -41,6 +44,8 @@ export class InstructorCoursesComponent implements OnInit {
     this.Checktopicvalid = true;
     this.Checksessionvalid = true;
     this.CheckCoursevalid = true;
+    this.ReInviteable = false;
+    this.Revokeable = false;
 
 
     var d = new Date();
@@ -292,6 +297,28 @@ export class InstructorCoursesComponent implements OnInit {
         if (data) {
           this.CourseSesssionList = data;
           console.log(this.CourseSesssionList);
+          this.totalinstructor = this.CourseSesssionList['0']['userdetails'];
+          //console.log(this.totalinstructor);
+          // this.totalinstructor = totalinstructor;
+          this.totalinstructor.forEach(insructor => {
+            // console.log(insructor.Approval);
+            if (insructor.Approval == 0) {
+              this.Revokeable = false;
+            }
+            if (insructor.Approval != 1) {
+              this.ReInviteable = false;
+            }
+            if (insructor.Approval == 1) {
+              this.ReInviteable = true;
+              this.Revokeable = true;
+            }
+          });
+
+
+
+
+
+          // console.log(this.totalinstructor.length);
           for (var i = 0; i < this.CourseSesssionList.length; i++) {
             if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
             //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
@@ -299,7 +326,7 @@ export class InstructorCoursesComponent implements OnInit {
           setTimeout(function () {
             new PerfectScrollbar('.instructor_scroll');
           },
-          500);
+            500);
           // var d = new Date(this.CourseSesssionList.StartDate);
           // alert(this.CourseSesssionList.StartDate);
           // this.StartDate = d;
@@ -312,7 +339,7 @@ export class InstructorCoursesComponent implements OnInit {
 
           //this.router.navigate(['/pagenotfound']);
         });
-        
+
   }
   close(i) {
 
