@@ -305,56 +305,43 @@ class InstructorCourses_model extends CI_Model
 	}
 	function getlist_session($data = NULL)
 	{
-		try {
-			$Course_id = $data['CourseId'];
-			$User_Id = $data['UserId'];
-		
-			// $result = $this->db->query('select cs.CourseId,cs.CourseSessionId,cs.EndDate,cs.SessionName,cs.TotalSeats,cs.StartTime,cs.EndTime,cs.StartDate
-			// FROM tblcourseuserregister AS csi 
-			// LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
-			// WHERE csi.UserId=487 AND cs.CourseId=$Course_id');
+	try{
+		$Course_id=$data['CourseId'];
+		 $User_Id=$data['UserId'];
+		// $result = $this->db->query('select cs.CourseId,cs.CourseSessionId,cs.EndDate,cs.SessionName,cs.TotalSeats,cs.StartTime,cs.EndTime,cs.StartDate
+        // FROM tblcourseuserregister AS csi 
+		// LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
+		// WHERE csi.UserId=487 AND cs.CourseId=$Course_id');
 
-			// $this->db->select('cs.CourseId,cs.CourseSessionId,cs.EndDate,cs.SessionName,cs.TotalSeats,cs.StartTime,cs.EndTime,cs.StartDate,cs.RemainingSeats');
-			// $this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
-			// $this->db->where('cs.CourseId',$data['CourseId']); 
-			// $this->db->where('csi.UserId',$data['UserId']); 
-			// $result = $this->db->get('tblcourseuserregister csi');
+		// $this->db->select('cs.CourseId,cs.CourseSessionId,cs.EndDate,cs.SessionName,cs.TotalSeats,cs.StartTime,cs.EndTime,cs.StartDate,cs.RemainingSeats');
+		// $this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
+		// $this->db->where('cs.CourseId',$data['CourseId']); 
+		// $this->db->where('csi.UserId',$data['UserId']); 
+		// $result = $this->db->get('tblcourseuserregister csi');
 
-			$result = $this->db->query('select csi.IsActive,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
-			GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId=' . $User_Id . ' AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
-			 (SELECT GROUP_CONCAT(u.FirstName,u.LastName)
+		$result = $this->db->query('select csi.IsActive,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
+			GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId='.$User_Id.' AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
+			 (SELECT GROUP_CONCAT(u.FirstName)
 						  FROM tbluser u 
 						  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
 					FROM tblcoursesession AS csi 
 					LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
-					WHERE csi.CourseId=' . $Course_id . ' GROUP BY csi.CourseSessionId');
-			$db_error = $this->db->error();
-			if (!empty($db_error) && !empty($db_error['code'])) {
-				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-				return false; // unreachable return statement !!!
-			}
-			$res = array();
-			if ($result->result()) {
-				$res = $result->result();
-				print_r($res);
-				
-					// $Instructor = $res->UserID;
-					// $UserID = explode(",", $Instructor,-1);
-					// foreach($UserID as $user){
-					// 	$this->db->select('FirstName,LastName,EmailAddress');
-					// 	$this->db->where('UserId',$user->UserId);
-					// 	$this->db->from('tbluser');
-					// 	$new_array = $this->db->get()->result();
-					// }
-				
-					// array_push($res,$new_array);
-					// print_r($res);
-			}
-			return $res;
-		} catch (Exception $e) {
-			trigger_error($e->getMessage(), E_USER_ERROR);
-			return false;
+					WHERE csi.CourseId='.$Course_id.' GROUP BY csi.CourseSessionId');
+		$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) { 
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+		$res=array();
+		if($result->result())
+		{
+			$res=$result->result();
 		}
+		return $res;
+		}catch(Exception $e){
+		trigger_error($e->getMessage(), E_USER_ERROR);
+		return false;
+		}	
 	}
 	function StartSession($CourseSessionId = NULL)
 	{
