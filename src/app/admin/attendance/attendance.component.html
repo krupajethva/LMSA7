@@ -144,8 +144,8 @@
           <td>{{Attendance.EmailAddress}}</td>
           <td class="text-center" *ngFor="let Check of Attendance.Child; let j = index">
             <div class="check_box">
-              <input type="checkbox" [checked]='Check=="1"'
-               (click)="AttendanceCheck(Attendance.CourseUserregisterId,Check,i,j,Attendance.Totalattendance)" name="Check{{i}}{{j}}" id="Check{{i}}{{j}}" value="yes">
+              <input type="checkbox" [checked]='Check=="1"' value={{Check}}
+               (click)="AttendanceCheck(Attendance.CourseUserregisterId,$event,i,j,Attendance.Totalattendance)" name="Check{{i}}{{j}}" id="Check{{i}}{{j}}" value="yes">
               <label for="Check{{i}}{{j}}" title="Absent" class="checkboxbtn_label"></label>
             </div>
           </td>

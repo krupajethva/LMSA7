@@ -286,10 +286,11 @@ export class AttendanceComponent implements OnInit {
 		}
   }
   AttendanceCheck(CourseUserregisterId,Check,i,j,Totalattendance)
-  {debugger
-    if(Check=="1")
+  {//debugger
+    //alert(Check.target.defaultValue)
+    
+    if(Check.target.defaultValue=="1")
     {
-
       this.checkvalue="0";
       this.AttendanceList[i].Totalattendance = Number(Totalattendance) - 1;
      //this.AttendanceList[i].Child[j]= "0";
@@ -302,9 +303,11 @@ export class AttendanceComponent implements OnInit {
     var data = { 'CourseUserregisterId': CourseUserregisterId, 'Check':this.checkvalue,'j':j,'UserId':this.globals.authData.UserId };
 			this.AttendanceService.UpdateAttendance(data)
 				.then((data) => {
-          let new_array = this.AttendanceList;
-          new_array[i].child = data;
-          this.AttendanceList = new_array;
+          
+          $('#Check'+i+j).val(this.checkvalue);
+          // let new_array = this.AttendanceList;
+          // new_array[i].child = data;
+          // this.AttendanceList = new_array;
     // this.AttendanceList[i].Child=data;
 				},
 					(error) => {
