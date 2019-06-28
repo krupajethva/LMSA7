@@ -328,31 +328,20 @@ class InstructorCourses extends CI_Controller
 			throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 			return false; // unreachable return statement !!!
 		}
-		//$res = array();
 		if ($result->result()) {
 			$res = $result->result();
-			//$Instructor = $res[0]->UserId;
-			//$UserID = explode(",", $Instructor);
-			//print_r($UserID);
 			foreach ($res as $row) {
-				//foreach ($UserID as $user) {
-					//echo $user;
-					$UserID = explode(",", $row->UserId);
-					$this->db->select('FirstName,LastName,EmailAddress');
-					$this->db->where_in('UserId', $UserID);
-					$this->db->from('tbluser');
-					$new_array = $this->db->get()->result();
-					//$row['demo']=$new_array;
-					$row->demo = $new_array;
-				//}
+				$UserID = explode(",", $row->UserId);
+				$this->db->select('tc.FirstName,tc.LastName,tc.EmailAddress,ti.Approval');
+				$this->db->join('tblcourseinstructor as ti', 'ti.UserId = tc.UserId','inner');
+				$this->db->where_in('tc.UserId', $UserID);
+				$this->db->where_in('ti.CourseSessionId', $row->CourseSessionId);
+				$this->db->from('tbluser as tc');
+				$new_array = $this->db->get()->result();
+				$row->userdetails = $new_array;
 			}
-
-
-			print_r($res);
-			//print_r($res);
-
-
 		}
+		print_r($res);
 	}
 
 

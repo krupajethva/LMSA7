@@ -283,7 +283,7 @@ class InstructorCourses_model extends CI_Model
 				$this->db->like('cp.CourseFullName', $data['Name']);
 			}
 
-			$this->db->group_by('cp.CourseId');
+			$this->db->group_by('cp.CourseId, cs.IsActive');
 			$result = $this->db->get('tblcourseinstructor csi');
 			//$this->db->like('cp.CourseFullName', $data['Name']); 
 			//$this->db->like('cp.CourseFullName', $data['Name']); 
@@ -336,6 +336,16 @@ class InstructorCourses_model extends CI_Model
 		if($result->result())
 		{
 			$res=$result->result();
+			foreach ($res as $row) {
+				$UserID = explode(",", $row->UserId);
+				$this->db->select('tc.FirstName,tc.LastName,tc.EmailAddress,ti.Approval');
+				$this->db->join('tblcourseinstructor as ti', 'ti.UserId = tc.UserId','inner');
+				$this->db->where_in('tc.UserId', $UserID);
+				$this->db->where_in('ti.CourseSessionId', $row->CourseSessionId);
+				$this->db->from('tbluser as tc');
+				$new_array = $this->db->get()->result();
+				$row->userdetails = $new_array;
+			}
 		}
 		return $res;
 		}catch(Exception $e){

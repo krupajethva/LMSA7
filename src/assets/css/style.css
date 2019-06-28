@@ -1040,14 +1040,25 @@ padding-top: 5px;
     text-transform: none;
     padding-left: 10px;
 }
+.view_inst_block ul li .instr_icn button{border: 0;background: transparent;}
 .view_inst_block ul li .instr_icn .fa-user-times{
   color: var(--theme-color);
-  margin: 0px 10px;
+  margin: 0px 0px;
   font-size: 16px;
 }
 .view_inst_block ul li .instr_icn .fa-user-plus{
   color: var(--option-color);
   font-size: 16px;
+}
+.view_inst_block ul li .instr_icn .fa-check{
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  background: #40526d;
+  border-radius: 50%;
+  line-height: 18px;
+  color: #fff;
+  font-size: 12px;
 }
 button.view_inst_btn {
   font-size: 21px;

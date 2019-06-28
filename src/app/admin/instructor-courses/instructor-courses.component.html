@@ -22,7 +22,6 @@
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
-
 </div>
 <div class="content_block">
   <div class="row">
@@ -149,140 +148,62 @@
                             <li>
                               <i class="fa fa-calendar"></i>
                               <strong>Instructors : </strong>
-                              <button (click)="view_inst_btn()" class="view_inst_btn">
+                              <button (click)="view_inst_btn(SessionList.CourseSessionId)" class="view_inst_btn view_inst_btn{{SessionList.CourseSessionId}}">
                                 <i title="View Instructors" data-toggle="tooltip" data-placement="top" class="fa fa-eye"
                                   aria-hidden="true"></i>
-                                <span>2</span>
+                                <span>{{SessionList.userdetails.length}}</span>
                               </button>
                             </li>
 
-                            <div class="view_inst_block">
-                              <span (click)="cancel_inst_btn()" class="close_skip close_btn fa fa-times" title="Close"
+                            <div class="view_inst_block view_inst_block{{SessionList.CourseSessionId}}">
+                              <span (click)="cancel_inst_btn(SessionList.CourseSessionId)" class="close_skip close_btn fa fa-times" title="Close"
                                 data-toggle="tooltip" data-placement="top"></span>
                               <div class="view_inst_wrap">
                                 <h3>Instructors</h3>
                                 <div class="instructor_scroll">
                                   <ul>
-                                    <li>
+                                    <li *ngFor="let user of  SessionList.userdetails">
                                       <div class="pull-left instr_name">
-                                        <span>Anand Yadav</span>
+                                        <span>{{user.FirstName}} {{user.LastName}}</span>
                                       </div>
                                       <div class="pull-right instr_icn">
+
                                         <a href="">
+                                          <i class="fa fa-check" *ngIf="user.Approval == 1" aria-hidden="true" data-placement="top"
+                                            data-toggle="tooltip" title="Accepted"></i>
+                                        </a>
+                                        <button type="button" *ngIf="user.Approval == 0">
+                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
+                                            title="Revoke"></i>
+                                        </button>
+                                        <button type="button" *ngIf="user.Approval == 0 || user.Approval == 2">
+                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
+                                            title="Re-invite"></i>
+                                        </button>
+                                        <!-- <a href="">
+                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
+                                            title="Revoke"></i>
+                                        </a> -->
+                                        <!-- <a href="">
+                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
+                                            title="Re-invite"></i>
+                                        </a> -->
+                                        <!-- <a href="">
                                           <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
                                             title="Revoke"></i>
                                         </a>
                                         <a href="">
                                           <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
                                             title="Re-invite"></i>
-                                        </a>
+                                        </a> -->
                                       </div>
                                       <div class="clearfix"></div>
                                       <div class="instr_email">
-                                        <span>ayadav@theopeneyes.in</span>
+                                        <span>{{user.EmailAddress}}</span>
                                       </div>
                                       <div class="clearfix"></div>
                                     </li>
                                     <li>
-                                      <div class="pull-left instr_name">
-                                        <span>Vidhi Bathani</span>
-                                      </div>
-                                      <div class="pull-right instr_icn">
-                                        <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
-                                        </a>
-                                        <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
-                                        </a>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                      <div class="instr_email">
-                                        <span>vidhi.bathani@theopeneyes.in</span>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </li>
-                                    <li>
-                                      <div class="pull-left instr_name">
-                                        <span>Uttam Bhut</span>
-                                      </div>
-                                      <div class="pull-right instr_icn">
-                                        <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
-                                        </a>
-                                        <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
-                                        </a>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                      <div class="instr_email">
-                                        <span>uttam.bhut@theopeneyes.in</span>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </li>
-                                    <li>
-                                      <div class="pull-left instr_name">
-                                        <span>Nirav Patel</span>
-                                      </div>
-                                      <div class="pull-right instr_icn">
-                                        <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
-                                        </a>
-                                        <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
-                                        </a>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                      <div class="instr_email">
-                                        <span>nirav.patel@theopeneyes.in</span>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </li>
-                                    <li>
-                                      <div class="pull-left instr_name">
-                                        <span>Krupali Mistry</span>
-                                      </div>
-                                      <div class="pull-right instr_icn">
-                                        <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
-                                        </a>
-                                        <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
-                                        </a>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                      <div class="instr_email">
-                                        <span>krupali.mistry@theopeneyes.in</span>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </li>
-                                    <li>
-                                      <div class="pull-left instr_name">
-                                        <span>Anand Yadav</span>
-                                      </div>
-                                      <div class="pull-right instr_icn">
-                                        <a href="">
-                                          <i class="fa fa-user-times" data-placement="top" data-toggle="tooltip"
-                                            title="Revoke"></i>
-                                        </a>
-                                        <a href="">
-                                          <i class="fa fa-user-plus" data-placement="top" data-toggle="tooltip"
-                                            title="Re-invite"></i>
-                                        </a>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                      <div class="instr_email">
-                                        <span>ayadav@theopeneyes.in</span>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    </li>
                                   </ul>
                                 </div>
                               </div>
