@@ -344,7 +344,14 @@ class InstructorCourses extends CI_Controller
 		print_r($res);
 	}
 
-
+	public function Revoke($id = NULL)
+	{
+		echo $id;
+		if (!empty($id)) {
+			$this->InstructorCourses_model->Revoke($id);
+		}
+	
+	}
 	public function StartSession($CourseSessionId = NULL)
 	{
 		if (!empty($CourseSessionId)) {

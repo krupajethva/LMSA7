@@ -338,7 +338,7 @@ class InstructorCourses_model extends CI_Model
 			$res=$result->result();
 			foreach ($res as $row) {
 				$UserID = explode(",", $row->UserId);
-				$this->db->select('tc.FirstName,tc.LastName,tc.EmailAddress,ti.Approval');
+				$this->db->select('tc.UserID,tc.FirstName,tc.LastName,tc.EmailAddress,ti.Approval');
 				$this->db->join('tblcourseinstructor as ti', 'ti.UserId = tc.UserId','inner');
 				$this->db->where_in('tc.UserId', $UserID);
 				$this->db->where_in('ti.CourseSessionId', $row->CourseSessionId);
