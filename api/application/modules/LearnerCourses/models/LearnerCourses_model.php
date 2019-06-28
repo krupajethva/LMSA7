@@ -114,10 +114,11 @@ class LearnerCourses_model extends CI_Model
 		// $this->db->where('csi.UserId',$data['UserId']); 
 		// $result = $this->db->get('tblcourseuserregister csi');
 
-		$result = $this->db->query('select csi.SessionName,csi.TotalSeats,csi.CourseId,csi.StartDate,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,
+		$result = $this->db->query('select csi.weekday,csi.SessionName,csi.TotalSeats,csi.CourseId,csi.StartDate,csi.SessionStatus,csi.EndDate,csi.StartTime,csi.EndTime,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,
 			GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId='.$User_Id.' AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
 			(SELECT COUNT(rs.ResultId) FROM tblmstresult as rs WHERE rs.LearnerId='.$User_Id.' AND  rs.CourseSessionId=csi.CourseSessionId) as taketest,
 			(SELECT Result FROM tblmstresult as rss WHERE rss.LearnerId='.$User_Id.' AND  rss.CourseSessionId=csi.CourseSessionId) as Result,
+			(SELECT ResultId FROM tblmstresult as res WHERE res.LearnerId='.$User_Id.' AND  res.CourseSessionId=csi.CourseSessionId) as ResultId,
 			 (SELECT GROUP_CONCAT(u.FirstName)
 						  FROM tbluser u 
 						  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
@@ -130,12 +131,22 @@ class LearnerCourses_model extends CI_Model
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
-		$res=array();
-		if($result->result())
-		{
-			$res=$result->result();
-		}
-		return $res;
+		$res=$Course_data=array();
+		$result = json_decode(json_encode($result->result()), TRUE);
+		 foreach($result as $row)
+		 { 
+			$row['monday'] = substr($row['weekday'], 0, 1);
+			$row['tuesday'] = substr($row['weekday'], 2, 1);
+			$row['wednesday'] = substr($row['weekday'], 4, 1);
+			$row['thursday'] = substr($row['weekday'], 6, 1);
+			$row['friday'] = substr($row['weekday'], 8, 1);
+			$row['saturday'] = substr($row['weekday'], 10, 1);
+			$row['sunday'] = substr($row['weekday'], 12, 1);
+
+			
+			array_push($Course_data,$row);
+		 }
+		return $Course_data;
 		}catch(Exception $e){
 		trigger_error($e->getMessage(), E_USER_ERROR);
 		return false;

@@ -196,8 +196,17 @@ this.LearnerCourseEntity.CourseId=CourseId;
 		//.map(res => res.json())
 		.then((data) => {
 		  if (data) {
-			this.CourseSesssionList = data;
-			
+				this.CourseSesssionList = data;
+				for (var i = 0; i < this.CourseSesssionList.length; i++) {
+				
+					if (this.CourseSesssionList[i].monday =="0") { this.CourseSesssionList[i].monday = ''; } else { this.CourseSesssionList[i].monday = 'Mon'; }
+					if( this.CourseSesssionList[i].tuesday== "0") { this.CourseSesssionList[i].tuesday = ''; } else { this.CourseSesssionList[i].tuesday = 'Tue'; }
+					if (this.CourseSesssionList[i].wednesday == "0") { this.CourseSesssionList[i].wednesday = ''; } else { this.CourseSesssionList[i].wednesday = 'Wed'; }
+					if (this.CourseSesssionList[i].thursday == "0") { this.CourseSesssionList[i].thursday = ''; } else { this.CourseSesssionList[i].thursday = 'Thu'; }
+					if (this.CourseSesssionList[i].friday =="0") { this.CourseSesssionList[i].friday = ''; } else { this.CourseSesssionList[i].friday = 'Fri'; }
+					if (this.CourseSesssionList[i].saturday == "0") { this.CourseSesssionList[i].saturday = ''; } else { this.CourseSesssionList[i].saturday = 'Sat'; }
+					if (this.CourseSesssionList[i].sunday == "0") { this.CourseSesssionList[i].sunday = ''; } else { this.CourseSesssionList[i].sunday = 'Sun'; }
+				}
 		  }  
 		},
 		  (error) => {
@@ -214,6 +223,12 @@ this.LearnerCourseEntity.CourseId=CourseId;
 			});
 		  },
 		  500);
+	}
+	//view certificate and redirect learner certificate page
+	viewcertificate(resultId,i)
+	{
+		$('#modalsession'+i).modal('hide'); 
+		this.router.navigate(['/assessment-result/'+resultId]);
 	}
 	close(i)
 	{debugger
