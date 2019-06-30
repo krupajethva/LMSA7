@@ -325,10 +325,9 @@ export class InstructorCoursesComponent implements OnInit {
     $('#modalsession' + i).modal('hide');
   }
 
-  Revoke(SessionList) {
+  Instructor_Invite(UserId,CourseSessionId,type) {
     debugger
-    this.InstructorCoursesService.Revoke(SessionList)
-    console.log(SessionList);
+    this.InstructorCoursesService.Instructor_Invite(UserId,CourseSessionId,type)
       // .then((data) => {
       //       let index = this.projectList.indexOf(project);
       //       if (index != -1) {

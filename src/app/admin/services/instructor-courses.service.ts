@@ -169,10 +169,10 @@ export class InstructorCoursesService {
     return promise;
   }
 
-  Revoke(id) {
+  Instructor_Invite(UserId, CourseSessionId, type) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'InstructorCourses/Revoke', id)
+      this.http.post(this.globals.baseAPIUrl + 'InstructorCourses/Instructor_Invite', { UserId, CourseSessionId, type })
         .toPromise()
         .then(
           res => { // Success
