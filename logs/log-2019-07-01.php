@@ -291,3 +291,39 @@ JOIN `tblcoursesession` `tcs` ON `tci`.`CourseSessionId`=`tcs`.`CourseSessionId`
 WHERE `tci`.`UserId` = '484'
 GROUP BY `tcs`.`SessionStatus`
 ORDER BY `tci`.`CourseSessionId` DESC
+ERROR - 2019-07-01 15:14:15 --> Query error: Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'lms.cs.IsActive' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: select cs.IsActive,cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
+        FROM tblcourseinstructor AS csi 
+		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
+        LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
+        LEFT JOIN  tblresources AS rs ON rs.ResourcesId = cp.CourseImageId
+        WHERE csi.UserId=484 GROUP BY cp.CourseId
+ERROR - 2019-07-01 15:14:27 --> Query error: Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'lms.cs.IsActive' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: select cs.IsActive,cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
+        FROM tblcourseinstructor AS csi 
+		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
+        LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
+        LEFT JOIN  tblresources AS rs ON rs.ResourcesId = cp.CourseImageId
+        WHERE csi.UserId=484 GROUP BY cp.CourseId
+ERROR - 2019-07-01 15:14:57 --> Query error: Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'lms.cs.IsActive' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: select cs.IsActive,cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
+        FROM tblcourseinstructor AS csi 
+		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
+        LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
+        LEFT JOIN  tblresources AS rs ON rs.ResourcesId = cp.CourseImageId
+        WHERE csi.UserId=484 GROUP BY cp.CourseId
+ERROR - 2019-07-01 15:15:00 --> Query error: Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'lms.cs.IsActive' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: select cs.IsActive,cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
+        FROM tblcourseinstructor AS csi 
+		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
+        LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
+        LEFT JOIN  tblresources AS rs ON rs.ResourcesId = cp.CourseImageId
+        WHERE csi.UserId=484 GROUP BY cp.CourseId
+ERROR - 2019-07-01 15:15:33 --> Query error: Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'lms.cs.IsActive' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: select cs.IsActive,cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath
+        FROM tblcourseinstructor AS csi 
+		LEFT JOIN  tblcoursesession AS cs ON cs.CourseSessionId = csi.CourseSessionId
+        LEFT JOIN  tblcourse AS cp ON cp.CourseId = cs.CourseId
+        LEFT JOIN  tblresources AS rs ON rs.ResourcesId = cp.CourseImageId
+        WHERE csi.UserId=484 GROUP BY cp.CourseId
+ERROR - 2019-07-01 15:15:41 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
+ERROR - 2019-07-01 15:33:13 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
+ERROR - 2019-07-01 15:34:35 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
+ERROR - 2019-07-01 15:36:18 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
+ERROR - 2019-07-01 15:37:43 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
+ERROR - 2019-07-01 15:39:22 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 739 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\models\CourseScheduler_model.php
