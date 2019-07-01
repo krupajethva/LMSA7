@@ -297,7 +297,7 @@ export class InstructorCoursesComponent implements OnInit {
         if (data) {
           this.CourseSesssionList = data;
 
-          // console.log(this.totalinstructor.length);
+          console.log( this.CourseSesssionList);
           for (var i = 0; i < this.CourseSesssionList.length; i++) {
             if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
             //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
@@ -324,6 +324,24 @@ export class InstructorCoursesComponent implements OnInit {
 
     $('#modalsession' + i).modal('hide');
   }
+
+  Instructor_Invite(UserId,CourseSessionId,type) {
+    debugger
+    this.InstructorCoursesService.Instructor_Invite(UserId,CourseSessionId,type)
+      // .then((data) => {
+      //       let index = this.projectList.indexOf(project);
+      //       if (index != -1) {
+      //         this.projectList.splice(index, 1);
+      //       }
+
+      // },
+      //   (error) => {
+      //     if (error.text) {
+      //      //error
+      //     }
+      //   });
+
+}
   StartSession(CourseSessionId, k) {
 
     swal({
