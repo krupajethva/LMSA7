@@ -291,3 +291,11 @@ JOIN `tblcoursesession` `tcs` ON `tci`.`CourseSessionId`=`tcs`.`CourseSessionId`
 WHERE `tci`.`UserId` = '484'
 GROUP BY `tcs`.`SessionStatus`
 ORDER BY `tci`.`CourseSessionId` DESC
+ERROR - 2019-07-01 15:54:08 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'elect csi.SessionName,csi.TotalSeats,csi.StartDate,csi.weekday,(csi.StartDate - ' at line 1 - Invalid query: elect csi.SessionName,csi.TotalSeats,csi.StartDate,csi.weekday,(csi.StartDate - INTERVAL 1 DAY) as prestartdate,csi.EndDate,csi.StartTime,csi.EndTime,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,
+			GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId=484 AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
+			 (SELECT GROUP_CONCAT(u.FirstName)
+						  FROM tbluser u 
+						  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
+					FROM tblcoursesession AS csi 
+					LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
+					WHERE csi.CourseId=28 AND csi.PublishStatus=1 AND csi.IsActive=1 GROUP BY csi.CourseSessionId
