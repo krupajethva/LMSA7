@@ -266,11 +266,11 @@
 					<div class="courses_li">
 						<ul>
 							<li>
-								<span class="success"></span>Completed</li>
-							<li>
 								<span class="warning"></span>In Progress</li>
-							<li>
-								<span class="danger"></span>Pending</li>
+							  <li>
+								<span class="primary"></span>Pending</li>
+							  <li>
+								<span class="success"></span>Completed</li>
 						</ul>
 					</div>
 					<div class="clearfix"></div>
@@ -281,11 +281,11 @@
 						<div class="name_box">
 							<i>{{learner.FirstName}}</i>
 							<div class="progress">
-								<div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{learner.complete}}" style="width: 80%">
+								<div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{learner.complete}}" style="width: 80%">
 								</div>
-								<div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{learner.inprocess}}" style="width: 0%">
+								<div class="progress-bar progress-bar-info" data-toggle="tooltip" data-placement="top" title="{{learner.inprocess}}" style="width: 0%">
 								</div>
-								<div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="{{learner.pending}}" style="width: 20%">
+								<div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{learner.pending}}" style="width: 20%">
 								</div>
 							</div>
 						</div>

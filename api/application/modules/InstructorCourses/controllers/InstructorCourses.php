@@ -313,36 +313,36 @@ class InstructorCourses extends CI_Controller
 		}
 	}
 
-	public function test()
-	{
-		$result = $this->db->query('select csi.IsActive,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
-		GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId=484 AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
-		 (SELECT GROUP_CONCAT(u.FirstName,u.LastName)
-					  FROM tbluser u 
-					  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
-				FROM tblcoursesession AS csi 
-				LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
-				WHERE csi.CourseId=30 GROUP BY csi.CourseSessionId');
-		$db_error = $this->db->error();
-		if (!empty($db_error) && !empty($db_error['code'])) {
-			throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-			return false; // unreachable return statement !!!
-		}
-		if ($result->result()) {
-			$res = $result->result();
-			foreach ($res as $row) {
-				$UserID = explode(",", $row->UserId);
-				$this->db->select('tc.FirstName,tc.LastName,tc.EmailAddress,ti.Approval');
-				$this->db->join('tblcourseinstructor as ti', 'ti.UserId = tc.UserId','inner');
-				$this->db->where_in('tc.UserId', $UserID);
-				$this->db->where_in('ti.CourseSessionId', $row->CourseSessionId);
-				$this->db->from('tbluser as tc');
-				$new_array = $this->db->get()->result();
-				$row->userdetails = $new_array;
-			}
-		}
-		print_r($res);
-	}
+	// public function test()
+	// {
+	// 	$result = $this->db->query('select csi.IsActive,csi.SessionName,csi.TotalSeats,csi.StartDate,TIME_FORMAT(csi.StartTime, "%h:%i %p") AS StartTimeChange,TIME_FORMAT(csi.EndTime, "%h:%i %p") AS EndTimeChange,csi.StartTime,csi.EndTime,csi.SessionStatus,csi.EndDate,csi.TotalSeats,csi.CourseSessionId,csi.RemainingSeats,csi.Showstatus,csi.CourseCloseDate,csi.PublishStatus,
+	// 	GROUP_CONCAT(cs.UserId) as UserId,(SELECT COUNT(mc.CourseUserregisterId) FROM tblcourseuserregister as mc WHERE mc.UserId=484 AND  mc.CourseSessionId=csi.CourseSessionId) as EnrollCheck,
+	// 	 (SELECT GROUP_CONCAT(u.FirstName,u.LastName)
+	// 				  FROM tbluser u 
+	// 				  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
+	// 			FROM tblcoursesession AS csi 
+	// 			LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
+	// 			WHERE csi.CourseId=30 GROUP BY csi.CourseSessionId');
+	// 	$db_error = $this->db->error();
+	// 	if (!empty($db_error) && !empty($db_error['code'])) {
+	// 		throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+	// 		return false; // unreachable return statement !!!
+	// 	}
+	// 	if ($result->result()) {
+	// 		$res = $result->result();
+	// 		foreach ($res as $row) {
+	// 			$UserID = explode(",", $row->UserId);
+	// 			$this->db->select('tc.FirstName,tc.LastName,tc.EmailAddress,ti.Approval');
+	// 			$this->db->join('tblcourseinstructor as ti', 'ti.UserId = tc.UserId','inner');
+	// 			$this->db->where_in('tc.UserId', $UserID);
+	// 			$this->db->where_in('ti.CourseSessionId', $row->CourseSessionId);
+	// 			$this->db->from('tbluser as tc');
+	// 			$new_array = $this->db->get()->result();
+	// 			$row->userdetails = $new_array;
+	// 		}
+	// 	}
+	// 	print_r($res);
+	// }
 
 	public function Instructor_Invite()
 	{

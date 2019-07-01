@@ -48,8 +48,8 @@
             </div>
           </div>
           <div class="col-md-5">
-            <button class="back_btn" type="submit">Filter</button>
-            <button class="next_btn" type="submit" (click)="clearForm(InstructorCourseForm)">Clear</button>
+            <button class="back_btn m_5" type="submit">Filter</button>
+            <button class="next_btn m_5" type="submit" (click)="clearForm(InstructorCourseForm)">Clear</button>
           </div>
         </div>
       </form>
@@ -118,7 +118,7 @@
                               <strong>Instructors : </strong>
                               <button (click)="view_inst_btn(SessionList.CourseSessionId)"
                                 class="view_inst_btn view_inst_btn{{SessionList.CourseSessionId}}">
-                                <i title="View Instructors" data-toggle="tooltip" data-placement="top" class="fa fa-eye"
+                                <i title="View Instructors" data-toggle="tooltip" data-placement="top" class="fa fa-plus-circle"
                                   aria-hidden="true"></i>
                                 <span>{{SessionList.userdetails.length}}</span>
                               </button>
@@ -337,8 +337,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="back_btn" data-dismiss="modal">Close</button>
-          <button type="submit" class="next_btn">Clone</button>
+          <button class="back_btn m_5" data-dismiss="modal">Close</button>
+          <button type="submit" class="next_btn m_5">Clone</button>
         </div>
       </div>
     </form>

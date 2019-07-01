@@ -39,6 +39,7 @@ this.Accept=true;
  {
   this.Accept=false;
  }
+ 
 	this.InvitationacceptdeclineService.Insinvitation(id1['type'],id1['CourseSessionId'],id1['UserId'])
 	.then((data) => 
 	{ 
