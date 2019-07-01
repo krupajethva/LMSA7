@@ -11,16 +11,15 @@
 		</div> -->
 		<div class="clearfix"></div>
 		<div class="breadcrumb_block pull-right">
-				<ul class="breadcrumb">
-					<li class="breadcrumb-item">
-						<a href="#">
-							<i class="fa fa-home"></i>
-						</a>
-					</li>	
-					<li class="breadcrumb-item active" aria-current="page">Course Detail</li>
-					<button class="pull-right" (click)="openModal()">Share</button>
-				</ul>
-				<div class="clearfix"></div>
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Course Detail</li>
+			</ul>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 
@@ -28,7 +27,6 @@
 </div>
 <div class="content_block course_detail_block ">
 	<div class="col-md-9 col-sm-8">
-
 		<div *ngIf="CourseDetailList">
 			<h1 class="no_margin">{{CourseDetailList.CourseFullName}}</h1>
 			<div class="stars_block" *ngIf="ReviewAverage==null">
@@ -39,6 +37,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage>0 && ReviewAverage<1">
 				<i class="fa fa-star-half-o"></i>
@@ -48,6 +50,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage>1 && ReviewAverage<2">
 				<i class="fa fa-star"></i>
@@ -57,6 +63,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage>2 && ReviewAverage<3">
 				<i class="fa fa-star"></i>
@@ -66,6 +76,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage>3 && ReviewAverage<4">
 				<i class="fa fa-star"></i>
@@ -75,6 +89,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage>4 && ReviewAverage<5">
 				<i class="fa fa-star"></i>
@@ -84,6 +102,10 @@
 				<i class="fa fa-star-half-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage==1">
 				<i class="fa fa-star"></i>
@@ -93,6 +115,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage==2">
 				<i class="fa fa-star"></i>
@@ -102,6 +128,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage==3">
 				<i class="fa fa-star"></i>
@@ -111,6 +141,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage==4">
 				<i class="fa fa-star"></i>
@@ -120,6 +154,10 @@
 				<i class="fa fa-star-o"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
 			<div class="stars_block" *ngIf="ReviewAverage==5">
 				<i class="fa fa-star"></i>
@@ -129,7 +167,12 @@
 				<i class="fa fa-star"></i>
 				|
 				<a href="" class="review_link">Write a Review</a>
+				|
+				<button class="share_btn" (click)="openModal()">
+					<i data-toggle="tooltip" data-placement="top" title="Share" class="fa fa-share-alt"></i>
+				</button>
 			</div>
+
 			<div class="clearfix"></div>
 			<p class="padding_15">
 				<video width="350" height="200" controls class="pull-left video_margin" *ngIf="CourseDetailList.FilePath">
@@ -184,7 +227,7 @@
 				</li>
 			</ul>
 			<div class="tab-content">
-				<div   role="tabpanel" class="tab-pane active" id="Features" *ngIf="CourseDetailList.Featurescheck==1">
+				<div role="tabpanel" class="tab-pane active" id="Features" *ngIf="CourseDetailList.Featurescheck==1">
 					<ul class="list_li width_li30">
 						<li [innerHTML]="CourseDetailList.EmailBody"></li>
 					</ul>
@@ -193,7 +236,7 @@
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<div   role="tabpanel" class="tab-pane" id="whatget">
+				<div role="tabpanel" class="tab-pane" id="whatget">
 					<ul class="list_li width_li30">
 						<li [innerHTML]="CourseDetailList.EmailBody2"></li>
 					</ul>
@@ -202,7 +245,7 @@
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<div  role="tabpanel" class="tab-pane" id="Target">
+				<div role="tabpanel" class="tab-pane" id="Target">
 					<ul class="list_li width_li30">
 						<li [innerHTML]="CourseDetailList.EmailBody3"></li>
 					</ul>
@@ -433,8 +476,9 @@
 			<div class="clearfix"></div>
 			<div *ngFor="let discussion of CourseDiscussionList; let i = index" class="forum_box">
 				<div class="img_icon">
-						<span *ngIf="discussion.ProfileImage=='' || discussion.ProfileImage==NULL" class="instructor_letter">{{discussion.FirstName | slice:0:01}}{{discussion.LastName | slice:0:01}}</span>
-						<img *ngIf="discussion.ProfileImage!='' && discussion.ProfileImage!=NULL" src="assets/ProfilePhoto/{{discussion.UserId}}/{{discussion.ProfileImage}}" alt="" class="img-responsive" />
+					<span *ngIf="discussion.ProfileImage=='' || discussion.ProfileImage==NULL" class="instructor_letter">{{discussion.FirstName | slice:0:01}}{{discussion.LastName | slice:0:01}}</span>
+					<img *ngIf="discussion.ProfileImage!='' && discussion.ProfileImage!=NULL" src="assets/ProfilePhoto/{{discussion.UserId}}/{{discussion.ProfileImage}}"
+					 alt="" class="img-responsive" />
 				</div>
 				<div class="content_name" id="content{{i}}">
 					<div class="name">{{discussion.Name}}</div>
@@ -499,8 +543,9 @@
 				</div>
 				<div *ngFor="let firstlevelreply of discussion.child; let j = index" class="forum_box inner_forum">
 					<div class="img_icon">
-							<span *ngIf="firstlevelreply.ProfileImage=='' || firstlevelreply.ProfileImage==NULL" class="instructor_letter">{{firstlevelreply.FirstName | slice:0:01}}{{firstlevelreply.LastName | slice:0:01}}</span>
-							<img *ngIf="firstlevelreply.ProfileImage!='' || firstlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{firstlevelreply.UserId}}/{{firstlevelreply.ProfileImage}}" alt="" class="img-responsive" />
+						<span *ngIf="firstlevelreply.ProfileImage=='' || firstlevelreply.ProfileImage==NULL" class="instructor_letter">{{firstlevelreply.FirstName | slice:0:01}}{{firstlevelreply.LastName | slice:0:01}}</span>
+						<img *ngIf="firstlevelreply.ProfileImage!='' || firstlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{firstlevelreply.UserId}}/{{firstlevelreply.ProfileImage}}"
+						 alt="" class="img-responsive" />
 					</div>
 					<div class="content_name" id="content{{i}}{{j}}">
 						<div class="name">{{firstlevelreply.Name}}</div>
@@ -566,8 +611,9 @@
 					</div>
 					<div *ngFor="let secondlevelreply of firstlevelreply.child; let k = index" class="forum_box inner_forum">
 						<div class="img_icon">
-								<span *ngIf="secondlevelreply.ProfileImage=='' || secondlevelreply.ProfileImage==NULL" class="instructor_letter">{{secondlevelreply.FirstName | slice:0:01}}{{secondlevelreply.LastName | slice:0:01}}</span>
-								<img *ngIf="secondlevelreply.ProfileImage!='' || secondlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{secondlevelreply.UserId}}/{{secondlevelreply.ProfileImage}}" alt="" class="img-responsive" />
+							<span *ngIf="secondlevelreply.ProfileImage=='' || secondlevelreply.ProfileImage==NULL" class="instructor_letter">{{secondlevelreply.FirstName | slice:0:01}}{{secondlevelreply.LastName | slice:0:01}}</span>
+							<img *ngIf="secondlevelreply.ProfileImage!='' || secondlevelreply.ProfileImage!=NULL" src="assets/ProfilePhoto/{{secondlevelreply.UserId}}/{{secondlevelreply.ProfileImage}}"
+							 alt="" class="img-responsive" />
 						</div>
 						<div class="content_name" id="content{{i}}{{j}}{{k}}">
 							<div class="name">{{secondlevelreply.Name}}</div>
@@ -719,8 +765,9 @@
 			<div class="clearfix"></div>
 			<div *ngFor="let review of CourseReviewList; let i = index" class="forum_box">
 				<div class="img_icon">
-						<span *ngIf="review.ProfileImage=='' || review.ProfileImage==NULL" class="instructor_letter">{{review.FirstName | slice:0:01}}{{review.LastName | slice:0:01}}</span>
-						<img *ngIf="review.ProfileImage!='' || review.ProfileImage!=NULL" src="assets/ProfilePhoto/{{review.UserId}}/{{review.ProfileImage}}" alt="" class="img-responsive" />
+					<span *ngIf="review.ProfileImage=='' || review.ProfileImage==NULL" class="instructor_letter">{{review.FirstName | slice:0:01}}{{review.LastName | slice:0:01}}</span>
+					<img *ngIf="review.ProfileImage!='' || review.ProfileImage!=NULL" src="assets/ProfilePhoto/{{review.UserId}}/{{review.ProfileImage}}"
+					 alt="" class="img-responsive" />
 				</div>
 				<div class="content_name" id='content{{i}}'>
 					<div class="name">{{review.Name}}</div>
@@ -921,7 +968,7 @@
 
 			<!-- Large modal -->
 			<div class="text-center">
-				<button type="button"  (click)="add()" class="next_btn" data-toggle="modal" data-target="bd-example-modal-lg">Available Session</button>
+				<button type="button" (click)="add()" class="next_btn" data-toggle="modal" data-target="bd-example-modal-lg">Available Session</button>
 			</div>
 			<div id="modalsession" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 			 aria-hidden="true">
@@ -1185,42 +1232,45 @@
 <div class="clearfix"></div>
 <div class="modal fade bs-example-modal-sm" id="Share_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog modal-sm" role="document">
-	  <div class="modal-content">
-		<div class="modal-body">
-  
-		  <!-- <p>Are You Sure You Want To Re-Invite This Email?</p> -->
-		  <form #shareForm="ngForm" (ngSubmit)="shareConfirm(shareForm)">
-			<div class="row">
-				<div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                      <label><span>*</span>Email Address</label>
-                      <input type="Email" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$"
-                        class="form-control" #EmailAddress="ngModel" maxlength="500"
-                        [(ngModel)]="shareEntity.EmailAddress" name="EmailAddress"
-                        [ngClass]="{red_border: (EmailAddress.dirty && EmailAddress.invalid)}" required/>
+		<div class="modal-content">
+			<div class="modal-body">
 
-                      <span style="font-size: 11px;">
-                        (You can enter multiple comma separated email addresses)
-					  </span>
-					  <div class="clearfix"></div>
-                      <span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted1)">
-						<span *ngIf="EmailAddress.errors.required || (EmailAddress.pristine && submitted1)">Please enter email
-						  address</span>
-						<span *ngIf="EmailAddress.errors && EmailAddress.errors.pattern">Please enter valid email address</span>
-					  </span>
+				<!-- <p>Are You Sure You Want To Re-Invite This Email?</p> -->
+				<form #shareForm="ngForm" (ngSubmit)="shareConfirm(shareForm)">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="form-group">
+								<label>
+									<span>*</span>Email Address</label>
+								<input type="Email" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" class="form-control" #EmailAddress="ngModel"
+								 maxlength="500" [(ngModel)]="shareEntity.EmailAddress" name="EmailAddress" [ngClass]="{red_border: (EmailAddress.dirty && EmailAddress.invalid)}"
+								 required/>
 
-                    </div>
-                  </div>
-			  <div class="clearfix"></div>
-			  <div class="text-center">
-				<button  type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
-				<button  type="button" class="back_btn" (click)="noForm(shareForm)" data-dismiss="modal"><span>Cancel</span></button>
-			  </div>
+								<span style="font-size: 11px;">
+									(You can enter multiple comma separated email addresses)
+								</span>
+								<div class="clearfix"></div>
+								<span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted1)">
+									<span *ngIf="EmailAddress.errors.required || (EmailAddress.pristine && submitted1)">Please enter email address
+									</span>
+									<span *ngIf="EmailAddress.errors && EmailAddress.errors.pattern">Please enter valid email address</span>
+								</span>
+
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="text-center">
+							<button type="submit" [disabled]="btn_disable" class="next_btn">
+								<span>Submit</span>
+							</button>
+							<button type="button" class="back_btn" (click)="noForm(shareForm)" data-dismiss="modal">
+								<span>Cancel</span>
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
-		  </form>
+
 		</div>
-  
-	  </div>
 	</div>
-  </div>
-  
+</div>

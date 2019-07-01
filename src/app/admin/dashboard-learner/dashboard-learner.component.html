@@ -31,57 +31,67 @@
     <h3>Overview</h3>
     <div class="row">
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg1">
-          <div class="pull-left">
-            <i class="fa fa-leanpub" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg1">
+            <div class="pull-left">
+              <i class="fa fa-leanpub" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">{{activecourse}}</div>
+              <div class="title">ENROLLED COURSES</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">{{activecourse}}</div>
-            <div class="title">ACTIVE COURSES</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg2">
-          <div class="pull-left">
-            <i class="fa fa-list-alt" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg2">
+            <div class="pull-left">
+              <i class="fa fa-leanpub" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">{{completedcourse}}</div>
+              <div class="title">COMPLETED COURSES</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">{{completedcourse}}</div>
-            <div class="title">COMPLETED COURSES</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg3">
-          <div class="pull-left">
-            <i class="fa fa-users" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg3">
+            <div class="pull-left">
+              <i class="fa fa-users" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">12</div>
+              <div class="title">INSTRUCTORS</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">12</div>
-            <div class="title">GROUPS</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg4">
-          <div class="pull-left">
-            <i class="fa fa-certificate" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg4">
+            <div class="pull-left">
+              <i class="fa fa-certificate" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">4</div>
+              <div class="title">CERTIFICATES</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">4</div>
-            <div class="title">CERTIFICATIONS/BADGES</div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-8 col-sm-8">
         <div class="graph_block">
-          <h3 class="pull-left">Test Vs Score Graphical Representation</h3>
+          <h3 class="pull-left">Graphical Representation</h3>
+          <div class="clearfix"></div>
           <div class="logincourse_tabs">
-            <ul class="nav nav-tabs" role="tablist">
+            <p>Content yut to come...</p>
+            <!-- <ul class="nav nav-tabs" role="tablist">
               <li role="logincourse" class="active">
                 <a href="#Today" aria-controls="Today" role="tab" data-toggle="tab">Today</a>
               </li>
@@ -94,9 +104,9 @@
               <li role="logincourse" class="disabled">
                 <a href="#Month" aria-controls="Month" role="tab" data-toggle="tab">Month</a>
               </li>
-            </ul>
+            </ul> -->
             <div class="clearfix"></div>
-            <div class="tab-content">
+            <!-- <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="Today">
                 <div id="login_course_today" class="chart"></div>
                 <div class="clearfix"></div>
@@ -113,7 +123,7 @@
                 <div id="login_course_month" class="chart"></div>
                 <div class="clearfix"></div>
               </div>
-            </div>
+            </div> -->
             <div class="clearfix"></div>
           </div>
           <div class="clearfix"></div>
@@ -125,11 +135,11 @@
           <div class="courses_li">
             <ul>
               <li>
-                <span class="success"></span>In Progress</li>
+                <span class="warning"></span>In Progress</li>
               <li>
-                <span class="warning"></span>Pending</li>
+                <span class="primary"></span>Pending</li>
               <li>
-                <span class="danger"></span>Completed</li>
+                <span class="success"></span>Completed</li>
             </ul>
           </div>
           <div class="clearfix"></div>
@@ -145,10 +155,10 @@
                 <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==1">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-info" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==2">
-                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 100%"></div>
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 100%"></div>
               </div>
             </div>
           </div>
@@ -362,7 +372,7 @@
     <div class="row">
       <div class="col-md-6 col-sm-6">
         <div class="rated_course_block">
-          <h3>Your Courses</h3>
+          <h3>My Courses</h3>
           <div class="scroll_score">
             <div class="table-responsive">
               <div class="scroll_yourscore">
@@ -379,7 +389,15 @@
                     <tr *ngFor="let learnercourse of yourcourse;let i = index">
                       <td>{{learnercourse.CourseFullName}}</td>
                       <td>{{learnercourse.FirstName}} {{learnercourse.LastName}}</td>
-                      <td>Rating</td>
+                      <td>
+                        <div class="stars_block">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                      </td>
                       <td class="text-center">
                         <button class="edit" data-toggle="tooltip" data-placement="top" routerLink="/course-detail/{{learnercourse.CourseId}}" title="View">
                           <i class="fa fa-eye"></i>
@@ -420,7 +438,7 @@
       <div class="col-md-6 col-sm-6">
         <div class="notification_block">
           <h3 class="pull-left">Recent Notifications</h3>
-          <a routerLink="/notification-list" class="next_btn pull-right">Notification List</a>
+          <!-- <a routerLink="/notification-list" class="next_btn pull-right">Notification List</a> -->
           <div class="clearfix"></div>
           <div class="notification_red">
             <div class="row">
