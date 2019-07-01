@@ -78,7 +78,7 @@ class Course_model extends CI_Model
 				'CourseFullName' => $post_Course['CourseFullName'],
 				'Price' => $post_Course['Price'],
 				'NoOfQuestion'=>$post_Course['NoOfQuestion'],
-				'AssessmentTime'=>$post_Course['AssessmentTime'],
+				'AssessmentTime'=>$post_Course['AssessmentHour'].':'.$post_Course['AssessmentMinute'].':'.$post_Course['AssessmentSecond'] ,
 				'Description' => $post_Course['Description'],
 				 'CourseImageId' => $id1,
 				 'CourseVideoId' => $id2,
@@ -284,9 +284,8 @@ class Course_model extends CI_Model
 	public function getAllCourseKey() {
 		try{
 		// $this->db->select('*');
-		$this->db->select('Description');
-		$this->db->where('Key','CourseKeyword');
-		$result = $this->db->get('tblmstconfiguration');
+		$this->db->select('tc.Keyword');
+		$result = $this->db->get('tblcourse tc');
 		//$result = $this->db->query('call getCountryList()');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
@@ -295,10 +294,14 @@ class Course_model extends CI_Model
 				}
 		$res = array();
 		foreach($result->result() as $row) {
-			$res = $row->Description;
-			$res = explode(",", $res);
+			$skill_explode = explode(',', $row->Keyword);
+			foreach ($skill_explode as $skill) {
+				if($skill!="" || $skill!=null){
+					array_push($res,$skill);
+				}					
+			}
 		}
-		return $res;
+		return array_values(array_unique($res));
 		}
 		catch(Exception $e){
 			trigger_error($e->getMessage(), E_USER_ERROR);
@@ -493,7 +496,7 @@ class Course_model extends CI_Model
 				'CourseFullName' => $post_Course['CourseFullName'],
 				'Price' => $post_Course['Price'],
 				'NoOfQuestion'=> $post_Course['NoOfQuestion'],
-				'AssessmentTime'=>$post_Course['AssessmentTime'],
+				'AssessmentTime'=>$post_Course['AssessmentHour'].':'.$post_Course['AssessmentMinute'].':'.$post_Course['AssessmentSecond'],
 				'Description' => $post_Course['Description'],
 				'CourseImageId' => $id1,
 				'CourseVideoId' => $id2,

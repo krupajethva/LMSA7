@@ -94,7 +94,7 @@
 						<div class="course_img">
 							<img src="assets/Instructor/{{course.Fid}}/image/{{course.FilePath}}" alt="" class="img-responsive" />
 						</div>
-						<div class="course_title">{{course.CourseFullName}}</div>
+						<div class="course_title"><a href="">{{course.CourseFullName}}</a></div>
 						<div class="course_btn text-center">
 							<!-- <a routerLink="/course-detail" class="next_btn">Continue</a> -->
 							<a class="back_btn" (click)="SessionClick(course.CourseId,i)">Your Session</a>
@@ -113,11 +113,11 @@
 											<div class="pull-right">
 
 												<ul class="statusicons">
-													<li class="completestatus">
+													<li class="success">
 														<span></span> Complete</li>
-													<li class="inprogressstatus">
+													<li class="warning">
 														<span></span> In Progress</li>
-													<li class="pendingstatus">
+													<li class="primary">
 														<span></span> Pending</li>
 												</ul>
 											</div>
@@ -139,16 +139,16 @@
 													<h4>{{SessionList.SessionName}}</h4>
 													<ul class="icon">
 														<li>
-															<i class="fa fa-calendar"></i>
-															<strong>Instructor : </strong> {{SessionList.FirstName}}</li>
+															<i class="fa fa-users"></i>
+															<strong>Instructors : </strong> {{SessionList.FirstName}}</li>
 														<li>
-															<i class="fa fa-user"></i>
+															<i class="fa fa-calendar"></i>
 															<strong>Start Date : </strong> {{SessionList.StartDate}}</li>
 														<li>
 															<i class="fa fa-calendar"></i>
 															<strong>End Date : </strong> {{SessionList.EndDate}}</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-calendar"></i>
 															<strong>Weekday : </strong>
 															{{SessionList.monday}}
 															<span *ngIf="SessionList.monday!='' && (SessionList.tuesday!='' || SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
@@ -165,16 +165,16 @@
 															{{SessionList.sunday}}
 														</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-clock-o"></i>
 															<strong>Start Time : </strong> {{SessionList.StartTime}}</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-clock-o"></i>
 															<strong>End Time : </strong> {{SessionList.EndTime}}</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-table"></i>
 															<strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
 														<li>
-															<i class="fa fa-user"></i>
+															<i class="fa fa-table"></i>
 															<strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}</li>
 														<li *ngIf="SessionList.Result!=NULL">
 															<i class="fa fa-user"></i>
