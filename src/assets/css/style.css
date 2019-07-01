@@ -1772,7 +1772,7 @@ select-dropdown > div{z-index: 999!important;}
 .instructor_img_letter{margin:0 10px 10px 0; overflow:hidden; text-transform:uppercase; font-weight:bold; font-size:45px; text-align:center; line-height:95px; float:left; width:100px; height:100px; display:inline-block; color:var(--theme-color); border:2px solid var(--theme-color); border-radius:100%;}
 .instructor_img_letter img{border-radius:100%;}
 .follow_block button i{margin-right:7px;}
-.learner_dashboard .scroll_score,.learner_dashboard .scroll_calender{height: 315px!important;position: relative;}
+.learner_dashboard .scroll_score,.learner_dashboard .scroll_calender{position:relative;height: 280px!important;}
 .instructor_dashboard .scroll_score,.instructor_dashboard .scroll_calender{height: 100%!important;}
 /* .learner_dashboard .audit_block {height: 370px!important;} */
 .instructor_dashboard .audit_block{height: 375px!important;}

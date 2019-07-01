@@ -191,7 +191,7 @@ export class DashboardLearnerComponent implements OnInit {
 
 
 		// PERFECT SCROLLBAR
-		new PerfectScrollbar('.scroll_yourscore');
+		// new PerfectScrollbar('.scroll_yourscore');
 		new PerfectScrollbar('.scroll_score');
 		new PerfectScrollbar('.scroll_calender');
 		// END PERFECT SCROLLBAR

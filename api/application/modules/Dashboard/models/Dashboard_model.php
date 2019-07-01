@@ -411,17 +411,26 @@ class Dashboard_model extends CI_Model
 		// INNER JOIN tbluser tu ON tci.UserId=tu.UserId
 		// WHERE tcur.UserId = 484
 
-		$this->db->select('tcur.CourseSessionId,tc.CourseFullName,tc.CourseId,tci.UserId,tu.FirstName,tu.LastName');
-		$this->db->join('tblcoursesession tcs','tcur.CourseSessionId=tcs.CourseSessionId');
-		$this->db->join('tblcourse tc','tcs.CourseId=tc.CourseId');
-		$this->db->join('tblcourseinstructor tci','tcur.CourseSessionId=tci.CourseSessionId');
-		$this->db->join('tbluser tu','tci.UserId=tu.UserId');
-		$this->db->where('tcur.UserId',$UserId);
-		$yourcourse = $this->db->get('tblcourseuserregister tcur');
-
+		// $this->db->select('tcur.CourseSessionId,tc.CourseFullName,tc.CourseId,tci.UserId,tu.FirstName,tu.LastName');
+		// $this->db->join('tblcoursesession tcs','tcur.CourseSessionId=tcs.CourseSessionId');
+		// $this->db->join('tblcourse tc','tcs.CourseId=tc.CourseId');
+		// $this->db->join('tblcourseinstructor tci','tcur.CourseSessionId=tci.CourseSessionId');
+		// $this->db->join('tbluser tu','tci.UserId=tu.UserId');
+		// $this->db->where('tcur.UserId',$UserId);
+		// $yourcourse = $this->db->get('tblcourseuserregister tcur');
+		$yourcourse = $this->db->query(
+			"SELECT `tcur`.`CourseSessionId`, `tc`.`CourseFullName`, `tc`.`CourseId`, `tci`.`UserId`,
+			(SELECT GROUP_CONCAT( CONCAT(u.FirstName ,' ',u.LastName)  SEPARATOR ',')
+									  FROM tbluser u 
+									  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(tci.UserId))) as FirstName
+			FROM `tblcourseuserregister` `tcur`
+			JOIN `tblcoursesession` `tcs` ON `tcur`.`CourseSessionId`=`tcs`.`CourseSessionId`
+			JOIN `tblcourse` `tc` ON `tcs`.`CourseId`=`tc`.`CourseId`
+			JOIN `tblcourseinstructor` `tci` ON `tcur`.`CourseSessionId`=`tci`.`CourseSessionId`
+			JOIN `tbluser` `tu` ON `tci`.`UserId`=`tu`.`UserId`
+			WHERE `tcur`.`UserId` = ".$UserId." GROUP by `tcur`.`CourseSessionId`"
+		);
 		$allLearnerData['yourcourse'] = $yourcourse->result();
-
-		
 		/*################ GET YOUR COURSES END ##############*/
 
 		/*################ GET TEST SCORE START ##############*/
