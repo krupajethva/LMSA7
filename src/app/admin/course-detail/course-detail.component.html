@@ -976,9 +976,9 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel">Available Session</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
-							</button>
+							</button> -->
 						</div>
 						<div class="clearfix"></div>
 						<div class="modal-body">
@@ -989,16 +989,16 @@
 										<h4>{{SessionList.SessionName}}</h4>
 										<ul class="icon">
 											<li>
-												<i class="fa fa-calendar"></i>
-												<strong>Instructor : </strong> {{SessionList.FirstName}}</li>
+												<i class="fa fa-users"></i>
+												<strong>Instructors : </strong> {{SessionList.FirstName}}</li>
 											<li>
-												<i class="fa fa-user"></i>
+												<i class="fa fa-calendar"></i>
 												<strong>Start Date : </strong> {{SessionList.StartDate}}</li>
 											<li>
 												<i class="fa fa-calendar"></i>
 												<strong>End Date : </strong> {{SessionList.EndDate}}</li>
 											<li>
-												<i class="fa fa-comments"></i>
+												<i class="fa fa-calendar"></i>
 												<strong>Weekday : </strong>
 												{{SessionList.monday}}
 												<span *ngIf="SessionList.monday!='' && (SessionList.tuesday!='' || SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
@@ -1014,19 +1014,19 @@
 												<span *ngIf="SessionList.saturday!='' && SessionList.sunday!='' ">,</span>
 												{{SessionList.sunday}}</li>
 											<li>
-												<i class="fa fa-comments"></i>
+												<i class="fa fa-clock-o"></i>
 												<strong>Start Time : </strong> {{SessionList.StartTime}}</li>
 											<li>
-												<i class="fa fa-comments"></i>
+												<i class="fa fa-clock-o"></i>
 												<strong>End Time : </strong> {{SessionList.EndTime}}</li>
 											<li>
-												<i class="fa fa-comments"></i>
+												<i class="fa fa-table"></i>
 												<strong>Total Seats : </strong>
 												<span *ngIf="SessionList.TotalSeats==0">NA</span>
 												<span *ngIf="SessionList.TotalSeats>0">{{SessionList.TotalSeats}}</span>
 											</li>
 											<li>
-												<i class="fa fa-user"></i>
+												<i class="fa fa-table"></i>
 												<strong>Pending Seats : </strong>
 												<span *ngIf="SessionList.TotalSeats==0">NA</span>
 												<span *ngIf="SessionList.TotalSeats>0">{{SessionList.TotalSeats-SessionList.RemainingSeats}}</span>
@@ -1064,7 +1064,7 @@
 						</div>
 						<div class="clearfix"></div>
 						<div class="modal-footer">
-							<button type="button" class="back_btn" data-dismiss="modal">Close</button>
+							<button type="button" class="next_btn" data-dismiss="modal">Close</button>
 							<!-- <button type="button" class="next_btn enrollnow_btn" (click)="Enroll()" [disabled]="!sessiontrue">Enroll Now</button> -->
 						</div>
 						<div class="clearfix"></div>
