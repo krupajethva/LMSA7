@@ -181,27 +181,19 @@
 					<thead>
 						<tr>
 							<th scope="col">Category</th>
-							<th scope="col">Total Courses</th>
+							<th scope="col" class="text-right">Total Courses</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<th scope="row">PHP</th>
-							<td>3</td>
-						</tr>
-						<tr>
-							<th scope="row">Angular</th>
-							<td>1</td>
-						</tr>
-						<tr>
-							<th scope="row">HTML</th>
-							<td>10</td>
+							<td scope="row">PHP</td>
+							<td class="text-right">3</td>
 						</tr>
 					</tbody>
 				</table>
 
 
-				<ul>
+				<!-- <ul>
 					<ng-container *ngFor="let SubCategory of SubCategoryList; let i = index;">
 						<li id="test{{i}}" class="test" *ngIf="SubCategory.totalcourse>0 ">
 							<a (click)="CategoryWise(SubCategory.CategoryId, i)">{{SubCategory.CategoryName}}
@@ -209,7 +201,7 @@
 							</a>
 						</li>
 					</ng-container>
-				</ul>
+				</ul> -->
 			</div>
 			<div class="clearfix"></div>
 			<div class="instrutor_course">
