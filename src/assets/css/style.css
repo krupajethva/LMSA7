@@ -947,6 +947,7 @@ footer.register_footer a:hover{color:var(--theme-color); }
   width: 75%;
   padding: 0px 5px;
   line-height: 18px;
+  text-transform: capitalize;
   vertical-align: middle;}
 .course_list_right .instrutor_course .users .total_courses{padding: 10px 0px;}
 .course_list_right .instrutor_course .users .total_courses i{    font-size: 16px;

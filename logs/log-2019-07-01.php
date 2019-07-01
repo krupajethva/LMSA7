@@ -258,3 +258,36 @@ JOIN `tblcoursesession` `tcs` ON `tci`.`CourseSessionId`=`tcs`.`CourseSessionId`
 WHERE `tci`.`UserId` = '297'
 GROUP BY `tcs`.`SessionStatus`
 ORDER BY `tci`.`CourseSessionId` DESC
+ERROR - 2019-07-01 15:12:06 --> Undefined variable: Course_data at line no 354 in C:\wamp64\www\LMSA7\api\application\modules\Course\models\Course_model.php
+ERROR - 2019-07-01 15:12:06 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 139 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\controllers\CourseScheduler.php
+ERROR - 2019-07-01 15:12:06 --> Query error: Commands out of sync; you can't run this command now - Invalid query: INSERT INTO `logs` (`errno`, `errtype`, `errstr`, `errfile`, `errline`, `user_agent`, `ip_address`, `time`) VALUES (8, 'Notice', 'Undefined variable: Course_data', 'C:\\wamp64\\www\\LMSA7\\api\\application\\modules\\Course\\models\\Course_model.php', 354, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', '::1', '2019-07-01 15:12:06')
+ERROR - 2019-07-01 15:12:07 --> Query error: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'lms.tci.CourseSessionId' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: SELECT count(tci.CourseSessionId) as courseview, `tcs`.`SessionStatus`
+FROM `tblcourseinstructor` as `tci`
+JOIN `tblcoursesession` `tcs` ON `tci`.`CourseSessionId`=`tcs`.`CourseSessionId`
+WHERE `tci`.`UserId` = '297'
+GROUP BY `tcs`.`SessionStatus`
+ORDER BY `tci`.`CourseSessionId` DESC
+ERROR - 2019-07-01 15:12:39 --> Query error: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'lms.tci.CourseSessionId' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: SELECT count(tci.CourseSessionId) as courseview, `tcs`.`SessionStatus`
+FROM `tblcourseinstructor` as `tci`
+JOIN `tblcoursesession` `tcs` ON `tci`.`CourseSessionId`=`tcs`.`CourseSessionId`
+WHERE `tci`.`UserId` = '484'
+GROUP BY `tcs`.`SessionStatus`
+ORDER BY `tci`.`CourseSessionId` DESC
+ERROR - 2019-07-01 15:13:14 --> Undefined variable: Course_data at line no 354 in C:\wamp64\www\LMSA7\api\application\modules\Course\models\Course_model.php
+ERROR - 2019-07-01 15:13:14 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 139 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\controllers\CourseScheduler.php
+ERROR - 2019-07-01 15:13:14 --> Query error: Commands out of sync; you can't run this command now - Invalid query: INSERT INTO `logs` (`errno`, `errtype`, `errstr`, `errfile`, `errline`, `user_agent`, `ip_address`, `time`) VALUES (8, 'Notice', 'Undefined variable: Course_data', 'C:\\wamp64\\www\\LMSA7\\api\\application\\modules\\Course\\models\\Course_model.php', 354, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', '::1', '2019-07-01 15:13:14')
+ERROR - 2019-07-01 15:13:15 --> Query error: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'lms.tci.CourseSessionId' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: SELECT count(tci.CourseSessionId) as courseview, `tcs`.`SessionStatus`
+FROM `tblcourseinstructor` as `tci`
+JOIN `tblcoursesession` `tcs` ON `tci`.`CourseSessionId`=`tcs`.`CourseSessionId`
+WHERE `tci`.`UserId` = '484'
+GROUP BY `tcs`.`SessionStatus`
+ORDER BY `tci`.`CourseSessionId` DESC
+ERROR - 2019-07-01 15:13:49 --> Undefined variable: Course_data at line no 354 in C:\wamp64\www\LMSA7\api\application\modules\Course\models\Course_model.php
+ERROR - 2019-07-01 15:13:49 --> Query error: Commands out of sync; you can't run this command now - Invalid query: INSERT INTO `logs` (`errno`, `errtype`, `errstr`, `errfile`, `errline`, `user_agent`, `ip_address`, `time`) VALUES (8, 'Notice', 'Undefined variable: Course_data', 'C:\\wamp64\\www\\LMSA7\\api\\application\\modules\\Course\\models\\Course_model.php', 354, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', '::1', '2019-07-01 15:13:49')
+ERROR - 2019-07-01 15:13:49 --> mysqli_next_result(): There is no next result set. Please, call mysqli_more_results()/mysqli::more_results() to check whether to call this function/method at line no 139 in C:\wamp64\www\LMSA7\api\application\modules\CourseScheduler\controllers\CourseScheduler.php
+ERROR - 2019-07-01 15:13:49 --> Query error: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'lms.tci.CourseSessionId' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by - Invalid query: SELECT count(tci.CourseSessionId) as courseview, `tcs`.`SessionStatus`
+FROM `tblcourseinstructor` as `tci`
+JOIN `tblcoursesession` `tcs` ON `tci`.`CourseSessionId`=`tcs`.`CourseSessionId`
+WHERE `tci`.`UserId` = '484'
+GROUP BY `tcs`.`SessionStatus`
+ORDER BY `tci`.`CourseSessionId` DESC
