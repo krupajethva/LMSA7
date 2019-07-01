@@ -147,7 +147,29 @@
 														<li>
 															<i class="fa fa-calendar"></i>
 															<strong>End Date : </strong> {{SessionList.EndDate}}</li>
-
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>Weekday : </strong>
+															{{SessionList.monday}}
+															<span *ngIf="SessionList.monday!='' && (SessionList.tuesday!='' || SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.tuesday}}
+															<span *ngIf="SessionList.tuesday!='' && (SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.wednesday}}
+															<span *ngIf="SessionList.wednesday!='' && (SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.thursday}}
+															<span *ngIf="SessionList.thursday!='' && (SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.friday}}
+															<span *ngIf="SessionList.friday!=''  && (SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
+															{{SessionList.saturday}}
+															<span *ngIf="SessionList.saturday!='' && SessionList.sunday!='' ">,</span>
+															{{SessionList.sunday}}
+														</li>
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>Start Time : </strong> {{SessionList.StartTime}}</li>
+														<li>
+															<i class="fa fa-comments"></i>
+															<strong>End Time : </strong> {{SessionList.EndTime}}</li>
 														<li>
 															<i class="fa fa-comments"></i>
 															<strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
@@ -157,6 +179,9 @@
 														<li *ngIf="SessionList.Result!=NULL">
 															<i class="fa fa-user"></i>
 															<strong>Your Result : </strong> {{SessionList.Result}}% </li>
+														<li *ngIf="SessionList.Result!=NULL && SessionList.ResultId !=NULL">
+															<a (click) = "viewcertificate(SessionList.ResultId,i)"><button class="back_btn"><i aria-hidden="true" class="fa fa-eye"></i> View Certificate </button></a>
+														</li>
 														<!-- <li class="enroll_course_tag" *ngIf="((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd'))">
 																<strong>Completed</strong>
 															</li>

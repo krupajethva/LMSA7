@@ -31,6 +31,9 @@ export class InstructorCoursesComponent implements OnInit {
   ECtime;
   coursestarthours;
   courseendhours;
+  totalinstructor;
+  Revokeable;
+  ReInviteable;
 
   constructor(public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
     private InstructorCoursesService: InstructorCoursesService, private LearnerCoursesService: LearnerCoursesService) { }
@@ -41,6 +44,8 @@ export class InstructorCoursesComponent implements OnInit {
     this.Checktopicvalid = true;
     this.Checksessionvalid = true;
     this.CheckCoursevalid = true;
+    this.ReInviteable = false;
+    this.Revokeable = false;
 
 
     var d = new Date();
@@ -237,12 +242,12 @@ export class InstructorCoursesComponent implements OnInit {
 
   }
 
-  view_inst_btn() {
-    $('.view_inst_block').addClass("active");
+  view_inst_btn(CourseSessionId) {
+    $('.view_inst_block' + CourseSessionId).addClass("active");
   }
 
-  cancel_inst_btn() {
-    $('.view_inst_block').removeClass("active");
+  cancel_inst_btn(CourseSessionId) {
+    $('.view_inst_block' + CourseSessionId).removeClass("active");
   }
 
   draft(CourseId, i) {
@@ -291,7 +296,8 @@ export class InstructorCoursesComponent implements OnInit {
       .then((data) => {
         if (data) {
           this.CourseSesssionList = data;
-          console.log(this.CourseSesssionList);
+
+          console.log( this.CourseSesssionList);
           for (var i = 0; i < this.CourseSesssionList.length; i++) {
             if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
             //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
@@ -299,7 +305,7 @@ export class InstructorCoursesComponent implements OnInit {
           setTimeout(function () {
             new PerfectScrollbar('.instructor_scroll');
           },
-          500);
+            500);
           // var d = new Date(this.CourseSesssionList.StartDate);
           // alert(this.CourseSesssionList.StartDate);
           // this.StartDate = d;
@@ -312,12 +318,30 @@ export class InstructorCoursesComponent implements OnInit {
 
           //this.router.navigate(['/pagenotfound']);
         });
-        
+
   }
   close(i) {
 
     $('#modalsession' + i).modal('hide');
   }
+
+  Instructor_Invite(UserId,CourseSessionId,type) {
+    debugger
+    this.InstructorCoursesService.Instructor_Invite(UserId,CourseSessionId,type)
+      // .then((data) => {
+      //       let index = this.projectList.indexOf(project);
+      //       if (index != -1) {
+      //         this.projectList.splice(index, 1);
+      //       }
+
+      // },
+      //   (error) => {
+      //     if (error.text) {
+      //      //error
+      //     }
+      //   });
+
+}
   StartSession(CourseSessionId, k) {
 
     swal({
