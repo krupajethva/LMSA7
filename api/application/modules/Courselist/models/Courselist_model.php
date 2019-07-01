@@ -287,7 +287,7 @@ class Courselist_model extends CI_Model
 						  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
 					FROM tblcoursesession AS csi 
 					LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
-					WHERE csi.CourseId='.$CourseId.' AND csi.PublishStatus=1 AND csi.IsActive=1 GROUP BY csi.CourseSessionId');
+					WHERE csi.CourseId='.$CourseId.' AND csi.PublishStatus=1 AND csi.IsActive=1 AND cs.Approval= 1 GROUP BY csi.CourseSessionId');
 		
 		// }
 	
