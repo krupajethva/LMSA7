@@ -21,13 +21,29 @@ export class InvitationacceptdeclineService {
           msg => { // Error
             reject(msg);
             this.globals.isLoading = false;
-
           }
         );
     });
     return promise;
   }
 
+  AcceptorDecline(type, CourseSessionId, UserId) {
+    debugger
+    let promise = new Promise((resolve, reject) => {
+      this.http.get(this.globals.baseAPIUrl + 'Instructorinvi/AcceptorDecline/' + type + '/' + CourseSessionId + '/' + UserId)
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+            reject(msg);
+            this.globals.isLoading = false;
+          }
+        );
+    });
+    return promise;
+  }
 
 
 

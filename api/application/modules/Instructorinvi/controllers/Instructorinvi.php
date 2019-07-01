@@ -12,6 +12,15 @@ class Instructorinvi extends CI_Controller
 		$this->load->model('Instructorinvi_model');
 	}
 
+	public function AcceptorDecline($type = NULL, $CourseSessionId = NULL, $UserId = NULL)
+	{
+	
+
+		$data = $this->Instructorinvi_model->getlist_course();
+
+		echo json_encode($data);
+	}
+
 	public function InstRequest($type = NULL, $CourseSessionId = NULL, $UserId = NULL)
 	{
 		if (!empty($type)) {
