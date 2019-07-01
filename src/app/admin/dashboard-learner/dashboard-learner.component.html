@@ -377,8 +377,8 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let learnercourse of yourcourse;let i = index">
-                      <td>{{learnercourse.CourseFullName}}</td>
-                      <td>{{learnercourse.FirstName}} {{learnercourse.LastName}}</td>
+                      <td>{{learnercourse.CourseFullName}} </td>
+                      <td>{{learnercourse.FirstName}} </td>
                       <td>Rating</td>
                       <td class="text-center">
                         <button class="edit" data-toggle="tooltip" data-placement="top" routerLink="/course-detail/{{learnercourse.CourseId}}" title="View">
