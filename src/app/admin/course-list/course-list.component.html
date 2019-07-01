@@ -205,14 +205,20 @@
 							<img src="assets/UserImages/{{InList.ProfileImage}}" alt="" class="img-responsive" />
 						</div>
 						<div class="name_box">
-							<span class="pull-left">{{InList.FirstName}}</span>
-							<span class="pull-right">{{InList.totalCourse}}</span>
+							<span>{{InList.FirstName}}</span>
+							<!-- <span class="pull-right">{{InList.totalCourse}}</span> -->
 						</div>
 						<div class="viewall_instructor_btn">
 							<a routerLink="/instructor-detail/{{InList.UserId}}">
 								<i class="fa fa-eye" title="" data-original-title="View Details"></i>
 							</a>
 						</div>
+						<div class="total_courses">
+							<span class="pull-left">
+								<i class="fa fa-book"></i> My Courses</span>
+							<span class="pull-right">{{InList.totalCourse}}</span>
+						</div>
+						<div class="clearfix"></div>
 
 					</div>
 				</ng-container>
