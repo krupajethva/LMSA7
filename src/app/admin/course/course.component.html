@@ -210,9 +210,20 @@
                                 <div class="form-group">
                                   <label>
                                     <span class="required">*</span>Assessment Time</label>
-                                  <input type="text" #AssessmentTime="ngModel" [(ngModel)]="CourseEntity.AssessmentTime" class="form-control" name="AssessmentTime"
+
+                                  <div class="time_number">
+                                    <input type="number" max="999" class="form-control" placeholder="hh" 
+                                    />:
+                                    <input type="number" max="59" class="form-control" placeholder="mm" 
+                                    />:
+                                    <input type="number" max="59" class="form-control" placeholder="ss"
+                                    />
+                                  </div>
+
+
+                                  <!-- <input type="text" #AssessmentTime="ngModel" [(ngModel)]="CourseEntity.AssessmentTime" class="form-control" name="AssessmentTime"
                                     [ngClass]="{red_border: (AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)}"
-                                    required />
+                                    required /> -->
                                   <span class="error_span" *ngIf="(AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)">
                                     <span *ngIf="AssessmentTime.errors && AssessmentTime.errors.required">
                                       Please enter Assessment Time
