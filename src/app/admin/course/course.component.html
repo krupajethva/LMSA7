@@ -212,11 +212,17 @@
                                     <span class="required">*</span>Assessment Time</label>
 
                                   <div class="time_number">
-                                    <input type="number" max="999" class="form-control" placeholder="hh" 
+                                    <input type="number" pattern="[0-9]{1,}"  #AssessmentHour="ngModel" [(ngModel)]="CourseEntity.AssessmentHour" max="24" min=0 class="form-control" placeholder="hh" 
+                                      [ngClass]="{red_border: (AssessmentHour.dirty && AssessmentHour.invalid) || (AssessmentHour.pristine && submitted)}" name="AssessmentHour"
+                                      required
                                     />:
-                                    <input type="number" max="59" class="form-control" placeholder="mm" 
+                                    <input type="number" pattern="[0-9]{1,}"  #AssessmentMinute="ngModel" [(ngModel)]="CourseEntity.AssessmentMinute" max="59" min=0 class="form-control" placeholder="mm" 
+                                      [ngClass]="{red_border: (AssessmentMinute.dirty && AssessmentMinute.invalid) || (AssessmentMinute.pristine && submitted)}" name="AssessmentMinute"
+                                      required
                                     />:
-                                    <input type="number" max="59" class="form-control" placeholder="ss"
+                                    <input type="number" pattern="[0-9]{1,}"  #AssessmentSecond="ngModel" [(ngModel)]="CourseEntity.AssessmentSecond" max="59" min=0 class="form-control" placeholder="ss"
+                                      [ngClass]="{red_border: (AssessmentSecond.dirty && AssessmentSecond.invalid) || (AssessmentSecond.pristine && submitted)}" name="AssessmentSecond"
+                                      required
                                     />
                                   </div>
 
@@ -224,11 +230,11 @@
                                   <!-- <input type="text" #AssessmentTime="ngModel" [(ngModel)]="CourseEntity.AssessmentTime" class="form-control" name="AssessmentTime"
                                     [ngClass]="{red_border: (AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)}"
                                     required /> -->
-                                  <span class="error_span" *ngIf="(AssessmentTime.dirty && AssessmentTime.invalid) || (AssessmentTime.pristine && submitted)">
-                                    <span *ngIf="AssessmentTime.errors && AssessmentTime.errors.required">
+                                  <span class="error_span" *ngIf="(AssessmentHour.dirty && AssessmentHour.invalid) || (AssessmentHour.pristine && submitted) || (AssessmentMinute.dirty && AssessmentMinute.invalid) || (AssessmentMinute.pristine && submitted) || (AssessmentSecond.dirty && AssessmentSecond.invalid) || (AssessmentSecond.pristine && submitted)">
+                                    <span *ngIf="(AssessmentHour.errors && AssessmentHour.errors.required) || (AssessmentMinute.errors && AssessmentMinute.errors.required) || (AssessmentSecond.errors && AssessmentSecond.errors.required)" >
                                       Please enter Assessment Time
                                     </span>
-                                    <span *ngIf="AssessmentTime.errors && AssessmentTime.errors.pattern">
+                                    <span *ngIf="(AssessmentHour.errors && AssessmentHour.errors.pattern) || (AssessmentMinute.errors && AssessmentMinute.errors.pattern) || (AssessmentSecond.errors && AssessmentSecond.errors.pattern)">
                                       Please enter valid Assessment Time
                                     </span>
                                   </span>

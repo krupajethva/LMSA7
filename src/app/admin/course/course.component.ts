@@ -437,6 +437,13 @@ export class CourseComponent implements OnInit {
 							if(this.CourseEntity.Keyword!=null){
 								this.CourseEntity.Keyword = this.CourseEntity.Keyword.split(","); 	//convert comma seperated string to array
 							}
+							if(this.CourseEntity.AssessmentTime != null)
+							{		
+								var time = this.CourseEntity.AssessmentTime.split(':');
+								this.CourseEntity.AssessmentHour = time[0];
+								this.CourseEntity.AssessmentMinute = time[1];
+								this.CourseEntity.AssessmentSecond = time[2];
+							}
 							if (data['IsActive'] == 0) { this.CourseEntity.IsActive = 0; } else { this.CourseEntity.IsActive = '1'; }
 							if (data['Featurescheck'] == 0) { this.CourseEntity.Featurescheck = 0; } else { this.CourseEntity.Featurescheck = '1'; }
 							if (data['whatgetcheck'] == 0) { this.CourseEntity.whatgetcheck = 0; } else { this.CourseEntity.whatgetcheck = '1'; }
