@@ -10,14 +10,14 @@
 					<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
 		  </div> -->
 		<div class="breadcrumb_block pull-right">
-				<ul class="breadcrumb">
-					<li class="breadcrumb-item">
-						<a href="#">
-							<i class="fa fa-home"></i>
-						</a>
-					</li>
-					<li class="breadcrumb-item active" aria-current="page">Course Catalog</li>
-				</ul>
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Course Catalog</li>
+			</ul>
 			<div class="clearfix"></div>
 		</div>
 		<div class="clearfix"></div>
@@ -29,17 +29,17 @@
 	<div class="col-md-9 col-sm-9">
 		<div class="course_list_block">
 			<div class="list_grid">
-				<button class="grid_btn active">
+				<!-- <button class="grid_btn active">
 					<i class="fa fa-th"></i>
 				</button>
 				<button class="list_btn">
 					<i class="fa fa-list"></i>
-				</button>
-				<button class="next_btn" type="submit" (click)="clearForm(aa)">Clear Filter</button>
+				</button> -->
+				<!-- <button class="next_btn" type="submit" (click)="clearForm(aa)">Clear Filter</button> -->
 			</div>
 			<div class="row">
 				<ng-container *ngFor="let course of CourseList | paginate: { itemsPerPage:6, currentPage: p}; let i = index">
-					<div class="col-md-4 col-sm-6">
+					<div class="col-md-12 col-sm-12">
 						<div class="course_box">
 							<div class="course_img">
 								<a routerLink="/course-detail/{{course.CourseId}}">
@@ -129,8 +129,8 @@
 									<i class="fa fa-star"></i>
 								</div>
 								<div class="desc_block">
-									<p>{{course.Description | slice:0:280}}
-										<a *ngIf="course.Description && course.Description.length > 280" routerLink="/course-detail/{{course.CourseId}}"> ... more</a>
+									<p>{{course.Description | slice:0:150}}
+										<a *ngIf="course.Description && course.Description.length > 150" routerLink="/course-detail/{{course.CourseId}}"> ... more</a>
 									</p>
 								</div>
 								<div></div>
@@ -161,8 +161,21 @@
 	</div>
 	<div class="col-md-3 col-sm-3">
 		<div class="course_list_right">
+			<div class="filter_head">
+				<h3 class="pull-left">Filters by</h3>
+				<button class="pull-right" type="submit" (click)="clearForm(aa)">Clear Filter</button>
+				<div class="clearfix"></div>
+			</div>
 			<div class="category_block">
-				<h3>Category</h3>
+				<div class="row">
+					<div class="col-md-10">
+						<h3 class="pull-left">Top 5 Courses per Category</h3>
+					</div>
+					<div class="col-md-2">
+						<button class="pull-right" type="submit">Clear</button>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 				<ul>
 					<ng-container *ngFor="let SubCategory of SubCategoryList; let i = index;">
 						<li id="test{{i}}" class="test" *ngIf="SubCategory.totalcourse>0 ">
@@ -175,7 +188,15 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="instrutor_course">
-				<h3>Top Instructors</h3>
+				<div class="row">
+					<div class="col-md-10">
+						<h3 class="pull-left">Top 5 Instructors</h3>
+					</div>
+					<div class="col-md-2">
+						<button class="pull-right" type="submit">Clear</button>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 				<ng-container *ngFor="let InList of InstList ; let i = index;">
 					<div (click)="InstWise(InList.UserId,i)" id="users{{i}}" class="users" *ngIf="InList.totalCourse>0 ">
 
