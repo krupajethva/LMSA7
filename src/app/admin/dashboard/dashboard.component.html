@@ -29,50 +29,60 @@
 		<h3>Overview</h3>
 		<div class="row">
 			<div class="col-md-3 col-sm-3">
-				<div class="overview_block">
-					<i class="fa fa-user"></i>
-					<div class="icon_number">
-						<span *ngIf="totalLearner!=0">{{totalLearner}}</span>
-						<span *ngIf="totalLearner==0">0</span>
+				<a href="">
+					<div class="overview_block">
+						<i class="fa fa-users"></i>
+						<div class="icon_number">
+							<span *ngIf="totalLearner!=0">{{totalLearner}}</span>
+							<span *ngIf="totalLearner==0">0</span>
+						</div>
+						<div class="title">ACTIVE LEARNERS</div>
 					</div>
-					<div class="title">ACTIVE LEARNERS</div>
-				</div>
+				</a>
 			</div>
 			<div class="col-md-3 col-sm-3">
-				<div class="overview_block">
-					<i class="fa fa-user"></i>
-					<div class="icon_number">
-						<span *ngIf="totalInstructor!=0">{{totalInstructor}}</span>
-						<span *ngIf="totalInstructor==0">0</span>
+				<a href="">
+					<div class="overview_block">
+						<i class="fa fa-users"></i>
+						<div class="icon_number">
+							<span *ngIf="totalInstructor!=0">{{totalInstructor}}</span>
+							<span *ngIf="totalInstructor==0">0</span>
+						</div>
+						<div class="title">ACTIVE INSTRUCTORS</div>
 					</div>
-					<div class="title">ACTIVE INSTRUCTORS</div>
-				</div>
+				</a>
 			</div>
 			<div class="col-md-3 col-sm-3">
-				<div class="overview_block">
-					<i class="fa fa-book"></i>
-					<div class="icon_number">
-						<span *ngIf="totalCourses!=0">{{totalCourses}}</span>
-						<span *ngIf="totalCourses==0">0</span>
+				<a href="">
+					<div class="overview_block">
+						<i class="fa fa-book"></i>
+						<div class="icon_number">
+							<span *ngIf="totalCourses!=0">{{totalCourses}}</span>
+							<span *ngIf="totalCourses==0">0</span>
+						</div>
+						<div class="title">TOTAL COURSES</div>
 					</div>
-					<div class="title">TOTAL COURSES</div>
-				</div>
+				</a>
 			</div>
 			<div class="col-md-3 col-sm-3">
-				<div class="overview_block">
-					<i class="fa fa-book"></i>
-					<div class="icon_number">10</div>
-					<div class="title">CLAIMED BADGES</div>
-				</div>
+				<a href="">
+					<div class="overview_block">
+						<i class="fa fa-id-badge"></i>
+						<div class="icon_number">10</div>
+						<div class="title">CLAIMED BADGES</div>
+					</div>
+				</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-6 col-sm-12">
+			<div class="col-md-12 col-sm-12">
 				<div class="graph_block">
 					<h3 class="pull-left">Login and Course Completed</h3>
+					<div class="clearfix"></div>
 					<div class="logincourse_tabs">
-						<ul class="nav nav-tabs" role="tablist">
+						<p>Content yut to come...</p>
+						<!-- <ul class="nav nav-tabs" role="tablist">
 							<li role="logincourse" class="active">
 								<a href="#Today" aria-controls="Today" role="tab" data-toggle="tab">Today</a>
 							</li>
@@ -105,62 +115,9 @@
 								<div class="clearfix"></div>
 							</div>
 						</div>
-						<div class="clearfix"></div>
+						<div class="clearfix"></div> -->
 					</div>
 					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="col-md-6 col-sm-12">
-				<div class="invited_user_block">
-					<h3>Recent 5 Invitations</h3>
-					<div class="table-responsive">
-						<div class="scroll_invitetbl">
-							<table class="table table-hover" style="width:100%">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Email</th>
-										<th class="text-center instructor_width">Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr *ngFor="let invitation of recentInvitation; let i = index">
-										<td>{{invitation.FirstName}}</td>
-										<td>{{invitation.EmailAddress}}</td>
-										<td class="text-center">
-											<div *ngIf="invitation.IsStatus =='0'">
-												<span>Accepted</span>
-											</div>
-											<div *ngIf="invitation.IsStatus =='1'">
-												<span>Pending</span>
-											</div>
-										</td>
-
-									</tr>
-									<!-- <tr>
-								<td>Trushant Mehta</td>
-								<td>TMehta@TheOpenEyes.com</td>
-								<td class="text-center"><span class="invited">Invited</span></td>
-							</tr>
-							<tr>
-								<td>Brielle Williamson</td>
-								<td>brielle.williamson@infosys.com</td>
-								<td class="text-center"><span class="invited">Invited</span></td>
-							</tr>
-							<tr>
-								<td>Michael Tilahun</td>
-								<td>michael.til@tcs.com</td>
-								<td class="text-center"><span class="accepted">Accepted</span></td>
-							</tr>
-							<tr>
-								<td>Garrett Winters</td>
-								<td>garrett.winters@yahoo.com</td>
-								<td class="text-center"><span class="accepted">Accepted</span></td>
-							</tr> -->
-								</tbody>
-							</table>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -267,9 +224,9 @@
 						<ul>
 							<li>
 								<span class="warning"></span>In Progress</li>
-							  <li>
+							<li>
 								<span class="primary"></span>Pending</li>
-							  <li>
+							<li>
 								<span class="success"></span>Completed</li>
 						</ul>
 					</div>
@@ -387,7 +344,7 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-6 col-sm-12">
+			<!-- <div class="col-md-6 col-sm-12">
 				<div class="notification_block">
 					<h3>Recent Notifications</h3>
 					<div class="notification_red">
@@ -471,13 +428,70 @@
 						</div>
 					</div>
 				</div>
+			</div> -->
+
+
+			<div class="col-md-6 col-sm-12">
+				<div class="invited_user_block">
+					<h3>Recent 5 Invitations</h3>
+					<div class="table-responsive">
+						<div class="scroll_invitetbl">
+							<table class="table table-hover" style="width:100%">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Email</th>
+										<th class="text-center instructor_width">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let invitation of recentInvitation; let i = index">
+										<td>{{invitation.FirstName}}</td>
+										<td>{{invitation.EmailAddress}}</td>
+										<td class="text-center">
+											<div *ngIf="invitation.IsStatus =='0'">
+												<span>Accepted</span>
+											</div>
+											<div *ngIf="invitation.IsStatus =='1'">
+												<span>Pending</span>
+											</div>
+										</td>
+
+									</tr>
+									<!-- <tr>
+									<td>Trushant Mehta</td>
+									<td>TMehta@TheOpenEyes.com</td>
+									<td class="text-center"><span class="invited">Invited</span></td>
+								</tr>
+								<tr>
+									<td>Brielle Williamson</td>
+									<td>brielle.williamson@infosys.com</td>
+									<td class="text-center"><span class="invited">Invited</span></td>
+								</tr>
+								<tr>
+									<td>Michael Tilahun</td>
+									<td>michael.til@tcs.com</td>
+									<td class="text-center"><span class="accepted">Accepted</span></td>
+								</tr>
+								<tr>
+									<td>Garrett Winters</td>
+									<td>garrett.winters@yahoo.com</td>
+									<td class="text-center"><span class="accepted">Accepted</span></td>
+								</tr> -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
+
+
 			<div class="col-md-6 col-sm-12">
 				<div class="audit_block">
 					<h3>Recent Activities</h3>
 					<div class="audit_box" *ngFor="let activity of recentActivity; let i = index">
 						<div class="title">
-							<span class="dot"></span>{{activity.Activity}} ({{activity.Module}} )
+							<span class="dot"></span>{{activity.Activity}} ({{activity.Module}})
 							<span class="name">By {{activity.FirstName}} {{activity.LastName}}</span>
 						</div>
 						<div class="time">{{activity.CreatedOn}}</div>

@@ -41,7 +41,7 @@ class InstructorCourses_model extends CI_Model
 				print_r($Instructor_name);
 
 
-				$this->db->select('ts.SessionName,ts.StartTime,ts.StartDate,tc.CourseFullName');
+				$this->db->select('ts.CourseSessionId,ts.SessionName,ts.StartTime,ts.StartDate,tc.CourseFullName');
 				$this->db->where('ts.CourseSessionId', $post_data['CourseSessionId']);
 				$this->db->join('tblcourse tc','ts.CourseId = tc.CourseId');
 				$result = $this->db->get('tblcoursesession ts');

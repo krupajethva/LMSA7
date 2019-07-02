@@ -412,8 +412,22 @@
         </div>
       </div>
       <!-- NEW END -->
-
       <div class="col-md-6 col-sm-6">
+          <div class="audit_block">
+            <h3 class="pull-left">Recent Activities</h3>
+            <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
+            <div class="clearfix"></div>
+            <div class="audit_box" *ngFor="let activity of LearnerActivities">
+              <div class="title">
+                <span class="dot"></span>{{activity.Activity}}
+                <!-- <span class="name">By Shane Griffin</span> -->
+              </div>
+              <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      <!-- <div class="col-md-6 col-sm-6">
         <div class="content_block">
           <div class="scroll_calender">
             <div class="color_description">
@@ -431,14 +445,16 @@
           </div>
         </div>
         <div class="clearfix"></div>
-      </div>
+      </div> -->
+
+
     </div>
     <div class="clearfix"></div>
     <div class="row">
-      <div class="col-md-6 col-sm-6">
+      <!-- <div class="col-md-6 col-sm-6">
         <div class="notification_block">
           <h3 class="pull-left">Recent Notifications</h3>
-          <!-- <a routerLink="/notification-list" class="next_btn pull-right">Notification List</a> -->
+         
           <div class="clearfix"></div>
           <div class="notification_red">
             <div class="row">
@@ -531,13 +547,12 @@
           <div class="audit_box" *ngFor="let activity of LearnerActivities">
             <div class="title">
               <span class="dot"></span>{{activity.Activity}}
-              <!-- <span class="name">By Shane Griffin</span> -->
             </div>
             <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
           </div>
           <div class="clearfix"></div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="clearfix"></div>
   </div>

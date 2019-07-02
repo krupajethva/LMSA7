@@ -94,7 +94,9 @@
 						<div class="course_img">
 							<img src="assets/Instructor/{{course.Fid}}/image/{{course.FilePath}}" alt="" class="img-responsive" />
 						</div>
-						<div class="course_title">{{course.CourseFullName}}</div>
+						<div class="course_title">
+							<a href="">{{course.CourseFullName}}</a>
+						</div>
 						<div class="course_btn text-center">
 							<!-- <a routerLink="/course-detail" class="next_btn">Continue</a> -->
 							<a class="back_btn" (click)="SessionClick(course.CourseId,i)">Your Session</a>
@@ -113,11 +115,11 @@
 											<div class="pull-right">
 
 												<ul class="statusicons">
-													<li class="completestatus">
+													<li class="success">
 														<span></span> Complete</li>
-													<li class="inprogressstatus">
+													<li class="warning">
 														<span></span> In Progress</li>
-													<li class="pendingstatus">
+													<li class="primary">
 														<span></span> Pending</li>
 												</ul>
 											</div>
@@ -139,16 +141,16 @@
 													<h4>{{SessionList.SessionName}}</h4>
 													<ul class="icon">
 														<li>
-															<i class="fa fa-calendar"></i>
-															<strong>Instructor : </strong> {{SessionList.FirstName}}</li>
+															<i class="fa fa-users"></i>
+															<strong>Instructors : </strong> {{SessionList.FirstName}}</li>
 														<li>
-															<i class="fa fa-user"></i>
+															<i class="fa fa-calendar"></i>
 															<strong>Start Date : </strong> {{SessionList.StartDate}}</li>
 														<li>
 															<i class="fa fa-calendar"></i>
 															<strong>End Date : </strong> {{SessionList.EndDate}}</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-calendar"></i>
 															<strong>Weekday : </strong>
 															{{SessionList.monday}}
 															<span *ngIf="SessionList.monday!='' && (SessionList.tuesday!='' || SessionList.wednesday!='' || SessionList.thursday!='' || SessionList.friday!='' || SessionList.saturday!=''|| SessionList.sunday!='')">,</span>
@@ -165,23 +167,25 @@
 															{{SessionList.sunday}}
 														</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-clock-o"></i>
 															<strong>Start Time : </strong> {{SessionList.StartTime}}</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-clock-o"></i>
 															<strong>End Time : </strong> {{SessionList.EndTime}}</li>
 														<li>
-															<i class="fa fa-comments"></i>
+															<i class="fa fa-table"></i>
 															<strong>Total Seats : </strong>{{SessionList.TotalSeats}}</li>
 														<li>
-															<i class="fa fa-user"></i>
+															<i class="fa fa-table"></i>
 															<strong>Pending Seats : </strong> {{SessionList.TotalSeats-SessionList.RemainingSeats}}</li>
 														<li *ngIf="SessionList.Result!=NULL">
 															<i class="fa fa-user"></i>
 															<strong>Your Result : </strong> {{SessionList.Result}}% </li>
-														<li *ngIf="SessionList.Result!=NULL && SessionList.ResultId !=NULL">
-															<a (click) = "viewcertificate(SessionList.ResultId,i)"><button class="back_btn"><i aria-hidden="true" class="fa fa-eye"></i> View Certificate </button></a>
-														</li>
+														<!-- <li *ngIf="SessionList.Result!=NULL && SessionList.ResultId !=NULL" class="certi_btn text-center">
+															<a (click)="viewcertificate(SessionList.ResultId,i)">
+																<button class="next_btn text-center"> View Certificate </button>
+															</a>
+														</li> -->
 														<!-- <li class="enroll_course_tag" *ngIf="((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd'))">
 																<strong>Completed</strong>
 															</li>
@@ -200,8 +204,14 @@
 														<a *ngIf="SessionList.taketest>0 && SessionList.Result==NULL && SessionList.SessionStatus==2" (click)="Continue(SessionList.CourseSessionId)"
 														 class="next_btn pull-right">Continue test</a>
 
-														<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==2">
-															<strong>Completed</strong>
+														<li class="enroll_course_tag no_margin no_padding" *ngIf="SessionList.SessionStatus==2">
+															<div class="col-md-6 complete_status">
+																<strong>Completed</strong>
+															</div>
+															<div *ngIf="SessionList.Result!=NULL && SessionList.ResultId !=NULL" class="col-md-6 certi_btn">
+																<button class="publishbtn" (click)="viewcertificate(SessionList.ResultId,i)">
+																	<i class="fa fa-eye"></i> View Certificate</button>
+															</div>
 														</li>
 														<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==0">
 															<a (click)="startsession(CourseSesssionList,i)">

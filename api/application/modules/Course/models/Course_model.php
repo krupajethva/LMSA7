@@ -167,8 +167,6 @@ class Course_model extends CI_Model
 				$topic_data = array(
 					'CourseId'=>$CourseId,
 					'TopicName' => $topic['TopicName']
-				
-					
 				);
 				$res=$this->db->query('call addtopic(?,?,@id)',$topic_data);
 				 $out_param_query1 = $this->db->query('select @id as out_param;');

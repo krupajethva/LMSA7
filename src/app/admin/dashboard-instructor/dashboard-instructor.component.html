@@ -55,48 +55,56 @@
     <h3>Overview</h3>
     <div class="row">
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg1">
-          <div class="pull-left">
-            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg1">
+            <div class="pull-left">
+              <i class="fa fa-youtube-play" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">{{totalCourses}}</div>
+              <div class="title">Courses</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">{{totalCourses}}</div>
-            <div class="title">Courses</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg2">
-          <div class="pull-left">
-            <i class="fa fa-leanpub" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg2">
+            <div class="pull-left">
+              <i class="fa fa-leanpub" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">{{totalLesson}}</div>
+              <div class="title">Lessons</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">{{totalLesson}}</div>
-            <div class="title">Lessons</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg3">
-          <div class="pull-left">
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg3">
+            <div class="pull-left">
+              <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">{{totalStudent}}</div>
+              <div class="title">Students</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">{{totalStudent}}</div>
-            <div class="title">Students</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg4">
-          <div class="pull-left">
-            <i class="fa fa-money" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg4">
+            <div class="pull-left">
+              <i class="fa fa-money" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">$22</div>
+              <div class="title">Earnings</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">$22</div>
-            <div class="title">Earnings</div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -116,9 +124,10 @@
               </select>
             </form>
           </div>
-
+          <div class="clearfix"></div>
           <div class="tab-content">
-            <div class="tab-pane active" id="Tab1">
+            <p>Content yut to come...</p>
+            <!-- <div class="tab-pane active" id="Tab1">
               <div id="instructorgraph" class="chart"></div>
             </div>
             <div class="tab-pane" id="Tab2">
@@ -129,7 +138,7 @@
             </div>
             <div class="tab-pane" id="Tab4">
               <div id="instructorgraph3" class="chart"></div>
-            </div>
+            </div> -->
           </div>
 
           <!-- <div id="instructorgraph" class="chart"></div> -->
@@ -352,6 +361,21 @@
         </div>
       </div>
       <div class="col-md-6 col-sm-6">
+        <div class="audit_block">
+          <h3 class="pull-left">Recent Activities</h3>
+          <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
+          <div class="clearfix"></div>
+          <div class="audit_box" *ngFor="let activity of recentActivity">
+            <div class="title">
+              <span class="dot"></span>{{activity.Activity}} ( {{activity.Module}} )
+              <!-- <span class="name">By Shane Griffin</span> -->
+            </div>
+            <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <!-- <div class="col-md-6 col-sm-6">
         <div class="content_block">
           <div class="scroll_calender">
             <div class="color_description">
@@ -370,11 +394,11 @@
           </div>
         </div>
         <div class="clearfix"></div>
-      </div>
+      </div> -->
     </div>
     <div class="clearfix"></div>
     <div class="row">
-      <div class="col-md-6 col-sm-6">
+      <!-- <div class="col-md-6 col-sm-6">
         <div class="notification_block">
           <h3 class="pull-left">Recent Notifications</h3>
           <a routerLink="/notification-list" class="next_btn pull-right">Notification List</a>
@@ -461,8 +485,8 @@
           </div>
           <div class="clearfix"></div>
         </div>
-      </div>
-      <div class="col-md-6 col-sm-6">
+      </div> -->
+      <!-- <div class="col-md-6 col-sm-6">
         <div class="audit_block">
           <h3 class="pull-left">Recent Activities</h3>
           <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
@@ -470,13 +494,13 @@
           <div class="audit_box" *ngFor="let activity of recentActivity">
             <div class="title">
               <span class="dot"></span>{{activity.Activity}} ( {{activity.Module}} )
-              <!-- <span class="name">By Shane Griffin</span> -->
+             
             </div>
             <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
           </div>
         </div>
         <div class="clearfix"></div>
-      </div>
+      </div> -->
     </div>
     <div class="clearfix"></div>
   </div>
