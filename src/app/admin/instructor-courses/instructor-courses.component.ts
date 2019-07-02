@@ -328,18 +328,24 @@ export class InstructorCoursesComponent implements OnInit {
   Instructor_Invite(UserId,CourseSessionId,type) {
     debugger
     this.InstructorCoursesService.Instructor_Invite(UserId,CourseSessionId,type)
-      // .then((data) => {
-      //       let index = this.projectList.indexOf(project);
-      //       if (index != -1) {
-      //         this.projectList.splice(index, 1);
-      //       }
+      .then((data) => {
+        if (data) {
+          //this.CourseSesssionList[k].SessionStatus = 1;
+          swal({
+            type: 'Re-Invite',
+            title: 'Invitation!',
+            text: 'Instructor has been Re-Invited.',
+            showConfirmButton: false,
+            timer: 3000
+          })
+        }
 
-      // },
-      //   (error) => {
-      //     if (error.text) {
-      //      //error
-      //     }
-      //   });
+      },
+        (error) => {
+          if (error.text) {
+           //error
+          }
+        });
 
 }
   StartSession(CourseSessionId, k) {
