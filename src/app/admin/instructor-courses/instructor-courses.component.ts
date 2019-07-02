@@ -355,7 +355,8 @@ export class InstructorCoursesComponent implements OnInit {
     })
       .then((result) => {
         if (result.value) {
-          this.InstructorCoursesService.StartSession(CourseSessionId)
+          var UserId = this.globals.authData.UserId;
+          this.InstructorCoursesService.StartSession(CourseSessionId,UserId)
             //.map(res => res.json())
             .then((data) => {
               if (data) {

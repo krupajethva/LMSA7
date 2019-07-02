@@ -61,10 +61,10 @@ export class InstructorCoursesService {
     });
     return promise;
   }
-  StartSession(CourseSessionId) {
+  StartSession(CourseSessionId,UserId) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'InstructorCourses/StartSession/' + CourseSessionId)
+      this.http.get(this.globals.baseAPIUrl + 'InstructorCourses/StartSession/' + CourseSessionId+'/'+UserId)
         .toPromise()
         .then(
           res => { // Success

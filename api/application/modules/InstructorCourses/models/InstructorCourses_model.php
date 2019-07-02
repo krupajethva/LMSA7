@@ -393,10 +393,129 @@ class InstructorCourses_model extends CI_Model
 			return false;
 		}
 	}
-	function StartSession($CourseSessionId = NULL)
+	function StartSession($CourseSessionId = NULL,$UserId)
 	{
 		try {
 			if ($CourseSessionId) {
+
+				$this->db->select('cs.StartDate,cs.EndDate,cs.weekday');
+				$this->db->where('cs.CourseSessionId',$CourseSessionId); 	
+				$result1 = $this->db->get('tblcoursesession cs');
+				$res=array();
+				$result1 = json_decode(json_encode($result1->result()), TRUE);
+				foreach($result1 as $row)
+				{ 
+				  $row['monday'] = substr($row['weekday'], 0, 1);
+					$row['tuesday'] = substr($row['weekday'], 2, 1);
+					$row['wednesday'] = substr($row['weekday'], 4, 1);
+					$row['thursday'] = substr($row['weekday'], 6, 1);
+					$row['friday'] = substr($row['weekday'], 8, 1);
+					$row['saturday'] = substr($row['weekday'], 10, 1);
+					$row['sunday'] = substr($row['weekday'], 12, 1);
+				   if($row['monday']==1)
+				   {
+					$date = new DateTime($row['StartDate']);
+					$date->modify('next monday');
+					$begin = $date;
+					$end = new DateTime($row['EndDate']);
+					$daterange = new DatePeriod($begin, new DateInterval('P7D'), $end);
+					
+					foreach($daterange as $date){
+					$date1=0;
+					array_push($res,$date1);
+					}
+				  }
+				  if($row['tuesday']==1)
+				   {
+					$date = new DateTime($row['StartDate']);
+					$date->modify('next tuesday');
+					$begin = $date;
+					$end = new DateTime($row['EndDate']);
+					$daterange = new DatePeriod($begin, new DateInterval('P7D'), $end);
+					
+					foreach($daterange as $date){
+					$date1=0;
+					array_push($res,$date1);
+					}
+				  }
+				  if($row['wednesday']==1)
+				   {
+					$date = new DateTime($row['StartDate']);
+					$date->modify('next wednesday');
+					$begin = $date;
+					$end = new DateTime($row['EndDate']);
+					$daterange = new DatePeriod($begin, new DateInterval('P7D'), $end);
+					
+					foreach($daterange as $date){
+					$date1=0;
+					array_push($res,$date1);
+					}
+				  }
+				  if($row['thursday']==1)
+				   {
+					$date = new DateTime($row['StartDate']);
+					$date->modify('next thursday');
+					$begin = $date;
+					$end = new DateTime($row['EndDate']);
+					$daterange = new DatePeriod($begin, new DateInterval('P7D'), $end);
+					
+					foreach($daterange as $date){
+					$date1=0;
+					array_push($res,$date1);
+					}
+				  }
+				  if($row['friday']==1)
+				   {
+					$date = new DateTime($row['StartDate']);
+					$date->modify('next friday');
+					$begin = $date;
+					$end = new DateTime($row['EndDate']);
+					$daterange = new DatePeriod($begin, new DateInterval('P7D'), $end);
+					
+					foreach($daterange as $date){
+					$date1=0;
+					array_push($res,$date1);
+					}
+				  }
+				  if($row['saturday']==1)
+				  {
+				   $date = new DateTime($row['StartDate']);
+				   $date->modify('next saturday');
+				   $begin = $date;
+				   $end = new DateTime($row['EndDate']);
+				   $daterange = new DatePeriod($begin, new DateInterval('P7D'), $end);
+				   
+				   foreach($daterange as $date){
+				   $date1=0;
+				   array_push($res,$date1);
+				   }
+				 }
+				 if($row['sunday']==1)
+				 {
+				  $date = new DateTime($row['StartDate']);
+				  $date->modify('next sunday');
+				  $begin = $date;
+				  $end = new DateTime($row['EndDate']);
+				  $daterange = new DatePeriod($begin, new DateInterval('P7D'), $end);
+				  
+				  foreach($daterange as $date){
+				  $date1=0;
+				  array_push($res,$date1);
+				  }
+				}
+					
+			}
+			$Attendance = implode(',', $res);
+
+				$Cart_data = array(
+					'Attendance' =>  $Attendance,
+					'UpdatedBy' =>$UserId,
+					'UpdatedOn' => date('y-m-d H:i:s')
+			
+				);
+				$this->db->where('CourseSessionId', $CourseSessionId);
+				$updated_result=$this->db->update('tblcourseuserregister',$Cart_data);
+				
 				$Course_data = array(
 					'SessionStatus' => 1
 				);
