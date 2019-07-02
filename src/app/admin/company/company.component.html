@@ -245,13 +245,13 @@
 
                 <div class="row">
                   <div class="col-md-12 col-sm-12  text-center">
-                    <button *ngIf="companyEntity.CompanyId==0" type="submit" class="next_btn">
+                    <button *ngIf="companyEntity.CompanyId==0" type="submit" class="next_btn m_5">
                       <span>Add</span>
                     </button>
-                    <button *ngIf="companyEntity.CompanyId>0" type="submit" class="next_btn">
+                    <button *ngIf="companyEntity.CompanyId>0" type="submit" class="next_btn m_5">
                       <span>Update</span>
                     </button>
-                    <button *ngIf="companyEntity.CompanyId==0" class="back_btn" type="button" (click)="clearForm(companyForm)">
+                    <button *ngIf="companyEntity.CompanyId==0" class="back_btn m_5" type="button" (click)="clearForm(companyForm)">
                       <span>Clear</span>
                     </button>
                   </div>
