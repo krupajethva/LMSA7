@@ -129,6 +129,32 @@ class Instructorinvi_model extends CI_Model
 			return false;
 		}
 	}
+
+	public function AcceptorDecline($type, $CourseSessionId, $UserId)
+	{
+		if (!empty($UserId)) {
+			try {
+				$this->db->select('Approval');
+				$this->db->where('CourseSessionId', $CourseSessionId);
+				$this->db->where('UserId', $UserId);
+				$this->db->from('tblcourseinstructor');
+				$result = $this->db->get();
+				$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) {
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+				$res = array();
+				if ($result->result()) {
+					$res = $result->result();
+				}
+				return $res;
+			} catch (Exception $e) {
+				trigger_error($e->getMessage(), E_USER_ERROR);
+				return false;
+			}
+		}
+	}
 	public function EditInstRequest($type, $CourseSessionId, $UserId)
 	{
 		if ($type) {
@@ -165,7 +191,6 @@ class Instructorinvi_model extends CI_Model
 			$this->db->select('UserId');
 			$this->db->where('CourseSessionId', $CourseSessionId);
 			$res1 = $this->db->get('tblcourseuserregister');
-
 		} else {
 			return false;
 		}

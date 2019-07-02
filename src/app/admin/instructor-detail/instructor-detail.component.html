@@ -28,14 +28,16 @@
 	<div class="col-md-12">
 		<div class="course_list_block instructor_block">
 			<h1 class="pull-left">{{FirstName}} {{LastName}}</h1>
-			<div class="follow_block pull-right">{{totalFollowers}} Followers
+			<div class="follow_block pull-right">
+				<a href="">{{totalFollowers}} Followers</a>
 				<span *ngIf="InstructorId!=globals.authData.UserId">|</span>
-				<button *ngIf="flag==0 && InstructorId!=globals.authData.UserId" class="back_btn" id="follow" data-toggle="tooltip" data-placement="top"
-				 title="Follow" (click)="followInstructor()">
-					<i class="fa fa-user-plus"></i>Follow Me</button>
-				<button *ngIf="flag!=0 && InstructorId!=globals.authData.UserId" class="next_btn" id="unfollow" data-toggle="tooltip" data-placement="top"
+				<button *ngIf="flag==0 && InstructorId!=globals.authData.UserId" id="follow" data-toggle="tooltip" data-placement="top" title="Follow"
+				 (click)="followInstructor()">
+					<i class="fa fa-user-plus"></i>
+				</button>
+				<button *ngIf="flag!=0 && InstructorId!=globals.authData.UserId" id="unfollow" data-toggle="tooltip" data-placement="top"
 				 title="Unfollow" (click)="unfollowInstructor()">
-					<i class="fa fa-user-times"></i>Unfollow
+					<i class="fa fa-user-times"></i>
 				</button>
 			</div>
 			<div class="clearfix"></div>
@@ -49,7 +51,11 @@
 					<i class="fa fa-graduation-cap"></i>
 					<strong>{{Education}}</strong>
 				</span>
-				<br>{{Biography}}</p>
+				<span class="education_type">
+					<i class="fa fa-briefcase" aria-hidden="true"></i>
+					<strong>{{Biography}}</strong>
+				</span>
+			</p>
 			<div class="clearfix"></div>
 			<h3>Active Courses</h3>
 			<div class="row">
