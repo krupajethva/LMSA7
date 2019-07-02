@@ -94,7 +94,9 @@
 						<div class="course_img">
 							<img src="assets/Instructor/{{course.Fid}}/image/{{course.FilePath}}" alt="" class="img-responsive" />
 						</div>
-						<div class="course_title"><a href="">{{course.CourseFullName}}</a></div>
+						<div class="course_title">
+							<a href="">{{course.CourseFullName}}</a>
+						</div>
 						<div class="course_btn text-center">
 							<!-- <a routerLink="/course-detail" class="next_btn">Continue</a> -->
 							<a class="back_btn" (click)="SessionClick(course.CourseId,i)">Your Session</a>
@@ -179,9 +181,11 @@
 														<li *ngIf="SessionList.Result!=NULL">
 															<i class="fa fa-user"></i>
 															<strong>Your Result : </strong> {{SessionList.Result}}% </li>
-														<li *ngIf="SessionList.Result!=NULL && SessionList.ResultId !=NULL">
-															<a (click) = "viewcertificate(SessionList.ResultId,i)"><button class="back_btn"><i aria-hidden="true" class="fa fa-eye"></i> View Certificate </button></a>
-														</li>
+														<!-- <li *ngIf="SessionList.Result!=NULL && SessionList.ResultId !=NULL" class="certi_btn text-center">
+															<a (click)="viewcertificate(SessionList.ResultId,i)">
+																<button class="next_btn text-center"> View Certificate </button>
+															</a>
+														</li> -->
 														<!-- <li class="enroll_course_tag" *ngIf="((SessionList.EndDate) < (datea | date : 'yyyy-MM-dd'))">
 																<strong>Completed</strong>
 															</li>
@@ -200,8 +204,14 @@
 														<a *ngIf="SessionList.taketest>0 && SessionList.Result==NULL && SessionList.SessionStatus==2" (click)="Continue(SessionList.CourseSessionId)"
 														 class="next_btn pull-right">Continue test</a>
 
-														<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==2">
-															<strong>Completed</strong>
+														<li class="enroll_course_tag no_margin no_padding" *ngIf="SessionList.SessionStatus==2">
+															<div class="col-md-6 complete_status">
+																<strong>Completed</strong>
+															</div>
+															<div *ngIf="SessionList.Result!=NULL && SessionList.ResultId !=NULL" class="col-md-6 certi_btn">
+																<button class="publishbtn" (click)="viewcertificate(SessionList.ResultId,i)">
+																	<i class="fa fa-eye"></i> View Certificate</button>
+															</div>
 														</li>
 														<li class="enroll_course_tag" *ngIf="SessionList.SessionStatus==0">
 															<a (click)="startsession(CourseSesssionList,i)">

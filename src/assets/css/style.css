@@ -651,6 +651,17 @@ footer.register_footer a:hover{color:var(--theme-color); }
   text-transform: capitalize;
   word-break: break-word;
 }
+.news-blog li.enroll_course_tag .complete_status strong{    padding: 5px 0px;
+  display: block;}
+.news-blog li.enroll_course_tag .certi_btn{    padding: 0;
+  background: #fff;
+  border-top: 1px solid #5cb85c;}
+.news-blog li.enroll_course_tag .certi_btn button  {    border: 0;
+    background: transparent;
+    color: #5cb85c;
+    font-size: 13px;
+    padding: 5px 0px;}
+.news-blog li.enroll_course_tag .certi_btn button i{color: #5cb85c;}
 .news-blog li.enroll_course_tag{ background: #00254a;
   color: #fff;
   padding: 5px 10px;
@@ -967,7 +978,7 @@ footer.register_footer a:hover{color:var(--theme-color); }
   line-height: 35px;
   vertical-align: middle;
   float: right;}
-.course_list_right .instrutor_course .users .viewall_instructor_btn i{    color: #2f607e;
+.course_list_right .instrutor_course .users .viewall_instructor_btn i{    color: #102749;
       font-size: 16px;}
 .course_list_right .instrutor_course .users .name_box i{display: block; font-style: normal; line-height: 35px;}
 /* .course_list_right .instrutor_course .users .name_box span{display: block; float: right; top: 20px; right: 10px; position: absolute;} */
