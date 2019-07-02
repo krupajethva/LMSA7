@@ -510,8 +510,8 @@ class CourseScheduler_model extends CI_Model
 							'CountryId' => $Courseschedular['CountryId'],
 							'StateId' => $Courseschedular['StateId'],
 							'Location' => $Courseschedular['Location'],
-							'PublishStatus' => $PublishStatus,
 							'weekday' => $weekday,
+							'PublishStatus' => $PublishStatus,
 							'CreatedBy' => $post_Course['CreatedBy'],
 							'CreatedOn' => date('y-m-d H:i:s')
 						);
