@@ -425,7 +425,7 @@ export class DashboardInstructorComponent implements OnInit {
 
     // PERFECT SCROLLBAR
     new PerfectScrollbar('.scroll_score');
-    new PerfectScrollbar('.scroll_calender');
+    //new PerfectScrollbar('.scroll_calender');
     // END PERFECT SCROLLBAR
 
   }

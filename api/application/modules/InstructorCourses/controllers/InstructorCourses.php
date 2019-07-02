@@ -491,11 +491,11 @@ class InstructorCourses extends CI_Controller
 		}
 	}
 
-	public function StartSession($CourseSessionId = NULL)
+	public function StartSession($CourseSessionId = NULL,$UserId= NULL)
 	{
 		if (!empty($CourseSessionId)) {
 
-			$data = $this->InstructorCourses_model->StartSession($CourseSessionId);
+			$data = $this->InstructorCourses_model->StartSession($CourseSessionId,$UserId);
 			echo json_encode($data);
 		}
 	}
