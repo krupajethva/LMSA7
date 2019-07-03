@@ -31,6 +31,23 @@ class InstructorCourses_model extends CI_Model
 			if (!empty($data)) {
 
 				$post_data = $data;
+				if($post_data['type']=="Revoke")
+				{
+					$revoke_data = array(
+						'Approval' => 3
+					);
+					$this->db->where('CourseSessionId', $post_data['CourseSessionId']);
+					$this->db->where('UserId', $post_data['UserId']);
+					$revoke = $this->db->update('tblcourseinstructor', $revoke_data);
+				}else
+				{
+					$reinvite_data = array(
+						'Approval' => 0
+					);
+					$this->db->where('CourseSessionId', $post_data['CourseSessionId']);
+					$this->db->where('UserId', $post_data['UserId']);
+					$reinvite = $this->db->update('tblcourseinstructor', $reinvite_data);
+				}
 				//echo $post_data;
 				$this->db->select('FirstName,LastName,EmailAddress');
 				$this->db->where('UserId', $post_data['UserId']);

@@ -13,15 +13,18 @@
         <div class="breadcrumb_block pull-right">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a>
+                    <a routerLink="/dashboard">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a>Company</a>
+                   
+                    <a routerLink="/company">Company</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">List</li>
+                <li class="breadcrumb-item active" aria-current="page">Company List</li>
             </ul>
+
+
         </div>
         <div class="clearfix"></div>
 
@@ -30,9 +33,12 @@
 
 </div>
 <div class="content_block">
-    <div class="col-md-6 col-sm-6 pull-right">
+    <!-- <div class="col-md-6 col-sm-6 pull-right">
         <a routerLink="/company-list" class="next_btn pull-right">Add a Company</a>
-    </div>
+    </div> -->
+    <div class="col-md-6 col-sm-6 pull-right add_btn">
+            <a routerLink="/company" class="next_btn pull-right">Add a Company</a>
+        </div>
     <div class="clearfix"></div>
     <div class="col-md-12">
         <table id="list_tables" class="table table-hover" style="width:100%">
@@ -55,21 +61,25 @@
                     <td>{{Company.Website}}</td>
                     <td class="text-center">{{Company.PhoneNumber}}</td>
                     <td class="text-center">
-                        <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="Company.IsActive==1 ? 'Active' : 'Deactive'">
-                            <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(Company,i)" [checked]="Company.IsActive==1"
-                                value="Yes">
+                        <div class="activeyes_box" data-toggle="tooltip" data-placement="top"
+                            [attr.title]="Company.IsActive==1 ? 'Active' : 'Deactive'">
+                            <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(Company,i)"
+                                [checked]="Company.IsActive==1" value="Yes">
                             <label for="active{{i}}"></label>
                         </div>
                     </td>
                     <td class="text-center">
-                        <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/company/edit/{{Company.CompanyId}}">
+                        <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit"
+                            routerLink="/company/edit/{{Company.CompanyId}}">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button *ngIf="Company.isdisabled>0" data-toggle="tooltip" [disabled]="Company.isdisabled>0" data-type="Record" class="delete"
+                        <button *ngIf="Company.isdisabled>0" data-toggle="tooltip" [disabled]="Company.isdisabled>0"
+                            data-type="Record" class="delete"
                             title="Company can't be deleted as it is already assigned to an active User's profile">
                             <i class="fa fa-trash"></i>
                         </button>
-                        <button class="delete" *ngIf="Company.isdisabled==0" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteCompany(Company)">
+                        <button class="delete" *ngIf="Company.isdisabled==0" data-toggle="tooltip" data-placement="top"
+                            title="Delete" (click)="deleteCompany(Company)">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>

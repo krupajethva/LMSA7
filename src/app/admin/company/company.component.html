@@ -1,7 +1,8 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
+   
     <div class="title_text">
-      <i class="fa fa-building" aria-hidden="true"></i>{{header}} a Company
+      <i class="fa fa-building" aria-hidden="true"></i>{{header}} Company
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
@@ -14,15 +15,17 @@
     </div> -->
 
     <div class="breadcrumb_block pull-right">
+     
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-          <a>
+          <a routerLink="/dashboard">
             <i class="fa fa-home"></i>
           </a>
         </li>
-        <li class="breadcrumb-item">
-          <a>Company</a>
-        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a routerLink="/company-list">
+              Company
+            </a></li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
     </div>
@@ -31,13 +34,15 @@
   <div class="clearfix"></div>
 
 </div>
-<div class="content_block course_detail_block">
+<div class="content_block">
+    <div class="list_button_block">
   <div class="col-md-12 col-sm-12">
     <div class="course_details">
       <div class="mydivs">
         <div class="row">
           <div class="col-md-12 col-sm-12">
             <h1 class="no_margin pull-left">ADD COMPANY</h1>
+            <a routerLink="/company-list" class="next_btn pull-right">List of Companies</a>
             <div class="form-group-active pull-right">
               <label>
                 <span>*</span>Active?</label>
@@ -271,5 +276,6 @@
 
       </div>
     </div>
+  </div>
   </div>
 </div>

@@ -325,24 +325,47 @@ export class InstructorCoursesComponent implements OnInit {
     $('#modalsession' + i).modal('hide');
   }
 
-  Instructor_Invite(UserId,CourseSessionId,type) {
+  Instructor_Invite(UserId,CourseSessionId,type,k,i) {
     debugger
+    this.globals.isLoading = true;
     this.InstructorCoursesService.Instructor_Invite(UserId,CourseSessionId,type)
       .then((data) => {
         if (data) {
           //this.CourseSesssionList[k].SessionStatus = 1;
-          swal({
-            type: 'Re-Invite',
-            title: 'Invitation!',
-            text: 'Instructor has been Re-Invited.',
-            showConfirmButton: false,
-            timer: 3000
-          })
+          if(type=="Revoke")
+          {
+            swal({
+              type: 'Revoke',
+              title: 'Instructor Revoke!',
+              text: 'Instructor has been Revoke.',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            this.CourseSesssionList[k].userdetails[i].Approval = 3;
+            this.globals.isLoading = false;
+
+          }else
+          {  
+            swal({
+              type: 'Re-Invite',
+              title: 'Invitation!',
+              text: 'Instructor has been Re-Invited.',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            this.CourseSesssionList[k].userdetails[i].Approval = 0;
+            this.globals.isLoading = false;
+          }
+         
+        }else
+        {
+          this.globals.isLoading = false;
         }
 
       },
         (error) => {
           if (error.text) {
+            this.globals.isLoading = false;
            //error
           }
         });

@@ -12,7 +12,7 @@
 		</div> -->
 
 		<div class="breadcrumb_block pull-right">
-			<ul class="breadcrumb">
+			<!-- <ul class="breadcrumb">
 				<li class="breadcrumb-item">
 					<a href="#">
 						<i class="fa fa-home"></i>
@@ -22,7 +22,19 @@
 					<a href="#">Category</a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page">Sub Category List</li>
-			</ul>
+			</ul> -->
+
+			<ul class="breadcrumb">
+					<li class="breadcrumb-item">
+							<a routerLink="/dashboard">
+								<i class="fa fa-home"></i>
+							</a>
+						</li>
+					<li class="breadcrumb-item">
+						<a routerLink="/category">Sub Category</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">Sub Category List</li>
+				</ul>
 			<div class="clearfix"></div>
 		</div>
 		<div class="clearfix"></div>
@@ -31,6 +43,9 @@
 
 </div>
 <div class="content_block">
+		<div class="col-md-6 col-sm-6 pull-right add_btn">
+				<a routerLink="/category" class="next_btn pull-right">Add a Sub Category</a>
+			</div>
 	<div class="col-md-12">
 		<table id="list_tables" class="table table-hover" style="width:100%">
 			<thead>
