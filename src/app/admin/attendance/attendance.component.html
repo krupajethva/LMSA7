@@ -107,8 +107,8 @@
         </form>
         <div class="clearfix"></div>
       </div>
-    </div>
-    <table *ngIf="listhide" id="list_tables" class="table table-responsive table-hover" style="width:100%">
+    </div>    
+    <table *ngIf="listhide && AttendanceList.length>0" id="list_tables" class="table table-responsive table-hover" style="width:100%">
       <thead>
         <tr>
           <th rowspan="2" class="text-center sr_no_width">#</th>
@@ -158,5 +158,8 @@
 
       </tbody>
     </table>
+    <div *ngIf = "AttendanceList.length <= 0">
+        No attendance found
+    </div>
   </div>
 </div>
