@@ -1,7 +1,7 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
     <div class="title_text">
-      <i class="fa fa-sitemap" aria-hidden="true"></i>{{header}} a Category
+      <i class="fa fa-sitemap" aria-hidden="true"></i>{{header}} Category
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
@@ -11,12 +11,16 @@
       </div> -->
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">
-            <i class="fa fa-home"></i>
-          </a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Category</li>
+          <li class="breadcrumb-item">
+              <a routerLink="/dashboard">
+                  <i class="fa fa-home"></i>
+              </a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+              <a routerLink="/Parentcategorylist">
+                Category
+              </a></li>
+        <!-- <li class="breadcrumb-item active" aria-current="page">Category</li> -->
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
     </div>

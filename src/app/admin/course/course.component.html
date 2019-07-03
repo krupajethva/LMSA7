@@ -1,8 +1,11 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
-    <div class="title_text" id="abc">
+    <!-- <div class="title_text" id="abc">
       <i class="fa fa-book" aria-hidden="true"></i>course
-    </div>
+    </div> -->
+    <div class="title_text">
+        <i class="fa fa-book" aria-hidden="true"></i>Add course
+      </div>
   </div>
   <div class="col-md-8 col-sm-8">
     <!-- <div class="welcome_message alert" role="alert">
@@ -11,13 +14,16 @@
     </div> -->
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">
-            <i class="fa fa-home"></i>
-          </a>
-        </li>
-
-        <li class="breadcrumb-item active" aria-current="page">Course</li>
+          <li class="breadcrumb-item">
+              <a routerLink="/dashboard">
+                  <i class="fa fa-home"></i>
+              </a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+              <a routerLink="/course-list">
+               Courses
+              </a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add</li>
       </ul>
     </div>
     <div class="clearfix"></div>
@@ -109,6 +115,7 @@
               </ul>
 
               <div class="form-group-active pull-right" [hidden]="!firstform">
+                
                 <label>
                   <span>*</span>Active?</label>
                 <div class="activeyes_box">
