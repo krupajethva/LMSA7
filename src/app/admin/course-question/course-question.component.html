@@ -27,18 +27,20 @@
   <div class="clearfix"></div>
 </div>
 <div class="content_block course_question_block">
+  
   <div class="row">
-    <div class="col-md-6 col-sm-6 pull-right">
+
+    <!-- <div class="col-md-6 col-sm-6">
       <a routerLink="/course-questionlist/{{cid}}" class="next_btn pull-right">List of Questions</a>
-    </div>
+    </div> -->
     <div class="clearfix"></div>
+    <div class="list_button_block">
     <div class="col-lg-12">
       <div class="form-bg">
         <div class="col-md-12 col-sm-12">
-          <div class="pull-left">
-            <h3>{{Coursename.CourseFullName}}</h3>
-          </div>
-          <div class="pull-right">
+            <h3 class="no_margin pull-left">{{Coursename.CourseFullName}}</h3>
+            <a routerLink="/course-questionlist/{{cid}}" class="next_btn pull-right">List of Questions</a>
+          <div class="form-group-active pull-right">
             <label>
               <span class="required">*</span>Active ?</label>
             <div class="activeyes_box">
@@ -47,6 +49,7 @@
               <label for="IsActive"></label>
             </div>
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
         <form class="form-validate" #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
@@ -129,4 +132,5 @@
   </div>
   <div class="clearfix"></div>
   <!-- End Inner Section -->
+</div>
 </div>
