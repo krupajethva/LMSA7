@@ -305,7 +305,7 @@ footer.footer_fixed.active_footermenu{width:94.3%; transition:all 0.4s ease 0s;}
   table.dataTable>tbody>tr.child ul.dtr-details{width: 100%;}
 .style_position{position:relative!important;}
 .right_content_block.style_position .bg_white_block:before{left: 15px;}
-.modal{overflow: hidden;}
+/* .modal{overflow: hidden;} */
 body.modal-open{margin-right: 0px;}
 .modal-backdrop{z-index: 9999;}
 .modal{z-index: 99999;}
@@ -490,7 +490,7 @@ footer.register_footer a:hover{color:var(--theme-color); }
 .course_detail_block .stars_block i{margin: 0 5px 0 0; color:#f9a825; font-size: 14px;}
 .course_detail_block .review_link{color: #2e2d31;}
 .course_detail_block .video_margin{margin: 0 15px 15px 0;}
-.course_detail_block .course_tabs .tab-content ul.list_li li{padding: 0px 0 7px 7px;background: url(../images/dot.png) left 5px no-repeat;background-size: 10px;}
+.course_detail_block .course_tabs .tab-content ul.list_li li{padding: 0px 0 7px 15px;background: url(../images/dot.png) left 5px no-repeat;background-size: 10px;}
 .course_detail_block .course_tabs .tab-content ul.list_li li > ul li{background: none;}
 .course_detail_block .course_tabs{display: block; position: relative; margin-bottom:15px;border: 1px solid #ccc;box-shadow: 0px 1px 5px #d6d6d6;}
 .course_detail_block .course_tabs .nav-tabs{ display: block; position: relative; width: 100%; padding: 0; margin: 0; border-bottom:1px solid #ccc;}
