@@ -32,7 +32,7 @@ export class InvitationacceptdeclineComponent implements OnInit {
 		this.resetEntity = {};
 		myInput();
 		let id = this.route.snapshot.paramMap.get('id');
-		console.log("hi");
+		
 		var id1 = new JwtHelperService().decodeToken(id);
 		console.log(id1['type']);
 
@@ -42,27 +42,27 @@ export class InvitationacceptdeclineComponent implements OnInit {
 			this.Accept = false;
 		}
 
-		this.InvitationacceptdeclineService.AcceptorDecline(id1['type'], id1['CourseSessionId'], id1['UserId'])
+		// this.InvitationacceptdeclineService.AcceptorDecline(id1['type'], id1['CourseSessionId'], id1['UserId'])
 
-		.then((data) => {
-			console.log(data);
-			// if (data == 'fail') {
-			// 	swal({
-			// 		type: 'danger',
-			// 		title: 'Oops...',
-			// 		text: 'You are already used this link!',
-			// 		showConfirmButton: false,
-			// 		timer: 3000
-			// 	})
-			// 	this.router.navigate(['/login']);
-			// }
-		},
-			(error) => {
-				this.btn_disable = false;
-				this.submitted = false;
-				this.globals.isLoading = false;
-				this.router.navigate(['/pagenotfound']);
-			});
+		// .then((data) => {
+		// 	console.log(data);
+		// 	if (data == 'fail') {
+		// 		swal({
+		// 			type: 'danger',
+		// 			title: 'Oops...',
+		// 			text: 'You are already used this link!',
+		// 			showConfirmButton: false,
+		// 			timer: 3000
+		// 		})
+		// 		this.router.navigate(['/login']);
+		// 	}
+		// },
+		// 	(error) => {
+		// 		this.btn_disable = false;
+		// 		this.submitted = false;
+		// 		this.globals.isLoading = false;
+		// 		this.router.navigate(['/pagenotfound']);
+		// 	});
 
 
 
