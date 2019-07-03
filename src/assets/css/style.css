@@ -1182,7 +1182,7 @@ button.view_inst_btn span {
       vertical-align: middle;}
 .content_block .instrucor_list .list_box h6    {    font-weight: 600;
       font-size: 14px;
-      margin-bottom: 5px;}
+      margin-bottom: 5px;    text-transform: capitalize;}
 .content_block .instrucor_list .list_box .instructor_buttons_group .back_btn,.content_block .instrucor_list .list_box .instructor_buttons_group .next_btn{min-width: 45px;}
 .content_block .instrucor_list .list_box .instructor_buttons_group button{background: transparent;border: 0;}
 .content_block .instrucor_list .list_box .instructor_buttons_group button i{color: #354865;font-size: 18px;}
