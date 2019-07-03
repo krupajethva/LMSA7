@@ -208,7 +208,7 @@ const routes: Routes = [
 				{ path : 'categorylist', component : CategorylistComponent,canActivate : [AuthGuard] },
 				{ path : 'category/edit/:id', component : CategoryComponent,canActivate : [AuthGuard] },
 				{ path : 'course', component : CourseComponent,canActivate : [AuthGuard] },
-				{ path : 'courselist-question', component : CourselistComponent,canActivate : [AuthGuard] },
+				{ path : 'courselist-question', component : CourseQuestionlistComponent,canActivate : [AuthGuard] },
 				{ path : 'course-list', component : CourseListComponent,canActivate : [AuthGuard] },
 				{ path : 'course-certificate', component : CourseCertificateComponent,canActivate : [AuthGuard] },
 				{ path : 'course/edit/:id', component : CourseComponent,canActivate : [AuthGuard] },
