@@ -38,8 +38,6 @@ class InstructorCourses_model extends CI_Model
 				$result_Inst = $this->db->get()->result();
 				$Instructor_name = $result_Inst['0']->FirstName . " " . $result_Inst['0']->LastName;
 				$EmailAddress = $result_Inst['0']->EmailAddress;
-				print_r($Instructor_name);
-
 
 				$this->db->select('ts.CourseSessionId,ts.SessionName,ts.StartTime,ts.StartDate,tc.CourseFullName');
 				$this->db->where('ts.CourseSessionId', $post_data['CourseSessionId']);

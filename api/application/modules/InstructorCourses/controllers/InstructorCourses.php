@@ -1,8 +1,12 @@
 <?php
+
+use \Firebase\JWT\JWT;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Headers: *');
 header('Content-Type: application/json');
+include APPPATH . 'vendor/firebase/php-jwt/src/JWT.php';
 
 class InstructorCourses extends CI_Controller
 {
@@ -412,6 +416,7 @@ class InstructorCourses extends CI_Controller
 						//echo json_encode("Fail");
 					}
 				}
+				echo json_encode("success");
 			} else {
 				$EmailToken = 'Instructor Invitation';
 				$this->db->select('Value');
@@ -448,21 +453,19 @@ class InstructorCourses extends CI_Controller
 						$bcc = $row->totalbcc;
 					}
 					$body = str_replace("{ CourseFullName }", $res->CourseFullName, $body);
+					$body = str_replace("{ SessionName }", $res->SessionName, $body);
 					$body = str_replace("{ StartDate }", $res->StartDate, $body);
 					$body = str_replace("{ StartTime }", $res->StartTime, $body);
-					$body = str_replace("{ SessionName }", $res->SessionName, $body);
-					//$body = str_replace("{ InstructorName }", $res->Instructor_name, $body);
-					//	$body = str_replace("{login_url}",$StartTime,$body);
-					//$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
+					$body = str_replace("{ InstructorName }", $res->Instructor_name, $body);
+
 					$data1['CourseSessionId'] = $res->CourseSessionId;
 					$data2['CourseSessionId'] = $res->CourseSessionId;
 					$data1['UserId'] = $row;
 					$data2['UserId'] = $row;
 					$data1['type'] = 1;
 					$data2['type'] = 2;
-					//	$body = str_replace("{login_url}",$StartTime,$body);
-					$body = str_replace("{ link1 }", '' . BASE_URL . '/instructor-invitation/' . JWT::encode($data1, "MyGeneratedKey", "HS256") . '', $body);
-					$body = str_replace("{ link2 }", '' . BASE_URL . '/instructor-invitation/' . JWT::encode($data2, "MyGeneratedKey", "HS256") . '', $body);
+					$body = str_replace("{ link1 }", '' . BASE_URL . '/instructor-courses/' . JWT::encode($data1, "MyGeneratedKey", "HS256") . '', $body);
+					$body = str_replace("{ link2 }", '' . BASE_URL . '/instructor-courses/' . JWT::encode($data2, "MyGeneratedKey", "HS256") . '', $body);
 					$this->email->from($smtpEmail, 'LMS Admin');
 					$this->email->to($rowTo[0]->EmailAddress);
 					$this->email->subject($row->Subject);
@@ -480,9 +483,10 @@ class InstructorCourses extends CI_Controller
 						);
 						$res = $this->db->insert('tblemaillog', $email_log);
 					} else {
-						//echo json_encode("Fail");
+						echo json_encode("Fail");
 					}
 				}
+				echo json_encode("success");
 			}
 		}
 	}
