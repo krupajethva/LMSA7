@@ -753,7 +753,7 @@ footer.register_footer a:hover{color:var(--theme-color); }
 .admin_dashboard .overview_block i { background: var(--option-color); border-radius: 10px; color: #fff; float: left; font-size: 21px; height: 40px; padding: 8px; position: absolute; right: 30px; text-align: center; top: -21px; width: 40px;}
 .admin_dashboard .overview_block .title{ font-size: 12px; display: inline-block; padding: 5px 10px; line-height: 12px; color: #2e2d31; font-family: 'OpenSans-regular';}
 .admin_dashboard .overview_block .icon_number{font-size: 45px; display: inline-block; line-height: 45px; color: var(--theme-color); font-family: 'OpenSans-Light';}
-.admin_dashboard .users_block {box-shadow:0px 0px 5px #ccc; background: #fff; display: block; position: relative; padding: 15px; margin-bottom: 30px; height: 520px;}
+.admin_dashboard .users_block {box-shadow:0px 0px 5px #ccc; background: #fff; display: block; position: relative; padding: 15px; margin-bottom: 30px; height: 300px;}
 .admin_dashboard .users_block .users{display: block; position: relative; padding: 0 0 10px 0; margin: 0 0 10px 0; border-bottom: 1px solid #ccc;}
 .admin_dashboard .users_block .users:last-child{border: 0; margin: 0;}
 .admin_dashboard .users_block h3 span{    background: #f4f4f4;
@@ -786,7 +786,7 @@ footer.register_footer a:hover{color:var(--theme-color); }
 .admin_dashboard .notification_block .notification_desc span{color:#b6b6b6; font-size: 12px;}
 .admin_dashboard .notification_block .notification_red .notification_time:after{background: var(--option-color);width: 3px;height: 45px;position: absolute;content: "";right: 3px;top: 0;}
 
-.admin_dashboard .audit_block{height: 350px;box-shadow:0px 0px 5px #ccc; background: #fff; display: block; position: relative; padding: 15px;}
+.admin_dashboard .audit_block{height: 300px;box-shadow:0px 0px 5px #ccc; background: #fff; display: block; position: relative; padding: 15px;}
 .admin_dashboard .audit_block .audit_box{display: block; position: relative; padding-bottom: 15px;}
 .admin_dashboard .audit_block .audit_box .title{font-size: 13px; color: #2e2d31; line-height: 18px; display: inline-block; width: 75%;}
 .admin_dashboard .audit_block .audit_box span.dot{ width: 10px; height: 10px; border-radius: 100%; display: inline-block; background: var(--option-color); margin-right: 20px; position: relative; z-index: 9;}
@@ -794,7 +794,7 @@ footer.register_footer a:hover{color:var(--theme-color); }
 .admin_dashboard .audit_block .audit_box .name{ display:block; font-size: 12px; color: #b6b6b6; padding:5px 0 0 30px;}
 .admin_dashboard .audit_block .audit_box .time{font-size: 12px; display: inline-block; width: 22%; text-align: right; font-style: italic;}
 
-.admin_dashboard .rated_course_block{box-shadow:0px 0px 5px #ccc; background: #fff; display: block; position: relative; padding: 15px; margin-bottom: 30px; height: 520px;}
+.admin_dashboard .rated_course_block{box-shadow:0px 0px 5px #ccc; background: #fff; display: block; position: relative; padding: 15px; margin-bottom: 30px; height: 300px;}
 .admin_dashboard .rated_course_block .stars_block{ margin: 0 0 0 0; color:#2e2d31; font-size: 12px; }
 .admin_dashboard .rated_course_block .stars_block i{margin: 0 5px 0 0; color:#f9a825; font-size: 12px;}
 
@@ -1831,11 +1831,11 @@ select-dropdown > div{z-index: 999!important;}
 .follow_block a{color:var(--option-color);padding-right: 5px;}
 .follow_block button{background: transparent;border: 0;padding: 0px 5px;}
 .follow_block button i{font-size: 15px;color: #102749;}
-.learner_dashboard .scroll_score,.learner_dashboard .scroll_calender{position:relative;height: 280px!important;}
-.instructor_dashboard .scroll_score,.instructor_dashboard .scroll_calender{height: 100%!important;}
+.learner_dashboard .scroll_score,.learner_dashboard .scroll_calender{position:relative;height: 235px!important;}
+/* .instructor_dashboard .scroll_score,.instructor_dashboard .scroll_calender{height: 100%!important;} */
 /* .learner_dashboard .audit_block {height: 370px!important;} */
 .instructor_dashboard .audit_block{height: 375px!important;}
-.instructor_dashboard .audit_block,.instructor_dashboard .notification_block{height: 345px!important;}
+.instructor_dashboard .audit_block,.instructor_dashboard .notification_block{height: 300px!important;}
 .instructor_block .course_box .course_img{    width: 100%;
   float: left;
   padding-right: 0px;}
@@ -3298,7 +3298,7 @@ margin-bottom: 15px;}
 @media (max-width: 1920px){
 	/* .admin_dashboard .users_block,.admin_dashboard .rated_course_block{height: 370px;} */
 	/* .learner_dashboard .users_block {height: 300px !important;} */
-	.learner_dashboard .rated_course_block {height:345px!important;}
+	.learner_dashboard .rated_course_block {height:300px!important;}
 	/* .course_list_block .course_box .course_title{height:70px;} */
   /* .course_list_block .course_box .desc_block{height:135px;} */
   .course_learner_block .course_box .course_img img{width: 575px;height: 175px;}
