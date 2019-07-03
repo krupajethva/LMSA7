@@ -460,12 +460,13 @@ class InstructorCourses extends CI_Controller
 
 					$data1['CourseSessionId'] = $res->CourseSessionId;
 					$data2['CourseSessionId'] = $res->CourseSessionId;
-					$data1['UserId'] = $row;
-					$data2['UserId'] = $row;
+					$data1['UserId'] = $data['UserId'];
+					$data2['UserId'] = $data['UserId'];
 					$data1['type'] = 1;
 					$data2['type'] = 2;
-					$body = str_replace("{ link1 }", '' . BASE_URL . '/instructor-courses/' . JWT::encode($data1, "MyGeneratedKey", "HS256") . '', $body);
-					$body = str_replace("{ link2 }", '' . BASE_URL . '/instructor-courses/' . JWT::encode($data2, "MyGeneratedKey", "HS256") . '', $body);
+					$body = str_replace("{ link1 }",'' .BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey", "HS256").'',$body);
+					$body = str_replace("{ link2 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'',$body);
+				
 					$this->email->from($smtpEmail, 'LMS Admin');
 					$this->email->to($rowTo[0]->EmailAddress);
 					$this->email->subject($row->Subject);
