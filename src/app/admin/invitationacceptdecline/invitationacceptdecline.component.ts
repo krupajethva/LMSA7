@@ -29,12 +29,12 @@ export class InvitationacceptdeclineComponent implements OnInit {
 
 	ngOnInit() {
 		debugger
-		this.resetEntity = {};
-		myInput();
+		//this.resetEntity = {};
+		//myInput();
 		let id = this.route.snapshot.paramMap.get('id');
 		
 		var id1 = new JwtHelperService().decodeToken(id);
-		console.log(id1['type']);
+		console.log(id1);
 
 		if (id1['type'] == 1) {
 			this.Accept = true;

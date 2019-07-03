@@ -177,13 +177,14 @@ class CourseScheduler_model extends CI_Model
 										$body = str_replace("{ SessionName }", $SessionName, $body);
 										$data1['CourseSessionId'] = $Courseschedular['CourseSessionId'];
 										$data2['CourseSessionId'] = $Courseschedular['CourseSessionId'];
-										$data1['UserId'] = $row;
-										$data2['UserId'] = $row;
+										$data1['UserId'] = $row1;
+										$data2['UserId'] = $row1;
 										$data1['type'] = 1;
 										$data2['type'] = 2;
 										//	$body = str_replace("{login_url}",$StartTime,$body);
-										$body = str_replace("{ link1 }", '' . BASE_URL . '/instructor-invitation/' . JWT::encode($data1, "MyGeneratedKey", "HS256") . '', $body);
-										$body = str_replace("{ link2 }", '' . BASE_URL . '/instructor-invitation/' . JWT::encode($data2, "MyGeneratedKey", "HS256") . '', $body);
+										$body = str_replace("{ link1 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey","HS256").'',$body);
+										$body = str_replace("{ link2 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'',$body);
+										
 										$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
 										$this->email->from($smtpEmail, 'LMS Admin');
 										$this->email->to($rowTo[0]->EmailAddress);
@@ -574,8 +575,9 @@ class CourseScheduler_model extends CI_Model
 									$data1['type'] = 1;
 									$data2['type'] = 2;
 									//	$body = str_replace("{login_url}",$StartTime,$body);
-									$body = str_replace("{ link1 }", '' . BASE_URL . '/instructor-invitation/' . JWT::encode($data1, "MyGeneratedKey", "HS256") . '', $body);
-									$body = str_replace("{ link2 }", '' . BASE_URL . '/instructor-invitation/' . JWT::encode($data2, "MyGeneratedKey", "HS256") . '', $body);
+									$body = str_replace("{ link1 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey","HS256").'',$body);
+									$body = str_replace("{ link2 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'',$body);
+									
 									$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
 									$this->email->from($smtpEmail, 'LMS Admin');
 									$this->email->to($rowTo[0]->EmailAddress);
