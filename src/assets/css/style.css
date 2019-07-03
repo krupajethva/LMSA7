@@ -432,6 +432,10 @@ ng-select > div{border: 0px!important;}
 ng-select > div > div.multiple input{width: 100%!important;height: 20px!important;}
 select-dropdown > div.below{top: 20px!important;}
 ng-select > div > div.multiple{padding: 0px;}
+
+.users_block .progress .progress-bar-warning{background-color: #f0ad4e;}
+.users_block .progress .progress-bar-primary{background-color: #5bc0de;}
+.users_block .progress .progress-bar-success{background-color: #5cb85c;}
 /*--------------End Common content--------------------*/
 
 
@@ -543,7 +547,7 @@ footer.register_footer a:hover{color:var(--theme-color); }
 .course_forum_block .forum_box.inner_forum:last-child{border: 0; margin-bottom: 0;}
 .forum_box.inner_forum::before { background: #eee; content: ""; height: 100%; left: -35px; position: absolute; top: -45px; width: 1px;}
 .forum_box.inner_forum::after { background: #eee; content: ""; height: 1px; left: -35px; position: absolute; top: 25px; width: 30px;}
-.course_forum_block .forum_box .img_icon{border: 1px solid #2e2d31; color: #2e2d31; font-size: 20px; line-height: 46px; height: 50px; width: 50px; border-radius: 100%; text-align: center; display: inline-block; vertical-align: top;}
+.course_forum_block .forum_box .img_icon{text-transform: uppercase;border: 1px solid #2e2d31; color: #2e2d31; font-size: 20px; line-height: 46px; height: 50px; width: 50px; border-radius: 100%; text-align: center; display: inline-block; vertical-align: top;}
 .course_forum_block .forum_box .img_icon img{border-radius: 100%;}
 .course_forum_block .forum_box .content_name{display: inline-block; position: relative; margin-left: 10px; width: 90%; padding-bottom: 15px;  border-bottom: 1px solid #ccc; margin-bottom: 15px;}
 .course_forum_block .forum_box .content_name .name{font-size: 13px; color: var(--theme-color); font-family: 'OpenSans-SemiBold'; margin-bottom: 5px;}
