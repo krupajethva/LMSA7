@@ -122,8 +122,6 @@ export class CourseComponent implements OnInit {
 		setTimeout(function () {
 
 			$('#CourseImage').change(function (e) {
-
-
 				var file = e.target.files[0];
 				var reader = new FileReader();
 				reader.onloadend = function () {
