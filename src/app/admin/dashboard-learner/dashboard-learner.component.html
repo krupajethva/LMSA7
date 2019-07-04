@@ -260,91 +260,91 @@
                     <td>{{Courses.CourseFullName}}</td>
                     <td>{{Courses.InstructorName}}</td>
                     <td>
-                    <div class="stars_block" *ngIf="Courses.reviewavg==null">
+                    <div class="stars_block" *ngIf="Courses.ratingavg==null">
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                    <div class="stars_block" *ngIf="Courses.reviewavg>0 && Courses.reviewavg<1">
+                    <div class="stars_block" *ngIf="Courses.ratingavg>0 && Courses.ratingavg<1">
                       <i class="fa fa-star-half-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                    <div class="stars_block" *ngIf="Courses.reviewavg>0 && Courses.reviewavg<1">
+                    <div class="stars_block" *ngIf="Courses.ratingavg>0 && Courses.ratingavg<1">
                       <i class="fa fa-star-half-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                    <div class="stars_block" *ngIf="Courses.reviewavg>0 && Courses.reviewavg<1">
+                    <div class="stars_block" *ngIf="Courses.ratingavg>0 && Courses.ratingavg<1">
                       <i class="fa fa-star-half-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg>1 && Courses.reviewavg<2">
+                  <div class="stars_block" *ngIf="Courses.ratingavg>1 && Courses.ratingavg<2">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-half-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg>2 && Courses.reviewavg<3">
+                  <div class="stars_block" *ngIf="Courses.ratingavg>2 && Courses.ratingavg<3">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-half-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg>3 && Courses.reviewavg<4">
+                  <div class="stars_block" *ngIf="Courses.ratingavg>3 && Courses.ratingavg<4">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-half-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg>4 && Courses.reviewavg<5">
+                  <div class="stars_block" *ngIf="Courses.ratingavg>4 && Courses.ratingavg<5">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-half-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg==1">
+                  <div class="stars_block" *ngIf="Courses.ratingavg==1">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg==2">
+                  <div class="stars_block" *ngIf="Courses.ratingavg==2">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg==3">
+                  <div class="stars_block" *ngIf="Courses.ratingavg==3">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-o"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg==4">
+                  <div class="stars_block" *ngIf="Courses.ratingavg==4">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star-o"></i>
                   </div>
-                  <div class="stars_block" *ngIf="Courses.reviewavg==5">
+                  <div class="stars_block" *ngIf="Courses.ratingavg==5">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -390,12 +390,82 @@
                       <td>{{learnercourse.CourseFullName}}</td>
                       <td>{{learnercourse.FirstName}} {{learnercourse.LastName}}</td>
                       <td>
-                        <div class="stars_block">
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg==null">
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg>0 && learnercourse.ratingavg<1">
+                          <i class="fa fa-star-half-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg>1 && learnercourse.ratingavg<2">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-half-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg>2 && learnercourse.ratingavg<3">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-half-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg>3 && learnercourse.ratingavg<4">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-half-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg>4 && learnercourse.ratingavg<5">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg==1">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg==2">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg==3">
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star-o"></i>
                           <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg==4">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="stars_block" *ngIf="learnercourse.ratingavg==5">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
                         </div>
                       </td>
                       <td class="text-center">
@@ -417,15 +487,15 @@
             <h3 class="pull-left">Recent Activities</h3>
             <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
             <div class="clearfix"></div>
-            <div class="audit_box" *ngFor="let activity of LearnerActivities">
+            <div class="audit_box" *ngFor="let activity of recentactivity">
               <div class="title">
-                <span class="dot"></span>{{activity.Activity}}
+                <span class="dot"></span>{{activity.Activity}} ( {{activity.Module}} )
                 <!-- <span class="name">By Shane Griffin</span> -->
               </div>
               <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
             </div>
-            <div class="clearfix"></div>
           </div>
+          <div class="clearfix"></div>
         </div>
       <!-- <div class="col-md-6 col-sm-6">
         <div class="content_block">

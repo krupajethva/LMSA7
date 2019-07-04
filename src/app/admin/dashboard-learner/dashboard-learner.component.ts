@@ -20,6 +20,7 @@ export class DashboardLearnerComponent implements OnInit {
 
 	courseview;
 	activecourse;
+	recentactivity;
 	completedcourse;
 	yourcourse;
 	testdata;
@@ -32,6 +33,7 @@ export class DashboardLearnerComponent implements OnInit {
 		this.courseview = [];
 
 		this.activecourse = [];
+		this.recentactivity = [];
 
 		this.completedcourse = [];
 
@@ -76,6 +78,9 @@ export class DashboardLearnerComponent implements OnInit {
 				}
 				if (data['activecourse']) {
 					this.activecourse = data['activecourse'];
+				}
+				if (data['recentactivity']) {
+					this.recentactivity = data['recentactivity'];
 				}
 				if (data['completedcourse']) {
 					this.completedcourse = data['completedcourse'];
