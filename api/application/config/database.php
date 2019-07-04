@@ -111,7 +111,6 @@ $db['Development'] = array(
 	'hostname' => '199.250.200.224',
 	// 'username' => 'devbyo5_LMS',
 	// 'password' => '&h.ovmR&-JlK',
-
 	'username' => 'devbyo5_VBathani',
 	'password' => 'W3lc0m3$2019',
 	'database' => 'devbyo5_LMS',
