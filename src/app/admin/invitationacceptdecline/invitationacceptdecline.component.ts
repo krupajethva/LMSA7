@@ -42,32 +42,21 @@ export class InvitationacceptdeclineComponent implements OnInit {
 			this.Accept = false;
 		}
 
-		// this.InvitationacceptdeclineService.AcceptorDecline(id1['type'], id1['CourseSessionId'], id1['UserId'])
-
-		// .then((data) => {
-		// 	console.log(data);
-		// 	if (data == 'fail') {
-		// 		swal({
-		// 			type: 'danger',
-		// 			title: 'Oops...',
-		// 			text: 'You are already used this link!',
-		// 			showConfirmButton: false,
-		// 			timer: 3000
-		// 		})
-		// 		this.router.navigate(['/login']);
-		// 	}
-		// },
-		// 	(error) => {
-		// 		this.btn_disable = false;
-		// 		this.submitted = false;
-		// 		this.globals.isLoading = false;
-		// 		this.router.navigate(['/pagenotfound']);
-		// 	});
-
-
-
-		this.InvitationacceptdeclineService.Insinvitation(id1['type'], id1['CourseSessionId'], id1['UserId'])
-	
+		this.InvitationacceptdeclineService.AcceptorDecline(id1['CourseSessionId'], id1['UserId'])
+		.then((data) => {
+			console.log(data);
+			if (data['Approval'] == 3) {
+				swal({
+					type: 'Revoke',
+					title: 'Oops...',
+					text: 'You haved Revoke!',
+					showConfirmButton: false,
+					timer: 3000
+				})
+				this.router.navigate(['/login']);
+			}else
+			{
+			this.InvitationacceptdeclineService.Insinvitation(id1['type'], id1['CourseSessionId'], id1['UserId'])
 			.then((data) => {
 				if (data == 'fail') {
 					swal({
@@ -86,6 +75,18 @@ export class InvitationacceptdeclineComponent implements OnInit {
 					this.globals.isLoading = false;
 					this.router.navigate(['/pagenotfound']);
 				});
+			}
+		},
+			(error) => {
+				this.btn_disable = false;
+				this.submitted = false;
+				this.globals.isLoading = false;
+				this.router.navigate(['/pagenotfound']);
+			});
+
+
+
+	
 
 	}
 

@@ -1,7 +1,7 @@
 <div class="title_heading">
 	<div class="col-md-4 col-sm-4">
 		<div class="title_text">
-			<i class="fa fa-sitemap" aria-hidden="true"></i>Default Badges
+			<i class="fa fa-id-badge" aria-hidden="true"></i>Default Badges
 		</div>
 	</div>
 	<div class="col-md-8 col-sm-8">
@@ -13,14 +13,14 @@
 		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a>
-						<i class="fa fa-home"></i>
-					</a>
+						<a routerLink="/dashboard">
+							<i class="fa fa-home"></i>
+						</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a>Badge</a>
+						<a routerLink="/default-badge">Default Badge</a>
 				</li>
-				<li class="breadcrumb-item active" aria-current="page">List</li>
+				<li class="breadcrumb-item active" aria-current="page">Default Badges List</li>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -30,6 +30,10 @@
 
 </div>
 <div class="content_block">
+		<div class="col-md-6 col-sm-6 pull-right add_btn">
+				<a routerLink="/default-badge" class="next_btn pull-right">Add Default Badges</a>
+			</div>
+		<div class="clearfix"></div>
 	<div class="col-md-12">
 		<table id="list_tables" class="table table-hover" style="width:100%">
 			<thead>

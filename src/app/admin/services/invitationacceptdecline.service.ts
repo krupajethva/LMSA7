@@ -27,10 +27,10 @@ export class InvitationacceptdeclineService {
     return promise;
   }
 
-  AcceptorDecline(type, CourseSessionId, UserId) {
+  AcceptorDecline(CourseSessionId, UserId) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'Instructorinvi/AcceptorDecline/' + type + '/' + CourseSessionId + '/' + UserId)
+      this.http.get(this.globals.baseAPIUrl + 'Instructorinvi/AcceptorDecline/' + '/' + CourseSessionId + '/' + UserId)
         .toPromise()
         .then(
           res => { // Success
