@@ -808,6 +808,17 @@ export class CourseComponent implements OnInit {
 				enterMode: Number(2)
 				//extraAllowedContent: 'style;*[id,rel](*){*}
 			});
+			CKEDITOR.replace('DescriptionF', {
+				height: '100',
+				resize_enabled: 'false',
+				resize_maxHeight: '100',
+				resize_maxWidth: '948',
+				resize_minHeight: '100',
+				resize_minWidth: '948',
+				extraAllowedContent: 'span;ul;li;table;td;style;*[id];*(*);*{*}',
+				enterMode: Number(2)
+				//extraAllowedContent: 'style;*[id,rel](*){*}
+			});
 
 			CKEDITOR.replace('EmailBodyW', {
 				height: '100',
@@ -1607,7 +1618,7 @@ export class CourseComponent implements OnInit {
 		if (this.CourseEntity.Targetcheck == true) { this.CourseEntity.Targetcheck = 1; } else { this.CourseEntity.Targetcheck = 0; }
 		if (this.CourseEntity.Morecheck == true) { this.CourseEntity.Morecheck = 1; } else { this.CourseEntity.Morecheck = 0; }
 		if (this.CourseEntity.Requirementcheck == true) { this.CourseEntity.Requirementcheck = 1; } else { this.CourseEntity.Requirementcheck = 0; }
-
+		this.CourseEntity.Description = CKEDITOR.instances.DescriptionF.getData();
 		this.CourseEntity.EmailBody = CKEDITOR.instances.EmailBodyF.getData();
 		this.CourseEntity.EmailBody2 = CKEDITOR.instances.EmailBodyW.getData();
 		this.CourseEntity.EmailBody3 = CKEDITOR.instances.EmailBodyT.getData();
@@ -1621,7 +1632,7 @@ export class CourseComponent implements OnInit {
 		if (file2) {
 			var CourseImage = Date.now() + '_' + file2['name'];
 			fd.append('CourseImage', file2, CourseImage);
-			//this.CourseEntity.CourseImageicon = file2['name'];
+		
 			this.CourseEntity.CourseImage = CourseImage;
 		}
 		else {
