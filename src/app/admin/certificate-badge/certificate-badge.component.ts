@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CertificateBadgeService } from '../services/certificate-badge.service';
 declare var $,swal: any;
 declare function myInput() : any;
-declare var $,Bloodhound: any;
+
 @Component({
   selector: 'app-certificate-badge',
   templateUrl: './certificate-badge.component.html',
@@ -14,7 +14,6 @@ declare var $,Bloodhound: any;
 })
 export class CertificateBadgeComponent implements OnInit {
   ParentList;
-
 badgesEntity;
 	submitted;
 	btn_disable;
@@ -144,7 +143,7 @@ badgesEntity;
                   this.btn_disable = true;
                   this.submitted = false;
                   this.globals.isLoading = false;
-                 
+                 alert(123);
                 
                 }, (error) => {
                   this.btn_disable = false;
@@ -172,7 +171,7 @@ badgesEntity;
               timer: 1500
             })
           } 
-            this.router.navigate(['/default-badgelist']);
+            //this.router.navigate(['/default-badgelist']);
           }, 
           (error) => 
           {

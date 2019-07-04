@@ -11,11 +11,11 @@
       </div> -->
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
-          <li class="breadcrumb-item">
-              <a routerLink="/dashboard">
-                  <i class="fa fa-home"></i>
-              </a>
-          </li>
+        <li class="breadcrumb-item">
+          <a routerLink="/dashboard">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
         <li class="breadcrumb-item active" aria-current="page">Instructor List</li>
       </ul>
       <div class="clearfix"></div>
@@ -27,6 +27,32 @@
 </div>
 <div class="content_block">
   <div class="row">
+    <div class="col-md-12">
+      <div class="instructor_search">
+        <div class="col-md-6">
+          <div class="instructor_search_note">
+            <p>Note: Search your instrucor here</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="instructor_search_box">
+            <form action="/action_page.php">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="search">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-12 col-sm-12">
       <div class="instrucor_list">
         <div class="col-md-3 col-sm-3" *ngFor="let instructor of InstructorList;let i = index">
@@ -37,25 +63,61 @@
             <img *ngIf="instructor.ProfileImage!='' && instructor.ProfileImage!=NULL" src="assets/ProfilePhoto/{{instructor.UserId}}/{{instructor.ProfileImage}}"
               alt="{{ProfileImage}}" class="img-responsive" />
             <h6 class="instrucor_name">{{instructor.FirstName}} {{instructor.LastName}}</h6>
-            <a href="" class="total_folllowers">{{instructor.totalFollowers}} Folllowers</a>
+            <div class="instructor_follow">
+              <ul>
+                <li>
+                  <a href="" class="total_folllowers">{{instructor.totalFollowers}} Folllowers</a>
+                </li>
+                <li>
+                  <a href="" class="total_folllowing">12 Folllowing</a>
+                </li>
+              </ul>
+            </div>
+            <div class="instructor_desc">
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                <a href="">Read More...</a>
+              </p>
+            </div>
             <div class="instructor_buttons_group">
-              <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}"
-                title="View Details">
+              <button>
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </button>
+              <!-- <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
                 <i class="fa fa-eye" aria-hidden="true"></i>
-              </button>
-              <button *ngIf="instructor.flag==0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip"
-                data-placement="top" title="Follow" id="follow" (click)="followInstructor(instructor)">
+              </button> -->
+              <!-- <button *ngIf="instructor.flag==0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+                title="Follow" id="follow" (click)="followInstructor(instructor)">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
-              </button>
-              <button *ngIf="instructor.flag!=0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip"
-                data-placement="top" title="Unfollow" id="unfollow" (click)="unfollowInstructor(instructor)">
+              </button> -->
+              <!-- <button *ngIf="instructor.flag!=0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+                title="Unfollow" id="unfollow" (click)="unfollowInstructor(instructor)">
                 <i class="fa fa-user-times" aria-hidden="true"></i>
-              </button>
+              </button> -->
+            </div>
+            <div class="instructor_courses_list">
+              <span>My last course</span>
+              <ul class="list_li">
+                <li>
+                  Angular Material 2 Design For Programmers and CSS Newbies
+                </li>
+              </ul>
+              <div class="more_course_btn">
+                <a href="">View all courses</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 pull-right">
+      <div class="pagination_block">
+        <ul class="pagination">
+          <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
