@@ -1,20 +1,21 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
-    <div class="title_text">    
-        <i class="fa fa-user-circle" aria-hidden="true"></i>My followers
+    <div class="title_text">
+      <i class="fa fa-user-circle" aria-hidden="true"></i>My followers
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-      <div class="welcome_message alert" role="alert">
-          <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+          Welcome back,
           <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
-      </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+      </div> -->
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+          <li class="breadcrumb-item">
+              <a routerLink="/dashboard">
+                  <i class="fa fa-home"></i>
+              </a>
+          </li>
         <li class="breadcrumb-item active" aria-current="page">My followers</li>
       </ul>
       <div class="clearfix"></div>
@@ -22,6 +23,7 @@
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
+
 </div>
 <div class="content_block">
   <div class="col-md-12">

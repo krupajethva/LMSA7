@@ -287,7 +287,7 @@ class Courselist_model extends CI_Model
 						  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(cs.UserId))) as FirstName
 					FROM tblcoursesession AS csi 
 					LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
-					WHERE csi.CourseId='.$CourseId.' AND csi.PublishStatus=1 AND csi.IsActive=1 GROUP BY csi.CourseSessionId');
+					WHERE csi.CourseId='.$CourseId.' AND csi.PublishStatus=1 AND csi.IsActive=1 AND cs.Approval= 1 GROUP BY csi.CourseSessionId');
 		
 		// }
 	
@@ -383,7 +383,7 @@ class Courselist_model extends CI_Model
 		{
 		if($post_addEnroll)
 			{
-				$this->db->select('cs.StartDate,cs.EndDate,cs.weekday');
+				/*$this->db->select('cs.StartDate,cs.EndDate,cs.weekday');
 				$this->db->where('cs.CourseSessionId',$post_addEnroll['CourseSessionId']); 	
 				$result1 = $this->db->get('tblcoursesession cs');
 				$res=array();
@@ -490,12 +490,12 @@ class Courselist_model extends CI_Model
 				}
 					
 			}
-			$Attendance = implode(',', $res);
+			$Attendance = implode(',', $res);*/
 
 				$Cart_data = array(
 					'UserId' =>  trim($post_addEnroll['UserId']),
 					'CourseSessionId' =>  $post_addEnroll['CourseSessionId'],
-					'Attendance' =>  $Attendance,
+					//'Attendance' =>  $Attendance,
 					'CreatedBy' =>trim($post_addEnroll['UserId']),
 					'CreatedOn' => date('y-m-d H:i:s')
 			

@@ -5,15 +5,12 @@
 		</div>
 	</div>
 	<div class="col-md-8 col-sm-8">
-		<div class="welcome_message alert" role="alert">
-			<i class="fa fa-info"></i>Welcome back,
+		<!-- <div class="welcome_message alert" role="alert">
+			Welcome back,
 			<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
 
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="breadcrumb_block">
-		<div class="col-md-6 col-sm-6">
+		</div> -->
+		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item">
 					<a>
@@ -25,14 +22,12 @@
 				</li>
 				<li class="breadcrumb-item active" aria-current="page">List</li>
 			</ul>
-			<div class="clearfix"></div>
-		</div>
-		<div class="col-md-6 col-sm-6">
-			<a routerLink="/default-badge" class="next_btn pull-right">Add a Badge</a>
 		</div>
 		<div class="clearfix"></div>
+
 	</div>
 	<div class="clearfix"></div>
+
 </div>
 <div class="content_block">
 	<div class="col-md-12">
@@ -43,7 +38,7 @@
 					<th class="action_width category">Badge Name</th>
 					<th class="date_width text-center">Badge Image</th>
 
-				
+
 					<th class="text-center active_width">Active?</th>
 					<th class="text-center action_width">Action</th>
 				</tr>
@@ -52,14 +47,13 @@
 				<tr *ngFor="let badges of badgesList; let i = index">
 					<td class="text-center">{{i+1}}</td>
 					<td>{{badges.BadgeImage }}</td>
-					<td class="text-center"> 
-            <div  class="col-md-2 col-sm-2 signature_preview">
-            <div class="choose_img">
-              <img id="BadgeImagePreview" align="middle"
-                src="assets/Instructor/{{badges.rid}}/image/{{badges.BadgeImage}}"
-              >
-            </div>
-          </div></td>
+					<td class="text-center">
+						<div class="col-md-2 col-sm-2 signature_preview">
+							<div class="choose_img">
+								<img id="BadgeImagePreview" align="middle" src="assets/Instructor/{{badges.rid}}/image/{{badges.BadgeImage}}">
+							</div>
+						</div>
+					</td>
 					<td class="text-center">
 						<!-- <div class="activeyes_box">
                       <input type="checkbox" name="active1" id="active1" checked value="Yes">

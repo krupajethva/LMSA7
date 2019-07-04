@@ -5,16 +5,13 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
       
       
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="#">
@@ -23,71 +20,78 @@
         </li>
         <li class="breadcrumb-item active" aria-current="page">Learner Dashboard</li>
       </ul>
-      <div class="clearfix"></div>
-    </div>
-    <div class="col-md-6 col-sm-6">
-      <div id="buttons" class="pull-right"></div>
     </div>
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
+
 </div>
 <div class="content_block admin_dashboard learner_dashboard">
   <div class="col-md-12">
     <h3>Overview</h3>
     <div class="row">
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg1">
-          <div class="pull-left">
-            <i class="fa fa-leanpub" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg1">
+            <div class="pull-left">
+              <i class="fa fa-leanpub" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">{{activecourse}}</div>
+              <div class="title">ENROLLED COURSES</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">{{activecourse}}</div>
-            <div class="title">ACTIVE COURSES</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg2">
-          <div class="pull-left">
-            <i class="fa fa-list-alt" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg2">
+            <div class="pull-left">
+              <i class="fa fa-leanpub" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">{{completedcourse}}</div>
+              <div class="title">COMPLETED COURSES</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">{{completedcourse}}</div>
-            <div class="title">COMPLETED COURSES</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg3">
-          <div class="pull-left">
-            <i class="fa fa-users" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg3">
+            <div class="pull-left">
+              <i class="fa fa-users" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">12</div>
+              <div class="title">INSTRUCTORS</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">12</div>
-            <div class="title">GROUPS</div>
-          </div>
-        </div>
+        </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <div class="learner_overview_block block_bg4">
-          <div class="pull-left">
-            <i class="fa fa-certificate" aria-hidden="true"></i>
+        <a href="">
+          <div class="learner_overview_block block_bg4">
+            <div class="pull-left">
+              <i class="fa fa-certificate" aria-hidden="true"></i>
+            </div>
+            <div class="pull-right">
+              <div class="icon_number">4</div>
+              <div class="title">CERTIFICATES</div>
+            </div>
           </div>
-          <div class="pull-right">
-            <div class="icon_number">4</div>
-            <div class="title">CERTIFICATIONS/BADGES</div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-8 col-sm-8">
         <div class="graph_block">
-          <h3 class="pull-left">Test Vs Score Graphical Representation</h3>
+          <h3 class="pull-left">Graphical Representation</h3>
+          <div class="clearfix"></div>
           <div class="logincourse_tabs">
-            <ul class="nav nav-tabs" role="tablist">
+            <p>Content yet to come...</p>
+            <!-- <ul class="nav nav-tabs" role="tablist">
               <li role="logincourse" class="active">
                 <a href="#Today" aria-controls="Today" role="tab" data-toggle="tab">Today</a>
               </li>
@@ -100,9 +104,9 @@
               <li role="logincourse" class="disabled">
                 <a href="#Month" aria-controls="Month" role="tab" data-toggle="tab">Month</a>
               </li>
-            </ul>
+            </ul> -->
             <div class="clearfix"></div>
-            <div class="tab-content">
+            <!-- <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="Today">
                 <div id="login_course_today" class="chart"></div>
                 <div class="clearfix"></div>
@@ -119,7 +123,7 @@
                 <div id="login_course_month" class="chart"></div>
                 <div class="clearfix"></div>
               </div>
-            </div>
+            </div> -->
             <div class="clearfix"></div>
           </div>
           <div class="clearfix"></div>
@@ -131,16 +135,16 @@
           <div class="courses_li">
             <ul>
               <li>
-                <span class="success"></span>In Progress</li>
+                <span class="warning"></span>In Progress</li>
               <li>
-                <span class="warning"></span>Pending</li>
+                <span class="primary"></span>Pending</li>
               <li>
-                <span class="danger"></span>Completed</li>
+                <span class="success"></span>Completed</li>
             </ul>
           </div>
           <div class="clearfix"></div>
 
-          <div class="users"  *ngFor="let course of courseview; let i = index">
+          <div class="users" *ngFor="let course of courseview; let i = index">
             <div class="img_box">{{course.courseview}}</div>
             <div class="name_box">
               <i *ngIf="course.SessionStatus==0">Pending</i>
@@ -148,23 +152,23 @@
               <i *ngIf="course.SessionStatus==2">Completed</i>
 
               <div class="progress" *ngIf="course.SessionStatus==0">
-                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==1">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==2">
-                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 100%"></div>
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 100%"></div>
               </div>
             </div>
           </div>
 
-          <!-- <div class="users">
+        <div class="users">
             <div class="img_box">5</div>
             <div class="name_box">
               <i>In Progress</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="5" style="width: 100%">
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="5" style="width: 100%">
                 </div>
               </div>
             </div>
@@ -174,7 +178,7 @@
             <div class="name_box">
               <i>Pending</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="2" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="2" style="width: 40%"></div>
               </div>
             </div>
           </div>
@@ -183,11 +187,11 @@
             <div class="name_box">
               <i>Completed</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-danger" data-toggle="tooltip" data-placement="top" title="4" style="width: 80%">
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="4" style="width: 80%">
                 </div>
               </div>
             </div>
-          </div> -->
+          </div> 
         </div>
       </div>
       <!-- <div class="col-md-6 col-sm-6">
@@ -366,10 +370,10 @@
 
     <!-- NEW START-->
     <div class="row">
-        <div class="col-md-6 col-sm-6">
-          <div class="rated_course_block">
-            <h3>Your Courses</h3>
-        <div class="scroll_score">
+      <div class="col-md-6 col-sm-6">
+        <div class="rated_course_block">
+          <h3>My Courses</h3>
+          <div class="scroll_score">
             <div class="table-responsive">
               <div class="scroll_yourscore">
                 <table class="table table-hover" style="width:100%">
@@ -385,7 +389,15 @@
                     <tr *ngFor="let learnercourse of yourcourse;let i = index">
                       <td>{{learnercourse.CourseFullName}}</td>
                       <td>{{learnercourse.FirstName}} {{learnercourse.LastName}}</td>
-                      <td>Rating</td>
+                      <td>
+                        <div class="stars_block">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star-o"></i>
+                        </div>
+                      </td>
                       <td class="text-center">
                         <button class="edit" data-toggle="tooltip" data-placement="top" routerLink="/course-detail/{{learnercourse.CourseId}}" title="View">
                           <i class="fa fa-eye"></i>
@@ -396,37 +408,53 @@
                 </table>
               </div>
             </div>
-        </div>
           </div>
         </div>
-    <!-- NEW END -->
-
+      </div>
+      <!-- NEW END -->
       <div class="col-md-6 col-sm-6">
-        <div class="content_block">
-		<div class="scroll_calender">
-          <div class="color_description">
-            <ul>
-              <ng-container *ngFor="let typelist of AnnouncementTypeList">
-                <li *ngIf="(typelist.IsActive==1)">
-                <span [ngStyle]="{'background-color':typelist.ColorCode}"></span>{{typelist.TypeName}}
-                </li>
-                </ng-container>
-            </ul>
+          <div class="audit_block">
+            <h3 class="pull-left">Recent Activities</h3>
+            <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
+            <div class="clearfix"></div>
+            <div class="audit_box" *ngFor="let activity of LearnerActivities">
+              <div class="title">
+                <span class="dot"></span>{{activity.Activity}}
+                <!-- <span class="name">By Shane Griffin</span> -->
+              </div>
+              <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
+            </div>
+            <div class="clearfix"></div>
           </div>
-          <div class="col-md-12 col-sm-12">
-            <div id="calendar"></div>
-          </div>		  
-		  </div>
+        </div>
+      <!-- <div class="col-md-6 col-sm-6">
+        <div class="content_block">
+          <div class="scroll_calender">
+            <div class="color_description">
+              <ul>
+                <ng-container *ngFor="let typelist of AnnouncementTypeList">
+                  <li *ngIf="(typelist.IsActive==1)">
+                    <span [ngStyle]="{'background-color':typelist.ColorCode}"></span>{{typelist.TypeName}}
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div id="calendar"></div>
+            </div>
+          </div>
         </div>
         <div class="clearfix"></div>
-      </div>
+      </div> -->
+
+
     </div>
     <div class="clearfix"></div>
     <div class="row">
-      <div class="col-md-6 col-sm-6">
+      <!-- <div class="col-md-6 col-sm-6">
         <div class="notification_block">
           <h3 class="pull-left">Recent Notifications</h3>
-          <a routerLink="/notification-list" class="next_btn pull-right">Notification List</a>
+         
           <div class="clearfix"></div>
           <div class="notification_red">
             <div class="row">
@@ -519,13 +547,12 @@
           <div class="audit_box" *ngFor="let activity of LearnerActivities">
             <div class="title">
               <span class="dot"></span>{{activity.Activity}}
-              <!-- <span class="name">By Shane Griffin</span> -->
             </div>
             <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
           </div>
           <div class="clearfix"></div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="clearfix"></div>
   </div>

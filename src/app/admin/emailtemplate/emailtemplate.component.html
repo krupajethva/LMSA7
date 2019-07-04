@@ -1,40 +1,43 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
     <div class="title_text">
-      <i class="fa fa-envelope-o" aria-hidden="true"></i>{{header}} an Email Template
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>{{header}} Email Template
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+     Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
 
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+    <div class="clearfix"></div>
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">
+          <a routerLink="/dashboard">
             <i class="fa fa-home"></i>
           </a>
         </li>
-        <li class="breadcrumb-item">
+        <!-- <li class="breadcrumb-item">
           <a href="#">Email Template</a>
-        </li>
+        </li> -->
+        <li class="breadcrumb-item active" aria-current="page">
+          <a routerLink="/emailtemplate-list">
+            Email Template
+          </a></li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
-      <div class="clearfix"></div>
     </div>
-    <div class="col-md-6 col-sm-6">
-      <a routerLink="/emailtemplate-list" class="next_btn pull-right">List of Email Templates</a>
-    </div>
-    <div class="clearfix"></div>
   </div>
+
   <div class="clearfix"></div>
 </div>
-<div class="content_block course_detail_block">
+<div class="content_block">
+  <div class="list_button_block">
+  <!-- <div class="col-md-6 col-sm-6 pull-right">
+    <a routerLink="/emailtemplate-list" class="next_btn pull-right">List of Email Templates</a>
+  </div> -->
+  <div class="clearfix"></div>
   <div class="col-md-12 col-sm-12">
     <div class="course_details">
       <div class="mydivs">
@@ -43,6 +46,8 @@
             <div class="col-md-12 col-sm-12">
               <form class="form-validate" #EmailForm="ngForm" (ngSubmit)="addEmailTemplate(EmailForm)">
                 <!-- <h1 class="no_margin pull-left">Add Email Template</h1> -->
+                <h1 class="no_margin pull-left">ADD EMAIL TEMPLATE</h1>
+                <a routerLink="/emailtemplate-list" class="next_btn pull-right">List of Email Templates</a>
                 <div class="form-group-active pull-right">
                   <label>
                     <span>*</span>Active?</label>
@@ -80,8 +85,7 @@
                         <span *ngIf="Token.errors.required || (Token.pristine && submitted)">Please select email token</span>
                       </span> -->
 
-                      <select #TokenId="ngModel" [(ngModel)]="emailEntity.TokenId" name="TokenId"
-                        required>
+                      <select #TokenId="ngModel" [(ngModel)]="emailEntity.TokenId" name="TokenId" required>
                         <option value="" ngSelected='emailEntity.TokenId==""'></option>
                         <option *ngFor="let tocken of tockenList" value="{{tocken.TokenId}}" ngSelected="emailEntity.TokenId==tocken.TokenId">{{tocken.TokenName}}</option>
                       </select>
@@ -136,8 +140,7 @@
                     <div class="form-group col-md-4">
                       <label>
                         <span class="required">*</span>To</label>
-                      <select class="form-control" #To="ngModel" [(ngModel)]="emailEntity.To" name="To"
-                        required>
+                      <select class="form-control" #To="ngModel" [(ngModel)]="emailEntity.To" name="To" required>
                         <option value="" ngSelected='emailEntity.To==""'></option>
                         <ng-container *ngFor="let role of roleList">
                           <option *ngIf="(emailEntity.Cc!=role.RoleId)&&(emailEntity.Bcc!=role.RoleId)" value="{{role.RoleId}}" ngSelected="emailEntity.To==role.RoleId">{{role.RoleName}}</option>
@@ -198,10 +201,10 @@
 
                   <div class="row">
                     <div class="col-md-12 col-sm-12  text-center">
-                      <button type="submit" class="next_btn">
+                      <button type="submit" class="next_btn m_5">
                         <span>{{buttonName}}</span>
                       </button>
-                      <button *ngIf="emailEntity.EmailId==0" class="back_btn" type="button" (click)="clearForm(EmailForm)">
+                      <button *ngIf="emailEntity.EmailId==0" class="back_btn m_5" type="button" (click)="clearForm(EmailForm)">
                         <span>Clear</span>
                       </button>
                     </div>
@@ -215,5 +218,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>

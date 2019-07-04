@@ -31,16 +31,16 @@ export class CourseListComponent implements OnInit {
       // $('.menu_right').toggleClass("active_right");
       // $('footer.footer_fixed').toggleClass("active_footermenu");
     }, 500);
-    $('.grid_btn').click(function () {
-      $('.grid_btn').addClass("active");
-      $('.list_btn').removeClass("active");
-      $('.course_list_block .col-md-4').removeClass("list_block");
-    });
-    $('.list_btn').click(function () {
-      $('.list_btn').addClass("active");
-      $('.grid_btn').removeClass("active");
-      $('.course_list_block .col-md-4').addClass("list_block");
-    });
+    // $('.grid_btn').click(function () {
+    //   $('.grid_btn').addClass("active");
+    //   $('.list_btn').removeClass("active");
+    //   $('.course_list_block .col-md-4').removeClass("list_block");
+    // });
+    // $('.list_btn').click(function () {
+    //   $('.list_btn').addClass("active");
+    //   $('.grid_btn').removeClass("active");
+    //   $('.course_list_block .col-md-4').addClass("list_block");
+    // });
 
     this.CourseListService.getAllCourse()
       //.map(res => res.json())

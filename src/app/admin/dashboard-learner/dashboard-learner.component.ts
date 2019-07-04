@@ -68,7 +68,7 @@ export class DashboardLearnerComponent implements OnInit {
 		
     	/*################ GET LEARNER DASHBOARD START ##############*/
 		this.DashboardService.getLearnerDashboard(this.globals.authData.UserId)
-			.then((data) => {
+			.then((data) => {debugger
 			debugger
 			if (data['courseview']) {
 				this.courseview = data['courseview'];
@@ -191,9 +191,9 @@ export class DashboardLearnerComponent implements OnInit {
 
 
 		// PERFECT SCROLLBAR
-		new PerfectScrollbar('.scroll_yourscore');
+		// new PerfectScrollbar('.scroll_yourscore');
 		new PerfectScrollbar('.scroll_score');
-		new PerfectScrollbar('.scroll_calender');
+		//new PerfectScrollbar('.scroll_calender');
 		// END PERFECT SCROLLBAR
 
 

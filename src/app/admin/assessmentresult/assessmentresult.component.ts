@@ -139,6 +139,7 @@ export class AssessmentresultComponent implements OnInit {
           setTimeout(function () {
           $('#baged').css('background-image', 'url(' + Dataurl + ')');
           $('#baged1').css('background-image', 'url(' + Dataurl + ')');
+          $('#baged2').css('background-image', 'url(' + Dataurl + ')');
           $('#Signature').css('background-image', 'url(' + Dataurlsign + ')');
           $('#Signature1').css('background-image', 'url(' + Dataurlsign + ')');
           

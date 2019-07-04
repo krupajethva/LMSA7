@@ -1,67 +1,79 @@
-<div class="title_heading">				
+<div class="title_heading">
 	<div class="col-md-4 col-sm-4">
 		<div class="title_text">
 			<i class="fa fa-globe" aria-hidden="true"></i>Countries
 		</div>
-		</div>
-		<div class="col-md-8 col-sm-8">
-			<div class="welcome_message alert" role="alert">
-				<i class="fa fa-info"></i>Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
+	</div>
+	<div class="col-md-8 col-sm-8">
+		<!-- <div class="welcome_message alert" role="alert">
+				Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
 				 
-			</div>
+			</div> -->
+		<div class="breadcrumb_block pull-right">
+			<ul class="breadcrumb">
+					<li class="breadcrumb-item">
+							<a routerLink="/dashboard">
+								<i class="fa fa-home"></i>
+							</a>
+						</li>
+				<li class="breadcrumb-item">
+					<a href="/country">Country</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Country List</li>
+			</ul>
 		</div>
 		<div class="clearfix"></div>
-		<div class="breadcrumb_block">
-			<div class="col-md-6 col-sm-6">
-				<ul class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-					<li class="breadcrumb-item"><a href="#">Country</a></li>
-					<li class="breadcrumb-item active" aria-current="page">List</li>
-				</ul>
-				<div class="clearfix"></div>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<a routerLink="/country" class="next_btn pull-right">Add a Country</a>	
-			</div>
-			<div class="clearfix"></div>
-		</div>
+	</div>
 	<div class="clearfix"></div>
+
 </div>
 <div class="content_block">
-   <div class="col-md-12">
-	   <table id="list_tables" class="table table-hover" style="width:100%">
-           <thead>
-            <tr>
-				<th class="text-center sr_no_width">#</th>
-                <th>Name</th>
-                <th class="text-center zipcode_width">Country Abbreviation</th>
-                <th class="text-center zipcode_width">Phone Prefix</th>
-                <th class="text-center active_width">Active?</th>
-                <th class="text-center action_width">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let Country of CountryList;let i = index">
-				<td class="text-center">{{i+1}}</td>
-                <td>{{Country.CountryName}}</td>
-                <td class="text-center">{{Country.CountryAbbreviation}}</td>
-                <td class="text-center">{{Country.PhonePrefix}}</td>
-                <td class="text-center">
-				
-                    <div class="activeyes_box"  data-toggle="tooltip" data-placement="top" [attr.title]="Country.IsActive==1 ? 'Active' : 'Deactive'">
-                            <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(Country,i)" [checked]="Country.IsActive==1" value="Yes" >
-                            <label for="active{{i}}"></label>
-                    </div>
-				</td>
-                <td class="text-center">
-					<button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/country/edit/{{Country.CountryId}}"><i class="fa fa-edit"></i></button>
-					<button class="delete" data-toggle="tooltip" data-placement="top"  *ngIf="Country.isdisabled>0"  [disabled]="Country.isdisabled>0" title="Countrys can't be deleted as it is already assigned to an active User's profile"> <i class="fa fa-trash"></i></button>	
-					<button class="delete" *ngIf="Country.isdisabled==0" data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deleteCountry(Country)"> <i class="fa fa-trash"></i> </button>
-				</td>
-            </tr>
-              </tbody>
-            </table>
-          
+		<div class="col-md-6 col-sm-6 pull-right add_btn">
+				<a routerLink="/country" class="next_btn pull-right">Add a Country</a>
+			</div>
+			<div class="clearfix"></div>
+	<div class="col-md-12">
+		<table id="list_tables" class="table table-hover" style="width:100%">
+			<thead>
+				<tr>
+					<th class="text-center sr_no_width">#</th>
+					<th>Name</th>
+					<th class="text-center zipcode_width">Country Abbreviation</th>
+					<th class="text-center zipcode_width">Phone Prefix</th>
+					<th class="text-center active_width">Active?</th>
+					<th class="text-center action_width">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let Country of CountryList;let i = index">
+					<td class="text-center">{{i+1}}</td>
+					<td>{{Country.CountryName}}</td>
+					<td class="text-center">{{Country.CountryAbbreviation}}</td>
+					<td class="text-center">{{Country.PhonePrefix}}</td>
+					<td class="text-center">
+
+						<div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="Country.IsActive==1 ? 'Active' : 'Deactive'">
+							<input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(Country,i)" [checked]="Country.IsActive==1"
+							 value="Yes">
+							<label for="active{{i}}"></label>
+						</div>
+					</td>
+					<td class="text-center">
+						<button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/country/edit/{{Country.CountryId}}">
+							<i class="fa fa-edit"></i>
+						</button>
+						<button class="delete" data-toggle="tooltip" data-placement="top" *ngIf="Country.isdisabled>0" [disabled]="Country.isdisabled>0"
+						 title="Countrys can't be deleted as it is already assigned to an active User's profile">
+							<i class="fa fa-trash"></i>
+						</button>
+						<button class="delete" *ngIf="Country.isdisabled==0" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteCountry(Country)">
+							<i class="fa fa-trash"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
 	</div>
 	<div class="clearfix"></div>
 </div>

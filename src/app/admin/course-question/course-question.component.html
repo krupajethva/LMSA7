@@ -5,75 +5,73 @@
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+
+    <div class="clearfix"></div>
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
           <a>
             <i class="fa fa-home"></i>
           </a>
         </li>
-   
+
         <li class="breadcrumb-item">Course Question</li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
-      <div class="clearfix"></div>
     </div>
-    <div class="col-md-6 col-sm-6">
-        <a routerLink="/course-questionlist/{{cid}}" class="next_btn pull-right">List of Questions</a>
-      </div>
-    <div class="col-md-6 col-sm-6">
-    </div>
-    <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
 </div>
 <div class="content_block course_question_block">
-
+  
   <div class="row">
+
+    <!-- <div class="col-md-6 col-sm-6">
+      <a routerLink="/course-questionlist/{{cid}}" class="next_btn pull-right">List of Questions</a>
+    </div> -->
+    <div class="clearfix"></div>
+    <div class="list_button_block">
     <div class="col-lg-12">
       <div class="form-bg">
         <div class="col-md-12 col-sm-12">
-          <div class="pull-left">
-            <h3>{{Coursename.CourseFullName}}</h3>
-          </div>
-          <div class="pull-right">
+            <h3 class="no_margin pull-left">{{Coursename.CourseFullName}}</h3>
+            <a routerLink="/course-questionlist/{{cid}}" class="next_btn pull-right">List of Questions</a>
+          <div class="form-group-active pull-right">
             <label>
               <span class="required">*</span>Active ?</label>
             <div class="activeyes_box">
 
-              <input type="checkbox" name="IsActive" id="IsActive"  value="yes"  #IsActive="ngModel" [(ngModel)]="QuestionEntity.IsActive">
+              <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="QuestionEntity.IsActive">
               <label for="IsActive"></label>
             </div>
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
         <form class="form-validate" #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
-          <div class="form-group col-md-7 col-sm-7 ckeditor_block editor" >
+          <div class="form-group col-md-7 col-sm-7 ckeditor_block editor">
             <label>
               <span class="required">*</span>Question</label>
-            <textarea class="form-control" name="QuestionName" id="QuestionName" rows="10" cols="60" #QuestionName="ngModel"
-              [(ngModel)]="QuestionEntity.QuestionName"  contenteditable="true" ></textarea>
+            <textarea class="form-control" name="QuestionName" id="QuestionName" rows="10" cols="60" #QuestionName="ngModel" [(ngModel)]="QuestionEntity.QuestionName"
+              contenteditable="true"></textarea>
             <span class="error_span" *ngIf="des_valid">Please enter question</span>
           </div>
           <div class="col-md-5 col-sm-5">
             <label *ngIf="!readiovalid">
-            <span class="required">*</span>Please select your answer</label>
-             <label *ngIf="readiovalid">
-              <span class="error_span"><span class="required">*</span>Please Select your answer</span>
-             </label>
+              <span class="required">*</span>Please select your answer</label>
+            <label *ngIf="readiovalid">
+              <span class="error_span">
+                <span class="required">*</span>Please Select your answer</span>
+            </label>
             <div class="answer_repeat_block" *ngFor="let Topic of TopicList; let i = index; let last = last;">
               <div class="form-group col-md-1 col-sm-1">
                 <div class="radiobtn_box">
-                  <input type="radio" name="CorrectAnswer" id="CorrectAnswer{{i}}" (change)="RadioChange(i)" 
-                     />
-         
+                  <input type="radio" name="CorrectAnswer" id="CorrectAnswer{{i}}" (change)="RadioChange(i)" />
+
                   <label for="CorrectAnswer{{i}}"></label>
                 </div>
               </div>
@@ -81,19 +79,18 @@
                 <input type="text" name="OptionValue{{i}}" id="OptionValue{{i}}" #OptionValue="ngModel" [(ngModel)]="TopicList[i].OptionValue"
                   class="form-control" placeholder="Your Option {{i+1}} Here" required />
                 <span class="error_span" *ngIf="(OptionValue.dirty && OptionValue.invalid) || (OptionValue.pristine && submitted)">
-                      <span *ngIf="OptionValue.errors && OptionValue.errors.required">
-                        Please enter option value
-                      </span>
-                      <span *ngIf="OptionValue.errors && OptionValue.errors.pattern">
-                        Please enter option value
-                      </span>
-                    </span>
-          
-                    <!-- <span class="error_span"  *ngIf="(OptionValue.dirty && OptionValue.invalid) || (OptionValue.pristine && submitted)">Please enter Option</span> -->
+                  <span *ngIf="OptionValue.errors && OptionValue.errors.required">
+                    Please enter option value
+                  </span>
+                  <span *ngIf="OptionValue.errors && OptionValue.errors.pattern">
+                    Please enter option value
+                  </span>
+                </span>
+
+                <!-- <span class="error_span"  *ngIf="(OptionValue.dirty && OptionValue.invalid) || (OptionValue.pristine && submitted)">Please enter Option</span> -->
               </div>
               <div class="form-group col-md-3 col-sm-3">
-                <button type="button" (click)="DeleteTopic(Topic)" *ngIf="i>1" class="r-btnRemove btn btn-danger btn-rounded btn-sm"
-                  title="Delete">
+                <button type="button" (click)="DeleteTopic(Topic)" *ngIf="i>1" class="r-btnRemove btn btn-danger btn-rounded btn-sm" title="Delete">
                   <span class="fa fa-times"></span>
                 </button>
                 <button type="button" (click)="AddNewTopic(i+1)" *ngIf="last && i<4" class="r-btnAdd btn btn-default btn-rounded btn-sm"
@@ -107,7 +104,7 @@
                     <span *ngIf="i!=0">Please enter Option {{i+1}} or Remove it</span>
                   </span>
                 </span> -->
-             
+
               </div>
               <div class="clearfix"></div>
             </div>
@@ -115,12 +112,12 @@
           </div>
           <div class="clearfix"></div>
           <div class="col-md-12 col-sm-12 text-center">
-            <button type="submit" class="next_btn margin_btn_30">
+            <button type="submit" class="next_btn margin_btn_30 m_5">
               <span>{{buttonName}}</span>
             </button>
-            <button *ngIf="QuestionEntity.QuestionId==0" class="back_btn" type="button" (click)="clearForm(questionForm)">
-                <span>Clear</span>
-              </button>
+            <button *ngIf="QuestionEntity.QuestionId==0" class="back_btn m_5" type="button" (click)="clearForm(questionForm)">
+              <span>Clear</span>
+            </button>
           </div>
           <!-- <div class="text-center">
               <button class="next_btn" type="submit">
@@ -135,4 +132,5 @@
   </div>
   <div class="clearfix"></div>
   <!-- End Inner Section -->
+</div>
 </div>

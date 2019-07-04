@@ -1,54 +1,51 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
+   
     <div class="title_text">
-      <i class="fa fa-building" aria-hidden="true"></i>{{header}} a Company
+      <i class="fa fa-building" aria-hidden="true"></i>{{header}} Company
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+
+    <div class="breadcrumb_block pull-right">
+     
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-          <a>
+          <a routerLink="/dashboard">
             <i class="fa fa-home"></i>
           </a>
         </li>
-        <li class="breadcrumb-item">
-          <a>Company</a>
-        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a routerLink="/company-list">
+              Company
+            </a></li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
-      <div class="clearfix"></div>
-    </div>
-    <div class="col-md-6 col-sm-6">
-
-      <a routerLink="/company-list" class="next_btn pull-right">List of Companies</a>
-
     </div>
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
+
 </div>
-<div class="content_block course_detail_block">
+<div class="content_block">
+    <div class="list_button_block">
   <div class="col-md-12 col-sm-12">
     <div class="course_details">
       <div class="mydivs">
         <div class="row">
           <div class="col-md-12 col-sm-12">
             <h1 class="no_margin pull-left">ADD COMPANY</h1>
+            <a routerLink="/company-list" class="next_btn pull-right">List of Companies</a>
             <div class="form-group-active pull-right">
               <label>
                 <span>*</span>Active?</label>
-
               <div class="activeyes_box">
                 <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="companyEntity.IsActive">
                 <label for="IsActive"></label>
@@ -164,8 +161,8 @@
                     <div class="form-group">
                       <label>
                         <span class="required">*</span>Address1</label>
-                      <input type="text" class="form-control" #Address1="ngModel" name="Address1" [(ngModel)]="companyEntity.Address1"
-                        maxlength="300" [ngClass]="{red_border: (Address1.dirty && Address1.invalid) || (Address1.pristine && submitted)}"
+                      <input type="text" class="form-control" #Address1="ngModel" name="Address1" [(ngModel)]="companyEntity.Address1" maxlength="300"
+                        [ngClass]="{red_border: (Address1.dirty && Address1.invalid) || (Address1.pristine && submitted)}"
                         required/>
                       <span class="error_span" *ngIf="(Address1.dirty && Address1.invalid) || (Address1.pristine && submitted)">
                         <span *ngIf="Address1.errors.required || (Address1.pristine && submitted)">Please enter address </span>
@@ -178,9 +175,8 @@
                     <div class="form-group">
                       <label>
                         <span></span>Address2 </label>
-                      <input type="text" class="form-control" #Address2="ngModel" name="Address2" maxlength="300"
-                        [(ngModel)]="companyEntity.Address2" [ngClass]="{red_border: (Address2.dirty && Address2.invalid)}"
-                      />
+                      <input type="text" class="form-control" #Address2="ngModel" name="Address2" maxlength="300" [(ngModel)]="companyEntity.Address2"
+                        [ngClass]="{red_border: (Address2.dirty && Address2.invalid)}" />
                       <!-- <span class="error_span" *ngIf="Address2.dirty && Address2.invalid">
                         <span *ngIf="Address2.errors && Address2.errors.pattern">Please enter valid address</span>
                       </span> -->
@@ -207,8 +203,7 @@
                     <div class="form-group">
                       <label>
                         <span class="required">*</span>State / Province</label>
-                      <select class="form-control" #StateId="ngModel" [(ngModel)]="companyEntity.StateId" name="StateId"
-                        required>
+                      <select class="form-control" #StateId="ngModel" [(ngModel)]="companyEntity.StateId" name="StateId" required>
                         <option value="" ngSelected='companyEntity.StateId==""'></option>
                         <option *ngFor="let state of StateList" value="{{state.StateId}}" ngSelected="companyEntity.StateId==state.StateId">{{state.StateName}}</option>
                       </select>
@@ -254,13 +249,13 @@
 
                 <div class="row">
                   <div class="col-md-12 col-sm-12  text-center">
-                    <button *ngIf="companyEntity.CompanyId==0" type="submit" class="next_btn">
+                    <button *ngIf="companyEntity.CompanyId==0" type="submit" class="next_btn m_5">
                       <span>Add</span>
                     </button>
-                    <button *ngIf="companyEntity.CompanyId>0" type="submit" class="next_btn">
+                    <button *ngIf="companyEntity.CompanyId>0" type="submit" class="next_btn m_5">
                       <span>Update</span>
                     </button>
-                    <button *ngIf="companyEntity.CompanyId==0" class="back_btn" type="button" (click)="clearForm(companyForm)">
+                    <button *ngIf="companyEntity.CompanyId==0" class="back_btn m_5" type="button" (click)="clearForm(companyForm)">
                       <span>Clear</span>
                     </button>
                   </div>
@@ -280,5 +275,6 @@
 
       </div>
     </div>
+  </div>
   </div>
 </div>

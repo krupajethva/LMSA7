@@ -1,40 +1,40 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
     <div class="title_text">
-      <i class="fa fa-globe" aria-hidden="true"></i>{{header}} a State
+      <i class="fa fa-globe" aria-hidden="true"></i>{{header}} State
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
-    <div class="welcome_message alert" role="alert">
-      <i class="fa fa-info"></i>Welcome back,
+    <!-- <div class="welcome_message alert" role="alert">
+      Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
 
-    </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="breadcrumb_block">
-    <div class="col-md-6 col-sm-6">
+    </div> -->
+    <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">
-            <i class="fa fa-home"></i>
-          </a>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="#">State</a>
-        </li>
+          <li class="breadcrumb-item">
+              <a routerLink="/dashboard">
+                <i class="fa fa-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <a routerLink="/state-list">
+                  State
+                </a></li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
-      <div class="clearfix"></div>
-    </div>
-    <div class="col-md-6 col-sm-6">
-      <a routerLink="/state-list" class="next_btn pull-right">List of States</a>
     </div>
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
+
 </div>
-<div class="content_block course_detail_block">
+<div class="content_block">
+    <div class="list_button_block">
+  <!-- <div class="col-md-6 col-sm-6 pull-right">
+    <a routerLink="/state-list" class="next_btn pull-right">List of States</a>
+  </div> -->
+  <div class="clearfix"></div>
   <div class="col-md-12 col-sm-12">
     <div class="course_details">
       <div class="mydivs">
@@ -43,6 +43,8 @@
             <div class="col-md-12 col-sm-12">
               <form class="form-validate" role="form" #stateForm="ngForm" (ngSubmit)="addState(stateForm)">
                 <!-- <h1 class="no_margin pull-left">Add State</h1> -->
+                <h1 class="no_margin pull-left">ADD STATE</h1>
+                <a routerLink="/state-list" class="next_btn pull-right">List of States</a>
                 <div class="form-group-active pull-right">
                   <label>
                     <span>*</span>Active?</label>
@@ -60,8 +62,7 @@
                       <div class="form-group">
                         <label>
                           <span class="required">*</span>Country</label>
-                        <select class='select-option' required class="form-control" #CountryId="ngModel" [(ngModel)]="stateEntity.CountryId" name="CountryId"
-                          >
+                        <select class='select-option' required class="form-control" #CountryId="ngModel" [(ngModel)]="stateEntity.CountryId" name="CountryId">
                           <option value="" ngSelected='stateEntity.CountryId==""'></option>
                           <option class='option' *ngFor='let country of CountryList' [value]="country.CountryId">{{country.CountryName}}</option>
                         </select>
@@ -118,10 +119,10 @@
                   <div class="clearfix"></div>
                   <div class="row">
                     <div class="col-md-12 col-sm-12  text-center">
-                      <button type="submit" class="next_btn">
+                      <button type="submit" class="next_btn m_5">
                         <span>{{buttonName}}</span>
                       </button>
-                      <button *ngIf="stateEntity.StateId==0" class="back_btn" type="button" (click)="clearForm(stateForm)">
+                      <button *ngIf="stateEntity.StateId==0" class="back_btn m_5" type="button" (click)="clearForm(stateForm)">
                         <span>Clear</span>
                       </button>
                     </div>
@@ -134,5 +135,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>

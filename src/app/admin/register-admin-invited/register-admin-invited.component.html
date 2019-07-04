@@ -103,7 +103,9 @@
                   <div class="form-group">
                     <label>
                       <span>*</span>Password </label>
-                    <input type="password" class="form-control" (keyup)="checkpassword()" data-toggle="tooltip" data-placement="top" title="Minimum 8 and maximum 50 characters in length. Should allow AlphaNumeric characters. Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#)."
+                    <input type="password" class="form-control" (keyup)="checkpassword()" data-toggle="tooltip" data-placement="top"
+                    data-html="true"
+title="<ul class='tooltip_style'><li>Minimum 8 and maximum 50 characters in length.</li><li>Should allow AlphaNumeric characters.</li><li>Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#).</li></ul>"
                       pattern="[a-zA-Z0-9_\-@$*&!#]{8,50}" #Password="ngModel" [(ngModel)]="RegisterEntity.Password" name="Password"
                       [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted1)}" required
                     />
@@ -122,7 +124,9 @@
                   <div class="form-group">
                     <label>
                       <span>*</span>Confirm Password </label>
-                    <input type="password" class="form-control" data-toggle="tooltip" data-placement="top" title="Minimum 8 and maximum 50 characters in length. Should allow AlphaNumeric characters. Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#)."
+                    <input type="password" class="form-control" data-toggle="tooltip" data-placement="top"
+                    data-html="true"
+title="<ul class='tooltip_style'><li>Minimum 8 and maximum 50 characters in length.</li><li>Should allow AlphaNumeric characters.</li><li>Only special characters allowed are at the rate (@), Underscore (_), Dash (-), Dollar ($), Star (*), Ampersand (&), Exclamation mark (!), and Hash (#).</li></ul>"
                       (keyup)="checkpassword()" pattern="[a-zA-Z0-9_\-@$*&!#]{8,50}" #cPassword="ngModel" [(ngModel)]="RegisterEntity.cPassword"
                       name="cPassword" [ngClass]="{red_border: ((cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted1)) || (same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required))}"
                       required />

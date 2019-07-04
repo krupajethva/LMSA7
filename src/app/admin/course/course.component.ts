@@ -72,6 +72,7 @@ export class CourseComponent implements OnInit {
 	tab3;
 	tab4;
 	tab5;
+	autocompleteItems;
 	constructor(public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
 		private CourseService: CourseService, private CourseSchedulerService: CourseSchedulerService) { }
 	//selectedCharacters: Array<string> = ['376'];
@@ -121,8 +122,6 @@ export class CourseComponent implements OnInit {
 		setTimeout(function () {
 
 			$('#CourseImage').change(function (e) {
-
-
 				var file = e.target.files[0];
 				var reader = new FileReader();
 				reader.onloadend = function () {
@@ -343,13 +342,15 @@ export class CourseComponent implements OnInit {
 
 		this.CourseService.getAllimage(this.globals.authData.UserId)
 			//.map(res => res.json())
-			.then((data) => {
+			.then((data) => {debugger
 				this.ImageList = data['image'];
 				this.VideoList = data['video'];
 				this.DefalutBadges = data['defalutbadge'];
 
+	
 				this.BadgesEntity.BadgeImageId = this.DefalutBadges[0].ResourcesId;
 				this.BadgesEntity.ResourcesId = this.DefalutBadges[0].ResourcesId;
+			
 
 			},
 				(error) => {
@@ -357,6 +358,17 @@ export class CourseComponent implements OnInit {
 
 					this.router.navigate(['/pagenotfound']);
 				});
+				this.CourseService.skillsData()
+				.then((data) => {
+					debugger
+					this.autocompleteItems = data;
+				},
+					(error) => {
+						//alert('error');
+						this.btn_disable = false;
+						this.submitted = false;
+						//this.router.navigate(['/pagenotfound']);
+					});
 		this.CourseSchedulerService.getAllDefaultData()
 			//.map(res => res.json())
 			.then((data) => {
@@ -420,6 +432,16 @@ export class CourseComponent implements OnInit {
 								$('#st5').addClass('success');
 							}
 							this.CourseEntity = data;
+							if(this.CourseEntity.Keyword!=null){
+								this.CourseEntity.Keyword = this.CourseEntity.Keyword.split(","); 	//convert comma seperated string to array
+							}
+							if(this.CourseEntity.AssessmentTime != null)
+							{		
+								var time = this.CourseEntity.AssessmentTime.split(':');
+								this.CourseEntity.AssessmentHour = time[0];
+								this.CourseEntity.AssessmentMinute = time[1];
+								this.CourseEntity.AssessmentSecond = time[2];
+							}
 							if (data['IsActive'] == 0) { this.CourseEntity.IsActive = 0; } else { this.CourseEntity.IsActive = '1'; }
 							if (data['Featurescheck'] == 0) { this.CourseEntity.Featurescheck = 0; } else { this.CourseEntity.Featurescheck = '1'; }
 							if (data['whatgetcheck'] == 0) { this.CourseEntity.whatgetcheck = 0; } else { this.CourseEntity.whatgetcheck = '1'; }
@@ -542,6 +564,7 @@ export class CourseComponent implements OnInit {
 							this.globals.isLoading = false;
 
 							setTimeout(function () {
+								
 								$(".instructorfocus").addClass('filled');
 								$(".instructorfocus").parents('.form-group').addClass('focused');
 								$('.form_time_picker').datetimepicker({
@@ -657,6 +680,7 @@ export class CourseComponent implements OnInit {
 
 
 					setTimeout(function () {
+						$('#badg0').addClass('image-radio-checked');
 						function toggleIcon(e) {
 							$(e.target)
 								.prev('.panel-heading')
@@ -1169,6 +1193,7 @@ export class CourseComponent implements OnInit {
 		this.secondform = false;
 		this.thirdform = false;
 		this.forthform = false;
+		this.fifthform = false;
 		//success
 
 
@@ -1213,6 +1238,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = true;
 			this.thirdform = false;
 			this.forthform = false;
+			this.fifthform = false;
 			$('#st2').addClass('active');
 			$('#step2').addClass('active');
 			$('#st2').removeClass('success');
@@ -1264,6 +1290,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = true;
 			this.thirdform = false;
 			this.forthform = false;
+			this.fifthform = false;
 			$('#st2').addClass('active');
 			$('#step2').addClass('active');
 			$('#st2').removeClass('success');
@@ -1310,6 +1337,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = false;
 			this.thirdform = true;
 			this.forthform = false;
+			this.fifthform = false;
 			//$('#st3').removeClass('disabled');
 			$('#st3').addClass('active');
 			$('#step3').addClass('active');
@@ -1411,6 +1439,7 @@ export class CourseComponent implements OnInit {
 			this.secondform = false;
 			this.thirdform = true;
 			this.forthform = false;
+			this.fifthform = false;
 			//$('#st3').removeClass('disabled');
 			$('#st3').addClass('active');
 			$('#step3').addClass('active');
@@ -1446,9 +1475,8 @@ export class CourseComponent implements OnInit {
 		this.secondform = false;
 		this.thirdform = false;
 		this.forthform = true;
+		this.fifthform = false;
 		//success
-
-
 
 		//$('#st1').removeClass('disabled');
 		$('#st4').addClass('active');
@@ -1493,7 +1521,7 @@ export class CourseComponent implements OnInit {
 
 
 
-		//$('#st1').removeClass('disabled');
+		$('#st5').removeClass('disabled');
 		$('#st5').addClass('active');
 		$('#st5').removeClass('success');
 		$('#step5').addClass('active');
@@ -1675,6 +1703,7 @@ export class CourseComponent implements OnInit {
 		if (CourseForm1.valid && count == 0) {
 			//this.btn_disable = true;
 			this.globals.isLoading = true;
+			this.CourseEntity.Keyword = this.CourseEntity.Keyword.join();
 			this.CourseService.add(this.CourseEntity)
 				.then((data) => {
 					// this.firstform = false;
@@ -2750,6 +2779,7 @@ export class CourseComponent implements OnInit {
 		debugger
 		this.badgehide = false;
 		this.BadgesEntity.ResourcesId = null;
+		this.BadgesEntity.BadgeImageId = null;
 		//this.BadgesEntity.badgeImage = null;
 		$("input[name='selectbages']").val(null);
 		$('#badgeImageicon input[type="text"]').val(null);
@@ -2911,6 +2941,7 @@ export class CourseComponent implements OnInit {
 			} else {
 				//	this.router.navigate(['/instructor-courses']);
 			}
+			this.tab5 = true;
 			this.Previousfive();
 
 		}
@@ -2918,6 +2949,7 @@ export class CourseComponent implements OnInit {
 	Finelsubmit() {
 
 		debugger
+			this.globals.isLoading = true;
 		if(this.urlid>0)
 		{
 			this.BadgesEntity.UpdatedBy = this.globals.authData.UserId;
@@ -2963,7 +2995,7 @@ export class CourseComponent implements OnInit {
 				this.submitted = false;
 				this.globals.isLoading = false;
 				//	this.CourseSchedulerEntity = {};
-
+				this.router.navigate(['/instructor-courses']);
 
 
 			},

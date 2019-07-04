@@ -1,82 +1,93 @@
-<div class="title_heading">				
+<div class="title_heading">
 	<div class="col-md-4 col-sm-4">
 		<div class="title_text">
 			<i class="fa fa-sitemap" aria-hidden="true"></i>Categories
 		</div>
-		</div>
-		<div class="col-md-8 col-sm-8">
-			<div class="welcome_message alert" role="alert">
-				<i class="fa fa-info"></i>Welcome back, <strong>12th Dec 2018 12:45</strong> 
+	</div>
+	<div class="col-md-8 col-sm-8">
+		<!-- <div class="welcome_message alert" role="alert">
+				Welcome back, <strong>12th Dec 2018 12:45</strong> 
 				 
-			</div>
+			</div> -->
+		<div class="breadcrumb_block pull-right">
+			<ul class="breadcrumb">
+					<li class="breadcrumb-item">
+							<a routerLink="/dashboard">
+								<i class="fa fa-home"></i>
+							</a>
+						</li>
+				<li class="breadcrumb-item">
+					<a routerLink="/Parentcategory">Category</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Category List</li>
+			</ul>
 		</div>
 		<div class="clearfix"></div>
-		<div class="breadcrumb_block">
-			<div class="col-md-6 col-sm-6">
-				<ul class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
-					<li class="breadcrumb-item"><a routerLink="/Parentcategory" >Category</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Category List</li>
-				</ul>
-				<div class="clearfix"></div>
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<a routerLink="/Parentcategory" class="next_btn pull-right">Category</a>	
-			</div>
-			<div class="clearfix"></div>
-		</div>
+	</div>
 	<div class="clearfix"></div>
+
 </div>
 <div class="content_block">
-   <div class="col-md-12">
-	   <table id="list_tables" class="table table-hover" style="width:100%">
-           <thead>
-            <tr>
-				<th class="text-center sr_no_width">#</th>
-                <th>Category Name</th>
-                <th class="date_time_width text-center">Category Code</th>
-                <th>Description</th>
-   
-                <th class="text-center active_width">Active?</th>
-                <th class="text-center action_width">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let category of categoryList; let i = index">
-				<td class="text-center">{{category.CategoryId}}</td>
-                <td>{{category.CategoryName}}</td>
-                <td class="text-center">{{category.CategoryCode}}</td>
-                <td>{{category.Description}}</td>
+	<div class="col-md-6 col-sm-6 pull-right add_btn">
+		<a routerLink="/Parentcategory" class="next_btn pull-right">Add a Category</a>
+	</div>
+	<div class="clearfix"></div>
+	<div class="col-md-12">
+		<table id="list_tables" class="table table-hover" style="width:100%">
+			<thead>
+				<tr>
+					<th class="text-center sr_no_width">#</th>
+					<th>Category Name</th>
+					<th class="date_time_width text-center">Category Code</th>
+					<th>Description</th>
 
-                <td class="text-center">
-					<!-- <div class="activeyes_box">
+					<th class="text-center active_width">Active?</th>
+					<th class="text-center action_width">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let category of categoryList; let i = index">
+					<td class="text-center">{{category.CategoryId}}</td>
+					<td>{{category.CategoryName}}</td>
+					<td class="text-center">{{category.CategoryCode}}</td>
+					<td>{{category.Description}}</td>
+
+					<td class="text-center">
+						<!-- <div class="activeyes_box">
                       <input type="checkbox" name="active1" id="active1" checked value="Yes">
                       <label for="active1"></label>
                     </div> -->
-                    <div class="activeyes_box"  data-toggle="tooltip" data-placement="top" [attr.title]="category.IsActive==1 ? 'Active' : 'Deactive'">
-                      <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(category,i)" [checked]="category.IsActive==1" value="Yes" >
-                      <label for="active{{i}}"></label>
-                    </div>
-				</td>
-                <td class="text-center">
-          <!-- <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button> -->
-          <button  class="edit" data-toggle="tooltip" data-placement="top"   title="Edit"  routerLink="/Parentcategory/edit/{{category.CategoryId}}" > <i class="fa fa-edit"></i> </button>
-					<!-- <button class="delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button> -->
-          
-					<div class="inline_delbtn tooltip_inline"  data-toggle="tooltip" data-placement="bottom"  title="You can’t delete category as it is assigned to one of the sub category "> 
-						<button *ngIf="category.isdisabled>0" class="delete" [disabled]="category.isdisabled>0"   (click)="deleteCategory(category)"  > <span class="fa fa-trash"></span> </button>
+						<div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="category.IsActive==1 ? 'Active' : 'Deactive'">
+							<input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(category,i)" [checked]="category.IsActive==1"
+							 value="Yes">
+							<label for="active{{i}}"></label>
 						</div>
-						<div class="inline_delbtn tooltip_inline"  data-toggle="tooltip" data-placement="bottom"    > 
-				<!-- <button *ngIf="(permissionEntity.Delete==1) && (domain.isdisabled==0)"   (click)="deleteDomain(domain)"  class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"> <span class="fa fa-times"></span> </button> -->
-				<button *ngIf="category.isdisabled==0"class="delete" data-toggle="tooltip" data-placement="bottom" title="Delete"  (click)="deleteCategory(category)"  > <i class="fa fa-trash"></i> </button>
-			</div>
-				</td>
-				
-            </tr>
-           
-           
-              </tbody>
-            </table>
+					</td>
+					<td class="text-center">
+						<!-- <button class="edit" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button> -->
+						<button class="edit" data-toggle="tooltip" data-placement="top" title="Edit" routerLink="/Parentcategory/edit/{{category.CategoryId}}">
+							<i class="fa fa-edit"></i>
+						</button>
+						<!-- <button class="delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button> -->
+
+						<div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="You can’t delete category as it is assigned to one of the sub category ">
+							<button *ngIf="category.isdisabled>0" class="delete" [disabled]="category.isdisabled>0" (click)="deleteCategory(category)">
+								<span class="fa fa-trash"></span>
+							</button>
+						</div>
+						<div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom">
+							<!-- <button *ngIf="(permissionEntity.Delete==1) && (domain.isdisabled==0)"   (click)="deleteDomain(domain)"  class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"> <span class="fa fa-times"></span> </button> -->
+							<button *ngIf="category.isdisabled==0" class="delete" data-toggle="tooltip" data-placement="bottom" title="Delete" (click)="deleteCategory(category)">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div>
+					</td>
+
+				</tr>
+
+
+			</tbody>
+		</table>
 
 	</div>
 	<div class="clearfix"></div>

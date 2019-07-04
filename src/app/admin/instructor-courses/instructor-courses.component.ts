@@ -31,6 +31,9 @@ export class InstructorCoursesComponent implements OnInit {
   ECtime;
   coursestarthours;
   courseendhours;
+  totalinstructor;
+  Revokeable;
+  ReInviteable;
 
   constructor(public globals: Globals, private router: Router, private elem: ElementRef, private route: ActivatedRoute,
     private InstructorCoursesService: InstructorCoursesService, private LearnerCoursesService: LearnerCoursesService) { }
@@ -41,6 +44,8 @@ export class InstructorCoursesComponent implements OnInit {
     this.Checktopicvalid = true;
     this.Checksessionvalid = true;
     this.CheckCoursevalid = true;
+    this.ReInviteable = false;
+    this.Revokeable = false;
 
 
     var d = new Date();
@@ -78,6 +83,7 @@ export class InstructorCoursesComponent implements OnInit {
       });
 
       new PerfectScrollbar('.course_clone_block');
+      //new PerfectScrollbar('.instructor_scroll');
 
       $('.modal').on('shown.bs.modal', function () {
         $('.right_content_block').addClass('style_position');
@@ -236,12 +242,12 @@ export class InstructorCoursesComponent implements OnInit {
 
   }
 
-  view_inst_btn() {
-    $('.view_inst_block').addClass("active");
+  view_inst_btn(CourseSessionId) {
+    $('.view_inst_block' + CourseSessionId).addClass("active");
   }
 
-  cancel_inst_btn() {
-    $('.view_inst_block').removeClass("active");
+  cancel_inst_btn(CourseSessionId) {
+    $('.view_inst_block' + CourseSessionId).removeClass("active");
   }
 
   draft(CourseId, i) {
@@ -290,11 +296,16 @@ export class InstructorCoursesComponent implements OnInit {
       .then((data) => {
         if (data) {
           this.CourseSesssionList = data;
+
+          console.log( this.CourseSesssionList);
           for (var i = 0; i < this.CourseSesssionList.length; i++) {
             if (this.CourseSesssionList[i].IsActive == 0) { this.CourseSesssionList[i].IsActive = 0; } else { this.CourseSesssionList[i].IsActive = '1'; }
             //  this.CourseSesssionList.StartDate= this.CourseSesssionList.StartDate;
           }
-
+          setTimeout(function () {
+            new PerfectScrollbar('.instructor_scroll');
+          },
+            500);
           // var d = new Date(this.CourseSesssionList.StartDate);
           // alert(this.CourseSesssionList.StartDate);
           // this.StartDate = d;
@@ -307,11 +318,59 @@ export class InstructorCoursesComponent implements OnInit {
 
           //this.router.navigate(['/pagenotfound']);
         });
+
   }
   close(i) {
 
     $('#modalsession' + i).modal('hide');
   }
+
+  Instructor_Invite(UserId,CourseSessionId,type,k,i) {
+    debugger
+    this.globals.isLoading = true;
+    this.InstructorCoursesService.Instructor_Invite(UserId,CourseSessionId,type)
+      .then((data) => {
+        if (data) {
+          //this.CourseSesssionList[k].SessionStatus = 1;
+          if(type=="Revoke")
+          {
+            swal({
+              type: 'Revoke',
+              title: 'Instructor Revoke!',
+              text: 'Instructor has been Revoke.',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            this.CourseSesssionList[k].userdetails[i].Approval = 3;
+            this.globals.isLoading = false;
+
+          }else
+          {  
+            swal({
+              type: 'Re-Invite',
+              title: 'Invitation!',
+              text: 'Instructor has been Re-Invited.',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            this.CourseSesssionList[k].userdetails[i].Approval = 0;
+            this.globals.isLoading = false;
+          }
+         
+        }else
+        {
+          this.globals.isLoading = false;
+        }
+
+      },
+        (error) => {
+          if (error.text) {
+            this.globals.isLoading = false;
+           //error
+          }
+        });
+
+}
   StartSession(CourseSessionId, k) {
 
     swal({
@@ -325,7 +384,8 @@ export class InstructorCoursesComponent implements OnInit {
     })
       .then((result) => {
         if (result.value) {
-          this.InstructorCoursesService.StartSession(CourseSessionId)
+          var UserId = this.globals.authData.UserId;
+          this.InstructorCoursesService.StartSession(CourseSessionId,UserId)
             //.map(res => res.json())
             .then((data) => {
               if (data) {
