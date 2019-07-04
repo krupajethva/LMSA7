@@ -359,3 +359,4 @@ class EditProfile extends CI_Controller
 	}
 
 }
+

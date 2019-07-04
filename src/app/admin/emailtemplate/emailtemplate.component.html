@@ -1,7 +1,7 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
     <div class="title_text">
-      <i class="fa fa-envelope-o" aria-hidden="true"></i>{{header}} an Email Template
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>{{header}} Email Template
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
@@ -14,13 +14,17 @@
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">
+          <a routerLink="/dashboard">
             <i class="fa fa-home"></i>
           </a>
         </li>
-        <li class="breadcrumb-item">
+        <!-- <li class="breadcrumb-item">
           <a href="#">Email Template</a>
-        </li>
+        </li> -->
+        <li class="breadcrumb-item active" aria-current="page">
+          <a routerLink="/emailtemplate-list">
+            Email Template
+          </a></li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
     </div>
@@ -28,10 +32,11 @@
 
   <div class="clearfix"></div>
 </div>
-<div class="content_block course_detail_block">
-  <div class="col-md-6 col-sm-6 pull-right">
+<div class="content_block">
+  <div class="list_button_block">
+  <!-- <div class="col-md-6 col-sm-6 pull-right">
     <a routerLink="/emailtemplate-list" class="next_btn pull-right">List of Email Templates</a>
-  </div>
+  </div> -->
   <div class="clearfix"></div>
   <div class="col-md-12 col-sm-12">
     <div class="course_details">
@@ -41,6 +46,8 @@
             <div class="col-md-12 col-sm-12">
               <form class="form-validate" #EmailForm="ngForm" (ngSubmit)="addEmailTemplate(EmailForm)">
                 <!-- <h1 class="no_margin pull-left">Add Email Template</h1> -->
+                <h1 class="no_margin pull-left">ADD EMAIL TEMPLATE</h1>
+                <a routerLink="/emailtemplate-list" class="next_btn pull-right">List of Email Templates</a>
                 <div class="form-group-active pull-right">
                   <label>
                     <span>*</span>Active?</label>
@@ -194,10 +201,10 @@
 
                   <div class="row">
                     <div class="col-md-12 col-sm-12  text-center">
-                      <button type="submit" class="next_btn">
+                      <button type="submit" class="next_btn m_5">
                         <span>{{buttonName}}</span>
                       </button>
-                      <button *ngIf="emailEntity.EmailId==0" class="back_btn" type="button" (click)="clearForm(EmailForm)">
+                      <button *ngIf="emailEntity.EmailId==0" class="back_btn m_5" type="button" (click)="clearForm(EmailForm)">
                         <span>Clear</span>
                       </button>
                     </div>
@@ -211,5 +218,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
