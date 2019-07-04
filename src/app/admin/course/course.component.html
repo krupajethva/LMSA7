@@ -251,13 +251,13 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="row">
-                              <div class="col-md-6 col-sm-6">
+                              <!-- <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                   <label for="exampleFormControlTextarea1">Description</label>
                                   <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" #Description="ngModel" [(ngModel)]="CourseEntity.Description"
                                     class="form-control" name="Description" [ngClass]="{red_border: (Description.dirty && Description.invalid) || (Description.pristine && submitted)}"></textarea>
                                 </div>
-                              </div>
+                              </div> -->
                               <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                   <label>
@@ -427,7 +427,10 @@
                               <div class="col-md-12 col-sm-12 coursetab_info">
                                 <div class="course_tabs">
                                   <ul id="tabs" class="nav nav-tabs" role="tablist">
-                                    <li role="course" class="active">
+                                      <li role="course" class="active">
+                                          <a href="#Description" aria-controls="Description" role="tab" data-toggle="tab">Description</a>
+                                        </li>
+                                    <li role="course" >
                                       <a href="#Features" aria-controls="Features" role="tab" data-toggle="tab">Features</a>
                                     </li>
                                     <li role="course">
@@ -446,7 +449,16 @@
                                     </li>
                                   </ul>
                                   <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="Features">
+                                      <div role="tabpanel" class="tab-pane active" id="Description">
+                                          <div class="form-group focused ckeditor_block editor">
+    
+    
+                                            <textarea class="form-control" name="Description" id="DescriptionF" rows="10" cols="60" contenteditable="true" #Description="ngModel"
+                                              [(ngModel)]="CourseEntity.Description" class="form-control"></textarea>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                        </div>
+                                    <div role="tabpanel" class="tab-pane " id="Features">
                                       <div class="form-group focused ckeditor_block editor">
 
 
