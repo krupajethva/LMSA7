@@ -1150,42 +1150,84 @@ button.view_inst_btn span {
 /*----------------------------End instructor Course Details------------------------------*/
 
 /*start css for instructor list*/
-.content_block .instrucor_list .list_box{    padding: 15px;
+.content_block .instructor_search{padding-bottom: 30px;}
+.content_block .instructor_search .instructor_search_note p{    color: var(--theme-color);
+  font-size: 14px;
+  line-height: 34px;}
+.content_block .instructor_search_box form input{    border: 1px solid #adadad;}
+.content_block .instructor_search_box form button{    background: #adadad;
+  border: 1px solid #adadad;
+  height: 34px;}
+  .content_block .instructor_search_box form button i{color:#fff;}
+.content_block .instrucor_list .list_box{    padding: 0px 15px;
   border: 1px solid #dcdcdc;
   border-radius: 3px;
-  text-align: center;margin-bottom: 25px;}
-  .content_block .instrucor_list .list_box .total_folllowers{
-    color: var(--option-color);
-  }
-.content_block .instrucor_list .list_box .instructor_buttons_group{    padding-top: 10px;
-  border-top: 1px solid #dcdcdc;
-  margin-top: 10px;}
-.content_block .instrucor_list .list_box img { width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    margin: 0 auto;
-    border: 1px solid #dcdcdc;
-    padding: 2px;}
+  text-align: center;
+  margin-bottom: 25px;
+  margin-top: 40px;}
+  .content_block .instrucor_list .list_box .instructor_desc{    margin-bottom: 10px;}
+  .content_block .instrucor_list .list_box .instructor_desc a{color: var(--option-color);margin-left: 5px;}
+  .content_block .instrucor_list .list_box .instructor_courses_list .more_course_btn a{    background: #adadad;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    margin-top: 15px;
+    color: #ffffff;
+    border-radius: 3px 3px 0px 0px;}
+  .content_block .instrucor_list .list_box .instructor_courses_list ul.list_li li {
+    padding: 0px 0 0px 15px;
+    background: url(../images/dot.png) left 5px no-repeat;
+    background-size: 10px;
+    text-align: left;
+}
+.content_block .instrucor_list .list_box .instructor_courses_list span{    text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
+  color: #102749;
+  margin-bottom: 5px;
+  display: block;}
+  .content_block .instrucor_list .list_box ul li{display: inline-block;padding: 0 10px;}
+  .content_block .instrucor_list .list_box .instructor_follow ul{    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    padding: 5px 5px;
+    margin: 10px 0px;}
+    .content_block .instrucor_list .list_box .instructor_follow ul li:first-child{    border-right: 1px solid #dcdcdc;}
+  .content_block .instrucor_list .list_box .instructor_follow ul li a.total_folllowers,.content_block .instrucor_list .list_box .instructor_follow ul li a.total_folllowing{color: var(--theme-color);}
+.content_block .instrucor_list .list_box .instructor_buttons_group{     padding-bottom: 10px;
+  border-bottom: 1px solid #dcdcdc;
+  margin-bottom: 5px;}
+.content_block .instrucor_list .list_box img {    width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin: -40px auto 0px;
+  border: 1px solid #dcdcdc;
+  padding: 2px;
+  background: #fff;}
 .content_block .instrucor_list .list_box .instructor_letter   {    text-transform: uppercase;
-      width: 75px;
-      height: 75px;
-      border: 1px solid #555;
-      border-radius: 100%;
-      text-align: center;
-      color: #555;
-      font-size: 36px;
-      display: inline-block;
-      margin-right: 10px;
-      line-height: 75px;
-      padding: 0;
-      overflow: hidden;
-      vertical-align: middle;}
+  width: 75px;
+  height: 75px;
+  border: 1px solid #555;
+  border-radius: 100%;
+  text-align: center;
+  color: #555;
+  font-size: 36px;
+  display: inline-block;
+  margin: -40px auto 0;
+  line-height: 75px;
+  padding: 0;
+  overflow: hidden;
+  vertical-align: middle;
+  background: #fff;}
 .content_block .instrucor_list .list_box h6    {    font-weight: 600;
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 5px;    text-transform: capitalize;}
 .content_block .instrucor_list .list_box .instructor_buttons_group .back_btn,.content_block .instrucor_list .list_box .instructor_buttons_group .next_btn{min-width: 45px;}
-.content_block .instrucor_list .list_box .instructor_buttons_group button{background: transparent;border: 0;}
-.content_block .instrucor_list .list_box .instructor_buttons_group button i{color: #354865;font-size: 18px;}
+.content_block .instrucor_list .list_box .instructor_buttons_group button{    background: transparent;
+  border: 1px solid var(--theme-color);
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;}
+.content_block .instrucor_list .list_box .instructor_buttons_group button i{    font-size: 16px;
+  color: var(--theme-color);}
 /*end css for instructor list*/
 
 /*css for flexislider for assessment test*/
@@ -1997,7 +2039,7 @@ select-dropdown > div{z-index: 999!important;}
     color: #345F90;
     text-transform: uppercase;
     text-align: center;
-    padding: 11px 30px;
+    padding: 10px 10px;
     position: relative;
     z-index: 2;
     cursor: pointer;
@@ -3492,6 +3534,7 @@ margin-bottom: 15px;}
     height: 40px;
     line-height: 40px;
 }
+.right_content_block .bg_white_block .title_heading .breadcrumb_block{float: left !important;}
   
   }
   @media only screen and (max-width: 991px) and (min-width: 768px) {
@@ -3520,6 +3563,9 @@ margin-bottom: 15px;}
 .learner_dashboard .users_block {
   height: 345px;
 }
+
+.wizard > div.wizard-inner .nav-tabs > li{    padding: 12px 8px;font-size: 11px;}
+
 .learner_dashboard .rated_course_block,.learner_dashboard .content_block{height: 410px!important;}
 }
   @media only screen and (max-width: 767px) and (min-width: 360px) {
