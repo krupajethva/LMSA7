@@ -1,7 +1,7 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
     <div class="title_text">
-      <i class="fa fa-globe" aria-hidden="true"></i>{{header}} a Country
+      <i class="fa fa-globe" aria-hidden="true"></i>{{header}}  Country
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
@@ -12,14 +12,15 @@
     </div> -->
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">
-            <i class="fa fa-home"></i>
-          </a>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="#">Country</a>
-        </li>
+          <li class="breadcrumb-item">
+              <a routerLink="/dashboard">
+                <i class="fa fa-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <a routerLink="/country-list">
+                  Country
+                </a></li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
     </div>
@@ -29,7 +30,8 @@
   <div class="clearfix"></div>
 
 </div>
-<div class="content_block course_detail_block">
+<div class="content_block">
+    <div class="list_button_block">
   <div class="col-md-12 col-sm-12">
     <div class="course_details">
       <div class="mydivs">
@@ -37,6 +39,8 @@
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <form class="form-validate" #CountryForm="ngForm" (ngSubmit)="addCountry(CountryForm)">
+                  <h1 class="no_margin pull-left">ADD COUNTRY</h1>
+                  <a routerLink="/country-list" class="next_btn pull-right">List of Countries</a>
                 <div class="form-group-active pull-right">
                   <label>
                     <span>*</span>Active?</label>
@@ -107,10 +111,10 @@
                   <div class="clearfix"></div>
                   <div class="row">
                     <div class="col-md-12 col-sm-12  text-center">
-                      <button type="submit" class="next_btn">
+                      <button type="submit" class="next_btn m_5">
                         <span>{{buttonName}}</span>
                       </button>
-                      <button *ngIf="CountryEntity.CountryId==0" class="back_btn" type="button" (click)="clearForm(CountryForm)">
+                      <button *ngIf="CountryEntity.CountryId==0" class="back_btn m_5" type="button" (click)="clearForm(CountryForm)">
                         <span>Clear</span>
                       </button>
                     </div>
@@ -124,4 +128,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

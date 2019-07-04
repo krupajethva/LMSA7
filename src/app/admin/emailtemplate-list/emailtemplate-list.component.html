@@ -12,14 +12,15 @@
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">
+          <a routerLink="/dashboard">
             <i class="fa fa-home"></i>
-          </a>
+        </a>
         </li>
         <li class="breadcrumb-item">
-          <a href="#">Email Template</a>
+          <!-- <a href="#">Email Template</a> -->
+          <a routerLink="/emailtemplate">Email Template</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">List</li>
+        <li class="breadcrumb-item active" aria-current="page">Email Template List</li>
       </ul>
     </div>
     <div class="clearfix"></div>
@@ -28,9 +29,12 @@
 
 </div>
 <div class="content_block">
-  <div class="col-md-6 col-sm-6 pull-right">
+    <div class="col-md-6 col-sm-6 pull-right add_btn">
+        <a routerLink="/emailtemplate" class="next_btn pull-right">Add a Email Template</a>
+    </div>
+  <!-- <div class="col-md-6 col-sm-6 pull-right">
     <a routerLink="/emailtemplate" class="next_btn pull-right">Add a Email Template</a>
-  </div>
+  </div> -->
   <div class="clearfix"></div>
   <div class="col-md-12">
     <table id="list_tables" class="table table-hover" style="width:100%">

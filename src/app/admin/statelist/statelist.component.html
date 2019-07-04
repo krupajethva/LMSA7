@@ -11,15 +11,16 @@
 			</div> -->
 		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
-				<li class="breadcrumb-item">
-					<a href="#">
-						<i class="fa fa-home"></i>
-					</a>
-				</li>
-				<li class="breadcrumb-item">
-					<a href="#">State</a>
-				</li>
-				<li class="breadcrumb-item active" aria-current="page">List</li>
+					<li class="breadcrumb-item">
+							<a routerLink="/dashboard">
+								<i class="fa fa-home"></i>
+							</a>
+						</li>
+						<li class="breadcrumb-item">
+                   
+								<a routerLink="/state">State</a>
+							</li>
+				<li class="breadcrumb-item active" aria-current="page">State List</li>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -28,9 +29,12 @@
 
 </div>
 <div class="content_block">
-	<div class="col-md-6 col-sm-6 pull-right">
+	<!-- <div class="col-md-6 col-sm-6 pull-right">
 		<a routerLink="/state" class="next_btn pull-right">Add a State</a>
-	</div>
+	</div> -->
+	<div class="col-md-6 col-sm-6 pull-right add_btn">
+            <a routerLink="/state" class="next_btn pull-right">Add a State</a>
+        </div>
 	<div class="clearfix"></div>
 	<div class="col-md-12">
 		<table id="list_tables" class="table table-hover" style="width:100%">
