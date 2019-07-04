@@ -12,11 +12,11 @@ class Instructorinvi extends CI_Controller
 		$this->load->model('Instructorinvi_model');
 	}
 
-	public function AcceptorDecline($type = NULL, $CourseSessionId = NULL, $UserId = NULL)
+	public function AcceptorDecline($CourseSessionId = NULL, $UserId = NULL)
 	{
 	
 
-		$data = $this->Instructorinvi_model->getlist_course();
+		$data = $this->Instructorinvi_model->getlist_course($CourseSessionId,$UserId);
 
 		echo json_encode($data);
 	}
@@ -32,7 +32,7 @@ class Instructorinvi extends CI_Controller
 				$this->db->from('tbluser');
 				$result_Inst = $this->db->get()->result();
 				$Instructor_name = $result_Inst['0']->FirstName . " " . $result_Inst['0']->LastName;
-				print_r($Instructor_name);
+			//	print_r($Instructor_name);
 
 				$this->db->select('ts.SessionName,ts.StartDate,ts.StartTime,ts.CourseId,tc.CourseFullName');
 				$this->db->where('CourseSessionId', $CourseSessionId);
@@ -43,7 +43,7 @@ class Instructorinvi extends CI_Controller
 				$StartDate = $res['0']->StartDate;
 				$StartTime = $res['0']->StartTime;
 				$CourseFullName = $res['0']->CourseFullName;
-				//print_r($res);
+			//	print_r($res);
 
 				$EmailToken = 'Course Republished Instructor';
 
@@ -140,6 +140,9 @@ class Instructorinvi extends CI_Controller
 
 					foreach ($learner as $learner) {
 						//send mail
+						$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
+
+						foreach ($query->result() as $row) {
 						$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $learner->UserId);
 						$rowTo = $queryTo->result();
 						$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
@@ -178,6 +181,7 @@ class Instructorinvi extends CI_Controller
 							//echo json_encode("Fail");
 						}
 					}
+					}
 					//	print_r($learner);
 
 					//Primary Instructor
@@ -189,6 +193,9 @@ class Instructorinvi extends CI_Controller
 
 					foreach ($Primary_inst as $Primary_inst) {
 						//send mail
+						$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
+
+						foreach ($query->result() as $row) {
 						$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $Primary_inst->UserId);
 						$rowTo = $queryTo->result();
 						$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
@@ -227,7 +234,8 @@ class Instructorinvi extends CI_Controller
 							//echo json_encode("Fail");
 						}
 					}
-					print_r($Primary_inst);
+					}
+					//print_r($Primary_inst);
 				}
 
 				if ($type == 2) {
@@ -238,7 +246,10 @@ class Instructorinvi extends CI_Controller
 					$Primary_inst = $this->db->get()->result();
 
 					foreach ($Primary_inst as $Primary_inst) {
+						$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
+
 						//send mail
+							foreach ($query->result() as $row) {
 						$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $Primary_inst->UserId);
 						$rowTo = $queryTo->result();
 						$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
@@ -273,9 +284,11 @@ class Instructorinvi extends CI_Controller
 								'MessageBody' => trim($body),
 							);
 							$res = $this->db->insert('tblemaillog', $email_log);
+							echo json_encode("success");
 						} else {
-							//echo json_encode("Fail");
+							echo json_encode("Fail");
 						}
+					}
 					}
 				}
 			}

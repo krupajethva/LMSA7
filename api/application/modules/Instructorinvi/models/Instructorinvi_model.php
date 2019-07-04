@@ -46,19 +46,25 @@ class Instructorinvi_model extends CI_Model
 			return false;
 		}
 	}
-	function getlist_course()
+	function getlist_course($CourseSessionId,$UserId)
 	{
 		try {
-			$this->db->select('con.CourseId,con.InstructorId,con.CourseFullName');
-			$result = $this->db->get('tblcourse as con');
+			$this->db->select('Approval');
+			$this->db->where('UserId', $UserId);
+			$this->db->where('CourseSessionId', $CourseSessionId);
+			$result = $this->db->get('tblcourseinstructor');
 			$db_error = $this->db->error();
 			if (!empty($db_error) && !empty($db_error['code'])) {
 				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 				return false; // unreachable return statement !!!
 			}
 			$res = array();
-			if ($result->result()) {
-				$res = $result->result();
+			// if ($result->result()) {
+			// 	$res = $result->result();
+			// }
+			foreach($result->result() as $row)
+			{
+				$res=$row;
 			}
 			return $res;
 		} catch (Exception $e) {

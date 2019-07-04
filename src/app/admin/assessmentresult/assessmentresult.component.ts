@@ -205,11 +205,11 @@ certificate()
   }
 
 
-  badge() {
+  badge() {debugger
     // alert("aas");
     document.getElementById('widget').style.display = "block";
     setTimeout(function () {
-      html2canvas($("#widget"), {
+      html2canvas($("#baged2"), {
         onrendered: function (canvas) {
           var filename = 'badge.png';
           var uri = canvas.toDataURL();
@@ -220,7 +220,6 @@ certificate()
 
             //Firefox requires the link to be in the body
             document.body.appendChild(link);
-
             //simulate click
             link.click();
 

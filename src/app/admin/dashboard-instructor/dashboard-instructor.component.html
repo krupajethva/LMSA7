@@ -55,7 +55,7 @@
     <h3>Overview</h3>
     <div class="row">
       <div class="col-md-3 col-sm-6">
-        <a href="">
+        <a routerLink="/course-list">
           <div class="learner_overview_block block_bg1">
             <div class="pull-left">
               <i class="fa fa-youtube-play" aria-hidden="true"></i>
@@ -280,7 +280,7 @@
                       </div>
                     </td>
                     <td class="text-center">
-                      <a routerLink="/course-detail">
+                      <a routerLink="/course-detail/{{course.CourseId}}">
                         <button class="edit" data-toggle="tooltip" data-placement="top" title="View">
                           <i class="fa fa-eye"></i>
                         </button>
