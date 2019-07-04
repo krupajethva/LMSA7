@@ -23,16 +23,16 @@ export class DashboardLearnerComponent implements OnInit {
 	completedcourse;
 	yourcourse;
 	testdata;
-	
 
-	constructor( public globals: Globals, private router: Router, private route: ActivatedRoute, private DashboardService: DashboardService,) { }
+
+	constructor(public globals: Globals, private router: Router, private route: ActivatedRoute, private DashboardService: DashboardService, ) { }
 
 	ngOnInit() {
 
 		this.courseview = [];
-		
+
 		this.activecourse = [];
-		
+
 		this.completedcourse = [];
 
 		this.yourcourse = [];
@@ -65,66 +65,64 @@ export class DashboardLearnerComponent implements OnInit {
 		// 		this.globals.isLoading = false;
 		// 		this.router.navigate(['/pagenotfound']);
 		// 	});
-		
-    	/*################ GET LEARNER DASHBOARD START ##############*/
+
+		/*################ GET LEARNER DASHBOARD START ##############*/
 		this.DashboardService.getLearnerDashboard(this.globals.authData.UserId)
-			.then((data) => {debugger
-			debugger
-			if (data['courseview']) {
-				this.courseview = data['courseview'];
-			
-			}
-			if (data['activecourse']) {
-				this.activecourse = data['activecourse'];
-			}
-			if (data['completedcourse']) {
-				this.completedcourse = data['completedcourse'];
-			}
-			if (data['yourcourse']) {
-				this.yourcourse = data['yourcourse'];
-			}
-			if (data['testdata']) {
-				this.testdata = data['testdata'];
-			}
-		},
-		(error) => {
-			this.globals.isLoading = false;
-			this.router.navigate(['/pagenotfound']);
-		});
- 		/*################ GET LEARNER DASHBOARD END ##############*/
+			.then((data) => {
+				debugger
+				debugger
+				if (data['courseview']) {
+					this.courseview = data['courseview'];
+				}
+				if (data['activecourse']) {
+					this.activecourse = data['activecourse'];
+				}
+				if (data['completedcourse']) {
+					this.completedcourse = data['completedcourse'];
+				}
+				if (data['yourcourse']) {
+					this.yourcourse = data['yourcourse'];
+				}
+				if (data['testdata']) {
+					this.testdata = data['testdata'];
+				}
+			},
+				(error) => {
+					this.globals.isLoading = false;
+					this.router.navigate(['/pagenotfound']);
+				});
+		/*################ GET LEARNER DASHBOARD END ##############*/
 
 		this.DashboardService.getCalendarDetails(this.globals.authData.UserId)
-			.then((data) => 
-			{ 
-		$('#calendar').fullCalendar({
+			.then((data) => {
+				$('#calendar').fullCalendar({
 
-			eventRender: function (eventObj, $el) {
-				$el.popover({
-					title: eventObj.title,
-					content: eventObj.description + '<br><b>Start:</b> ' + eventObj.start.format('D-MMM-YY h:mm a') + '<br><b>End:</b> ' + eventObj.end.format('D-MMM-YY h:mm a') + '<br><b>Location:</b> ' + eventObj.location + '<br><b>Organizer:</b> ' + eventObj.organizer,
-					//content: '<p>' + eventObj.description + '<br>Start: ' + eventObj.start.format('h:mm a') + '</p><p>' + 'End: ' + eventObj.end.format('h:mm a') + '</p>',
-					trigger: 'hover',
-					placement: 'bottom',
-					container: 'body',
-					html: true
+					eventRender: function (eventObj, $el) {
+						$el.popover({
+							title: eventObj.title,
+							content: eventObj.description + '<br><b>Start:</b> ' + eventObj.start.format('D-MMM-YY h:mm a') + '<br><b>End:</b> ' + eventObj.end.format('D-MMM-YY h:mm a') + '<br><b>Location:</b> ' + eventObj.location + '<br><b>Organizer:</b> ' + eventObj.organizer,
+							//content: '<p>' + eventObj.description + '<br>Start: ' + eventObj.start.format('h:mm a') + '</p><p>' + 'End: ' + eventObj.end.format('h:mm a') + '</p>',
+							trigger: 'hover',
+							placement: 'bottom',
+							container: 'body',
+							html: true
+						});
+					},
+					defaultDate: new Date(),
+					defaultView: 'month',
+					yearColumns: 2,
+					bootstrap: true,
+					navLinks: true,
+					editable: false,
+					dragable: false,
+					eventLimit: true,
+					events: data
 				});
 			},
-			defaultDate: new Date(),
-			defaultView: 'month',
-			yearColumns: 2,
-			bootstrap: true,
-			navLinks: true,
-			editable: false,
-			dragable: false,
-			eventLimit: true,
-			events:data
-		});
-	},
-	(error) => 
-  {
-    this.globals.isLoading = false;
-    this.router.navigate(['/pagenotfound']);
-  });
+				(error) => {
+					this.globals.isLoading = false;
+					this.router.navigate(['/pagenotfound']);
+				});
 
 		var chart = AmCharts.makeChart("login_course_today", {
 			"type": "serial",
