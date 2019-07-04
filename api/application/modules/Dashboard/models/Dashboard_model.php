@@ -327,10 +327,11 @@ class Dashboard_model extends CI_Model
 
 		/*################ GET INSTRUCTOR COURSE ##############*/
 		$this->db->distinct();
-		$this->db->select('tci.CourseSessionId,tcs.CourseId,tc.CourseFullName');
+		$this->db->select('tci.CourseSessionId,tcs.CourseId,tc.CourseFullName,(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId =tc.CourseId) as reviewavg');
 		$this->db->join('tblcoursesession tcs','tci.CourseSessionId=tcs.CourseSessionId');
 		$this->db->join('tblcourse tc','tcs.CourseId=tc.CourseId');
 		$this->db->where('tci.UserId',$UserId);
+		$this->db->group_by('tc.CourseId');
 		$instructorCourseResult = $this->db->get('tblcourseinstructor as tci');
 		
 		$allinstructordata['instructorcourses'] = $instructorCourseResult->result();	
