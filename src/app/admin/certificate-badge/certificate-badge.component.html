@@ -1,7 +1,7 @@
 <div class="title_heading">
   <div class="col-md-4 col-sm-4">
     <div class="title_text">
-      <i class="fa fa-sitemap" aria-hidden="true"></i>Badge
+      <i class="fa fa-id-badge" aria-hidden="true"></i>Add Default Badge
     </div>
   </div>
   <div class="col-md-8 col-sm-8">
@@ -14,13 +14,17 @@
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-          <a>
+          <a routerLink="/dashboard">
             <i class="fa fa-home"></i>
           </a>
         </li>
-        <li class="breadcrumb-item">
+        <!-- <li class="breadcrumb-item">
           <a>Badge</a>
-        </li>
+        </li> -->
+        <li class="breadcrumb-item active" aria-current="page">
+          <a routerLink="/default-badgelist">
+           Default Badges
+          </a></li>
         <li class="breadcrumb-item active" aria-current="page">{{header}}</li>
       </ul>
     </div>
@@ -30,51 +34,58 @@
 
 </div>
 <div class="content_block">
-  <div class="col-md-12 col-sm-12">
-    <form class="form-validate" #BadgesForm="ngForm" (ngSubmit)="addBadges(BadgesForm)">
-      <div class="form-group-active pull-right">
-        <label>
-          <span class="required">*</span>Active ?</label>
-        <div class="activeyes_box">
-          <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="badgesEntity.IsActive">
-          <label for="IsActive"></label>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-      <div class="row">
-
-        <div class="col-md-4 col-sm-10">
-          <div class="form-group file_upload" id="UserImageIdIcon">
-            <label>
-              <span></span>{{submitbutton}} Default Badges</label>
-            <input type="text" disabled />
-            <input type="file" accept="image/*" name="BadgeImage" id="BadgeImage" class="form-control" #BadgeImage="ngModel" [(ngModel)]="badgesEntity.BadgeImage"
-              (change)="replaceBadges()" />
-            <span class="error_span" *ngIf="ImageValid">
-              Please upload Default Badges
-            </span>
-            <a class="link display_none"></a>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-2 signature_preview">
-          <div class="choose_img">
-            <img id="BadgeImagePreview" align="middle" src="assets/Instructor/{{badgesEntity.rid}}/image/{{badgesEntity.BadgeImage}}"
-              alt="your image" alt="{{badgesEntity.BadgeImage}}">
+  <div class="list_button_block">
+    <div class="col-md-12 col-sm-12">
+      <form class="form-validate" #BadgesForm="ngForm" (ngSubmit)="addBadges(BadgesForm)">
+        <h1 class="no_margin pull-left">ADD DEFAULT BADGE</h1>
+        <a routerLink="/default-badgelist" class="next_btn pull-right">List of Default Badges</a>
+        <div class="form-group-active pull-right">
+          <label>
+            <span class="required">*</span>Active ?</label>
+          <div class="activeyes_box">
+            <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel"
+              [(ngModel)]="badgesEntity.IsActive">
+            <label for="IsActive"></label>
           </div>
         </div>
         <div class="clearfix"></div>
-      </div>
-      <div class="text-center">
-        <button class="next_btn m_5" type="submit">
-          <span>{{submitbutton}}</span>
-        </button>
-        <button *ngIf="badgesEntity.ResourcesId ==0" class="back_btn m_5" type="button" (click)="clearForm(BadgesForm)">
-          <span>Clear</span>
-        </button>
-      </div>
-    </form>
-  </div>
+        <div class="row">
 
-  <div class="clearfix"></div>
+          <div class="col-md-4 col-sm-10">
+            <div class="form-group file_upload" id="UserImageIdIcon">
+              <label>
+                <span></span>{{submitbutton}} Default Badges</label>
+              <input type="text" disabled />
+              <input type="file" accept="image/*" name="BadgeImage" id="BadgeImage" class="form-control"
+                #BadgeImage="ngModel" [(ngModel)]="badgesEntity.BadgeImage" (change)="replaceBadges()" />
+              <span class="error_span" *ngIf="ImageValid">
+                Please upload Default Badges
+              </span>
+              <a class="link display_none"></a>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2 signature_preview">
+            <div class="choose_img">
+              <img id="BadgeImagePreview" align="middle"
+                src="assets/Instructor/{{badgesEntity.rid}}/image/{{badgesEntity.BadgeImage}}" alt="your image"
+                alt="{{badgesEntity.BadgeImage}}">
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="text-center">
+          <button class="next_btn m_5" type="submit">
+            <span>{{submitbutton}}</span>
+          </button>
+          <button *ngIf="badgesEntity.ResourcesId ==0" class="back_btn m_5" type="button"
+            (click)="clearForm(BadgesForm)">
+            <span>Clear</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
 </div>
 <div class="clearfix"></div>
