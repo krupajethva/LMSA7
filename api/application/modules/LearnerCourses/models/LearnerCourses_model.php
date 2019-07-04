@@ -125,7 +125,7 @@ class LearnerCourses_model extends CI_Model
 					FROM tblcoursesession AS csi 
 					LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
 					LEFT JOIN  tblcourseuserregister AS dd ON dd.CourseSessionId = csi.CourseSessionId
-					WHERE csi.CourseId='.$Course_id.' AND dd.UserId='.$User_Id.' AND csi.PublishStatus=1 AND cs.IsActive=1  GROUP BY csi.CourseSessionId');
+					WHERE csi.CourseId='.$Course_id.' AND dd.UserId='.$User_Id.' AND csi.PublishStatus=1 AND cs.IsActive=1 AND cs.Approval= 1  GROUP BY csi.CourseSessionId');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
