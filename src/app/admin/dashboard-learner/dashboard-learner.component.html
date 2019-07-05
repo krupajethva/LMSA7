@@ -8,15 +8,13 @@
     <!-- <div class="welcome_message alert" role="alert">
       Welcome back,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong>
-      
-      
     </div> -->
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-            <a routerLink="/dashboard">
-							<i class="fa fa-home"></i>
-						  </a>
+          <a routerLink="/dashboard">
+            <i class="fa fa-home"></i>
+          </a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Learner Dashboard</li>
       </ul>
@@ -24,7 +22,6 @@
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
-
 </div>
 <div class="content_block admin_dashboard learner_dashboard">
   <div class="col-md-12">
@@ -57,13 +54,13 @@
         </a>
       </div>
       <div class="col-md-3 col-sm-6">
-        <a href="">
+        <a routerLink="/instructorlist">
           <div class="learner_overview_block block_bg3">
             <div class="pull-left">
               <i class="fa fa-users" aria-hidden="true"></i>
             </div>
             <div class="pull-right">
-              <div class="icon_number">12</div>
+              <div class="icon_number">{{totalinstructor}}</div>
               <div class="title">INSTRUCTORS</div>
             </div>
           </div>
@@ -152,23 +149,27 @@
               <i *ngIf="course.SessionStatus==2">Completed</i>
 
               <div class="progress" *ngIf="course.SessionStatus==0">
-                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top"
+                  title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==1">
-                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top"
+                  title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==2">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 100%"></div>
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top"
+                  title="{{course.courseview}}" style="width: 100%"></div>
               </div>
             </div>
           </div>
 
-        <div class="users">
+          <div class="users">
             <div class="img_box">5</div>
             <div class="name_box">
               <i>In Progress</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="5" style="width: 100%">
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="5"
+                  style="width: 100%">
                 </div>
               </div>
             </div>
@@ -178,7 +179,8 @@
             <div class="name_box">
               <i>Pending</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="2" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="2"
+                  style="width: 40%"></div>
               </div>
             </div>
           </div>
@@ -187,11 +189,12 @@
             <div class="name_box">
               <i>Completed</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="4" style="width: 80%">
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="4"
+                  style="width: 80%">
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
       <!-- <div class="col-md-6 col-sm-6">
@@ -469,7 +472,8 @@
                         </div>
                       </td>
                       <td class="text-center">
-                        <button class="edit" data-toggle="tooltip" data-placement="top" routerLink="/course-detail/{{learnercourse.CourseId}}" title="View">
+                        <button class="edit" data-toggle="tooltip" data-placement="top"
+                          routerLink="/course-detail/{{learnercourse.CourseId}}" title="View">
                           <i class="fa fa-eye"></i>
                         </button>
                       </td>
@@ -483,20 +487,20 @@
       </div>
       <!-- NEW END -->
       <div class="col-md-6 col-sm-6">
-          <div class="audit_block">
-            <h3 class="pull-left">Recent Activities</h3>
-            <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
-            <div class="clearfix"></div>
-            <div class="audit_box" *ngFor="let activity of recentactivity">
-              <div class="title">
-                <span class="dot"></span>{{activity.Activity}} ( {{activity.Module}} )
-                <!-- <span class="name">By Shane Griffin</span> -->
-              </div>
-              <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
-            </div>
-          </div>
+        <div class="audit_block">
+          <h3 class="pull-left">Recent Activities</h3>
+          <a routerLink="/activity-list" class="next_btn pull-right">Activity List</a>
           <div class="clearfix"></div>
+          <div class="audit_box" *ngFor="let activity of recentactivity">
+            <div class="title">
+              <span class="dot"></span>{{activity.Activity}} ( {{activity.Module}} )
+              <!-- <span class="name">By Shane Griffin</span> -->
+            </div>
+            <div class="time">{{activity.CreatedOn | date:'MMM d, y'}}</div>
+          </div>
         </div>
+        <div class="clearfix"></div>
+      </div>
       <!-- <div class="col-md-6 col-sm-6">
         <div class="content_block">
           <div class="scroll_calender">
