@@ -20,7 +20,6 @@ class Badges extends CI_Controller
 	}
 	public function addbadges()
 	{
-		
 		$post_badges = json_decode(trim(file_get_contents('php://input')), true);
 		if ($post_badges) 
 			{ 
@@ -39,14 +38,11 @@ class Badges extends CI_Controller
 						{
 							echo json_encode('success');	
 						}
-					}
-				
-					
+					}		
 			}
 	}
 	public function badgegetById($Course_id=null)
 	{	
-		
 		if(!empty($Course_id))
 		{
 			$data=[];
@@ -68,31 +64,29 @@ class Badges extends CI_Controller
 			}		
 		}
 	}
-	public function delete() {
+	public function delete() 
+	{
 		$post_Course = json_decode(trim(file_get_contents('php://input')), true);		
-
 		if ($post_Course)
 		 {
-			if($post_Course['id'] > 0){
+			if($post_Course['id'] > 0)
+			{
 				$result = $this->Badges_model->delete_badge($post_Course);
-				if($result) {
-					
+				if($result) 
+				{
 					echo json_encode("Delete successfully");
-					}
+				}
 		 	}
-		
-			
-		} 
-			
+		} 	
 	}
-	
-
-	public function isActiveChange() {
-		
+	public function isActiveChange()
+	{
 		$post_data = json_decode(trim(file_get_contents('php://input')), true);	
-		if ($post_data) {
+		if ($post_data) 
+		{
 			$result = $this->Badges_model->isActiveChange($post_data);
-			if($result) {
+			if($result) 
+			{
 				echo json_encode('success');	
 			}						
 		}		
@@ -105,14 +99,14 @@ class Badges extends CI_Controller
 			if(isset($_FILES['BadgeImage']) && !empty($_FILES['BadgeImage']))
 			{	
 				//$dirname=str_replace(' ','_',$id);
-				$directoryname="../src/assets/Instructor/".$id."/";
+				//$directoryname="../src/assets/Instructor/".$id."/";
 
 				$directoryname="../src/assets/Instructor/".$id."/";
 				$directoryname1= $directoryname."image/";
-				if(!is_dir($directoryname1)){
+				if(!is_dir($directoryname1))
+				{
 					mkdir($directoryname1, 0755, true);
-					}
-
+				}
 				$target_dir=$directoryname1;
 				$newfilename= str_replace(" ", "_", basename($_FILES["BadgeImage"]["name"]));
 				$target_file = $target_dir . $newfilename;
@@ -129,10 +123,5 @@ class Badges extends CI_Controller
 			{
 				echo json_encode('error');
 			}
-	
-	
 	}
-	
-	
-
 }

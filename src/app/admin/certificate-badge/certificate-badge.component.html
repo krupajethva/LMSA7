@@ -57,7 +57,7 @@
                 <span></span>{{submitbutton}} Default Badges</label>
               <input type="text" disabled />
               <input type="file" accept="image/*" name="BadgeImage" id="BadgeImage" class="form-control"
-                #BadgeImage="ngModel" [(ngModel)]="badgesEntity.BadgeImage" (change)="replaceBadges()" />
+                 (change)="replaceBadges()" />
               <span class="error_span" *ngIf="ImageValid">
                 Please upload Default Badges
               </span>

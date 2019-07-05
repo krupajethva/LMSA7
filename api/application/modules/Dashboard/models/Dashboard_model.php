@@ -382,6 +382,17 @@ class Dashboard_model extends CI_Model
 		$allLearnerData['activecourse'] = $activecourse->result()[0]->activecourse;
 		/*################ GET   ACTIVE COURSE END ##############*/
 
+	/*################ GET RECENT ACTIVITY START ##############*/
+	$this->db->select('tal.Module,tal.Activity,tal.CreatedOn');
+	$this->db->where('tal.UserId',$UserId);
+	$this->db->order_by('ActivityLogId','desc');
+	$this->db->limit(5);
+	$recentactivity = $this->db->get('tblactivitylog tal');
+
+	$allLearnerData['recentactivity'] = $recentactivity->result();
+
+/*################ GET RECENT ACTIVITY END ##############*/
+
 		/*################ GET  COMPLETED COURSE START ##############*/
 		$this->db->select('count(tci.CourseSessionId) as completedcourse');
 		$this->db->join('tblcoursesession tcs','tci.CourseSessionId=tcs.CourseSessionId');
@@ -420,17 +431,17 @@ class Dashboard_model extends CI_Model
 		// $this->db->where('tcur.UserId',$UserId);
 		// $yourcourse = $this->db->get('tblcourseuserregister tcur');
 		$yourcourse = $this->db->query(
-			"SELECT `tcur`.`CourseSessionId`, `tc`.`CourseFullName`, `tc`.`CourseId`, `tci`.`UserId`, `tr`.`Rating`,
+			"SELECT `tcur`.`CourseSessionId`, `tc`.`CourseFullName`, `tc`.`CourseId`, `tci`.`UserId`,
+			(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId =tc.CourseId) as ratingavg,
 			(SELECT GROUP_CONCAT( CONCAT(u.FirstName ,' ',u.LastName)  SEPARATOR ',')
 									  FROM tbluser u 
 									  WHERE FIND_IN_SET(u.UserId, GROUP_CONCAT(tci.UserId))) as FirstName
 			FROM `tblcourseuserregister` `tcur`
 			JOIN `tblcoursesession` `tcs` ON `tcur`.`CourseSessionId`=`tcs`.`CourseSessionId`
 			JOIN `tblcourse` `tc` ON `tcs`.`CourseId`=`tc`.`CourseId`
-			JOIN `tblcoursereview` `tr` ON `tcs`.`CourseId`=`tr`.`CourseId`
 			JOIN `tblcourseinstructor` `tci` ON `tcur`.`CourseSessionId`=`tci`.`CourseSessionId`
 			JOIN `tbluser` `tu` ON `tci`.`UserId`=`tu`.`UserId`
-			WHERE `tcur`.`UserId` = ".$UserId." GROUP by `tcur`.`CourseSessionId`"
+			WHERE `tcur`.`UserId` = ".$UserId." AND `tci`.`Approval` = 1 GROUP by `tcur`.`CourseSessionId`"
 		);
 		$allLearnerData['yourcourse'] = $yourcourse->result();
 		/*################ GET YOUR COURSES END ##############*/
