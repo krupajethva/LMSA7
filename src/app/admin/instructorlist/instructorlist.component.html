@@ -31,7 +31,7 @@
       <div class="instructor_search">
         <div class="col-md-6">
           <div class="instructor_search_note">
-            <p>Note: Search your instrucor here</p>
+            <p>Note: Search your instrucor by course name</p>
           </div>
         </div>
         <div class="col-md-6">
@@ -79,8 +79,11 @@
               </p>
             </div>
             <div class="instructor_buttons_group">
-              <button>
+              <button data-toggle="tooltip" data-placement="top" title="LinkedIn Profile">
                 <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </button>
+              <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
+                <i class="fa fa-eye" aria-hidden="true"></i>
               </button>
               <!-- <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
                 <i class="fa fa-eye" aria-hidden="true"></i>

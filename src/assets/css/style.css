@@ -1150,7 +1150,7 @@ button.view_inst_btn span {
 /*----------------------------End instructor Course Details------------------------------*/
 
 /*start css for instructor list*/
-.content_block .instructor_search{padding-bottom: 30px;}
+.content_block .instructor_search{padding-bottom: 15px;}
 .content_block .instructor_search .instructor_search_note p{    color: var(--theme-color);
   font-size: 14px;
   line-height: 34px;}
@@ -1163,7 +1163,7 @@ button.view_inst_btn span {
   border: 1px solid #dcdcdc;
   border-radius: 3px;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   margin-top: 40px;}
   .content_block .instrucor_list .list_box .instructor_desc{    margin-bottom: 10px;}
   .content_block .instrucor_list .list_box .instructor_desc a{color: var(--option-color);margin-left: 5px;}
@@ -1225,7 +1225,8 @@ button.view_inst_btn span {
   border: 1px solid var(--theme-color);
   width: 32px;
   height: 32px;
-  border-radius: 20px;}
+  border-radius: 20px;
+margin: 0 5px;}
 .content_block .instrucor_list .list_box .instructor_buttons_group button i{    font-size: 16px;
   color: var(--theme-color);}
 /*end css for instructor list*/
