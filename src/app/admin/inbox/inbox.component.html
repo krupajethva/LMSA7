@@ -15,11 +15,11 @@
     <div class="clearfix"></div>
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
-          <li class="breadcrumb-item">
-              <a routerLink="/dashboard">
-                  <i class="fa fa-home"></i>
-              </a>
-          </li>
+        <li class="breadcrumb-item">
+          <a routerLink="/dashboard">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
         <li class="breadcrumb-item active">
           <a href="#">Inbox</a>
         </li>
@@ -30,23 +30,1241 @@
   <div class="clearfix"></div>
 </div>
 <div class="inbox-mail">
-  <div class="col-md-3 compose">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mail_entity compose">
+        <nav class="nav-sidebar">
+          <ul class="nav nav-tabs">
+            <li class="compose_label">
+              <a (click)="clearEntity()" class="ml_0">
+                <i class="fa fa-plus"></i>Compose</a>
+            </li>
+            <li class="active">
+              <a href="#tab1" (click)="inbox()" data-toggle="tab">
+
+                <i class="fa fa-inbox"></i>Inbox
+                <span *ngFor="let Inboxcount of inboxcountList;let i=index;">{{Inboxcount.Unreadcount}}</span>
+
+                <div class="clearfix"></div>
+              </a>
+            </li>
+            <li class="">
+              <a href="#tab2" (click)="sentbox()" data-toggle="tab">
+                <i class="fa fa-paper-plane-o"></i>Sent</a>
+            </li>
+            <li class="">
+              <a href="#tab3" (click)="starred()" data-toggle="tab">
+                <i class="fa fa-star-o"></i>Starred</a>
+            </li>
+            <li class="">
+              <a href="#tab4" (click)="draft()" data-toggle="tab">
+                <i class="fa fa-pencil-square-o"></i>Draft
+                <span *ngFor="let Draftcountres of draftcountList;let i=index;">{{Draftcountres.Draftcount}}</span>
+                <div class="clearfix"></div>
+              </a>
+            </li>
+            <li class="">
+              <!-- <span *ngFor="let Spamres of spamList;let i=index;"> -->
+              <a href="#tab5" (click)="spam()" data-toggle="tab" class="mr_0">
+                <i class="fa fa-trash-o"></i>Trash</a>
+              <!-- </span> -->
+            </li>
+          </ul>
+        </nav>
+        <div class="clearfix"></div>
+        <div class="mail_search_select tab-content tab-content-in">
+          <form #AddNewForm="ngForm" (ngSubmit)="addEmail(AddNewForm)">
+            <div class="compose_mail_box">
+              <div class="mailbox-header">
+                <div class="pull-left">
+                  <h3>Message Box</h3>
+                </div>
+                <div class="pull-right">
+                  <button type="button" (click)="Closedraft()" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="mail_box_body">
+
+                <div class="form-group">
+                  <ng-select placeholder="Choose your To user" [options]="userList" [multiple]="true" [(ngModel)]="selectedCharacters" [ngModelOptions]="{standalone: true}"
+                    required>
+                  </ng-select>
+                  <span class="error_span" *ngIf="errorMsg">
+                    Please select to user
+                  </span>
+                </div>
+
+                <div class="form-group">
+                  <ng-select placeholder="Choose your Cc user" [options]="userList" [multiple]="true" [(ngModel)]="selectedCharactersCc" [ngModelOptions]="{standalone: true}">
+                  </ng-select>
+                </div>
+
+                <div class="form-group">
+                  <ng-select placeholder="Choose your Bcc user" [options]="userList" [multiple]="true" [(ngModel)]="selectedCharactersBcc"
+                    [ngModelOptions]="{standalone: true}">
+                  </ng-select>
+                </div>
+
+                <div class="form-group">
+                  <input type="email" name="Subject" #Subject="ngModel" maxlength="255" [(ngModel)]="emailEntity.Subject" class="form-control"
+                    placeholder="Subject" [ngClass]="{red_border: (Subject.dirty && Subject.invalid) || (Subject.pristine && submitted)}"
+                    required>
+                  <span class="error_span" *ngIf="(Subject.dirty && Subject.invalid) || (Subject.pristine && submitted)">
+                    <span *ngIf="Subject.errors.required || (Subject.pristine && submitted)">Please enter subject</span>
+                  </span>
+                  <!-- <span class="error_span" *ngIf="Subject.errors && Subject.errors.pattern">
+                            Please enter valid subject
+                          </span> -->
+                </div>
+
+
+                <div class="clearfix"></div>
+                <div class="composebox">
+                  <div class="col-md-12 col-sm-12">
+                    <div class="multifileeditor">
+                      <div class="form-group focused ckeditor_block editor">
+
+
+                        <textarea class="form-control" rows="10" cols="60" contenteditable="true" id="MessageBody" #MessageBody="ngModel" [(ngModel)]="emailEntity.MessageBody"
+                          name="MessageBody"></textarea>
+                        <span class="error_span" *ngIf="des_valid">Please enter email body</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <div class="multifileuploader">
+                      <div class="form-group">
+                        <!-- <input type="file" id="multiupload" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple> -->
+
+                        <input type="text" disabled />
+                        <input type="file" name="CertificateId" id="CertificateId" class="form-control" #CertificateId="ngModel" [(ngModel)]="emailEntity.CertificateId"
+                          accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple size="25MB"
+                        />
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="mailbox-footer">
+                <div class="pull-left">
+
+                  <button class="submit_btn back_btn draft_btn m_5" type="button" (click)="saveDraftInbox()">Save as Draft
+                  </button>
+                  <button class="submit_btn next_btn send_btn m_5" type="submit">Send</button>
+
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- Inbox Start -->
+          <div class="tab-pane active text-style tab1" id="tab1">
+            <div class="inbox-right">
+              <div class="mailbox-content">
+                <div class="mail-toolbar clearfix">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="float-left">
+                        <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                          <div class="check_box ckbCheckAll">
+                            <input type="checkbox" name="Check" id="CheckAll" [(ngModel)]="Check" (click)="selectAll()" />
+                            <label for="CheckAll" class="checkboxbtn_label">Select All</label>
+                          </div>
+                          <!-- <div class="btn-group">
+                                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                              Select All
+                                            </a>
+                                          </div> -->
+                        </div>
+                      </div>
+                      <div class="mail_label float-left">
+                        <ul class="mail_icons">
+                          <li>
+                            <a (click)="unreadMultiInbox()" title="Add as Unread">
+                              <i class="fa fa-envelope icon_9"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a (click)="readMultiInbox()" title="Add as Read">
+                              <i class="fa fa-envelope-open icon_9"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a (click)="starredMultiInbox()" title="Add as Starred">
+                              <i class="fa fa-star icon_9"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a (click)="deleteMultiInbox()" class="font-red" title="Add as Spam">
+                              <i class="fa fa-trash icon_9"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="serach_mailbox float-right">
+                        <form action="/action_page.php">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <div class="input-group-btn">
+                              <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="inboxmail">
+                  <table class="table">
+                    <tbody>
+                      <tr class="table-row" *ngFor="let Inboxres of inboxList | paginate: { itemsPerPage:5, currentPage: in, id:'in'};let i=index;">
+                        <td class="table-img sr_no_width">
+                          <div class="check_box checkBoxClass">
+                            <input type="checkbox" class="checkbox_check" [(ngModel)]="inboxList[i].Check" name="Check" id="Check{{i}}">
+                            <label for="Check{{i}}" class="checkboxbtn_label"></label>
+                          </div>
+                        </td>
+                        <td class="mail_labels width_15">
+                          <ul [ngClass]="{active:Inboxres.IsRead==0}">
+                            <li>
+                              <div *ngIf="Inboxres.IsDelete==0">
+                                <a class="important" (click)="deleteInbox(Inboxres,1)" title="Mark as Spam">
+                                  <i class="fa fa-trash icon_9"></i>
+                                </a>
+                              </div>
+                              <div *ngIf="Inboxres.IsDelete==1">
+                                <a (click)="deleteInbox(Inboxres,1)" title="Remove as Spam">
+                                  <i class="fa fa-trash icon_9 main"></i>
+                                </a>
+                              </div>
+                            </li>
+                            <li>
+                              <div *ngIf="Inboxres.IsRead==0">
+                                <a (click)="readInbox(Inboxres,1)" title="Mark as Read">
+                                  <i class="fa fa-envelope icon_9"></i>
+                                </a>
+                              </div>
+                              <div *ngIf="Inboxres.IsRead==1">
+                                <a (click)="readInbox(Inboxres,1)" title="Remove as Read">
+                                  <i class="fa fa-envelope-open main icon_9"></i>
+                                </a>
+                              </div>
+                            </li>
+                            <li>
+                              <div *ngIf="Inboxres.IsStar==0">
+                                <a (click)="addstarInbox(Inboxres,1)" title="Mark as Starred">
+                                  <i class="fa fa-star icon_9"></i>
+                                </a>
+                              </div>
+                              <div *ngIf="Inboxres.IsStar==1">
+                                <a (click)="addstarInbox(Inboxres,1)" title="Remove as Starred">
+                                  <i class="fa fa-star icon_9 main"></i>
+                                </a>
+                              </div>
+                            </li>
+                          </ul>
+                        </td>
+                        <td class="table-text">
+                          <a (click)="readOnlyInbox(Inboxres)" routerLink="/inbox-preview/{{Inboxres.EmailNotificationId}}">
+                            <h6 [ngClass]="{active:Inboxres.IsRead==0}">{{Inboxres.Name}}</h6>
+                            <p [ngClass]="{active:Inboxres.IsRead==0}">{{Inboxres.Subject}} - {{Inboxres.MessageBody | pipe}}</p>
+                          </a>
+                        </td>
+                        <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') != (Inboxres.CreatedOn | date : 'yyyy/MM/dd'))">
+                          <span [ngClass]="{active:Inboxres.IsRead==0}">{{Inboxres.CreatedOn | date:'medium'}}</span>
+                        </td>
+                        <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') == (Inboxres.CreatedOn | date : 'yyyy/MM/dd'))">
+                          <span [ngClass]="{active:Inboxres.IsRead==0}">{{Inboxres.CreatedOn | date:'shortTime'}}</span>
+                        </td>
+                      </tr>
+                      <tr *ngIf="inboxList.length==0">
+                        <td>In Inbox we didn't show find anything to show here.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <span class="pagination_block" *ngIf="inboxList!=''">
+                  <div class="mail_count pull-left">
+                    <span>Total </span>
+                    <strong>{{ inboxList.length | number }} </strong>
+                    <span>Inbox Email</span>
+                  </div>
+                  <ul class="pagination pull-right">
+                    <pagination-controls (pageChange)="in=$event" id='in'></pagination-controls>
+                  </ul>
+                </span>
+              </div>
+            </div> -->
+          </div>
+          <!-- Inbox End-->
+          <!-- Sendbox Start-->
+          <div class="tab-pane text-style tab1" id="tab2">
+            <div class="inbox-right">
+              <div class="mailbox-content">
+                <div class="mail-toolbar clearfix">
+                  <div class="float-left">
+                    <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                      <div class="check_box">
+                        <input type="checkbox" name="Check3" id="CheckAll3" [(ngModel)]="Check3" (click)="selectAllSent()" />
+                        <label for="CheckAll3" class="checkboxbtn_label"></label>
+                      </div>
+                      <!-- <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                  Select All
+                                </a>
+                              </div> -->
+                    </div>
+                  </div>
+                  <div class="mail_label float-right">
+                    <ul>
+                      <!-- <li>
+                                <a (click)="sendunreadMultiInbox()" title="Add as Unread">
+                                  <i class="fa fa-envelope icon_9"></i>
+                                </a>
+                              </li> -->
+                      <!-- <li>
+                                <a (click)="sendreadMultiInbox()" title="Add as Read">
+                                  <i class="fa fa-envelope-open icon_9"></i>
+                                </a>
+                              </li> -->
+                      <li>
+                        <a (click)="sendstarredMultiInbox()" title="Add as Starred">
+                          <i class="fa fa-star icon_9"></i>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a (click)="senddeleteMultiInbox()" class="font-red" title="Add as Spam">
+                          <i class="fa fa-trash icon_9"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <table class="table">
+                  <tbody>
+                    <tr class="table-row" *ngFor="let Senboxres of sendboxList | paginate: { itemsPerPage:5, currentPage: sen, id:'sen'};let i=index;">
+                      <td class="table-img sr_no_width">
+                        <div class="check_box checkBoxClass">
+                          <input type="checkbox" class="checkbox_check" [(ngModel)]="sendboxList[i].Check3" name="Check3" id="Check3{{i}}">
+                          <label for="Check3{{i}}" class="checkboxbtn_label"></label>
+                        </div>
+                      </td>
+                      <td class="mail_labels width_15">
+                        <ul>
+                          <li>
+                            <div *ngIf="Senboxres.IsDelete==0">
+                              <a class="important" (click)="deleteInbox(Senboxres,2)" title="Mark as Spam">
+                                <i class="fa fa-trash icon_9"></i>
+                              </a>
+                            </div>
+                            <div *ngIf="Senboxres.IsDelete==1">
+                              <a (click)="deleteInbox(Senboxres,2)" title="Remove as Spam">
+                                <i class="fa fa-trash icon_9 main"></i>
+                              </a>
+                            </div>
+                          </li>
+
+                          <!-- <li>
+                                    <div *ngIf="Senboxres.IsRead==0">
+                                      <a (click)="readInbox(Senboxres,2)" title="Mark as Read">
+                                        <i class="fa fa-envelope icon_9"></i>
+                                      </a>
+                                    </div>
+                                    <div *ngIf="Senboxres.IsRead==1">
+                                      <a (click)="readInbox(Senboxres,2)" title="Remove as Read">
+                                        <i class="fa fa-envelope-open main icon_9"></i>
+                                      </a>
+                                    </div>
+                                  </li> -->
+                          <li>
+                            <div *ngIf="Senboxres.IsStar==0">
+                              <a (click)="addstarInbox(Senboxres,2)" title="Mark as Starred">
+                                <i class="fa fa-star icon_9"></i>
+                              </a>
+                            </div>
+                            <div *ngIf="Senboxres.IsStar==1">
+                              <a (click)="addstarInbox(Senboxres,2)" title="Remove as Starred">
+                                <i class="fa fa-star icon_9 main"></i>
+                              </a>
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="table-text">
+                        <a (click)="readOnlyInbox(Senboxres)" routerLink="/inbox-preview/{{Senboxres.EmailNotificationId}}">
+                          <h6>{{Senboxres.Names | pipe}}</h6>
+                          <p>{{Senboxres.Subject}} - {{Senboxres.MessageBody | pipe}}</p>
+                        </a>
+                      </td>
+                      <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') != (Senboxres.CreatedOn | date : 'yyyy/MM/dd'))">
+                        {{Senboxres.CreatedOn | date:'medium'}}
+                      </td>
+                      <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') == (Senboxres.CreatedOn | date : 'yyyy/MM/dd'))">
+                        {{Senboxres.CreatedOn | date:'shortTime'}}
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="sendboxList.length==0">
+                      <td>In Sendbox we didn't show find anything to show here.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <span class="pagination_block" *ngIf="sendboxList!=''">
+                  <div class="mail_count pull-left">
+                    <span>Total </span>
+                    <strong>{{ sendboxList.length | number }} </strong>
+                    <span>Sendbox Email</span>
+                  </div>
+                  <ul class="pagination pull-right">
+                    <pagination-controls (pageChange)="sen=$event" id='sen'></pagination-controls>
+                  </ul>
+                </span>
+              </div>
+            </div> -->
+          </div>
+          <!-- Sendbox End-->
+          <!-- Starred Start -->
+          <div class="tab-pane text-style tab1" id="tab3">
+            <div class="inbox-right">
+              <div class="mailbox-content">
+                <div class="mail-toolbar clearfix">
+                  <div class="float-left">
+                    <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                      <div class="check_box">
+                        <input type="checkbox" name="Check5" id="CheckAll5" [(ngModel)]="Check5" (click)="selectAllStar()">
+                        <label for="CheckAll5" class="checkboxbtn_label"></label>
+                      </div>
+                      <!-- <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                  Select All
+                                </a>
+                              </div> -->
+                    </div>
+                  </div>
+                  <div class="mail_label float-right">
+                    <ul>
+                      <li>
+                        <a (click)="starunreadMultiInbox()" title="Add as Unread">
+                          <i class="fa fa-envelope icon_9"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a (click)="starreadMultiInbox()" title="Add as Read">
+                          <i class="fa fa-envelope-open icon_9"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a (click)="starredMultiInbox()" title="Add as Starred">
+                          <i class="fa fa-star icon_9"></i>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a (click)="stardeleteMultiInbox()" class="font-red" title="Add as Spam">
+                          <i class="fa fa-trash icon_9"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <table class="table">
+                  <tbody>
+                    <tr class="table-row" *ngFor="let Addstarres of addstarList | paginate: { itemsPerPage:5, currentPage: star, id:'star'};let i=index;">
+                      <td class="table-img sr_no_width">
+                        <div class="check_box checkBoxClass">
+                          <input type="checkbox" class="checkbox_check" [(ngModel)]="addstarList[i].Check5" name="Check5" id="Check5{{i}}">
+                          <label for="Check5{{i}}" class="checkboxbtn_label"></label>
+                        </div>
+                      </td>
+                      <td class="mail_labels width_15">
+                        <ul [ngClass]="{active:Addstarres.IsRead==0}">
+                          <li>
+                            <div *ngIf="Addstarres.IsDelete==0">
+                              <a class="important" (click)="deleteInbox(Addstarres,3)" title="Mark as Spam">
+                                <i class="fa fa-trash icon_9"></i>
+                              </a>
+                            </div>
+                            <div *ngIf="Addstarres.IsDelete==1">
+                              <a (click)="deleteInbox(Addstarres,3)" title="Remove as Spam">
+                                <i class="fa fa-trash icon_9 main"></i>
+                              </a>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div *ngIf="Addstarres.IsRead==0">
+                              <a (click)="readInbox(Addstarres,3)" title="Mark as Read">
+                                <i class="fa fa-envelope icon_9"></i>
+                              </a>
+                            </div>
+                            <div *ngIf="Addstarres.IsRead==1">
+                              <a (click)="readInbox(Addstarres,3)" title="Remove as Read">
+                                <i class="fa fa-envelope-open main icon_9"></i>
+                              </a>
+                            </div>
+                          </li>
+                          <li>
+                            <div *ngIf="Addstarres.IsStar==0">
+                              <a (click)="addstarInbox(Addstarres,3)" title="Mark as Starred">
+                                <i class="fa fa-star icon_9"></i>
+                              </a>
+                            </div>
+                            <div *ngIf="Addstarres.IsStar==1">
+                              <a (click)="addstarInbox(Addstarres,3)" title="Remove as Starred">
+                                <i class="fa fa-star icon_9 main"></i>
+                              </a>
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                      <td class="table-text">
+                        <a routerLink="/inbox-preview/{{Addstarres.EmailNotificationId}}">
+                          <h6 *ngIf="Addstarres.SenderId!=globals.authData.UserId" [ngClass]="{active:Addstarres.IsRead==0}">{{Addstarres.Name}}</h6>
+                          <h6 *ngIf="Addstarres.SenderId==globals.authData.UserId" [ngClass]="{active:Addstarres.IsRead==0}">{{Addstarres.Names}}</h6>
+                          <p [ngClass]="{active:Addstarres.IsRead==0}">{{Addstarres.Subject}} - {{Addstarres.MessageBody | pipe}}</p>
+                        </a>
+                      </td>
+                      <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') != (Addstarres.CreatedOn | date : 'yyyy/MM/dd'))">
+                        {{Addstarres.CreatedOn | date:'medium'}}
+                      </td>
+                      <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') == (Addstarres.CreatedOn | date : 'yyyy/MM/dd'))">
+                        {{Addstarres.CreatedOn | date:'shortTime'}}
+                      </td>
+                    </tr>
+                    <tr *ngIf="addstarList.length==0">
+                      <td>In Starredbox we didn't show find anything to show here.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <span class="pagination_block" *ngIf="addstarList!=''">
+                  <div class="mail_count pull-left">
+                    <span>Total </span>
+                    <strong>{{ addstarList.length | number }} </strong>
+                    <span>Starred Email</span>
+                  </div>
+                  <ul class="pagination pull-right">
+                    <pagination-controls (pageChange)="star=$event" id='star'></pagination-controls>
+                  </ul>
+                </span>
+              </div>
+            </div> -->
+          </div>
+          <!-- Starred End -->
+          <!-- Draft Start -->
+          <div class="tab-pane text-style tab1" id="tab4">
+            <div class="inbox-right">
+              <div class="mailbox-content">
+                <div class="mail-toolbar clearfix">
+                  <div class="float-left">
+                    <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                      <div class="check_box">
+                        <input type="checkbox" name="Check4" id="CheckAll4" [(ngModel)]="Check4" (click)="selectAllDraft()" />
+                        <label for="CheckAll4" class="checkboxbtn_label"></label>
+                      </div>
+                      <!-- <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                  Select All
+                                </a>
+                              </div> -->
+                    </div>
+                  </div>
+                  <div class="mail_label float-right">
+                    <ul>
+                      <li>
+                        <a (click)="draftunreadMultiInbox()" title="Add as Unread">
+                          <i class="fa fa-envelope icon_9"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a (click)="draftreadMultiInbox()" title="Add as Read">
+                          <i class="fa fa-envelope-open icon_9"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a (click)="draftstarredMultiInbox()" title="Add as Starred">
+                          <i class="fa fa-star icon_9"></i>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a (click)="draftdeleteMultiInbox()" class="font-red" title="Add as Spam">
+                          <i class="fa fa-trash icon_9"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="scroll_mailtbl">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody>
+                        <tr class="table-row" *ngFor="let Draftres of draftList | paginate: { itemsPerPage:5, currentPage: draft, id:'draft'};let i=index;">
+                          <td class="table-img sr_no_width">
+                            <div class="check_box checkBoxClass">
+                              <input type="checkbox" class="checkbox_check" [(ngModel)]="draftList[i].Check4" name="Check4" id="Check4{{i}}">
+                              <label for="Check4{{i}}" class="checkboxbtn_label"></label>
+                            </div>
+                          </td>
+                          <td class="mail_labels width_15">
+                            <ul [ngClass]="{active:Draftres.IsRead==0}">
+                              <li>
+                                <div *ngIf="Draftres.IsDelete==0">
+                                  <a class="important" (click)="deleteInbox(Draftres,5)" title="Mark as Spam">
+                                    <i class="fa fa-trash icon_9"></i>
+                                  </a>
+                                </div>
+                                <div *ngIf="Draftres.IsDelete==1">
+                                  <a (click)="deleteInbox(Draftres,5)" title="Remove as Spam">
+                                    <i class="fa fa-trash icon_9 main"></i>
+                                  </a>
+                                </div>
+                              </li>
+
+                              <li>
+                                <div *ngIf="Draftres.IsRead==0">
+                                  <a (click)="readInbox(Draftres,5)" title="Mark as Read">
+                                    <i class="fa fa-envelope icon_9"></i>
+                                  </a>
+                                </div>
+                                <div *ngIf="Draftres.IsRead==1">
+                                  <a (click)="readInbox(Draftres,5)" title="Remove as Read">
+                                    <i class="fa fa-envelope-open main icon_9"></i>
+                                  </a>
+                                </div>
+                              </li>
+                              <li>
+                                <div *ngIf="Draftres.IsStar==0">
+                                  <a (click)="addstarInbox(Draftres,5)" title="Mark as Starred">
+                                    <i class="fa fa-star icon_9"></i>
+                                  </a>
+                                </div>
+                                <div *ngIf="Draftres.IsStar==1">
+                                  <a (click)="addstarInbox(Draftres,5)" title="Remove as Starred">
+                                    <i class="fa fa-star icon_9 main"></i>
+                                  </a>
+                                </div>
+                              </li>
+                            </ul>
+                          </td>
+                          <td class="table-text">
+                            <a (click)="drfatEdit(Draftres,i)">
+                              <h6 [ngClass]="{active:Draftres.IsRead==0}">{{Draftres.Names | pipe}}</h6>
+                              <p [ngClass]="{active:Draftres.IsRead==0}">{{Draftres.Subject}} - {{Draftres.MessageBody | pipe}}</p>
+                            </a>
+                          </td>
+                          <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') != (Draftres.CreatedOn | date : 'yyyy/MM/dd'))">
+                            {{Draftres.CreatedOn | date:'medium'}}
+                          </td>
+                          <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') == (Draftres.CreatedOn | date : 'yyyy/MM/dd'))">
+                            {{Draftres.CreatedOn | date:'shortTime'}}
+                          </td>
+                        </tr>
+                        <tr *ngIf="draftList.length==0">
+                          <td>In Draftbox we didn't show find anything to show here.</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <span class="pagination_block" *ngIf="draftList!=''">
+                  <div class="mail_count pull-left">
+                    <span>Total </span>
+                    <strong>{{ draftList.length | number }} </strong>
+                    <span>Draft Email</span>
+                  </div>
+                  <ul class="pagination pull-right">
+                    <pagination-controls (pageChange)="draft=$event" id='draft'></pagination-controls>
+                  </ul>
+                </span>
+              </div>
+            </div> -->
+          </div>
+          <!-- Draft End -->
+          <!-- Delete Start -->
+          <div class="tab-pane text-style tab1" id="tab5">
+            <div class="inbox-right">
+              <div class="mailbox-content">
+                <div class="mail-toolbar clearfix">
+                  <div class="float-left">
+                    <div class="btn-group m-r-sm mail-hidden-options" style="display: inline-block;">
+                      <div class="check_box">
+                        <input type="checkbox" name="Check2" id="CheckAll2" [(ngModel)]="Check2" (click)="selectAllSpam()">
+                        <label for="CheckAll2" class="checkboxbtn_label"></label>
+                      </div>
+                      <!-- <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                  Select All
+                                </a>
+                              </div> -->
+                    </div>
+                  </div>
+                  <div class="mail_label float-right">
+                    <ul>
+                      <li>
+                        <a (click)="spamunreadMultiInbox()" title="Add as Unread">
+                          <i class="fa fa-envelope icon_9"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a (click)="spamreadMultiInbox()" title="Add as Read">
+                          <i class="fa fa-envelope-open icon_9"></i>
+                        </a>
+                      </li>
+                      <!-- <li>
+                                <a (click)="spamstarredMultiInbox()" title="Add as Starred">
+                                  <i class="fa fa-star icon_9"></i>
+                                </a>
+                              </li> -->
+                      <li>
+                        <a (click)="deleteAllPermInbox()" class="font-red" title="Delete">
+                          <i class="fa fa-trash" icon_9=""></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="scroll_mailtbl">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody>
+                        <tr class="table-row" *ngFor="let Spamres of spamList | paginate: { itemsPerPage:5, currentPage: spam, id:'spam'};let i=index;">
+                          <td class="table-img sr_no_width">
+                            <div class="check_box checkBoxClass">
+                              <input type="checkbox" class="checkbox_check" [(ngModel)]="spamList[i].Check2" name="Check2" id="Check2{{i}}">
+                              <label for="Check2{{i}}" class="checkboxbtn_label"></label>
+                            </div>
+                          </td>
+                          <td class="mail_labels width_15">
+                            <ul [ngClass]="{active:Spamres.IsRead==0}">
+                              <li>
+                                <a (click)="deletePermenantInbox(Spamres)" class="font-red" title="Delete">
+                                  <i class="fa fa-trash-o icon_9"></i>
+                                </a>
+                              </li>
+
+                              <li>
+                                <div *ngIf="Spamres.IsRead==0">
+                                  <a (click)="readInbox(Spamres,6)" title="Mark as Read">
+                                    <i class="fa fa-envelope icon_9"></i>
+                                  </a>
+                                </div>
+                                <div *ngIf="Spamres.IsRead==1">
+                                  <a (click)="readInbox(Spamres,6)" title="Remove as Read">
+                                    <i class="fa fa-envelope-open main icon_9"></i>
+                                  </a>
+                                </div>
+                              </li>
+                              <li>
+                                <a (click)="recoverMail(Spamres,6)" title="Recover Email">
+                                  <i class="fa fa-undo icon_9"></i>
+                                </a>
+                              </li>
+
+                            </ul>
+                          </td>
+                          <td class="table-text">
+                            <a routerLink="/inbox-preview/{{Spamres.EmailNotificationId}}">
+                              <h6 *ngIf="Spamres.SenderId!=globals.authData.UserId" [ngClass]="{active:Spamres.IsRead==0}">{{Spamres.Name}}</h6>
+                              <h6 *ngIf="Spamres.SenderId==globals.authData.UserId" [ngClass]="{active:Spamres.IsRead==0}">{{Spamres.Names}}</h6>
+
+                              <p [ngClass]="{active:Spamres.IsRead==0}">{{Spamres.Subject}} - {{Spamres.MessageBody | pipe}}</p>
+                            </a>
+                          </td>
+                          <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') != (Spamres.CreatedOn | date : 'yyyy/MM/dd'))">
+                            {{Spamres.CreatedOn | date:'medium'}}
+                          </td>
+                          <td class="march width_15" *ngIf="((currentDate | date : 'yyyy/MM/dd') == (Spamres.CreatedOn | date : 'yyyy/MM/dd'))">
+                            {{Spamres.CreatedOn | date:'shortTime'}}
+                          </td>
+                        </tr>
+                        <tr *ngIf="spamList.length==0">
+                          <td>In Spambox we didn't show find anything to show here.</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <span class="pagination_block" *ngIf="spamList!=''">
+                  <div class="mail_count pull-left">
+                    <span>Total </span>
+                    <strong>{{ spamList.length | number }} </strong>
+                    <span>Spam Email</span>
+                  </div>
+                  <ul class="pagination pull-right">
+                    <pagination-controls (pageChange)="spam=$event" id='spam'></pagination-controls>
+                  </ul>
+                </span>
+              </div>
+            </div> -->
+          </div>
+          <!-- Delete End -->
+
+
+
+
+
+
+
+          <div class="inbox-right inbox_preview">
+            <div class="mailbox-content inbox_preview_wrap">
+              <div class="mail-toolbar clearfix">
+                <div class="mail_preview_head float-left">
+                  <h3>Scrum call meeting</h3>
+                </div>
+                <div class="mail_labels pull-right">
+                  <ul>
+                    <li>
+                      <div>
+                        <a class="important" title="Mark as Spam">
+                          <i class="fa fa-trash icon_9"></i>
+                        </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <a title="Remove as Spam">
+                          <i class="fa fa-trash icon_9 main"></i>
+                        </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <a title="Mark as Read">
+                          <i class="fa fa-envelope icon_9"></i>
+                        </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <a title="Remove as Read">
+                          <i class="fa fa-envelope-open main icon_9"></i>
+                        </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <a title="Mark as Starred">
+                          <i class="fa fa-star icon_9"></i>
+                        </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <a title="Remove as Starred">
+                          <i class="fa fa-star icon_9 main"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="inbox_preview_mailbox">
+                <div class="clearfix"></div>
+                <div class="inbox_preview_body">
+                  <div class="mail_preview_row">
+                    <div class="pull-left">
+                      <img src="assets/images/guy-8.jpg" class="img-responsive" alt="" />
+                      <div class="mail_id">
+                        <p>ayadav@theopeneyes.in
+                          <span>
+                            to krupali.mistry@theopeneyes.com
+                            <div class="dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td>From : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>To : </td>
+                                      <td>krupali.mistry@theopeneyes.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Cc : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Bcc : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Date : </td>
+                                      <td> Jul 8, 2019, 1:11:42 PM</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Subject : </td>
+                                      <td>Scrum call meeting</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="pull-right">
+                      <ul>
+                        <li>
+                          Jul 8, 2019, 1:11:42 PM
+                        </li>
+                        <li>
+                          <a title="Delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Mark as read">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Mark as starred">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Reply" (click)="replay()">
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Reply to all" (click)="replayAll()">
+                            <i class="fa fa-reply-all" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Forward" (click)="forward()">
+                            <i class="fa fa-share" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="mail_preview_reply">
+                      <p>Hi,</p>
+                      <p>Thanks for reaching out to us.</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                        and scrambled it to make a type specimen book.</p>
+                      <p>Thanks You</p>
+                      <p>Regards,</p>
+                      <p>Anand Yadav</p>
+                      <p>Front End Developer</p>
+                      <p>+91 9537849690</p>
+                      <a>ayadav@theopeneyes.in</a>
+                    </div>
+                    <!-- <div class="mailbody_editor">
+                      <div class="form-group focused ckeditor_block editor">
+                        <textarea class="form-control" name="EmailBody" rows="10" cols="60" contenteditable="true">{{emailPreviewEntity.MessageBody}}</textarea>
+                      </div>
+                    </div> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <hr>
+                <div class="inbox_preview_body">
+                  <div class="mail_preview_row">
+                    <div class="pull-left">
+                      <img src="assets/images/guy-9.jpg" class="img-responsive" alt="" />
+                      <div class="mail_id">
+                        <p>krupali.mistry@theopeneyes.com
+                          <span>
+                            to ayadav@theopeneyes.in
+                            <div class="dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td>From : </td>
+                                      <td>krupali.mistry@theopeneyes.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>To : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Cc : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Bcc : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Date : </td>
+                                      <td> Jul 8, 2019, 1:11:42 PM</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Subject : </td>
+                                      <td>Scrum call meeting reply</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="pull-right">
+                      <ul>
+                        <li>
+                          Jul 8, 2019, 1:11:42 PM
+                        </li>
+                        <li>
+                          <a title="Delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Mark as read">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Mark as starred">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Reply" (click)="replay()">
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Reply to all" (click)="replayAll()">
+                            <i class="fa fa-reply-all" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Forward" (click)="forward()">
+                            <i class="fa fa-share" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="mail_preview_reply">
+                      <p>Hi, Anand</p>
+                      <p>Thanks for reaching out to us.</p>
+                      <p>Sure i will join at scrum call meeting</p>
+                      <p>Thanks You</p>
+                      <p>Regards,</p>
+                      <p>Krupali Mistry</p>
+                      <p>Senior Front End Developer</p>
+                      <p>+91 8452415421</p>
+                      <a>krupali.mistry@theopeneyes.com</a>
+                    </div>
+                    <!-- <div class="mailbody_editor">
+                        <div class="form-group focused ckeditor_block editor">
+                          <textarea class="form-control" name="EmailBody" rows="10" cols="60" contenteditable="true">{{emailPreviewEntity.MessageBody}}</textarea>
+                        </div>
+                      </div> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <hr>
+                <div class="inbox_preview_body">
+                  <div class="mail_preview_row">
+                    <div class="pull-left">
+                      <img src="assets/images/guy-8.jpg" class="img-responsive" alt="" />
+                      <div class="mail_id">
+                        <p>ayadav@theopeneyes.in
+                          <span>
+                            to krupali.mistry@theopeneyes.com
+                            <div class="dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td>From : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>To : </td>
+                                      <td>krupali.mistry@theopeneyes.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Cc : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Bcc : </td>
+                                      <td>ayadav@theopeneyes.in</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Date : </td>
+                                      <td> Jul 8, 2019, 1:11:42 PM</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Subject : </td>
+                                      <td>Scrum call meeting</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="pull-right">
+                      <ul>
+                        <li>
+                          Jul 8, 2019, 1:11:42 PM
+                        </li>
+                        <li>
+                          <a title="Delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Mark as read">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Mark as starred">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Reply" (click)="replay()">
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Reply to all" (click)="replayAll()">
+                            <i class="fa fa-reply-all" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a title="Forward" (click)="forward()">
+                            <i class="fa fa-share" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="mail_preview_reply">
+                      <p>Hi, Krupali</p>
+                      <p>Thanks for your answer.</p>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                        and scrambled it to make a type specimen book.</p>
+                      <p>Thanks You</p>
+                      <p>Regards,</p>
+                      <p>Anand Yadav</p>
+                      <p>Front End Developer</p>
+                      <p>+91 9537849690</p>
+                      <a>ayadav@theopeneyes.in</a>
+                    </div>
+                    <div class="mail_preview_reply_inner">
+                      <p>On
+                        <span>Sun, Apr 28, 2019, 7:29 PM</span> Krupali Mistry
+                        <a href="">krupali.mistry@theopeneyes.com</a> wrote:</p>
+                      <p>Hi, Anand</p>
+                      <p>Thanks for reaching out to us.</p>
+                      <p>Sure i will join at scrum call meeting</p>
+                      <p>Thanks You</p>
+                      <p>Regards,</p>
+                      <p>Krupali Mistry</p>
+                      <p>Senior Front End Developer</p>
+                      <p>+91 8452415421</p>
+                    </div>
+                    <!-- <div class="mailbody_editor">
+                        <div class="form-group focused ckeditor_block editor">
+                          <textarea class="form-control" name="EmailBody" rows="10" cols="60" contenteditable="true">{{emailPreviewEntity.MessageBody}}</textarea>
+                        </div>
+                      </div> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <hr>
+                <div class="clearfix"></div>
+                <div class="inbox_preview_footer">
+                  <div class="mailbox_preview_btn">
+                    <a class="back_btn m_5" (click)="replay()">
+                      <i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
+                    <a class="next_btn m_5" (click)="forward()">
+                      <i class="fa fa-share" aria-hidden="true"></i> Forward</a>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- <div class="col-md-3 compose">
     <form action="#" method="GET">
-      <!-- <div class="input-group input-group-in">
-          <input type="text" name="search" class="form-control2 input-search" placeholder="Search...">
-          <span class="input-group-btn">
-            <button class="btn btn-success" type="button">
-              <i class="fa fa-search"></i>
-            </button>
-          </span>
-        </div> -->
-      <!-- Input Group -->
     </form>
     <div class="compose_label">
       <a (click)="clearEntity()">Compose</a>
     </div>
 
-    <!-- Sidebar Menu Start -->
+  
     <nav class="nav-sidebar">
       <ul class="nav tabs">
         <li class="active">
@@ -74,17 +1292,17 @@
           </a>
         </li>
         <li class="">
-          <!-- <span *ngFor="let Spamres of spamList;let i=index;"> -->
+
           <a href="#tab5" (click)="spam()" data-toggle="tab">
             <i class="fa fa-trash-o"></i>Trash</a>
-          <!-- </span> -->
+
         </li>
       </ul>
     </nav>
-    <!-- Sidebar Menu End -->
-  </div>
-  <!-- tab content -->
-  <div class="col-md-9 tab-content tab-content-in">
+
+  </div> -->
+    <!-- tab content -->
+    <!-- <div class="col-md-9 tab-content tab-content-in">
 
     <form #AddNewForm="ngForm" (ngSubmit)="addEmail(AddNewForm)">
       <div class="compose_mail_box">
@@ -128,9 +1346,6 @@
             <span class="error_span" *ngIf="(Subject.dirty && Subject.invalid) || (Subject.pristine && submitted)">
               <span *ngIf="Subject.errors.required || (Subject.pristine && submitted)">Please enter subject</span>
             </span>
-            <!-- <span class="error_span" *ngIf="Subject.errors && Subject.errors.pattern">
-              Please enter valid subject
-            </span> -->
           </div>
 
 
@@ -150,7 +1365,6 @@
             <div class="col-md-12 col-sm-12">
               <div class="multifileuploader">
                 <div class="form-group">
-                  <!-- <input type="file" id="multiupload" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple> -->
 
                   <input type="text" disabled />
                   <input type="file" name="CertificateId" id="CertificateId" class="form-control" #CertificateId="ngModel" [(ngModel)]="emailEntity.CertificateId"
@@ -175,7 +1389,7 @@
     </form>
 
 
-    <!-- Inbox Start -->
+
     <div class="tab-pane active text-style tab1" id="tab1">
       <div class="inbox-right">
         <div class="mailbox-content">
@@ -186,11 +1400,6 @@
                   <input type="checkbox" name="Check" id="CheckAll" [(ngModel)]="Check" (click)="selectAll()" />
                   <label for="CheckAll" class="checkboxbtn_label"></label>
                 </div>
-                <!-- <div class="btn-group">
-                  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Select All
-                  </a>
-                </div> -->
               </div>
             </div>
             <div class="mail_label float-right">
@@ -309,9 +1518,9 @@
       </div>
     </div>
 
-    <!-- Inbox End-->
 
-    <!-- Sendbox Start-->
+
+
     <div class="tab-pane text-style tab1" id="tab2">
       <div class="inbox-right">
 
@@ -323,25 +1532,10 @@
                   <input type="checkbox" name="Check3" id="CheckAll3" [(ngModel)]="Check3" (click)="selectAllSent()" />
                   <label for="CheckAll3" class="checkboxbtn_label"></label>
                 </div>
-                <!-- <div class="btn-group">
-                  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Select All
-                  </a>
-                </div> -->
               </div>
             </div>
             <div class="mail_label float-right">
               <ul>
-                <!-- <li>
-                  <a (click)="sendunreadMultiInbox()" title="Add as Unread">
-                    <i class="fa fa-envelope icon_9"></i>
-                  </a>
-                </li> -->
-                <!-- <li>
-                  <a (click)="sendreadMultiInbox()" title="Add as Read">
-                    <i class="fa fa-envelope-open icon_9"></i>
-                  </a>
-                </li> -->
                 <li>
                   <a (click)="sendstarredMultiInbox()" title="Add as Starred">
                     <i class="fa fa-star icon_9"></i>
@@ -379,19 +1573,6 @@
                         </a>
                       </div>
                     </li>
-
-                    <!-- <li>
-                      <div *ngIf="Senboxres.IsRead==0">
-                        <a (click)="readInbox(Senboxres,2)" title="Mark as Read">
-                          <i class="fa fa-envelope icon_9"></i>
-                        </a>
-                      </div>
-                      <div *ngIf="Senboxres.IsRead==1">
-                        <a (click)="readInbox(Senboxres,2)" title="Remove as Read">
-                          <i class="fa fa-envelope-open main icon_9"></i>
-                        </a>
-                      </div>
-                    </li> -->
                     <li>
                       <div *ngIf="Senboxres.IsStar==0">
                         <a (click)="addstarInbox(Senboxres,2)" title="Mark as Starred">
@@ -443,9 +1624,7 @@
       </div>
     </div>
 
-    <!-- Sendbox End-->
 
-    <!-- Starred Start -->
     <div class="tab-pane text-style tab1" id="tab3">
       <div class="inbox-right">
 
@@ -457,11 +1636,6 @@
                   <input type="checkbox" name="Check5" id="CheckAll5" [(ngModel)]="Check5" (click)="selectAllStar()">
                   <label for="CheckAll5" class="checkboxbtn_label"></label>
                 </div>
-                <!-- <div class="btn-group">
-                  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Select All
-                  </a>
-                </div> -->
               </div>
             </div>
             <div class="mail_label float-right">
@@ -577,10 +1751,10 @@
       </div>
     </div>
 
-    <!-- Starred End -->
 
 
-    <!-- Draft Start -->
+
+
     <div class="tab-pane text-style tab1" id="tab4">
       <div class="inbox-right">
 
@@ -592,11 +1766,7 @@
                   <input type="checkbox" name="Check4" id="CheckAll4" [(ngModel)]="Check4" (click)="selectAllDraft()" />
                   <label for="CheckAll4" class="checkboxbtn_label"></label>
                 </div>
-                <!-- <div class="btn-group">
-                  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Select All
-                  </a>
-                </div> -->
+               
               </div>
             </div>
             <div class="mail_label float-right">
@@ -717,10 +1887,9 @@
       </div>
     </div>
 
-    <!-- Draft End -->
 
 
-    <!-- Delete Start -->
+
     <div class="tab-pane text-style tab1" id="tab5">
       <div class="inbox-right">
 
@@ -732,11 +1901,6 @@
                   <input type="checkbox" name="Check2" id="CheckAll2" [(ngModel)]="Check2" (click)="selectAllSpam()">
                   <label for="CheckAll2" class="checkboxbtn_label"></label>
                 </div>
-                <!-- <div class="btn-group">
-                  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Select All
-                  </a>
-                </div> -->
               </div>
             </div>
             <div class="mail_label float-right">
@@ -751,11 +1915,6 @@
                     <i class="fa fa-envelope-open icon_9"></i>
                   </a>
                 </li>
-                <!-- <li>
-                  <a (click)="spamstarredMultiInbox()" title="Add as Starred">
-                    <i class="fa fa-star icon_9"></i>
-                  </a>
-                </li> -->
                 <li>
                   <a (click)="deleteAllPermInbox()" class="font-red" title="Delete">
                     <i class="fa fa-trash" icon_9=""></i>
@@ -845,7 +2004,7 @@
       </div>
     </div>
 
-    <!-- Delete End -->
+
 
 
 
@@ -855,25 +2014,6 @@
       <div class="col-md-12">
         <div class="mailbox_pagination pull-right">
           <nav aria-label="...">
-            <!-- <ul class="pagination">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">2
-                    <span class="sr-only">(current)</span>
-                  </a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-                </li>
-              </ul> -->
 
           </nav>
         </div>
@@ -881,11 +2021,11 @@
     </div>
 
   </div>
-  <div class="clearfix"> </div>
-</div>
+  <div class="clearfix"> </div> -->
+  </div>
 
 
-<!-- <div class="content_block inbox_block">
+  <!-- <div class="content_block inbox_block">
     <div class="col-md-8 col-sm-8">
       <div class="inbox_leftblock">
       </div>

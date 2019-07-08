@@ -141,9 +141,7 @@ badgesEntity;
                 .then((data) => {
                   this.globals.isLoading = false;
                   this.btn_disable = true;
-                  this.submitted = false;
-                 //alert(123);
-                
+                  this.submitted = false;                
                 }, (error) => {
                   this.btn_disable = false;
                   this.submitted = false;

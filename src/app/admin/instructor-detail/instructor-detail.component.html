@@ -32,9 +32,11 @@
 		<div class="row">
 			<div class="col-md-1">
 				<div class="instructor_img_letter">
-					<span *ngIf="ProfileImage=='' || ProfileImage==NULL" class="instructor_letter" aria-hidden="true">{{FirstName | slice:0:01}}{{LastName | slice:0:01}}</span>
-					<img *ngIf="ProfileImage!='' && ProfileImage!=NULL" src="assets/ProfilePhoto/{{InstructorUserId}}/{{ProfileImage}}" alt="{{ProfileImage}}"
-					 class="img-responsive" />
+					<span *ngIf="ProfileImage=='' || ProfileImage==NULL" class="instructor_letter"
+						aria-hidden="true">{{FirstName | slice:0:01}}{{LastName | slice:0:01}}</span>
+					<img *ngIf="ProfileImage!='' && ProfileImage!=NULL"
+						src="assets/ProfilePhoto/{{InstructorUserId}}/{{ProfileImage}}" alt="{{ProfileImage}}"
+						class="img-responsive" />
 				</div>
 			</div>
 			<div class="col-md-6 br_1">
@@ -92,18 +94,28 @@
 					<ul class="social_icons">
 						<li>
 							<a href="">
-								<i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn Profile"></i>
+								<i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top"
+									title="LinkedIn Profile"></i>
 							</a>
 						</li>
 						<li>
 							<a href="">
 								<i class="fa fa-user-plus" data-toggle="tooltip" data-placement="top" title="Follow"></i>
 							</a>
+							<!-- <button *ngIf="flag==0 && InstructorId!=globals.authData.UserId" id="follow"
+								data-toggle="tooltip" data-placement="top" title="Follow" (click)="followInstructor()">
+								<i class="fa fa-user-plus"></i>
+							</button> -->
 						</li>
 						<li>
 							<a href="">
 								<i class="fa fa-user-times" data-toggle="tooltip" data-placement="top" title="Unfollow"></i>
 							</a>
+							<!-- <button *ngIf="flag!=0 && InstructorId!=globals.authData.UserId" id="unfollow"
+								data-toggle="tooltip" data-placement="top" title="Unfollow"
+								(click)="unfollowInstructor()">
+								<i class="fa fa-user-times"></i>
+							</button> -->
 						</li>
 					</ul>
 				</div>
@@ -141,11 +153,16 @@
 										</li>
 										<li>
 											<strong>Biography : </strong>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-												standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-												a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-												remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-												Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+											<p>Lorem Ipsum is simply dummy text of the printing and typesetting
+												industry. Lorem Ipsum has been the industry's
+												standard dummy text ever since the 1500s, when an unknown printer took a
+												galley of type and scrambled it to make
+												a type specimen book. It has survived not only five centuries, but also
+												the leap into electronic typesetting,
+												remaining essentially unchanged. It was popularised in the 1960s with
+												the release of Letraset sheets containing
+												Lorem Ipsum passages, and more recently with desktop publishing software
+												like Aldus PageMaker including versions
 												of Lorem Ipsum.</p>
 										</li>
 									</ul>
@@ -166,7 +183,8 @@
 												<div class="instructor_search_box">
 													<form action="/action_page.php">
 														<div class="input-group">
-															<input type="text" class="form-control" placeholder="Search" name="search">
+															<input type="text" class="form-control" placeholder="Search"
+																name="search">
 															<div class="input-group-btn">
 																<button class="btn btn-default" type="submit">
 																	<i class="glyphicon glyphicon-search"></i>
@@ -177,6 +195,175 @@
 												</div>
 											</div>
 											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="instructor_courses_wrap">
+										<div class="col-md-3">
+											<div class="instructor_course_blocks">
+												<div class="instructor_top_block">
+													<h3>Angular Material 2 Design For Programmers and CSS Newbies</h3>
+													<div class="pull-left course_rating">
+														<ul>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+														</ul>
+													</div>
+													<div class="pull-right course_review">
+														<a href="">5 Reviews</a>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<div class="instructor_bottom_block">
+													<strong class="course_category">Angular Material</strong>
+													<span class="skill_list">php,html,css</span>
+													<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+														at its layout. </p>
+												</div>
+												<div class="view_detail_btn">
+													<a href="">View Details</a>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="instructor_course_blocks">
+												<div class="instructor_top_block">
+													<h3>Angular Material 2 Design For Programmers and CSS Newbies</h3>
+													<div class="pull-left course_rating">
+														<ul>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+														</ul>
+													</div>
+													<div class="pull-right course_review">
+														<a href="">5 Reviews</a>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<div class="instructor_bottom_block">
+													<strong class="course_category">Angular Material</strong>
+													<span class="skill_list">php,html,css</span>
+													<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+														at its layout. </p>
+												</div>
+												<div class="view_detail_btn">
+													<a href="">View Details</a>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="instructor_course_blocks">
+												<div class="instructor_top_block">
+													<h3>Angular Material 2 Design For Programmers and CSS Newbies</h3>
+													<div class="pull-left course_rating">
+														<ul>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+														</ul>
+													</div>
+													<div class="pull-right course_review">
+														<a href="">5 Reviews</a>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<div class="instructor_bottom_block">
+													<strong class="course_category">Angular Material</strong>
+													<span class="skill_list">php,html,css</span>
+													<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+														at its layout. </p>
+												</div>
+												<div class="view_detail_btn">
+													<a href="">View Details</a>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="instructor_course_blocks">
+												<div class="instructor_top_block">
+													<h3>Angular Material 2 Design For Programmers and CSS Newbies</h3>
+													<div class="pull-left course_rating">
+														<ul>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+															<li>
+																<i class="fa fa-star" aria-hidden="true"></i>
+															</li>
+														</ul>
+													</div>
+													<div class="pull-right course_review">
+														<a href="">5 Reviews</a>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<div class="instructor_bottom_block">
+													<strong class="course_category">Angular Material</strong>
+													<span class="skill_list">php,html,css</span>
+													<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+														at its layout. </p>
+												</div>
+												<div class="view_detail_btn">
+													<a href="">View Details</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 pull-right">
+										<div class="pagination_block">
+											<ul class="pagination">
+												<pagination-controls (pageChange)="p=$event"></pagination-controls>
+											</ul>
 										</div>
 									</div>
 								</div>
@@ -359,7 +546,6 @@
 	<!-- </div>
 	</div>
 	<div class="clearfix"></div> -->
-
 
 
 

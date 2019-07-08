@@ -75,6 +75,9 @@ class Badges extends CI_Controller
 				if($result) 
 				{
 					echo json_encode("Delete successfully");
+				}else
+				{
+					echo json_encode('error');	
 				}
 		 	}
 		} 	
@@ -88,8 +91,15 @@ class Badges extends CI_Controller
 			if($result) 
 			{
 				echo json_encode('success');	
-			}						
-		}		
+			}else
+			{
+				echo json_encode('error');	
+			}
+
+		}else
+		{
+			echo json_encode('error');	
+		}	
 	}
 	
 	public function badgeuploadFile($id)
