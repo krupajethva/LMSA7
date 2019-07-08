@@ -1953,7 +1953,7 @@ select-dropdown > div{z-index: 999!important;}
 }
 .content_block .instructor_details_tabs .tab-content .tab-pane{
   border: 1px solid #dcdcdc;
-  padding: 20px;
+  padding: 10px;
   background:#fff;
   line-height: 22px;
 }
@@ -1961,8 +1961,22 @@ select-dropdown > div{z-index: 999!important;}
   margin-top: 0;
 }
 .content_block .instructor_details_tabs .tab-content .about_instructor_list ul li{padding: 0px 0 20px 20px;background: url(../images/dot.png) left 5px no-repeat;background-size: 10px;font-size: 14px;}
-.content_block .instructor_details_tabs .tab-content .about_instructor_list ul li strong{font-size: 16px;padding-right: 15px;width: 20%;display: inline-block;float: left;}
+.content_block .instructor_details_tabs .tab-content .about_instructor_list ul li strong{font-size: 16px;padding-right: 15px;width: 20%;float: left;}
 .content_block .instructor_details_tabs .tab-content .about_instructor_list ul li p{width: 80%;float: left;}
+
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks{border: 1px solid #dcdcdc;border-radius: 3px;padding: 5px 0px 0px 0px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block{border-bottom: 1px solid #dcdcdc;padding-bottom: 5px;margin-bottom: 5px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block h3{font-size: 16px;line-height: 24px;margin-bottom: 5px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating ul li{display: inline-block;margin-right:5px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating ul li i{color:#f9a825;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block span.skill_list{display: block;padding: 0px 0px 5px 15px;color: var(--option-color);letter-spacing: 1px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block strong,  .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block p,.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating,.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block h3{padding-left: 15px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_review{padding-right: 15px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .view_detail_btn{text-align: center;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .view_detail_btn a{background: #adadad;display: inline-block;padding: 5px 10px 5px 10px;margin-top: 15px;color: #ffffff;border-radius: 3px 3px 0px 0px;text-align: center;}
+
+
+
 @media only screen and (max-width: 767px) {
   .content_block .instructor_details_tabs .tab .nav-tabs li a{
       padding: 15px 10px;
