@@ -17,7 +17,7 @@ export class DashboardLearnerComponent implements OnInit {
 	LearnerCourses;
 	AnnouncementTypeList;
 	LearnerActivities;
-
+	totalinstructor;
 	courseview;
 	activecourse;
 	recentactivity;
@@ -31,7 +31,7 @@ export class DashboardLearnerComponent implements OnInit {
 	ngOnInit() {
 
 		this.courseview = [];
-
+		this.totalinstructor = [];
 		this.activecourse = [];
 		this.recentactivity = [];
 
@@ -72,12 +72,15 @@ export class DashboardLearnerComponent implements OnInit {
 		this.DashboardService.getLearnerDashboard(this.globals.authData.UserId)
 			.then((data) => {
 				debugger
-				debugger
+
 				if (data['courseview']) {
 					this.courseview = data['courseview'];
 				}
 				if (data['activecourse']) {
 					this.activecourse = data['activecourse'];
+				}
+				if (data['totalinstructor']) {
+					this.totalinstructor = data['totalinstructor'];
 				}
 				if (data['recentactivity']) {
 					this.recentactivity = data['recentactivity'];
