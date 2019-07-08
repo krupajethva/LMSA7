@@ -143,7 +143,7 @@ badgesEntity;
                   this.btn_disable = true;
                   this.submitted = false;
                   this.globals.isLoading = false;
-                 alert(123);
+                 //alert(123);
                 
                 }, (error) => {
                   this.btn_disable = false;
