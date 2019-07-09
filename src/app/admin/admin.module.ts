@@ -95,6 +95,8 @@ import { CertificateBadgeslistComponent } from './certificate-badgeslist/certifi
 import { CoursebeforereminderComponent } from './coursebeforereminder/coursebeforereminder.component';
 import { InvitationacceptdeclineComponent } from './invitationacceptdecline/invitationacceptdecline.component';
 import { CoursebeforereminderlistComponent } from './coursebeforereminderlist/coursebeforereminderlist.component';
+import { InstructorfollowingsComponent } from './instructorfollowings/instructorfollowings.component';
+
 
 @NgModule({
 	
@@ -170,6 +172,7 @@ import { CoursebeforereminderlistComponent } from './coursebeforereminderlist/co
 		RegisterAdminInvitedComponent, OpeninstructorComponent,
 		InvitationacceptdeclineComponent,
 		InstructorlistComponent,
+		InstructorfollowingsComponent,
 	],
 	imports: [
 		//BrowserModule,
