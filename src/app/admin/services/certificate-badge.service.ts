@@ -98,6 +98,8 @@ export class CertificateBadgeService {
   uploadFile(file,id) {debugger
     let promise = new Promise((resolve, reject) => {
       this.http.post(this.globals.baseAPIUrl + 'Badges/badgeuploadFile/' + id, file)
+      //this.http.post('http://localhost/LMSA7/api/Badges/badgeuploadFile/' + id, file)
+      //this.http.post('http://localhost/OESS_MyOpenEyes/api/Module/badgeuploadFile/' + id, file)
         .toPromise()
         .then(
           res => { // Success

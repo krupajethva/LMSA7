@@ -149,25 +149,25 @@ badgesEntity;
                   this.router.navigate(['/pagenotfound']);
                 });
               }
-           // BadgesForm.form.markAsPristine();
-          //   if (id) {
+           BadgesForm.form.markAsPristine();
+            if (id) {
           
-          //   swal({
-          //     type: 'success',
-          //     title: 'Updated!',
-          //     text: 'Badge has been updated successfully',
-          //     showConfirmButton: false,
-          //     timer: 1500
-          //   })
-          // } else {
-          //   swal({
-          //     type: 'success',
-          //     title: 'Added!',
-          //     text: 'Badge has been added successfully',
-          //     showConfirmButton: false,
-          //     timer: 1500
-          //   })
-          // } 
+            swal({
+              type: 'success',
+              title: 'Updated!',
+              text: 'Badge has been updated successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          } else {
+            swal({
+              type: 'success',
+              title: 'Added!',
+              text: 'Badge has been added successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          } 
             //this.router.navigate(['/default-badgelist']);
           }, 
           (error) => 

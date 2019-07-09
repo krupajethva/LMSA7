@@ -1,0 +1,2 @@
+ERROR - 2019-07-09 12:11:14 --> move_uploaded_file(../assets/Instructor/1/image/1562654469702_1546839189564_bg5.jpg): failed to open stream: No such file or directory at line no 125 in D:\wamp64\www\LMSA7\api\application\modules\Badges\controllers\Badges.php
+ERROR - 2019-07-09 12:11:15 --> move_uploaded_file(): Unable to move 'D:\wamp64\tmp\phpA0D3.tmp' to '../assets/Instructor/1/image/1562654469702_1546839189564_bg5.jpg' at line no 125 in D:\wamp64\www\LMSA7\api\application\modules\Badges\controllers\Badges.php
