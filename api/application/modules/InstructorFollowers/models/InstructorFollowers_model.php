@@ -258,7 +258,7 @@ class InstructorFollowers_model extends CI_Model
 	{
 		try {
 			if ($post_data) {
-				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,tif.FollowerUserId,tif.InstructorUserId');
+				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,u.Biography,tif.FollowerUserId,tif.InstructorUserId');
 				$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
 				$this->db->from('tbluser u');
 				$this->db->where('u.RoleId', 3);
@@ -308,4 +308,6 @@ class InstructorFollowers_model extends CI_Model
 			return false;
 		}
 	}
+
+
 }

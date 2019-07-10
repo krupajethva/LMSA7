@@ -49,8 +49,9 @@ export class InstructorDetailComponent implements OnInit {
     this.InstructorfollowersService.getInstructorDetails(obj)
     .then((data) => {
       if (data) {
+        console.log(data);
           this.FollowerDetail = data['FollowerDetail'];
-          console.log(this.FollowerDetail);
+        //  console.log(this.FollowerDetail);
           if(this.FollowerDetail!=null){
           this.flag = this.FollowerDetail.flag;
           this.totalFollowers = this.FollowerDetail.totalFollowers;
