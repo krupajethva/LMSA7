@@ -50,7 +50,7 @@ class Register_model extends CI_Model
 					return false;
 				}
 
-				$user_data1=array(
+				/*$user_data1=array(
 				"EducationLevelId"=>$post_user['EducationLevelId'],
 					"Field"=>$post_user['Field'],
 					"Skills"=>$post_user['Keyword'],
@@ -71,9 +71,10 @@ class Register_model extends CI_Model
 					$res2=$this->db->insert('tblmstaddresses',$user_data2);
 					$AddressesId=$this->db->insert_id();
 
+				
 				$user_data=array(
 					"InvitedByUserId"=>0,
-					"RoleId"=>4,
+					"RoleId"=>$role,
 					"FirstName"=>$post_user['FirstName'],
 					"LastName"=>$post_user['LastName'],
 					"PhoneNumber"=>$post_user['PhoneNumber'],
@@ -85,12 +86,46 @@ class Register_model extends CI_Model
 					"IsActive"=>0,
 					"CreatedBy" =>1,
 					"CreatedOn" =>date('y-m-d H:i:s')
+				);	*/
+				if($post_user['registerRole'] == 1) // learner 
+				{
+					$role = 4;
+					$address1=$post_user['Address1'];
+					$city=$post_user['City'];
+					$biography = ' ';
+					$skills = $post_user['Keyword'];
+				}
+				else{								// instructor
+					$role = 3;
+					$address1= ' ';
+					$city= ' ';
+					$biography = $post_user['Biography'];
+					$skills = ' ';
+				}
+				$user_data=array(
+					"InvitedByUserId"=>0,
+					"RoleId"=>$role,
+					"FirstName"=>$post_user['FirstName'],
+					"LastName"=>$post_user['LastName'],
+					"PhoneNumber"=>$post_user['PhoneNumber'],
+					"EmailAddress"=>$post_user['EmailAddress'],
+					"Password"=>md5($post_user['Password']),
+					"Address1"=>$address1,
+					"City"=>$city,
+					"Biography" => $biography,
+					"EducationLevelId"=>$post_user['EducationLevelId'],
+					"Field"=>$post_user['Field'],
+					"Skills"=>$skills,
+					"IsStatus"=>1,
+					"IsActive"=>0,
+					"CreatedBy" =>1,
+					"CreatedOn" =>date('y-m-d H:i:s')
 				);	
-				$res=$this->db->insert('tbluser',$user_data);
-				$userId=$this->db->insert_id();
-			//	$res1= $this->db->query('call learnerRegister(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$user_data);
-			//	$out_param_query = $this->db->query('select @id as out_param;');
-			//	$id=$out_param_query->result()[0]->out_param;
+				//$res=$this->db->insert('tbluser',$user_data);
+				//$userId=$this->db->insert_id();
+				$res= $this->db->query('call Register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$user_data);
+				$out_param_query = $this->db->query('select @id as out_param;');
+				$id=$out_param_query->result()[0]->out_param;
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -98,8 +133,33 @@ class Register_model extends CI_Model
 				}
 				if($res)
 				{
-					////return $id;
-					 return $userId;
+					
+					// return $userId;
+					if($post_user['Certificate']!='')
+						{
+							foreach($post_user['Certificate'] as $certificate)
+							{
+								$certificate_data=array(
+									'UserId' => $id,
+									'Certificate' => $certificate,
+									'IsActive' => 1,
+									'CreatedBy' => $id,
+									'CreatedOn' => date('y-m-d H:i:s'),
+									'UpdatedBy' => $id,
+									'UpdatedOn' => date('y-m-d H:i:s')
+								);	
+									$res1=$this->db->insert('tblinstructorcertificate',$certificate_data);
+							}	
+							if($res1){
+								return $id;
+							}
+							else{
+								return false;
+							}				
+						}
+						else{
+							return $id;
+						}
 				}
 				else
 				{

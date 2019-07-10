@@ -68,7 +68,7 @@ export class AuthGuard implements CanActivate {
 					  return false;
 					}
 				}	
-				if(state.url=='/register-instructor' || state.url=='/register-learner' || state.url=='/open-register-instructor' || (state.url.split('/')[1]=='register-admin-invited') || (state.url.split('/')[1]=='register-instructor-invited') || (state.url.split('/')[1]=='register-learner-invited') || (state.url.split('/')[1]=='user-activation') || state.url=='/welcome' || state.url=='/' || state.url=='/login' || state.url=='' || state.url=='/link-list' || state.url=='/forgot-password' || (state.url.split('/')[1]=='reset-password') || state.url=='/register-learner' || state.url=='/register-admin'){			
+				if(state.url=='/register' || state.url=='/open-register-instructor' || (state.url.split('/')[1]=='register-admin-invited') || (state.url.split('/')[1]=='register-instructor-invited') || (state.url.split('/')[1]=='register-learner-invited') || (state.url.split('/')[1]=='user-activation') || state.url=='/welcome' || state.url=='/' || state.url=='/login' || state.url=='' || state.url=='/link-list' || state.url=='/forgot-password' || (state.url.split('/')[1]=='reset-password')  || state.url=='/register-admin'){			
 					this.globals.IsLoggedIn = true;
 					this.router.navigate(['/dashboard']);
 					return false;
@@ -78,7 +78,7 @@ export class AuthGuard implements CanActivate {
 				}
 					  
 			} else { 
-				if(state.url=='/register-instructor' || state.url=='/open-register-instructor' || (state.url.split('/')[1]=='register-admin-invited') || state.url=='/register-learner' || (state.url.split('/')[1]=='register-instructor-invited') || (state.url.split('/')[1]=='register-learner-invited') || (state.url.split('/')[1]=='user-activation')  || state.url=='/welcome' || state.url=='/login' || state.url=='' || state.url=='/link-list' || state.url=='/forgot-password' || (state.url.split('/')[1]=='reset-password') || state.url=='/register-learner' || state.url=='/register-admin'){			
+				if(state.url=='/register' || state.url=='/open-register-instructor' || (state.url.split('/')[1]=='register-admin-invited') ||  (state.url.split('/')[1]=='register-instructor-invited') || (state.url.split('/')[1]=='register-learner-invited') || (state.url.split('/')[1]=='user-activation')  || state.url=='/welcome' || state.url=='/login' || state.url=='' || state.url=='/link-list' || state.url=='/forgot-password' || (state.url.split('/')[1]=='reset-password') || state.url=='/register-admin'){			
 					 this.globals.IsLoggedIn = false;
 					 return true;
 				 } else {

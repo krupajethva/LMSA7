@@ -241,6 +241,7 @@ class Attendance_model extends CI_Model
 		$this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
 		$this->db->join('tbluser us', 'us.UserId = csi.UserId', 'left');
 		$this->db->where('csi.CourseSessionId',$CourseSessionId); 	
+		$this->db->where('cs.SessionStatus != 0'); 	
 		$result = $this->db->get('tblcourseuserregister csi');
 	
 

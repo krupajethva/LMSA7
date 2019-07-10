@@ -24,7 +24,23 @@ export class UserinstructorService {
     });		
     return promise;
     }
-
+    
+    // get certificate by instuctor userid
+    getCertificateById(userId){
+      let promise = new Promise((resolve, reject) => {
+        this.http.get(this.globals.baseAPIUrl + 'Instructor/getCertificateById/'+userId)
+          .toPromise()
+          .then(
+            res => { // Success
+              resolve(res);
+            },
+            msg => { // Error
+          reject(msg);
+            }
+          );
+      });		
+      return promise;
+      }
     // ** IsActive user instructor //
     isActiveChange(changeEntity){ 
       let promise = new Promise((resolve, reject) => {

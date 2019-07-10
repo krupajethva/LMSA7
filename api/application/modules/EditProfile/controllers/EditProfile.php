@@ -148,7 +148,7 @@ class EditProfile extends CI_Controller
 				if($post_Certificate['id'] > 0){
 					$result = $this->EditProfile_model->deleteCertificate($post_Certificate);
 					if($result) {		
-						unlink("../src/assets/certificate/".$post_Certificate['Name']);				
+						unlink("../src/assets/Instructor/". $post_Certificate['Userid'] ."/EducationCertificate/".$post_Certificate['Name']);				
 						echo json_encode("Delete successfully");
 						}
 				 }				
