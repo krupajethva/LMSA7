@@ -108,9 +108,6 @@ class Badges extends CI_Controller
 		{
 			if(isset($_FILES['BadgeImage']) && !empty($_FILES['BadgeImage']))
 			{	
-				//$dirname=str_replace(' ','_',$id);
-				//$directoryname="../src/assets/Instructor/".$id."/";
-
 				$directoryname="../src/assets/Instructor/".$id."/";
 				$directoryname1= $directoryname."image/";
 				if(!is_dir($directoryname1))
