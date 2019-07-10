@@ -19,6 +19,7 @@ export class InstructorlistComponent implements OnInit {
     this.InstructorfollowersService.getAllInstructors(obj)
       .then((data) => {
         this.InstructorList = data;
+        console.log(this.InstructorList);
       },
       (error) => {
         // this.globals.isLoading = false;

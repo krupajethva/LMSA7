@@ -71,7 +71,7 @@
                   <a href="" class="total_folllowers">{{instructor.totalFollowers}} Folllowers</a>
                 </li>
                 <li>
-                  <a href="" class="total_folllowing">12 Folllowing</a>
+                  <a href="" class="total_folllowing">{{instructor.totalFolloings}} Folllowing</a>
                 </li>
               </ul>
             </div>
@@ -106,9 +106,6 @@
                 (click)="unfollowInstructor(instructor)">
                 <i class="fa fa-user-times" aria-hidden="true"></i>
               </button>
-
-
-
 
               <!-- <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
                 <i class="fa fa-eye" aria-hidden="true"></i>

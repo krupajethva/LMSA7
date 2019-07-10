@@ -92,32 +92,43 @@
 						</li>
 					</ul>
 					<ul class="social_icons">
-						<li>
+						<!-- <li>
 							<a href="">
 								<i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top"
 									title="LinkedIn Profile"></i>
 							</a>
+						</li> -->
+						<!-- <li>
+							<a href="">
+								<i class="fa fa-user-plus" data-toggle="tooltip" data-placement="top"
+									title="Follow"></i>
+							</a>
+
 						</li>
 						<li>
 							<a href="">
-								<i class="fa fa-user-plus" data-toggle="tooltip" data-placement="top" title="Follow"></i>
+								<i class="fa fa-user-times" data-toggle="tooltip" data-placement="top"
+									title="Unfollow"></i>
 							</a>
-							<!-- <button *ngIf="flag==0 && InstructorId!=globals.authData.UserId" id="follow"
+
+						</li> -->
+						<div class="instructor_buttons_group">
+							<button data-toggle="tooltip" data-placement="top" title="LinkedIn Profile">
+								<i class="fa fa-linkedin" aria-hidden="true"></i>
+							</button>
+							<button *ngIf="flag==0 && InstructorId!=globals.authData.UserId" id="follow"
 								data-toggle="tooltip" data-placement="top" title="Follow" (click)="followInstructor()">
 								<i class="fa fa-user-plus"></i>
-							</button> -->
-						</li>
-						<li>
-							<a href="">
-								<i class="fa fa-user-times" data-toggle="tooltip" data-placement="top" title="Unfollow"></i>
-							</a>
-							<!-- <button *ngIf="flag!=0 && InstructorId!=globals.authData.UserId" id="unfollow"
+							</button>
+							<button *ngIf="flag!=0 && InstructorId!=globals.authData.UserId" id="unfollow"
 								data-toggle="tooltip" data-placement="top" title="Unfollow"
 								(click)="unfollowInstructor()">
 								<i class="fa fa-user-times"></i>
-							</button> -->
-						</li>
+							</button>
+						</div>
+
 					</ul>
+
 				</div>
 			</div>
 			<div class="clearfix"></div>

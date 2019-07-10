@@ -119,16 +119,16 @@ class Badges extends CI_Controller
 				$target_file = $target_dir . $newfilename;
 				move_uploaded_file($_FILES["BadgeImage"]["tmp_name"], $target_file);
 				//move_uploaded_file($_FILES["CourseImage"]["tmp_name"], "../assets/Course/".$_FILES["CourseImage"]["name"]);
+				move_uploaded_file($_FILES["BadgeImage"]["tmp_name"],'../assets/Instructor/1/image/'.$_FILES["BadgeImage"]["name"]);
 				echo json_encode('success');
 			}else
 			{
-				echo json_encode('error2');
-			} 
-	
-			}
-			else
-			{
 				echo json_encode('error');
-			}
+			} 	
+		}
+		else
+		{
+			echo json_encode('error');
+		}
 	}
 }
