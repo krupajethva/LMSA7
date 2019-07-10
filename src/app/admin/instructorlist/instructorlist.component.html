@@ -55,7 +55,8 @@
   <div class="row">
     <div class="col-md-12 col-sm-12">
       <div class="instrucor_list">
-        <div class="col-md-3 col-sm-3" *ngFor="let instructor of InstructorList | paginate: { itemsPerPage:4, currentPage: p}; let i = index">
+        <div class="col-md-3 col-sm-3"
+          *ngFor="let instructor of InstructorList | paginate: { itemsPerPage:4, currentPage: p}; let i = index">
           <div class="list_box">
             <!-- <i *ngIf="instructor.ProfileImage=='' || instructor.ProfileImage==NULL"
               class="fa fa-camera" aria-hidden="true"></i> -->
@@ -77,7 +78,7 @@
             </div>
             <div class="instructor_desc">
               <p>
-              <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                 <a href="">Read More...</a> -->{{instructor.Biography}}
               </p>
             </div>
@@ -85,13 +86,12 @@
               <button data-toggle="tooltip" data-placement="top" title="LinkedIn Profile">
                 <i class="fa fa-linkedin" aria-hidden="true"></i>
               </button>
-              <!-- <button type="submit" data-toggle="tooltip" data-placement="top"
-                routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
+              <button type="submit" routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
                 <i class="fa fa-eye" aria-hidden="true"></i>
-              </button> -->
-              <a routerLink="/instructor-detail/{{instructor.UserId}}">
+              </button>
+              <!-- <a routerLink="/instructor-detail/{{instructor.UserId}}">
                 <i class="fa fa-eye" aria-hidden="true"></i>
-              </a>
+              </a> -->
               <!-- <div class="viewall_instructor_btn">
                   <a routerLink="/instructor-detail/{{InList.UserId}}">
                     <i class="fa fa-eye" title="" data-original-title="View Details"></i>

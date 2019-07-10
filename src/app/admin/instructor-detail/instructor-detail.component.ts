@@ -15,6 +15,7 @@ export class InstructorDetailComponent implements OnInit {
   InstructorId;
   flag;
   totalFollowers;
+  totalFolloings;
   Biography;
   Education;
   ProfileImage;
@@ -23,6 +24,7 @@ export class InstructorDetailComponent implements OnInit {
   FollowerDetail;
   FirstName;
   LastName;
+  EmailAddress;
 
   constructor(private InstructorfollowersService: InstructorfollowersService, private globals: Globals, private router: Router, private route: ActivatedRoute) { }
 
@@ -55,10 +57,12 @@ export class InstructorDetailComponent implements OnInit {
           if(this.FollowerDetail!=null){
           this.flag = this.FollowerDetail.flag;
           this.totalFollowers = this.FollowerDetail.totalFollowers;
+          this.totalFolloings = this.FollowerDetail.totalFolloings;
           }
           else{
             this.flag = 0;
             this.totalFollowers = 0;
+            this.totalFolloings = 0;
           }
           this.FirstName = data['InstructorDetail']['FirstName'];
           this.LastName = data['InstructorDetail']['LastName'];
@@ -66,6 +70,8 @@ export class InstructorDetailComponent implements OnInit {
           this.Education = data['InstructorDetail']['Education'];
           this.ProfileImage = data['InstructorDetail']['ProfileImage'];
           this.InstructorUserId = data['InstructorDetail']['UserId'];
+          
+          this.EmailAddress = data['InstructorDetail']['EmailAddress'];
           this.ActiveCourses = data['ActiveCourses'];
       }
     },
