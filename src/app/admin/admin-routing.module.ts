@@ -225,7 +225,7 @@ const routes: Routes = [
 				{ path : 'education/edit/:id', component : EducationComponent,canActivate : [AuthGuard] },
 				{ path : 'instructorfollowers', component : InstructorfollowersComponent,canActivate : [AuthGuard] },
 				{ path : 'register-admin', component : RegisterAdminComponent,canActivate : [AuthGuard] },
-				{ path : 'register-learner', component : RegisterLearnerComponent,canActivate : [AuthGuard] },
+				{ path : 'register', component : RegisterLearnerComponent,canActivate : [AuthGuard] },
 				{ path : 'login', component : LoginComponent,canActivate : [AuthGuard] },
 				{ path : 'link-list', component : LinkListComponent,canActivate : [AuthGuard] },
 				{ path : 'forgot-password', component : ForgotPasswordComponent,canActivate : [AuthGuard] },

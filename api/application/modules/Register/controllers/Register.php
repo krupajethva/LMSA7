@@ -144,7 +144,7 @@ class Register extends CI_Controller
 				   }
 				}
 			}
-			echo json_encode('Success');
+			echo json_encode($userId);
 								
 							
 			}	

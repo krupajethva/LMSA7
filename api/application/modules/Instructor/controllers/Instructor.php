@@ -39,6 +39,13 @@ class Instructor extends CI_Controller
 		echo json_encode($data);	
 	}
 
+	// list all instructor certificates//
+	public function getCertificateById($userId)
+	{
+		$data=$this->Instructor_model->getCertificateById($userId);
+		echo json_encode($data);	
+	}
+
 	 // ** IsActive user instructor //
 	public function isActiveChange() {
 		
