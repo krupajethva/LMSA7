@@ -19,6 +19,7 @@ export class InstructorlistComponent implements OnInit {
     this.InstructorfollowersService.getAllInstructors(obj)
       .then((data) => {
         this.InstructorList = data;
+        console.log(this.InstructorList);
       },
       (error) => {
         // this.globals.isLoading = false;
@@ -31,10 +32,10 @@ export class InstructorlistComponent implements OnInit {
     this.InstructorfollowersService.followInstructor(follow)
       .then((data) => {
         this.globals.isLoading = false;
-        $('#follow').hide();
+      //  $('#follow').hide();
         instructor.flag=1;
         instructor.totalFollowers = instructor.totalFollowers + 1;
-        $('#unfollow').show();
+      //  $('#unfollow').show();
       },
         (error) => {
           if (error.text) {
@@ -48,10 +49,10 @@ export class InstructorlistComponent implements OnInit {
     this.InstructorfollowersService.unfollowInstructor(unfollow)
       .then((data) => {
         this.globals.isLoading = false;
-        $('#unfollow').hide();
+      //  $('#unfollow').hide();
         instructor.flag=0;
         instructor.totalFollowers = instructor.totalFollowers - 1;
-        $('#follow').show();
+     //   $('#follow').show();
       },
         (error) => {
           if (error.text) {

@@ -436,6 +436,9 @@ ng-select > div > div.multiple{padding: 0px;}
 .users_block .progress .progress-bar-warning{background-color: #f0ad4e;}
 .users_block .progress .progress-bar-primary{background-color: #5bc0de;}
 .users_block .progress .progress-bar-success{background-color: #5cb85c;}
+.br_1{border-right: 1px solid #dcdcdc;}
+.ml_0{margin-left: 0 !important;}
+.mr_0{margin-right: 0 !important;}
 /*--------------End Common content--------------------*/
 
 
@@ -1150,42 +1153,85 @@ button.view_inst_btn span {
 /*----------------------------End instructor Course Details------------------------------*/
 
 /*start css for instructor list*/
-.content_block .instrucor_list .list_box{    padding: 15px;
+.content_block .instructor_search{padding-bottom: 15px;}
+.content_block .instructor_search .instructor_search_note p{    color: var(--theme-color);
+  font-size: 14px;
+  line-height: 34px;}
+.content_block .instructor_search_box form input{    border: 1px solid #adadad;}
+.content_block .instructor_search_box form button{    background: #adadad;
+  border: 1px solid #adadad;
+  height: 34px;}
+  .content_block .instructor_search_box form button i{color:#fff;}
+.content_block .instrucor_list .list_box{    padding: 0px 15px;
   border: 1px solid #dcdcdc;
   border-radius: 3px;
-  text-align: center;margin-bottom: 25px;}
-  .content_block .instrucor_list .list_box .total_folllowers{
-    color: var(--option-color);
-  }
-.content_block .instrucor_list .list_box .instructor_buttons_group{    padding-top: 10px;
-  border-top: 1px solid #dcdcdc;
-  margin-top: 10px;}
-.content_block .instrucor_list .list_box img { width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    margin: 0 auto;
-    border: 1px solid #dcdcdc;
-    padding: 2px;}
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 40px;}
+  .content_block .instrucor_list .list_box .instructor_desc{    margin-bottom: 10px;}
+  .content_block .instrucor_list .list_box .instructor_desc a{color: var(--option-color);margin-left: 5px;}
+  .content_block .instrucor_list .list_box .instructor_courses_list .more_course_btn a{    background: #adadad;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    margin-top: 15px;
+    color: #ffffff;
+    border-radius: 3px 3px 0px 0px;}
+  .content_block .instrucor_list .list_box .instructor_courses_list ul.list_li li {
+    padding: 0px 0 0px 15px;
+    background: url(../images/dot.png) left 5px no-repeat;
+    background-size: 10px;
+    text-align: left;
+}
+.content_block .instrucor_list .list_box .instructor_courses_list span{    text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
+  color: #102749;
+  margin-bottom: 5px;
+  display: block;}
+  .content_block .instrucor_list .list_box ul li{display: inline-block;padding: 0 10px;}
+  .content_block .instrucor_list .list_box .instructor_follow ul{    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    padding: 5px 5px;
+    margin: 10px 0px;}
+    .content_block .instrucor_list .list_box .instructor_follow ul li:first-child{    border-right: 1px solid #dcdcdc;}
+  .content_block .instrucor_list .list_box .instructor_follow ul li a.total_folllowers,.content_block .instrucor_list .list_box .instructor_follow ul li a.total_folllowing{color: var(--theme-color);}
+.content_block .instrucor_list .list_box .instructor_buttons_group{     padding-bottom: 10px;
+  border-bottom: 1px solid #dcdcdc;
+  margin-bottom: 5px;}
+.content_block .instrucor_list .list_box img {    width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin: -40px auto 0px;
+  border: 1px solid #dcdcdc;
+  padding: 2px;
+  background: #fff;}
 .content_block .instrucor_list .list_box .instructor_letter   {    text-transform: uppercase;
-      width: 75px;
-      height: 75px;
-      border: 1px solid #555;
-      border-radius: 100%;
-      text-align: center;
-      color: #555;
-      font-size: 36px;
-      display: inline-block;
-      margin-right: 10px;
-      line-height: 75px;
-      padding: 0;
-      overflow: hidden;
-      vertical-align: middle;}
+  width: 75px;
+  height: 75px;
+  border: 1px solid #555;
+  border-radius: 100%;
+  text-align: center;
+  color: #555;
+  font-size: 36px;
+  display: inline-block;
+  margin: -40px auto 0;
+  line-height: 75px;
+  padding: 0;
+  overflow: hidden;
+  vertical-align: middle;
+  background: #fff;}
 .content_block .instrucor_list .list_box h6    {    font-weight: 600;
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 5px;    text-transform: capitalize;}
 .content_block .instrucor_list .list_box .instructor_buttons_group .back_btn,.content_block .instrucor_list .list_box .instructor_buttons_group .next_btn{min-width: 45px;}
-.content_block .instrucor_list .list_box .instructor_buttons_group button{background: transparent;border: 0;}
-.content_block .instrucor_list .list_box .instructor_buttons_group button i{color: #354865;font-size: 18px;}
+.content_block .instrucor_list .list_box .instructor_buttons_group button{    background: transparent;
+  border: 1px solid var(--theme-color);
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;
+margin: 0 5px;}
+.content_block .instrucor_list .list_box .instructor_buttons_group button i{    font-size: 16px;
+  color: var(--theme-color);}
 /*end css for instructor list*/
 
 /*css for flexislider for assessment test*/
@@ -1763,16 +1809,28 @@ button.view_inst_btn span {
 .inbox-mail .input-group {position: relative;display: table;width: 100%;border-collapse: separate;margin-bottom: 0em;}
 .inbox-mail .form-control2 {border: 1px solid #e0e0e0;padding: 5px 8px;width: 100%;height: 38px;box-shadow: 0 1px 1px rgba(0,0,0,.05);}
 .inbox-mail .input-group-btn button.btn.btn-success{line-height: 24px;background-color: #356987;border: 1px solid transparent;border-color: #356987;border-top-right-radius: 4px;border-bottom-right-radius: 4px;box-shadow: 0 1px 1px rgba(0,0,0,.05);}
-.inbox-mail .compose .compose_label a{display:block;font-size: 1.2em;color: #fff;    background: linear-gradient(to top left, var(--option-color), var(--theme-color));;text-align: center;padding: 10px;border-radius: 4px;}
-.inbox-mail nav.nav-sidebar {margin: 1em 0;background: #fff;border: 1px solid #ebeff6;border-radius: 4px;box-shadow: 0 1px 1px rgba(0,0,0,.05);}
+/* .inbox-mail .compose .compose_label a{display:block;font-size: 1.2em;color: #fff;    background: linear-gradient(to top left, var(--option-color), var(--theme-color));;text-align: center;padding: 10px;border-radius: 4px;} */
+/* .inbox-mail nav.nav-sidebar {margin: 1em 0;background: #fff;border: 1px solid #ebeff6;border-radius: 4px;box-shadow: 0 1px 1px rgba(0,0,0,.05);} */
 .inbox-mail .tabs  li:first-child a{border-top-left-radius: 4px;border-top-right-radius: 4px;}
 .inbox-mail .tabs  li a{padding:1em;}
-.inbox-mail .nav > li > a {color: #999;border-bottom: 1px solid #E9E9E9;font-weight: 600;font-size: 12px;}
-.inbox-mail .nav > li > a i {margin-right: 14px;}
-.inbox-mail .nav-sidebar ul li a span{color: #fff;font-size: 0.8em;    background: linear-gradient(to top left, var(--option-color), var(--theme-color));;border-radius: 10px;width: 25px;height: 18px;display: inline-block;line-height: 1.7em;text-align: center;float: right;}
+.inbox-mail .nav > li > a {color: #999;font-weight: 600;font-size: 12px;}
+.inbox-mail .nav > li > a i {    margin-right: 14px;
+  font-size: 18px;
+  vertical-align: middle;}
+.inbox-mail .nav-sidebar ul li a span{    color: #fff;
+  font-size: 14px;
+  background: #c3c3c3;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  position: absolute;
+  top: -8px;
+  right: -8px;}
 .inbox-mail .tab-content-in{margin:0;}
-.inbox-mail .inbox-right {position: relative;background-color: #fff;padding: 10px;border: 1px solid #ebeff6;border-radius: 4px;box-shadow: 0 1px 1px rgba(0,0,0,.05);margin-bottom: 15px;}
-.inbox-mail .mail-toolbar {padding-bottom: 5px;}
+.inbox-mail .inbox-right {position: relative;background-color: #fff;padding: 0px 15px 0px 15px;}
+.inbox-mail .mail-toolbar {padding-bottom: 0px;}
 .inbox-mail .float-right {float: right;}
 .inbox-mail .float-left {float: left;}
 .inbox-mail tr.table-row {border-top: 1px solid #F3F3F4;}
@@ -1785,8 +1843,12 @@ button.view_inst_btn span {
   margin: 5px 0px;
   font-weight: normal!important;}
 .inbox-mail td.table-text p {color: #999;font-weight: normal!important;}
-.inbox-mail .mail_label ul li{display: inline-block;margin-right: 10px;list-style: none;height: 35px;width: 35px;}
-.inbox-mail .mail_label ul li a{color: #fff;background: linear-gradient(to top left, var(--option-color), var(--theme-color));border-radius: 50%;display: block;text-align: center;font-size: 16px;height: 100%;line-height: 35px;box-shadow: 0 0 10px #bfbfbf;}
+.inbox-mail .mail_label ul{margin-left: 30px;}
+.inbox-mail .mail_label ul li{    display: inline-block;
+  padding: 0px 10px;
+  list-style: none;}
+.inbox-mail .mail_label ul li a{    color: #999;
+  font-size: 18px;}
 .inbox-mail .mailbox-content .check_box{float: left;}
 .inbox-mail .compose_mail_box{display:none;transition: all 0.6s ease;z-index: 99999;position: fixed;background: #fff;right: 15px;bottom: 40px;border-radius: 10px 10px 0px 0px;width: 50%;box-shadow: 0 0 25px #b3b3b3;}
 .inbox-mail .compose_mail_box .mailbox-header{float: left;width: 100%;background: #3c7693;padding: 10px;border-radius: 10px 10px 0px 0px;}
@@ -1801,12 +1863,13 @@ button.view_inst_btn span {
 .inbox-mail .inbox_preview_mailbox .inbox_preview_header ul li{list-style: none;display: inline-block;margin-right:5px;font-size: 16px;}
 .inbox-mail .inbox_preview_mailbox .inbox_preview_body img{display: inline-block;width: 35px;height: 35px;border-radius: 50%;margin-right: 15px;}
 .inbox-mail .inbox_preview_mailbox .inbox_preview_body .mail_id{display: inline-block;font-weight: bold;font-size: 14px;vertical-align:middle;}
-.inbox-mail .inbox_preview_mailbox .inbox_preview_body .mail_id span{display: inline-block;color: #b1b1b1;font-weight: normal;}
+.inbox-mail .inbox_preview_mailbox .inbox_preview_body .mail_id span{display: block;color: #b1b1b1;font-weight: normal;}
 .inbox-mail .inbox_preview_mailbox .inbox_preview_body .mail_id span .dropdown{display:inline-block}
 .inbox-mail .inbox_preview_mailbox .inbox_preview_body ul li{margin-right:10px;display: inline-block;list-style: none;}
+.inbox-mail .inbox_preview_mailbox .inbox_preview_body ul li:first-child{margin-right: 20px;}
 .inbox-mail .inbox_preview_mailbox .inbox_preview_body .mail_id span .open > .dropdown-menu{width: 375px;padding: 10px;}
 .inbox-mail .compose_mail_box .mail_box_body .composebox{height: 125px;position: relative;}
-.inbox-mail td.mail_labels ul li{vertical-align: middle;height: 15px;display: inline-block;margin-right: 10px;list-style: none;}
+.inbox-mail td.mail_labels ul li{vertical-align: middle;height: 5px;display: inline-block;margin-right: 10px;list-style: none;}
 .inbox-mail td.mail_labels ul li i{color: #999;}
 .inbox-mail td.mail_labels ul li i.main,.inbox-mail td.mail_labels ul li i.readmail{color:var(--option-color);}
 .main,.readmail{color:var(--option-color);}
@@ -1820,6 +1883,45 @@ button.view_inst_btn span {
 .inbox-mail .mailbox-content .pagination_block .mail_count{float: left;padding: 8px 8px;font-size: 13px;}
 
 select-dropdown > div{z-index: 999!important;}
+
+
+.inbox-mail nav.nav-sidebar{margin-bottom: 10px;}
+.inbox-mail nav.nav-sidebar .nav-tabs{border: 0;padding: 0px 15px 0px 15px;}
+.inbox-mail nav.nav-sidebar .nav-tabs > li{margin-bottom: 0px;transition: all 0.3s ease-in-out;}
+.inbox-mail nav.nav-sidebar .nav-tabs > li > a{    border-radius: 20px;
+  border: 1px solid #dcdcdc;
+  margin: 0px 10px;
+  font-size: 13px;
+  padding: 10px 30px;
+  transition: all 0.3s ease-in-out;}
+.inbox-mail nav.nav-sidebar .nav > li > a:hover, .inbox-mail nav.nav-sidebar .nav > li > a:focus{    background-color: #f7f7f7;
+  border-color: #dcdcdc;}
+.inbox-mail nav.nav-sidebar .nav-tabs > li.active > a, .inbox-mail nav.nav-sidebar .nav-tabs > li.active > a:hover, .inbox-mail nav.nav-sidebar .nav-tabs > li.active > a:focus{border: 1px solid #dcdcdc;cursor: pointer;background-color: #f7f7f7;}
+.inbox-mail .mail-toolbar .check_box{margin: 0;}
+.inbox-mail .mail-toolbar .check_box label{padding: 0 5px 0 20px;}
+.inbox-mail .serach_mailbox form input{    border: 1px solid #dcdcdc;
+  border-radius: 20px;    border-right: 0;}
+.inbox-mail .serach_mailbox form button{     background: #c3c3c3;
+  border: 1px solid #dcdcdc;
+  height: 34px;
+  border-radius: 20px;}
+.inbox-mail .serach_mailbox form button i{    color: #fff;
+  line-height: 10px;}
+.inbox-mail .inbox-right .mailbox-content .inboxmail{height: 125px;position: relative;}
+.inbox-mail .inbox-right .inbox_preview_wrap{height: 250px;position: relative;}
+.inbox-mail .inbox-right.inbox_preview .mailbox-content{border-top: 2px solid #999999;
+  padding: 10px 0px 0px 0px;}
+.inbox-mail .inbox_preview_mailbox .inbox_preview_body .mail_id span .dropdown button{    background: transparent;
+    padding: 0px 2px;}
+.inbox-mail .inbox-right.inbox_preview .mail_labels ul li{    font-size: 16px;
+  margin: 0px 10px;}
+.inbox-mail .inbox_preview_body .mail_preview_row .mail_preview_reply p{margin-bottom: 10px;}
+.inbox-mail .inbox_preview_body .mail_preview_row .mail_preview_reply a{text-decoration: underline;}
+.inbox-mail .inbox_preview_body .mail_preview_row .mail_preview_reply_inner{    margin: 10px 0px 0px 20px;
+  border-left: 1px solid #dcdcdc;
+  padding-left: 15px;}
+.inbox-mail .inbox_preview_body .mail_preview_row .mail_preview_reply_inner p{opacity: 0.5;}
+.inbox-mail .inbox_preview_body .mail_preview_row .mail_preview_reply_inner a{text-decoration: underline;}
 /*inbox css*/
 
 /*------------Instructor Details------------------------------*/
@@ -1840,6 +1942,119 @@ select-dropdown > div{z-index: 999!important;}
   float: left;
   padding-right: 0px;}
   .instructor_block .course_box .content{width: 100%;}
+
+
+.content_block .instructor_education_details{padding-left: 35px;}
+.instructor_education_details ul.follow_list{margin: 10px 0px 15px;} 
+.instructor_education_details ul.follow_list li{width: 100%!important;}
+.instructor_education_details ul.follow_list li a{font-size: 14px;}
+.content_block .instructor_education_details ul li{display: inline-block;width: 50%;} 
+.content_block .instructor_education_details .instr_icon{width: 15%;float: left;}
+.content_block .instructor_education_details .instr_icon i{color: var(--option-color);font-size: 20px;line-height: 32px;}
+.content_block .instructor_education_details .instr_icon_details{width: 85%;float: left;}
+.content_block .instructor_education_details .instr_icon_details strong{font-size: 14px;}
+.content_block .instructor_education_details .instr_icon_details span{display: block;margin-top: 2px;text-transform: capitalize;}
+.content_block .instructor_education_details h1{margin: 10px 0px 15px;font-size: 24px;}
+.content_block .instructor_reviewratings_details ul li{padding-bottom: 10px;font-size: 12px;display: inline-block;margin-right: 60px;}
+.content_block .instructor_reviewratings_details ul li i{color: var(--option-color);width: 20px;font-size: 14px;}
+.content_block .instructor_reviewratings_details ul li strong {font-size: 14px;}
+.content_block .instructor_reviewratings_details ul.social_icons{padding-top: 5px;}
+.content_block .instructor_reviewratings_details ul.social_icons li{margin-right: 10px;width: 25px;height: 25px;border: 1px solid var(--theme-color);border-radius: 20px;text-align: center;line-height: 24px;}
+.content_block .instructor_reviewratings_details ul.social_icons li i{color: var(--theme-color);}
+
+.content_block .instructor_details_tabs{padding-top: 35px;}
+.content_block .instructor_details_tabs .tab .nav-tabs {
+  border-bottom:0 none;
+}
+.content_block .instructor_details_tabs .tab .nav-tabs li{
+  margin-right: 10px;
+}
+.content_block .instructor_details_tabs .tab .nav-tabs li a{
+  position: relative;
+    padding: 15px;
+    color: var(--theme-color);
+    font-size: 17px;
+    z-index: 1;
+}
+.content_block .instructor_details_tabs .tab .nav-tabs li a:hover{
+  background:transparent;
+  border:1px solid transparent;
+}
+.content_block .instructor_details_tabs .tab .nav-tabs li a:before{
+  content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 8px;
+    left: -1px;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    font-size: 17px;
+    border-bottom: 0px none;
+    border-radius: 10px 10px 0 0;
+    transform-origin: left center 0;
+    transform: perspective(4px) rotateX(2deg);
+    z-index: -1;
+}
+.content_block .instructor_details_tabs .tab .nav-tabs li.active a:before{
+  background: var(--theme-color);
+  border: 1px solid #102749;
+  border-bottom: 0;
+}
+.content_block .instructor_details_tabs .tab .nav-tabs li.active a,
+.content_block .instructor_details_tabs .tab .nav-tabs li.active a:focus,
+.content_block .instructor_details_tabs .tab .nav-tabs li.active a:hover{
+  border: 1px solid transparent;
+    background: transparent;
+    color: #fff;
+    z-index: 2;
+}
+.content_block .instructor_details_tabs .tab-content .tab-pane{
+  border: 1px solid #dcdcdc;
+  padding: 10px;
+  background:#fff;
+  line-height: 22px;
+}
+.content_block .instructor_details_tabs .tab-content .tab-pane h3{
+  margin-top: 0;
+}
+.content_block .instructor_details_tabs .tab-content .about_instructor_list ul li{padding: 0px 0 20px 20px;background: url(../images/dot.png) left 5px no-repeat;background-size: 10px;font-size: 14px;}
+.content_block .instructor_details_tabs .tab-content .about_instructor_list ul li strong{font-size: 16px;padding-right: 15px;width: 20%;float: left;}
+.content_block .instructor_details_tabs .tab-content .about_instructor_list ul li p{width: 80%;float: left;}
+
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks{border: 1px solid #dcdcdc;border-radius: 3px;padding: 5px 0px 0px 0px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block{border-bottom: 1px solid #dcdcdc;padding-bottom: 5px;margin-bottom: 5px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block h3{font-size: 16px;line-height: 24px;margin-bottom: 5px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating ul li{display: inline-block;margin-right:5px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating ul li i{color:#f9a825;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block span.skill_list{display: block;padding: 0px 0px 5px 15px;color: var(--option-color);letter-spacing: 1px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block strong,  .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block p,.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating,.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block h3{padding-left: 15px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_review{padding-right: 15px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .view_detail_btn{text-align: center;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .view_detail_btn a{background: #adadad;display: inline-block;padding: 5px 10px 5px 10px;margin-top: 15px;color: #ffffff;border-radius: 3px 3px 0px 0px;text-align: center;}
+
+
+
+@media only screen and (max-width: 767px) {
+  .content_block .instructor_details_tabs .tab .nav-tabs li a{
+      padding: 15px 10px;
+      font-size: 14px;
+  }
+  .content_block .instructor_details_tabs .tab .nav-tabs li a:before{
+      bottom: 6px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .content_block .instructor_details_tabs .tab .nav-tabs li{
+      width:100%;
+      margin-bottom: 5px;
+  }
+  .content_block .instructor_details_tabs .tab .nav-tabs li a:before{
+      bottom: 0;
+      transform: none;
+      border-bottom: 1px solid #dcdcdc;
+  }
+}
 /*------------End Instructor Details------------------------------*/
 
 /*------------course scheduler------------------------------*/
@@ -1997,7 +2212,7 @@ select-dropdown > div{z-index: 999!important;}
     color: #345F90;
     text-transform: uppercase;
     text-align: center;
-    padding: 11px 30px;
+    padding: 10px 10px;
     position: relative;
     z-index: 2;
     cursor: pointer;
@@ -3492,6 +3707,7 @@ margin-bottom: 15px;}
     height: 40px;
     line-height: 40px;
 }
+.right_content_block .bg_white_block .title_heading .breadcrumb_block{float: left !important;}
   
   }
   @media only screen and (max-width: 991px) and (min-width: 768px) {
@@ -3520,6 +3736,9 @@ margin-bottom: 15px;}
 .learner_dashboard .users_block {
   height: 345px;
 }
+
+.wizard > div.wizard-inner .nav-tabs > li{    padding: 12px 8px;font-size: 11px;}
+
 .learner_dashboard .rated_course_block,.learner_dashboard .content_block{height: 410px!important;}
 }
   @media only screen and (max-width: 767px) and (min-width: 360px) {

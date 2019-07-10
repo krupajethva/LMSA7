@@ -28,6 +28,10 @@ import { UserService } from './services/user.service';
 import { InstructorfollowersComponent } from './instructorfollowers/instructorfollowers.component';
 import { InstructorfollowersService } from './services/instructorfollowers.service';
 
+import { InstructorfollowingsComponent } from './instructorfollowings/instructorfollowings.component';
+import { InstructorfollowingsService } from './services/instructorfollowings.service';
+
+
 import { CoursebeforereminderComponent } from './coursebeforereminder/coursebeforereminder.component';
 import { CoursebeforereminderService } from './services/coursebeforereminder.service';
 
@@ -253,8 +257,10 @@ const routes: Routes = [
 				{ path : 'coursebeforereminder/:id', component : CoursebeforereminderComponent,canActivate : [AuthGuard] },
 				{ path : 'coursebeforereminderlist', component : CoursebeforereminderlistComponent,canActivate : [AuthGuard] },
 				{ path : 'instructor-invitation/:id', component : InvitationacceptdeclineComponent,canActivate : [AuthGuard] },
+				{ path : 'instructorfollowings', component : InstructorfollowingsComponent,canActivate : [AuthGuard] },
  			    { path: '', redirectTo: 'link-list', pathMatch:'full'},
 				{ path: '**', redirectTo : 'link-list' }
+				
         
         ]
   }
@@ -272,7 +278,7 @@ providers: [AdminService,ImportfiledataService,InboxService,Globals,AuthGuard,Re
 	ResetpasswordService,CategoryService,CourseService,CoursetopicService,ParentcategoryService,
     CourseListService,RolepermissionService,CommonService,CoursebeforereminderlistService,
 	CertificateBadgeService,AttendanceService,CourseSchedulerService,CourseCertificateService,CourseQuestionService,
-	DashboardService,AssessmenttestService,LearnerCoursesService,InstructorCoursesService,ActivedeleteService,InstructorfollowersService,CoursebeforereminderService,InvitationacceptdeclineService],
+	DashboardService,AssessmenttestService,LearnerCoursesService,InstructorCoursesService,ActivedeleteService,InstructorfollowersService,CoursebeforereminderService,InvitationacceptdeclineService,InstructorfollowingsService,],
 
 
   bootstrap: [AdminComponent],

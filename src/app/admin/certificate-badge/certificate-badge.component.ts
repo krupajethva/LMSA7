@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CertificateBadgeService } from '../services/certificate-badge.service';
 declare var $,swal: any;
 declare function myInput() : any;
-declare var $,Bloodhound: any;
+
 @Component({
   selector: 'app-certificate-badge',
   templateUrl: './certificate-badge.component.html',
@@ -14,7 +14,6 @@ declare var $,Bloodhound: any;
 })
 export class CertificateBadgeComponent implements OnInit {
   ParentList;
-
 badgesEntity;
 	submitted;
 	btn_disable;
@@ -142,10 +141,7 @@ badgesEntity;
                 .then((data) => {
                   this.globals.isLoading = false;
                   this.btn_disable = true;
-                  this.submitted = false;
-                  this.globals.isLoading = false;
-                 
-                
+                  this.submitted = false;                
                 }, (error) => {
                   this.btn_disable = false;
                   this.submitted = false;
@@ -153,7 +149,7 @@ badgesEntity;
                   this.router.navigate(['/pagenotfound']);
                 });
               }
-            BadgesForm.form.markAsPristine();
+           BadgesForm.form.markAsPristine();
             if (id) {
           
             swal({
@@ -168,8 +164,8 @@ badgesEntity;
               type: 'success',
               title: 'Added!',
               text: 'Badge has been added successfully',
-              showConfirmButton: false,
-              timer: 1500
+              showConfirmButton: true
+          
             })
           } 
             this.router.navigate(['/default-badgelist']);
@@ -187,7 +183,7 @@ badgesEntity;
     clearForm(BadgesForm) {debugger
       BadgesForm.form.markAsPristine();
       this.badgesEntity = {};
-      BadgesForm.form.markAsPristine();
+      //BadgesForm.form.markAsPristine();
       this.submitted = false;
       this.badgesEntity.IsActive = '1';   
       this.badgesEntity.ResourcesId = 0;
