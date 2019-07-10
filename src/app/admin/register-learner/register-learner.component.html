@@ -350,19 +350,19 @@
 									<h1 class="pull-left">Personal Detail</h1>
 									<div class="pull-right">
 										<div class="radiobtn_box">
-											<input type="radio" name="role" id="role1" value="Role1">
+											<input type="radio" [checked] [value]="1"  #registerRole = "ngModel" [(ngModel)] = "RegisterEntity.registerRole" name="role" id="role1" >
 											<label for="role1">Register as Learner</label>
 										</div>
 										<div class="radiobtn_box">
-											<input type="radio" name="role" id="role2" value="Role2">
+											<input type="radio" [checked] [value]="2" #registerRole = "ngModel" [(ngModel)] = "RegisterEntity.registerRole" name="role" id="role2" >
 											<label for="role2">Register as Instructor</label>
 										</div>
 									</div>
 									<div class="clearfix"></div>
 									<p class="padding_15">Enter your detail</p>
-									<p class="padding_15">Enter your detail to Register as
+									<!--<p class="padding_15" >Enter your detail to Register as
 										<strong>Learner:</strong>
-									</p>
+									</p>-->
 								</div>
 								<div class="col-md-2 col-sm-2 col-xs-2">
 								</div>
@@ -472,29 +472,29 @@
 								</div>
 							</div>
 							<div class="clearfix"></div>
-							<div class="row">
+							<div class="row" *ngIf="RegisterEntity.registerRole == 2">
 								<div class="col-md-12 col-sm-12">
 									<div class="form-group">
 										<label>
 											<span>*</span>Biography </label>
 										<textarea class="form-control" #Biography="ngModel" maxlength="250" [(ngModel)]="RegisterEntity.Biography" name="Biography"
 										 [ngClass]="{red_border: (Biography.dirty && Biography.invalid)}" required></textarea>
-										<span class="error_span" *ngIf="(Biography.dirty && Biography.invalid) || (Biography.pristine && submitted2)">
-											<span *ngIf="Biography.errors.required || (Biography.pristine && submitted2)">Please enter biography</span>
+										<span class="error_span" *ngIf="(Biography.dirty && Biography.invalid) || (Biography.pristine && submitted1)">
+											<span *ngIf="Biography.errors.required || (Biography.pristine && submitted1)">Please enter biography</span>
 										</span>
 									</div>
 								</div>
 							</div>
 							<div class="clearfix"></div>
-							<div class="row">
+							<div class="row" *ngIf="RegisterEntity.registerRole == 1">
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 										<label>
 											<span>*</span>Address</label>
 										<input type="text" class="form-control" #Address1="ngModel" [(ngModel)]="RegisterEntity.Address1" name="Address1" maxlength="100"
-										 pattern="[a-zA-Z0-9\-&\, ]{2,300}" [ngClass]="{red_border: (Address1.dirty && Address1.invalid) || (Address1.pristine && submitted2)}"
+										 pattern="[a-zA-Z0-9\-&\, ]{2,300}" [ngClass]="{red_border: (Address1.dirty && Address1.invalid) || (Address1.pristine && submitted1)}"
 										 required />
-										<span class="error_span" *ngIf="(Address1.dirty && Address1.invalid) || (Address1.pristine && submitted2)">
+										<span class="error_span" *ngIf="(Address1.dirty && Address1.invalid) || (Address1.pristine && submitted1)">
 											<span *ngIf="Address1.errors.required || (Address1.pristine && submitted2)">Please enter address1</span>
 											<span *ngIf="Address1.errors && Address1.errors.pattern">Please enter valid address1</span>
 										</span>
@@ -505,8 +505,8 @@
 										<label>
 											<span>*</span>City</label>
 										<input type="text" class="form-control" #City="ngModel" [(ngModel)]="RegisterEntity.City" name="City" maxlength="100" pattern="[a-zA-Z\-&\, ]{2,100}"
-										 [ngClass]="{red_border: (City.dirty && City.invalid) || (City.pristine && submitted2)}" required />
-										<span class="error_span" *ngIf="(City.dirty && City.invalid) || (City.pristine && submitted2)">
+										 [ngClass]="{red_border: (City.dirty && City.invalid) || (City.pristine && submitted1)}" required />
+										<span class="error_span" *ngIf="(City.dirty && City.invalid) || (City.pristine && submitted1)">
 											<span *ngIf="City.errors.required || (City.pristine && submitted2)">Please enter city</span>
 											<span *ngIf="City.errors && City.errors.pattern">Please enter valid city</span>
 										</span>
@@ -521,7 +521,8 @@
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<h1 class="pull-left">Educational Detail</h1>
-								<h3 class="pull-right">Register as Learner</h3>
+								<h3 class="pull-right" *ngIf="RegisterEntity.registerRole == 1">Register as Learner</h3>
+								<h3 class="pull-right" *ngIf="RegisterEntity.registerRole == 2">Register as Instructor</h3>
 								<div class="clearfix"></div>
 								<p class="padding_15">Enter your detail</p>
 							</div>
@@ -529,37 +530,54 @@
 							</div>
 						</div>
 						<form #RegisterForm2="ngForm">
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<label>
-											<span>*</span>Level of Education</label>
-										<select #EducationLevelId="ngModel" [(ngModel)]="RegisterEntity.EducationLevelId" name="EducationLevelId" [ngClass]="{red_border: (EducationLevelId.dirty && EducationLevelId.invalid) || (EducationLevelId.pristine && submitted2)}"
-										 required>
-											<option value="" ngSelected='RegisterEntity.EducationLevelId==""'></option>
-											<option *ngFor="let education of EducationLeveList" value="{{education.EducationLevelId}}" ngSelected="RegisterEntity.EducationLevelId==education.EducationLevelId">{{education.Education}}</option>
-										</select>
-										<span class="error_span" *ngIf="(EducationLevelId.dirty && EducationLevelId.invalid) || (EducationLevelId.pristine && submitted2)">
-											<span *ngIf="EducationLevelId.errors.required || (EducationLevelId.pristine && submitted2)">Please select education level</span>
-										</span>
+							
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>
+												<span>*</span>Level of Education</label>
+											<select #EducationLevelId="ngModel" [(ngModel)]="RegisterEntity.EducationLevelId" name="EducationLevelId" [ngClass]="{red_border: (EducationLevelId.dirty && EducationLevelId.invalid) || (EducationLevelId.pristine && submitted2)}"
+											required>
+												<option value="" ngSelected='RegisterEntity.EducationLevelId==""'></option>
+												<option *ngFor="let education of EducationLeveList" value="{{education.EducationLevelId}}" ngSelected="RegisterEntity.EducationLevelId==education.EducationLevelId">{{education.Education}}</option>
+											</select>
+											<span class="error_span" *ngIf="(EducationLevelId.dirty && EducationLevelId.invalid) || (EducationLevelId.pristine && submitted2)">
+												<span *ngIf="EducationLevelId.errors.required || (EducationLevelId.pristine && submitted2)">Please select education level</span>
+											</span>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6">
+										<div class="form-group">
+											<label>
+												<span>*</span>Expertise field </label>
+											<input type="text" class="form-control" maxlength="250" #Field="ngModel" [(ngModel)]="RegisterEntity.Field" name="Field"
+											pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (Field.dirty && Field.invalid) || (Field.pristine && submitted2)}"
+											required />
+											<span class="error_span" *ngIf="(Field.dirty && Field.invalid) || (Field.pristine && submitted2)">
+												<span *ngIf="Field.errors.required || (Field.pristine && submitted2)">Please enter field</span>
+												<span *ngIf="Field.errors && Field.errors.pattern">Please enter valid field</span>
+											</span>
+										</div>
 									</div>
 								</div>
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<label>
-											<span>*</span>Expertise field </label>
-										<input type="text" class="form-control" maxlength="250" #Field="ngModel" [(ngModel)]="RegisterEntity.Field" name="Field"
-										 pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (Field.dirty && Field.invalid) || (Field.pristine && submitted2)}"
-										 required />
-										<span class="error_span" *ngIf="(Field.dirty && Field.invalid) || (Field.pristine && submitted2)">
-											<span *ngIf="Field.errors.required || (Field.pristine && submitted2)">Please enter field</span>
-											<span *ngIf="Field.errors && Field.errors.pattern">Please enter valid field</span>
-										</span>
+								<div class="clearfix"></div>
+								<div class="row" *ngIf="RegisterEntity.registerRole == 2">
+									<div class="col-md-12 col-sm-12">
+										<div class="multifileuploader">
+											<div class="form-group file_upload">
+												<label>Upload your Educational Certificate</label>
+												<input type="text" id="certificate" class="form-control" />
+												<input type="file" name="CertificateId" id="CertificateId" (change) = "certificateSelect($event.target)" class="form-control" #CertificateId="ngModel" [(ngModel)]="RegisterEntity.CertificateId"
+												accept="image/*,.pdf" multiple size="25MB" />
+												<span class="error_span" *ngIf="certificate_error">
+													Please upload your educational cerificates
+												</span>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
 							<div class="clearfix"></div>
-							<div class="row">
+							<div class="row" *ngIf="RegisterEntity.registerRole == 1">
 								<div class="col-md-12 col-sm-12">
 									<div class="form-group">
 										<label>
@@ -570,22 +588,6 @@
 											Please enter skills
 										</span>
 
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-							<div class="row">
-								<div class="col-md-12 col-sm-12">
-									<div class="multifileuploader">
-										<div class="form-group file_upload">
-											<label>Upload your Educational Certificate</label>
-											<input type="text" disabled class="form-control" />
-											<input type="file" name="CertificateId" id="CertificateId" class="form-control" #CertificateId="ngModel" [(ngModel)]="RegisterEntity.CertificateId"
-											 accept="image/*,.pdf" multiple size="25MB" />
-											<span class="error_span" *ngIf="certificate_error">
-												Please upload your educational cerificates
-											</span>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -623,41 +625,43 @@
 												<span>{{RegisterEntity.PhoneNumber}}</span>
 											</p>
 										</div>
-										<div class="col-md-6">
-											<p class="padding_15">Address:
-												<span>405,Iskon Atria 1,Gotri Road</span>
-											</p>
+										<div *ngIf="RegisterEntity.registerRole == 1">
+											<div class="col-md-6">
+												<p class="padding_15">Address:
+													<span>{{RegisterEntity.Address1}}</span>
+												</p>
+											</div>
+											<div class="col-md-6">
+												<p class="padding_15">City:
+													<span>{{RegisterEntity.City}}</span>
+												</p>
+											</div>
 										</div>
-										<div class="col-md-6">
-											<p class="padding_15">City:
-												<span>Vadodara</span>
-											</p>
-										</div>
-										<div class="col-md-12">
+										<div class="col-md-12" *ngIf="RegisterEntity.registerRole == 2">
 											<p class="padding_15">Biography:
-												<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-													standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-													make a type specimen book.</span>
+												<span>{{RegisterEntity.Biography}}</span>
 											</p>
 										</div>
 									</div>
 									<div class="row">
 										<h1>Educational Detail</h1>
-										<div class="col-md-4">
+										<div *ngIf="RegisterEntity.registerRole == 2">
+											<div class="col-md-4">
 
-											<p class="padding_15">Level of Education:
-												<span *ngFor="let education of EducationLeveList">
-													<span *ngIf="education.EducationLevelId==RegisterEntity.EducationLevelId">{{education.Education}}</span>
-												</span>
-											</p>
+												<p class="padding_15">Level of Education:
+													<span *ngFor="let education of EducationLeveList">
+														<span *ngIf="education.EducationLevelId==RegisterEntity.EducationLevelId">{{education.Education}}</span>
+													</span>
+												</p>
 
+											</div>
+											<div class="col-md-4">
+												<p class="padding_15">Expertise Field:
+													<span>{{RegisterEntity.Field}}</span>
+												</p>
+											</div>
 										</div>
-										<div class="col-md-4">
-											<p class="padding_15">Expertise Field:
-												<span>{{RegisterEntity.Field}}</span>
-											</p>
-										</div>
-										<div class="col-md-4">
+										<div class="col-md-4" *ngIf="RegisterEntity.registerRole == 1">
 											<p class="padding_15">Skills:
 												<span>{{RegisterEntity.Keyword}}</span>
 											</p>

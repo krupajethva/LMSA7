@@ -108,19 +108,16 @@ class Badges extends CI_Controller
 		{
 			if(isset($_FILES['BadgeImage']) && !empty($_FILES['BadgeImage']))
 			{	
-				//$dirname=str_replace(' ','_',$id);
-				//$directoryname="../src/assets/Instructor/".$id."/";
-
-				// $directoryname="../src/assets/Instructor/".$id."/";
-				// $directoryname1= $directoryname."image/";
-				// if(!is_dir($directoryname1))
-				// {
-				// 	mkdir($directoryname1, 0755, true);
-				// }
-				// $target_dir=$directoryname1;
-				// $newfilename= str_replace(" ", "_", basename($_FILES["BadgeImage"]["name"]));
-				// $target_file = $target_dir . $newfilename;
-				// move_uploaded_file($_FILES["BadgeImage"]["tmp_name"], $target_file);
+				$directoryname="../src/assets/Instructor/".$id."/";
+				$directoryname1= $directoryname."image/";
+				if(!is_dir($directoryname1))
+				{
+					mkdir($directoryname1, 0755, true);
+				}
+				$target_dir=$directoryname1;
+				$newfilename= str_replace(" ", "_", basename($_FILES["BadgeImage"]["name"]));
+				$target_file = $target_dir . $newfilename;
+				move_uploaded_file($_FILES["BadgeImage"]["tmp_name"], $target_file);
 				//move_uploaded_file($_FILES["CourseImage"]["tmp_name"], "../assets/Course/".$_FILES["CourseImage"]["name"]);
 				move_uploaded_file($_FILES["BadgeImage"]["tmp_name"],'../assets/Instructor/1/image/'.$_FILES["BadgeImage"]["name"]);
 				echo json_encode('success');

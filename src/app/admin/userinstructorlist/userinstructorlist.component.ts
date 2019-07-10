@@ -24,13 +24,30 @@ export class UserinstructorlistComponent implements OnInit {
 	type;
   deleteEntity;
   ReInviteEntity;
+  CertificateEntity;
   constructor( public globals: Globals, private router: Router,private UserService: UserService, private UserinstructorService: UserinstructorService,private route:ActivatedRoute) { }
  
   ngOnInit() {
 	
 		  $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
-    
+  setTimeout(function () {
+    $('.modal').on('shown.bs.modal', function () {
+      $('.right_content_block').addClass('style_position');
+    })
+    $('.modal').on('hidden.bs.modal', function () {
+      $('.right_content_block').removeClass('style_position');
+      
+    if ($(".bg_white_block").height() < $(window).height() - 100) {
+      $('footer').addClass('footer_fixed');
+    }
+    else {
+      $('footer').removeClass('footer_fixed');
+    }
+      myInput();
+    });
+    },
+    500);
     
     this.globals.isLoading = true;	
     this.UserinstructorService.getAllUser()
@@ -198,9 +215,39 @@ export class UserinstructorlistComponent implements OnInit {
             
   }
 
-
+  // display certificate particular instructor
+  viewCertificate(userId)
+  {debugger
+    
+    this.UserinstructorService.getCertificateById(userId)
+      .then((data) => 
+      { 
+        this.CertificateEntity = data;	
+        if(this.CertificateEntity.length > 0)
+        {
+          $('#certificatedisplay').modal('show'); 
+        }
+        else{
+          swal({
+         
+            type: 'error',
+            title:'Oops...',
+            text: "You have no any certificate uploaded",
+            showConfirmButton: false,
+            timer: 3000
+          })
+        }
+      },
+      (error) => {
+        this.globals.isLoading = false;
+      });
+  }
+  close()
+  {
+    $('#certificatedisplay').modal('hide'); 
+  }
   reinviteUser(user)
-  { 
+  { debugger
     this.ReInviteEntity =  user;
     swal({
       title: 'Re-Invite an Instructor',

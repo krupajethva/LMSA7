@@ -164,11 +164,11 @@ badgesEntity;
               type: 'success',
               title: 'Added!',
               text: 'Badge has been added successfully',
-              showConfirmButton: false,
-              timer: 1500
+              showConfirmButton: true
+          
             })
           } 
-            //this.router.navigate(['/default-badgelist']);
+            this.router.navigate(['/default-badgelist']);
           }, 
           (error) => 
           {
@@ -183,7 +183,7 @@ badgesEntity;
     clearForm(BadgesForm) {debugger
       BadgesForm.form.markAsPristine();
       this.badgesEntity = {};
-      BadgesForm.form.markAsPristine();
+      //BadgesForm.form.markAsPristine();
       this.submitted = false;
       this.badgesEntity.IsActive = '1';   
       this.badgesEntity.ResourcesId = 0;

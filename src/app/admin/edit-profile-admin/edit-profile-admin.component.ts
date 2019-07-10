@@ -517,17 +517,18 @@ export class EditProfileAdminComponent implements OnInit {
 		}
 		if (eduForm.valid && error_count == 0) {
 			console.log(this.EducationEntity.Skills);
-			this.EducationEntity.Skills = this.EducationEntity.Skills.join();
+			if(this.EducationEntity.Skills != null)
+				this.EducationEntity.Skills = this.EducationEntity.Skills.join();
 			console.log(this.EducationEntity.Skills);
 			this.btn_disable1 = true;
 			this.globals.isLoading = true;
-			let file1 = null;
+			let file1 = '';
 			var fd = new FormData();
 			if (this.globals.authData.RoleId == 3) {
-				let file1 = this.elem.nativeElement.querySelector('#CertificateId').files;
+				 file1 = this.elem.nativeElement.querySelector('#CertificateId').files;
 			}
 			this.EducationEntity.Certificate = [];
-			if (file1 != null) {
+			if (file1 && file1.length != 0) {
 				for (var i = 0; i < file1.length; i++) {
 					var Certificate = Date.now() + '_' + file1[i]['name'];
 					fd.append('Certificate' + i, file1[i], Certificate);
@@ -539,7 +540,8 @@ export class EditProfileAdminComponent implements OnInit {
 						this.globals.isLoading = false;
 						this.btn_disable1 = false;
 						this.submitted1 = false;
-						this.EducationEntity.Skills = this.EducationEntity.Skills.split(',');
+						if(this.EducationEntity.Skills != null)
+							this.EducationEntity.Skills = this.EducationEntity.Skills.split(',');
 						console.log(this.EducationEntity.Skills);
 
 						if (file1) {
@@ -554,7 +556,7 @@ export class EditProfileAdminComponent implements OnInit {
 										showConfirmButton: false,
 										timer: 3000
 									})
-									window.location.href = '/edit-profile-admin';
+									this.router.navigate(['/edit-profile-admin']);
 								},
 									(error) => {
 										this.btn_disable1 = false;
@@ -587,7 +589,7 @@ export class EditProfileAdminComponent implements OnInit {
 				this.EducationEntity.UserId = this.globals.authData.UserId;
 				this.EditProfileService.updateEducationDetails(this.EducationEntity)
 					.then((data) => {
-						this.EducationEntity.Skills = this.EducationEntity.Skills.split(',');
+						//this.EducationEntity.Skills = this.EducationEntity.Skills.split(',');
 						this.globals.isLoading = false;
 						this.btn_disable1 = false;
 						this.submitted1 = false;
