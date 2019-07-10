@@ -50,7 +50,7 @@
             </li>
             <li class="">
               <a href="#tab2" (click)="sentbox()" data-toggle="tab">
-                <i class="fa fa-paper-plane-o"></i>Sent</a>
+                <i class="fa fa-paper-plane-o"></i>Sent Items</a>
             </li>
             <li class="">
               <a href="#tab3" (click)="starred()" data-toggle="tab">
@@ -188,11 +188,11 @@
                               <i class="fa fa-envelope icon_9"></i>
                             </a>
                           </li>
-                          <li>
+                          <!-- <li>
                             <a (click)="readMultiInbox()" title="Add as Read">
                               <i class="fa fa-envelope-open icon_9"></i>
                             </a>
-                          </li>
+                          </li> -->
                           <li>
                             <a (click)="starredMultiInbox()" title="Add as Starred">
                               <i class="fa fa-star icon_9"></i>
@@ -223,16 +223,109 @@
                   </div>
                 </div>
                 <div class="inboxmail">
-                  <table class="table">
+                  <div class="inboxmail_row">
+                    <div class="imbox_checkbox">
+                      <div class="check_box checkBoxClass">
+                        <input type="checkbox" class="checkbox_check" [(ngModel)]="inboxList[i].Check" name="Check" id="Check{{i}}">
+                        <label for="Check{{i}}" class="checkboxbtn_label"></label>
+                      </div>
+                    </div>
+                    <div class="mail_labels">
+                      <ul>
+                        <li>
+                          <div>
+                            <a class="important" title="Mark as Spam">
+                              <i class="fa fa-trash icon_9"></i>
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <a title="Mark as Read">
+                              <i class="fa fa-envelope icon_9"></i>
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <a title="Mark as Starred">
+                              <i class="fa fa-star icon_9"></i>
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mail_desc">
+                      <a href="">
+                        <h6 class="pull-left">Anand Yadav
+                          <span> - Scrum call meeting</span>
+                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </h6>
+                      </a>
+                    </div>
+                    <div class="mail_date_time">
+                      <span class="pull-right">Mon 8-7-2019 21:15</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="inboxmail_row">
+                    <div class="imbox_checkbox">
+                      <div class="check_box checkBoxClass">
+                        <input type="checkbox" class="checkbox_check" [(ngModel)]="inboxList[i].Check" name="Check" id="Check{{i}}">
+                        <label for="Check{{i}}" class="checkboxbtn_label"></label>
+                      </div>
+                    </div>
+                    <div class="mail_labels">
+                      <ul>
+                        <li>
+                          <div>
+                            <a class="important" title="Mark as Spam">
+                              <i class="fa fa-trash icon_9"></i>
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <a title="Mark as Read">
+                              <i class="fa fa-envelope icon_9"></i>
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div>
+                            <a title="Mark as Starred">
+                              <i class="fa fa-star icon_9"></i>
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mail_desc">
+                      <a href="">
+                        <h6 class="pull-left">Anand Yadav
+                          <span> - Scrum call meeting</span>
+                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </h6>
+                      </a>
+                    </div>
+                    <div class="mail_date_time">
+                      <span class="pull-right">Mon 8-7-2019 21:15</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+
+                  <!-- <table class="table">
                     <tbody>
                       <tr class="table-row" *ngFor="let Inboxres of inboxList | paginate: { itemsPerPage:5, currentPage: in, id:'in'};let i=index;">
-                        <td class="table-img sr_no_width">
+                        <td class="table-img">
                           <div class="check_box checkBoxClass">
                             <input type="checkbox" class="checkbox_check" [(ngModel)]="inboxList[i].Check" name="Check" id="Check{{i}}">
                             <label for="Check{{i}}" class="checkboxbtn_label"></label>
                           </div>
                         </td>
-                        <td class="mail_labels width_15">
+                        <td class="mail_labels">
                           <ul [ngClass]="{active:Inboxres.IsRead==0}">
                             <li>
                               <div *ngIf="Inboxres.IsDelete==0">
@@ -273,6 +366,17 @@
                           </ul>
                         </td>
                         <td class="table-text">
+                          <a href="">
+                            <h6 class="pull-left">Anand Yadav
+                              <span> - Scrum call meeting</span>
+                              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </h6>
+                          </a>
+                        </td>
+                        <td class="date-time">
+                          <span class="pull-right">Mon 8-7-2019 21:15</span>
+                        </td>
+                        <td class="table-text">
                           <a (click)="readOnlyInbox(Inboxres)" routerLink="/inbox-preview/{{Inboxres.EmailNotificationId}}">
                             <h6 [ngClass]="{active:Inboxres.IsRead==0}">{{Inboxres.Name}}</h6>
                             <p [ngClass]="{active:Inboxres.IsRead==0}">{{Inboxres.Subject}} - {{Inboxres.MessageBody | pipe}}</p>
@@ -289,7 +393,9 @@
                         <td>In Inbox we didn't show find anything to show here.</td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
+
+
                 </div>
                 <div class="clearfix"></div>
               </div>
@@ -841,7 +947,7 @@
 
           <div class="inbox-right inbox_preview">
             <div class="mailbox-content inbox_preview_wrap">
-              <div class="mail-toolbar clearfix">
+              <div class="mail-toolbar fixed_head clearfix">
                 <div class="mail_preview_head float-left">
                   <h3>Scrum call meeting</h3>
                 </div>
@@ -856,22 +962,8 @@
                     </li>
                     <li>
                       <div>
-                        <a title="Remove as Spam">
-                          <i class="fa fa-trash icon_9 main"></i>
-                        </a>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
                         <a title="Mark as Read">
                           <i class="fa fa-envelope icon_9"></i>
-                        </a>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <a title="Remove as Read">
-                          <i class="fa fa-envelope-open main icon_9"></i>
                         </a>
                       </div>
                     </li>
@@ -883,11 +975,19 @@
                       </div>
                     </li>
                     <li>
-                      <div>
-                        <a title="Remove as Starred">
-                          <i class="fa fa-star icon_9 main"></i>
-                        </a>
-                      </div>
+                      <a title="Reply" (click)="replay()">
+                        <i class="fa fa-reply" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a title="Reply to all" (click)="replayAll()">
+                        <i class="fa fa-reply-all" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a title="Forward" (click)="forward()">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -897,91 +997,130 @@
                 <div class="clearfix"></div>
                 <div class="inbox_preview_body">
                   <div class="mail_preview_row">
-                    <div class="pull-left">
-                      <img src="assets/images/guy-8.jpg" class="img-responsive" alt="" />
-                      <div class="mail_id">
-                        <p>ayadav@theopeneyes.in
-                          <span>
-                            to krupali.mistry@theopeneyes.com
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <table class="table">
-                                  <tbody>
-                                    <tr>
-                                      <td>From : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>To : </td>
-                                      <td>krupali.mistry@theopeneyes.com</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Cc : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Bcc : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Date : </td>
-                                      <td> Jul 8, 2019, 1:11:42 PM</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Subject : </td>
-                                      <td>Scrum call meeting</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                    <div data-toggle="collapse" data-target="#mailrowone" class="mail_head_row">
+                      <div class="pull-left">
+                        <img src="assets/images/guy-8.jpg" class="img-responsive" alt="" />
+                        <div class="mail_id">
+                          <p>ayadav@theopeneyes.in
+                            <span>
+                              to krupali.mistry@theopeneyes.com
+                              <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>From : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>To : </td>
+                                        <td>krupali.mistry@theopeneyes.com</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Cc : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Bcc : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Date : </td>
+                                        <td> Jul 8, 2019, 1:11:42 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Subject : </td>
+                                        <td>Scrum call meeting</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
-                            </div>
-                          </span>
-                        </p>
+                            </span>
+                          </p>
+                        </div>
                       </div>
+                      <div class="pull-right">
+                        <ul>
+                          <li>
+                            Jul 8, 2019, 1:11:42 PM
+                          </li>
+                          <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <a>
+                                  <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                </a>
+                              </li>
+                              <li>
+                                <a>
+                                  <i class="fa fa-envelope" aria-hidden="true"></i> Marl as read
+                                </a>
+                              </li>
+                              <li>
+                                <a>
+                                  <i class="fa fa-star" aria-hidden="true"></i> Mark as starred
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="replay()">
+                                  <i class="fa fa-reply" aria-hidden="true"></i> Reply
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="replayAll()">
+                                  <i class="fa fa-reply-all" aria-hidden="true"></i> Reply to all
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="forward()">
+                                  <i class="fa fa-share" aria-hidden="true"></i> Forward
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
+                          <!-- <li>
+                                <a title="Delete">
+                                  <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a title="Mark as read">
+                                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a title="Mark as starred">
+                                  <i class="fa fa-star" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a title="Reply" (click)="replay()">
+                                  <i class="fa fa-reply" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a title="Reply to all" (click)="replayAll()">
+                                  <i class="fa fa-reply-all" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a title="Forward" (click)="forward()">
+                                  <i class="fa fa-share" aria-hidden="true"></i>
+                                </a>
+                              </li> -->
+                        </ul>
+                      </div>
+                      <div class="clearfix"></div>
                     </div>
-                    <div class="pull-right">
-                      <ul>
-                        <li>
-                          Jul 8, 2019, 1:11:42 PM
-                        </li>
-                        <li>
-                          <a title="Delete">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a title="Mark as read">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a title="Mark as starred">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a title="Reply" (click)="replay()">
-                            <i class="fa fa-reply" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a title="Reply to all" (click)="replayAll()">
-                            <i class="fa fa-reply-all" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a title="Forward" (click)="forward()">
-                            <i class="fa fa-share" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="mail_preview_reply">
+                    <div id="mailrowone" class="mail_preview_reply collapse">
                       <p>Hi,</p>
                       <p>Thanks for reaching out to us.</p>
                       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -1006,58 +1145,96 @@
                 <hr>
                 <div class="inbox_preview_body">
                   <div class="mail_preview_row">
-                    <div class="pull-left">
-                      <img src="assets/images/guy-9.jpg" class="img-responsive" alt="" />
-                      <div class="mail_id">
-                        <p>krupali.mistry@theopeneyes.com
-                          <span>
-                            to ayadav@theopeneyes.in
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <table class="table">
-                                  <tbody>
-                                    <tr>
-                                      <td>From : </td>
-                                      <td>krupali.mistry@theopeneyes.com</td>
-                                    </tr>
-                                    <tr>
-                                      <td>To : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Cc : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Bcc : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Date : </td>
-                                      <td> Jul 8, 2019, 1:11:42 PM</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Subject : </td>
-                                      <td>Scrum call meeting reply</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                    <div data-toggle="collapse" data-target="#mailrowtwo" class="mail_head_row">
+                      <div class="pull-left">
+                        <img src="assets/images/guy-9.jpg" class="img-responsive" alt="" />
+                        <div class="mail_id">
+                          <p>krupali.mistry@theopeneyes.com
+                            <span>
+                              to ayadav@theopeneyes.in
+                              <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>From : </td>
+                                        <td>krupali.mistry@theopeneyes.com</td>
+                                      </tr>
+                                      <tr>
+                                        <td>To : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Cc : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Bcc : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Date : </td>
+                                        <td> Jul 8, 2019, 1:11:42 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Subject : </td>
+                                        <td>Scrum call meeting reply</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
-                            </div>
-                          </span>
-                        </p>
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="pull-right">
-                      <ul>
-                        <li>
-                          Jul 8, 2019, 1:11:42 PM
-                        </li>
-                        <li>
+                      <div class="pull-right">
+                        <ul>
+                          <li>
+                            Jul 8, 2019, 1:11:42 PM
+                          </li>
+                          <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <a>
+                                  <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                </a>
+                              </li>
+                              <li>
+                                <a>
+                                  <i class="fa fa-envelope" aria-hidden="true"></i> Marl as read
+                                </a>
+                              </li>
+                              <li>
+                                <a>
+                                  <i class="fa fa-star" aria-hidden="true"></i> Mark as starred
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="replay()">
+                                  <i class="fa fa-reply" aria-hidden="true"></i> Reply
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="replayAll()">
+                                  <i class="fa fa-reply-all" aria-hidden="true"></i> Reply to all
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="forward()">
+                                  <i class="fa fa-share" aria-hidden="true"></i> Forward
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
+                          <!-- <li>
                           <a title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
@@ -1086,11 +1263,12 @@
                           <a title="Forward" (click)="forward()">
                             <i class="fa fa-share" aria-hidden="true"></i>
                           </a>
-                        </li>
-                      </ul>
+                        </li> -->
+                        </ul>
+                      </div>
+                      <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="mail_preview_reply">
+                    <div id="mailrowtwo" class="mail_preview_reply collapse">
                       <p>Hi, Anand</p>
                       <p>Thanks for reaching out to us.</p>
                       <p>Sure i will join at scrum call meeting</p>
@@ -1113,58 +1291,96 @@
                 <hr>
                 <div class="inbox_preview_body">
                   <div class="mail_preview_row">
-                    <div class="pull-left">
-                      <img src="assets/images/guy-8.jpg" class="img-responsive" alt="" />
-                      <div class="mail_id">
-                        <p>ayadav@theopeneyes.in
-                          <span>
-                            to krupali.mistry@theopeneyes.com
-                            <div class="dropdown">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <table class="table">
-                                  <tbody>
-                                    <tr>
-                                      <td>From : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>To : </td>
-                                      <td>krupali.mistry@theopeneyes.com</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Cc : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Bcc : </td>
-                                      <td>ayadav@theopeneyes.in</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Date : </td>
-                                      <td> Jul 8, 2019, 1:11:42 PM</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Subject : </td>
-                                      <td>Scrum call meeting</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                    <div data-toggle="collapse" data-target="#mailrowthree" class="mail_head_row">
+                      <div class="pull-left">
+                        <img src="assets/images/guy-8.jpg" class="img-responsive" alt="" />
+                        <div class="mail_id">
+                          <p>ayadav@theopeneyes.in
+                            <span>
+                              to krupali.mistry@theopeneyes.com
+                              <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                  aria-expanded="false">
+                                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>From : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>To : </td>
+                                        <td>krupali.mistry@theopeneyes.com</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Cc : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Bcc : </td>
+                                        <td>ayadav@theopeneyes.in</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Date : </td>
+                                        <td> Jul 8, 2019, 1:11:42 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Subject : </td>
+                                        <td>Scrum call meeting</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
-                            </div>
-                          </span>
-                        </p>
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="pull-right">
-                      <ul>
-                        <li>
-                          Jul 8, 2019, 1:11:42 PM
-                        </li>
-                        <li>
+                      <div class="pull-right">
+                        <ul>
+                          <li>
+                            Jul 8, 2019, 1:11:42 PM
+                          </li>
+                          <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <a>
+                                  <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                </a>
+                              </li>
+                              <li>
+                                <a>
+                                  <i class="fa fa-envelope" aria-hidden="true"></i> Marl as read
+                                </a>
+                              </li>
+                              <li>
+                                <a>
+                                  <i class="fa fa-star" aria-hidden="true"></i> Mark as starred
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="replay()">
+                                  <i class="fa fa-reply" aria-hidden="true"></i> Reply
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="replayAll()">
+                                  <i class="fa fa-reply-all" aria-hidden="true"></i> Reply to all
+                                </a>
+                              </li>
+                              <li>
+                                <a (click)="forward()">
+                                  <i class="fa fa-share" aria-hidden="true"></i> Forward
+                                </a>
+                              </li>
+                            </ul>
+                          </li>
+                          <!-- <li>
                           <a title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
@@ -1193,48 +1409,47 @@
                           <a title="Forward" (click)="forward()">
                             <i class="fa fa-share" aria-hidden="true"></i>
                           </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="mail_preview_reply">
-                      <p>Hi, Krupali</p>
-                      <p>Thanks for your answer.</p>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                        and scrambled it to make a type specimen book.</p>
-                      <p>Thanks You</p>
-                      <p>Regards,</p>
-                      <p>Anand Yadav</p>
-                      <p>Front End Developer</p>
-                      <p>+91 9537849690</p>
-                      <a>ayadav@theopeneyes.in</a>
-                    </div>
-                    <div class="mail_preview_reply_inner">
-                      <p>On
-                        <span>Sun, Apr 28, 2019, 7:29 PM</span> Krupali Mistry
-                        <a href="">krupali.mistry@theopeneyes.com</a> wrote:</p>
-                      <p>Hi, Anand</p>
-                      <p>Thanks for reaching out to us.</p>
-                      <p>Sure i will join at scrum call meeting</p>
-                      <p>Thanks You</p>
-                      <p>Regards,</p>
-                      <p>Krupali Mistry</p>
-                      <p>Senior Front End Developer</p>
-                      <p>+91 8452415421</p>
-                    </div>
-                    <!-- <div class="mailbody_editor">
+                        </li> -->
+                        </ul>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div id="mailrowthree" class="mail_preview_reply collapse">
+                        <p>Hi, Krupali</p>
+                        <p>Thanks for your answer.</p>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                          and scrambled it to make a type specimen book.</p>
+                        <p>Thanks You</p>
+                        <p>Regards,</p>
+                        <p>Anand Yadav</p>
+                        <p>Front End Developer</p>
+                        <p>+91 9537849690</p>
+                        <a>ayadav@theopeneyes.in</a>
+                        <div class="mail_preview_reply_inner">
+                          <p>On
+                            <span>Sun, Apr 28, 2019, 7:29 PM</span> Krupali Mistry
+                            <a href="">krupali.mistry@theopeneyes.com</a> wrote:</p>
+                          <p>Hi, Anand</p>
+                          <p>Thanks for reaching out to us.</p>
+                          <p>Sure i will join at scrum call meeting</p>
+                          <p>Thanks You</p>
+                          <p>Regards,</p>
+                          <p>Krupali Mistry</p>
+                          <p>Senior Front End Developer</p>
+                          <p>+91 8452415421</p>
+                        </div>
+                      </div>
+                      <!-- <div class="mailbody_editor">
                         <div class="form-group focused ckeditor_block editor">
                           <textarea class="form-control" name="EmailBody" rows="10" cols="60" contenteditable="true">{{emailPreviewEntity.MessageBody}}</textarea>
                         </div>
                       </div> -->
+                      <div class="clearfix"></div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <hr>
                     <div class="clearfix"></div>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <hr>
-                <div class="clearfix"></div>
-                <div class="inbox_preview_footer">
+                    <!-- <div class="inbox_preview_footer">
                   <div class="mailbox_preview_btn">
                     <a class="back_btn m_5" (click)="replay()">
                       <i class="fa fa-reply" aria-hidden="true"></i> Reply</a>
@@ -1242,22 +1457,22 @@
                       <i class="fa fa-share" aria-hidden="true"></i> Forward</a>
                     <div class="clearfix"></div>
                   </div>
+                </div> -->
+                  </div>
                 </div>
               </div>
+
+
+
             </div>
           </div>
-
-
-
         </div>
-      </div>
-    </div>
 
 
 
 
 
-    <!-- <div class="col-md-3 compose">
+        <!-- <div class="col-md-3 compose">
     <form action="#" method="GET">
     </form>
     <div class="compose_label">
@@ -1301,8 +1516,8 @@
     </nav>
 
   </div> -->
-    <!-- tab content -->
-    <!-- <div class="col-md-9 tab-content tab-content-in">
+        <!-- tab content -->
+        <!-- <div class="col-md-9 tab-content tab-content-in">
 
     <form #AddNewForm="ngForm" (ngSubmit)="addEmail(AddNewForm)">
       <div class="compose_mail_box">
@@ -2022,10 +2237,10 @@
 
   </div>
   <div class="clearfix"> </div> -->
-  </div>
+      </div>
 
 
-  <!-- <div class="content_block inbox_block">
+      <!-- <div class="content_block inbox_block">
     <div class="col-md-8 col-sm-8">
       <div class="inbox_leftblock">
       </div>
