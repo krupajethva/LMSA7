@@ -59,11 +59,9 @@
           <div class="list_box">
             <!-- <i *ngIf="instructor.ProfileImage=='' || instructor.ProfileImage==NULL"
               class="fa fa-camera" aria-hidden="true"></i> -->
-            <span *ngIf="instructor.ProfileImage=='' || instructor.ProfileImage==NULL"
-              class="instructor_letter">{{instructor.FirstName | slice:0:01}}{{instructor.LastName | slice:0:01}}</span>
-            <img *ngIf="instructor.ProfileImage!='' && instructor.ProfileImage!=NULL"
-              src="assets/ProfilePhoto/{{instructor.UserId}}/{{instructor.ProfileImage}}" alt="{{ProfileImage}}"
-              class="img-responsive" />
+            <span *ngIf="instructor.ProfileImage=='' || instructor.ProfileImage==NULL" class="instructor_letter">{{instructor.FirstName | slice:0:01}}{{instructor.LastName | slice:0:01}}</span>
+            <img *ngIf="instructor.ProfileImage!='' && instructor.ProfileImage!=NULL" src="assets/ProfilePhoto/{{instructor.UserId}}/{{instructor.ProfileImage}}"
+              alt="{{ProfileImage}}" class="img-responsive" />
             <h6 class="instrucor_name">{{instructor.FirstName}} {{instructor.LastName}}</h6>
             <div class="instructor_follow">
               <ul>
@@ -76,17 +74,15 @@
               </ul>
             </div>
             <div class="instructor_desc">
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                <a href="">Read More...</a>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...
               </p>
             </div>
             <div class="instructor_buttons_group">
-              <button data-toggle="tooltip" data-placement="top" title="LinkedIn Profile">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </button>
-              <button type="submit" data-toggle="tooltip" data-placement="top"
-                routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
+              <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">
                 <i class="fa fa-eye" aria-hidden="true"></i>
+              </button>
+              <button data-toggle="tooltip" data-placement="top" title="Share Profile">
+                <i class="fa fa-share" aria-hidden="true"></i>
               </button>
 
               <!-- <button data-toggle="tooltip" data-placement="top" title="Follow">
@@ -96,15 +92,21 @@
                 <i class="fa fa-user-times" aria-hidden="true"></i>
               </button> -->
 
-              <button *ngIf="instructor.flag==0 && instructor.UserId!=globals.authData.UserId" type="submit"
-                data-toggle="tooltip" data-placement="top" title="Follow" id="follow"
-                (click)="followInstructor(instructor)">
+              <button *ngIf="instructor.flag==0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+                title="Follow" id="follow" (click)="followInstructor(instructor)">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
               </button>
-              <button *ngIf="instructor.flag!=0 && instructor.UserId!=globals.authData.UserId" type="submit"
-                data-toggle="tooltip" data-placement="top" title="Unfollow" id="unfollow"
-                (click)="unfollowInstructor(instructor)">
+              <button *ngIf="instructor.flag!=0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+                title="Unfollow" id="unfollow" (click)="unfollowInstructor(instructor)">
                 <i class="fa fa-user-times" aria-hidden="true"></i>
+              </button>
+
+              <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="Report">
+                <i class="fa fa-flag" aria-hidden="true"></i>
+              </button>
+
+              <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="Recommend">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
               </button>
 
               <!-- <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="View Details">

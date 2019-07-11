@@ -32,11 +32,9 @@
 		<div class="row">
 			<div class="col-md-1">
 				<div class="instructor_img_letter">
-					<span *ngIf="ProfileImage=='' || ProfileImage==NULL" class="instructor_letter"
-						aria-hidden="true">{{FirstName | slice:0:01}}{{LastName | slice:0:01}}</span>
-					<img *ngIf="ProfileImage!='' && ProfileImage!=NULL"
-						src="assets/ProfilePhoto/{{InstructorUserId}}/{{ProfileImage}}" alt="{{ProfileImage}}"
-						class="img-responsive" />
+					<span *ngIf="ProfileImage=='' || ProfileImage==NULL" class="instructor_letter" aria-hidden="true">{{FirstName | slice:0:01}}{{LastName | slice:0:01}}</span>
+					<img *ngIf="ProfileImage!='' && ProfileImage!=NULL" src="assets/ProfilePhoto/{{InstructorUserId}}/{{ProfileImage}}" alt="{{ProfileImage}}"
+					 class="img-responsive" />
 				</div>
 			</div>
 			<div class="col-md-6 br_1">
@@ -91,14 +89,14 @@
 							<strong>12</strong> Courses
 						</li>
 					</ul>
-					<ul class="social_icons">
-						<!-- <li>
+					<!-- <ul class="social_icons"> -->
+					<!-- <li>
 							<a href="">
 								<i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top"
 									title="LinkedIn Profile"></i>
 							</a>
 						</li> -->
-						<!-- <li>
+					<!-- <li>
 							<a href="">
 								<i class="fa fa-user-plus" data-toggle="tooltip" data-placement="top"
 									title="Follow"></i>
@@ -112,22 +110,33 @@
 							</a>
 
 						</li> -->
-						<div class="instructor_buttons_group">
-							<button data-toggle="tooltip" data-placement="top" title="LinkedIn Profile">
-								<i class="fa fa-linkedin" aria-hidden="true"></i>
-							</button>
-							<button *ngIf="flag==0 && InstructorId!=globals.authData.UserId" id="follow"
-								data-toggle="tooltip" data-placement="top" title="Follow" (click)="followInstructor()">
-								<i class="fa fa-user-plus"></i>
-							</button>
-							<button *ngIf="flag!=0 && InstructorId!=globals.authData.UserId" id="unfollow"
-								data-toggle="tooltip" data-placement="top" title="Unfollow"
-								(click)="unfollowInstructor()">
-								<i class="fa fa-user-times"></i>
-							</button>
-						</div>
+					<div class="instructor_buttons_group">
+						<button class="bb_none" data-toggle="tooltip" data-placement="top" title="LinkedIn Profile">
+							<i class="fa fa-linkedin" aria-hidden="true"></i>
+						</button>
+						<button class="bb_none" data-toggle="tooltip" data-placement="top" title="Share Profile">
+							<i class="fa fa-share" aria-hidden="true"></i>
+						</button>
+						<button class="bb_none" *ngIf="flag==0 && InstructorId!=globals.authData.UserId" id="follow" data-toggle="tooltip" data-placement="top"
+						 title="Follow" (click)="followInstructor()">
+							<i class="fa fa-user-plus"></i>
+						</button>
+						<button class="bb_none" *ngIf="flag!=0 && InstructorId!=globals.authData.UserId" id="unfollow" data-toggle="tooltip" data-placement="top"
+						 title="Unfollow" (click)="unfollowInstructor()">
+							<i class="fa fa-user-times"></i>
+						</button>
+						<button class="bb_none" type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}"
+						 title="Report">
+							<i class="fa fa-flag" aria-hidden="true"></i>
+						</button>
 
-					</ul>
+						<button class="bb_none" type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}"
+						 title="Recommend">
+							<i class="fa fa-commenting-o" aria-hidden="true"></i>
+						</button>
+					</div>
+
+					<!-- </ul> -->
 
 				</div>
 			</div>
@@ -164,16 +173,11 @@
 										</li>
 										<li>
 											<strong>Biography : </strong>
-											<p>Lorem Ipsum is simply dummy text of the printing and typesetting
-												industry. Lorem Ipsum has been the industry's
-												standard dummy text ever since the 1500s, when an unknown printer took a
-												galley of type and scrambled it to make
-												a type specimen book. It has survived not only five centuries, but also
-												the leap into electronic typesetting,
-												remaining essentially unchanged. It was popularised in the 1960s with
-												the release of Letraset sheets containing
-												Lorem Ipsum passages, and more recently with desktop publishing software
-												like Aldus PageMaker including versions
+											<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+												standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+												a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+												remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+												Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
 												of Lorem Ipsum.</p>
 										</li>
 									</ul>
@@ -194,8 +198,7 @@
 												<div class="instructor_search_box">
 													<form action="/action_page.php">
 														<div class="input-group">
-															<input type="text" class="form-control" placeholder="Search"
-																name="search">
+															<input type="text" class="form-control" placeholder="Search" name="search">
 															<div class="input-group-btn">
 																<button class="btn btn-default" type="submit">
 																	<i class="glyphicon glyphicon-search"></i>
@@ -372,7 +375,7 @@
 								<div class="row">
 									<div class="col-md-12 pull-right">
 										<div class="pagination_block">
-											<ul class="pagination">
+											<ul class="pagination pr_0">
 												<pagination-controls (pageChange)="p=$event"></pagination-controls>
 											</ul>
 										</div>
