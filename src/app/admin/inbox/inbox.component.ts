@@ -54,11 +54,12 @@ export class InboxComponent implements OnInit {
   ngOnInit() {
 
 
+
     // PERFECT SCROLLBAR
     setTimeout(function () {
-      new PerfectScrollbar('.inboxmail');
-      new PerfectScrollbar('.inbox_preview_wrap');
-    }, 100);
+      // new PerfectScrollbar('.inboxmail');
+      // new PerfectScrollbar('.inbox_preview_wrap');
+    }, 500);
     // END PERFECT SCROLLBAR
 
     setTimeout(function () {

@@ -161,7 +161,7 @@ class InstructorFollowers_model extends CI_Model
 			if ($post_data) {
 				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,tif.FollowerUserId,tif.InstructorUserId');
 				$this->db->from('tblinstructorfollowers tif');
-				//$this->db->join('tbluser u','tif.FollowerUserId = u.UserId','inner');
+				$this->db->join('tbluser u','tif.FollowerUserId = u.UserId','inner');
 				$this->db->where('tif.InstructorUserId', $post_data['InstructorId']);
 				$result = $this->db->get();
 
@@ -179,7 +179,24 @@ class InstructorFollowers_model extends CI_Model
 							$total = explode(',', $row->FollowerUserId);
 						}
 						$res['totalFollowers'] = count($total);
-						return $res;
+						
+						if ($row->InstructorUserId != '') {
+							$result = $this->db->query('SELECT FIND_IN_SET(' . $row->InstructorUserId . ', tif.FollowerUserId) as flag FROM `tblinstructorfollowers` `tif`');
+							// $res = array();
+							$count = 0;
+							if ($result->result()) {
+								foreach ($result->result() as $row1) {
+									if ($row1->flag != 0) {
+										$count = $count + 1;
+									}
+								}
+							}
+							$res['totalFolloings']  = $count;
+						} else {
+							$res['totalFolloings'] = 0;
+						}
+						array_push($res, $row);
+					return $res;
 					}
 				} else {
 					return null;
@@ -196,7 +213,7 @@ class InstructorFollowers_model extends CI_Model
 	{
 		try {
 			if ($post_data) {
-				$this->db->select('u.UserId,u.FirstName,u.LastName,u.ProfileImage,el.Education,u.Biography');
+				$this->db->select('u.UserId,u.FirstName,u.LastName,u.EmailAddress,u.ProfileImage,el.Education,u.Biography');
 				$this->db->from('tbluser u');
 				$this->db->join('tbluserdetail ud', 'ud.UserDetailId = u.UserDetailId', 'left');
 				$this->db->join('tblmsteducationlevel el', 'el.EducationLevelId = ud.EducationLevelId', 'left');
@@ -258,7 +275,7 @@ class InstructorFollowers_model extends CI_Model
 	{
 		try {
 			if ($post_data) {
-				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,tif.FollowerUserId,tif.InstructorUserId');
+				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,u.Biography,tif.FollowerUserId,tif.InstructorUserId');
 				$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
 				$this->db->from('tbluser u');
 				$this->db->where('u.RoleId', 3);
@@ -308,4 +325,6 @@ class InstructorFollowers_model extends CI_Model
 			return false;
 		}
 	}
+
+
 }
