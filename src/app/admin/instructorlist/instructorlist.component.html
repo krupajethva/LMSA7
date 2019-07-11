@@ -55,7 +55,8 @@
   <div class="row">
     <div class="col-md-12 col-sm-12">
       <div class="instrucor_list">
-        <div class="col-md-3 col-sm-3" *ngFor="let instructor of InstructorList;let i = index">
+        <div class="col-md-3 col-sm-3"
+          *ngFor="let instructor of InstructorList | paginate: { itemsPerPage:4, currentPage: p}; let i = index">
           <div class="list_box">
             <!-- <i *ngIf="instructor.ProfileImage=='' || instructor.ProfileImage==NULL"
               class="fa fa-camera" aria-hidden="true"></i> -->
@@ -74,7 +75,7 @@
               </ul>
             </div>
             <div class="instructor_desc">
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...
+              <p>{{instructor.Biography}}
               </p>
             </div>
             <div class="instructor_buttons_group">
@@ -137,10 +138,11 @@
       </div>
       <div class="clearfix"></div>
     </div>
+    <div *ngIf="InstructorList==''">Instructors are not available</div>
   </div>
   <div class="row">
     <div class="col-md-12 pull-right">
-      <div class="pagination_block">
+      <div class="pagination_block" *ngIf="InstructorList!=''">
         <ul class="pagination">
           <pagination-controls (pageChange)="p=$event"></pagination-controls>
         </ul>
