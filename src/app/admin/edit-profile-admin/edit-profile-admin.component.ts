@@ -45,7 +45,10 @@ export class EditProfileAdminComponent implements OnInit {
 
 
 	ngOnInit() {
-
+		setTimeout(function () {
+			$('input[type="file"]').imageuploadify();
+			myInput();
+		}, 100);
 		setTimeout(function () {
 			$('#Signature').change(function (e) {
 			
@@ -80,7 +83,6 @@ export class EditProfileAdminComponent implements OnInit {
 		this.CompanyEntity = {};
 		this.IndustryEntity = {};
 		this.EducationEntity = {};
-
 		debugger
 		this.EditProfileService.getDefaultData()
 			.then((data) => {
@@ -92,39 +94,74 @@ export class EditProfileAdminComponent implements OnInit {
 				this.EditProfileService.getProfileById(this.globals.authData.UserId)
 					.then((data) => {
 						this.RegisterEntity = data['user'];
-						console.log(this.RegisterEntity);
 						this.CompanyEntity = data['user'];
-						// alert(this.RegisterEntity.ProfileImage);
-						this.EditProfileService.getEducationDetail(this.globals.authData.UserId)
-							.then((data) => {
-								this.EducationEntity = data['EducationDetails'];
-								this.CertificateEntity = data['EducationCertificates'];
-								console.log(data);
-								setTimeout(function () {
-									myInput();
-								}, 100);
-								if(this.EducationEntity.Skills!=null){
-									this.EducationEntity.Skills = this.EducationEntity.Skills.split(","); 	//convert comma seperated string to array
-								}
-								
-								this.countProgressBar();
-							},
-								(error) => {
-									this.globals.isLoading = false;
-								});
+						this.countProgressBar();
 					},
-						(error) => {
-							this.globals.isLoading = false;
-						});
+					(error) => {
+						this.globals.isLoading = false;
+					});
 			},
 				(error) => {
 					this.globals.isLoading = false;
 				});
-		setTimeout(function () {
-			$('input[type="file"]').imageuploadify();
-			myInput();
-			$("")
-		}, 100);
+		
+	}
+
+	// show personal details form & data
+	personalDetails()
+	{
+		myInput();
+		$("#personaldetails").show();
+		$("#educationdetails").hide();
+		$("#changepassword").hide();
+		this.EditProfileService.getProfileById(this.globals.authData.UserId)
+			.then((data) => {
+				this.RegisterEntity = data['user'];
+				console.log(this.RegisterEntity);
+				this.CompanyEntity = data['user'];
+				// alert(this.RegisterEntity.ProfileImage);
+				
+			},
+			(error) => {
+				this.globals.isLoading = false;
+			});
+	}
+
+	// show Education details form & data
+	educationDetails()
+	{
+		$("#educationdetails").show();
+		$("#changepassword").hide();
+		$("#personaldetails").hide();
+
+		this.EditProfileService.getEducationDetail(this.globals.authData.UserId)
+			.then((data) => {
+				this.EducationEntity = data['EducationDetails'];
+				this.CertificateEntity = data['EducationCertificates'];
+				console.log(data);
+				setTimeout(function () {
+					myInput();
+				}, 100);
+				if(this.EducationEntity.Skills!=null){
+					this.EducationEntity.Skills = this.EducationEntity.Skills.split(","); 	//convert comma seperated string to array
+				}
+				
+				this.countProgressBar();
+			},
+			(error) => {
+				this.globals.isLoading = false;
+			});
+	}
+
+	// show change password form 
+	changePassword(newpassForm)
+	{ 
+		this.newpassEntity={};
+		this.submitted2 = false;
+		newpassForm.form.markAsPristine();
+		$("#changepassword").show();
+		$("#personaldetails").hide();
+		$("#educationdetails").hide();
 	}
 	replaceImage() {
 		var input = this.elem.nativeElement.querySelector('#UsereditImageId');
@@ -162,6 +199,7 @@ export class EditProfileAdminComponent implements OnInit {
 	}
 
 	countProgressBar() {
+		debugger
 		var current_progress = 0;
 		if (this.globals.authData.RoleId == 2 || this.globals.authData.RoleId == 1) {
 			if (this.RegisterEntity.FirstName != '' && this.RegisterEntity.FirstName != null) {
@@ -484,9 +522,9 @@ export class EditProfileAdminComponent implements OnInit {
 					this.globals.isLoading = false;
 					this.btn_disable = false;
 					this.submitted = false;
-					this.RegisterEntity = {};
+					//this.RegisterEntity = {};
 					this.countProgressBar();
-					window.location.href = '/edit-profile-admin';
+					this.router.navigate(['/edit-profile-admin']);;
 				},
 					(error) => {
 						this.btn_disable = false;
@@ -787,7 +825,7 @@ export class EditProfileAdminComponent implements OnInit {
 		}
 	}
 
-	checkpassword() {
+	checkpassword() {debugger
 		if (this.newpassEntity.cPassword != this.newpassEntity.nPassword) {
 			this.same = true;
 			this.oldnewsame = false;
