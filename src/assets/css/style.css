@@ -997,6 +997,51 @@ footer.register_footer a:hover{color:var(--theme-color); }
 /* .course_list_right .instrutor_course .users:hover,.course_list_right .instrutor_course .users.active,.course_list_right .instrutor_course .users:focus{background: var(--theme-color); color: #fff;} */
 /* .course_list_right .instrutor_course .users:hover .name_box,.course_list_right .instrutor_course .users:focus .name_box,.course_list_right .instrutor_course .users.active .name_box,.course_list_right .instrutor_course .users:hover .viewall_instructor_btn i{color: #fff;}
 .course_list_right .instrutor_course .users:hover .img_box,.course_list_right .instrutor_course .users.active .img_box,.course_list_right .instrutor_course .users:focus .img_box{border: 1px solid #fff; color: #fff;} */
+
+
+
+.content_block .course-filter .dropdown_checkbox{display: block; width:100%; margin:0;}
+.content_block .course-filter .dropdown_checkbox label{ background:url(../images/checkbox.png) left center no-repeat transparent; font-weight:normal; font-size: 13px; background-size:15px; padding:8px 5px 7px 20px; text-align:center; display:inline-block; vertical-align:top; margin:0; cursor:pointer; color:#444; position: relative;top: 5px;}
+.content_block .course-filter .dropdown_checkbox input[type="checkbox"]:checked + label{background:url(../images/checkbox_checked.png) left center no-repeat #fff !important; background-size:15px !important; color:var(--theme-color) !important;}
+.content_block .course-filter .dropdown_checkbox li.active label{background:url(../images/checkbox_checked.png) left center no-repeat;	background-size: 15px; color: #444;}
+.content_block .course-filter .dropdown_checkbox .btn-defaul{width:100%; background: #fff; border: 1px solid #ccc !important; color: #000 !important; height: 34px!important; border-radius:4px!important; padding: 3px 35px 2px 5px!important; width: 100%!important; font-size:12px!important;}
+.content_block .course-filter .dropdown_checkbox .btn-group{width: 100%;}
+.content_block .course-filter .dropdown_checkbox .input-group-text{border-radius: 4px 0 0 4px;}
+.content_block .course-filter .dropdown_checkbox  .multiselect-container{padding: 10px;    min-width: 245px !important;}
+.content_block .course-filter .dropdown_checkbox  .multiselect-container > li{padding:2px }
+.content_block .course-filter .dropdown_checkbox  .multiselect-container .input-group{margin: 0 0 10px;}
+.content_block .course-filter .dropdown_checkbox  .multiselect-container .input-group .input-group-btn {
+  display: table-cell;
+}
+.content_block .course-filter .dropdown_checkbox  .multiselect-container .input-group .input-group-btn button{    border-left: 0px !important;
+  height: 34px;
+  border: 1px solid #ccc;}
+.content_block .course-filter .dropdown_checkbox .multiselect-item .input-group-append .multiselect-clear-filter {
+  padding: 8px 0px;
+  height: auto;
+  z-index: 9;
+  line-height: 5px;
+  background: transparent;
+  border: 0px;
+  color: #929394;
+}
+.content_block .course-filter .dropdown_checkbox .multiselect-item i {
+  border: 0;
+  height: auto;
+  width: auto;
+  position: relative;
+  padding: 0;
+  color: #929394;
+  bottom: 0;
+  text-align: center;
+  left: 0;
+}
+.content_block .course-filter .dropdown_checkbox .btn-group button{    width: 100%;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;}
 /*----------------------------End Course List------------------------------*/
 
 
@@ -1156,6 +1201,11 @@ button.view_inst_btn span {
 
 /*start css for instructor list*/
 .content_block .instructor_search{padding-bottom: 15px;}
+.content_block .instructor_details_tabs .instructor_search{    margin-top: -60px;
+  padding: 0;
+  margin-right: -10px;
+  width: 70%;
+  float: right;}
 .content_block .instructor_search .instructor_search_note p{    color: var(--theme-color);
   font-size: 14px;
   line-height: 34px;}
@@ -1195,7 +1245,7 @@ button.view_inst_btn span {
     border-radius: 3px;
     padding: 5px 5px;
     margin: 10px 0px;}
-    .content_block .instrucor_list .list_box .instructor_follow ul li:first-child{    border-right: 1px solid #dcdcdc;}
+    .content_block .instrucor_list .list_box .instructor_follow ul li:last-child{    border-left: 1px solid #dcdcdc;}
   .content_block .instrucor_list .list_box .instructor_follow ul li a.total_folllowers,.content_block .instrucor_list .list_box .instructor_follow ul li a.total_folllowing{color: var(--theme-color);}
 .content_block .instrucor_list .list_box .instructor_buttons_group{     padding-bottom: 10px;
   border-bottom: 1px solid #dcdcdc;
@@ -1228,13 +1278,14 @@ button.view_inst_btn span {
 .content_block .instrucor_list .list_box .instructor_buttons_group .back_btn,.content_block .instrucor_list .list_box .instructor_buttons_group .next_btn{min-width: 45px;}
 .content_block .instrucor_list .list_box .instructor_buttons_group button{    background: transparent;
   border: 1px solid var(--theme-color);
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
   border-radius: 20px;
   margin: 0 3px;
   padding: 0px;
-  text-align: center;}
-.content_block .instrucor_list .list_box .instructor_buttons_group button i{    font-size: 13px;
+  text-align: center;
+  line-height: 13px;}
+.content_block .instrucor_list .list_box .instructor_buttons_group button i{    font-size: 12px;
   color: var(--theme-color);}
 /*end css for instructor list*/
 
@@ -2016,7 +2067,7 @@ select-dropdown > div{z-index: 999!important;}
   .instructor_block .course_box .content{width: 100%;}
 
 
-.content_block .instructor_education_details{padding-left: 35px;}
+.content_block .instructor_education_details{padding-left: 15px;}
 .instructor_education_details ul.follow_list{margin: 10px 0px 15px;} 
 .instructor_education_details ul.follow_list li{width: 100%!important;}
 .instructor_education_details ul.follow_list li a{font-size: 14px;}
@@ -2026,22 +2077,29 @@ select-dropdown > div{z-index: 999!important;}
 .content_block .instructor_education_details .instr_icon_details{width: 85%;float: left;}
 .content_block .instructor_education_details .instr_icon_details strong{font-size: 14px;}
 .content_block .instructor_education_details .instr_icon_details span{display: block;margin-top: 2px;text-transform: capitalize;}
-.content_block .instructor_education_details h1{margin: 10px 0px 15px;font-size: 24px;}
-.content_block .instructor_reviewratings_details ul li{padding-bottom: 10px;font-size: 12px;display: inline-block;margin-right: 60px;}
+.content_block .instructor_education_details h1{margin: 10px 15px 10px 0px;
+  font-size: 24px;
+  display: inline-block;
+  padding-right: 15px;
+  border-right: 1px dashed #a1aab5;}
+.content_block .instructor_reviewratings_details ul li{padding-bottom: 10px;font-size: 12px;display: inline-block;margin-right: 20px;}
+.content_block .instructor_reviewratings_details ul li:last-child{margin-right: 0px;}
 .content_block .instructor_reviewratings_details ul li i{color: var(--option-color);width: 20px;font-size: 14px;}
 .content_block .instructor_reviewratings_details ul li strong {font-size: 14px;}
 .content_block .instructor_reviewratings_details ul.social_icons{padding-top: 5px;}
 .content_block .instructor_reviewratings_details ul.social_icons li{margin-right: 10px;width: 25px;height: 25px;border: 1px solid var(--theme-color);border-radius: 20px;text-align: center;line-height: 24px;}
 .content_block .instructor_reviewratings_details ul.social_icons li i{color: var(--theme-color);font-size: 16px;}
-.content_block .instructor_reviewratings_details .instructor_buttons_group i{font-size: 13px;}
-.content_block .instructor_reviewratings_details .instructor_buttons_group button{outline: none;background: transparent;
+.content_block .instructor_education_details.instructor_buttons_group i{font-size: 13px;color:var(--theme-color);}
+.content_block .instructor_education_details.instructor_buttons_group button{    outline: none;
+  background: transparent;
   border: 1px solid var(--theme-color);
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
   border-radius: 20px;
   margin: 0 3px;
   padding: 0px;
-  text-align: center;}
+  text-align: center;
+  vertical-align: super;}
 
 .content_block .instructor_details_tabs{padding-top: 35px;}
 .content_block .instructor_details_tabs .tab .nav-tabs {
@@ -2108,7 +2166,7 @@ select-dropdown > div{z-index: 999!important;}
 .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block h3{font-size: 16px;line-height: 24px;margin-bottom: 5px;}
 .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating ul li{display: inline-block;margin-right:5px;}
 .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating ul li i{color:#f9a825;}
-.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block span.skill_list{display: block;padding: 0px 0px 5px 15px;color: var(--option-color);letter-spacing: 1px;}
+.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block span.skill_list{display: block;padding: 0px 0px 5px 15px;color: var(--theme-color);letter-spacing: 1px;}
 .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block strong,  .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_bottom_block p,.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_rating,.content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block h3{padding-left: 15px;}
 .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .instructor_top_block .course_review{padding-right: 15px;}
 .content_block .instructor_details_tabs .tab-content .instructor_courses_wrap .instructor_course_blocks .view_detail_btn{text-align: center;}

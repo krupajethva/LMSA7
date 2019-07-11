@@ -14,11 +14,19 @@ export class CourseListComponent implements OnInit {
   CourseList;
   InstList;
   SubCategoryList;
-  
-  constructor( public globals: Globals, private router: Router, private route: ActivatedRoute,
+
+  constructor(public globals: Globals, private router: Router, private route: ActivatedRoute,
     private CourseListService: CourseListService) { }
 
   ngOnInit() {
+
+    setTimeout(function () {
+      $('.multiselectdropdown').multiselect({
+        includeSelectAllOption: true,
+        enableFiltering: true
+      });
+    }, 500);
+
     setTimeout(function () {
       if ($(".bg_white_block").height() < $(window).height() - 100) {
         $('footer').addClass('footer_fixed');
