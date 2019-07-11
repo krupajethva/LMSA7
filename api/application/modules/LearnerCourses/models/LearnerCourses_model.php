@@ -157,8 +157,9 @@ class LearnerCourses_model extends CI_Model
 			$this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
 			$this->db->where('cs.IsActive', 1);
 			$this->db->where('cs.PublishStatus', 1);
-
 			$this->db->where('csi.UserId', $data['user']);
+
+			
 			if ($data['Cat'] != 0) {
 				$this->db->where('cp.CategoryId', $data['Cat']);
 			}

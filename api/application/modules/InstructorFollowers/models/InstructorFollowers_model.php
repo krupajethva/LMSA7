@@ -280,7 +280,7 @@ class InstructorFollowers_model extends CI_Model
 				$this->db->from('tbluser u');
 				$this->db->where('u.RoleId', 3);
 				$result = $this->db->get();
-				$q = $this->db->last_query();
+				//$q = $this->db->last_query();
 
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) {
@@ -288,8 +288,6 @@ class InstructorFollowers_model extends CI_Model
 					return false; // unreachable return statement !!!
 				}
 				$res = array();
-
-
 				foreach ($result->result() as $row) {
 					$total = [];
 					if ($row->FollowerUserId != '') {
@@ -326,5 +324,78 @@ class InstructorFollowers_model extends CI_Model
 		}
 	}
 
+	function SearchInstructor($data = NULL)
+	{
+		try {
+			// $this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,cs.PublishStatus,rs.InstructorId as Fid,rs.FilePath');
+			// $this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
+			// $this->db->join('tblcourse cp', 'cp.CourseId = cs.CourseId', 'left');
+			// $this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
+			// $this->db->where('cs.IsActive', 1);
+			// $this->db->where('cs.PublishStatus', 1);
+			// $this->db->where('csi.UserId', $data['user']);
+
+			$this->db->select('FIND_IN_SET(' . $data['user'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,u.Biography,tif.FollowerUserId,tif.InstructorUserId');
+			$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
+			$this->db->from('tbluser u');
+			$this->db->where('u.RoleId', 3);
+		//	$result = $this->db->get();
+
+			
+			
+			if ($data['Name'] != null) {
+				$this->db->like('u.FirstName', $data['Name']);
+			}
+
+			$this->db->group_by('u.UserId');
+			$result = $this->db->get();
+
+
+			$db_error = $this->db->error();
+			if (!empty($db_error) && !empty($db_error['code'])) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+				return false; // unreachable return statement !!!
+			}
+			$res = array();
+			foreach ($result->result() as $row) {
+				$total = [];
+				if ($row->FollowerUserId != '') {
+					$total = explode(',', $row->FollowerUserId);
+					$row->totalFollowers = count($total);
+				} else {
+					$row->totalFollowers = 0;
+				}
+				//following
+				if ($row->UserId != '') {
+					$result = $this->db->query('SELECT FIND_IN_SET(' . $row->UserId . ', tif.FollowerUserId) as flag FROM `tblinstructorfollowers` `tif`');
+					// $res = array();
+					$count = 0;
+					if ($result->result()) {
+						foreach ($result->result() as $row1) {
+							if ($row1->flag != 0) {
+								$count = $count + 1;
+							}
+						}
+					}
+					$row->totalFolloings = $count;
+				} else {
+					$row->totalFolloings = 0;
+				}
+				array_push($res, $row);
+			}
+			return $res;
+		} catch (Exception $e) {
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+ function test(){
+	$this->db->select('CourseId,CourseFullName');
+	$this->db->from('tblcourse');
+	$result  = $this->db->get();
+	$res = $result -> result();
+	return $res;
+	
+ }
 
 }
