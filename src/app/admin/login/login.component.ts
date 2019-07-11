@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(loginForm)
-	 {	
+	 {	debugger
 		this.submitted = true;
 		if(loginForm.valid){
 			this.btn_disable = true;
@@ -69,6 +69,16 @@ export class LoginComponent implements OnInit {
               showConfirmButton: false,
               timer: 3000
             }) 
+        }
+        else if(data == 'Activation')
+        {
+          swal({
+            type: 'warning',
+            title:'Oops...',
+            text: 'Please verify your email for activate your account',
+            showConfirmButton: false,
+            timer: 3000
+          }) 
         }
         else
         {

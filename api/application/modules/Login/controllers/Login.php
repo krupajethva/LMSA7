@@ -25,6 +25,10 @@ class Login extends CI_Controller {
 				{
 					echo json_encode('Deactive');
 				}
+				else if($result == 'Activation')
+				{
+					echo json_encode('Activation');
+				}
 				else
 				{
 						$token = array(

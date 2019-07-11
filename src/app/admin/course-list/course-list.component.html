@@ -11,11 +11,11 @@
 		  </div> -->
 		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
-					<li class="breadcrumb-item">
-							<a routerLink="/dashboard">
-								<i class="fa fa-home"></i>
-							</a>
-						</li>
+				<li class="breadcrumb-item">
+					<a routerLink="/dashboard">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
 				<!-- <li class="breadcrumb-item active" aria-current="page">
 						<a routerLink="/course">
 						 Course
@@ -30,6 +30,59 @@
 
 </div>
 <div class="content_block">
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="course-filter">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>
+							<span>*</span>Search by Course Name </label>
+						<input type="text" class="form-control" name="CourseFullName" />
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<!-- <label>
+							<span>*</span>Search by Skills</label> -->
+						<div class="dropdown_checkbox">
+							<select class="form-control multiselectdropdown" multiple="multiple">
+								<option>Php(2)</option>
+								<option>Css(21)</option>
+								<option>Angular(4)</option>
+								<option>Codigniter(6)</option>
+								<option>JQuery(14)</option>
+								<option>Sass(10)</option>
+								<option>Photoshop(9)</option>
+								<option>Html(1)</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<!-- <label>
+							<span>*</span>Search by instructors</label> -->
+						<div class="dropdown_checkbox">
+							<select class="form-control multiselectdropdown" multiple="multiple">
+								<option>Anand Yadav</option>
+								<option>Krupali Mistry</option>
+								<option>Vidhi Bathani</option>
+								<option>Nirav Patel</option>
+								<option>Uttam Bhut</option>
+								<option>Sudhir Parmar</option>
+								<option>Mayank Sharma</option>
+								<option>Jaxi Chawda</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<button class="back_btn m_5" type="submit">Filter</button>
+					<button class="next_btn m_5" type="submit">Clear</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="col-md-9 col-sm-9">
 		<div class="course_list_block">
 			<div class="list_grid">
