@@ -150,7 +150,7 @@ class Register extends CI_Controller
 			}	
 			else
 			{
-					echo json_encode('email duplicate');
+				echo json_encode('email duplicate');
 			}
 		}
 	}
@@ -182,7 +182,8 @@ class Register extends CI_Controller
 		// ** Education List //
 	public function getlist_EducationLevel() {
 		
-		$data=$this->Register_model->getlist_EducationLevel();		
+		$data=$this->Register_model->getlist_EducationLevel();	
+
 		echo json_encode($data);
 				
 	}
