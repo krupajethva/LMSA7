@@ -43,7 +43,7 @@ class InstructorFollowers extends CI_Controller
 		// 	$q = $this->db->last_query();
 		// 	echo $q;
 		$res=$this->InstructorFollowers_model->test();		
-		echo $res;
+		echo json_encode($res);	
 		exit;
 
 	}

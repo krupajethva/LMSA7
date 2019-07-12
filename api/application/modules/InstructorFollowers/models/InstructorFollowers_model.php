@@ -161,7 +161,7 @@ class InstructorFollowers_model extends CI_Model
 			if ($post_data) {
 				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,tif.FollowerUserId,tif.InstructorUserId');
 				$this->db->from('tblinstructorfollowers tif');
-				$this->db->join('tbluser u','tif.FollowerUserId = u.UserId','inner');
+				$this->db->join('tbluser u', 'tif.FollowerUserId = u.UserId', 'inner');
 				$this->db->where('tif.InstructorUserId', $post_data['InstructorId']);
 				$result = $this->db->get();
 
@@ -179,7 +179,7 @@ class InstructorFollowers_model extends CI_Model
 							$total = explode(',', $row->FollowerUserId);
 						}
 						$res['totalFollowers'] = count($total);
-						
+
 						if ($row->InstructorUserId != '') {
 							$result = $this->db->query('SELECT FIND_IN_SET(' . $row->InstructorUserId . ', tif.FollowerUserId) as flag FROM `tblinstructorfollowers` `tif`');
 							// $res = array();
@@ -196,7 +196,7 @@ class InstructorFollowers_model extends CI_Model
 							$res['totalFolloings'] = 0;
 						}
 						array_push($res, $row);
-					return $res;
+						return $res;
 					}
 				} else {
 					return null;
@@ -327,28 +327,53 @@ class InstructorFollowers_model extends CI_Model
 	function SearchInstructor($data = NULL)
 	{
 		try {
-			// $this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,cs.PublishStatus,rs.InstructorId as Fid,rs.FilePath');
-			// $this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
-			// $this->db->join('tblcourse cp', 'cp.CourseId = cs.CourseId', 'left');
-			// $this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
-			// $this->db->where('cs.IsActive', 1);
-			// $this->db->where('cs.PublishStatus', 1);
-			// $this->db->where('csi.UserId', $data['user']);
-
 			$this->db->select('FIND_IN_SET(' . $data['user'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,u.Biography,tif.FollowerUserId,tif.InstructorUserId');
 			$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
 			$this->db->from('tbluser u');
 			$this->db->where('u.RoleId', 3);
-		//	$result = $this->db->get();
 
-			
-			
+			// $this->db->select('tbc.CourseId,tbc.CourseFullName');
+			// $this->db->join('tblcoursesession ts', 'tc.CourseSessionId=ts.CourseSessionId');
+			// $this->db->join('tblcourse tbc', 'tbc.CourseId=ts.CourseId');
+			// $this->db->join('tbl  user u','tc.UserId=u.UserId');
+			// $this->db->order_by("ts.EndDate", "desc");
+			// $this->db->limit(1);
+			// $this->db->from('tblcourseinstructor tc');
+			// $this->db->where('u.RoleId', 3);
+			// $result = $this->db->get();
+
+
+
 			if ($data['Name'] != null) {
-				$this->db->like('u.FirstName', $data['Name']);
+				// query to get user ids based on coursename and use user ids in main query search
+				$likeResult = $this->db->query("
+				SELECT `tc`.`UserId`, max(`ts`.`EndDate`)
+				FROM `tblcourseinstructor` `tc`
+				JOIN `tblcoursesession` `ts` ON `tc`.`CourseSessionId`=`ts`.`CourseSessionId`
+				JOIN `tblcourse` `tbc` ON `tbc`.`CourseId`=`ts`.`CourseId`
+				JOIN `tbluser` `u` ON `tc`.`UserId`=`u`.`UserId`
+				WHERE `u`.`RoleId` = 3 AND tbc.CourseFullName LIKE '%" . $data['Name'] . "%'
+				GROUP BY `u`.`UserId`");
+				$finalResult = $likeResult->result();
+				$userArr = array(); //user ids that have course name like passed name
+				foreach ($finalResult as $finalResultRow) {
+					$userArr[] = $finalResultRow->UserId;
+				};
+				// end of coursename search and we got user ids array, use this in main condition
+
+				$this->db->where(
+				"
+				u.FirstName LIKE '%" . $data['Name'] . "%'
+				OR u.LastName LIKE '%" . $data['Name'] . "%'
+				");
+				$this->db->or_where_in('u.UserId',$userArr);
 			}
 
-			$this->db->group_by('u.UserId');
+			$this->db->group_by('u.UserId, tif.FollowerUserId');
 			$result = $this->db->get();
+			$tmp  = $this->db->last_query();
+			echo $tmp;
+			exit;
 
 
 			$db_error = $this->db->error();
@@ -389,13 +414,20 @@ class InstructorFollowers_model extends CI_Model
 			return false;
 		}
 	}
- function test(){
-	$this->db->select('CourseId,CourseFullName');
-	$this->db->from('tblcourse');
-	$result  = $this->db->get();
-	$res = $result -> result();
-	return $res;
-	
- }
-
+	function test()
+	{
+		$this->db->select("tbc.CourseId,tbc.CourseFullName, u.UserId, CONCAT(u.FirstName,' ',u.LastName) as Name, max(EndDate)");
+		$this->db->join('tblcoursesession ts', 'tc.CourseSessionId=ts.CourseSessionId');
+		$this->db->join('tblcourse tbc', 'tbc.CourseId=ts.CourseId');
+		$this->db->join('tbluser u', 'tc.UserId=u.UserId');
+		$this->db->from('tblcourseinstructor tc');
+		$this->db->group_by('tbc.CourseId');
+		$this->db->group_by('u.UserId');
+		$this->db->where('u.RoleId', 3);
+		$this->db->get();
+		$q = $this->db->last_query();
+		echo $q;
+		exit;
+		return $res;
+	}
 }
