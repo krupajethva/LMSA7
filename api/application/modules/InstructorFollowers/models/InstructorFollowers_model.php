@@ -59,8 +59,6 @@ class InstructorFollowers_model extends CI_Model
 		}
 	}
 
-
-
 	function followInstructor($post_followInstructor)
 	{
 		try {
@@ -174,15 +172,15 @@ class InstructorFollowers_model extends CI_Model
 				$total = [];
 				if ($result->result()) {
 					foreach ($result->result() as $row) {
+						//totalFollower
 						$res['flag'] = $row->flag;
 						if ($row->FollowerUserId != '') {
 							$total = explode(',', $row->FollowerUserId);
 						}
 						$res['totalFollowers'] = count($total);
-
+						//totalfollowing
 						if ($row->InstructorUserId != '') {
 							$result = $this->db->query('SELECT FIND_IN_SET(' . $row->InstructorUserId . ', tif.FollowerUserId) as flag FROM `tblinstructorfollowers` `tif`');
-							// $res = array();
 							$count = 0;
 							if ($result->result()) {
 								foreach ($result->result() as $row1) {
@@ -195,6 +193,36 @@ class InstructorFollowers_model extends CI_Model
 						} else {
 							$res['totalFolloings'] = 0;
 						}
+						//Rating and Review
+						if ($row->InstructorUserId != '') {
+							$this->db->select('ROUND(AVG(Rating)) as Rating,count(ReviewId) as Reviews');
+							$this->db->from('tblcoursereview');
+							$this->db->where('UserId', $row->InstructorUserId);
+							$this->db->group_by('UserId');
+							$totalrating = $this->db->get()->result()[0];
+
+							$res['Ratings'] = $totalrating->Rating;
+							$res['Reviews'] = $totalrating->Reviews;
+						} else {
+							$res['Ratings'] = 0;
+							$res['Reviews'] = 0;
+						}
+						//course 
+						if ($row->InstructorUserId != '') { 
+							$this->db->select('tc.CourseFullName,tc.CourseId,tc.Description');
+							$this->db->join('tblcoursesession ts','tbc.CourseSessionId=ts.CourseSessionId');
+							$this->db->join('tblcourse tc','ts.CourseId=tc.CourseId');
+							$this->db->from('tblcourseinstructor tbc');
+							$this->db->where('tbc.UserId', $row->InstructorUserId);
+						
+							$totalcourse = $this->db->get()->result();
+
+							$q = $this->db->last_query();
+						
+							// $res['totalcourse'] = 
+						
+						} else { }
+
 						array_push($res, $row);
 						return $res;
 					}
@@ -362,11 +390,12 @@ class InstructorFollowers_model extends CI_Model
 				// end of coursename search and we got user ids array, use this in main condition
 
 				$this->db->where(
-				"
+					"
 				u.FirstName LIKE '%" . $data['Name'] . "%'
 				OR u.LastName LIKE '%" . $data['Name'] . "%'
-				");
-				$this->db->or_where_in('u.UserId',$userArr);
+				"
+				);
+				$this->db->or_where_in('u.UserId', $userArr);
 			}
 
 			$this->db->group_by('u.UserId, tif.FollowerUserId');

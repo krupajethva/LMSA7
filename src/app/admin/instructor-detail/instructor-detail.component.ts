@@ -16,6 +16,8 @@ export class InstructorDetailComponent implements OnInit {
   flag;
   totalFollowers;
   totalFolloings;
+  Ratings;
+  Reviews;
   Biography;
   Education;
   ProfileImage;
@@ -53,11 +55,13 @@ export class InstructorDetailComponent implements OnInit {
       if (data) {
         console.log(data);
           this.FollowerDetail = data['FollowerDetail'];
-        //  console.log(this.FollowerDetail);
+       
           if(this.FollowerDetail!=null){
           this.flag = this.FollowerDetail.flag;
           this.totalFollowers = this.FollowerDetail.totalFollowers;
           this.totalFolloings = this.FollowerDetail.totalFolloings;
+          this.Reviews = this.FollowerDetail.Reviews;
+          this.Ratings = this.FollowerDetail.Ratings;
           }
           else{
             this.flag = 0;
