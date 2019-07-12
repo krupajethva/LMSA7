@@ -327,21 +327,12 @@ class InstructorFollowers_model extends CI_Model
 	function SearchInstructor($data = NULL)
 	{
 		try {
-			// $this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,cs.PublishStatus,rs.InstructorId as Fid,rs.FilePath');
-			// $this->db->join('tblcoursesession cs', 'cs.CourseSessionId = csi.CourseSessionId', 'left');
-			// $this->db->join('tblcourse cp', 'cp.CourseId = cs.CourseId', 'left');
-			// $this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
-			// $this->db->where('cs.IsActive', 1);
-			// $this->db->where('cs.PublishStatus', 1);
-			// $this->db->where('csi.UserId', $data['user']);
+		
 
 			$this->db->select('FIND_IN_SET(' . $data['user'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,u.Biography,tif.FollowerUserId,tif.InstructorUserId');
 			$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
 			$this->db->from('tbluser u');
 			$this->db->where('u.RoleId', 3);
-		//	$result = $this->db->get();
-
-			
 			
 			if ($data['Name'] != null) {
 				$this->db->like('u.FirstName', $data['Name']);
@@ -349,7 +340,6 @@ class InstructorFollowers_model extends CI_Model
 
 			$this->db->group_by('u.UserId');
 			$result = $this->db->get();
-
 
 			$db_error = $this->db->error();
 			if (!empty($db_error) && !empty($db_error['code'])) {
