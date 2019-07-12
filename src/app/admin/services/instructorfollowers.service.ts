@@ -107,4 +107,23 @@ export class InstructorfollowersService {
     });
     return promise;
   }
+
+  SearchInstructor(data){ debugger
+    let promise = new Promise((resolve, reject) => { 
+      debugger
+      this.http.post(this.globals.baseAPIUrl + 'InstructorFollowers/SearchInstructor', data)
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+        reject(msg);
+        this.globals.isLoading = false;
+        this.router.navigate(['/pagenotfound']);
+          }
+        );
+    });		
+    return promise;
+    }
 }

@@ -20,7 +20,6 @@ class LearnerCourses extends CI_Controller
 	public function getSearchCourseList() {
 		$data = json_decode(trim(file_get_contents('php://input')), true);
 		if(!empty($data)) {					
-			
 			$result = [];
 			$res['course']=$this->LearnerCourses_model->getSearchCourseList($data);		
 			echo json_encode($res);				
