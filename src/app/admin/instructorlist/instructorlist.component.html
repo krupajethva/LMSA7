@@ -91,9 +91,9 @@
                 title="Follow" id="follow" (click)="followInstructor(instructor)">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
               </button>
-              <button *ngIf="instructor.flag!=0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+              <button class="unfollow_icn" *ngIf="instructor.flag!=0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
                 title="Unfollow" id="unfollow" (click)="unfollowInstructor(instructor)">
-                <i class="fa fa-user-times" aria-hidden="true"></i>
+                <i class="fa fa-user-times unfollow_icn" aria-hidden="true"></i>
               </button>
 
               <button type="submit" data-toggle="tooltip" data-placement="top" routerLink="/instructor-detail/{{instructor.UserId}}" title="Report">

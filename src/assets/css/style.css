@@ -1287,6 +1287,8 @@ button.view_inst_btn span {
   line-height: 13px;}
 .content_block .instrucor_list .list_box .instructor_buttons_group button i{    font-size: 12px;
   color: var(--theme-color);}
+.content_block .instrucor_list .list_box .instructor_buttons_group button.unfollow_icn,.content_block .instructor_education_details.instructor_buttons_group button.unfollow_icn{border-color: red !important;}
+.content_block .instrucor_list .list_box .instructor_buttons_group button i.unfollow_icn,.content_block .instructor_education_details.instructor_buttons_group i.unfollow_icn{color:red !important;}
 /*end css for instructor list*/
 
 /*css for flexislider for assessment test*/
