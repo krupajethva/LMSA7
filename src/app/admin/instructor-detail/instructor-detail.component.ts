@@ -27,12 +27,19 @@ export class InstructorDetailComponent implements OnInit {
   FirstName;
   LastName;
   EmailAddress;
+  totalcoursesdetails;
+  totalcourses;
+  InstructorEntity;
+
 
   constructor(private InstructorfollowersService: InstructorfollowersService, private globals: Globals, private router: Router, private route: ActivatedRoute) { }
 
 
   ngOnInit() {
-	//this.FollowerDetail=[];
+    this.InstructorEntity = {};
+
+  //this.FollowerDetail=[];
+  this.totalcoursesdetails=[];
 	  setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
         $('footer').removeClass('footer_fixed');
@@ -55,13 +62,16 @@ export class InstructorDetailComponent implements OnInit {
       if (data) {
         console.log(data);
           this.FollowerDetail = data['FollowerDetail'];
-       
           if(this.FollowerDetail!=null){
           this.flag = this.FollowerDetail.flag;
           this.totalFollowers = this.FollowerDetail.totalFollowers;
           this.totalFolloings = this.FollowerDetail.totalFolloings;
           this.Reviews = this.FollowerDetail.Reviews;
           this.Ratings = this.FollowerDetail.Ratings;
+          this.totalcoursesdetails = this.FollowerDetail.totalcoursesdetails;
+          console.log(this.totalcoursesdetails);
+         this.totalcourses =this.totalcoursesdetails.length;
+       
           }
           else{
             this.flag = 0;
@@ -117,4 +127,58 @@ export class InstructorDetailComponent implements OnInit {
           }
         });
   }
+
+  // SearchCourse(InstructorForm) {
+  //   if ((this.InstructorEntity.Search == undefined || this.InstructorEntity.Search == "" || this.InstructorEntity.Search == null) ) {
+
+  //   } else {
+  //     if (InstructorForm.valid) {
+  //       this.globals.isLoading = true;
+
+  //       //   this.SalesDashboardEntity.CompanyId;
+  //       // 	this.SalesDashboardEntity.UserId;
+  //       // this.vardisabled=true;
+  //       if (this.InstructorEntity.Search == undefined) {
+  //         this.InstructorEntity.Search = null;
+  //       }
+      
+  //       var data = {'Name': this.InstructorEntity.Search, 'user': this.globals.authData.UserId };
+  //       this.InstructorfollowersService.SearchCourse(data)
+  //         .then((data) => {
+  //           this.globals.isLoading = false;
+  //           // this.hideowner=false;
+  //           // this.header_var = 'List of all users';
+  //           //alert('success');
+  //           if (data == 'error') {
+  //             this.InstructorList = [];
+  //           }
+  //           else {
+  //             this.InstructorList = data['search'];
+  //           }
+  //           setTimeout(function () {
+  //             $('.modal').on('shown.bs.modal', function () {
+  //               $('.right_content_block').addClass('style_position');
+  //             })
+  //             $('.modal').on('hidden.bs.modal', function () {
+  //               $('.right_content_block').removeClass('style_position');
+  //             });
+  //             // myInput();
+  //           },
+  //             500);
+  //           // this.btn_disable = false;
+  //           // this.submitted = false;
+  //           // this.globals.isLoading = false;
+  //         },
+  //           (error) => {
+  //             //alert('error');
+  //             // this.btn_disable = false;
+  //             // this.submitted = false;
+  //             // this.globals.isLoading = false;
+  //             // this.router.navigate(['/pagenotfound']);
+
+  //           });
+  //     }
+
+  //   }
+  // }
 }
