@@ -511,20 +511,20 @@ export class EditProfileAdminComponent implements OnInit {
 						
 					}
 
-					RegisterForm.form.markAsPristine();
-					swal({
-						type: 'success',
-						title: 'Updated!',
-						text: 'Your profile has been updated successfully.',
-						showConfirmButton: false,
-						timer: 3000
-					})
-					this.globals.isLoading = false;
-					this.btn_disable = false;
-					this.submitted = false;
+					// RegisterForm.form.markAsPristine();
+					// swal({
+					// 	type: 'success',
+					// 	title: 'Updated!',
+					// 	text: 'Your profile has been updated successfully.',
+					// 	showConfirmButton: false,
+					// 	timer: 3000
+					// })
+					// this.globals.isLoading = false;
+					// this.btn_disable = false;
+					// this.submitted = false;
 					//this.RegisterEntity = {};
-					this.countProgressBar();
-					this.router.navigate(['/edit-profile-admin']);;
+					//this.countProgressBar();
+					//this.router.navigate(['/edit-profile-admin']);;
 				},
 					(error) => {
 						this.btn_disable = false;

@@ -61,11 +61,11 @@
           <td class="text-center" *ngIf="globals.authData.RoleId!=3">
             <!-- <button  title="Revoke" class="next_btn" (click)="revokeUser(user)">Revoke</button>
                     <button  title="Re-Invite" class="next_btn" (click)="reinviteUser(user)">Re-Invite</button> -->
-            <button *ngIf="user.InvitedByUserId!=0" class="revoke_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Revoke"
+            <button *ngIf="user.InvitedByUserId!=0 && user.IsStatus != 0" class="revoke_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Revoke"
               (click)="revokeUser(user)">
               <i class="fa fa-user-times"></i>
             </button>
-            <button *ngIf="user.InvitedByUserId!=0" class="reinvite_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Re-Invite"
+            <button *ngIf="user.InvitedByUserId!=0 && user.IsStatus != 0" class="reinvite_btn" type="delete" data-toggle="tooltip" data-placement="top" title="Re-Invite"
               (click)="reinviteUser(user)">
               <i class="fa fa-user-plus"></i>
             </button>
