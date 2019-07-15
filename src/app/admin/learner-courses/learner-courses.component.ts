@@ -146,7 +146,6 @@ export class LearnerCoursesComponent implements OnInit {
 					this.btn_disable = false;
 					this.submitted = false;
 					this.globals.isLoading = false;
-
 				},
 					(error) => {
 						//alert('error');
