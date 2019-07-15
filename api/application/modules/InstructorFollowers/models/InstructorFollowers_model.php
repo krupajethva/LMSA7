@@ -208,19 +208,19 @@ class InstructorFollowers_model extends CI_Model
 							$res['Reviews'] = 0;
 						}
 						//course 
-						if ($row->InstructorUserId != '') { 
+						if ($row->InstructorUserId != '') {
 							$this->db->select('tc.CourseFullName,tc.CourseId,tc.Description');
-							$this->db->join('tblcoursesession ts','tbc.CourseSessionId=ts.CourseSessionId');
-							$this->db->join('tblcourse tc','ts.CourseId=tc.CourseId');
+							$this->db->join('tblcoursesession ts', 'tbc.CourseSessionId=ts.CourseSessionId');
+							$this->db->join('tblcourse tc', 'ts.CourseId=tc.CourseId');
 							$this->db->from('tblcourseinstructor tbc');
 							$this->db->where('tbc.UserId', $row->InstructorUserId);
-						
+
 							$totalcourse = $this->db->get()->result();
 
 							$q = $this->db->last_query();
-						
+
 							// $res['totalcourse'] = 
-						
+
 						} else { }
 
 						array_push($res, $row);
@@ -395,15 +395,13 @@ class InstructorFollowers_model extends CI_Model
 				OR u.LastName LIKE '%" . $data['Name'] . "%'
 				"
 				);
-				$this->db->or_where_in('u.UserId', $userArr);
+				if (count($userArr) > 0) {
+					$this->db->or_where_in('u.UserId', $userArr);
+				}
 			}
 
 			$this->db->group_by('u.UserId, tif.FollowerUserId');
 			$result = $this->db->get();
-			$tmp  = $this->db->last_query();
-			echo $tmp;
-			exit;
-
 			$db_error = $this->db->error();
 			if (!empty($db_error) && !empty($db_error['code'])) {
 				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
