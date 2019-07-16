@@ -27,7 +27,59 @@
   <div class="col-md-12">
     <h3>Overview</h3>
     <div class="row">
-      <div class="col-md-3 col-sm-6">
+
+
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-leanpub"></i>
+            <div class="icon_number">
+              <span *ngIf="totalLearner!=0">{{activecourse}}</span>
+              <span *ngIf="totalLearner==0">0</span>
+            </div>
+            <div class="title">ENROLLED COURSES</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-leanpub"></i>
+            <div class="icon_number">
+              <span *ngIf="totalInstructor!=0">{{completedcourse}}</span>
+              <span *ngIf="totalInstructor==0">0</span>
+            </div>
+            <div class="title">COMPLETED COURSES</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-users"></i>
+            <div class="icon_number">
+              <span *ngIf="totalCourses!=0">{{totalinstructor}}</span>
+              <span *ngIf="totalCourses==0">0</span>
+            </div>
+            <div class="title">INSTRUCTORS</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-certificate"></i>
+            <div class="icon_number">4</div>
+            <div class="title">CERTIFICATES</div>
+          </div>
+        </a>
+      </div>
+
+
+
+
+
+      <!-- <div class="col-md-3 col-sm-6">
         <a href="">
           <div class="learner_overview_block block_bg1">
             <div class="pull-left">
@@ -78,7 +130,11 @@
             </div>
           </div>
         </a>
-      </div>
+      </div> -->
+
+
+
+
     </div>
     <div class="clearfix"></div>
     <div class="row">
@@ -149,16 +205,13 @@
               <i *ngIf="course.SessionStatus==2">Completed</i>
 
               <div class="progress" *ngIf="course.SessionStatus==0">
-                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top"
-                  title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==1">
-                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top"
-                  title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==2">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top"
-                  title="{{course.courseview}}" style="width: 100%"></div>
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 100%"></div>
               </div>
             </div>
           </div>
@@ -168,8 +221,7 @@
             <div class="name_box">
               <i>In Progress</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="5"
-                  style="width: 100%">
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="5" style="width: 100%">
                 </div>
               </div>
             </div>
@@ -179,8 +231,7 @@
             <div class="name_box">
               <i>Pending</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="2"
-                  style="width: 40%"></div>
+                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="2" style="width: 40%"></div>
               </div>
             </div>
           </div>
@@ -189,8 +240,7 @@
             <div class="name_box">
               <i>Completed</i>
               <div class="progress">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="4"
-                  style="width: 80%">
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="4" style="width: 80%">
                 </div>
               </div>
             </div>
@@ -472,8 +522,7 @@
                         </div>
                       </td>
                       <td class="text-center">
-                        <button class="edit" data-toggle="tooltip" data-placement="top"
-                          routerLink="/course-detail/{{learnercourse.CourseId}}" title="View">
+                        <button class="edit" data-toggle="tooltip" data-placement="top" routerLink="/course-detail/{{learnercourse.CourseId}}" title="View">
                           <i class="fa fa-eye"></i>
                         </button>
                       </td>

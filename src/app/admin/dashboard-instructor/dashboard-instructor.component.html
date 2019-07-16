@@ -15,9 +15,9 @@
     <div class="breadcrumb_block pull-right">
       <ul class="breadcrumb">
         <li class="breadcrumb-item">
-            <a routerLink="/dashboard">
-              <i class="fa fa-home"></i>
-            </a>
+          <a routerLink="/dashboard">
+            <i class="fa fa-home"></i>
+          </a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Instructor Dashboard</li>
       </ul>
@@ -54,7 +54,57 @@
   <div class="col-md-12">
     <h3>Overview</h3>
     <div class="row">
-      <div class="col-md-3 col-sm-6">
+
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-youtube-play"></i>
+            <div class="icon_number">
+              <span *ngIf="totalLearner!=0">{{totalCourses}}</span>
+              <span *ngIf="totalLearner==0">0</span>
+            </div>
+            <div class="title">Courses</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-leanpub"></i>
+            <div class="icon_number">
+              <span *ngIf="totalInstructor!=0">{{totalLesson}}</span>
+              <span *ngIf="totalInstructor==0">0</span>
+            </div>
+            <div class="title">Lessons</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-graduation-cap"></i>
+            <div class="icon_number">
+              <span *ngIf="totalCourses!=0">{{totalStudent}}</span>
+              <span *ngIf="totalCourses==0">0</span>
+            </div>
+            <div class="title">Enrolled Students</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <a href="">
+          <div class="overview_block">
+            <i class="fa fa-money"></i>
+            <div class="icon_number">$22</div>
+            <div class="title">Total Earnings</div>
+          </div>
+        </a>
+      </div>
+
+
+
+
+      <!-- <div class="col-md-3 col-sm-6">
         <a routerLink="/course-list">
           <div class="learner_overview_block block_bg1">
             <div class="pull-left">
@@ -105,16 +155,19 @@
             </div>
           </div>
         </a>
-      </div>
+      </div> -->
+
+
+
     </div>
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-8 col-sm-8">
         <div class="graph_block">
-          <div class="col-md-10">
+          <div class="col-md-10 pr_0 pl_0">
             <h3 class="pull-left">Graphical Representation</h3>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 pr_0 pl_0">
             <form>
               <select id='Select'>
                 <option value='0'>2015</option>
