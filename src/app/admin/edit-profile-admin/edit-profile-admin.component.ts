@@ -484,6 +484,7 @@ export class EditProfileAdminComponent implements OnInit {
 			this.globals.isLoading = true;
 			this.EditProfileService.editprofile(this.RegisterEntity)
 				.then((data) => {
+					this.globals.isLoading = false;
 					if (profileImage) {
 						this.EditProfileService.uploadProfilePicture(profilefd, this.globals.authData.UserId)
 							.then((data) => {

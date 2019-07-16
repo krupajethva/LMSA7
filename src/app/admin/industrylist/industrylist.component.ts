@@ -26,7 +26,7 @@ export class IndustrylistComponent implements OnInit {
 
 	ngOnInit() {
 
-
+		this.globals.isLoading = true;
 		this.IndustryService.getAllInd()
 			.then((data) => {
 				debugger

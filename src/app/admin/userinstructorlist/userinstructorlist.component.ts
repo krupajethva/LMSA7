@@ -218,10 +218,12 @@ export class UserinstructorlistComponent implements OnInit {
   // display certificate particular instructor
   viewCertificate(userId)
   {    
+    this.globals.isLoading = true;
     this.UserinstructorService.getCertificateById(userId)
       .then((data) => 
       { 
         this.CertificateEntity = data;	
+        this.globals.isLoading = false;
         if(this.CertificateEntity.length > 0)
         {
           $('#certificatedisplay').modal('show'); 

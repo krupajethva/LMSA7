@@ -108,6 +108,7 @@ export class CompanyComponent implements OnInit {
 		}
 		if (companyForm.valid) {
 			this.btn_disable = true;
+			this.globals.isLoading = true;
 			this.CompanyService.add(this.companyEntity)
 				.then((data) => {
 					if (this.companyEntity.CountryId > 0) {

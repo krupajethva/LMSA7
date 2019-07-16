@@ -127,9 +127,11 @@ export class SettingsComponent implements OnInit {
 		if (reminderForm.valid) {
 			this.btn_disable8 = true;
 			this.submitted8 = false;
+			this.globals.isLoading = true;
 			this.SettingsService.UpdateReminder(this.reminderEntity)
 				.then((data) => {
 					this.btn_disable8 = false;
+					this.globals.isLoading = false;
 					reminderForm.form.markAsPristine();
 					swal({
 						type: 'success',
@@ -167,9 +169,11 @@ export class SettingsComponent implements OnInit {
 		if (insonoffForm.valid) {
 			this.btn_disable7 = true;
 			this.submitted7 = false;
+			this.globals.isLoading = true;
 			this.SettingsService.insaddONOFF(this.instructoronoffEntity)
 				.then((data) => {
 					this.btn_disable7 = false;
+					this.globals.isLoading = false;
 					insonoffForm.form.markAsPristine();
 					swal({
 						type: 'success',
@@ -215,10 +219,12 @@ export class SettingsComponent implements OnInit {
 			this.btn_disable7 = true;
 			this.submitted3 = false;
 			this.submitted7 = false;
+			this.globals.isLoading = true;
 			this.SettingsService.addONOFF({'learner':this.onoffEntity,'inst':this.instructoronoffEntity})
 				.then((data) => {
 					this.btn_disable3 = false;
 					this.btn_disable7 = false;
+					this.globals.isLoading = false;
 					onoffForm.form.markAsPristine();
 					swal({
 						type: 'success',
@@ -293,12 +299,14 @@ export class SettingsComponent implements OnInit {
 		}
 
 		this.submitted5 = true;
+		this.globals.isLoading = true;
 		if (contForm.valid) {
 			this.btn_disable5 = true;
 			this.SettingsService.addcontact(this.ContactEntity)
 				.then((data) => {
 					this.btn_disable5 = false;
 					this.submitted5 = false;
+					this.globals.isLoading = false;
 					// this.updateEntity = {};
 					contForm.form.markAsPristine();
 					swal({
@@ -336,10 +344,12 @@ export class SettingsComponent implements OnInit {
 		this.submitted2 = true;
 		if (courseKeywordForm.valid) {
 			this.btn_disable2 = true;
+			this.globals.isLoading = true;
 			this.SettingsService.addCourseKeyword(this.courseKeyEntity)
 				.then((data) => {
 					this.btn_disable2 = false;
 					this.submitted2 = false;
+					this.globals.isLoading = false;
 					// this.updateEntity = {};
 					courseKeywordForm.form.markAsPristine();
 					swal({
@@ -380,10 +390,12 @@ export class SettingsComponent implements OnInit {
 		this.submitted4 = true;
 		if (fromForm.valid) {
 			this.btn_disable4 = true;
+			this.globals.isLoading = true;
 			this.SettingsService.update_email({ 'EmailFrom': this.configEntity.emailfrom, 'EmailPassword': this.configEntity.emailpassword, 'UpdatedBy': this.globals.authData.UserId })
 				.then((data) => {
 					this.btn_disable4 = false;
 					this.submitted4 = false;
+					this.globals.isLoading = false;
 					// this.updateEntity = {};
 					fromForm.form.markAsPristine();
 					swal({
@@ -432,6 +444,7 @@ export class SettingsComponent implements OnInit {
 			this.btn_disable5 = true;
 			this.btn_disable2 = true;
 			this.btn_disable6 = true;
+			this.globals.isLoading = true;
 			this.SettingsService.secondSubmit({'contact':this.ContactEntity,'keyword':this.courseKeyEntity,'invitationmsg':this.InviEntity})
 				.then((data) => {
 					this.btn_disable5 = false;
@@ -440,6 +453,7 @@ export class SettingsComponent implements OnInit {
 					this.submitted2 = false;
 					this.btn_disable6 = false;
 					this.submitted6 = false;
+					this.globals.isLoading = false;
 					InvitationForm.form.markAsPristine();
 					swal({
 						type: 'success',
