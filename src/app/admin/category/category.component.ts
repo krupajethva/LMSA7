@@ -136,6 +136,7 @@ export class CategoryComponent implements OnInit {
         
         if(CategoryForm.valid){
           this.btn_disable = true;
+          this.globals.isLoading = true;
           this.CategoryService.add(this.CategoryEntity)
           .then((data) => 
           {
@@ -170,6 +171,7 @@ export class CategoryComponent implements OnInit {
  
             this.btn_disable = false;
             this.submitted = false;
+            this.globals.isLoading = false;
 
           });	
         

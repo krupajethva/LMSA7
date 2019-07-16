@@ -133,6 +133,7 @@ badgesEntity;
       }
         if(BadgesForm.valid && count == 0){
           this.btn_disable = true;
+          this.globals.isLoading = true;
           this.CertificateBadgeService.add(this.badgesEntity)
           .then((data) => 
           {

@@ -99,10 +99,12 @@ export class CourseDiscussionComponent implements OnInit {
     this.postEntity.UpdatedBy = this.globals.authData.UserId;
     this.postEntity.UserId = this.globals.authData.UserId;
     this.postEntity.CourseId = id;
+    this.globals.isLoading = true;
     if (postForm.valid) {
       this.CourseListService.addPost(this.postEntity)
         .then((data) => {
           debugger
+          this.globals.isLoading = false;
           this.postEntity.DiscussionId = data['DiscussionId'];
           this.postEntity.PostTime = data['PostTime'];
           //this.CourseDiscussionList.push(this.postEntity);
@@ -174,11 +176,11 @@ export class CourseDiscussionComponent implements OnInit {
       this.postEntity.ParentId = firstlevelreply.DiscussionId;
       this.postEntity.CreatedBy = this.globals.authData.UserId;
     }
-    
+    this.globals.isLoading = true;
     if (replyForm.valid) {
       this.CourseListService.addCommentReply(this.postEntity)
         .then((data) => {
-          debugger
+          this.globals.isLoading = false;
           if(ReplyEdit==1){
           this.postEntity.DiscussionId = data['DiscussionId'];
           this.postEntity.PostTime = data['PostTime'];
