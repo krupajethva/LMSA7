@@ -258,8 +258,8 @@ const routes: Routes = [
 				{ path : 'coursebeforereminderlist', component : CoursebeforereminderlistComponent,canActivate : [AuthGuard] },
 				{ path : 'instructor-invitation/:id', component : InvitationacceptdeclineComponent,canActivate : [AuthGuard] },
 				{ path : 'instructorfollowings', component : InstructorfollowingsComponent,canActivate : [AuthGuard] },
- 			    { path: '', redirectTo: 'link-list', pathMatch:'full'},
-				{ path: '**', redirectTo : 'link-list' }
+ 			    { path: '', redirectTo: 'login', pathMatch:'full'},
+				{ path: '**', redirectTo : 'login' }
 				
         
         ]

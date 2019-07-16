@@ -47,7 +47,7 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let category of categoryList; let i = index">
-					<td class="text-center">{{category.CategoryId}}</td>
+					<td class="text-center">{{i+1}}</td>
 					<td>{{category.CategoryName}}</td>
 					<td class="text-center">{{category.CategoryCode}}</td>
 					<td>{{category.Description}}</td>

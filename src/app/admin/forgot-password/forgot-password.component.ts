@@ -62,7 +62,7 @@ export class ForgotPasswordComponent implements OnInit {
             swal({
         	   
 							type: 'warning',
-							text: 'Please check your Email Address!',
+							text: 'Please check your Email.',
 							showConfirmButton: false,
 							timer: 3000
             }) 

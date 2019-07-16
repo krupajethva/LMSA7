@@ -217,8 +217,7 @@ export class UserinstructorlistComponent implements OnInit {
 
   // display certificate particular instructor
   viewCertificate(userId)
-  {debugger
-    
+  {    
     this.UserinstructorService.getCertificateById(userId)
       .then((data) => 
       { 
@@ -242,10 +241,12 @@ export class UserinstructorlistComponent implements OnInit {
         this.globals.isLoading = false;
       });
   }
+  //close certificate modal
   close()
   {
     $('#certificatedisplay').modal('hide'); 
   }
+
   reinviteUser(user)
   { debugger
     this.ReInviteEntity =  user;
