@@ -126,4 +126,23 @@ export class InstructorfollowersService {
     });		
     return promise;
     }
+
+    SearchCourse(data){ debugger
+      let promise = new Promise((resolve, reject) => { 
+        debugger
+        this.http.post(this.globals.baseAPIUrl + 'InstructorFollowers/SearchCourse', data)
+          .toPromise()
+          .then(
+            res => { // Success
+              resolve(res);
+            },
+            msg => { // Error
+          reject(msg);
+          this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+            }
+          );
+      });		
+      return promise;
+      }
 }

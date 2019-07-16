@@ -73,7 +73,12 @@
 						<ul class="pull-right follow_list">
 							<li>
 								<a href="">{{totalFollowers}} Followers</a> |
-								<a href="">{{totalFolloings}} Following</a>
+								<a href="" *ngIf="roleId!=3">{{totalFolloings}} Following</a>
+
+								<!-- <a *ngFor="roleId==3" [attr.href]="isDisabled(link) ? null : '#'"
+									[class.disabled]="isDisabled(link)" (click)="!isDisabled(link) && onClick(link)">
+									{{ link.name }}
+								</a> -->
 							</li>
 						</ul>
 						<div class="clearfix"></div>
@@ -299,9 +304,12 @@
 									<div class="col-md-12">
 										<div class="instructor_search">
 											<div class="instructor_search_box">
-												<form action="/action_page.php" #InstructorForm="ngForm" (ngSubmit)="SearchCourse(InstructorForm)">
+												<form action="/action_page.php" #InstructorForm="ngForm"
+													(ngSubmit)="SearchCourse(InstructorForm)">
 													<div class="input-group">
-														<input type="text" class="form-control" placeholder="Search your course by course name or instructor name" name="search" [(ngModel)]="InstructorEntity.Search">
+														<input type="text" class="form-control"
+															placeholder="Search your course by course name or Keyword"
+															name="search" [(ngModel)]="InstructorEntity.Search">
 														<div class="input-group-btn">
 															<button class="btn btn-default" type="submit">
 																<i class="glyphicon glyphicon-search"></i>

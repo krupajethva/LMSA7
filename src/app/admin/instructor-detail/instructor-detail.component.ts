@@ -30,6 +30,7 @@ export class InstructorDetailComponent implements OnInit {
   totalcoursesdetails;
   totalcourses;
   InstructorEntity;
+  roleId;
 
 
   constructor(private InstructorfollowersService: InstructorfollowersService, private globals: Globals, private router: Router, private route: ActivatedRoute) { }
@@ -37,43 +38,43 @@ export class InstructorDetailComponent implements OnInit {
 
   ngOnInit() {
     this.InstructorEntity = {};
-
-  //this.FollowerDetail=[];
-  this.totalcoursesdetails=[];
-	  setTimeout(function () {
+    this.totalcoursesdetails = [];
+    this.roleId = this.globals.authData.RoleId;
+   
+    setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
         $('footer').removeClass('footer_fixed');
       }
       else {
         $('footer').addClass('footer_fixed');
       }
-	  
+
     }, 1000);
     let id = this.route.snapshot.paramMap.get('id');
-    if(id){
-      this.InstructorId=id;
-    }else{
-      this.InstructorId=this.globals.authData.UserId;
+    if (id) {
+      this.InstructorId = id;
+    } else {
+      this.InstructorId = this.globals.authData.UserId;
     }
-   
+
     var obj = { 'InstructorId': this.InstructorId, 'LearnerId': this.globals.authData.UserId };
     this.InstructorfollowersService.getInstructorDetails(obj)
-    .then((data) => {
-      if (data) {
-        console.log(data);
+      .then((data) => {
+        if (data) {
+          //console.log(data);
           this.FollowerDetail = data['FollowerDetail'];
-          if(this.FollowerDetail!=null){
-          this.flag = this.FollowerDetail.flag;
-          this.totalFollowers = this.FollowerDetail.totalFollowers;
-          this.totalFolloings = this.FollowerDetail.totalFolloings;
-          this.Reviews = this.FollowerDetail.Reviews;
-          this.Ratings = this.FollowerDetail.Ratings;
-          this.totalcoursesdetails = this.FollowerDetail.totalcoursesdetails;
-          console.log(this.totalcoursesdetails);
-         this.totalcourses =this.totalcoursesdetails.length;
-       
+          if (this.FollowerDetail != null) {
+            this.flag = this.FollowerDetail.flag;
+            this.totalFollowers = this.FollowerDetail.totalFollowers;
+            this.totalFolloings = this.FollowerDetail.totalFolloings;
+            this.Reviews = this.FollowerDetail.Reviews;
+            this.Ratings = this.FollowerDetail.Ratings;
+            this.totalcoursesdetails = this.FollowerDetail.totalcoursesdetails;
+            //  console.log(this.totalcoursesdetails);
+            this.totalcourses = this.totalcoursesdetails.length;
+
           }
-          else{
+          else {
             this.flag = 0;
             this.totalFollowers = 0;
             this.totalFolloings = 0;
@@ -84,14 +85,14 @@ export class InstructorDetailComponent implements OnInit {
           this.Education = data['InstructorDetail']['Education'];
           this.ProfileImage = data['InstructorDetail']['ProfileImage'];
           this.InstructorUserId = data['InstructorDetail']['UserId'];
-          
+
           this.EmailAddress = data['InstructorDetail']['EmailAddress'];
           this.ActiveCourses = data['ActiveCourses'];
-      }
-    },
-      (error) => {
-        //this.router.navigate(['/pagenotfound']);
-      });
+        }
+      },
+        (error) => {
+          //this.router.navigate(['/pagenotfound']);
+        });
   }
   followInstructor() {
     debugger
@@ -100,7 +101,7 @@ export class InstructorDetailComponent implements OnInit {
       .then((data) => {
         this.globals.isLoading = false;
         $('#follow').hide();
-        this.flag=1;
+        this.flag = 1;
         this.totalFollowers = this.totalFollowers + 1;
         $('#unfollow').show();
       },
@@ -117,7 +118,7 @@ export class InstructorDetailComponent implements OnInit {
       .then((data) => {
         this.globals.isLoading = false;
         $('#unfollow').hide();
-        this.flag=0;
+        this.flag = 0;
         this.totalFollowers = this.totalFollowers - 1;
         $('#follow').show();
       },
@@ -128,57 +129,41 @@ export class InstructorDetailComponent implements OnInit {
         });
   }
 
-  // SearchCourse(InstructorForm) {
-  //   if ((this.InstructorEntity.Search == undefined || this.InstructorEntity.Search == "" || this.InstructorEntity.Search == null) ) {
+  SearchCourse(InstructorForm) {
+    if ((this.InstructorEntity.Search == undefined || this.InstructorEntity.Search == "" || this.InstructorEntity.Search == null)) {
 
-  //   } else {
-  //     if (InstructorForm.valid) {
-  //       this.globals.isLoading = true;
+    } else {
+      if (InstructorForm.valid) {
+        this.globals.isLoading = true;
 
-  //       //   this.SalesDashboardEntity.CompanyId;
-  //       // 	this.SalesDashboardEntity.UserId;
-  //       // this.vardisabled=true;
-  //       if (this.InstructorEntity.Search == undefined) {
-  //         this.InstructorEntity.Search = null;
-  //       }
-      
-  //       var data = {'Name': this.InstructorEntity.Search, 'user': this.globals.authData.UserId };
-  //       this.InstructorfollowersService.SearchCourse(data)
-  //         .then((data) => {
-  //           this.globals.isLoading = false;
-  //           // this.hideowner=false;
-  //           // this.header_var = 'List of all users';
-  //           //alert('success');
-  //           if (data == 'error') {
-  //             this.InstructorList = [];
-  //           }
-  //           else {
-  //             this.InstructorList = data['search'];
-  //           }
-  //           setTimeout(function () {
-  //             $('.modal').on('shown.bs.modal', function () {
-  //               $('.right_content_block').addClass('style_position');
-  //             })
-  //             $('.modal').on('hidden.bs.modal', function () {
-  //               $('.right_content_block').removeClass('style_position');
-  //             });
-  //             // myInput();
-  //           },
-  //             500);
-  //           // this.btn_disable = false;
-  //           // this.submitted = false;
-  //           // this.globals.isLoading = false;
-  //         },
-  //           (error) => {
-  //             //alert('error');
-  //             // this.btn_disable = false;
-  //             // this.submitted = false;
-  //             // this.globals.isLoading = false;
-  //             // this.router.navigate(['/pagenotfound']);
+        if (this.InstructorEntity.Search == undefined) {
+          this.InstructorEntity.Search = null;
+        }
 
-  //           });
-  //     }
+        var data = { 'Name': this.InstructorEntity.Search, 'InstructorId': this.InstructorId, 'LearnerId': this.globals.authData.UserId };
 
-  //   }
-  // }
+        this.InstructorfollowersService.SearchCourse(data)
+          .then((data) => {
+            this.globals.isLoading = false;
+
+            if (data == 'error') {
+              this.totalcoursesdetails = [];
+            }
+            else {
+              this.totalcoursesdetails = data['search']['totalcoursesdetails'];
+            }
+
+          },
+            (error) => {
+              //alert('error');
+              // this.btn_disable = false;
+              // this.submitted = false;
+              // this.globals.isLoading = false;
+              // this.router.navigate(['/pagenotfound']);
+
+            });
+      }
+
+    }
+  }
 }

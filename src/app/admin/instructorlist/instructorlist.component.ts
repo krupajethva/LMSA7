@@ -13,10 +13,12 @@ declare var $: any;
 export class InstructorlistComponent implements OnInit {
   InstructorList;
   InstructorEntity;
+  roleId;
   constructor(public globals: Globals, private router: Router, private InstructorfollowersService: InstructorfollowersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.InstructorEntity = {};
+    this.roleId =this.globals.authData.RoleId;
     var obj = { 'LearnerId': this.globals.authData.UserId };
     this.InstructorfollowersService.getAllInstructors(obj)
       .then((data) => {
