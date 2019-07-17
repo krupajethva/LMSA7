@@ -217,13 +217,25 @@ class InstructorFollowers_model extends CI_Model
 							$this->db->where('tbc.UserId', $row->InstructorUserId);
 							$this->db->Group_by("tc.CourseId");
 							$totalcourse = $this->db->get()->result();
+							$q = $this->db->last_query();
 							$res['totalcoursesdetails'] = $totalcourse;
 						} else {
 							$res['totalcoursesdetails'] = NULL;
 						}
+						//Unique Student
+						if ($row->InstructorUserId != '') {
+							$result = $this->db->query('SELECT COUNT(DISTINCT `UserId`) as totalstudent FROM `tblcourseuserregister` WHERE CourseSessionId IN (SELECT `CourseSessionId` FROM `tblcourseinstructor` WHERE `UserId`=' . $row->InstructorUserId . ')');
+							$totalstudent = $result->result()[0];
+							$res['totalstudent'] = $totalstudent->totalstudent;
+						} else {
+							$res['totalstudent'] = NULL;
+						}
+
+
 						array_push($res, $row);
-						return $res;
+						
 					}
+					return $res;
 				} else {
 					return null;
 				}

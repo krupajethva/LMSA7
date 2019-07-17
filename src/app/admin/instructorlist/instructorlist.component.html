@@ -126,7 +126,7 @@
               <span>My last course</span>
               <ul class="list_li">
                 <li>
-                {{instructor.lastcourse}}
+                {{instructor.lastcourse | slice:0:60 }}
                 </li>
               </ul>
               <div class="more_course_btn">

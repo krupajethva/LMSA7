@@ -31,6 +31,7 @@ export class InstructorDetailComponent implements OnInit {
   totalcourses;
   InstructorEntity;
   roleId;
+  totalstudent;
 
 
   constructor(private InstructorfollowersService: InstructorfollowersService, private globals: Globals, private router: Router, private route: ActivatedRoute) { }
@@ -40,7 +41,7 @@ export class InstructorDetailComponent implements OnInit {
     this.InstructorEntity = {};
     this.totalcoursesdetails = [];
     this.roleId = this.globals.authData.RoleId;
-   
+
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
         $('footer').removeClass('footer_fixed');
@@ -59,9 +60,9 @@ export class InstructorDetailComponent implements OnInit {
 
     var obj = { 'InstructorId': this.InstructorId, 'LearnerId': this.globals.authData.UserId };
     this.InstructorfollowersService.getInstructorDetails(obj)
-      .then((data) => {
+      .then((data) => { debugger
         if (data) {
-          //console.log(data);
+         // console.log(data);
           this.FollowerDetail = data['FollowerDetail'];
           if (this.FollowerDetail != null) {
             this.flag = this.FollowerDetail.flag;
@@ -69,6 +70,7 @@ export class InstructorDetailComponent implements OnInit {
             this.totalFolloings = this.FollowerDetail.totalFolloings;
             this.Reviews = this.FollowerDetail.Reviews;
             this.Ratings = this.FollowerDetail.Ratings;
+            this.totalstudent = this.FollowerDetail.totalstudent;
             this.totalcoursesdetails = this.FollowerDetail.totalcoursesdetails;
             //  console.log(this.totalcoursesdetails);
             this.totalcourses = this.totalcoursesdetails.length;
@@ -78,6 +80,11 @@ export class InstructorDetailComponent implements OnInit {
             this.flag = 0;
             this.totalFollowers = 0;
             this.totalFolloings = 0;
+            this.Reviews = 0;
+            this.Ratings = 0;
+            this.totalstudent =0;
+            this.totalcoursesdetails =[];
+            this.totalcourses =0;
           }
           this.FirstName = data['InstructorDetail']['FirstName'];
           this.LastName = data['InstructorDetail']['LastName'];

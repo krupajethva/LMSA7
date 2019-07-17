@@ -121,7 +121,7 @@
 							</li>
 							<li>
 								<i class="fa fa-users"></i>
-								<strong>54</strong> Unique Students
+								<strong>{{totalstudent}}</strong> Unique Students
 							</li>
 							<li>
 								<i class="fa fa-book"></i>
@@ -440,7 +440,9 @@
 												<div class="instructor_bottom_block">
 													<!-- <strong class="course_category">Angular Material</strong> -->
 													<span class="skill_list">{{course.Keyword}}</span>
-													<p>{{course.Description | slice:0:120 }}</p>
+													<p>{{course.Description | slice:0:70 }}</p>
+													<!-- <p>{{course.Description | truncate : 70 }}</p>  -->
+													
 												</div>
 												<div class="view_detail_btn">
 													<a href="">View Details</a>
