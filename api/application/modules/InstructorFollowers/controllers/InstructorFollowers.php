@@ -31,28 +31,20 @@ class InstructorFollowers extends CI_Controller
 		}
 	}
 
-	public function test(){
-		// $this->db->select('tbc.CourseId,tbc.CourseFullName');
-		// $this->db->join('tblcourseinstructor tc','u.UserId=tc.UserId');
-		// $this->db->where('tc.UserId',484);
-		// $this->db->join('tblcoursesession ts','tc.CourseId=ts.CourseId');
-		// $this->db->order_by("ts.EndDate", "desc");
-		// $this->db->limit(1);
-		// $this->db->from('tblcourse tbc');
-		// $result = $this->db->get();
-		// 	$q = $this->db->last_query();
-		// 	echo $q;
-		$res=$this->InstructorFollowers_model->test();		
-		echo json_encode($res);	
-		exit;
-
-	}
-
 	public function SearchInstructor() {
 		$data = json_decode(trim(file_get_contents('php://input')), true);
 		if(!empty($data)) {					
 			$result = [];
 			$res['search']=$this->InstructorFollowers_model->SearchInstructor($data);		
+			echo json_encode($res);				
+		}			
+	}
+
+	public function SearchCourse() {
+		$data = json_decode(trim(file_get_contents('php://input')), true);
+		if(!empty($data)) {					
+			$result = [];
+			$res['search']=$this->InstructorFollowers_model->SearchCourse($data);		
 			echo json_encode($res);				
 		}			
 	}

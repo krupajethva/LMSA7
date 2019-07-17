@@ -212,20 +212,30 @@ class InstructorFollowers_model extends CI_Model
 							$this->db->select('tc.CourseFullName,tc.CourseId,tc.Description,ROUND(AVG(tr.Rating)) as Rating,count(tr.ReviewId) as Reviews,tc.Keyword');
 							$this->db->join('tblcoursesession ts', 'tbc.CourseSessionId=ts.CourseSessionId');
 							$this->db->join('tblcourse tc', 'ts.CourseId=tc.CourseId');
-							$this->db->join('tblcoursereview tr','tc.CourseId=tr.CourseId','left');
+							$this->db->join('tblcoursereview tr', 'tc.CourseId=tr.CourseId', 'left');
 							$this->db->from('tblcourseinstructor tbc');
 							$this->db->where('tbc.UserId', $row->InstructorUserId);
 							$this->db->Group_by("tc.CourseId");
 							$totalcourse = $this->db->get()->result();
+							$q = $this->db->last_query();
 							$res['totalcoursesdetails'] = $totalcourse;
+						} else {
+							$res['totalcoursesdetails'] = NULL;
+						}
+						//Unique Student
+						if ($row->InstructorUserId != '') {
+							$result = $this->db->query('SELECT COUNT(DISTINCT `UserId`) as totalstudent FROM `tblcourseuserregister` WHERE CourseSessionId IN (SELECT `CourseSessionId` FROM `tblcourseinstructor` WHERE `UserId`=' . $row->InstructorUserId . ')');
+							$totalstudent = $result->result()[0];
+							$res['totalstudent'] = $totalstudent->totalstudent;
+						} else {
+							$res['totalstudent'] = NULL;
+						}
 
-						
-						
-						} else { }
 
 						array_push($res, $row);
-						return $res;
+						
 					}
+					return $res;
 				} else {
 					return null;
 				}
@@ -376,7 +386,7 @@ class InstructorFollowers_model extends CI_Model
 			$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
 			$this->db->from('tbluser u');
 			$this->db->where('u.RoleId', 3);
-		
+
 			if ($data['Name'] != null) {
 				// query to get user ids based on coursename and use user ids in main query search
 				$likeResult = $this->db->query("
@@ -445,20 +455,57 @@ class InstructorFollowers_model extends CI_Model
 			return false;
 		}
 	}
-	function test()
+	function SearchCourse($data = NULL)
 	{
-		$this->db->select("tbc.CourseId,tbc.CourseFullName, u.UserId, CONCAT(u.FirstName,' ',u.LastName) as Name, max(EndDate)");
-		$this->db->join('tblcoursesession ts', 'tc.CourseSessionId=ts.CourseSessionId');
-		$this->db->join('tblcourse tbc', 'tbc.CourseId=ts.CourseId');
-		$this->db->join('tbluser u', 'tc.UserId=u.UserId');
-		$this->db->from('tblcourseinstructor tc');
-		$this->db->group_by('tbc.CourseId');
-		$this->db->group_by('u.UserId');
-		$this->db->where('u.RoleId', 3);
-		$this->db->get();
-		$q = $this->db->last_query();
-		echo $q;
-		exit;
-		//return $res;
+		try {
+			if ($data) {
+				$this->db->select('FIND_IN_SET(' . $data['LearnerId'] . ',tif.FollowerUserId) as flag,tif.FollowerUserId,tif.InstructorUserId');
+				$this->db->from('tblinstructorfollowers tif');
+				$this->db->join('tbluser u', 'tif.FollowerUserId = u.UserId', 'inner');
+				$this->db->where('tif.InstructorUserId', $data['InstructorId']);
+				$result = $this->db->get();
+
+				$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) {
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+				$res = array();
+				if ($result->result()) {
+					foreach ($result->result() as $row) {
+						if ($row->InstructorUserId != '') {
+							$this->db->select('tc.CourseFullName,tc.CourseId,tc.Description,ROUND(AVG(tr.Rating)) as Rating,count(tr.ReviewId) as Reviews,tc.Keyword');
+							$this->db->join('tblcoursesession ts', 'tbc.CourseSessionId=ts.CourseSessionId');
+							$this->db->join('tblcourse tc', 'ts.CourseId=tc.CourseId');
+							$this->db->join('tblcoursereview tr', 'tc.CourseId=tr.CourseId', 'left');
+							$this->db->from('tblcourseinstructor tbc');
+							$this->db->where('tbc.UserId', $row->InstructorUserId);
+
+							if ($data['Name'] != null) {
+								$this->db->like('tc.CourseFullName', $data['Name']);
+							}
+							if ($data['Name'] != null) {
+								$this->db->or_like('tc.Keyword', $data['Name'], 'both');
+							}
+							$this->db->Group_by("tc.CourseId");
+							$totalcourse = $this->db->get()->result();
+
+							$res['totalcoursesdetails'] = $totalcourse;
+						} else {
+							$res['totalcoursesdetails'] = NULL;
+						}
+						array_push($res, $row);
+						return $res;
+					}
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} catch (Exception $e) {
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
 	}
 }

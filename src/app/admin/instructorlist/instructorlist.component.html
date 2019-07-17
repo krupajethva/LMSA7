@@ -65,7 +65,7 @@
                   <a href="" class="total_folllowers">{{instructor.totalFollowers}} Folllowers</a>
                 </li>
                 <li>
-                  <a href="" class="total_folllowing">{{instructor.totalFolloings}} Folllowing</a>
+                  <a href="" *ngIf="roleId!=3" class="total_folllowing" >{{instructor.totalFolloings}} Folllowing</a>
                 </li>
               </ul>
             </div>
@@ -126,7 +126,7 @@
               <span>My last course</span>
               <ul class="list_li">
                 <li>
-                {{instructor.lastcourse}}
+                {{instructor.lastcourse | slice:0:60 }}
                 </li>
               </ul>
               <div class="more_course_btn">
