@@ -33,53 +33,43 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="course-filter">
-				<div class="col-md-3">
-					<div class="form-group">
-						<label>
-							<span>*</span>Search by Course Name </label>
-						<input type="text" class="form-control" name="CourseFullName" />
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="form-group">
-						<label>
-							<span>*</span>Search by Skills</label>
-						<div class="dropdown_checkbox">
-							<select class="form-control multiselectdropdown" multiple="multiple">
-								<option>Php(2)</option>
-								<option>Css(21)</option>
-								<option>Angular(4)</option>
-								<option>Codigniter(6)</option>
-								<option>JQuery(14)</option>
-								<option>Sass(10)</option>
-								<option>Photoshop(9)</option>
-								<option>Html(1)</option>
-							</select>
+				<form class="form-validate" #CourseFilterForm="ngForm" (ngSubmit)="courseFilter(CourseFilterForm)">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>
+								<span>*</span>Search by Course Name </label>
+							<input type="text" class="form-control" id="CourseFullName" name="CourseFullName" #CourseFullName="ngModel" [(ngModel)] = "CourseFilterEntity.CourseFullName" />
 						</div>
 					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="form-group">
-						<label>
-							<span>*</span>Search by instructors</label>
-						<div class="dropdown_checkbox">
-							<select class="form-control multiselectdropdown" multiple="multiple">
-								<option>Anand Yadav</option>
-								<option>Krupali Mistry</option>
-								<option>Vidhi Bathani</option>
-								<option>Nirav Patel</option>
-								<option>Uttam Bhut</option>
-								<option>Sudhir Parmar</option>
-								<option>Mayank Sharma</option>
-								<option>Jaxi Chawda</option>
-							</select>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>
+								<span>*</span>Search by Skills</label>
+							<div class="dropdown_checkbox">
+								<select id="CourseSkill" name ="CourseSkill" class="form-control multiselectdropdown" multiple="multiple">
+									<ng-container *ngFor = "let skills of SkillList;let i = index;" >
+										<option value="{{skills}}">{{skills}}</option>
+									</ng-container>
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-3">
-					<button class="back_btn m_5" type="submit">Filter</button>
-					<button class="next_btn m_5" type="submit">Clear</button>
-				</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>
+								<span>*</span>Search by instructors</label>
+							<div class="dropdown_checkbox">
+								<select  id="Instructor" class="form-control multiselectdropdown" multiple="multiple">
+									<option *ngFor = "let Instr of InstList;let i = index;"  value="{{Instr.UserId}}">{{Instr.FirstName + ' ' + Instr.LastName}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<button class="back_btn m_5" type="submit">Filter</button>
+						<button class="next_btn m_5" type="button" (click)="clearData(CourseFilterForm)">Clear</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -308,7 +298,7 @@
 					<div class="clearfix"></div>
 				</div>
 				<ng-container *ngFor="let InList of InstList ; let i = index;">
-					<div (click)="InstWise(InList.UserId,i)" id="users{{i}}" class="users" *ngIf="InList.totalCourse>0 ">
+					<div (click)="InstWise(InList.UserId,i)" id="users{{i}}" class="users" *ngIf="InList.totalCourse>0 && i < 5">
 
 						<div class="img_box">
 							<span *ngIf="InList.ProfileImage=='' || InList.ProfileImage==NULL" class="instructor_letter">{{InList.FirstName | slice:0:01}}{{InList.LastName | slice:0:01}}</span>

@@ -19,7 +19,7 @@ class Courselist extends CI_Controller
 		$data['sub']=$this->Courselist_model->getlist_SubCategory();
 
 		$data['Inst']=$this->Courselist_model->getlist_Instructors();
-		//$data['skill']=$this->Course_model->get_skilldata($Course_id);
+		$data['skill']=$this->Courselist_model->getAllCourseKey();
 		//print_r($data);
 		echo json_encode($data);
 	}
@@ -403,4 +403,22 @@ class Courselist extends CI_Controller
 		
 	}
 	
+	public function courseFilter()
+	{
+		$courseFilter_data = json_decode(trim(file_get_contents('php://input')), true);	
+		if ($courseFilter_data) {
+			$result['Course'] = $this->Courselist_model->courseFilter($courseFilter_data);
+				
+			
+			if($result) {
+				echo json_encode($result);	
+			}
+			else {
+				echo json_encode("error");	
+			}
+		}
+		else {
+			echo json_encode("error");	
+		}	
+	}
 }

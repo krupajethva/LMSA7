@@ -26,7 +26,8 @@ export class DashboardInstructorComponent implements OnInit {
 
   totalStudent;
   totalLesson;
-  
+  total;
+  ratio;
   constructor( public globals: Globals, private router: Router, private route: ActivatedRoute, private DashboardService: DashboardService,) { }
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class DashboardInstructorComponent implements OnInit {
     /*################ GET INSTRUCTOR DASHBOARD START ##############*/
 		this.DashboardService.getInstructorDashboard(this.globals.authData.UserId)
 		.then((data) => {
-
+      debugger
       if (data['totalcourse']) {
         this.totalCourses = data['totalcourse'];
       }
@@ -54,6 +55,11 @@ export class DashboardInstructorComponent implements OnInit {
       }
       if (data['courseview']) {
         this.courseView = data['courseview'];
+        this.total = 0;
+        for (let i = 0; i < this.courseView.length; i++) {
+          this.total = Number(this.total) + Number(this.courseView[i].totalcourse);
+          this.ratio += Number(this.total) / Number(this.courseView[i].totalcourse);
+        }
       }
       if (data['student']) {
         this.totalStudent = data['student'];

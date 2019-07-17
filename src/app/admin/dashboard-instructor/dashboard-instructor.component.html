@@ -221,13 +221,13 @@
               <i *ngIf="course.SessionStatus==2">Completed</i>
 
               <div class="progress" *ngIf="course.SessionStatus==0">
-                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}/{{total}}" [ngStyle]="{'width':(total/course.courseview)  + '%'}" ></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==1">
-                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-warning" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}/{{total}}" [ngStyle]="{'width':(total/course.courseview)  + '%'}"></div>
               </div>
               <div class="progress" *ngIf="course.SessionStatus==2">
-                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}" style="width: 40%"></div>
+                <div class="progress-bar progress-bar-success" data-toggle="tooltip" data-placement="top" title="{{course.courseview}}/{{total}}" [ngStyle]="{'width':(total/course.courseview)  + '%'}"></div>
               </div>
             </div>
           </div>
