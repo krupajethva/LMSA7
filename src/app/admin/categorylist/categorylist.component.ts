@@ -132,7 +132,7 @@ export class CategorylistComponent implements OnInit {
 		})
 		.then((result) => {
 			if (result.value) {
-		var del={'Userid':this.global.authdata.UserId,'id':category.CategoryId,'Name':category.CategoryName};
+		var del={'Userid':this.globals.authData.UserId,'id':category.CategoryId,'Name':category.CategoryName};
 		this.CategoryService.deleteCategory(del)
 		.then((data) => 
 		{
