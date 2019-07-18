@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Globals } from '.././globals';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+declare function myInput(): any;
 
 import { CourseListService } from '../services/course-list.service';
 declare var $, PerfectScrollbar: any;
@@ -14,11 +15,21 @@ export class CourseListComponent implements OnInit {
   CourseList;
   InstList;
   SubCategoryList;
-  
-  constructor( public globals: Globals, private router: Router, private route: ActivatedRoute,
+  SkillList;
+  CourseFilterEntity;
+
+  constructor(public globals: Globals, private router: Router, private route: ActivatedRoute,
     private CourseListService: CourseListService) { }
 
   ngOnInit() {
+
+    setTimeout(function () {
+      $('.multiselectdropdown').multiselect({
+        includeSelectAllOption: true,
+        enableFiltering: true
+      });
+    }, 500);
+
     setTimeout(function () {
       if ($(".bg_white_block").height() < $(window).height() - 100) {
         $('footer').addClass('footer_fixed');
@@ -41,14 +52,16 @@ export class CourseListComponent implements OnInit {
     //   $('.grid_btn').removeClass("active");
     //   $('.course_list_block .col-md-4').addClass("list_block");
     // });
-
+    myInput();
+   this.CourseFilterEntity = {};
     this.CourseListService.getAllCourse()
       //.map(res => res.json())
       .then((data) => {
+        debugger
         this.CourseList = data['course'];
         this.SubCategoryList = data['sub'];
         this.InstList = data['Inst'];
-
+        this.SkillList = data['skill'];
       },
         (error) => {
           //alert('error');
@@ -93,7 +106,8 @@ export class CourseListComponent implements OnInit {
 
         });
   }
-  clearForm(aa) {
+  // clear form
+  clearData(CourseFilterForm) { 
     this.globals.isLoading = true;
     this.CourseListService.getAllCourse()
       //.map(res => res.json())
@@ -101,7 +115,12 @@ export class CourseListComponent implements OnInit {
         this.CourseList = data['course'];
         this.SubCategoryList = data['sub'];
         this.InstList = data['Inst'];
+        this.SkillList = data['skill'];
+        this.CourseFilterEntity = {};
+        this.CourseFilterEntity.CourseSkill = '';
+        this.CourseFilterEntity.Instructor = '';
         this.globals.isLoading = false;
+        CourseFilterForm.form.markAsPristine();
 
       },
         (error) => {
@@ -111,5 +130,51 @@ export class CourseListComponent implements OnInit {
         });
 
     //LearnerCourseForm.form.markAsPristine();
+  }
+  // course filter
+  courseFilter(CourseFilterForm)
+  {
+    
+    var CourseFullName = $("#CourseFullName").val();
+    var CourseSkill = $("#CourseSkill").val();
+    var Instructor = $("#Instructor").val();
+    if(CourseFullName != null)
+    {
+      this.CourseFilterEntity.CourseFullName =  CourseFullName.toString();
+    }
+    else
+    {
+      this.CourseFilterEntity.CourseFullName = '';
+    }
+    if(CourseSkill != null)
+    {
+      this.CourseFilterEntity.CourseSkill =  CourseSkill.toString();
+    }
+    else
+    {
+      this.CourseFilterEntity.CourseSkill = '';
+    }
+    if(Instructor != null)
+    {
+      this.CourseFilterEntity.Instructor =  Instructor.toString();
+    }
+    else
+    {
+      this.CourseFilterEntity.Instructor = '';
+    }
+
+    this.CourseListService.courseFilter(this.CourseFilterEntity)
+      //.map(res => res.json())
+      .then((data) => {
+        this.CourseList = data['Course'];
+        this.globals.isLoading = false;
+
+      },
+        (error) => {
+          //alert('error');
+          this.globals.isLoading = false;
+          //this.router.navigate(['/pagenotfound']);
+        });
+    
   }
 }

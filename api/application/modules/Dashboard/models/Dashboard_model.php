@@ -324,12 +324,14 @@ class Dashboard_model extends CI_Model
 		$this->db->join('tblcourse tc', 'tcs.CourseId=tc.CourseId');
 		$this->db->where('tci.UserId', $UserId);
 		$this->db->group_by('tc.CourseId');
+		$this->db->order_by('tcs.CourseId', 'desc');
+		$this->db->limit(5);
 		$instructorCourseResult = $this->db->get('tblcourseinstructor as tci');
 
 		$allinstructordata['instructorcourses'] = $instructorCourseResult->result();
 
 		/*################ GET COURSE VIEW ##############*/
-		$this->db->select('count(tci.CourseSessionId) as courseview,tcs.SessionStatus');
+		$this->db->select('count(tci.CourseSessionId) as courseview,count(`tcs`.CourseId) as totalcourse,tcs.SessionStatus');
 		$this->db->join('tblcoursesession tcs', 'tci.CourseSessionId=tcs.CourseSessionId');
 		$this->db->where('tci.UserId', $UserId);
 		$this->db->group_by('tcs.SessionStatus');

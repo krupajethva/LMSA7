@@ -177,13 +177,13 @@ export class CategorylistComponent implements OnInit {
       this.categoryList[i].IsActive = 1;
       changeEntity.IsActive = 1;
     }
-   // this.globals.isLoading = true;
+    this.globals.isLoading = true;
     changeEntity.UpdatedBy = 1;
     
 		this.CategoryService.isActiveChange(changeEntity)
 		.then((data) => 
 		{	      
-     // this.globals.isLoading = false;	
+      this.globals.isLoading = false;	
      swal({
       type: 'success',
       title: 'Updated!',
@@ -195,7 +195,7 @@ export class CategorylistComponent implements OnInit {
 		}, 
 		(error) => 
 		{
-     // this.globals.isLoading = false;
+      this.globals.isLoading = false;
       this.router.navigate(['/pagenotfound']);
 		});		
 	}

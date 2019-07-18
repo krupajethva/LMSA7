@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-8 col-sm-8">
     <!-- <div class="welcome_message alert" role="alert">
-      Welcome back,
+      Welcome,
       <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
 
     </div> -->
@@ -81,7 +81,7 @@
       </div>
       <ul class="nav nav-tabs" role="tablist">
         <li class="active">
-          <a href="#personaldetails" aria-controls="personaldetails" role="tab" data-toggle="tab">
+          <a  (click) = "personalDetails()" aria-controls="personaldetails" role="tab" data-toggle="tab">
             <i class="fa fa-user"></i>Personal Details</a>
         </li>
         <!-- <li><a href="#uploaduserimage" aria-controls="uploaduserimage" role="tab" data-toggle="tab"><i class="fa fa-image"></i>Upload Image</a></li> -->
@@ -90,7 +90,7 @@
             <i class="fa fa-building"></i>Company Details</a>
         </li> -->
         <li *ngIf="globals.authData.RoleId==3 || globals.authData.RoleId==4">
-          <a href="#educationdetails" aria-controls="educationdetails" role="tab" data-toggle="tab">
+          <a  (click) = "educationDetails()"  aria-controls="educationdetails" role="tab" data-toggle="tab">
             <i class="fa fa-graduation-cap"></i>Educational Details</a>
         </li>
         <li *ngIf="globals.authData.RoleId==3">
@@ -98,7 +98,7 @@
             <i class="fa fa-graduation-cap"></i>Other Details</a>
         </li>
         <li>
-          <a href="#changepassword" aria-controls="changepassword" role="tab" data-toggle="tab">
+          <a (click) = "changePassword(newpassForm)" aria-controls="changepassword" role="tab" data-toggle="tab">
             <i class="fa fa-key"></i>Change Password</a>
         </li>
         <li>
@@ -615,7 +615,7 @@
                     name="Password" [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted2)}"
                     required />
                   <span class="error_span" *ngIf="(Password.dirty && Password.invalid) || (Password.pristine && submitted2)">
-                    <span *ngIf="Password.errors && Password.errors.required">Please enter your current password</span>
+                    <span *ngIf="Password.errors && Password.errors.required">Please enter current password</span>
                     <span *ngIf="Password.errors && Password.errors.pattern">Password must be valid 8 characters or more
                     </span>
                   </span>
@@ -631,7 +631,7 @@
                     [(ngModel)]="newpassEntity.nPassword" name="nPassword" [ngClass]="{red_border: (nPassword.dirty && nPassword.invalid) || (nPassword.pristine && submitted2)}"
                     required />
                   <span class="error_span" *ngIf="(nPassword.dirty && nPassword.invalid) || (nPassword.pristine && submitted2)">
-                    <span *ngIf="nPassword.errors && nPassword.errors.required">Please enter your new password</span>
+                    <span *ngIf="nPassword.errors && nPassword.errors.required">Please enter new password</span>
                     <span *ngIf="nPassword.errors && nPassword.errors.pattern">
                       Password must be valid 8 characters or more</span>
                   </span>
@@ -649,7 +649,7 @@ title="<ul class='tooltip_style'><li>Minimum 8 and maximum 50 characters in leng
                     [(ngModel)]="newpassEntity.cPassword" name="cPassword" [ngClass]="{red_border: (cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted2||(same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required)))}"
                     required />
                   <span class="error_span" *ngIf="(cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted2) || same">
-                    <span *ngIf="cPassword.errors && cPassword.errors.required && !same">Please enter your confirm password
+                    <span *ngIf="cPassword.errors && cPassword.errors.required && !same">Please enter confirm password
                     </span>
                     <span *ngIf="cPassword.errors && cPassword.errors.pattern && !same">Password must be valid 8 characters or more</span>
                     <span *ngIf="same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required)">

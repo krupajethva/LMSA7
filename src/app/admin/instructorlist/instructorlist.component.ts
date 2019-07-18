@@ -12,19 +12,23 @@ declare var $: any;
 })
 export class InstructorlistComponent implements OnInit {
   InstructorList;
-  constructor( public globals: Globals, private router: Router,private InstructorfollowersService: InstructorfollowersService,private route:ActivatedRoute) { }
+  InstructorEntity;
+  roleId;
+  constructor(public globals: Globals, private router: Router, private InstructorfollowersService: InstructorfollowersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    var obj = {'LearnerId': this.globals.authData.UserId };
+    this.InstructorEntity = {};
+    this.roleId =this.globals.authData.RoleId;
+    var obj = { 'LearnerId': this.globals.authData.UserId };
     this.InstructorfollowersService.getAllInstructors(obj)
       .then((data) => {
         this.InstructorList = data;
-        console.log(this.InstructorList);
+        //console.log(this.InstructorList);
       },
-      (error) => {
-        // this.globals.isLoading = false;
-        this.router.navigate(['/pagenotfound']);
-      });
+        (error) => {
+          // this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
   }
   followInstructor(instructor) {
     debugger
@@ -32,10 +36,10 @@ export class InstructorlistComponent implements OnInit {
     this.InstructorfollowersService.followInstructor(follow)
       .then((data) => {
         this.globals.isLoading = false;
-      //  $('#follow').hide();
-        instructor.flag=1;
+        //  $('#follow').hide();
+        instructor.flag = 1;
         instructor.totalFollowers = instructor.totalFollowers + 1;
-      //  $('#unfollow').show();
+        //  $('#unfollow').show();
       },
         (error) => {
           if (error.text) {
@@ -49,15 +53,69 @@ export class InstructorlistComponent implements OnInit {
     this.InstructorfollowersService.unfollowInstructor(unfollow)
       .then((data) => {
         this.globals.isLoading = false;
-      //  $('#unfollow').hide();
-        instructor.flag=0;
+        //  $('#unfollow').hide();
+        instructor.flag = 0;
         instructor.totalFollowers = instructor.totalFollowers - 1;
-     //   $('#follow').show();
+        //   $('#follow').show();
       },
         (error) => {
           if (error.text) {
             alert("Error");
           }
         });
+  }
+
+  SearchInstructor(InstructorForm) {
+    if ((this.InstructorEntity.Search == undefined || this.InstructorEntity.Search == "" || this.InstructorEntity.Search == null) ) {
+
+    } else {
+      if (InstructorForm.valid) {
+        this.globals.isLoading = true;
+
+        //   this.SalesDashboardEntity.CompanyId;
+        // 	this.SalesDashboardEntity.UserId;
+        // this.vardisabled=true;
+        if (this.InstructorEntity.Search == undefined) {
+          this.InstructorEntity.Search = null;
+        }
+      
+        var data = {  'Name': this.InstructorEntity.Search, 'user': this.globals.authData.UserId };
+        this.InstructorfollowersService.SearchInstructor(data)
+          .then((data) => {
+            this.globals.isLoading = false;
+            // this.hideowner=false;
+            // this.header_var = 'List of all users';
+            //alert('success');
+            if (data == 'error') {
+              this.InstructorList = [];
+            }
+            else {
+              this.InstructorList = data['search'];
+            }
+            setTimeout(function () {
+              $('.modal').on('shown.bs.modal', function () {
+                $('.right_content_block').addClass('style_position');
+              })
+              $('.modal').on('hidden.bs.modal', function () {
+                $('.right_content_block').removeClass('style_position');
+              });
+              // myInput();
+            },
+              500);
+            // this.btn_disable = false;
+            // this.submitted = false;
+            // this.globals.isLoading = false;
+          },
+            (error) => {
+              //alert('error');
+              // this.btn_disable = false;
+              // this.submitted = false;
+              // this.globals.isLoading = false;
+              // this.router.navigate(['/pagenotfound']);
+
+            });
+      }
+
+    }
   }
 }

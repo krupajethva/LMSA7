@@ -59,8 +59,6 @@ class InstructorFollowers_model extends CI_Model
 		}
 	}
 
-
-
 	function followInstructor($post_followInstructor)
 	{
 		try {
@@ -161,7 +159,7 @@ class InstructorFollowers_model extends CI_Model
 			if ($post_data) {
 				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,tif.FollowerUserId,tif.InstructorUserId');
 				$this->db->from('tblinstructorfollowers tif');
-				//$this->db->join('tbluser u','tif.FollowerUserId = u.UserId','inner');
+				$this->db->join('tbluser u', 'tif.FollowerUserId = u.UserId', 'inner');
 				$this->db->where('tif.InstructorUserId', $post_data['InstructorId']);
 				$result = $this->db->get();
 
@@ -174,13 +172,70 @@ class InstructorFollowers_model extends CI_Model
 				$total = [];
 				if ($result->result()) {
 					foreach ($result->result() as $row) {
+						//totalFollower
 						$res['flag'] = $row->flag;
 						if ($row->FollowerUserId != '') {
 							$total = explode(',', $row->FollowerUserId);
 						}
 						$res['totalFollowers'] = count($total);
-						return $res;
+						//totalfollowing
+						if ($row->InstructorUserId != '') {
+							$result = $this->db->query('SELECT FIND_IN_SET(' . $row->InstructorUserId . ', tif.FollowerUserId) as flag FROM `tblinstructorfollowers` `tif`');
+							$count = 0;
+							if ($result->result()) {
+								foreach ($result->result() as $row1) {
+									if ($row1->flag != 0) {
+										$count = $count + 1;
+									}
+								}
+							}
+							$res['totalFolloings']  = $count;
+						} else {
+							$res['totalFolloings'] = 0;
+						}
+						//Rating and Review
+						if ($row->InstructorUserId != '') {
+							$this->db->select('ROUND(AVG(Rating)) as Rating,count(ReviewId) as Reviews');
+							$this->db->from('tblcoursereview');
+							$this->db->where('UserId', $row->InstructorUserId);
+							$this->db->group_by('UserId');
+							$totalrating = $this->db->get()->result()[0];
+
+							$res['Ratings'] = $totalrating->Rating;
+							$res['Reviews'] = $totalrating->Reviews;
+						} else {
+							$res['Ratings'] = 0;
+							$res['Reviews'] = 0;
+						}
+						//totalcourse 
+						if ($row->InstructorUserId != '') {
+							$this->db->select('tc.CourseFullName,tc.CourseId,tc.Description,ROUND(AVG(tr.Rating)) as Rating,count(tr.ReviewId) as Reviews,tc.Keyword');
+							$this->db->join('tblcoursesession ts', 'tbc.CourseSessionId=ts.CourseSessionId');
+							$this->db->join('tblcourse tc', 'ts.CourseId=tc.CourseId');
+							$this->db->join('tblcoursereview tr', 'tc.CourseId=tr.CourseId', 'left');
+							$this->db->from('tblcourseinstructor tbc');
+							$this->db->where('tbc.UserId', $row->InstructorUserId);
+							$this->db->Group_by("tc.CourseId");
+							$totalcourse = $this->db->get()->result();
+							$q = $this->db->last_query();
+							$res['totalcoursesdetails'] = $totalcourse;
+						} else {
+							$res['totalcoursesdetails'] = NULL;
+						}
+						//Unique Student
+						if ($row->InstructorUserId != '') {
+							$result = $this->db->query('SELECT COUNT(DISTINCT `UserId`) as totalstudent FROM `tblcourseuserregister` WHERE CourseSessionId IN (SELECT `CourseSessionId` FROM `tblcourseinstructor` WHERE `UserId`=' . $row->InstructorUserId . ')');
+							$totalstudent = $result->result()[0];
+							$res['totalstudent'] = $totalstudent->totalstudent;
+						} else {
+							$res['totalstudent'] = NULL;
+						}
+
+
+						array_push($res, $row);
+						
 					}
+					return $res;
 				} else {
 					return null;
 				}
@@ -196,7 +251,7 @@ class InstructorFollowers_model extends CI_Model
 	{
 		try {
 			if ($post_data) {
-				$this->db->select('u.UserId,u.FirstName,u.LastName,u.ProfileImage,el.Education,u.Biography');
+				$this->db->select('u.UserId,u.FirstName,u.LastName,u.EmailAddress,u.ProfileImage,el.Education,u.Biography');
 				$this->db->from('tbluser u');
 				$this->db->join('tbluserdetail ud', 'ud.UserDetailId = u.UserDetailId', 'left');
 				$this->db->join('tblmsteducationlevel el', 'el.EducationLevelId = ud.EducationLevelId', 'left');
@@ -258,12 +313,12 @@ class InstructorFollowers_model extends CI_Model
 	{
 		try {
 			if ($post_data) {
-				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,tif.FollowerUserId,tif.InstructorUserId');
+				$this->db->select('FIND_IN_SET(' . $post_data['LearnerId'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,u.Biography,tif.FollowerUserId,tif.InstructorUserId');
 				$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
 				$this->db->from('tbluser u');
 				$this->db->where('u.RoleId', 3);
 				$result = $this->db->get();
-				$q = $this->db->last_query();
+				//$q = $this->db->last_query();
 
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) {
@@ -271,8 +326,6 @@ class InstructorFollowers_model extends CI_Model
 					return false; // unreachable return statement !!!
 				}
 				$res = array();
-
-
 				foreach ($result->result() as $row) {
 					$total = [];
 					if ($row->FollowerUserId != '') {
@@ -297,9 +350,156 @@ class InstructorFollowers_model extends CI_Model
 					} else {
 						$row->totalFolloings = 0;
 					}
+					//last course
+					if ($row->UserId != '') {
+						$result = $this->db->query('SELECT `tbc`.`CourseId`, `tbc`.`CourseFullName`
+						FROM `tblcourseinstructor` `tc`
+						JOIN `tblcoursesession` `ts` ON `tc`.`CourseSessionId`=`ts`.`CourseSessionId`
+						JOIN `tblcourse` `tbc` ON `tbc`.`CourseId`=`ts`.`CourseId`
+						WHERE `tc`.`UserId` = ' . $row->UserId . '
+						ORDER BY `ts`.`EndDate` DESC
+						 LIMIT 1');
+						if ($result->result()) {
+							foreach ($result->result() as $row1) {
+								$row->lastcourse = $row1->CourseFullName;
+							}
+						} else {
+							$row->lastcourse = '';
+						}
+					}
 					array_push($res, $row);
 				}
 				return $res;
+			} else {
+				return false;
+			}
+		} catch (Exception $e) {
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+
+	function SearchInstructor($data = NULL)
+	{
+		try {
+			$this->db->select('FIND_IN_SET(' . $data['user'] . ',tif.FollowerUserId) as flag,u.UserId,u.FirstName,u.LastName,u.ProfileImage,u.Biography,tif.FollowerUserId,tif.InstructorUserId');
+			$this->db->join('tblinstructorfollowers tif', 'tif.InstructorUserId = u.UserId', 'left');
+			$this->db->from('tbluser u');
+			$this->db->where('u.RoleId', 3);
+
+			if ($data['Name'] != null) {
+				// query to get user ids based on coursename and use user ids in main query search
+				$likeResult = $this->db->query("
+				SELECT `tc`.`UserId`, max(`ts`.`EndDate`)
+				FROM `tblcourseinstructor` `tc`
+				JOIN `tblcoursesession` `ts` ON `tc`.`CourseSessionId`=`ts`.`CourseSessionId`
+				JOIN `tblcourse` `tbc` ON `tbc`.`CourseId`=`ts`.`CourseId`
+				JOIN `tbluser` `u` ON `tc`.`UserId`=`u`.`UserId`
+				WHERE `u`.`RoleId` = 3 AND tbc.CourseFullName LIKE '%" . $data['Name'] . "%'
+				GROUP BY `u`.`UserId`");
+				$finalResult = $likeResult->result();
+				$userArr = array(); //user ids that have course name like passed name
+				foreach ($finalResult as $finalResultRow) {
+					$userArr[] = $finalResultRow->UserId;
+				};
+				// end of coursename search and we got user ids array, use this in main condition
+
+				$this->db->where(
+					"
+				u.FirstName LIKE '%" . $data['Name'] . "%'
+				OR u.LastName LIKE '%" . $data['Name'] . "%'
+				"
+				);
+				if (count($userArr) > 0) {
+					$this->db->or_where_in('u.UserId', $userArr);
+				}
+			}
+
+			$this->db->group_by('u.UserId, tif.FollowerUserId');
+			$result = $this->db->get();
+			$db_error = $this->db->error();
+			if (!empty($db_error) && !empty($db_error['code'])) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+				return false; // unreachable return statement !!!
+			}
+			$res = array();
+			foreach ($result->result() as $row) {
+				$total = [];
+				if ($row->FollowerUserId != '') {
+					$total = explode(',', $row->FollowerUserId);
+					$row->totalFollowers = count($total);
+				} else {
+					$row->totalFollowers = 0;
+				}
+				//following
+				if ($row->UserId != '') {
+					$result = $this->db->query('SELECT FIND_IN_SET(' . $row->UserId . ', tif.FollowerUserId) as flag FROM `tblinstructorfollowers` `tif`');
+					// $res = array();
+					$count = 0;
+					if ($result->result()) {
+						foreach ($result->result() as $row1) {
+							if ($row1->flag != 0) {
+								$count = $count + 1;
+							}
+						}
+					}
+					$row->totalFolloings = $count;
+				} else {
+					$row->totalFolloings = 0;
+				}
+				array_push($res, $row);
+			}
+			return $res;
+		} catch (Exception $e) {
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+	function SearchCourse($data = NULL)
+	{
+		try {
+			if ($data) {
+				$this->db->select('FIND_IN_SET(' . $data['LearnerId'] . ',tif.FollowerUserId) as flag,tif.FollowerUserId,tif.InstructorUserId');
+				$this->db->from('tblinstructorfollowers tif');
+				$this->db->join('tbluser u', 'tif.FollowerUserId = u.UserId', 'inner');
+				$this->db->where('tif.InstructorUserId', $data['InstructorId']);
+				$result = $this->db->get();
+
+				$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) {
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+				$res = array();
+				if ($result->result()) {
+					foreach ($result->result() as $row) {
+						if ($row->InstructorUserId != '') {
+							$this->db->select('tc.CourseFullName,tc.CourseId,tc.Description,ROUND(AVG(tr.Rating)) as Rating,count(tr.ReviewId) as Reviews,tc.Keyword');
+							$this->db->join('tblcoursesession ts', 'tbc.CourseSessionId=ts.CourseSessionId');
+							$this->db->join('tblcourse tc', 'ts.CourseId=tc.CourseId');
+							$this->db->join('tblcoursereview tr', 'tc.CourseId=tr.CourseId', 'left');
+							$this->db->from('tblcourseinstructor tbc');
+							$this->db->where('tbc.UserId', $row->InstructorUserId);
+
+							if ($data['Name'] != null) {
+								$this->db->like('tc.CourseFullName', $data['Name']);
+							}
+							if ($data['Name'] != null) {
+								$this->db->or_like('tc.Keyword', $data['Name'], 'both');
+							}
+							$this->db->Group_by("tc.CourseId");
+							$totalcourse = $this->db->get()->result();
+
+							$res['totalcoursesdetails'] = $totalcourse;
+						} else {
+							$res['totalcoursesdetails'] = NULL;
+						}
+						array_push($res, $row);
+						return $res;
+					}
+				} else {
+					return false;
+				}
 			} else {
 				return false;
 			}

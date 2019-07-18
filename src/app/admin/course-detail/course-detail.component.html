@@ -6,7 +6,7 @@
 	</div>
 	<div class="col-md-8 col-sm-8">
 		<!-- <div class="welcome_message alert" role="alert">
-			Welcome back,
+			Welcome,
 			<strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}! </strong>
 		</div> -->
 		<div class="clearfix"></div>
@@ -1227,14 +1227,12 @@
 		</div>
 	</div>
 	<div class="clearfix"></div>
-
 </div>
 <div class="clearfix"></div>
 <div class="modal fade bs-example-modal-sm" id="Share_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-
 				<!-- <p>Are You Sure You Want To Re-Invite This Email?</p> -->
 				<form #shareForm="ngForm" (ngSubmit)="shareConfirm(shareForm)">
 					<div class="row">
@@ -1245,7 +1243,6 @@
 								<input type="Email" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" class="form-control" #EmailAddress="ngModel"
 								 maxlength="500" [(ngModel)]="shareEntity.EmailAddress" name="EmailAddress" [ngClass]="{red_border: (EmailAddress.dirty && EmailAddress.invalid)}"
 								 required/>
-
 								<span style="font-size: 11px;">
 									(You can enter multiple comma separated email addresses)
 								</span>
@@ -1255,7 +1252,6 @@
 									</span>
 									<span *ngIf="EmailAddress.errors && EmailAddress.errors.pattern">Please enter valid email address</span>
 								</span>
-
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -1270,7 +1266,6 @@
 					</div>
 				</form>
 			</div>
-
 		</div>
 	</div>
 </div>

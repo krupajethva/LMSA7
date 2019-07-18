@@ -330,4 +330,24 @@ PurchaseCourse(pay)
             });		
             return promise;
             }
+
+    courseFilter(CourseFilterEntity){
+      
+      let promise = new Promise((resolve, reject) => {
+        this.http.post(this.globals.baseAPIUrl + 'Courselist/courseFilter', CourseFilterEntity)
+          .toPromise()
+          .then(
+            res => { // Success
+              resolve(res);
+            },
+            msg => { // Error
+              reject(msg);
+              this.globals.isLoading = false;
+              this.router.navigate(['/pagenotfound']);      
+            }
+          );
+      });		
+      return promise;
+    }
+            
   }

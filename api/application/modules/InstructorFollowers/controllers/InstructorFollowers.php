@@ -30,6 +30,24 @@ class InstructorFollowers extends CI_Controller
 			}
 		}
 	}
+
+	public function SearchInstructor() {
+		$data = json_decode(trim(file_get_contents('php://input')), true);
+		if(!empty($data)) {					
+			$result = [];
+			$res['search']=$this->InstructorFollowers_model->SearchInstructor($data);		
+			echo json_encode($res);				
+		}			
+	}
+
+	public function SearchCourse() {
+		$data = json_decode(trim(file_get_contents('php://input')), true);
+		if(!empty($data)) {					
+			$result = [];
+			$res['search']=$this->InstructorFollowers_model->SearchCourse($data);		
+			echo json_encode($res);				
+		}			
+	}
 	public function getById($FollowerId=null)
 	{	
 		if(!empty($FollowerId))

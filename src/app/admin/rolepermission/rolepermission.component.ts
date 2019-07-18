@@ -163,10 +163,12 @@ debugger
   updatePermission()
 	{	
     this.btn_disable = true;
+    this.globals.isLoading = true;
     this.RolepermissionService.update_permission(this.permissionList)
     .then((data) => 
     {
       this.btn_disable = false;
+      this.globals.isLoading = false;
       swal({
        
         type: 'success',

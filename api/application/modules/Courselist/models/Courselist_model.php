@@ -157,7 +157,7 @@ class Courselist_model extends CI_Model
         tblcourseinstructor as c LEFT JOIN tblcoursesession as cs  on cs.CourseSessionId=c.CourseSessionId
         LEFT JOIN tbluser as user on c.UserId=user.UserId
         LEFT JOIN tblcourse as cp on cp.CourseId=cs.CourseId WHERE cs.PublishStatus!=0 AND cs.IsActive=1
-        GROUP BY c.UserId ORDER BY COUNT(DISTINCT cp.CourseId) DESC LIMIT 5');
+        GROUP BY c.UserId ORDER BY COUNT(DISTINCT cp.CourseId) DESC ');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -1247,4 +1247,73 @@ class Courselist_model extends CI_Model
 		}	
 	}
 	
+	public function getAllCourseKey() {
+		try{
+		// $this->db->select('*');
+		$this->db->select('tc.Keyword');
+		$result = $this->db->get('tblcourse tc');
+		//$result = $this->db->query('call getCountryList()');
+		$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) { 
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+		$res = array();
+		foreach($result->result() as $row) {
+			$skill_explode = explode(',', $row->Keyword);
+			foreach ($skill_explode as $skill) {
+				if($skill!="" || $skill!=null){
+					array_push($res,$skill);
+				}					
+			}
+		}
+		return array_values(array_unique($res));
+		}
+		catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+	// filter for course list
+	public function courseFilter($courseFilter_data) {
+		try{
+			$this->db->select('cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,cp.NoOfQuestion,cp.IsActive,rs.InstructorId as Fid,rs.FilePath,(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId = cp.CourseId) as reviewavg');
+			$this->db->join('tblcoursesession cs', 'cs.CourseId = cp.CourseId', 'left');
+			$this->db->join('tblresources rs', 'rs.ResourcesId = cp.CourseImageId', 'left');
+			$this->db->join('tblcourseinstructor tci', 'tci.CourseSessionId = cs.CourseSessionId', 'left');
+			$this->db->where('cs.IsActive', 1);
+			$this->db->where('cs.PublishStatus', 1);
+
+		
+			if ($courseFilter_data['CourseFullName'] != null && $courseFilter_data['CourseFullName'] != '' ) {
+				$this->db->like('cp.CourseFullName', $courseFilter_data['CourseFullName']);
+			}
+			if ($courseFilter_data['CourseSkill'] != null && $courseFilter_data['CourseSkill'] != '' ) {
+				$this->db->like('cp.Keyword', $courseFilter_data['CourseSkill']);
+			}
+			if ($courseFilter_data['Instructor'] != null && $courseFilter_data['Instructor'] != '' ) {
+				$this->db->like('tci.UserId', $courseFilter_data['Instructor']);
+			}
+			$this->db->group_by('cp.CourseId');
+			$result = $this->db->get('tblcourse cp');
+			$db_error = $this->db->error();
+			if (!empty($db_error) && !empty($db_error['code'])) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+				return false; // unreachable return statement !!!
+			}
+			$res = array();
+			if ($result->result()) {
+				$res = $result->result();
+			}
+			else {
+				$res = false;	
+			}
+			return $res;
+		}
+		catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+
 }

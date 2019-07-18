@@ -98,6 +98,7 @@ export class ParentcategoryComponent implements OnInit {
   }
 
   addCategory(CategoryForm) {debugger
+    
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.ParentCategoryEntity.UpdatedBy = 1;
@@ -116,6 +117,7 @@ export class ParentcategoryComponent implements OnInit {
     }
     if (CategoryForm.valid) {
       this.btn_disable = true;
+      this.globals.isLoading = true;
       this.ParentcategoryService.add(this.ParentCategoryEntity)
         .then((data) => {
 
@@ -150,6 +152,7 @@ export class ParentcategoryComponent implements OnInit {
 
             this.btn_disable = false;
             this.submitted = false;
+            this.globals.isLoading = false;
 
           });
 

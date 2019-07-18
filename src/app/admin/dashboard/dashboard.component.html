@@ -6,15 +6,15 @@
 	</div>
 	<div class="col-md-8 col-sm-8">
 		<!-- <div class="welcome_message alert" role="alert">
-			Welcome back, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
+			Welcome, <strong>{{globals.authData.FirstName}} {{globals.authData.LastName}}!</strong> 
 			
 		</div> -->
 		<div class="breadcrumb_block pull-right">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item">
-						<a routerLink="/dashboard">
-							<i class="fa fa-home"></i>
-						  </a>
+					<a routerLink="/dashboard">
+						<i class="fa fa-home"></i>
+					</a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
 			</ul>
@@ -78,7 +78,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
 				<div class="graph_block">
-					<h3 class="pull-left">Login and Course Completed</h3>
+					<h4 class="pull-left">Login and Course Completed</h4>
 					<div class="clearfix"></div>
 					<div class="logincourse_tabs">
 						<p>Content yet to come...</p>
@@ -125,7 +125,7 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
 				<div class="rated_course_block">
-					<h3>Top Rated Courses</h3>
+					<h4>Top 5 Rated Courses</h4>
 					<div class="table-responsive">
 						<div class="scroll_topcourse">
 							<table class="table table-hover" style="width:100%">
@@ -215,10 +215,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6">
 				<div class="users_block">
-					<h3>Top Learners
-						<br>
-						<span>Courses</span>
-					</h3>
+					<h4>Top 5 Learners Courses</h4>
 					<div class="clearfix"></div>
 					<div class="courses_li">
 						<ul>
@@ -301,10 +298,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6">
 				<div class="users_block instructor_block">
-					<h3>Top Instructors
-						<br>
-						<span>Created Courses</span>
-					</h3>
+					<h4>Top 5 Instructors Created Courses</h4>
 					<div class="users" *ngFor="let instructor of topInstructors; let i = index">
 						<div class="img_box" *ngIf="instructor.ProfileImage!='' && instructor.ProfileImage!=NULL">
 							<img src="assets/UserImages/{{instructor.ProfileImage}}" alt="{{instructor.ProfileImage}}" class="img-responsive" />
@@ -433,7 +427,7 @@
 
 			<div class="col-md-6 col-sm-12">
 				<div class="invited_user_block">
-					<h3>Recent 5 Invitations</h3>
+					<h4>Recent 5 Invitations</h4>
 					<div class="table-responsive">
 						<div class="scroll_invitetbl">
 							<table class="table table-hover" style="width:100%">
@@ -488,7 +482,7 @@
 
 			<div class="col-md-6 col-sm-12">
 				<div class="audit_block">
-					<h3>Recent Activities</h3>
+					<h4>Recent 5 Activities</h4>
 					<div class="audit_box" *ngFor="let activity of recentActivity; let i = index">
 						<div class="title">
 							<span class="dot"></span>{{activity.Activity}} ({{activity.Module}})

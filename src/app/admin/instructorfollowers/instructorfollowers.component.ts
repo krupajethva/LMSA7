@@ -90,6 +90,7 @@ export class InstructorfollowersComponent implements OnInit {
           $('.buttons-print').attr('data-original-title', 'Print').tooltip();
         }, 100);
         this.InstructorFollowersList = data;
+        console.log(this.InstructorFollowersList);
         //this.globals.isLoading = false;	
       },
         (error) => {
