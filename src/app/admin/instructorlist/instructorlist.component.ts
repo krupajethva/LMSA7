@@ -118,4 +118,23 @@ export class InstructorlistComponent implements OnInit {
 
     }
   }
+
+  //Clear Form for instructor search
+  clearForm(InstructorForm)
+  {
+    this.globals.isLoading = true;
+    var obj = { 'LearnerId': this.globals.authData.UserId };
+    this.InstructorfollowersService.getAllInstructors(obj)
+      .then((data) => {
+        this.InstructorList = data;
+        this.InstructorEntity = {};
+        this.globals.isLoading = false;
+        InstructorForm.form.markAsPristine();
+      },
+        (error) => {
+          // this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
+    
+  }
 }

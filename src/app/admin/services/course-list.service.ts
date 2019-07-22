@@ -43,7 +43,8 @@ export class CourseListService {
     });		
     return promise;
     } 
-    getInstWise(UserId){ 
+    // Display instructor wise course
+    /*getInstWise(UserId){ 
       debugger
       let promise = new Promise((resolve, reject) => {
         this.http.get(this.globals.baseAPIUrl + 'Courselist/getInstWise/' + UserId )
@@ -60,7 +61,7 @@ export class CourseListService {
           );
       });		
       return promise;
-      }
+      }*/
       getAllCourseDetail(Id){ 
         debugger
         let promise = new Promise((resolve, reject) => {

@@ -175,7 +175,8 @@ class Courselist_model extends CI_Model
 		return false;
 	}	
 	}
-	function getInstWiseList($User_Id = NULL)
+	// Display instructor wise course
+	/*function getInstWiseList($User_Id = NULL)
 	{
 	try{
 		$result = $this->db->query('select cp.CourseId,cp.CourseId,cp.CourseFullName,cp.CategoryId,cp.Description,cp.Price,rs.InstructorId as Fid,rs.FilePath,(SELECT ROUND(AVG(Rating),1) from tblcoursereview where CourseId = cp.CourseId) as reviewavg
@@ -215,7 +216,7 @@ class Courselist_model extends CI_Model
 		trigger_error($e->getMessage(), E_USER_ERROR);
 		return false;
 		}	
-	}
+	}*/
 	function getCourseDetailList($post_getAllCourseDetail)
 	{
 	try{

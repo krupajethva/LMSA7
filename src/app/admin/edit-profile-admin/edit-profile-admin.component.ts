@@ -83,6 +83,7 @@ export class EditProfileAdminComponent implements OnInit {
 		this.CompanyEntity = {};
 		this.IndustryEntity = {};
 		this.EducationEntity = {};
+		this.CertificateEntity = {};
 		debugger
 		this.EditProfileService.getDefaultData()
 			.then((data) => {
@@ -846,6 +847,7 @@ export class EditProfileAdminComponent implements OnInit {
 		this.btn_disable2 = false;
 		this.submitted2 = false;
 		this.same = false;
+		this.oldnewsame = false;
 		this.newpassEntity = {};
 		newpassForm.form.markAsPristine();
 	}

@@ -33,7 +33,9 @@ class Courselist extends CI_Controller
 			echo json_encode($result);				
 		}			
 	}
-	public function getInstWise($User_Id = NULL) {
+
+	// Display instructor wise course
+	/*public function getInstWise($User_Id = NULL) {
 		
 		if(!empty($User_Id)) {					
 			
@@ -42,7 +44,7 @@ class Courselist extends CI_Controller
 			//print_r($result);		
 			echo json_encode($result);				
 		}			
-	}
+	}*/
 	public function getAllCourseDetail() {
 		
 		$post_getAllCourseDetail = json_decode(trim(file_get_contents('php://input')), true);

@@ -70,7 +70,7 @@ export class LearnerCoursesComponent implements OnInit {
 				  500);
 	}
 	taketest(sessionId)
-	{		alert(sessionId);
+	{		
 		if(sessionId)
 		{
 			var assessment = { 'sessionId': sessionId,'learner': this.globals.authData.UserId };

@@ -28,7 +28,7 @@
 <div class="content_block">
   <div class="row">
     <div class="col-md-12 pull-right">
-      <div class="col-md-12 col-sm-12">
+      <div class="col-md-11 col-sm-11">
         <div class="instructor_search">
           <div class="instructor_search_box">
             <form action="/action_page.php" #InstructorForm="ngForm" (ngSubmit)="SearchInstructor(InstructorForm)">
@@ -45,6 +45,7 @@
           <div class="clearfix"></div>
         </div>
       </div>
+      <button class="next_btn m_5" (click)="clearForm(InstructorForm)" type="submit">Clear</button>
     </div>
   </div>
   <div class="row">

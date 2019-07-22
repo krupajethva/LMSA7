@@ -411,7 +411,8 @@ class InstructorFollowers_model extends CI_Model
 				"
 				);
 				if (count($userArr) > 0) {
-					$this->db->or_where_in('u.UserId', $userArr);
+					//$this->db->or_where_in('u.UserId', $userArr);
+					$this->db->where_in('u.UserId', $userArr);
 				}
 			}
 

@@ -88,7 +88,8 @@ export class CourseListComponent implements OnInit {
           this.globals.isLoading = false;
         });
   }
-  InstWise(UserId, i) {
+  // Display instructor wise course
+  /*InstWise(UserId, i) {
     debugger
     this.globals.isLoading = true;
     this.CourseListService.getInstWise(UserId)
@@ -105,7 +106,7 @@ export class CourseListComponent implements OnInit {
           this.globals.isLoading = false;
 
         });
-  }
+  } */
   // clear form
   clearData(CourseFilterForm) { 
     this.globals.isLoading = true;
