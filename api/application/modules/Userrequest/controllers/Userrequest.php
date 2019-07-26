@@ -10,7 +10,7 @@ class Userrequest extends CI_Controller {
 		$this->load->model('Userrequest_model');
 	}
 	
-	public function addUser()
+	/*public function addUser()
 	{  
 		$post_user = json_decode(trim(file_get_contents('php://input')), true);
 		if ($post_user) 
@@ -275,7 +275,7 @@ class Userrequest extends CI_Controller {
 				 }
 					
 			}
-	}
+	}*/
 
 
 	public function getAllUserList()

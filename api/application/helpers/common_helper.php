@@ -63,6 +63,16 @@ if (!function_exists('getSmtpDetails')) {
                 
             $res['smtpEmail']=$smtpEmail;
             $res['smtpPassword']=$smtpPassword;
+            $config['protocol']='smtp';
+            $config['smtp_host']=SMTP_HOST;
+            $config['smtp_port']=SMTP_PORT;
+            $config['smtp_user']=$smtpEmail;
+            $config['smtp_pass']=$smtpPassword;
+
+            $config['charset']='utf-8';
+            $config['newline']="\r\n";
+            $config['mailtype'] = 'html';                           
+            $CI->email->initialize($config);
             if($res){
                 return $res;
             }
@@ -88,22 +98,40 @@ if (!function_exists('getEmailDetails')) {
             $query = $CI->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '".$EmailToken."' && et.IsActive = 1");
             $res=$query->result();
             $row=$res[0];
-            if($row->To==5 || $row->To==4 || $row->To==3 ){
+            if($EmailToken == 'Forgot Password' || $EmailToken == 'Reset Password' || $EmailToken == 'Change Password' || $EmailToken == 'Open Invitation'  || $EmailToken == 'Registration Complete')
+            {
                 $queryTo = $CI->db->query('SELECT EmailAddress FROM tbluser where UserId = '.$UserId); 
                 $rowTo = $queryTo->result();
                 $Email_address = $rowTo[0]->EmailAddress;
             }
             else
             {
-                $userId_ar = explode(',', $row->totalTo);	
-                $email_address = array();
-                    foreach($userId_ar as $userId){
-                    $queryTo = $CI->db->query('SELECT EmailAddress FROM tbluser where UserId = '.$userId); 
+                if($row->To==5 || $row->To==4 || $row->To==3 ){
+                    $queryTo = $CI->db->query('SELECT EmailAddress FROM tbluser where UserId = '.$UserId); 
                     $rowTo = $queryTo->result();
-                    array_push($email_address,$rowTo[0]->EmailAddress);
-                    }
-                    $Email_address = implode(',',$email_address);
+                    $Email_address = $rowTo[0]->EmailAddress;
+                }
+                else if($row->To==1 || $row->To==2){
+                    $queryTo = $CI->db->query('SELECT EmailAddress,RoleId FROM tbluser where RoleId in ('.$UserId.') '); 
+                    $email_address = array();
+                        foreach($queryTo->result() as $row1){                        
+                            array_push($email_address,$row1->EmailAddress);
+                        }
+                        $Email_address = implode(',',$email_address);
+                }
+                else
+                {
+                    $userId_ar = explode(',', $row->totalTo);	
+                    $email_address = array();
+                        foreach($userId_ar as $userId){
+                        $queryTo = $CI->db->query('SELECT EmailAddress FROM tbluser where UserId = '.$userId); 
+                        $rowTo = $queryTo->result();
+                        array_push($email_address,$rowTo[0]->EmailAddress);
+                        }
+                        $Email_address = implode(',',$email_address);
+                }
             }
+            
                 
                 $query1 = $CI->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
                 $body = $row->EmailBody;  

@@ -51,79 +51,27 @@ class Instructor extends CI_Controller
 		
 		$post_data = json_decode(trim(file_get_contents('php://input')), true);	
 		if ($post_data) {
+			$smtpDetails = getSmtpDetails(); //get smtp details 
 			$result = $this->Instructor_model->isActiveChange($post_data);
 			if($result) {
 				$userId=$post_data['UserId'];
-				$EmailToken = 'Activation of Instructor by Admin';
-
-				$this->db->select('Value');
-				$this->db->where('Key','EmailFrom');
-				$smtp1 = $this->db->get('tblmstconfiguration');	
-				foreach($smtp1->result() as $row) {
-					$smtpEmail = $row->Value;
-				}
-				$this->db->select('Value');
-				$this->db->where('Key','EmailPassword');
-				$smtp2 = $this->db->get('tblmstconfiguration');	
-				foreach($smtp2->result() as $row) {
-					$smtpPassword = $row->Value;
-				}
+				if($post_data['IsActive'] == 1)
+					$EmailToken = 'Activation of Instructor by Admin';
+				else
+					$EmailToken = 'Activation of Instructor by Admin'; //change that email token
+				$res=new stdClass();
+				$res->loginUrl = BASE_URL.'/login/';
 				
-				$config['protocol']=PROTOCOL;
-				$config['smtp_host']=SMTP_HOST;
-				$config['smtp_port']=SMTP_PORT;
-				$config['smtp_user']=$smtpEmail;
-				$config['smtp_pass']=$smtpPassword;
-
-				$config['charset']='utf-8';
-				$config['newline']="\r\n";
-				$config['mailtype'] = 'html';							
-				$this->email->initialize($config);
-		
-				$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '".$EmailToken."' && et.IsActive = 1");
-			
-				foreach($query->result() as $row){ 
-					if($row->To==3){
-					$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = '.$userId); 
-					$rowTo = $queryTo->result();
-					$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
-					$body = $row->EmailBody;
-					if($row->BccEmail!=''){
-						$bcc = $row->BccEmail.','.$row->totalbcc;
-					} else {
-						$bcc = $row->totalbcc;
-					}
-					
-					$body = str_replace("{ link }",''.BASE_URL.'/login/',$body);
-					$this->email->from($smtpEmail, 'LMS Admin');
-					$this->email->to($rowTo[0]->EmailAddress);		
-					$this->email->subject($row->Subject);
-					$this->email->cc($row->totalcc);
-					$this->email->bcc($bcc);
-					$this->email->message($body);
-					if($this->email->send())
-					{
-						$email_log = array(
-							'From' => trim($smtpEmail),
-							'Cc' => '',
-							'Bcc' => '',
-							'To' => trim($rowTo[0]->EmailAddress),
-							'Subject' => trim($row->Subject),
-							'MessageBody' => trim($body),
-						);
-						$res = $this->db->insert('tblemaillog',$email_log);
-						echo json_encode("Success");
-					}else
-					{
-						//echo json_encode("Fail");
-					}
-				}  
+				$EmailDetails = getEmailDetails($EmailToken,$userId); //get email details by user id
+				$body = $EmailDetails['EmailBody'];
+                $FormattedBody = getFormattedBody($res ,$body);
 				
-			}			
+				// send email to particular email
+                $send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
+				echo json_encode("Success");		
 		}
 		else
 		{
-			
 			echo json_encode('fail');
 		}		
 	}

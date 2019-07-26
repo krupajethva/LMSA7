@@ -235,16 +235,7 @@ class EditProfile extends CI_Controller
 		if ($post_pass)
 		{	
 			$smtpDetails = getSmtpDetails();
-            $config['protocol']='smtp';
-            $config['smtp_host']=SMTP_HOST;
-            $config['smtp_port']=SMTP_PORT;
-            $config['smtp_user']=$smtpDetails['smtpEmail'];
-            $config['smtp_pass']=$smtpDetails['smtpPassword'];
-
-            $config['charset']='utf-8';
-            $config['newline']="\r\n";
-            $config['mailtype'] = 'html';                           
-			$this->email->initialize($config);		
+            
 
 			$result = $this->EditProfile_model->change_password($post_pass);
 			if($result){
@@ -259,7 +250,7 @@ class EditProfile extends CI_Controller
 					$EmailAddress = $row->EmailAddress;
 				}
 				
-				$res=new \stdClass();
+				$res=new stdClass();
 				$res->loginUrl = BASE_URL . '/login/';
 				$EmailToken = 'Change Password';
 				$EmailDetails = getEmailDetails($EmailToken,$userId);

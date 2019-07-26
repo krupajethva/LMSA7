@@ -6,13 +6,13 @@ if (!function_exists('getFormattedBody')) {
         $CI = & get_instance();
         try{
             $CurrentYear = date("Y");
-             $data = json_decode(json_encode($res), True);
-            // $LineManager = (isset($data['LineManager'])?$data['LineManager']:'Not assigned');
-            // $Password = (isset($data['Password'])?$data['Password']:'');
-            // $Requester = (isset($data['Requester'])?$data['Requester']:'');
-            // $ForgotUrl = (isset($data['forgotUrl'])?$data['forgotUrl']:'');
-            // $HrName = (isset($data['HrName'])?$data['HrName']:'');
-            // $UserName = (isset($data['UserName'])?$data['UserName']:'');
+            $data = json_decode(json_encode($res), True);
+            $EmailAddress = (isset($data['EmailAddress'])?$data['EmailAddress']:'');
+            $FirstName = (isset($data['FirstName'])?$data['FirstName']:'');
+            $LastName = (isset($data['LastName'])?$data['LastName']:'');
+            $RoleName = (isset($data['RoleName'])?$data['RoleName']:'');
+            $Text = (isset($data['Text'])?$data['Text']:'');
+            $Button_text = (isset($data['Button_text'])?$data['Button_text']:'');
             // $EvaluationName = (isset($data['EvaluationName'])?$data['EvaluationName']:'');
             // $EvaluationTypeName = (isset($data['EvaluationTypeName'])?$data['EvaluationTypeName']:'');
             // $EvaluationOf = (isset($data['EvaluationOf'])?$data['EvaluationOf']:'');
@@ -29,13 +29,13 @@ if (!function_exists('getFormattedBody')) {
             // $ContactPhoneNo = (isset($data['ContactPhoneNo'])?$data['ContactPhoneNo']:'');
             // $ContactMessage = (isset($data['ContactMessage'])?$data['ContactMessage']:'');
 
-             $body = str_replace("{ link }",$data['loginUrl'],$body);
-            // $body = str_replace("{LineManager}",$LineManager,$body);
-            // $body = str_replace("{Password}",$Password,$body);
-            // $body = str_replace("{logo_url}",''.BASE_URL.'/assets/images/oeti.png',$body);
-            // $body = str_replace("{key_url}",''.BASE_URL.'/assets/images/users_lock.jpg',$body);
-            // $body = str_replace("{forgot_url}",$ForgotUrl,$body);
-            // $body = str_replace("{current_year}",$CurrentYear,$body);
+            $body = str_replace("{ link }",$data['loginUrl'],$body);
+            $body = str_replace("{ email_address }",$EmailAddress,$body);
+            $body = str_replace("{ first_name }",$FirstName,$body);
+            $body = str_replace("{ last_name }",$LastName,$body);
+            $body = str_replace("{ role }",$RoleName,$body);
+            $body = str_replace("{text}",$Text,$body);
+            $body = str_replace("{button_text}",$Button_text,$body);
             // $body = str_replace("{requester}",$Requester,$body);
             // $body = str_replace("{hrName}",$HrName,$body);
             // $body = str_replace("{userName}",$UserName,$body);
