@@ -81,7 +81,7 @@ class EditProfile extends CI_Controller
 		if($_FILES){
 			if(isset($_FILES['Signature']) && !empty($_FILES['Signature'])){
 				$fileName = $_FILES["Signature"]["name"];
-				$directoryName = "../src/assets/Instructor/" . $UserId . "/Signature/";
+				$directoryName = "../assets/Instructor/" . $UserId . "/Signature/";
 				$source_file = $_FILES["Signature"]["tmp_name"];
 				$target_file = $directoryName . $fileName;
 				if(!is_dir($directoryName)){
@@ -120,7 +120,7 @@ class EditProfile extends CI_Controller
 						if(isset($_FILES['Certificate'.$i]) && !empty($_FILES['Certificate'.$i]))
 						{
 							$fileName = $_FILES["Certificate".$i]["name"];
-							$directoryName = "../src/assets/Instructor/" . $UserId . "/EducationCertificate/";
+							$directoryName = "../assets/Instructor/" . $UserId . "/EducationCertificate/";
 							$source_file = $_FILES["Certificate".$i]["tmp_name"];
 							$target_file = $directoryName . $fileName;
 							if(!is_dir($directoryName)){
@@ -148,7 +148,7 @@ class EditProfile extends CI_Controller
 				if($post_Certificate['id'] > 0){
 					$result = $this->EditProfile_model->deleteCertificate($post_Certificate);
 					if($result) {		
-						unlink("../src/assets/Instructor/". $post_Certificate['Userid'] ."/EducationCertificate/".$post_Certificate['Name']);				
+						unlink("../assets/Instructor/". $post_Certificate['Userid'] ."/EducationCertificate/".$post_Certificate['Name']);				
 						echo json_encode("Delete successfully");
 						}
 				 }				
