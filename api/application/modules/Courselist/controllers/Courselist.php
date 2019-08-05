@@ -243,72 +243,26 @@ class Courselist extends CI_Controller
 		}			
 	}
 	public function shareCourse()
-		{				 		
+	{				 		
 		$post_data = json_decode(trim(file_get_contents('php://input')), true);		
+		$smtpDetails = getSmtpDetails(); //get smtp details 
 		if ($post_data)
-			{
-					 $EmailToken = 'Share Course';
-
-					 $this->db->select('Value');
-					 $this->db->where('Key','EmailFrom');
-					 $smtp1 = $this->db->get('tblmstconfiguration');	
-					 foreach($smtp1->result() as $row) {
-						 $smtpEmail = $row->Value;
-					 }
-					 $this->db->select('Value');
-					 $this->db->where('Key','EmailPassword');
-					 $smtp2 = $this->db->get('tblmstconfiguration');	
-					 foreach($smtp2->result() as $row) {
-						 $smtpPassword = $row->Value;
-					 }
-					 
-					$config['protocol']=PROTOCOL;
-					$config['smtp_host']=SMTP_HOST;
-					$config['smtp_port']=SMTP_PORT;
-					$config['smtp_user']=$smtpEmail;
-					$config['smtp_pass']=$smtpPassword;
-				 
-					 $config['charset']='utf-8';
-					 $config['newline']="\r\n";
-					 $config['mailtype'] = 'html';							
-					 $this->email->initialize($config);
-			 
-					 $query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '".$EmailToken."' && et.IsActive = 1");
-					
-					 foreach($query->result() as $row){ 
-						 if($row->To==4){
-						 $body = $row->EmailBody;
-						$body = str_replace("{ first_name }",$post_data['FirstName'],$body);
-						$body = str_replace("{ last_name }",$post_data['LastName'],$body);
-						$body = str_replace("{ course_name }",$post_data['courseName'],$body);
-						$body = str_replace("{ course_skills }",$post_data['skills'],$body);
-						$body = str_replace("{ course_price }",$post_data['price'],$body);
-						$body = str_replace("{ link }",''.BASE_URL.'/course-detail/'.$post_data['CourseId'].'',$body);
-						 $this->email->from($smtpEmail, 'LMS Admin');
-						 $this->email->to($post_data['EmailAddress']);		
-						 $this->email->subject($row->Subject);
-						 $this->email->cc($row->totalcc);
-						 $this->email->bcc($bcc);
-						 $this->email->message($body);
-						 if($this->email->send())
-						 {
-							$email_log = array(
-								'From' => trim($smtpEmail),
-								'Cc' => '',
-								'Bcc' => '',
-								'To' => trim($EmailAddress),
-								'Subject' => trim($row->Subject),
-								'MessageBody' => trim($body),
-							);
-							$res = $this->db->insert('tblemaillog',$email_log);	
-							
-						 }else
-						 {
-							 //echo json_encode("Fail");
-						 }
-					 }  
-				 }
-				 echo json_encode('Success'); 	
+		{
+			$res=new stdClass();
+			$res->loginUrl = ''.BASE_URL.'/course-detail/'.$post_data['CourseId'].'';
+			$res->FirstName = $post_data['FirstName'];
+			$res->LastName = $post_data['LastName'];
+			$res->courseName = $post_data['courseName'];
+			$res->skills = $post_data['skills'];
+			$res->price = $post_data['price'];
+			$EmailToken = 'Share Course';
+			$EmailDetails = getEmailDetails($EmailToken,"''"); //get email details by user id
+			$body = $EmailDetails['EmailBody'];
+			$FormattedBody = getFormattedBody($res ,$body);
+			
+			// send email to particular email
+			$send = SendEmail($smtpDetails['smtpEmail'], $post_data['EmailAddress'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
+			echo json_encode('Success'); 	
 		}
 		
 	}

@@ -109,7 +109,10 @@ if (!function_exists('getEmailDetails')) {
                 if($row->To==5 || $row->To==4 || $row->To==3 ){
                     $queryTo = $CI->db->query('SELECT EmailAddress FROM tbluser where UserId = '.$UserId); 
                     $rowTo = $queryTo->result();
-                    $Email_address = $rowTo[0]->EmailAddress;
+                    if($rowTo)
+                        $Email_address = $rowTo[0]->EmailAddress;
+                    else
+                        $Email_address = '';
                 }
                 else if($row->To==1 || $row->To==2){
                     $queryTo = $CI->db->query('SELECT EmailAddress,RoleId FROM tbluser where RoleId in ('.$UserId.') '); 
