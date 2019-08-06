@@ -549,10 +549,11 @@ class InstructorCourses extends CI_Controller
 								
 								// send email to particular email
 								$send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
-								echo json_encode('true');
+								
 							}
 						}
 					}
+					echo json_encode('true');
 				}
 			}
 		}
