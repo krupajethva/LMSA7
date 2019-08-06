@@ -21,6 +21,10 @@ import { IndustryComponent } from './industry/industry.component';
 import { IndustrylistComponent } from './industrylist/industrylist.component';
 
 
+import { InboxPreviewNewComponent } from './inbox-preview-new/inbox-preview-new.component';
+
+import { InboxNewComponent } from './inbox-new/inbox-new.component';
+
 import { PipePipe } from './pipe/pipe.pipe';
 
 import { DatePipePipe } from './datepipe/date-pipe.pipe';
@@ -173,6 +177,8 @@ import { InstructorfollowingsComponent } from './instructorfollowings/instructor
 		InvitationacceptdeclineComponent,
 		InstructorlistComponent,
 		InstructorfollowingsComponent,
+		InboxNewComponent,
+		InboxPreviewNewComponent,
 	],
 	imports: [
 		//BrowserModule,
