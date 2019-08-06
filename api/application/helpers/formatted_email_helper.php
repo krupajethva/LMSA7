@@ -21,9 +21,9 @@ if (!function_exists('getFormattedBody')) {
             $SessionName = (isset($data['SessionName'])?$data['SessionName']:'');
             $InstructorName = (isset($data['InstructorName'])?$data['InstructorName']:'');
             $login_url = (isset($data['loginUrl'])?$data['loginUrl']:'');
-            // $ExtendedDays = (isset($data['ExtendedDays'])?$data['ExtendedDays']:'');
-            // $EvaluationStartDate = (isset($data['EvaluationStartDate'])?$data['EvaluationStartDate']:'');
-            // $EvaluationEndDate = (isset($data['EvaluationEndDate'])?$data['EvaluationEndDate']:'');
+            $courseName = (isset($data['courseName'])?$data['courseName']:'');
+            $skills = (isset($data['skills'])?$data['skills']:'');
+            $price = (isset($data['price'])?$data['price']:'');
             // $JoiningDate = (isset($data['JoiningDate'])?$data['JoiningDate']:'');
             // $ContactEmail = (isset($data['ContactEmail'])?$data['ContactEmail']:'');
             // $ContactPhoneNo = (isset($data['ContactPhoneNo'])?$data['ContactPhoneNo']:'');
@@ -44,9 +44,9 @@ if (!function_exists('getFormattedBody')) {
             $body = str_replace("{ SessionName }",$SessionName,$body);
             $body = str_replace("{ InstructorName }",$InstructorName,$body);
             $body = str_replace("{login_url}",$login_url,$body);
-            // $body = str_replace("{hrComment}",$HrComments,$body);
-            // $body = str_replace("{currentExpiryDate}",$CurrentExpiryDate,$body);
-            // $body = str_replace("{extendedExpiryDate}",$ExtendedExpiryDate,$body);
+            $body = str_replace("{ course_name }",$courseName,$body);
+            $body = str_replace("{ course_skills }",$skills,$body);
+            $body = str_replace("{ course_price }",$price,$body);
             // $body = str_replace("{extendedDays}",$ExtendedDays,$body);
             // $body = str_replace("{startDate}",$EvaluationStartDate,$body);
             // $body = str_replace("{expiryDate}",$EvaluationEndDate,$body);
