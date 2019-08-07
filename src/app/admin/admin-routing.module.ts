@@ -18,6 +18,9 @@ import { IndustryComponent } from './industry/industry.component';
 import { IndustrylistComponent } from './industrylist/industrylist.component';
 import { IndustryService } from './services/industry.service';
 
+
+import { InboxNewComponent } from './inbox-new/inbox-new.component';
+
 import { RegisterAdminInvitedComponent } from './register-admin-invited/register-admin-invited.component';
 import { RegisterAdminInvitedService } from './services/register-admin-invited.service';
 
@@ -140,6 +143,9 @@ import { InstructorCoursesService } from './services/instructor-courses.service'
 import { InboxComponent } from './inbox/inbox.component';
 import { InboxService } from './services/inbox.service';
 
+
+import { InboxPreviewNewComponent } from './inbox-preview-new/inbox-preview-new.component';
+
 import { InboxPreviewComponent } from './inbox-preview/inbox-preview.component';
 
 import { CourseDiscussionComponent } from './course-discussion/course-discussion.component';
@@ -196,7 +202,7 @@ const routes: Routes = [
 				{ path : 'industry/edit/:id', component : IndustryComponent ,canActivate : [AuthGuard]},
 			//	{ path : 'register-admin-invited/edit/:id', component : RegisterAdminInvitedComponent ,canActivate : [AuthGuard]},
 				{ path : 'user-activation/:id', component : UserActivationComponent,canActivate : [AuthGuard] },
-				{ path : 'open-register-instructor', component : OpeninstructorComponent ,canActivate : [AuthGuard]},
+			//	{ path : 'open-register-instructor', component : OpeninstructorComponent ,canActivate : [AuthGuard]},
 				{ path : 'activity-list', component : ActivityListComponent ,canActivate : [AuthGuard]},
 				{ path : 'loginlog', component : LoginlogComponent ,canActivate : [AuthGuard]},
 				{ path : 'emaillog', component : EmaillogComponent ,canActivate : [AuthGuard]},
@@ -236,6 +242,8 @@ const routes: Routes = [
 				{ path : 'reset-password/:id', component : ResetpasswordComponent,canActivate : [AuthGuard] },
 				{ path : 'edit-profile-admin', component : EditProfileAdminComponent,canActivate : [AuthGuard] },
 				{ path : 'inbox', component : InboxComponent,canActivate : [AuthGuard] },
+				{ path : 'inbox-new', component : InboxNewComponent,canActivate : [AuthGuard] },
+				{ path : 'inbox-preview-new', component : InboxPreviewNewComponent,canActivate : [AuthGuard] },
 				{ path : 'inbox/:id', component : InboxComponent,canActivate : [AuthGuard] },
 				{ path : 'inbox-preview/:id', component : InboxPreviewComponent,canActivate : [AuthGuard] },
 				{ path : 'course-discussion/:id', component : CourseDiscussionComponent,canActivate : [AuthGuard] },

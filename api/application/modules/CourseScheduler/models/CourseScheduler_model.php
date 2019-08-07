@@ -16,35 +16,11 @@ class CourseScheduler_model extends CI_Model
 				$this->db->where('CourseId', $CourseId);
 				$result_course = $this->db->get('tblcourse');
 				$course = json_decode(json_encode($result_course->result()), True);
-				$this->db->select('Value');
-				$this->db->where('Key', 'EmailFrom');
-				$smtp1 = $this->db->get('tblmstconfiguration');
-
-				foreach ($smtp1->result() as $row) {
-					$smtpEmail = $row->Value;
-				}
-				$this->db->select('Value');
-				$this->db->where('Key', 'EmailPassword');
-				$smtp2 = $this->db->get('tblmstconfiguration');
-				foreach ($smtp2->result() as $row) {
-					$smtpPassword = $row->Value;
-				}
-
-				$config['protocol'] = PROTOCOL;
-				$config['smtp_host'] = SMTP_HOST;
-				$config['smtp_port'] = SMTP_PORT;
-				$config['smtp_user'] = $smtpEmail;
-				$config['smtp_pass'] = $smtpPassword;
-
-				$config['charset'] = 'utf-8';
-				$config['newline'] = "\r\n";
-				$config['mailtype'] = 'html';
-				$this->email->initialize($config);
 				
 				$smtpDetails = getSmtpDetails(); //get smtp details 
 
 				foreach ($post_Courseschedular as $Courseschedular) {
-					if ($Courseschedular['CourseSessionId'] > 0) {
+					if ($Courseschedular['CourseSessionId'] > 0) { 
 						$weekday = '';
 
 						if ($Courseschedular['Showstatus'] == 1) {
@@ -194,142 +170,43 @@ class CourseScheduler_model extends CI_Model
 							FROM tbluser WHERE UserId IN (' . $fatch . ')');
 							$user_Result = $user->result();
 							$deleteName = $user_Result[0]->deletename;
+							$res=new stdClass();
+							$res->loginUrl = BASE_URL . '/login/';
+							$res->CourseFullName = $course[0]['CourseFullName'];
+							$res->StartDate = $Courseschedular['StartDate'];
+							$res->InstructorName = $deleteName;
+							$res->SessionName = $Courseschedular['SessionName'];
+							
 
 							foreach ($old_data1 as $deleterow) {
 								if (in_array($deleterow, $old_data)) {
-									$SessionName = $Courseschedular['SessionName'];
-									$StartDate = $Courseschedular['StartDate'];
-									$CourseName = $course[0]['CourseFullName'];
+									
 									$EmailToken = 'Instructor Delete';
-									$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
-
-									foreach ($query->result() as $row) {
-										if ($row->To == 4 || $row->To == 3) {
-											$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $deleterow);
-											$rowTo = $queryTo->result();
-											$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
-											$body = $row->EmailBody;
-
-											if ($row->BccEmail != '') {
-												$bcc = $row->BccEmail . ',' . $row->totalbcc;
-											} else {
-												$bcc = $row->totalbcc;
-											}
-											$body = str_replace("{ CourseFullName }", $CourseName, $body);
-											$body = str_replace("{ StartDate }", $StartDate, $body);
-											$body = str_replace("{ InstructorName }", $deleteName, $body);
-											$body = str_replace("{ SessionName }", $SessionName, $body);
-											$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
-											$this->email->from($smtpEmail, 'LMS Admin');
-											$this->email->to($rowTo[0]->EmailAddress);
-											$this->email->subject($row->Subject);
-											$this->email->cc($row->totalcc);
-											$this->email->bcc($bcc);
-											$this->email->message($body);
-											if ($this->email->send()) {
-												$email_log = array(
-													'From' => trim($smtpEmail),
-													'Cc' => '',
-													'Bcc' => '',
-													'To' => trim($rowTo[0]->EmailAddress),
-													'Subject' => trim($row->Subject),
-													'MessageBody' => trim($body),
-												);
-												$res = $this->db->insert('tblemaillog', $email_log);
-											} else {
-												// echo json_encode('fail');
-											}
-										}
-									}
+									$EmailDetails = getEmailDetails($EmailToken,$deleterow); //get email details by user id
+									$body = $EmailDetails['EmailBody'];
+									$FormattedBody = getFormattedBody($res ,$body);
+									
+									// send email to particular email
+									$send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
 								} else {
-									$SessionName = $Courseschedular['SessionName'];
-									$StartDate = $Courseschedular['StartDate'];
-									$CourseName = $course[0]['CourseFullName'];
 									$EmailToken = 'Instructor Delete';
-									$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
-
-									foreach ($query->result() as $row) {
-										if ($row->To == 4 || $row->To == 3) {
-											$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $deleterow);
-											$rowTo = $queryTo->result();
-											$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
-											$body = $row->EmailBody;
-
-											if ($row->BccEmail != '') {
-												$bcc = $row->BccEmail . ',' . $row->totalbcc;
-											} else {
-												$bcc = $row->totalbcc;
-											}
-											$body = str_replace("{ CourseFullName }", $CourseName, $body);
-											$body = str_replace("{ StartDate }", $StartDate, $body);
-											$body = str_replace("{ InstructorName }", $deleteName, $body);
-											$body = str_replace("{ SessionName }", $SessionName, $body);
-											$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
-											$this->email->from($smtpEmail, 'LMS Admin');
-											$this->email->to($rowTo[0]->EmailAddress);
-											$this->email->subject($row->Subject);
-											$this->email->cc($row->totalcc);
-											$this->email->bcc($bcc);
-											$this->email->message($body);
-											if ($this->email->send()) {
-												$email_log = array(
-													'From' => trim($smtpEmail),
-													'Cc' => '',
-													'Bcc' => '',
-													'To' => trim($rowTo[0]->EmailAddress),
-													'Subject' => trim($row->Subject),
-													'MessageBody' => trim($body),
-												);
-												$res = $this->db->insert('tblemaillog', $email_log);
-											} else {
-												// echo json_encode('fail');
-											}
-										}
-									}
+									$EmailDetails = getEmailDetails($EmailToken,$deleterow); //get email details by user id
+									$body = $EmailDetails['EmailBody'];
+									$FormattedBody = getFormattedBody($res ,$body);
+									
+									// send email to particular email
+									$send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
+						
 									//array_push($array_match,$row);
 									if ($Courseschedular['Check'] == 1) {
 										$resultTo = $this->db->query('SELECT UserId from tblcourseuserregister where CourseSessionId=' . $Courseschedular['CourseSessionId']);
 										$ToEmaillearner = $resultTo->result();
 										if ($ToEmaillearner) {
 											foreach ($ToEmaillearner as $tolearner) {
-												foreach ($query->result() as $row) {
-													if ($row->To == 4 || $row->To == 3) {
-														$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $tolearner->UserId);
-														$rowTo = $queryTo->result();
-														$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
-														$body = $row->EmailBody;
-
-														if ($row->BccEmail != '') {
-															$bcc = $row->BccEmail . ',' . $row->totalbcc;
-														} else {
-															$bcc = $row->totalbcc;
-														}
-														$body = str_replace("{ CourseFullName }", $CourseName, $body);
-														$body = str_replace("{ StartDate }", $StartDate, $body);
-														$body = str_replace("{ InstructorName }", $deleteName, $body);
-														$body = str_replace("{ SessionName }", $SessionName, $body);
-														$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
-														$this->email->from($smtpEmail, 'LMS Admin');
-														$this->email->to($rowTo[0]->EmailAddress);
-														$this->email->subject($row->Subject);
-														$this->email->cc($row->totalcc);
-														$this->email->bcc($bcc);
-														$this->email->message($body);
-														if ($this->email->send()) {
-															$email_log = array(
-																'From' => trim($smtpEmail),
-																'Cc' => '',
-																'Bcc' => '',
-																'To' => trim($rowTo[0]->EmailAddress),
-																'Subject' => trim($row->Subject),
-																'MessageBody' => trim($body),
-															);
-															$res = $this->db->insert('tblemaillog', $email_log);
-														} else {
-															// echo json_encode('fail');
-														}
-													}
-												}
+												$EmailDetails = getEmailDetails($EmailToken,$tolearner->UserId); //get email details by user id
+												$body = $EmailDetails['EmailBody'];
+												$FormattedBody = getFormattedBody($res ,$body);
+												$send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
 											}
 										} else { }
 									} else { }
@@ -351,54 +228,21 @@ class CourseScheduler_model extends CI_Model
 										find_in_set(us.UserId, Creg.UserId) AND coin.Approval=1 AND Creg.CourseSessionId=' . $Courseschedular["CourseSessionId"] . ' GROUP BY us.EmailAddress');
 								$ToEmaillearner = $resultTo->result();
 								if ($ToEmaillearner) {
-
-									$EmailToken = 'Course Republished Enrolees';
-									$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
-
 									foreach ($ToEmaillearner as $tolearner) {
-										$CourseFullName = $tolearner->CourseFullName;
-										$StartDate = $tolearner->StartDate;
-										$StartTime = $tolearner->StartTimeChange;
-										$InstructorName = $tolearner->instName;
-										foreach ($query->result() as $row) {
-											if ($row->To == 4 || $row->To == 3) {
-												$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $tolearner->UserId);
-												$rowTo = $queryTo->result();
-												$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
-												$body = $row->EmailBody;
-
-												if ($row->BccEmail != '') {
-													$bcc = $row->BccEmail . ',' . $row->totalbcc;
-												} else {
-													$bcc = $row->totalbcc;
-												}
-												$body = str_replace("{ CourseFullName }", $CourseFullName, $body);
-												$body = str_replace("{ StartDate }", $StartDate, $body);
-												$body = str_replace("{ StartTime }", $StartTime, $body);
-												$body = str_replace("{ InstructorName }", $InstructorName, $body);
-												//$body = str_replace("{ SessionName }",$SessionName,$body);
-												$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
-												$this->email->from($smtpEmail, 'LMS Admin');
-												$this->email->to($rowTo[0]->EmailAddress);
-												$this->email->subject($row->Subject);
-												$this->email->cc($row->totalcc);
-												$this->email->bcc($bcc);
-												$this->email->message($body);
-												if ($this->email->send()) {
-													$email_log = array(
-														'From' => trim($smtpEmail),
-														'Cc' => '',
-														'Bcc' => '',
-														'To' => trim($rowTo[0]->EmailAddress),
-														'Subject' => trim($row->Subject),
-														'MessageBody' => trim($body),
-													);
-													$res = $this->db->insert('tblemaillog', $email_log);
-												} else {
-													// echo json_encode('fail');
-												}
-											}
-										}
+										$res=new stdClass();
+										$res->loginUrl = BASE_URL . '/login/';
+										$res->CourseFullName = $tolearner->CourseFullName;
+										$res->StartDate = $tolearner->StartDate;
+										$res->StartTime = $tolearner->StartTimeChange;
+										$res->InstructorName = $tolearner->instName;
+										$EmailToken = 'Course Republished Enrolees';
+										$EmailDetails = getEmailDetails($EmailToken,$tolearner->UserId); //get email details by user id
+										$body = $EmailDetails['EmailBody'];
+										$FormattedBody = getFormattedBody($res ,$body);
+										
+										// send email to particular email
+										$send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
+										
 									}
 								} else { }
 							} else { }
@@ -523,58 +367,28 @@ class CourseScheduler_model extends CI_Model
 							$StartDate = $Courseschedular['StartDate'];
 							$StartTime = $Courseschedular['StartTime'];
 							$CourseName = $course[0]['CourseFullName'];
+
+							$data1['CourseSessionId'] = $Courseschedular['CourseSessionId'];
+							$data2['CourseSessionId'] = $Courseschedular['CourseSessionId'];
+							$data1['UserId'] = $UserId;
+							$data2['UserId'] = $UserId;
+							$data1['type'] = 1;
+							$data2['type'] = 2;
+							$res=new stdClass();
+							$res->loginUrl = BASE_URL . '/login/';
+							$res->link1 = ''.BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey","HS256").'';//link1
+							$res->link2 = ''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'';
+							$res->CourseFullName = $CourseName;
+							$res->StartDate = $StartDate;
+							$res->StartTime = $StartTime;
+							$res->SessionName = $SessionName;
 							$EmailToken = 'Instructor Invitation';
-
-							$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
-
-							foreach ($query->result() as $row) {
-								if ($row->To == 4 || $row->To == 3) {
-									$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $UserId);
-									$rowTo = $queryTo->result();
-									$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
-									$body = $row->EmailBody;
-
-									if ($row->BccEmail != '') {
-										$bcc = $row->BccEmail . ',' . $row->totalbcc;
-									} else {
-										$bcc = $row->totalbcc;
-									}
-									$body = str_replace("{ CourseFullName }", $CourseName, $body);
-									$body = str_replace("{ StartDate }", $StartDate, $body);
-									$body = str_replace("{ StartTime }", $StartTime, $body);
-									$body = str_replace("{ SessionName }", $SessionName, $body);
-									$data1['CourseSessionId'] = $Courseschedular['CourseSessionId'];
-									$data2['CourseSessionId'] = $Courseschedular['CourseSessionId'];
-									$data1['UserId'] = $UserId;
-									$data2['UserId'] = $UserId;
-									$data1['type'] = 1;
-									$data2['type'] = 2;
-									//	$body = str_replace("{login_url}",$StartTime,$body);
-									$body = str_replace("{ link1 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data1,"MyGeneratedKey","HS256").'',$body);
-									$body = str_replace("{ link2 }",''.BASE_URL.'/instructor-invitation/'.JWT::encode($data2,"MyGeneratedKey","HS256").'',$body);
-									
-									$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
-									$this->email->from($smtpEmail, 'LMS Admin');
-									$this->email->to($rowTo[0]->EmailAddress);
-									$this->email->subject($row->Subject);
-									$this->email->cc($row->totalcc);
-									$this->email->bcc($bcc);
-									$this->email->message($body);
-									if ($this->email->send()) {
-										$email_log = array(
-											'From' => trim($smtpEmail),
-											'Cc' => '',
-											'Bcc' => '',
-											'To' => trim($rowTo[0]->EmailAddress),
-											'Subject' => trim($row->Subject),
-											'MessageBody' => trim($body),
-										);
-										$res = $this->db->insert('tblemaillog', $email_log);
-									} else {
-										// echo json_encode('fail');
-									}
-								}
-							}
+							$EmailDetails = getEmailDetails($EmailToken,$UserId); //get email details by user id
+							$body = $EmailDetails['EmailBody'];
+							$FormattedBody = getFormattedBody($res ,$body);
+							
+							// send email to particular email
+							$send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
 						}
 
 
@@ -600,58 +414,24 @@ GROUP_CONCAT(cs.UserId) as UserId,
 		LEFT JOIN  tblcourseinstructor AS cs ON cs.CourseSessionId = csi.CourseSessionId
 		WHERE csi.CourseSessionId=' . $CourseSessionId . ' AND cs.IsPrimary=1 GROUP BY csi.CourseSessionId');
 						$Cdata = $Coursedata->result();
-						$EmailToken = 'Course Published Followers';
 
 						foreach ($arr as $users) {
 
-							$CourseFullName = $Cdata[0]->CourseFullName;
-							$StartDate = $Cdata[0]->StartDate;
-							$StartTime = $Cdata[0]->StartTimeChange;
-							$InstructorName = $Cdata[0]->FirstName;
+							$res=new stdClass();
+							$res->loginUrl = BASE_URL . '/login/';
+							$res->CourseFullName = $Cdata[0]->CourseFullName;
+							$res->StartDate = $Cdata[0]->StartDate;
+							$res->StartTime = $Cdata[0]->StartTimeChange;
+							$res->InstructorName = $Cdata[0]->FirstName;
 
-							$query = $this->db->query("SELECT et.To,et.Subject,et.EmailBody,et.BccEmail,(SELECT GROUP_CONCAT(UserId SEPARATOR ',') FROM tbluser WHERE RoleId = et.To && ISActive = 1 && IsStatus = 0) AS totalTo,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Cc && ISActive = 1 && IsStatus = 0) AS totalcc,(SELECT GROUP_CONCAT(EmailAddress SEPARATOR ',') FROM tbluser WHERE RoleId = et.Bcc && ISActive = 1 && IsStatus = 0) AS totalbcc FROM tblemailtemplate AS et LEFT JOIN tblmsttoken as token ON token.TokenId=et.TokenId WHERE token.TokenName = '" . $EmailToken . "' && et.IsActive = 1");
-
-							foreach ($query->result() as $row) {
-								if ($row->To == 4 || $row->To == 3) {
-									$queryTo = $this->db->query('SELECT EmailAddress FROM tbluser where UserId = ' . $users);
-									$rowTo = $queryTo->result();
-									$query1 = $this->db->query('SELECT p.PlaceholderId,p.PlaceholderName,t.TableName,c.ColumnName FROM tblmstemailplaceholder AS p LEFT JOIN tblmsttablecolumn AS c ON c.ColumnId = p.ColumnId LEFT JOIN tblmsttable AS t ON t.TableId = c.TableId WHERE p.IsActive = 1');
-									$body = $row->EmailBody;
-
-									if ($row->BccEmail != '') {
-										$bcc = $row->BccEmail . ',' . $row->totalbcc;
-									} else {
-										$bcc = $row->totalbcc;
-									}
-									$body = str_replace("{ CourseFullName }", $CourseFullName, $body);
-									$body = str_replace("{ StartDate }", $StartDate, $body);
-									$body = str_replace("{ StartTime }", $StartTime, $body);
-									$body = str_replace("{ InstructorName }", $InstructorName, $body);
-									//	$body = str_replace("{login_url}",$StartTime,$body);
-									$body = str_replace("{login_url}", '' . BASE_URL . '/login/', $body);
-									$this->email->from($smtpEmail, 'LMS Admin');
-									$this->email->to($rowTo[0]->EmailAddress);
-									$this->email->subject($row->Subject);
-									$this->email->cc($row->totalcc);
-									$this->email->bcc($bcc);
-									$this->email->message($body);
-									if ($this->email->send()) {
-										$email_log = array(
-											'From' => trim($smtpEmail),
-											'Cc' => '',
-											'Bcc' => '',
-											'To' => trim($rowTo[0]->EmailAddress),
-											'Subject' => trim($row->Subject),
-											'MessageBody' => trim($body),
-										);
-										$res = $this->db->insert('tblemaillog', $email_log);
-										//echo json_encode($users);
-
-									} else {
-										echo json_encode('fail');
-									}
-								} else { }
-							}
+							$EmailToken = 'Course Published Followers';
+							$EmailDetails = getEmailDetails($EmailToken,$users); //get email details by user id
+							$body = $EmailDetails['EmailBody'];
+							$FormattedBody = getFormattedBody($res ,$body);
+							
+							// send email to particular email
+							$send = SendEmail($smtpDetails['smtpEmail'], $EmailDetails['To'], $EmailDetails['Cc'], $EmailDetails['Bcc'], $EmailDetails['Subject'], $FormattedBody);
+						
 						}
 					}
 				}
