@@ -123,7 +123,7 @@ class Register_model extends CI_Model
 				);	
 				//$res=$this->db->insert('tbluser',$user_data);
 				//$userId=$this->db->insert_id();
-				$res= $this->db->query('call Register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$user_data);
+				$res= $this->db->query('call register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@id)',$user_data);
 				$out_param_query = $this->db->query('select @id as out_param;');
 				$id=$out_param_query->result()[0]->out_param;
 				$db_error = $this->db->error();
@@ -188,7 +188,8 @@ class Register_model extends CI_Model
 				$this->db->where('EmailAddress',trim($post_user['EmailAddress']));
 				$this->db->limit(1);
 				$query = $this->db->get();
-				if($query->num_rows() > 0){
+				if($query->num_rows() > 0)
+				{
 					return false;
 				}
 				else

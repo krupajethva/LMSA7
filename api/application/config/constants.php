@@ -86,20 +86,20 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
  // Local
 
-// define('ACTIVE_GROUP', 'default'); // database mode
-// define('BASE_URL', 'http://localhost:4200'); // local Base URL
-// define('PROTOCOL', 'smtp'); // smtp details
-// define('SMTP_HOST', 'ssl://smtp.googlemail.com'); 
-// define('SMTP_PORT', '465'); 
+define('ACTIVE_GROUP', 'default'); // database mode
+define('BASE_URL', 'http://localhost:4200'); // local Base URL
+define('PROTOCOL', 'smtp'); // smtp details
+define('SMTP_HOST', 'ssl://smtp.googlemail.com'); 
+define('SMTP_PORT', '465'); 
 
 
 //   Development
 
-define('ACTIVE_GROUP', 'Development'); // database mode
-define('BASE_URL', 'http://lms-test.devbyopeneyes.com'); // Development Base URL
-define('PROTOCOL', 'mail'); // smtp details
-define('SMTP_HOST', 'vps40446.inmotionhosting.com'); 
-define('SMTP_PORT', '587'); 
+// define('ACTIVE_GROUP', 'Development'); // database mode
+// define('BASE_URL', 'http://lms-test.devbyopeneyes.com'); // Development Base URL
+// define('PROTOCOL', 'mail'); // smtp details
+// define('SMTP_HOST', 'vps40446.inmotionhosting.com'); 
+// define('SMTP_PORT', '587'); 
 
 //   production
 
