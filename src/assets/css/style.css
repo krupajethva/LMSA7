@@ -68,6 +68,9 @@ h5{color:var(--theme-color); display:block; font:normal 12px/12px 'OpenSans-Semi
 .ps{z-index: 9;}
 .m_5{margin: 0px 5px;}
 .swal2-container.swal2-shown{z-index: 99999;}
+.p_0{padding: 0 !important;}
+.m_0{margin: 0 !important;}
+.display_none{display: none;}
 /* ========== Do Not Touch In Css End ========== */
 
 /*-------------Header and navigation--------------------*/
@@ -2186,7 +2189,14 @@ select-dropdown > div{z-index: 999!important;}
 .content_block .mail_box_tbl table tr .check_box{margin: 0;}
 .content_block .mail_box_tbl table tr .check_box label{top:0;padding-left: 16px;}
 .content_block .mail_box_tbl table tr.unread_mail_row .mail_from_head,.content_block .mail_box_tbl table tr.unread_mail_row .mail_time_head,.content_block .mail_box_tbl table tr.unread_mail_row .mail_sub_head{color: #333;font-weight: 600;font-size: 12px;}
+.content_block .mail_box_tbl table tr .mail_from_head span{    font-size: 12px;
+  padding-left: 5px;
+  color: #102749;
+  font-weight: 600;
+  padding-right: 5px;}
 .content_block .mail_box_tbl table tr td.width_2{width:2%;}
+.content_block .mail_box_tbl table tr td.width_8{width:8%;}
+.content_block .mail_box_tbl table tr td.width_10{width:10%;}
 .content_block .mail_box_tbl table tr td{padding: 15px 0px;}
 .content_block .mail_box_tbl table tr td:first-child{padding-left: 15px;}
 .content_block .mail_box_tbl table tr td:last-child{padding-right: 15px;}
@@ -2208,24 +2218,52 @@ select-dropdown > div{z-index: 999!important;}
   padding: 10px 0px;}
 .content_block .inbox_preview_header .inbox_preview_sub span{    font-size: 16px;
   font-weight: 600;
-  padding-bottom: 5px;
+  padding-bottom: 0px;
   display: block;}
-.content_block .inbox_preview_header .inbox_preview_mail span{    font-size: 14px;
+  .content_block .inbox_preview_body .inbox_preview_mail{    margin-bottom: 10px;}
+.content_block .inbox_preview_body .inbox_preview_mail span{    font-size: 14px;
   display: block;}
-.content_block .inbox_preview_header .mail_actions i,.content_block .inbox_preview_attachments_footer .mail_actions i{    color: #9ea7b3;
+.content_block .inbox_preview_body .inbox_preview_mail span > span{    display: inline;
+    font-weight: 600;}
+.content_block .inbox_preview_header .mail_actions a,.content_block .inbox_preview_attachments_footer .mail_actions a{    color: #9ea7b3;
   border: 1px solid #9ea7b3;
   margin-left: 5px;
   padding: 5px;
   font-size: 12px;
   margin-bottom: 5px;
   border-radius: 3px;}
+  .content_block .inbox_preview_header .mail_actions{float: right;}
+  .content_block .inbox_preview_header .cc_bcc_btn{    position: absolute;
+    right: 0;
+    top: 5px;
+    z-index: 99;}
+.content_block .inbox_preview_header .cc_bcc_btn a{    background: var(--option-color);
+  color: #fff;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  font-size: 10px;}
+.content_block .inbox_preview_body .mail_actions .dropdown-menu{    left: auto;
+    right: 10px;
+    top: 25px;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    text-align: left;}
+.content_block .inbox_preview_body .mail_actions .dropdown-menu > li > a:hover,.content_block .inbox_preview_body .mail_actions .dropdown-menu > li > a:focus{background-color: transparent;color: #102749;}
+.content_block .inbox_preview_body .mail_actions .dropdown-menu > li > a{color: #102749;outline:none;}
+.content_block .inbox_preview_body .mail_actions .dropdown-menu > li > a i{margin-right: 5px;}
   .content_block .inbox_preview_header .mail_schedule span{    padding-top: 20px;
     display: block;}
-.content_block .inbox_preview_body{padding: 10px 0px;}
+.content_block .inbox_preview_body{padding: 10px 0px 0px 0px;}
+.content_block .inbox_preview_body .mail_schedule,.content_block .inbox_preview_body .mail_actions{display: inline-block;}
+.content_block .inbox_preview_body .mail_schedule span{margin-right: 10px;}
+.content_block .inbox_preview_body .mail_actions .btn-primary{    background: transparent;
+  color: #102749;
+  border: 0;box-shadow: none;padding: 0;}
+.content_block .inbox_preview_body .btn-primary .caret{border-top-color: #102749;}
 .content_block .inbox_preview_body p{margin-bottom: 5px;}
 .content_block .inbox_preview_attachments{border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-    padding: 10px 0px;}
+    padding: 0px 0px 10px 0px;}
 .content_block .inbox_preview_attachments h6{font-size: 16px;}
 .content_block .inbox_preview_attachments h6 i{color: #9ea7b3;
   margin-right: 3px;}
@@ -2238,13 +2276,33 @@ select-dropdown > div{z-index: 999!important;}
 .content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box .attachments_files_img{    padding: 15px;
       height: 130px;
       overflow: hidden;}
+      .content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box .attachments_files_img .img-thumbnail{background-color:transparent;border:0;border-radius: 0;padding: 0;}
 .content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box .attachments_files_img img{margin: 0 auto;height: 100%;}
-.content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box span{    display: block;
-      font-size: 14px;
-      padding: 5px 0px;
+.content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box .attachments_files_box_title{    display: block;
+      font-size: 12px;
+      padding: 5px 10px;
       border-top: 1px solid #ddd;background: #f5f5f5;}
+      .content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box .attachments_files_box_title i{font-size: 16px;padding: 0;margin-left: 10px;}
 .content_block .inbox_preview_attachments_footer{padding: 10px 0;}
+button.close{opacity: 1;
+  position: relative;
+  background: #fff;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px #dcdcdc;
+  z-index: 9;}
 /*Inbox-preview-new Css*/
+
+/*Compose Mail Css*/
+.content_block .inbox_compose_body .imageuploadify{border: 1px solid #ddd;
+  min-height: 100%;
+  max-width: 100%;
+  margin: 0;
+  border-radius: 0;box-shadow: none;}
+/*Compose Mail Css*/
 
 /*------------Instructor Details------------------------------*/
 .instructor_block .education_cap i,.instructor_block .education_type i{width:20px;margin:0 10px 0 0;color:var(--theme-color); font-size:18px;}
@@ -3839,12 +3897,13 @@ margin-bottom: 15px;}
 .admin_dashboard .users_block .users .name_box{width: 75%;}
 }
 
-@media only screen and (max-width: 1200px) and (min-width: 991px) {
+@media only screen and (max-width: 1200px) and (min-width: 992px) {
 	.course_learner_block .course_box .course_title {height: 110px !important;font-size: 14px;}
 	.course_list_block .course_box .course_title {height: 50px;}
 	.course_list_block .course_box .course_title {height: 75px;font-size:14px;}
   /* .course_list_block .course_box .desc_block {height: 315px;} */
   /* .admin_dashboard .users_block, .admin_dashboard .rated_course_block{height:550px!important;} */
+.content_block .mail_box_tbl table tr td.width_10{width:15% !important;}
 }
 
 @media only screen and (max-width: 1400px) and (min-width: 991px) {
@@ -4055,6 +4114,8 @@ margin-bottom: 15px;}
     line-height: 40px;
 }
 .right_content_block .bg_white_block .title_heading .breadcrumb_block{float: left !important;}
+
+.content_block .inbox_list_block .text-right,.content_block .inbox_header .compose_label.text-right{text-align: left;margin-top: 10px;}
   
   }
   @media only screen and (max-width: 991px) and (min-width: 768px) {
@@ -4087,15 +4148,18 @@ margin-bottom: 15px;}
 .wizard > div.wizard-inner .nav-tabs > li{    padding: 12px 8px;font-size: 11px;}
 
 .learner_dashboard .rated_course_block,.learner_dashboard .content_block{height: 410px!important;}
+
+.content_block .mail_box_tbl table tr td.width_8{width:10% !important;}
+.content_block .mail_box_tbl table tr td.width_10{width:15% !important;}
 }
-  @media only screen and (max-width: 767px) and (min-width: 360px) {
+  @media only screen and (max-width: 767px) and (min-width: 320px) {
 	  .course_learner_block .course_box .progress_block{padding:5px 10px;height:45px;}	 
 	  .course_learner_block .course_box .course_img {display: block;/* height: 85px; */margin: 10px auto 0px;width: 150px;border-bottom:0px;}
 	  .course_learner_block .course_box .course_title{text-align:center;}
-      .course_learner_block .course_box .course_title{height:auto!important;}	 
-      .course_learner_block .course_box .course_btn{text-align:center;}	 
-      .course_list_block .course_box .course_img{display: block;/* height: 85px; */margin: 10px auto 0px;width: 150px;border-bottom: 0px;}	  
-  }
+    .course_learner_block .course_box .course_title{height:auto!important;}	 
+    .course_learner_block .course_box .course_btn{text-align:center;}	 
+    .course_list_block .course_box .course_img{display: block;/* height: 85px; */margin: 10px auto 0px;width: 150px;border-bottom: 0px;}	  
+    }
 
   @media (max-width: 480px) {
     .active_slider .owl-stage{margin: 0 0px !important;}

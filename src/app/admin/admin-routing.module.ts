@@ -21,6 +21,8 @@ import { IndustryService } from './services/industry.service';
 
 import { InboxNewComponent } from './inbox-new/inbox-new.component';
 
+import { ComposeComponent } from './compose/compose.component';
+
 import { RegisterAdminInvitedComponent } from './register-admin-invited/register-admin-invited.component';
 import { RegisterAdminInvitedService } from './services/register-admin-invited.service';
 
@@ -244,6 +246,7 @@ const routes: Routes = [
 				{ path : 'inbox', component : InboxComponent,canActivate : [AuthGuard] },
 				{ path : 'inbox-new', component : InboxNewComponent,canActivate : [AuthGuard] },
 				{ path : 'inbox-preview-new', component : InboxPreviewNewComponent,canActivate : [AuthGuard] },
+				{ path : 'compose', component : ComposeComponent,canActivate : [AuthGuard] },
 				{ path : 'inbox/:id', component : InboxComponent,canActivate : [AuthGuard] },
 				{ path : 'inbox-preview/:id', component : InboxPreviewComponent,canActivate : [AuthGuard] },
 				{ path : 'course-discussion/:id', component : CourseDiscussionComponent,canActivate : [AuthGuard] },
