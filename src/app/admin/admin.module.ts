@@ -25,6 +25,8 @@ import { InboxPreviewNewComponent } from './inbox-preview-new/inbox-preview-new.
 
 import { InboxNewComponent } from './inbox-new/inbox-new.component';
 
+import { ComposeComponent } from './compose/compose.component';
+
 import { PipePipe } from './pipe/pipe.pipe';
 
 import { DatePipePipe } from './datepipe/date-pipe.pipe';
@@ -179,6 +181,7 @@ import { InstructorfollowingsComponent } from './instructorfollowings/instructor
 		InstructorfollowingsComponent,
 		InboxNewComponent,
 		InboxPreviewNewComponent,
+		ComposeComponent,
 	],
 	imports: [
 		//BrowserModule,
