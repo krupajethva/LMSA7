@@ -26,12 +26,51 @@
 					<i class="fa fa-angle-down pull-right"></i>
 				</a>
 				<div class="collapse" id="collapseExample{{i}}{{j}}">
-					<ul class="sub_menu">
+					<ul class="sub_menu" *ngIf="child.DisplayName!='Mail'">
 
 						<li [ngClass]="{'active':(globals.currentLink == subchild.Url)}" *ngFor="let subchild of child.child; let k=index;">
 							<a (click)="menuopen(subchild.Url,0,i,j)" title="{{subchild.DisplayName}}" data-toggle="tooltip" data-placement="right">
 								<i class="{{subchild.Icon}}"></i>
 								<span>{{subchild.DisplayName}}</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="sub_menu" *ngIf="child.DisplayName=='Mail'">
+
+						<li>
+							<a routerLink="/inbox-new" title="Compose" data-toggle="tooltip" data-placement="right">
+								<i class="fa fa-eye"></i>
+								<span>Inbox</span>
+							</a>
+						</li>
+						<li>
+							<a routerLink="/inbox-preview-new" title="Compose" data-toggle="tooltip" data-placement="right">
+								<i class="fa fa-eye"></i>
+								<span>Sent</span>
+							</a>
+						</li>
+						<li>
+							<a routerLink="/inbox-new" title="Compose" data-toggle="tooltip" data-placement="right">
+								<i class="fa fa-eye"></i>
+								<span>Draft</span>
+							</a>
+						</li>
+						<li>
+							<a routerLink="/inbox-new" title="Compose" data-toggle="tooltip" data-placement="right">
+								<i class="fa fa-eye"></i>
+								<span>Important</span>
+							</a>
+						</li>
+						<li>
+							<a routerLink="/inbox-new" title="Compose" data-toggle="tooltip" data-placement="right">
+								<i class="fa fa-eye"></i>
+								<span>Spam</span>
+							</a>
+						</li>
+						<li>
+							<a routerLink="/inbox-new" title="Compose" data-toggle="tooltip" data-placement="right">
+								<i class="fa fa-eye"></i>
+								<span>All Mail</span>
 							</a>
 						</li>
 					</ul>

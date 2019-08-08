@@ -25,15 +25,17 @@
     <div class="col-md-12">
       <div class="inbox_header">
         <div class="col-md-2 compose_label">
-          <a href="">Compose Mail</a>
+          <a routerLink="/compose">Compose Mail</a>
         </div>
-        <div class="col-md-10 serach_mail">
+        <div class="col-md-8 serach_mail">
           <div class="form-group">
-            <label><span></span>Search</label>
+            <label><span></span>Searching for all message</label>
             <input type="text" name="lname" id="lname" class="form-control" required />
           </div>
-          <!-- <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button> -->
+        </div>
+        <div class="col-md-2 compose_label text-right">
+          <a routerLink="/inbox-new">Back to inbox</a>
+          <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -47,27 +49,75 @@
           <div class="inbox_preview_sub">
             <span>Subject: Aldus PageMaker including versions of Lorem Ipsum.</span>
           </div>
-          <div class="inbox_preview_mail">
-            <span>From: alex.smith@corporation.com</span>
-            <span>To: me</span>
-          </div>
         </div>
         <div class="col-md-4 text-right">
           <div class="mail_actions">
-            <a href=""><i class="fa fa-reply"></i></a>
-            <a href=""><i class="fa fa-reply-all"></i></a>
-            <a href=""><i class="fa fa-share"></i></a>
-            <a href=""><i class="fa fa-trash"></i></a>
+            <a routerLink="/compose"><i class="fa fa-reply"></i> Reply</a>
+            <a routerLink="/compose"><i class="fa fa-reply-all"></i> Reply to All</a>
+            <a routerLink="/compose"><i class="fa fa-share"></i> Forward</a>
+            <a href=""><i class="fa fa-trash"></i> Delete</a>
           </div>
-          <div class="mail_schedule">
-            <span>10:15AM 02 FEB 2014</span>
-          </div>
+          <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
       </div>
+
       <div class="inbox_preview_body">
+        <div class="col-md-8">
+          <div class="inbox_preview_mail">
+            <span><strong>From:</strong> alex.smith@corporation.com</span>
+            <span><strong>To:</strong> me, nirav.patel@theopeneyes.in, krupali.mistry@theopeneyes.in <span>+6 <div
+                  class="dropdown mail_actions">
+                  <button class="btn btn-primary dropdown-toggle" id="menu3" type="button" data-toggle="dropdown"><span
+                      class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user-circle"
+                          aria-hidden="true"></i> 'uttam bhut'</a>
+                    </li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user-circle"
+                          aria-hidden="true"></i> 'vidhi bathani'</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user-circle"
+                          aria-hidden="true"></i> ayadav@theopeneyes.in</a>
+                    </li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user-circle"
+                          aria-hidden="true"></i> 'mayank sharma'</a>
+                    </li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user-circle"
+                          aria-hidden="true"></i> 'jaxi chawda'</a>
+                    </li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-user-circle"
+                          aria-hidden="true"></i> kamlesh.solanki@theopeneyes.in</a>
+                    </li>
+                  </ul>
+                </div></span></span>
+          </div>
+        </div>
+        <div class="col-md-4 text-right">
+          <div class="mail_schedule">
+            <span>10:15 AM 02 FEB 2014</span>
+          </div>
+          <div class="dropdown mail_actions">
+            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><i
+                class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i class="fa fa-reply"></i>
+                  Reply</a>
+              </li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i
+                    class="fa fa-reply-all"></i> Reply to
+                  All</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i class="fa fa-share"></i>
+                  Forward</a>
+              </li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-trash"></i> Delete</a>
+              </li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
         <div class="col-md-12">
-          <p>Hello Jonathan!</p>
+          <p>Hello Nirav!</p>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
             industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
             scrambled it to make a type specimen book.It was popularised in the 1960s with the release of Letraset
@@ -91,22 +141,33 @@
             <h6><i class="fa fa-paperclip" aria-hidden="true"></i> Attachments <span>(2)</span></h6>
           </div>
           <div class="inbox_preview_attachments_files">
-            <div class="col-md-3">
+            <div class="col-md-2 p_0">
               <div class="attachments_files_box">
                 <a href="#">
                   <i class="fa fa-file" aria-hidden="true"></i>
-                  <span>Document_2014.doc</span>
                 </a>
+                <div class="attachments_files_box_title">
+                  <span class="pull-left">basic.css</span>
+                  <a href="assets/css/basic.css" download class="pull-right"><i class="fa fa-download"></i></a>
+                  <div class="clearfix"></div>
+                </div>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="attachments_files_box">
                 <a href="#">
                   <div class="attachments_files_img">
-                    <img src="assets/images/bg.png" alt="" class="img-responsive" />
+                    <img src="assets/images/bg.png" class="img-fluid img-thumbnail" alt="" />
                   </div>
-                  <span>badge.png</span>
                 </a>
+                <div class="attachments_files_box_title">
+                  <span class="pull-left">badge.png</span>
+                  <div data-toggle="modal" data-target="#modalgallery">
+                    <a href="#lightbox" data-slide-to="0" class="pull-right"><i class="fa fa-eye"></i></a>
+                  </div>
+                  <a href="assets/images/bg.png" download class="pull-right"><i class="fa fa-download"></i></a>
+                  <div class="clearfix"></div>
+                </div>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -114,14 +175,188 @@
           <div class="clearfix"></div>
         </div>
       </div>
+
+      <div class="inbox_preview_body">
+        <div class="col-md-8">
+          <div class="inbox_preview_mail">
+            <strong>RE: Aldus PageMaker including versions of Lorem Ipsum.</strong>
+            <span><strong>From:</strong> ayadav@theopeneyes.in</span>
+            <span><strong>To:</strong> alex.smith@corporation.com</span>
+          </div>
+        </div>
+        <div class="col-md-4 text-right">
+          <div class="mail_schedule">
+            <span>04:12 PM 12 FEB 2014</span>
+          </div>
+          <div class="dropdown mail_actions">
+            <button class="btn btn-primary dropdown-toggle" id="menu2" type="button" data-toggle="dropdown"><i
+                class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i class="fa fa-reply"></i>
+                  Reply</a>
+              </li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i
+                    class="fa fa-reply-all"></i> Reply to
+                  All</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i class="fa fa-share"></i>
+                  Forward</a>
+              </li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-trash"></i> Delete</a>
+              </li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+          <p>Hello Alex!</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book.It was popularised in the 1960s with the release of Letraset
+            sheets
+            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+            including versions of Lorem Ipsum. It has survived not only five centuries, but also the leap into
+            electronic
+            typesetting, remaining essentially unchanged.</p>
+          <p>It was popularised in the 1960s with the release Letraset sheets containing Lorem Ipsum passages, and more
+            recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>There are many variations of passages of Lorem IpsumLorem Ipsum available, but the majority have suffered
+            alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+            If
+            you are going to use a passage of.</p>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="inbox_preview_attachments">
+        <div class="col-md-12">
+          <div class="inbox_preview_attachments_head">
+            <h6><i class="fa fa-paperclip" aria-hidden="true"></i> Attachments <span>(2)</span></h6>
+          </div>
+          <div class="inbox_preview_attachments_files">
+            <div class="col-md-2 p_0">
+              <div class="attachments_files_box">
+                <a href="#">
+                  <div class="attachments_files_img">
+                    <img src="assets/images/guy-6.jpg" class="img-fluid img-thumbnail" alt="" />
+                  </div>
+                </a>
+                <div class="attachments_files_box_title">
+                  <span class="pull-left">guy-6.jpg</span>
+                  <div data-toggle="modal" data-target="#modalgallery1">
+                    <a href="#lightbox" data-slide-to="0" class="pull-right"><i class="fa fa-eye"></i></a>
+                  </div>
+                  <a href="assets/images/guy-6.jpg" download class="pull-right"><i class="fa fa-download"></i></a>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="attachments_files_box">
+                <a href="#">
+                  <div class="attachments_files_img">
+                    <img src="assets/images/guy-8.jpg" class="img-fluid img-thumbnail" alt="" />
+                  </div>
+                </a>
+                <div class="attachments_files_box_title">
+                  <span class="pull-left">guy-8.jpg</span>
+                  <div data-toggle="modal" data-target="#modalgallery2">
+                    <a href="#lightbox" data-slide-to="0" class="pull-right"><i class="fa fa-eye"></i></a>
+                  </div>
+                  <a href="assets/images/guy-8.jpg" download class="pull-right"><i class="fa fa-download"></i></a>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+      <div class="inbox_preview_body">
+        <div class="col-md-8">
+          <div class="inbox_preview_mail">
+            <strong>FW: Aldus PageMaker including versions of Lorem Ipsum.</strong>
+            <span><strong>From:</strong> ayadav@theopeneyes.in</span>
+            <span><strong>To:</strong> krupali.mistry@theopeneyes.com</span>
+          </div>
+        </div>
+        <div class="col-md-4 text-right">
+          <div class="mail_schedule">
+            <span>05:00 PM 20 FEB 2014</span>
+          </div>
+          <div class="dropdown mail_actions">
+            <button class="btn btn-primary dropdown-toggle" id="menu2" type="button" data-toggle="dropdown"><i
+                class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i class="fa fa-reply"></i>
+                  Reply</a>
+              </li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i
+                    class="fa fa-reply-all"></i> Reply to
+                  All</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" routerLink="/compose"><i class="fa fa-share"></i>
+                  Forward</a>
+              </li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><i class="fa fa-trash"></i> Delete</a>
+              </li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+          <p>Hello Krupali!</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book.It was popularised in the 1960s with the release of Letraset
+            sheets
+            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+            including versions of Lorem Ipsum. It has survived not only five centuries, but also the leap into
+            electronic
+            typesetting, remaining essentially unchanged.</p>
+          <p>It was popularised in the 1960s with the release Letraset sheets containing Lorem Ipsum passages, and more
+            recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>There are many variations of passages of Lorem IpsumLorem Ipsum available, but the majority have suffered
+            alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+            If
+            you are going to use a passage of.</p>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="inbox_preview_attachments">
+        <div class="col-md-12">
+          <div class="inbox_preview_attachments_head">
+            <h6><i class="fa fa-paperclip" aria-hidden="true"></i> Attachment <span>(1)</span></h6>
+          </div>
+          <div class="inbox_preview_attachments_files">
+            <div class="col-md-2 p_0">
+              <div class="attachments_files_box">
+                <a href="#">
+                  <i class="fa fa-file" aria-hidden="true"></i>
+                </a>
+                <div class="attachments_files_box_title">
+                  <span class="pull-left">amcharts.js</span>
+                  <a href="assets/js/amcharts.js" download class="pull-right"><i class="fa fa-download"></i></a>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
       <div class="inbox_preview_attachments_footer">
         <div class="col-md-12 text-right">
           <div class="mail_actions">
-            <a href=""><i class="fa fa-reply"> Reply</i></a>
-            <a href=""><i class="fa fa-reply-all"> Reply to All</i></a>
-            <a href=""><i class="fa fa-share"> Forward</i></a>
-            <a href=""><i class="fa fa-trash"> Delete</i></a>
+            <a routerLink="/compose"><i class="fa fa-reply"></i> Reply</a>
+            <a routerLink="/compose"><i class="fa fa-reply-all"></i> Reply to All</a>
+            <a routerLink="/compose"><i class="fa fa-share"></i> Forward</a>
+            <a href=""><i class="fa fa-trash"></i> Delete</a>
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -129,3 +364,69 @@
   </div>
 </div>
 <div class="clearfix"></div>
+
+<!-- Modal popup for carousel img preview -->
+<div class="modal fade" id="modalgallery" tabindex="-1" role="dialog" aria-labelledby="Lightbox Gallery"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span class="cancel_modal" aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div id="lightbox" class="carousel slide" data-ride="carousel" data-interval="5000" data-keyboard="true">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/images/bg.png" class="img-responsive" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal popup for carousel img preview -->
+
+<!-- Modal popup for carousel img preview -->
+<div class="modal fade" id="modalgallery1" tabindex="-1" role="dialog" aria-labelledby="Lightbox Gallery"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span class="cancel_modal" aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div id="lightbox" class="carousel slide" data-ride="carousel" data-interval="5000" data-keyboard="true">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/images/guy-6.jpg" class="img-responsive" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal popup for carousel img preview -->
+
+<!-- Modal popup for carousel img preview -->
+<div class="modal fade" id="modalgallery2" tabindex="-1" role="dialog" aria-labelledby="Lightbox Gallery"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span class="cancel_modal" aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div id="lightbox" class="carousel slide" data-ride="carousel" data-interval="5000" data-keyboard="true">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/images/guy-8.jpg" class="img-responsive" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal popup for carousel img preview -->
