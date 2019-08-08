@@ -34,6 +34,7 @@ export class CategoryComponent implements OnInit {
         }      
         else{  
           $('footer').addClass('footer_fixed');    
+       
         } 
       },100);
 		var skills = new Bloodhound({

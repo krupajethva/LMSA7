@@ -204,7 +204,7 @@ const routes: Routes = [
 				{ path : 'industry/edit/:id', component : IndustryComponent ,canActivate : [AuthGuard]},
 			//	{ path : 'register-admin-invited/edit/:id', component : RegisterAdminInvitedComponent ,canActivate : [AuthGuard]},
 				{ path : 'user-activation/:id', component : UserActivationComponent,canActivate : [AuthGuard] },
-				{ path : 'open-register-instructor', component : OpeninstructorComponent ,canActivate : [AuthGuard]},
+			//	{ path : 'open-register-instructor', component : OpeninstructorComponent ,canActivate : [AuthGuard]},
 				{ path : 'activity-list', component : ActivityListComponent ,canActivate : [AuthGuard]},
 				{ path : 'loginlog', component : LoginlogComponent ,canActivate : [AuthGuard]},
 				{ path : 'emaillog', component : EmaillogComponent ,canActivate : [AuthGuard]},
