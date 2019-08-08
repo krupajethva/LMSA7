@@ -156,7 +156,7 @@ class Courselist_model extends CI_Model
 		$result = $this->db->query('select c.UserId,user.FirstName,user.LastName,user.ProfileImage,COUNT(DISTINCT cp.CourseId) as totalCourse FROM
         tblcourseinstructor as c LEFT JOIN tblcoursesession as cs  on cs.CourseSessionId=c.CourseSessionId
         LEFT JOIN tbluser as user on c.UserId=user.UserId
-        LEFT JOIN tblcourse as cp on cp.CourseId=cs.CourseId WHERE cs.PublishStatus!=0 AND cs.IsActive=1
+        LEFT JOIN tblcourse as cp on cp.CourseId=cs.CourseId WHERE cs.PublishStatus!=0 AND cs.IsActive=1 AND c.Approval = 1
         GROUP BY c.UserId ORDER BY COUNT(DISTINCT cp.CourseId) DESC ');
 		$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
