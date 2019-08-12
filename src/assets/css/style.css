@@ -2292,7 +2292,7 @@ select-dropdown > div{z-index: 999!important;}
       font-size: 12px;
       padding: 5px 10px;
       border-top: 1px solid #ddd;background: #f5f5f5;}
-      .content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box .attachments_files_box_title i{font-size: 16px;padding: 0;margin-left: 10px;}
+      .content_block .inbox_preview_attachments .inbox_preview_attachments_files .attachments_files_box .attachments_files_box_title i{font-size: 14px;padding: 0;margin-left: 5px;}
 .content_block .inbox_preview_attachments_footer{padding: 10px 0;}
 button.close{opacity: 1;
   position: relative;
@@ -2304,6 +2304,7 @@ button.close{opacity: 1;
   border-radius: 20px;
   box-shadow: 0 0 5px #dcdcdc;
   z-index: 9;}
+  .content_block .inbox_preview_attachments .inbox_preview_attachments_files .p_0{margin-right: 5px !important;}
 /*Inbox-preview-new Css*/
 
 /*Compose Mail Css*/
@@ -3830,7 +3831,8 @@ margin-bottom: 15px;}
   .admin_dashboard .notification_block .row .col-md-3,.admin_dashboard .notification_block .row .col-sm-3{padding: 0px 15px 0px 0px;}
 }
 @media (max-width: 991px) {
-	.fc-view .col-sm-6 {width: 92%;}
+  .fc-view .col-sm-6 {width: 92%;}
+.content_block .inbox_preview_body .text-right{text-align: left;margin: 10px 0px;}
 }
 @media (width: 812px){
   .sidebar_wrap.small_menu {width: 60px;}
@@ -3890,6 +3892,7 @@ margin-bottom: 15px;}
       height: auto !important;
   }
     .right_content_block .bg_white_block .content_block .certification_block .col-md-3{width: 33.33%;}
+
   }
 
   @media only screen and (max-width: 1300px) and (min-width: 768px)   {
@@ -4039,6 +4042,13 @@ margin-bottom: 15px;}
     .linkup_wrapper .linkup_section .linkup_header .plus-minus{padding-left: 5px;}
     .linkup_wrapper .linkup_section .linkup_header .expand{padding-left: 5px;}
     .footer_fixed_block .footer_bottom{padding: 5px 10px;}
+    .content_block .inbox_preview_body .inbox_preview_mail span > span{display: block;}
+    .content_block .inbox_preview_body .mail_actions .dropdown-menu {
+      right: auto;
+      left: -30px;
+      top: 15px;
+      font-size: 13px;
+  }
   }
   @media (max-width: 667px) {
     .linkup_wrapper .linkup_section .linkup_header .border_h2::after{border-bottom: 0px;}
@@ -4129,8 +4139,9 @@ margin-bottom: 15px;}
 }
 .right_content_block .bg_white_block .title_heading .breadcrumb_block{float: left !important;}
 
-.content_block .inbox_list_block .text-right,.content_block .inbox_header .compose_label.text-right{text-align: left;margin-top: 10px;}
-  
+.content_block .inbox_list_block .text-right,.content_block .inbox_header .compose_label.text-right,.content_block .inbox_preview_header .text-right,.content_block .inbox_preview_attachments_footer .text-right{text-align: left;margin-top: 10px;}
+.content_block .inbox_preview_header .mail_actions{float: left;}
+.content_block .inbox_preview_attachments .inbox_preview_attachments_files .col-xs-12{padding: 0;margin: 15px 0px;}
   }
   @media only screen and (max-width: 991px) and (min-width: 768px) {
 	/* .admin_dashboard .users_block,.admin_dashboard .rated_course_block,.learner_dashboard .rated_course_block, .learner_dashboard .content_block,.learner_dashboard .users_block, .admin_dashboard .graph_block{height:auto!important;} */
