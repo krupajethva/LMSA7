@@ -25,8 +25,9 @@ export class ComposeComponent implements OnInit {
       extraAllowedContent: 'span;ul;li;table;td;style;*[id];*(*);*{*}',
       enterMode: Number(2),
       //extraAllowedContent: 'style;*[id,rel](*){*}
-      //removePlugins : 'elementspath,save,image,flash,iframe,link,smiley,tabletools,find,pagebreak,templates,about,maximize,showblocks,newpage,language',
-      //removeButtons : 'Copy,Cut,Paste,Undo,Redo,Print,Form,TextField,Textarea,Button,SelectAll,NumberedList,BulletedList,CreateDiv,Table,PasteText,PasteFromWord,Select,HiddenField'
+      disableNativeSpellChecker : 'false',
+      removePlugins : 'image,iframe,link,tabletools,about,wsc,scayt',
+      removeButtons : 'Copy,Cut,Paste,Undo,Redo,Table,PasteText,PasteFromWord,Source,Unlink,Anchor,Scayt'
     });
 
   }

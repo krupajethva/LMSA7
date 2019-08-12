@@ -2191,10 +2191,10 @@ select-dropdown > div{z-index: 999!important;}
 .content_block .mail_box_tbl table tr .check_box label{top:0;padding-left: 16px;}
 .content_block .mail_box_tbl table tr.unread_mail_row .mail_from_head,.content_block .mail_box_tbl table tr.unread_mail_row .mail_time_head,.content_block .mail_box_tbl table tr.unread_mail_row .mail_sub_head{color: #333;font-weight: 600;font-size: 12px;}
 .content_block .mail_box_tbl table tr .mail_from_head span{    font-size: 10px;
-  padding-left: 2px;
+  padding-left: 0px;
   color: #102749;
   font-weight: 600;
-  padding-right: 2px;}
+  padding-right: 0px;}
 .content_block .mail_box_tbl table tr td.width_2{width:2%;}
 /* .content_block .mail_box_tbl table tr td.width_8{width:8%;} */
 .content_block .mail_box_tbl table tr td.width_10{width:10%;}
@@ -2312,6 +2312,10 @@ button.close{opacity: 1;
   max-width: 100%;
   margin: 0;
   border-radius: 0;box-shadow: none;}
+  .cke_toolbar_break {
+    display: none !important;
+    clear: both !important;
+}
 /*Compose Mail Css*/
 
 /*------------Instructor Details------------------------------*/
