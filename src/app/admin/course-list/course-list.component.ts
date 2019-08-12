@@ -23,12 +23,7 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
 
-    setTimeout(function () {
-      $('.multiselectdropdown').multiselect({
-        includeSelectAllOption: true,
-        enableFiltering: true
-      });
-    }, 500);
+    
 
     setTimeout(function () {
       if ($(".bg_white_block").height() < $(window).height() - 100) {
@@ -62,6 +57,12 @@ export class CourseListComponent implements OnInit {
         this.SubCategoryList = data['sub'];
         this.InstList = data['Inst'];
         this.SkillList = data['skill'];
+        setTimeout(function () {
+          $('.multiselectdropdown').multiselect({
+            includeSelectAllOption: true,
+            enableFiltering: true
+          });
+        }, 500);
       },
         (error) => {
           //alert('error');

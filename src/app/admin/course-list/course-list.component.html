@@ -37,14 +37,14 @@
 					<div class="col-md-3">
 						<div class="form-group">
 							<label>
-								<span>*</span>Search by Course Name </label>
+								Search by Course Name </label>
 							<input type="text" class="form-control" id="CourseFullName" name="CourseFullName" #CourseFullName="ngModel" [(ngModel)] = "CourseFilterEntity.CourseFullName" />
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
 							<label>
-								<span>*</span>Search by Skills</label>
+								Search by Skills</label>
 							<div class="dropdown_checkbox">
 								<select id="CourseSkill" name ="CourseSkill" class="form-control multiselectdropdown" multiple="multiple">
 									<ng-container *ngFor = "let skills of SkillList;let i = index;" >
@@ -57,7 +57,7 @@
 					<div class="col-md-3">
 						<div class="form-group">
 							<label>
-								<span>*</span>Search by instructors</label>
+								Search by instructors</label>
 							<div class="dropdown_checkbox">
 								<select  id="Instructor" class="form-control multiselectdropdown" multiple="multiple">
 									<option *ngFor = "let Instr of InstList;let i = index;"  value="{{Instr.UserId}}">{{Instr.FirstName + ' ' + Instr.LastName}}</option>

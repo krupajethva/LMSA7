@@ -603,7 +603,9 @@
 								<div class="preview_tab">
 									<div class="row br_btm">
 										<h1 class="pull-left">Personal Detail</h1>
-										<h3 class="pull-right pr_15">Register as Learner</h3>
+										<h3 class="pull-right pr_15" *ngIf="RegisterEntity.registerRole == 1">Register as Learner</h3>
+										<h3 class="pull-right pr_15" *ngIf="RegisterEntity.registerRole == 2">Register as Instructor</h3>
+								
 										<div class="clearfix"></div>
 										<div class="col-md-6">
 											<p class="padding_15">First Name:
