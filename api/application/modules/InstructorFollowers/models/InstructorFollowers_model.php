@@ -319,8 +319,8 @@ class InstructorFollowers_model extends CI_Model
 				$this->db->where('u.RoleId', 3);
 				$result = $this->db->get();
 				$q = $this->db->last_query();
-				echo $q;
-				exit;
+				// echo $q;
+				// exit;
 
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) {
