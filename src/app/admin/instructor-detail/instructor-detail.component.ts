@@ -60,9 +60,10 @@ export class InstructorDetailComponent implements OnInit {
 
     var obj = { 'InstructorId': this.InstructorId, 'LearnerId': this.globals.authData.UserId };
     this.InstructorfollowersService.getInstructorDetails(obj)
-      .then((data) => { debugger
+      .then((data) => {
+        debugger
         if (data) {
-         // console.log(data);
+          // console.log(data);
           this.FollowerDetail = data['FollowerDetail'];
           if (this.FollowerDetail != null) {
             this.flag = this.FollowerDetail.flag;
@@ -82,9 +83,9 @@ export class InstructorDetailComponent implements OnInit {
             this.totalFolloings = 0;
             this.Reviews = 0;
             this.Ratings = 0;
-            this.totalstudent =0;
-            this.totalcoursesdetails =[];
-            this.totalcourses =0;
+            this.totalstudent = 0;
+            this.totalcoursesdetails = [];
+            this.totalcourses = 0;
           }
           this.FirstName = data['InstructorDetail']['FirstName'];
           this.LastName = data['InstructorDetail']['LastName'];
@@ -172,5 +173,22 @@ export class InstructorDetailComponent implements OnInit {
       }
 
     }
+  }
+
+  clearForm(InstructorForm) {
+    this.globals.isLoading = true;
+    var obj = { 'InstructorId': this.InstructorId, 'LearnerId': this.globals.authData.UserId };
+    this.InstructorfollowersService.getInstructorDetails(obj)
+      .then((data) => {
+        //this.InstructorList = data;
+        this.InstructorEntity = {};
+        this.globals.isLoading = false;
+        InstructorForm.form.markAsPristine();
+      },
+        (error) => {
+          // this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
+
   }
 }

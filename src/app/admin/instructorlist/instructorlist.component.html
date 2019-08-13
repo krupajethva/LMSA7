@@ -23,7 +23,6 @@
     <div class="clearfix"></div>
   </div>
   <div class="clearfix"></div>
-
 </div>
 <div class="content_block">
   <div class="row">
@@ -94,7 +93,7 @@
                 <i class="fa fa-user-times" aria-hidden="true"></i>
               </button> -->
 
-              <button *ngIf="instructor.flag==0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+              <button *ngIf="instructor.flag==0 || instructor.flag==NULL && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
                 title="Follow" id="follow" (click)="followInstructor(instructor)">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
               </button>

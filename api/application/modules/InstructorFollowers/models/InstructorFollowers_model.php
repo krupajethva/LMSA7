@@ -318,7 +318,9 @@ class InstructorFollowers_model extends CI_Model
 				$this->db->from('tbluser u');
 				$this->db->where('u.RoleId', 3);
 				$result = $this->db->get();
-				//$q = $this->db->last_query();
+				$q = $this->db->last_query();
+				echo $q;
+				exit;
 
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) {
@@ -481,6 +483,7 @@ class InstructorFollowers_model extends CI_Model
 							$this->db->join('tblcoursereview tr', 'tc.CourseId=tr.CourseId', 'left');
 							$this->db->from('tblcourseinstructor tbc');
 							$this->db->where('tbc.UserId', $row->InstructorUserId);
+							$this->db->group_start();
 
 							if ($data['Name'] != null) {
 								$this->db->like('tc.CourseFullName', $data['Name']);
@@ -488,6 +491,7 @@ class InstructorFollowers_model extends CI_Model
 							if ($data['Name'] != null) {
 								$this->db->or_like('tc.Keyword', $data['Name'], 'both');
 							}
+							$this->db->group_end();
 							$this->db->Group_by("tc.CourseId");
 							$totalcourse = $this->db->get()->result();
 
