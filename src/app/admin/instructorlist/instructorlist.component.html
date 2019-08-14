@@ -93,11 +93,11 @@
                 <i class="fa fa-user-times" aria-hidden="true"></i>
               </button> -->
 
-              <button *ngIf="instructor.flag==0 || instructor.flag==NULL && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+              <button *ngIf="(instructor.flag==0 || instructor.flag==NULL) && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
                 title="Follow" id="follow" (click)="followInstructor(instructor)">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
               </button>
-              <button class="unfollow_icn" *ngIf="instructor.flag!=0 && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
+              <button class="unfollow_icn" *ngIf="instructor.flag!=0  && instructor.flag!=NULL && instructor.UserId!=globals.authData.UserId" type="submit" data-toggle="tooltip" data-placement="top"
                 title="Unfollow" id="unfollow" (click)="unfollowInstructor(instructor)">
                 <i class="fa fa-user-times unfollow_icn" aria-hidden="true"></i>
               </button>
@@ -130,7 +130,7 @@
                 </li>
               </ul>
               <div class="more_course_btn">
-                <a routerLink="/learner-courses">View all courses</a>
+                <a routerLink="/instructor-detail/{{instructor.UserId}}">View all courses</a>
               </div>
             </div>
           </div>

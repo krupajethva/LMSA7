@@ -73,7 +73,7 @@ export class InstructorDetailComponent implements OnInit {
             this.Ratings = this.FollowerDetail.Ratings;
             this.totalstudent = this.FollowerDetail.totalstudent;
             this.totalcoursesdetails = this.FollowerDetail.totalcoursesdetails;
-            //  console.log(this.totalcoursesdetails);
+             console.log(this.totalcoursesdetails);
             this.totalcourses = this.totalcoursesdetails.length;
 
           }
@@ -175,20 +175,22 @@ export class InstructorDetailComponent implements OnInit {
     }
   }
 
-  // clearForm(InstructorForm) {
-  //   this.globals.isLoading = true;
-  //   var obj = { 'InstructorId': this.InstructorId, 'LearnerId': this.globals.authData.UserId };
-  //   this.InstructorfollowersService.getInstructorDetails(obj)
-  //     .then((data) => {
-  //       //this.InstructorList = data;
-  //       this.InstructorEntity = {};
-  //       this.globals.isLoading = false;
-  //       InstructorForm.form.markAsPristine();
-  //     },
-  //       (error) => {
-  //         // this.globals.isLoading = false;
-  //         this.router.navigate(['/pagenotfound']);
-  //       });
+  clearForm(InstructorForm) {
+    this.globals.isLoading = true;
+    var obj = { 'InstructorId': this.InstructorId, 'LearnerId': this.globals.authData.UserId };
+    this.InstructorfollowersService.getInstructorDetails(obj)
+      .then((data) => {
+        //this.InstructorList = data;
+        this.FollowerDetail = data['FollowerDetail'];
+        this.totalcoursesdetails = this.FollowerDetail.totalcoursesdetails;
+        this.InstructorEntity = {};
+        this.globals.isLoading = false;
+        InstructorForm.form.markAsPristine();
+      },
+        (error) => {
+          // this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
 
-  // }
+  }
 }
